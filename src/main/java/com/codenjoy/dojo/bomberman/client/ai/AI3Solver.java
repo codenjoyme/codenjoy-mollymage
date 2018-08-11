@@ -25,21 +25,17 @@ package com.codenjoy.dojo.bomberman.client.ai;
 
 import com.codenjoy.dojo.bomberman.client.Board;
 import com.codenjoy.dojo.bomberman.model.Elements;
-import com.codenjoy.dojo.bomberman.services.GameRunner;
 import com.codenjoy.dojo.services.Direction;
-import com.codenjoy.dojo.client.LocalGameRunner;
 import com.codenjoy.dojo.client.Solver;
 import com.codenjoy.dojo.client.WebSocketRunner;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.RandomDice;
 
-import java.util.List;
-
-public class RandomSolver implements Solver<Board> {
+public class AI3Solver implements Solver<Board> {
     private Dice dice;
 
-    public RandomSolver(Dice dice) {
+    public AI3Solver(Dice dice) {
         this.dice = dice;
     }
 
@@ -72,7 +68,7 @@ public class RandomSolver implements Solver<Board> {
 
     public static void start(String name, Dice dice) {
         WebSocketRunner.runAI(name,
-                new RandomSolver(new RandomDice()),
+                new AI3Solver(new RandomDice()),
                 new Board());
     }
 }

@@ -33,7 +33,7 @@ import com.codenjoy.dojo.services.RandomDice;
 
 import java.util.*;
 
-public class Apofig2Solver implements Solver<Board> {
+public class AI2Solver implements Solver<Board> {
 
     public static HistoryPoint memory = new HistoryPoint(null);
 
@@ -206,7 +206,7 @@ public class Apofig2Solver implements Solver<Board> {
         }
     }
 
-    public Apofig2Solver(Solver solver) {
+    public AI2Solver(Solver solver) {
         this.solver = solver;
     }
 
@@ -239,7 +239,7 @@ public class Apofig2Solver implements Solver<Board> {
 
     public static void start(String name, Dice dice) {
         WebSocketRunner.runAI(name,
-                new ApofigSolver(new RandomDice()),
+                new AISolver(new RandomDice()),
                 new Board());
     }
 

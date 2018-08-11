@@ -42,15 +42,15 @@ import static org.mockito.Mockito.*;
  * Date: 17.08.13
  * Time: 16:44
  */
-public class ApofigSolverTest {
+public class AISolverTest {
 
-    private ApofigSolver solver;
+    private AISolver solver;
     private Dice dice;
 
     @Before
     public void setup() {
         dice = mock(Dice.class);
-        solver = new ApofigSolver(dice);
+        solver = new AISolver(dice);
     }
 
     @Test

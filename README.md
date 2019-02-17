@@ -4,7 +4,7 @@ For NonJava languages:
 - and follow README.md instructions
 
 For Java:
-- setup Java (JDK 7 or 8)
+- setup Java (JDK 8)
     + setup JAVA_HOME variable
 - setup Maven3
     + setup M2_HOME variable
@@ -19,15 +19,10 @@ For Java:
         * on this page you can also read game instructions
 - register your hero on server http://server/codenjoy-contest/register
 - in class .\src\main\java\com\codenjoy\dojo\bomberman\client\YourSolver.java
-    + put your email into USER_NAME constant instead of 'user@gmail.com'
+    + copy board page browser url from address bar and paste into main method
     + implement logic inside method
         * public String get(Board board) {
     + run main method of YourSolver class
-        * if you play on LAN please uncomment line
-            - WebSocketRunner.runOnServer("192.168.1.1:8080", // to use for local server
-        * and write valid server_host_ip instead of 192.168.1.1
-        * this line you can use for connect to http://codenjoy.com server
-            - WebSocketRunner.run(WebSocketRunner.Host.REMOTE, // to use for codenjoy.com server
     + on page http://server/codenjoy-contest/board/game/bomberman you can check the leaderboard - your bot should move
     + if something changed - restart the process
         * warning! only one instance of YourSolver class you can run per player - please check this

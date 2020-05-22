@@ -23,11 +23,11 @@ package com.codenjoy.dojo.bomberman.model;
  */
 
 
-import com.codenjoy.dojo.services.multiplayer.GameField;
+import com.codenjoy.dojo.services.round.RoundGameField;
 
 import java.util.List;
 
-public interface Field extends GameField<Player> {  // TODO применить тут ISP (все ли методы должны быть паблик?)
+public interface Field extends RoundGameField<Player> {  // TODO применить тут ISP (все ли методы должны быть паблик?)
     int size();
 
     List<Hero> getBombermans();

@@ -42,7 +42,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
 
-public class AbstractBombermanTest {
+public class AbstractGameTest {
 
     public int SIZE = 5;
     protected Game game;

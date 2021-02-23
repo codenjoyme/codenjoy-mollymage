@@ -31,7 +31,7 @@ import static com.codenjoy.dojo.services.Direction.DOWN;
 import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 import static org.junit.Assert.assertEquals;
 
-public class RoundBattleSingleTest extends AbstractSingleTest {
+public class RoundBattleTest extends AbstractMultiplayerTest {
 
     public static final int DEFAULT_COUNT = 3;
     private int minTicksForWin = 1;

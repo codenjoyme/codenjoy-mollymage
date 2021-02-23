@@ -32,13 +32,12 @@ import org.junit.Test;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
-public class BombermanTest extends AbstractBombermanTest {
+public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldBoard_whenStartGame() {

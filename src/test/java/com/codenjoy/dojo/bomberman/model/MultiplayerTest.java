@@ -35,7 +35,7 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class SingleTest extends AbstractSingleTest {
+public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Before
     public void setup() {
@@ -631,7 +631,7 @@ public class SingleTest extends AbstractSingleTest {
 
     @Override
     protected RoundSettingsWrapper getRoundSettings() {
-        return BombermanTest.getRoundSettings();
+        return GameTest.getRoundSettings();
     }
 
     @Test

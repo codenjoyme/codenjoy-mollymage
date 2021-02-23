@@ -32,7 +32,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
-public class PerksBombermanTest extends AbstractBombermanTest {
+public class PerksTest extends AbstractGameTest {
 
     @Test
     public void shouldPerkBeDropped_whenWallIsDestroyed() {

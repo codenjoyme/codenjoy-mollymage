@@ -47,7 +47,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
-public abstract class AbstractSingleTest {
+public abstract class AbstractMultiplayerTest {
 
     public static final int SIZE = 5;
     protected final Walls walls = new WallsImpl();

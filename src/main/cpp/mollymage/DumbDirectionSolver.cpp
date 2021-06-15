@@ -92,7 +92,7 @@ Direction DumbDirectionSolver::tryToMove(Point pt) {
 				potion.setNull(true);
 			}
 			if (result == Direction(LL("NULL"))) {
-				again == true;
+				again = true;
 			}
 	} while (count++ < 20 && again);
 	if (count >= 20) {

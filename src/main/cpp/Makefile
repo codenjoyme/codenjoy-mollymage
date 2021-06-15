@@ -1,5 +1,5 @@
-TARGET = bomberman
-PROJ = ./bomberman
+TARGET = hero
+PROJ = ./hero
 UTIL = $(PROJ)/utils
 
 CC = g++
@@ -18,9 +18,9 @@ objects =
 all: $(TARGET)
 
 $(TARGET): objs
-	$(CC) $(CFLAGS)  $(IFLAGS) -o bomberman.exe $(objects) $(LDIR) $(LFLAGS)
+	$(CC) $(CFLAGS)  $(IFLAGS) -o hero.exe $(objects) $(LDIR) $(LFLAGS)
 objs:
 	$(CC) $(CFLAGS) $(IFLAGS) $(PROJ)/main.cpp -c $(util_c) $(util_h) $(proj_c) $(proj_h) $(LDIR) $(LFLAGS)
 	$(eval objects := $(wildcard *.o))
 clean: 
-	rm -f *.o bomberman.exe
+	rm -f *.o hero.exe

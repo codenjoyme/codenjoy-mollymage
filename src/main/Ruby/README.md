@@ -1,4 +1,4 @@
-# Ruby client for Bomberman game
+# Ruby client for Hero game
 
 ## How to setup Codenjoy server localy
 
@@ -30,7 +30,7 @@ git clone https://github.com/codenjoyme/codenjoy.git
 ```
 3. Install WebSocket gem (Ruby and `bundler` gem should be installed):
 ```
-cd codenjoy/CodingDojo/games/bomberman/src/main/Ruby/
+cd codenjoy/CodingDojo/games/hero/src/main/Ruby/
 bundle install
 ```
 4. Run your client:
@@ -47,7 +47,7 @@ Now you can code your bot, change code of `game.rb` after block
     #                               YOUR ALGORITHM HERE
     #
     #    Set variables:
-    #     * +act+ (true/false) - Place bomb or not in current iteration
+    #     * +act+ (true/false) - Place potion or not in current iteration
     #     * +direction+ - Direction to move (UP, DOWN, LEFT, RIGHT)
     #
     ############################################################################################################

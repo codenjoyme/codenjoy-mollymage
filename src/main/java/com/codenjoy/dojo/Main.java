@@ -22,8 +22,8 @@ package com.codenjoy.dojo;
  * #L%
  */
 
-import com.codenjoy.dojo.bomberman.services.GameRunner;
-import com.codenjoy.dojo.bomberman.services.GameSettings;
+import com.codenjoy.dojo.mollymage.services.GameRunner;
+import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.client.local.LocalGameRunner;
 import com.codenjoy.dojo.client.local.ws.LocalWSGameServer;
 import com.codenjoy.dojo.services.Dice;
@@ -43,7 +43,7 @@ public class Main {
                 "\t\t-Dsettings={'ROUNDS_ENABLED':false, ...}\n" +
                 "\t\t-Drandom=SEED_STRING\n");
 
-        String game = "bomberman";
+        String game = "hero";
         String settingsString = System.getProperty("settings", "{}");
         String randomSeed = System.getProperty("random", null);
 

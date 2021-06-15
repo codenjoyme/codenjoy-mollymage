@@ -20,7 +20,7 @@
  * #L%
  */
 
-package bomberman
+package hero
 
 import (
 	"errors"
@@ -50,7 +50,7 @@ type Game interface {
 
 const (
 	gamePath          = "/codenjoy-contest/ws"
-	gameQueryTemplate = "user=%s&code=%s&gameName=bomberman"
+	gameQueryTemplate = "user=%s&code=%s&gameName=hero"
 )
 
 // It's var for testing purposes
@@ -67,7 +67,7 @@ func (b *board) Show() string {
 	return repr.String()
 }
 
-// Move allows client to manipulate bomberman, client should
+// Move allows client to manipulate hero, client should
 // assign new action every second or STOP action will be used as a default
 func (b *board) Move(move Action) {
 	if move.IsValid() {
@@ -110,7 +110,7 @@ func getConnection(u url.URL) (*websocket.Conn, error) {
 }
 
 // createURL creates valid connection URL from raw url copied from browser url input in the game window
-// example browserURL: "https://codenjoy.com/codenjoy-contest/board/player/793wdxskw521spo4mn1y?code=531459153668826800&gameName=bomberman"
+// example browserURL: "https://codenjoy.com/codenjoy-contest/board/player/793wdxskw521spo4mn1y?code=531459153668826800&gameName=hero"
 func createURL(browserURL string) (url.URL, error) {
 	// get host name
 	mutatedUrl := strings.Replace(browserURL, "https://", "", 1)

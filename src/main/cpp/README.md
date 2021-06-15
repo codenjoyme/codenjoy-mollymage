@@ -8,7 +8,7 @@ For C++:
         # server = ip:8080 server ip inside your LAN
         # server = codenjoy.com if you play on http://codenjoy.com/codenjoy-contest
 - register your hero on server http://<server>/codenjoy-contest/register
-- open bomberman.sln in Visual Studio
+- open hero.sln in Visual Studio
 - change yourName in main.cpp from "_bot_" to your one
 - implement your bot in YourDirectionSolver class.
     = you can use our DumbDirectionSolver implementation as an example

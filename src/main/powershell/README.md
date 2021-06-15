@@ -1,9 +1,9 @@
 ## PowershellCodenjoyBot
 Powershell helper/client module for 
-[CodingDojo project](https://github.com/codenjoyme/codenjoy/tree/master/CodingDojo/) **Bomberman game**.  
+[CodingDojo project](https://github.com/codenjoyme/codenjoy/tree/master/CodingDojo/) **Hero game**.  
 *Prerequisites: .NET Framework since 4.5*
 
-[Bobmberman game rules.](https://github.com/codenjoyme/codenjoy/blob/master/CodingDojo/games/bomberman/src/main/webapp/resources/help/bomberman.html)
+[Bobmberman game rules.](https://github.com/codenjoyme/codenjoy/blob/master/CodingDojo/games/hero/src/main/webapp/resources/help/hero.html)
 
 Powershell WebSockets implementation based on the following:  
 https://github.com/markwragg/Powershell-SlackBot  
@@ -13,15 +13,15 @@ https://github.com/brianddk/ripple-ps-websocket
 
 1. [Build/Run local gameserver](https://github.com/codenjoyme/codenjoy/tree/master/CodingDojo/) and [Register your player](http://127.0.0.1:8080/codenjoy-contest/register)
 
-2. Import **`BombermanAPI.psm1`** module into your PS session to access basic/helper functions  
+2. Import **`HeroAPI.psm1`** module into your PS session to access basic/helper functions  
 (specify full path to the .psm1 module if module location differs from shell location )
 ```powershell
-Import-Module .\BombermanAPI.psm1 -Force
+Import-Module .\HeroAPI.psm1 -Force
 ```
 
-3. Change/Set your Gameserver websocket connection URI and your Username in the **`$Global:BombermanURI`** variable
+3. Change/Set your Gameserver websocket connection URI and your Username in the **`$Global:HeroURI`** variable
 ```powershell
-[URI]$Global:BombermanURI = "ws://127.0.0.1:8080/codenjoy-contest/ws?user=username@users.org"
+[URI]$Global:HeroURI = "ws://127.0.0.1:8080/codenjoy-contest/ws?user=username@users.org"
 ```
 
 3. Execute a loop below. Your Bomber will start moving randomly every 1sec.
@@ -110,7 +110,7 @@ $AllWalls.Count
 * If you need to get a single element from a given collection, use the first index
 ```powershell
 Invoke-GameSync
-$badGuys = Get-GameElementCollection -Element OtherBomberman
+$badGuys = Get-GameElementCollection -Element OtherHero
 $badGuys.Count
 $badGuys[0]
 ```
@@ -118,9 +118,9 @@ $badGuys[0]
 * To obtain X,Y points, refer to the second index
 ```powershell
 Invoke-GameSync
-$MeatChopper = Get-GameElementCollection -Element MeatChopper
-$MeatChopperXcoordinate = $MeatChopper[2][0]
-$MeatChopperYcoordinate = $MeatChopper[2][1]
+$Ghost = Get-GameElementCollection -Element Ghost
+$GhostXcoordinate = $Ghost[2][0]
+$GhostYcoordinate = $Ghost[2][1]
 ```
 
 
@@ -152,15 +152,15 @@ while ($true)
 	$GameBoard = Get-GameBoardElementArray
 	
 	# Get Bomber's position
-	# If bomb just been placed, Bomberman is 'BombBomberman' game element
-	$myBombBomber = Get-GameElementCollection -Element BombBomberman
+	# If bomb just been placed, Hero is 'BombHero' game element
+	$myBombBomber = Get-GameElementCollection -Element BombHero
 	If ($myBombBomber)
 	{
 		$x = $myBombBomber[0][0]
 		$y = $myBombBomber[0][1]
 	}
-	# In general case Bomberman is 'Bomberman' game element
-	$myBomber = Get-GameElementCollection -Element Bomberman
+	# In general case Hero is 'Hero' game element
+	$myBomber = Get-GameElementCollection -Element Hero
 	If ($myBomber)
 	{
 		$x = $myBomber[0][0]
@@ -177,13 +177,13 @@ while ($true)
 		$myNextAction = "act"
 		# store gametime of bombplace action 
 		$LastTimeBombPlaced = $GameTime
-		"Placing BOMB" + " at GameTime " + $GameTime
+		"Placing POTION" + " at GameTime " + $GameTime
 		# Ending current loop iteration because -$myNextAction has just been choosen
 		Continue
 	}
 	
 	# If not able to place a bomb at current game turn, need to make a move.
-	# Check gameboard cells near bomberman's position . First "space" cell will be choosen for the next move.
+	# Check gameboard cells near hero's position . First "space" cell will be choosen for the next move.
 	if ($GameBoard[($x+1),($y)] -match "Space")
 	{
 		$myNextAction = "right"
@@ -217,33 +217,33 @@ while ($true)
 ### Helper function usage/how-to
 
 * позиция моего бомбера на доске  
-`Point getBomberman()`
+`Point getHero()`
 ```powershell
-getBomberman
+getHero
 ```
 
 * позиции всех остальных бомберов (противников) на доске  
-`Collection<Point> getOtherBombermans()`
+`Collection<Point> getOtherHeroes()`
 ```powershell
-getOtherBombermans
+getOtherHeroes
 ```
 
 * жив ли мой бомбер
-`boolean isMyBombermanDead()`
+`boolean isMyHeroDead()`
 ```powershell
-isMyBombermanDead
+isMyHeroDead
 ```
 * находится ли в позиции  x, y заданный элемент? находится ли в позиции  x, y что-нибудь из заданного набора  
 `boolean isAt(int x, int y, Element element)`
 `boolean isAt(int x, int y, Collection<Element> elements)`
 ```powershell
-isAt -X 32 -Y 15 -Element MeatChopper
+isAt -X 32 -Y 15 -Element Ghost
 isAt 32 15 Space,Boom,BombTimer1,Wall
 ```
 * есть ли вокруг клеточки с координатой x,y заданный элемент
 `boolean isNear(int x, int y, Element element)`
 ```powershell
-isNear -x 29 -y 31 -Element MeatChopper
+isNear -x 29 -y 31 -Element Ghost
 ```
 * есть ли препятствие в клеточке x, y
 `boolean isBarrierAt(int x, int y)` 
@@ -274,9 +274,9 @@ getBarriers
 ```
 
 * координаты всех чудиков которые могут убить бомбера
-`Collection<Point> getMeatChoppers()`
+`Collection<Point> getGhosts()`
 ```powershell
-getMeatChoppers
+getGhosts
 ```
 
 * координаты всех бетонных стен
@@ -286,9 +286,9 @@ getWalls
 ```
 
 * координаты всех кирпичных стен (их можно разрушать)
-`Collection<Point> getDestroyWalls()`
+`Collection<Point> getTreasureBoxes()`
 ```powershell
-getDestroyWalls
+getTreasureBoxes
 ```
 
 * Координаты всех бомб. 

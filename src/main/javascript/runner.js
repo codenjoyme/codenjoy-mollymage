@@ -103,46 +103,102 @@ if (!browser) {
 }
 
 var Element = {
-    /// This is your Bomberman
-    BOMBERMAN : '☺',             // this is what he usually looks like
-    BOMB_BOMBERMAN : '☻',        // this is if he is sitting on own bomb
-    DEAD_BOMBERMAN : 'Ѡ',        // oops, your Bomberman is dead (don't worry, he will appear somewhere in next move)
-                                 // you're getting -200 for each death
+/// your Molly
 
-    /// this is other players Bombermans
-    OTHER_BOMBERMAN : '♥',       // this is what other Bombermans looks like
-    OTHER_BOMB_BOMBERMAN : '♠',  // this is if player just set the bomb
-    OTHER_DEAD_BOMBERMAN : '♣',  // enemy corpse (it will disappear shortly, right on the next move)
-                                 // if you've done it you'll get +1000
+    // This is what she usually looks like.
+    HERO : '☺',
 
-    /// the bombs
-    BOMB_TIMER_5 : '5',          // after bomberman set the bomb, the timer starts (5 tacts)
-    BOMB_TIMER_4 : '4',          // this will blow up after 4 tacts
-    BOMB_TIMER_3 : '3',          // this after 3
-    BOMB_TIMER_2 : '2',          // two
-    BOMB_TIMER_1 : '1',          // one
-    BOOM : '҉',                  // Boom! this is what is bomb does, everything that is destroyable got destroyed
+    // This is if she is sitting on own potion.
+    POTION_HERO : '☻',
 
-    /// walls
-    WALL : '☼',                  // indestructible wall - it will not fall from bomb
-    DESTROYABLE_WALL : '#',      // this wall could be blowed up
-    DESTROYED_WALL : 'H',        // this is how broken wall looks like, it will dissapear on next move
-                                 // if it's you did it - you'll get +10 points.
+    // Oops, your Molly is dead (don't worry,
+    // she will appear somewhere in next move).
+    // You're getting penalty points for each death.
+    DEAD_HERO : 'Ѡ',
 
-    /// meatchoppers
-    MEAT_CHOPPER : '&',          // this guys runs over the board randomly and gets in the way all the time
-                                 // if it will touch bomberman - it will die
-    DEAD_MEAT_CHOPPER : 'x',     // you'd better kill this piece of ... meat, you'll get +100 point for it
-                                 // this is chopper corpse
+/// other players heroes
 
-    /// perks
-    BOMB_BLAST_RADIUS_INCREASE : '+', // Bomb blast radius increase. Applicable only to new bombs. The perk is temporary.
-    BOMB_COUNT_INCREASE : 'c',   // Increase available bombs count. Number of extra bombs can be set in settings. Temporary.
-    BOMB_REMOTE_CONTROL : 'r',   // Bomb blast not by timer but by second act. Number of RC triggers is limited and can be set in settings.
-    BOMB_IMMUNE : 'i',           // Do not die after bomb blast (own bombs and others as well). Temporary.
+    // This is what other heroes looks like.
+    OTHER_HERO : '♥',
 
-    /// a void
-    NONE : ' '                  // this is the only place where you can move your Bomberman
+    // This is if player is sitting on own potion.
+    OTHER_POTION_HERO : '♠',
+
+    // Enemy corpse (it will disappear shortly,
+    // right on the next move).
+    // If you've done it you'll get score points.
+    OTHER_DEAD_HERO : '♣',
+
+/// the potions
+    // After Molly set the potion, the timer starts (5 ticks).
+    POTION_TIMER_5 : '5',
+
+    // This will blow up after 4 ticks.
+    POTION_TIMER_4 : '4',
+
+    // This after 3...
+    POTION_TIMER_3 : '3',
+
+    // Two..
+    POTION_TIMER_2 : '2',
+
+    // One.
+    POTION_TIMER_1 : '1',
+
+    // Boom! this is what is potion does,
+    // everything that is destroyable got destroyed.
+    BOOM : '҉',
+
+/// walls
+
+    // Indestructible wall - it will not fall from potion.
+    WALL : '☼',
+
+    // this is a treasure box, it opens with an explosion.
+    TREASURE_BOX : '#',
+
+    // this is like a treasure box opens looks
+    // like, it will disappear on next move.
+    // if it's you did it - you'll get score
+    // points. Perhaps a prize will appear.
+    OPENING_TREASURE_BOX : 'H',
+
+/// soulless creatures
+
+    // This guys runs over the board randomly
+    // and gets in the way all the time.
+    // If it will touch Molly - she will die.
+    // You'd better kill this piece of ... soul,
+    // you'll get score points for it.
+    GHOST : '&',
+
+    // This is ghost corpse.
+    DEAD_GHOST : 'x',
+
+/// perks
+
+    // Potion blast radius increase.
+    // Applicable only to new potions.
+    // The perk is temporary.
+    POTION_BLAST_RADIUS_INCREASE : '+',
+
+    // Increase available potions count.
+    // Number of extra potions can be set
+    // in settings. Temporary.
+    POTION_COUNT_INCREASE : 'c',
+
+    // Potion blast not by timer but by second act.
+    // Number of RC triggers is limited and c
+    // an be set in settings.
+    POTION_REMOTE_CONTROL : 'r',
+
+    // Do not die after potion blast
+    // (own potion and others as well). Temporary.
+    POTION_IMMUNE : 'i',
+
+/// a void
+    // This is the only place where you can move your Molly.
+    NONE : ' '
 };
 
 var D = function(index, dx, dy, name){
@@ -189,7 +245,7 @@ var Direction = {
     DOWN : D(3, 0, -1, 'down'),
     LEFT : D(0, -1, 0, 'left'),
     RIGHT : D(1, 1, 0, 'right'),
-    ACT : D(4, 0, 0, 'act'),                // drop bomb
+    ACT : D(4, 0, 0, 'act'),                // drop potion
     STOP : D(5, 0, 0, '')                   // stay
 };
 
@@ -292,24 +348,24 @@ var Board = function(board){
     var size = boardSize();
     var xyl = new LengthToXY(size);
 
-    var getBomberman = function() {
+    var getHero = function() {
         var result = [];
-        result = result.concat(findAll(Element.BOMBERMAN));
-        result = result.concat(findAll(Element.BOMB_BOMBERMAN));
-        result = result.concat(findAll(Element.DEAD_BOMBERMAN));
+        result = result.concat(findAll(Element.HERO));
+        result = result.concat(findAll(Element.POTION_HERO));
+        result = result.concat(findAll(Element.DEAD_HERO));
         return result[0];
     };
 
-    var getOtherBombermans = function() {
+    var getOtherHeroes = function() {
         var result = [];
-        result = result.concat(findAll(Element.OTHER_BOMBERMAN));
-        result = result.concat(findAll(Element.OTHER_BOMB_BOMBERMAN));
-        result = result.concat(findAll(Element.OTHER_DEAD_BOMBERMAN));
+        result = result.concat(findAll(Element.OTHER_HERO));
+        result = result.concat(findAll(Element.OTHER_POTION_HERO));
+        result = result.concat(findAll(Element.OTHER_DEAD_HERO));
         return result;
     };
 
-    var isMyBombermanDead = function() {
-        return board.indexOf(Element.DEAD_BOMBERMAN) != -1;
+    var isMyHeroDead = function() {
+        return board.indexOf(Element.DEAD_HERO) != -1;
     };
 
     var isAt = function(x, y, element) {
@@ -336,39 +392,39 @@ var Board = function(board){
     };
 
     var getBarriers = function() {
-        var all = getMeatChoppers();
+        var all = getGhosts();
         all = all.concat(getWalls());
-        all = all.concat(getBombs());
-        all = all.concat(getDestroyWalls());
-        all = all.concat(getOtherBombermans());
+        all = all.concat(getPotions());
+        all = all.concat(getTreasureBoxes());
+        all = all.concat(getOtherHeroes());
         all = all.concat(getFutureBlasts());
         return removeDuplicates(all);
     };
 
     var toString = function() {
         return util.format("%s\n" +
-            "Bomberman at: %s\n" +
-            "Other bombermans at: %s\n" +
-            "Meat choppers at: %s\n" +
-            "Destroy walls at: %s\n" +
-            "Bombs at: %s\n" +
+            "Hero at: %s\n" +
+            "Other heroes at: %s\n" +
+            "Ghosts at: %s\n" +
+            "Treasure Boxes at: %s\n" +
+            "Potions as: %s\n" +
             "Blasts: %s\n" +
             "Expected blasts at: %s\n" +
             "Perks at: %s",
                 boardAsString(),
-                getBomberman(),
-                printArray(getOtherBombermans()),
-                printArray(getMeatChoppers()),
-                printArray(getDestroyWalls()),
-                printArray(getBombs()),
+                getHero(),
+                printArray(getOtherHeroes()),
+                printArray(getGhosts()),
+                printArray(getTreasureBoxes()),
+                printArray(getPotions()),
                 printArray(getBlasts()),
                 printArray(getFutureBlasts()),
                 printArray(getPerks())
                 );
     };
 
-    var getMeatChoppers = function() {
-       return findAll(Element.MEAT_CHOPPER);
+    var getGhosts = function() {
+       return findAll(Element.GHOST);
     };
 
     var findAll = function(element) {
@@ -386,28 +442,28 @@ var Board = function(board){
        return findAll(Element.WALL);
    };
 
-   var getDestroyWalls = function() {
-       return findAll(Element.DESTROYABLE_WALL);
+   var getTreasureBoxes = function() {
+       return findAll(Element.TREASURE_BOX);
    };
 
-   var getBombs = function() {
+   var getPotions = function() {
        var result = [];
-       result = result.concat(findAll(Element.BOMB_TIMER_1));
-       result = result.concat(findAll(Element.BOMB_TIMER_2));
-       result = result.concat(findAll(Element.BOMB_TIMER_3));
-       result = result.concat(findAll(Element.BOMB_TIMER_4));
-       result = result.concat(findAll(Element.BOMB_TIMER_5));
-       result = result.concat(findAll(Element.BOMB_BOMBERMAN));
-       result = result.concat(findAll(Element.OTHER_BOMB_BOMBERMAN));       
+       result = result.concat(findAll(Element.POTION_TIMER_1));
+       result = result.concat(findAll(Element.POTION_TIMER_2));
+       result = result.concat(findAll(Element.POTION_TIMER_3));
+       result = result.concat(findAll(Element.POTION_TIMER_4));
+       result = result.concat(findAll(Element.POTION_TIMER_5));
+       result = result.concat(findAll(Element.POTION_HERO));
+       result = result.concat(findAll(Element.OTHER_POTION_HERO));       
        return result;
    };
 
    var getPerks = function() {
         var result = [];
-        result = result.concat(findAll(Element.BOMB_BLAST_RADIUS_INCREASE));
-        result = result.concat(findAll(Element.BOMB_COUNT_INCREASE));
-        result = result.concat(findAll(Element.BOMB_REMOTE_CONTROL));
-        result = result.concat(findAll(Element.BOMB_IMMUNE));
+        result = result.concat(findAll(Element.POTION_BLAST_RADIUS_INCREASE));
+        result = result.concat(findAll(Element.POTION_COUNT_INCREASE));
+        result = result.concat(findAll(Element.POTION_REMOTE_CONTROL));
+        result = result.concat(findAll(Element.POTION_IMMUNE));
         return result;
    }
 
@@ -416,15 +472,15 @@ var Board = function(board){
    };
 
    var getFutureBlasts = function() {
-       var bombs = getBombs();
+       var potions = getPotions();
        var result = [];
-       for (var index in bombs) {
-           var bomb = bombs[index];
-           result.push(bomb);
-           result.push(new Point(bomb.getX() - 1, bomb.getY())); // TODO to remove duplicate
-           result.push(new Point(bomb.getX() + 1, bomb.getY()));
-           result.push(new Point(bomb.getX()    , bomb.getY() - 1));
-           result.push(new Point(bomb.getX()    , bomb.getY() + 1));
+       for (var index in potions) {
+           var potion = potions[index];
+           result.push(potion);
+           result.push(new Point(potion.getX() - 1, potion.getY())); // TODO to remove duplicate
+           result.push(new Point(potion.getX() + 1, potion.getY()));
+           result.push(new Point(potion.getX()    , potion.getY() - 1));
+           result.push(new Point(potion.getX()    , potion.getY() + 1));
        }
        var result2 = [];
        for (var index in result) {
@@ -475,18 +531,18 @@ var Board = function(board){
 
    return {
         size : boardSize,
-        getBomberman : getBomberman,
-        getOtherBombermans : getOtherBombermans,
-        isMyBombermanDead : isMyBombermanDead,
+        getHero : getHero,
+        getOtherHeroes : getOtherHeroes,
+        isMyHeroDead : isMyHeroDead,
         isAt : isAt,
         boardAsString : boardAsString,
         getBarriers : getBarriers,
         toString : toString,
-        getMeatChoppers : getMeatChoppers,
+        getGhosts : getGhosts,
         findAll : findAll,
         getWalls : getWalls,
-        getDestroyWalls : getDestroyWalls,
-        getBombs : getBombs,
+        getTreasureBoxes : getTreasureBoxes,
+        getPotions : getPotions,
         getBlasts : getBlasts,
         getFutureBlasts : getFutureBlasts,
         isAnyOfAt : isAnyOfAt,
@@ -511,7 +567,7 @@ var DirectionSolver = function(board){
          * @return next hero action
          */
         get : function() {
-            var bomberman = board.getBomberman();
+            var hero = board.getHero();
 
             // TODO your code here
 

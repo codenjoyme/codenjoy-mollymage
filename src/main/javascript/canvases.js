@@ -42,7 +42,7 @@ function initCanvas(boardSize) {
     var isDrawByOrder = true;
 
     var elements = Element;
-    var spriteElements = ["bomberman", "bomb_bomberman", "dead_bomberman", "other_bomberman", "other_bomb_bomberman", "other_dead_bomberman", "bomb_timer_5", "bomb_timer_4", "bomb_timer_3", "bomb_timer_2", "bomb_timer_1", "boom", "wall", "destroyable_wall", "destroyed_wall", "meat_chopper", "dead_meat_chopper", "bomb_blast_radius_increase", "bomb_count_increase", "bomb_remote_control", "bomb_immune", "none"];
+    var spriteElements = ["hero", "potion_hero", "dead_hero", "other_hero", "other_potion_hero", "other_dead_hero", "potion_timer_5", "potion_timer_4", "potion_timer_3", "potion_timer_2", "potion_timer_1", "boom", "wall", "treasure_box", "opened_treasure_box", "ghost", "dead_ghost", "potion_blast_radius_increase", "potion_count_increase", "potion_remote_control", "potion_immune", "none"];
     var alphabet = '☺☻Ѡ♥♠♣54321҉☼#H&x+cri ';
 
     loadCanvasData(alphabet, spriteElements);

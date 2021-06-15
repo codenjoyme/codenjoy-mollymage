@@ -39,67 +39,126 @@ BLAST_SIZE = ARGV[2].to_i || 4
 
 ELEMENTS = Hash.new
 
-# This is your Bomberman
-ELEMENTS[:BOMBERMAN] = '☺'             # this is what he usually looks like
-ELEMENTS[:BOMB_BOMBERMAN] = '☻'        # this is if he is sitting on own bomb
-ELEMENTS[:DEAD_BOMBERMAN] = 'Ѡ'        # oops, your Bomberman is dead (don't worry, he will appear
-# somewhere in next move)
-# you're getting -200 for each death
+## your Molly
 
-# this is other players Bombermans
-ELEMENTS[:OTHER_BOMBERMAN] = '♥'       # this is what other Bombermans looks like
-ELEMENTS[:OTHER_BOMB_BOMBERMAN] = '♠'  # this is if player just set the bomb
-ELEMENTS[:OTHER_DEAD_BOMBERMAN] = '♣'  # enemy corpse (it will disappear shortly, right on the next move)
-# if you've done it you'll get +1000
+    # This is what she usually looks like.
+    ELEMENTS[:HERO] = '☺'
 
-# the bombs
-ELEMENTS[:BOMB_TIMER_5] = '5'          # after bomberman set the bomb, the timer starts (5 tacts)
-ELEMENTS[:BOMB_TIMER_4] = '4'          # this will blow up after 4 tacts
-ELEMENTS[:BOMB_TIMER_3] = '3'          # this after 3
-ELEMENTS[:BOMB_TIMER_2] = '2'          # two
-ELEMENTS[:BOMB_TIMER_1] = '1'          # one
-ELEMENTS[:BOOM] = '҉'                  # Boom! this is what is bomb does, everything that is destroyable
-# got destroyed
+    # This is if she is sitting on own potion.
+    ELEMENTS[:POTION_HERO] = '☻'
 
-# walls
-ELEMENTS[:WALL] = '☼'                 # indestructible wall - it will not fall from bomb
-ELEMENTS[:DESTROY_WALL] = '#'          # this wall could be blowed up
+    # Oops, your Molly is dead (don't worry,
+    # she will appear somewhere in next move).
+    # You're getting penalty points for each death.
+    ELEMENTS[:DEAD_HERO] = 'Ѡ'
 
-ELEMENTS[:DESTROYED_WALL] = 'H'        # this is how broken wall looks like, it will dissapear on next move
-# if it's you did it - you'll get +10 points.
+## other players heroes
 
-# meatchoppers
-ELEMENTS[:MEAT_CHOPPER] = '&'          # this guys runs over the board randomly and gets in the way all the time
-# if it will touch bomberman - it will die
-# you'd better kill this piece of ... meat, you'll get +100 point for it
-ELEMENTS[:DEAD_MEAT_CHOPPER] = 'x'     # this is chopper corpse
+    # This is what other heroes looks like.
+    ELEMENTS[:OTHER_HERO] = '♥'
 
-# a void
-ELEMENTS[:NONE] = ' '                 # this is the only place where you can move your Bomberman
+    # This is if player is sitting on own potion.
+    ELEMENTS[:OTHER_POTION_HERO] = '♠'
+
+    # Enemy corpse (it will disappear shortly,
+    # right on the next move).
+    # If you've done it you'll get score points.
+    ELEMENTS[:OTHER_DEAD_HERO] = '♣'
+
+## the potions
+    # After Molly set the potion, the timer starts (5 ticks).
+    ELEMENTS[:POTION_TIMER_5] = '5'
+
+    # This will blow up after 4 ticks.
+    ELEMENTS[:POTION_TIMER_4] = '4'
+
+    # This after 3...
+    ELEMENTS[:POTION_TIMER_3] = '3'
+
+    # Two..
+    ELEMENTS[:POTION_TIMER_2] = '2'
+
+    # One.
+    ELEMENTS[:POTION_TIMER_1] = '1'
+
+    # Boom! this is what is potion does,
+    # everything that is destroyable got destroyed.
+    ELEMENTS[:BOOM] = '҉'
+
+## walls
+
+    # Indestructible wall - it will not fall from potion.
+    ELEMENTS[:WALL] = '☼'
+
+    # this is a treasure box, it opens with an explosion.
+    ELEMENTS[:TREASURE_BOX] = '#'
+
+    # this is like a treasure box opens looks
+    # like, it will disappear on next move.
+    # if it's you did it - you'll get score
+    # points. Perhaps a prize will appear.
+    ELEMENTS[:OPENING_TREASURE_BOX] = 'H'
+
+## soulless creatures
+
+    # This guys runs over the board randomly
+    # and gets in the way all the time.
+    # If it will touch Molly - she will die.
+    # You'd better kill this piece of ... soul,
+    # you'll get score points for it.
+    ELEMENTS[:GHOST] = '&'
+
+    # This is ghost corpse.
+    ELEMENTS[:DEAD_GHOST] = 'x'
+
+## perks
+
+    # Potion blast radius increase.
+    # Applicable only to new potions.
+    # The perk is temporary.
+    ELEMENTS[:POTION_BLAST_RADIUS_INCREASE] = '+'
+
+    # Increase available potions count.
+    # Number of extra potions can be set
+    # in settings. Temporary.
+    ELEMENTS[:POTION_COUNT_INCREASE] = 'c'
+
+    # Potion blast not by timer but by second act.
+    # Number of RC triggers is limited and c
+    # an be set in settings.
+    ELEMENTS[:POTION_REMOTE_CONTROL] = 'r'
+
+    # Do not die after potion blast
+    # (own potion and others as well). Temporary.
+    ELEMENTS[:POTION_IMMUNE] = 'i'
+
+## a void
+    # This is the only place where you can move your Molly.
+    ELEMENTS[:NONE] = ' '
 
 # List of barriers
 BARRIERS = [
-    ELEMENTS[:BOMB_BOMBERMAN],
-    ELEMENTS[:BOMB_TIMER_1],
-    ELEMENTS[:BOMB_TIMER_2],
-    ELEMENTS[:BOMB_TIMER_3],
-    ELEMENTS[:BOMB_TIMER_4],
-    ELEMENTS[:BOMB_TIMER_5],
-    ELEMENTS[:OTHER_BOMBERMAN],
-    ELEMENTS[:OTHET_BOMB_BOMBERMAN],
+    ELEMENTS[:POTION_HERO],
+    ELEMENTS[:POTION_TIMER_1],
+    ELEMENTS[:POTION_TIMER_2],
+    ELEMENTS[:POTION_TIMER_3],
+    ELEMENTS[:POTION_TIMER_4],
+    ELEMENTS[:POTION_TIMER_5],
+    ELEMENTS[:OTHER_HERO],
+    ELEMENTS[:OTHER_POTION_HERO],
     ELEMENTS[:WALL],
-    ELEMENTS[:DESTROY_WALL],
+    ELEMENTS[:TREASURE_BOX],
 ]
 
-# List of bombs
-BOMBS = [
-    ELEMENTS[:BOMB_BOMBERMAN],
-    ELEMENTS[:BOMB_TIMER_1],
-    ELEMENTS[:BOMB_TIMER_2],
-    ELEMENTS[:BOMB_TIMER_3],
-    ELEMENTS[:BOMB_TIMER_4],
-    ELEMENTS[:BOMB_TIMER_5],
-    ELEMENTS[:OTHET_BOMB_BOMBERMAN],
+# List of potions
+POTIONS = [
+    ELEMENTS[:POTION_HERO],
+    ELEMENTS[:POTION_TIMER_1],
+    ELEMENTS[:POTION_TIMER_2],
+    ELEMENTS[:POTION_TIMER_3],
+    ELEMENTS[:POTION_TIMER_4],
+    ELEMENTS[:POTION_TIMER_5],
+    ELEMENTS[:OTHER_POTION_HERO],
 ]
 
 ##################################### END OF ELEMENTS TYPES #########################################################
@@ -160,8 +219,8 @@ class Point
   end
 end
 
-# Bomberman class
-class Bomberman
+# Hero class
+class Hero
 
   # Initialize
   # @param [Game] game game object
@@ -169,10 +228,10 @@ class Bomberman
     @game = game
   end
 
-  # Is Bomberman alive?!
-  # @return [Boolean] +true+ if my bomberman alive
+  # Is Hero alive?!
+  # @return [Boolean] +true+ if my hero alive
   def dead?
-    board.index(ELEMENTS[:DEAD_BOMBERMAN]) != nil
+    board.index(ELEMENTS[:DEAD_HERO]) != nil
   end
 
   # Can I move in specified direction?
@@ -184,17 +243,17 @@ class Bomberman
     !@game.is_barrier_at?(point.send(direction.downcase))
   end
 
-  # Return current position of Bomberman on field
-  # @return [Point] position of bomberman
+  # Return current position of Hero on field
+  # @return [Point] position of hero
   def position
-    pos = @game.board.index(ELEMENTS[:BOMBERMAN])
-    pos = @game.board.index(ELEMENTS[:DEAD_BOMBERMAN]) unless pos
-    pos = @game.board.index(ELEMENTS[:BOMB_BOMBERMAN]) unless pos
+    pos = @game.board.index(ELEMENTS[:HERO])
+    pos = @game.board.index(ELEMENTS[:DEAD_HERO]) unless pos
+    pos = @game.board.index(ELEMENTS[:POTION_HERO]) unless pos
 
     @game.pos_to_coords(pos)
   end
 
-  # What will be position of bomberman after move in specified direction
+  # What will be position of hero after move in specified direction
   #
   # @param [String] direction - 'UP', 'DOWN', 'LEFT', 'RIGHT'
   # @return [Point] position after move
@@ -208,7 +267,7 @@ end
 # Game class
 class Game
   attr_accessor :board
-  attr_reader :bomberman
+  attr_reader :hero
 
   # Returns board size
   # @return [Integer] board size
@@ -216,24 +275,24 @@ class Game
     Math.sqrt(board.length).to_i
   end
 
-  # Retruns bomberman position
-  # @return [Bomberman] returns bomberman object
-  def bomberman
-    @bomberman ||= Bomberman.new(self)
+  # Retruns hero position
+  # @return [Hero] returns hero object
+  def hero
+    @hero ||= Hero.new(self)
   end
 
-  # Returns array of other bomberman positions
+  # Returns array of other hero positions
   #
-  # @return [Array[Point]] array of other bomberman`s positions
-  def get_other_bombermans
+  # @return [Array[Point]] array of other hero`s positions
+  def get_other_heroes
     res = []
-    bombers = []
-    bombers += indexes(board, ELEMENTS[:OTHER_BOMBERMAN])
-    bombers += indexes(board, ELEMENTS[:OTHER_DEAD_BOMBERMAN])
-    bombers += indexes(board, ELEMENTS[:OTHER_BOMB_BOMBERMAN])
+    heroes = []
+    heroes += indexes(board, ELEMENTS[:OTHER_HERO])
+    heroes += indexes(board, ELEMENTS[:OTHER_DEAD_HERO])
+    heroes += indexes(board, ELEMENTS[:OTHER_POTION_HERO])
 
-    # BOMBERS
-    bombers.each do |pos|
+    # POTIONERS
+    heroes.each do |pos|
       res << pos_to_coords(pos)
     end
 
@@ -318,14 +377,14 @@ class Game
     res
   end
 
-  # Return list of meat choppers on field
+  # Return list of ghosts on field
   #
-  # @return [Array[Point]] array of meat choppers positions
-  def get_meat_choppers
+  # @return [Array[Point]] array of ghosts positions
+  def get_ghosts
     res = []
     pos = 0
     board.chars.each do |ch|
-      res << pos_to_coords(pos) if ch == ELEMENTS[:MEAT_CHOPPER]
+      res << pos_to_coords(pos) if ch == ELEMENTS[:GHOST]
       pos += 1
     end
 
@@ -349,7 +408,7 @@ class Game
   # Return list of destroyable walls on field
   #
   # @return [Array[Point]] array of destroyable walls positions
-  def get_destroy_walls
+  def get_treasure_boxes
     res = []
     pos = 0
     board.chars.each do |ch|
@@ -360,14 +419,14 @@ class Game
     res
   end
 
-  # Return list of bombs on field
+  # Return list of potions on field
   #
-  # @return [Array[Point]] array of bombs positions
-  def get_bombs
+  # @return [Array[Point]] array of potions positions
+  def get_potions
     res = []
     pos = 0
     board.chars.each do |ch|
-      res << pos_to_coords(pos) if BOMBS.include? ch
+      res << pos_to_coords(pos) if POTIONS.include? ch
       pos += 1
     end
 
@@ -380,13 +439,13 @@ class Game
   def get_future_blasts
     res = []
 
-    get_bombs.each do |bomb|
+    get_potions.each do |potion|
       directions = {:up => true, :down => true, :left => true, :right => true}
-      res << bomb
+      res << potion
 
       (1..BLAST_SIZE).each do |sh|
         # x + N
-        x = Point.new(bomb.x + sh, bomb.y)
+        x = Point.new(potion.x + sh, potion.y)
         if is_barrier_at?(x)
           directions[:right] = false
         elsif !is_barrier_at?(x) && directions[:right]
@@ -394,7 +453,7 @@ class Game
         end
 
         # x - N
-        x = Point.new(bomb.x - sh, bomb.y)
+        x = Point.new(potion.x - sh, potion.y)
         if is_barrier_at?(x)
           directions[:left] = false
         elsif !is_barrier_at?(x) && directions[:left]
@@ -402,7 +461,7 @@ class Game
         end
 
         # y + N
-        x = Point.new(bomb.x, bomb.y + sh)
+        x = Point.new(potion.x, potion.y + sh)
         if is_barrier_at?(x)
           directions[:down] = false
         elsif !is_barrier_at?(x) && directions[:down]
@@ -410,7 +469,7 @@ class Game
         end
 
         # y - N
-        x = Point.new(bomb.x, bomb.y - sh)
+        x = Point.new(potion.x, potion.y - sh)
         if is_barrier_at?(x)
           directions[:up] = false
         elsif !is_barrier_at?(x) && directions[:up]
@@ -430,7 +489,7 @@ class Game
   def danger_at?(point)
     dangers = []
 
-    dangers += get_meat_choppers
+    dangers += get_ghosts
     dangers += get_future_blasts
 
     dangers.include?(point)
@@ -505,8 +564,8 @@ ws.on :message do |msg|
     board = $1.force_encoding('UTF-8')
     game.board = board
 
-    # Bomberman object
-    bomber = game.bomberman
+    # Hero object
+    hero = game.hero
 
 
     ############################################################################################################
@@ -514,19 +573,19 @@ ws.on :message do |msg|
     #                               YOUR ALGORITHM HERE
     #
     #    Set variables:
-    #     * +act+ (true/false) - Place bomb or not in current iteration
+    #     * +act+ (true/false) - Place potion or not in current iteration
     #     * +direction+ - Direction to move (UP, DOWN, LEFT, RIGHT)
     #
     ############################################################################################################
 
 
-    # Place bomb if wall nearby
-    act = game.count_near(bomber.position, ELEMENTS[:DESTROY_WALL]) > 0
+    # Place potion if wall nearby
+    act = game.count_near(hero.position, ELEMENTS[:TREASURE_BOX]) > 0
 
-    # Change direction if bomberman can't move in specified direction
-    if direction.empty? || !bomber.can_move?(direction)
+    # Change direction if hero can't move in specified direction
+    if direction.empty? || !hero.can_move?(direction)
       ['DOWN', 'UP', 'LEFT', 'RIGHT'].each do |dir|
-        if bomber.can_move?(dir)
+        if hero.can_move?(dir)
           direction = dir
           break
         end
@@ -534,9 +593,9 @@ ws.on :message do |msg|
     end
 
     # Don't move in to danger places
-    if game.danger_at?(bomber.position_after_move(direction))
+    if game.danger_at?(hero.position_after_move(direction))
       ['DOWN', 'UP', 'RIGHT', 'LEFT'].each do |dir|
-        if !game.danger_at?(bomber.position_after_move(dir)) && bomber.can_move?(dir)
+        if !game.danger_at?(hero.position_after_move(dir)) && hero.can_move?(dir)
           direction = dir
           break
         end
@@ -551,7 +610,7 @@ ws.on :message do |msg|
 
 
 
-    # Send Direction and Place bomb (ACT) actions to server
+    # Send Direction and Place potion (ACT) actions to server
     ws.send "#{act ? 'ACT' : ''} #{direction.to_s.upcase}"
   rescue Exception => e
     puts e.message

@@ -1,4 +1,4 @@
-module github.com/dnahurnyi/bomberman
+module github.com/dnahurnyi/hero
 
 go 1.13
 

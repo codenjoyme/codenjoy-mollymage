@@ -143,7 +143,7 @@
 5: 2:Scores: 0
 5: 2:Answer: ACT
 5: 2:Fire Event: DIED
-5: 2:Fire Event: KILL_DESTROY_WALL
+5: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 6: 1:☼☼☼☼☼☼☼☼☼☼☼
 6: 1:☼&   # ###☼
@@ -174,9 +174,9 @@
 6: 2:Scores: 10
 6: 2:Answer: STOP
 6: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-6: 1:Fire Event: KILL_DESTROY_WALL
-6: 1:Fire Event: KILL_MEAT_CHOPPER
-6: 1:Fire Event: KILL_DESTROY_WALL
+6: 1:Fire Event: KILL_TREASURE_BOX
+6: 1:Fire Event: KILL_GHOST
+6: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 7: 1:☼☼☼☼☼☼☼☼☼☼☼
 7: 1:☼ &  # H##☼
@@ -528,7 +528,7 @@
 18: 2:Scores: 0
 18: 2:Answer: ACT
 18: 1:Fire Event: DIED
-18: 1:Fire Event: KILL_MEAT_CHOPPER
+18: 1:Fire Event: KILL_GHOST
 ------------------------------------------
 19: 1:☼☼☼☼☼☼☼☼☼☼☼
 19: 1:☼    # ♠##☼
@@ -647,8 +647,8 @@
 22: 2:Scores: 0
 22: 2:Answer: ACT
 22: 2:Fire Event: DIED
-22: 2:Fire Event: KILL_DESTROY_WALL
-22: 2:Fire Event: KILL_DESTROY_WALL
+22: 2:Fire Event: KILL_TREASURE_BOX
+22: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 23: 1:☼☼☼☼☼☼☼☼☼☼☼
 23: 1:☼    H҉♣H#☼
@@ -767,7 +767,7 @@
 26: 2:Scores: 20
 26: 2:Answer: ACT
 26: 1:Fire Event: DIED
-26: 1:Fire Event: KILL_DESTROY_WALL
+26: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 27: 1:☼☼☼☼☼☼☼☼☼☼☼
 27: 1:☼&    #  #☼
@@ -945,7 +945,7 @@
 32: 2:
 32: 2:Scores: 0
 32: 2:Answer: ACT
-32: 1:Fire Event: KILL_MEAT_CHOPPER
+32: 1:Fire Event: KILL_GHOST
 ------------------------------------------
 33: 1:☼☼☼☼☼☼☼☼☼☼☼
 33: 1:☼     #♠ #☼
@@ -1005,8 +1005,8 @@
 34: 2:Scores: 0
 34: 2:Answer: ACT
 34: 2:Fire Event: DIED
-34: 2:Fire Event: KILL_DESTROY_WALL
-34: 2:Fire Event: KILL_DESTROY_WALL
+34: 2:Fire Event: KILL_TREASURE_BOX
+34: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 35: 1:☼☼☼☼☼☼☼☼☼☼☼
 35: 1:☼     H♣҉H☼
@@ -1213,7 +1213,7 @@
 41: 2:Scores: 0
 41: 2:Answer: STOP
 41: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-41: 1:Fire Event: KILL_DESTROY_WALL
+41: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 42: 1:☼☼☼☼☼☼☼☼☼☼☼
 42: 1:☼  &  #  #☼
@@ -1360,7 +1360,7 @@
 46: 2:Scores: 0
 46: 2:Answer: ACT
 46: 2:Fire Event: DIED
-46: 2:Fire Event: KILL_DESTROY_WALL
+46: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 47: 1:☼☼☼☼☼☼☼☼☼☼☼
 47: 1:☼ &   ## #☼
@@ -1538,8 +1538,8 @@
 52: 2:Answer: ACT
 52: 2:Fire Event: DIED
 52: 1:Fire Event: KILL_OTHER_HERO
-52: 1:Fire Event: KILL_DESTROY_WALL
-52: 2:Fire Event: KILL_DESTROY_WALL
+52: 1:Fire Event: KILL_TREASURE_BOX
+52: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 53: 1:☼☼☼☼☼☼☼☼☼☼☼
 53: 1:☼ &   ## #☼
@@ -1686,7 +1686,7 @@
 57: 2:
 57: 2:Scores: 10
 57: 2:Answer: ACT
-57: 1:Fire Event: KILL_DESTROY_WALL
+57: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 58: 1:☼☼☼☼☼☼☼☼☼☼☼
 58: 1:☼# &  #H♠#☼
@@ -1717,8 +1717,8 @@
 58: 2:Scores: 10
 58: 2:Answer: ACT
 58: 2:Fire Event: DIED
-58: 2:Fire Event: KILL_DESTROY_WALL
-58: 2:Fire Event: KILL_DESTROY_WALL
+58: 2:Fire Event: KILL_TREASURE_BOX
+58: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 59: 1:☼☼☼☼☼☼☼☼☼☼☼
 59: 1:☼#&   H҉♣H☼
@@ -1897,8 +1897,8 @@
 64: 1:Fire Event: DIED
 64: 2:Fire Event: DIED
 64: 2:Fire Event: KILL_OTHER_HERO
-64: 2:Fire Event: KILL_DESTROY_WALL
-64: 2:Fire Event: KILL_DESTROY_WALL
+64: 2:Fire Event: KILL_TREASURE_BOX
+64: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 65: 1:☼☼☼☼☼☼☼☼☼☼☼
 65: 1:☼#      & ☼
@@ -2108,8 +2108,8 @@
 71: 2:
 71: 2:Scores: 170
 71: 2:Answer: ACT
-71: 1:Fire Event: KILL_DESTROY_WALL
-71: 1:Fire Event: KILL_MEAT_CHOPPER
+71: 1:Fire Event: KILL_TREASURE_BOX
+71: 1:Fire Event: KILL_GHOST
 ------------------------------------------
 72: 1:☼☼☼☼☼☼☼☼☼☼☼
 72: 1:☼# x҉҉҉҉҉#☼
@@ -2169,7 +2169,7 @@
 73: 2:Scores: 170
 73: 2:Answer: ACT
 73: 2:Fire Event: DIED
-73: 2:Fire Event: KILL_DESTROY_WALL
+73: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 74: 1:☼☼☼☼☼☼☼☼☼☼☼
 74: 1:☼# ☺     #☼
@@ -2258,7 +2258,7 @@
 76: 2:
 76: 2:Scores: 130
 76: 2:Answer: ACT
-76: 1:Fire Event: KILL_DESTROY_WALL
+76: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 77: 1:☼☼☼☼☼☼☼☼☼☼☼
 77: 1:☼#♠҉☺ #  #☼
@@ -2347,7 +2347,7 @@
 79: 2:Scores: 130
 79: 2:Answer: ACT
 79: 2:Fire Event: DIED
-79: 2:Fire Event: KILL_DESTROY_WALL
+79: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 80: 1:☼☼☼☼☼☼☼☼☼☼☼
 80: 1:☼H♣҉҉3# &#☼
@@ -2440,7 +2440,7 @@
 82: 2:PLAYER_GAME_OVER -> START_NEW_GAME
 82: 2:Fire Event: DIED
 82: 1:Fire Event: DIED
-82: 1:Fire Event: KILL_DESTROY_WALL
+82: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 83: 1:☼☼☼☼☼☼☼☼☼☼☼
 83: 1:☼ ҉҉҉҉H& #☼
@@ -2618,10 +2618,10 @@
 88: 2:Scores: 0
 88: 2:Answer: ACT
 88: 2:Fire Event: DIED
-88: 1:Fire Event: KILL_MEAT_CHOPPER
-88: 1:Fire Event: KILL_DESTROY_WALL
-88: 2:Fire Event: KILL_MEAT_CHOPPER
-88: 2:Fire Event: KILL_DESTROY_WALL
+88: 1:Fire Event: KILL_GHOST
+88: 1:Fire Event: KILL_TREASURE_BOX
+88: 2:Fire Event: KILL_GHOST
+88: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 89: 1:☼☼☼☼☼☼☼☼☼☼☼
 89: 1:☼&   #   #☼
@@ -2798,7 +2798,7 @@
 94: 2:Scores: 110
 94: 2:Answer: ACT
 94: 2:Fire Event: DIED
-94: 2:Fire Event: KILL_DESTROY_WALL
+94: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 95: 1:☼☼☼☼☼☼☼☼☼☼☼
 95: 1:☼&   #   #☼
@@ -2829,8 +2829,8 @@
 95: 2:Scores: 70
 95: 2:Answer: STOP
 95: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-95: 1:Fire Event: KILL_DESTROY_WALL
-95: 1:Fire Event: KILL_DESTROY_WALL
+95: 1:Fire Event: KILL_TREASURE_BOX
+95: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 96: 1:☼☼☼☼☼☼☼☼☼☼☼
 96: 1:☼ &  #   #☼
@@ -2977,8 +2977,8 @@
 100: 2:Scores: 70
 100: 2:Answer: ACT
 100: 2:Fire Event: DIED
-100: 2:Fire Event: KILL_DESTROY_WALL
-100: 2:Fire Event: KILL_DESTROY_WALL
+100: 2:Fire Event: KILL_TREASURE_BOX
+100: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 101: 1:☼☼☼☼☼☼☼☼☼☼☼
 101: 1:☼   &#   #☼
@@ -3009,10 +3009,10 @@
 101: 2:Scores: 40
 101: 2:Answer: STOP
 101: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-101: 1:Fire Event: KILL_DESTROY_WALL
-101: 1:Fire Event: KILL_DESTROY_WALL
-101: 1:Fire Event: KILL_DESTROY_WALL
-101: 1:Fire Event: KILL_DESTROY_WALL
+101: 1:Fire Event: KILL_TREASURE_BOX
+101: 1:Fire Event: KILL_TREASURE_BOX
+101: 1:Fire Event: KILL_TREASURE_BOX
+101: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 102: 1:☼☼☼☼☼☼☼☼☼☼☼
 102: 1:☼  & #   #☼
@@ -3216,7 +3216,7 @@
 108: 2:
 108: 2:Scores: 40
 108: 2:Answer: ACT
-108: 1:Fire Event: KILL_DESTROY_WALL
+108: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 109: 1:☼☼☼☼☼☼☼☼☼☼☼
 109: 1:☼&   # # #☼
@@ -3636,7 +3636,7 @@
 122: 2:Scores: 350
 122: 2:Answer: ACT
 122: 2:Fire Event: DIED
-122: 2:Fire Event: KILL_MEAT_CHOPPER
+122: 2:Fire Event: KILL_GHOST
 ------------------------------------------
 123: 1:☼☼☼☼☼☼☼☼☼☼☼
 123: 1:☼ &  # # #☼
@@ -3755,7 +3755,7 @@
 126: 2:Scores: 400
 126: 2:Answer: ACT
 126: 1:Fire Event: DIED
-126: 1:Fire Event: KILL_DESTROY_WALL
+126: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 127: 1:☼☼☼☼☼☼☼☼☼☼☼
 127: 1:☼   &# # #☼
@@ -4024,7 +4024,7 @@
 135: 2:Scores: 550
 135: 2:Answer: ACT
 135: 2:Fire Event: DIED
-135: 2:Fire Event: KILL_DESTROY_WALL
+135: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 136: 1:☼☼☼☼☼☼☼☼☼☼☼
 136: 1:☼&#& # # #☼
@@ -4171,7 +4171,7 @@
 140: 2:
 140: 2:Scores: 510
 140: 2:Answer: ACT
-140: 1:Fire Event: KILL_DESTROY_WALL
+140: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 141: 1:☼☼☼☼☼☼☼☼☼☼☼
 141: 1:☼ #  # # #☼
@@ -4378,8 +4378,8 @@
 147: 2:Scores: 460
 147: 2:Answer: ACT
 147: 2:Fire Event: DIED
-147: 2:Fire Event: KILL_DESTROY_WALL
-147: 2:Fire Event: KILL_DESTROY_WALL
+147: 2:Fire Event: KILL_TREASURE_BOX
+147: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 148: 1:☼☼☼☼☼☼☼☼☼☼☼
 148: 1:☼ #& # # #☼
@@ -4556,7 +4556,7 @@
 153: 2:Scores: 430
 153: 2:Answer: ACT
 153: 2:Fire Event: DIED
-153: 2:Fire Event: KILL_DESTROY_WALL
+153: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 154: 1:☼☼☼☼☼☼☼☼☼☼☼
 154: 1:☼ #& # # #☼
@@ -4587,7 +4587,7 @@
 154: 2:Scores: 390
 154: 2:Answer: STOP
 154: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-154: 1:Fire Event: KILL_DESTROY_WALL
+154: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 155: 1:☼☼☼☼☼☼☼☼☼☼☼
 155: 1:☼ #  # # #☼
@@ -4736,7 +4736,7 @@
 159: 1:Fire Event: DIED
 159: 2:Fire Event: DIED
 159: 2:Fire Event: KILL_OTHER_HERO
-159: 1:Fire Event: KILL_DESTROY_WALL
+159: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 160: 1:☼☼☼☼☼☼☼☼☼☼☼
 160: 1:☼&#& # # #☼
@@ -4914,7 +4914,7 @@
 165: 2:Scores: 540
 165: 2:Answer: ACT
 165: 1:Fire Event: DIED
-165: 1:Fire Event: KILL_DESTROY_WALL
+165: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 166: 1:☼☼☼☼☼☼☼☼☼☼☼
 166: 1:☼ #& # # #☼
@@ -5209,8 +5209,8 @@
 175: 2:Scores: 490
 175: 2:Answer: ACT
 175: 2:Fire Event: DIED
-175: 2:Fire Event: KILL_DESTROY_WALL
-175: 2:Fire Event: KILL_DESTROY_WALL
+175: 2:Fire Event: KILL_TREASURE_BOX
+175: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 176: 1:☼☼☼☼☼☼☼☼☼☼☼
 176: 1:☼&#  # H♣H☼
@@ -5242,8 +5242,8 @@
 176: 2:Answer: STOP
 176: 2:PLAYER_GAME_OVER -> START_NEW_GAME
 176: 1:Fire Event: DIED
-176: 1:Fire Event: KILL_DESTROY_WALL
-176: 1:Fire Event: KILL_DESTROY_WALL
+176: 1:Fire Event: KILL_TREASURE_BOX
+176: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 177: 1:☼☼☼☼☼☼☼☼☼☼☼
 177: 1:☼ #  # r  ☼
@@ -5420,8 +5420,8 @@
 182: 2:Scores: 460
 182: 2:Answer: ACT
 182: 1:Fire Event: DIED
-182: 1:Fire Event: KILL_DESTROY_WALL
-182: 1:Fire Event: KILL_DESTROY_WALL
+182: 1:Fire Event: KILL_TREASURE_BOX
+182: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 183: 1:☼☼☼☼☼☼☼☼☼☼☼
 183: 1:☼ #  #    ☼
@@ -5747,7 +5747,7 @@
 193: 2:Scores: 360
 193: 2:Answer: ACT
 193: 2:Fire Event: DIED
-193: 1:Fire Event: KILL_DESTROY_WALL
+193: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 194: 1:☼☼☼☼☼☼☼☼☼☼☼
 194: 1:☼ #҉ # &# ☼
@@ -5924,8 +5924,8 @@
 199: 2:Scores: 310
 199: 2:Answer: ACT
 199: 2:Fire Event: DIED
-199: 2:Fire Event: KILL_DESTROY_WALL
-199: 2:Fire Event: KILL_DESTROY_WALL
+199: 2:Fire Event: KILL_TREASURE_BOX
+199: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 200: 1:☼☼☼☼☼☼☼☼☼☼☼
 200: 1:☼ #  # &# ☼
@@ -5956,8 +5956,8 @@
 200: 2:Scores: 280
 200: 2:Answer: STOP
 200: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-200: 1:Fire Event: KILL_DESTROY_WALL
-200: 1:Fire Event: KILL_DESTROY_WALL
+200: 1:Fire Event: KILL_TREASURE_BOX
+200: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 201: 1:☼☼☼☼☼☼☼☼☼☼☼
 201: 1:☼ #  ## #♥☼
@@ -6104,8 +6104,8 @@
 205: 2:Scores: 280
 205: 2:Answer: ACT
 205: 2:Fire Event: DIED
-205: 2:Fire Event: KILL_DESTROY_WALL
-205: 2:Fire Event: KILL_DESTROY_WALL
+205: 2:Fire Event: KILL_TREASURE_BOX
+205: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 206: 1:☼☼☼☼☼☼☼☼☼☼☼
 206: 1:☼ #  ## H♣☼
@@ -6137,7 +6137,7 @@
 206: 2:Answer: STOP
 206: 2:PLAYER_GAME_OVER -> START_NEW_GAME
 206: 1:Fire Event: DIED
-206: 1:Fire Event: KILL_DESTROY_WALL
+206: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 207: 1:☼☼☼☼☼☼☼☼☼☼☼
 207: 1:☼ #  ###+ ☼
@@ -6285,9 +6285,9 @@
 211: 2:Scores: 250
 211: 2:Answer: ACT
 211: 2:Fire Event: DIED
-211: 2:Fire Event: KILL_DESTROY_WALL
-211: 2:Fire Event: KILL_DESTROY_WALL
-211: 2:Fire Event: KILL_DESTROY_WALL
+211: 2:Fire Event: KILL_TREASURE_BOX
+211: 2:Fire Event: KILL_TREASURE_BOX
+211: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 212: 1:☼☼☼☼☼☼☼☼☼☼☼
 212: 1:☼ #҉ ###  ☼
@@ -6406,8 +6406,8 @@
 215: 2:Scores: 230
 215: 2:Answer: ACT
 215: 1:Fire Event: DROP_PERK
-215: 1:Fire Event: KILL_DESTROY_WALL
-215: 1:Fire Event: KILL_MEAT_CHOPPER
+215: 1:Fire Event: KILL_TREASURE_BOX
+215: 1:Fire Event: KILL_GHOST
 ------------------------------------------
 216: 1:☼☼☼☼☼☼☼☼☼☼☼
 216: 1:☼ #  ###♠#☼
@@ -6467,8 +6467,8 @@
 217: 2:Scores: 230
 217: 2:Answer: ACT
 217: 2:Fire Event: DIED
-217: 2:Fire Event: KILL_DESTROY_WALL
-217: 2:Fire Event: KILL_DESTROY_WALL
+217: 2:Fire Event: KILL_TREASURE_BOX
+217: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 218: 1:☼☼☼☼☼☼☼☼☼☼☼
 218: 1:☼ #  ##H♣H☼
@@ -6647,7 +6647,7 @@
 223: 2:Scores: 200
 223: 2:Answer: ACT
 223: 2:Fire Event: DIED
-223: 2:Fire Event: KILL_DESTROY_WALL
+223: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 224: 1:☼☼☼☼☼☼☼☼☼☼☼
 224: 1:☼ #҉ ##  &☼
@@ -6794,7 +6794,7 @@
 228: 2:
 228: 2:Scores: 160
 228: 2:Answer: ACT
-228: 1:Fire Event: KILL_DESTROY_WALL
+228: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 229: 1:☼☼☼☼☼☼☼☼☼☼☼
 229: 1:☼ #  ##   ☼
@@ -6825,7 +6825,7 @@
 229: 2:Scores: 160
 229: 2:Answer: ACT
 229: 2:Fire Event: DIED
-229: 2:Fire Event: KILL_DESTROY_WALL
+229: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 230: 1:☼☼☼☼☼☼☼☼☼☼☼
 230: 1:☼ #  ##  &☼
@@ -7209,7 +7209,7 @@
 242: 2:Answer: ACT
 242: 2:Fire Event: DIED
 242: 1:Fire Event: KILL_OTHER_HERO
-242: 2:Fire Event: KILL_DESTROY_WALL
+242: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 243: 1:☼☼☼☼☼☼☼☼☼☼☼
 243: 1:☼ #  ##   ☼
@@ -7386,7 +7386,7 @@
 248: 2:Scores: 30
 248: 2:Answer: ACT
 248: 2:Fire Event: DIED
-248: 2:Fire Event: KILL_DESTROY_WALL
+248: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 249: 1:☼☼☼☼☼☼☼☼☼☼☼
 249: 1:☼ #҉ ##   ☼
@@ -7446,7 +7446,7 @@
 250: 2:
 250: 2:Scores: 10
 250: 2:Answer: ACT
-250: 1:Fire Event: KILL_DESTROY_WALL
+250: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 251: 1:☼☼☼☼☼☼☼☼☼☼☼
 251: 1:☼ #  ##♠  ☼
@@ -7564,7 +7564,7 @@
 254: 2:Scores: 10
 254: 2:Answer: ACT
 254: 2:Fire Event: DIED
-254: 2:Fire Event: KILL_DESTROY_WALL
+254: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 255: 1:☼☼☼☼☼☼☼☼☼☼☼
 255: 1:☼ #  #H♣҉҉☼
@@ -7683,7 +7683,7 @@
 258: 2:Scores: 10
 258: 2:Answer: ACT
 258: 1:Fire Event: DIED
-258: 1:Fire Event: KILL_DESTROY_WALL
+258: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 259: 1:☼☼☼☼☼☼☼☼☼☼☼
 259: 1:☼ #  #    ☼
@@ -7746,7 +7746,7 @@
 260: 2:Fire Event: DIED
 260: 1:Fire Event: DIED
 260: 2:Fire Event: KILL_OTHER_HERO
-260: 2:Fire Event: KILL_DESTROY_WALL
+260: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 261: 1:☼☼☼☼☼☼☼☼☼☼☼
 261: 1:☼ #  #    ☼
@@ -7924,8 +7924,8 @@
 266: 2:Scores: 210
 266: 2:Answer: ACT
 266: 2:Fire Event: DIED
-266: 2:Fire Event: KILL_DESTROY_WALL
-266: 2:Fire Event: KILL_DESTROY_WALL
+266: 2:Fire Event: KILL_TREASURE_BOX
+266: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 267: 1:☼☼☼☼☼☼☼☼☼☼☼
 267: 1:☼ H♣҉H  ☺ ☼
@@ -8014,7 +8014,7 @@
 269: 2:
 269: 2:Scores: 180
 269: 2:Answer: ACT
-269: 1:Fire Event: KILL_DESTROY_WALL
+269: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 270: 1:☼☼☼☼☼☼☼☼☼☼☼
 270: 1:☼    ☺   ҉☼
@@ -8103,7 +8103,7 @@
 272: 2:Scores: 180
 272: 2:Answer: ACT
 272: 2:Fire Event: DIED
-272: 2:Fire Event: KILL_DESTROY_WALL
+272: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 273: 1:☼☼☼☼☼☼☼☼☼☼☼
 273: 1:☼     ☺   ☼
@@ -8192,7 +8192,7 @@
 275: 2:
 275: 2:Scores: 140
 275: 2:Answer: ACT
-275: 1:Fire Event: KILL_DESTROY_WALL
+275: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 276: 1:☼☼☼☼☼☼☼☼☼☼☼
 276: 1:☼    ҉☺♠  ☼
@@ -8489,7 +8489,7 @@
 285: 2:PLAYER_GAME_OVER -> START_NEW_GAME
 285: 2:Fire Event: DIED
 285: 1:Fire Event: KILL_OTHER_HERO
-285: 1:Fire Event: KILL_DESTROY_WALL
+285: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 286: 1:☼☼☼☼☼☼☼☼☼☼☼
 286: 1:☼         ☼
@@ -8637,7 +8637,7 @@
 290: 2:Scores: 0
 290: 2:Answer: ACT
 290: 1:Fire Event: DIED
-290: 1:Fire Event: KILL_DESTROY_WALL
+290: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 291: 1:☼☼☼☼☼☼☼☼☼☼☼
 291: 1:☼    #    ☼
@@ -8669,9 +8669,9 @@
 291: 2:Answer: ACT
 291: 1:PLAYER_GAME_OVER -> START_NEW_GAME
 291: 2:Fire Event: DIED
-291: 2:Fire Event: KILL_DESTROY_WALL
-291: 2:Fire Event: KILL_DESTROY_WALL
-291: 2:Fire Event: KILL_DESTROY_WALL
+291: 2:Fire Event: KILL_TREASURE_BOX
+291: 2:Fire Event: KILL_TREASURE_BOX
+291: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 292: 1:☼☼☼☼☼☼☼☼☼☼☼
 292: 1:☼    #  ☺#☼
@@ -8818,8 +8818,8 @@
 296: 2:
 296: 2:Scores: 30
 296: 2:Answer: ACT
-296: 1:Fire Event: KILL_DESTROY_WALL
-296: 1:Fire Event: KILL_DESTROY_WALL
+296: 1:Fire Event: KILL_TREASURE_BOX
+296: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 297: 1:☼☼☼☼☼☼☼☼☼☼☼
 297: 1:☼    H҉҉҉H☼
@@ -8850,7 +8850,7 @@
 297: 2:Scores: 30
 297: 2:Answer: ACT
 297: 2:Fire Event: DIED
-297: 2:Fire Event: KILL_DESTROY_WALL
+297: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 298: 1:☼☼☼☼☼☼☼☼☼☼☼
 298: 1:☼    #   +☼
@@ -9027,8 +9027,8 @@
 303: 2:Scores: 10
 303: 2:Answer: ACT
 303: 2:Fire Event: DIED
-303: 2:Fire Event: KILL_DESTROY_WALL
-303: 2:Fire Event: KILL_DESTROY_WALL
+303: 2:Fire Event: KILL_TREASURE_BOX
+303: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 304: 1:☼☼☼☼☼☼☼☼☼☼☼
 304: 1:☼    #1   ☼
@@ -9059,7 +9059,7 @@
 304: 2:Scores: 20
 304: 2:Answer: STOP
 304: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-304: 1:Fire Event: KILL_DESTROY_WALL
+304: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 305: 1:☼☼☼☼☼☼☼☼☼☼☼
 305: 1:☼    H҉҉҉҉☼
@@ -9644,7 +9644,7 @@
 324: 2:Scores: 0
 324: 2:Answer: ACT
 324: 2:Fire Event: DIED
-324: 2:Fire Event: KILL_DESTROY_WALL
+324: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 325: 1:☼☼☼☼☼☼☼☼☼☼☼
 325: 1:☼         ☼
@@ -9704,7 +9704,7 @@
 326: 2:
 326: 2:Scores: 10
 326: 2:Answer: ACT
-326: 1:Fire Event: KILL_DESTROY_WALL
+326: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 327: 1:☼☼☼☼☼☼☼☼☼☼☼
 327: 1:☼  #   ҉  ☼
@@ -9853,9 +9853,9 @@
 331: 2:Answer: STOP
 331: 2:PLAYER_GAME_OVER -> START_NEW_GAME
 331: 1:Fire Event: DIED
-331: 1:Fire Event: KILL_DESTROY_WALL
-331: 1:Fire Event: KILL_DESTROY_WALL
-331: 1:Fire Event: KILL_DESTROY_WALL
+331: 1:Fire Event: KILL_TREASURE_BOX
+331: 1:Fire Event: KILL_TREASURE_BOX
+331: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 332: 1:☼☼☼☼☼☼☼☼☼☼☼
 332: 1:☼  #      ☼
@@ -10003,8 +10003,8 @@
 336: 2:Scores: 0
 336: 2:Answer: ACT
 336: 2:Fire Event: DIED
-336: 2:Fire Event: KILL_DESTROY_WALL
-336: 2:Fire Event: KILL_DESTROY_WALL
+336: 2:Fire Event: KILL_TREASURE_BOX
+336: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 337: 1:☼☼☼☼☼☼☼☼☼☼☼
 337: 1:☼  # &    ☼
@@ -10093,8 +10093,8 @@
 339: 2:
 339: 2:Scores: 20
 339: 2:Answer: ACT
-339: 1:Fire Event: KILL_DESTROY_WALL
-339: 1:Fire Event: KILL_DESTROY_WALL
+339: 1:Fire Event: KILL_TREASURE_BOX
+339: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 340: 1:☼☼☼☼☼☼☼☼☼☼☼
 340: 1:☼  #   ♠  ☼
@@ -10183,7 +10183,7 @@
 342: 2:Scores: 20
 342: 2:Answer: ACT
 342: 2:Fire Event: DIED
-342: 2:Fire Event: KILL_DESTROY_WALL
+342: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 343: 1:☼☼☼☼☼☼☼☼☼☼☼
 343: 1:☼  #҉҉҉♣҉҉☼
@@ -10272,7 +10272,7 @@
 345: 2:
 345: 2:Scores: 10
 345: 2:Answer: ACT
-345: 1:Fire Event: KILL_DESTROY_WALL
+345: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 346: 1:☼☼☼☼☼☼☼☼☼☼☼
 346: 1:☼  # #♠   ☼
@@ -10361,7 +10361,7 @@
 348: 2:Scores: 10
 348: 2:Answer: ACT
 348: 2:Fire Event: DIED
-348: 2:Fire Event: KILL_DESTROY_WALL
+348: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 349: 1:☼☼☼☼☼☼☼☼☼☼☼
 349: 1:☼  # H♣҉҉҉☼
@@ -10479,7 +10479,7 @@
 352: 2:
 352: 2:Scores: 10
 352: 2:Answer: ACT
-352: 1:Fire Event: KILL_DESTROY_WALL
+352: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 353: 1:☼☼☼☼☼☼☼☼☼☼☼
 353: 1:☼ ♠# &    ☼
@@ -10539,7 +10539,7 @@
 354: 2:Scores: 10
 354: 2:Answer: ACT
 354: 2:Fire Event: DIED
-354: 2:Fire Event: KILL_DESTROY_WALL
+354: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 355: 1:☼☼☼☼☼☼☼☼☼☼☼
 355: 1:☼҉♣H & #  ☼
@@ -10716,8 +10716,8 @@
 360: 2:Scores: 10
 360: 2:Answer: ACT
 360: 2:Fire Event: DIED
-360: 2:Fire Event: KILL_DESTROY_WALL
-360: 2:Fire Event: KILL_DESTROY_WALL
+360: 2:Fire Event: KILL_TREASURE_BOX
+360: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 361: 1:☼☼☼☼☼☼☼☼☼☼☼
 361: 1:☼ #  & H҉♣☼
@@ -10864,7 +10864,7 @@
 365: 2:
 365: 2:Scores: 20
 365: 2:Answer: ACT
-365: 1:Fire Event: KILL_DESTROY_WALL
+365: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 366: 1:☼☼☼☼☼☼☼☼☼☼☼
 366: 1:☼ #    &  ☼
@@ -11072,10 +11072,10 @@
 372: 2:Answer: ACT
 372: 2:Fire Event: DIED
 372: 1:Fire Event: DIED
-372: 2:Fire Event: KILL_DESTROY_WALL
-372: 2:Fire Event: KILL_DESTROY_WALL
-372: 1:Fire Event: KILL_DESTROY_WALL
-372: 1:Fire Event: KILL_DESTROY_WALL
+372: 2:Fire Event: KILL_TREASURE_BOX
+372: 2:Fire Event: KILL_TREASURE_BOX
+372: 1:Fire Event: KILL_TREASURE_BOX
+372: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 373: 1:☼☼☼☼☼☼☼☼☼☼☼
 373: 1:☼♣H       ☼
@@ -11253,10 +11253,10 @@
 378: 2:Scores: 20
 378: 2:Answer: ACT
 378: 2:Fire Event: DIED
-378: 2:Fire Event: KILL_DESTROY_WALL
-378: 2:Fire Event: KILL_DESTROY_WALL
-378: 2:Fire Event: KILL_DESTROY_WALL
-378: 2:Fire Event: KILL_DESTROY_WALL
+378: 2:Fire Event: KILL_TREASURE_BOX
+378: 2:Fire Event: KILL_TREASURE_BOX
+378: 2:Fire Event: KILL_TREASURE_BOX
+378: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 379: 1:☼☼☼☼☼☼☼☼☼☼☼
 379: 1:☼         ☼
@@ -11435,8 +11435,8 @@
 384: 2:Scores: 40
 384: 2:Answer: ACT
 384: 2:Fire Event: DIED
-384: 2:Fire Event: KILL_DESTROY_WALL
-384: 2:Fire Event: KILL_DESTROY_WALL
+384: 2:Fire Event: KILL_TREASURE_BOX
+384: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 385: 1:☼☼☼☼☼☼☼☼☼☼☼
 385: 1:☼        #☼
@@ -11496,8 +11496,8 @@
 386: 2:
 386: 2:Scores: 20
 386: 2:Answer: ACT
-386: 1:Fire Event: KILL_DESTROY_WALL
-386: 1:Fire Event: KILL_DESTROY_WALL
+386: 1:Fire Event: KILL_TREASURE_BOX
+386: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 387: 1:☼☼☼☼☼☼☼☼☼☼☼
 387: 1:☼        #☼
@@ -11794,7 +11794,7 @@
 396: 2:Scores: 200
 396: 2:Answer: ACT
 396: 2:Fire Event: DIED
-396: 2:Fire Event: KILL_DESTROY_WALL
+396: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 397: 1:☼☼☼☼☼☼☼☼☼☼☼
 397: 1:☼҉       #☼
@@ -11854,8 +11854,8 @@
 398: 2:
 398: 2:Scores: 160
 398: 2:Answer: ACT
-398: 1:Fire Event: KILL_DESTROY_WALL
-398: 1:Fire Event: KILL_DESTROY_WALL
+398: 1:Fire Event: KILL_TREASURE_BOX
+398: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 399: 1:☼☼☼☼☼☼☼☼☼☼☼
 399: 1:☼        #☼
@@ -11973,8 +11973,8 @@
 402: 2:Scores: 160
 402: 2:Answer: ACT
 402: 2:Fire Event: DIED
-402: 2:Fire Event: KILL_DESTROY_WALL
-402: 2:Fire Event: KILL_DESTROY_WALL
+402: 2:Fire Event: KILL_TREASURE_BOX
+402: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 403: 1:☼☼☼☼☼☼☼☼☼☼☼
 403: 1:☼      # #☼
@@ -12005,9 +12005,9 @@
 403: 2:Scores: 130
 403: 2:Answer: STOP
 403: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-403: 1:Fire Event: KILL_DESTROY_WALL
-403: 1:Fire Event: KILL_MEAT_CHOPPER
-403: 1:Fire Event: KILL_DESTROY_WALL
+403: 1:Fire Event: KILL_TREASURE_BOX
+403: 1:Fire Event: KILL_GHOST
+403: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 404: 1:☼☼☼☼☼☼☼☼☼☼☼
 404: 1:☼      # #☼
@@ -12154,7 +12154,7 @@
 408: 2:Scores: 130
 408: 2:Answer: ACT
 408: 2:Fire Event: DIED
-408: 2:Fire Event: KILL_DESTROY_WALL
+408: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 409: 1:☼☼☼☼☼☼☼☼☼☼☼
 409: 1:☼    ҉## #☼
@@ -12274,9 +12274,9 @@
 412: 2:Scores: 95
 412: 2:Answer: ACT
 412: 2:Fire Event: DIED
-412: 1:Fire Event: KILL_DESTROY_WALL
-412: 2:Fire Event: KILL_DESTROY_WALL
-412: 2:Fire Event: KILL_DESTROY_WALL
+412: 1:Fire Event: KILL_TREASURE_BOX
+412: 2:Fire Event: KILL_TREASURE_BOX
+412: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 413: 1:☼☼☼☼☼☼☼☼☼☼☼
 413: 1:☼    ҉## #☼
@@ -12515,7 +12515,7 @@
 420: 1:Fire Event: DIED
 420: 2:Fire Event: DIED
 420: 2:Fire Event: KILL_OTHER_HERO
-420: 1:Fire Event: KILL_DESTROY_WALL
+420: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 421: 1:☼☼☼☼☼☼☼☼☼☼☼
 421: 1:☼     ####☼
@@ -12695,7 +12695,7 @@
 426: 1:Fire Event: DIED
 426: 2:Fire Event: DIED
 426: 2:Fire Event: KILL_OTHER_HERO
-426: 2:Fire Event: KILL_DESTROY_WALL
+426: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 427: 1:☼☼☼☼☼☼☼☼☼☼☼
 427: 1:☼    ҉####☼
@@ -12875,7 +12875,7 @@
 432: 2:Scores: 310
 432: 2:Answer: ACT
 432: 1:Fire Event: DIED
-432: 1:Fire Event: KILL_DESTROY_WALL
+432: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 433: 1:☼☼☼☼☼☼☼☼☼☼☼
 433: 1:☼ ҉҉҉҉H###☼
@@ -12936,8 +12936,8 @@
 434: 2:Scores: 310
 434: 2:Answer: ACT
 434: 2:Fire Event: DIED
-434: 2:Fire Event: KILL_DESTROY_WALL
-434: 2:Fire Event: KILL_DESTROY_WALL
+434: 2:Fire Event: KILL_TREASURE_BOX
+434: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 435: 1:☼☼☼☼☼☼☼☼☼☼☼
 435: 1:☼      ###☼
@@ -13055,8 +13055,8 @@
 438: 2:
 438: 2:Scores: 280
 438: 2:Answer: ACT
-438: 1:Fire Event: KILL_DESTROY_WALL
-438: 1:Fire Event: KILL_DESTROY_WALL
+438: 1:Fire Event: KILL_TREASURE_BOX
+438: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 439: 1:☼☼☼☼☼☼☼☼☼☼☼
 439: 1:☼      ###☼
@@ -13291,7 +13291,7 @@
 446: 2:
 446: 2:Scores: 230
 446: 2:Answer: ACT
-446: 1:Fire Event: KILL_DESTROY_WALL
+446: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 447: 1:☼☼☼☼☼☼☼☼☼☼☼
 447: 1:☼      ###☼
@@ -13497,8 +13497,8 @@
 453: 2:
 453: 2:Scores: 180
 453: 2:Answer: ACT
-453: 1:Fire Event: KILL_DESTROY_WALL
-453: 1:Fire Event: KILL_MEAT_CHOPPER
+453: 1:Fire Event: KILL_TREASURE_BOX
+453: 1:Fire Event: KILL_GHOST
 ------------------------------------------
 454: 1:☼☼☼☼☼☼☼☼☼☼☼
 454: 1:☼      ###☼
@@ -13709,8 +13709,8 @@
 460: 2:Answer: ACT
 460: 2:Fire Event: DIED
 460: 1:Fire Event: DIED
-460: 2:Fire Event: KILL_DESTROY_WALL
-460: 1:Fire Event: KILL_DESTROY_WALL
+460: 2:Fire Event: KILL_TREASURE_BOX
+460: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 461: 1:☼☼☼☼☼☼☼☼☼☼☼
 461: 1:☼  & ҉ ###☼
@@ -13889,7 +13889,7 @@
 466: 2:Scores: 295
 466: 2:Answer: ACT
 466: 2:Fire Event: DIED
-466: 2:Fire Event: KILL_DESTROY_WALL
+466: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 467: 1:☼☼☼☼☼☼☼☼☼☼☼
 467: 1:☼  & ҉ ###☼
@@ -13949,7 +13949,7 @@
 468: 2:
 468: 2:Scores: 255
 468: 2:Answer: ACT
-468: 1:Fire Event: KILL_DESTROY_WALL
+468: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 469: 1:☼☼☼☼☼☼☼☼☼☼☼
 469: 1:☼&     H##☼
@@ -14067,8 +14067,8 @@
 472: 2:Scores: 255
 472: 2:Answer: ACT
 472: 2:Fire Event: DIED
-472: 2:Fire Event: KILL_DESTROY_WALL
-472: 2:Fire Event: KILL_DESTROY_WALL
+472: 2:Fire Event: KILL_TREASURE_BOX
+472: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 473: 1:☼☼☼☼☼☼☼☼☼☼☼
 473: 1:☼    &  ##☼
@@ -14157,7 +14157,7 @@
 475: 2:
 475: 2:Scores: 225
 475: 2:Answer: ACT
-475: 1:Fire Event: KILL_DESTROY_WALL
+475: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 476: 1:☼☼☼☼☼☼☼☼☼☼☼
 476: 1:☼       ##☼
@@ -14248,7 +14248,7 @@
 478: 1:Fire Event: DIED
 478: 2:Fire Event: DIED
 478: 2:Fire Event: KILL_OTHER_HERO
-478: 2:Fire Event: KILL_DESTROY_WALL
+478: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 479: 1:☼☼☼☼☼☼☼☼☼☼☼
 479: 1:☼    #  ##☼
@@ -14427,10 +14427,10 @@
 484: 2:Answer: ACT
 484: 2:Fire Event: DIED
 484: 1:Fire Event: DIED
-484: 2:Fire Event: KILL_DESTROY_WALL
-484: 2:Fire Event: KILL_DESTROY_WALL
-484: 1:Fire Event: KILL_DESTROY_WALL
-484: 1:Fire Event: KILL_DESTROY_WALL
+484: 2:Fire Event: KILL_TREASURE_BOX
+484: 2:Fire Event: KILL_TREASURE_BOX
+484: 1:Fire Event: KILL_TREASURE_BOX
+484: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 485: 1:☼☼☼☼☼☼☼☼☼☼☼
 485: 1:☼    H҉҉H#☼
@@ -14608,8 +14608,8 @@
 490: 2:Scores: 355
 490: 2:Answer: ACT
 490: 2:Fire Event: DIED
-490: 2:Fire Event: KILL_DESTROY_WALL
-490: 2:Fire Event: KILL_DESTROY_WALL
+490: 2:Fire Event: KILL_TREASURE_BOX
+490: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 491: 1:☼☼☼☼☼☼☼☼☼☼☼
 491: 1:☼      # #☼
@@ -14640,7 +14640,7 @@
 491: 2:Scores: 325
 491: 2:Answer: STOP
 491: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-491: 1:Fire Event: KILL_DESTROY_WALL
+491: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 492: 1:☼☼☼☼☼☼☼☼☼☼☼
 492: 1:☼      # #☼
@@ -14789,7 +14789,7 @@
 496: 1:Fire Event: DIED
 496: 2:Fire Event: DIED
 496: 2:Fire Event: KILL_OTHER_HERO
-496: 2:Fire Event: KILL_DESTROY_WALL
+496: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 497: 1:☼☼☼☼☼☼☼☼☼☼☼
 497: 1:☼    # # #☼
@@ -15000,8 +15000,8 @@
 503: 2:Answer: STOP
 503: 2:PLAYER_GAME_OVER -> START_NEW_GAME
 503: 1:Fire Event: DIED
-503: 1:Fire Event: KILL_DESTROY_WALL
-503: 1:Fire Event: KILL_DESTROY_WALL
+503: 1:Fire Event: KILL_TREASURE_BOX
+503: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 504: 1:☼☼☼☼☼☼☼☼☼☼☼
 504: 1:☼Ѡ҉҉҉H ###☼
@@ -15149,7 +15149,7 @@
 508: 2:Scores: 385
 508: 2:Answer: ACT
 508: 2:Fire Event: DIED
-508: 2:Fire Event: KILL_DESTROY_WALL
+508: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 509: 1:☼☼☼☼☼☼☼☼☼☼☼
 509: 1:☼ ☺ 3# ###☼
@@ -15239,7 +15239,7 @@
 511: 2:Scores: 345
 511: 2:Answer: ACT
 511: 1:Fire Event: DIED
-511: 1:Fire Event: KILL_DESTROY_WALL
+511: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 512: 1:☼☼☼☼☼☼☼☼☼☼☼
 512: 1:☼ Ѡ҉҉H ###☼
@@ -15505,7 +15505,7 @@
 520: 2:Scores: 295
 520: 2:Answer: ACT
 520: 2:Fire Event: DIED
-520: 1:Fire Event: KILL_DESTROY_WALL
+520: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 521: 1:☼☼☼☼☼☼☼☼☼☼☼
 521: 1:☼      ##H☼
@@ -15652,7 +15652,7 @@
 525: 2:
 525: 2:Scores: 245
 525: 2:Answer: ACT
-525: 1:Fire Event: KILL_DESTROY_WALL
+525: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 526: 1:☼☼☼☼☼☼☼☼☼☼☼
 526: 1:☼      ## ☼
@@ -15800,7 +15800,7 @@
 530: 2:
 530: 2:Scores: 195
 530: 2:Answer: ACT
-530: 1:Fire Event: KILL_DESTROY_WALL
+530: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 531: 1:☼☼☼☼☼☼☼☼☼☼☼
 531: 1:☼      H# ☼
@@ -15862,7 +15862,7 @@
 532: 2:Fire Event: DIED
 532: 1:Fire Event: DIED
 532: 2:Fire Event: KILL_OTHER_HERO
-532: 2:Fire Event: KILL_DESTROY_WALL
+532: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 533: 1:☼☼☼☼☼☼☼☼☼☼☼
 533: 1:☼    #  # ☼
@@ -16041,8 +16041,8 @@
 538: 2:Answer: ACT
 538: 2:Fire Event: DIED
 538: 1:Fire Event: DIED
-538: 2:Fire Event: KILL_DESTROY_WALL
-538: 1:Fire Event: KILL_DESTROY_WALL
+538: 2:Fire Event: KILL_TREASURE_BOX
+538: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 539: 1:☼☼☼☼☼☼☼☼☼☼☼
 539: 1:☼  ҉ #  # ☼
@@ -16220,8 +16220,8 @@
 544: 2:Scores: 315
 544: 2:Answer: ACT
 544: 2:Fire Event: DIED
-544: 2:Fire Event: KILL_DESTROY_WALL
-544: 2:Fire Event: KILL_DESTROY_WALL
+544: 2:Fire Event: KILL_TREASURE_BOX
+544: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 545: 1:☼☼☼☼☼☼☼☼☼☼☼
 545: 1:☼  # H҉♣H ☼
@@ -16339,8 +16339,8 @@
 548: 2:
 548: 2:Scores: 285
 548: 2:Answer: ACT
-548: 1:Fire Event: KILL_DESTROY_WALL
-548: 1:Fire Event: KILL_DESTROY_WALL
+548: 1:Fire Event: KILL_TREASURE_BOX
+548: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 549: 1:☼☼☼☼☼☼☼☼☼☼☼
 549: 1:☼  #      ☼
@@ -16400,8 +16400,8 @@
 550: 2:Scores: 285
 550: 2:Answer: ACT
 550: 2:Fire Event: DIED
-550: 2:Fire Event: KILL_DESTROY_WALL
-550: 2:Fire Event: KILL_DESTROY_WALL
+550: 2:Fire Event: KILL_TREASURE_BOX
+550: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 551: 1:☼☼☼☼☼☼☼☼☼☼☼
 551: 1:☼  H   #  ☼
@@ -16607,7 +16607,7 @@
 557: 2:Scores: 255
 557: 2:Answer: ACT
 557: 1:Fire Event: DIED
-557: 1:Fire Event: KILL_DESTROY_WALL
+557: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 558: 1:☼☼☼☼☼☼☼☼☼☼☼
 558: 1:☼  ♠   #  ☼
@@ -16786,8 +16786,8 @@
 563: 2:Scores: 205
 563: 2:Answer: ACT
 563: 1:Fire Event: DIED
-563: 1:Fire Event: KILL_DESTROY_WALL
-563: 1:Fire Event: KILL_DESTROY_WALL
+563: 1:Fire Event: KILL_TREASURE_BOX
+563: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 564: 1:☼☼☼☼☼☼☼☼☼☼☼
 564: 1:☼    ♠ HѠH☼
@@ -16819,7 +16819,7 @@
 564: 2:Answer: ACT
 564: 1:PLAYER_GAME_OVER -> START_NEW_GAME
 564: 2:Fire Event: DIED
-564: 2:Fire Event: KILL_DESTROY_WALL
+564: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 565: 1:☼☼☼☼☼☼☼☼☼☼☼
 565: 1:☼ ҉҉҉♣҉҉҉ ☼
@@ -16996,8 +16996,8 @@
 570: 2:Scores: 165
 570: 2:Answer: ACT
 570: 2:Fire Event: DIED
-570: 1:Fire Event: KILL_DESTROY_WALL
-570: 2:Fire Event: KILL_DESTROY_WALL
+570: 1:Fire Event: KILL_TREASURE_BOX
+570: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 571: 1:☼☼☼☼☼☼☼☼☼☼☼
 571: 1:☼        ☺☼
@@ -17174,7 +17174,7 @@
 576: 2:Scores: 125
 576: 2:Answer: ACT
 576: 2:Fire Event: DIED
-576: 2:Fire Event: KILL_DESTROY_WALL
+576: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 577: 1:☼☼☼☼☼☼☼☼☼☼☼
 577: 1:☼҉♣҉҉H☺ & ☼
@@ -17467,7 +17467,7 @@
 586: 2:Scores: 85
 586: 2:Answer: ACT
 586: 2:Fire Event: DIED
-586: 2:Fire Event: KILL_DESTROY_WALL
+586: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 587: 1:☼☼☼☼☼☼☼☼☼☼☼
 587: 1:☼         ☼
@@ -17527,8 +17527,8 @@
 588: 2:
 588: 2:Scores: 45
 588: 2:Answer: ACT
-588: 1:Fire Event: KILL_DESTROY_WALL
-588: 1:Fire Event: KILL_DESTROY_WALL
+588: 1:Fire Event: KILL_TREASURE_BOX
+588: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 589: 1:☼☼☼☼☼☼☼☼☼☼☼
 589: 1:☼         ☼
@@ -17646,7 +17646,7 @@
 592: 2:Scores: 45
 592: 2:Answer: ACT
 592: 2:Fire Event: DIED
-592: 2:Fire Event: KILL_DESTROY_WALL
+592: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 593: 1:☼☼☼☼☼☼☼☼☼☼☼
 593: 1:☼         ☼
@@ -17823,8 +17823,8 @@
 598: 2:Scores: 10
 598: 2:Answer: ACT
 598: 2:Fire Event: DIED
-598: 2:Fire Event: KILL_DESTROY_WALL
-598: 2:Fire Event: KILL_MEAT_CHOPPER
+598: 2:Fire Event: KILL_TREASURE_BOX
+598: 2:Fire Event: KILL_GHOST
 ------------------------------------------
 599: 1:☼☼☼☼☼☼☼☼☼☼☼
 599: 1:☼ ҉҉҉♣҉҉x☺☼
@@ -18003,8 +18003,8 @@
 604: 2:Fire Event: DIED
 604: 1:Fire Event: DIED
 604: 2:Fire Event: KILL_OTHER_HERO
-604: 2:Fire Event: KILL_DESTROY_WALL
-604: 2:Fire Event: KILL_DESTROY_WALL
+604: 2:Fire Event: KILL_TREASURE_BOX
+604: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 605: 1:☼☼☼☼☼☼☼☼☼☼☼
 605: 1:☼     &   ☼
@@ -18212,7 +18212,7 @@
 611: 2:
 611: 2:Scores: 230
 611: 2:Answer: ACT
-611: 1:Fire Event: KILL_DESTROY_WALL
+611: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 612: 1:☼☼☼☼☼☼☼☼☼☼☼
 612: 1:☼҉҉҉҉# &  ☼
@@ -18419,7 +18419,7 @@
 618: 2:Scores: 180
 618: 2:Answer: ACT
 618: 2:Fire Event: DIED
-618: 2:Fire Event: KILL_DESTROY_WALL
+618: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 619: 1:☼☼☼☼☼☼☼☼☼☼☼
 619: 1:☼ #  #  & ☼
@@ -18450,8 +18450,8 @@
 619: 2:Scores: 140
 619: 2:Answer: STOP
 619: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-619: 1:Fire Event: KILL_DESTROY_WALL
-619: 1:Fire Event: KILL_DESTROY_WALL
+619: 1:Fire Event: KILL_TREASURE_BOX
+619: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 620: 1:☼☼☼☼☼☼☼☼☼☼☼
 620: 1:☼ #  #   &☼
@@ -18774,7 +18774,7 @@
 630: 2:Scores: 90
 630: 2:Answer: ACT
 630: 2:Fire Event: DIED
-630: 2:Fire Event: KILL_DESTROY_WALL
+630: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 631: 1:☼☼☼☼☼☼☼☼☼☼☼
 631: 1:☼ #  H#   ☼
@@ -18951,8 +18951,8 @@
 636: 2:Scores: 50
 636: 2:Answer: ACT
 636: 2:Fire Event: DIED
-636: 2:Fire Event: KILL_DESTROY_WALL
-636: 2:Fire Event: KILL_DESTROY_WALL
+636: 2:Fire Event: KILL_TREASURE_BOX
+636: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 637: 1:☼☼☼☼☼☼☼☼☼☼☼
 637: 1:☼♣H   #3  ☼
@@ -19041,8 +19041,8 @@
 639: 2:
 639: 2:Scores: 20
 639: 2:Answer: ACT
-639: 1:Fire Event: KILL_MEAT_CHOPPER
-639: 1:Fire Event: KILL_DESTROY_WALL
+639: 1:Fire Event: KILL_GHOST
+639: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 640: 1:☼☼☼☼☼☼☼☼☼☼☼
 640: 1:☼     H҉҉x☼
@@ -19131,9 +19131,9 @@
 642: 2:Scores: 20
 642: 2:Answer: ACT
 642: 2:Fire Event: DIED
-642: 2:Fire Event: KILL_DESTROY_WALL
-642: 2:Fire Event: KILL_DESTROY_WALL
-642: 2:Fire Event: KILL_DESTROY_WALL
+642: 2:Fire Event: KILL_TREASURE_BOX
+642: 2:Fire Event: KILL_TREASURE_BOX
+642: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 643: 1:☼☼☼☼☼☼☼☼☼☼☼
 643: 1:☼      #  ☼
@@ -19252,7 +19252,7 @@
 646: 2:Scores: 30
 646: 2:Answer: ACT
 646: 1:Fire Event: DIED
-646: 1:Fire Event: KILL_DESTROY_WALL
+646: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 647: 1:☼☼☼☼☼☼☼☼☼☼☼
 647: 1:☼  ҉ ♠ # #☼
@@ -19313,7 +19313,7 @@
 648: 2:Scores: 30
 648: 2:Answer: ACT
 648: 2:Fire Event: DIED
-648: 2:Fire Event: KILL_DESTROY_WALL
+648: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 649: 1:☼☼☼☼☼☼☼☼☼☼☼
 649: 1:☼ ҉҉҉♣҉H #☼
@@ -19490,7 +19490,7 @@
 654: 2:Scores: 10
 654: 2:Answer: ACT
 654: 2:Fire Event: DIED
-654: 2:Fire Event: KILL_DESTROY_WALL
+654: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 655: 1:☼☼☼☼☼☼☼☼☼☼☼
 655: 1:☼ ☺    ҉ #☼
@@ -19667,7 +19667,7 @@
 660: 2:Scores: 10
 660: 2:Answer: ACT
 660: 2:Fire Event: DIED
-660: 2:Fire Event: KILL_DESTROY_WALL
+660: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 661: 1:☼☼☼☼☼☼☼☼☼☼☼
 661: 1:☼҉       #☼
@@ -19786,7 +19786,7 @@
 664: 2:Scores: 10
 664: 2:Answer: ACT
 664: 1:Fire Event: DIED
-664: 1:Fire Event: KILL_DESTROY_WALL
+664: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 665: 1:☼☼☼☼☼☼☼☼☼☼☼
 665: 1:☼        #☼
@@ -19847,7 +19847,7 @@
 666: 2:Scores: 10
 666: 2:Answer: ACT
 666: 2:Fire Event: DIED
-666: 2:Fire Event: KILL_DESTROY_WALL
+666: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 667: 1:☼☼☼☼☼☼☼☼☼☼☼
 667: 1:☼        #☼
@@ -19966,7 +19966,7 @@
 670: 2:Scores: 10
 670: 2:Answer: ACT
 670: 1:Fire Event: DIED
-670: 1:Fire Event: KILL_DESTROY_WALL
+670: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 671: 1:☼☼☼☼☼☼☼☼☼☼☼
 671: 1:☼    # ♠ #☼
@@ -20027,8 +20027,8 @@
 672: 2:Scores: 10
 672: 2:Answer: ACT
 672: 2:Fire Event: DIED
-672: 2:Fire Event: KILL_DESTROY_WALL
-672: 2:Fire Event: KILL_DESTROY_WALL
+672: 2:Fire Event: KILL_TREASURE_BOX
+672: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 673: 1:☼☼☼☼☼☼☼☼☼☼☼
 673: 1:☼  ☺ H҉♣҉H☼
@@ -20205,8 +20205,8 @@
 678: 2:Scores: 20
 678: 2:Answer: ACT
 678: 2:Fire Event: DIED
-678: 2:Fire Event: KILL_DESTROY_WALL
-678: 2:Fire Event: KILL_DESTROY_WALL
+678: 2:Fire Event: KILL_TREASURE_BOX
+678: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 679: 1:☼☼☼☼☼☼☼☼☼☼☼
 679: 1:☼         ☼
@@ -20470,7 +20470,7 @@
 687: 2:
 687: 2:Scores: 25
 687: 2:Answer: ACT
-687: 2:Fire Event: KILL_DESTROY_WALL
+687: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 688: 1:☼☼☼☼☼☼☼☼☼☼☼
 688: 1:☼     1H  ☼
@@ -20617,7 +20617,7 @@
 692: 2:Scores: 35
 692: 2:Answer: ACT
 692: 2:Fire Event: DIED
-692: 2:Fire Event: KILL_MEAT_CHOPPER
+692: 2:Fire Event: KILL_GHOST
 ------------------------------------------
 693: 1:☼☼☼☼☼☼☼☼☼☼☼
 693: 1:☼☺     ҉  ☼
@@ -20794,7 +20794,7 @@
 698: 2:Scores: 100
 698: 2:Answer: ACT
 698: 2:Fire Event: DIED
-698: 2:Fire Event: KILL_DESTROY_WALL
+698: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 699: 1:☼☼☼☼☼☼☼☼☼☼☼
 699: 1:☼ ҉҉҉♣҉҉҉ ☼
@@ -20912,7 +20912,7 @@
 702: 2:
 702: 2:Scores: 60
 702: 2:Answer: ACT
-702: 1:Fire Event: KILL_DESTROY_WALL
+702: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 703: 1:☼☼☼☼☼☼☼☼☼☼☼
 703: 1:☼  ҉      ☼
@@ -20972,7 +20972,7 @@
 704: 2:Scores: 60
 704: 2:Answer: ACT
 704: 2:Fire Event: DIED
-704: 2:Fire Event: KILL_DESTROY_WALL
+704: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 705: 1:☼☼☼☼☼☼☼☼☼☼☼
 705: 1:☼         ☼
@@ -21120,7 +21120,7 @@
 709: 2:Scores: 20
 709: 2:Answer: ACT
 709: 1:Fire Event: DIED
-709: 1:Fire Event: KILL_DESTROY_WALL
+709: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 710: 1:☼☼☼☼☼☼☼☼☼☼☼
 710: 1:☼      #  ☼
@@ -21298,7 +21298,7 @@
 715: 2:
 715: 2:Scores: 0
 715: 2:Answer: ACT
-715: 1:Fire Event: KILL_DESTROY_WALL
+715: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 716: 1:☼☼☼☼☼☼☼☼☼☼☼
 716: 1:☼҉ ☺   #  ☼
@@ -21329,9 +21329,9 @@
 716: 2:Scores: 0
 716: 2:Answer: ACT
 716: 2:Fire Event: DIED
-716: 2:Fire Event: KILL_DESTROY_WALL
-716: 2:Fire Event: KILL_DESTROY_WALL
-716: 2:Fire Event: KILL_DESTROY_WALL
+716: 2:Fire Event: KILL_TREASURE_BOX
+716: 2:Fire Event: KILL_TREASURE_BOX
+716: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 717: 1:☼☼☼☼☼☼☼☼☼☼☼
 717: 1:☼   ☺  #  ☼
@@ -21594,7 +21594,7 @@
 725: 2:
 725: 2:Scores: 30
 725: 2:Answer: ACT
-725: 1:Fire Event: KILL_DESTROY_WALL
+725: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 726: 1:☼☼☼☼☼☼☼☼☼☼☼
 726: 1:☼ ☺҉   #  ☼
@@ -21625,7 +21625,7 @@
 726: 2:Scores: 30
 726: 2:Answer: ACT
 726: 2:Fire Event: DIED
-726: 2:Fire Event: KILL_DESTROY_WALL
+726: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 727: 1:☼☼☼☼☼☼☼☼☼☼☼
 727: 1:☼ ☺    #  ☼
@@ -21892,7 +21892,7 @@
 735: 2:Fire Event: DIED
 735: 1:Fire Event: DIED
 735: 2:Fire Event: KILL_OTHER_HERO
-735: 1:Fire Event: KILL_DESTROY_WALL
+735: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 736: 1:☼☼☼☼☼☼☼☼☼☼☼
 736: 1:☼  ҉҉҉҉H  ☼
@@ -22070,7 +22070,7 @@
 741: 2:Scores: 200
 741: 2:Answer: ACT
 741: 2:Fire Event: DIED
-741: 2:Fire Event: KILL_DESTROY_WALL
+741: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 742: 1:☼☼☼☼☼☼☼☼☼☼☼
 742: 1:☼        #☼
@@ -22426,8 +22426,8 @@
 753: 2:Scores: 310
 753: 2:Answer: ACT
 753: 2:Fire Event: DIED
-753: 2:Fire Event: KILL_MEAT_CHOPPER
-753: 2:Fire Event: KILL_DESTROY_WALL
+753: 2:Fire Event: KILL_GHOST
+753: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 754: 1:☼☼☼☼☼☼☼☼☼☼☼
 754: 1:☼        #☼
@@ -22605,9 +22605,9 @@
 759: 2:Answer: ACT
 759: 2:Fire Event: DIED
 759: 1:Fire Event: DIED
-759: 2:Fire Event: KILL_DESTROY_WALL
-759: 2:Fire Event: KILL_DESTROY_WALL
-759: 1:Fire Event: KILL_DESTROY_WALL
+759: 2:Fire Event: KILL_TREASURE_BOX
+759: 2:Fire Event: KILL_TREASURE_BOX
+759: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 760: 1:☼☼☼☼☼☼☼☼☼☼☼
 760: 1:☼    &   #☼
@@ -22785,7 +22785,7 @@
 765: 2:Scores: 340
 765: 2:Answer: ACT
 765: 2:Fire Event: DIED
-765: 2:Fire Event: KILL_DESTROY_WALL
+765: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 766: 1:☼☼☼☼☼☼☼☼☼☼☼
 766: 1:☼  &     #☼
@@ -22962,7 +22962,7 @@
 771: 2:Scores: 300
 771: 2:Answer: ACT
 771: 2:Fire Event: DIED
-771: 2:Fire Event: KILL_DESTROY_WALL
+771: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 772: 1:☼☼☼☼☼☼☼☼☼☼☼
 772: 1:☼  ҉   & #☼
@@ -23139,7 +23139,7 @@
 777: 2:
 777: 2:Scores: 265
 777: 2:Answer: ACT
-777: 1:Fire Event: KILL_DESTROY_WALL
+777: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 778: 1:☼☼☼☼☼☼☼☼☼☼☼
 778: 1:☼  &     #☼
@@ -23198,8 +23198,8 @@
 779: 2:
 779: 2:Scores: 265
 779: 2:Answer: ACT
-779: 2:Fire Event: KILL_MEAT_CHOPPER
-779: 2:Fire Event: KILL_DESTROY_WALL
+779: 2:Fire Event: KILL_GHOST
+779: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 780: 1:☼☼☼☼☼☼☼☼☼☼☼
 780: 1:☼    x   #☼
@@ -23316,7 +23316,7 @@
 783: 2:
 783: 2:Scores: 375
 783: 2:Answer: ACT
-783: 1:Fire Event: KILL_DESTROY_WALL
+783: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 784: 1:☼☼☼☼☼☼☼☼☼☼☼
 784: 1:☼ &      #☼
@@ -23349,7 +23349,7 @@
 784: 1:Fire Event: DIED
 784: 2:Fire Event: DIED
 784: 2:Fire Event: KILL_OTHER_HERO
-784: 2:Fire Event: KILL_DESTROY_WALL
+784: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 785: 1:☼☼☼☼☼☼☼☼☼☼☼
 785: 1:☼  & ҉   #☼
@@ -23527,8 +23527,8 @@
 790: 2:Scores: 535
 790: 2:Answer: ACT
 790: 2:Fire Event: DIED
-790: 2:Fire Event: KILL_DESTROY_WALL
-790: 2:Fire Event: KILL_DESTROY_WALL
+790: 2:Fire Event: KILL_TREASURE_BOX
+790: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 791: 1:☼☼☼☼☼☼☼☼☼☼☼
 791: 1:☼    H҉♣҉H☼
@@ -23560,7 +23560,7 @@
 791: 2:Answer: STOP
 791: 2:PLAYER_GAME_OVER -> START_NEW_GAME
 791: 1:Fire Event: DIED
-791: 1:Fire Event: KILL_DESTROY_WALL
+791: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 792: 1:☼☼☼☼☼☼☼☼☼☼☼
 792: 1:☼     ♥   ☼
@@ -23739,7 +23739,7 @@
 797: 2:Answer: STOP
 797: 2:PLAYER_GAME_OVER -> START_NEW_GAME
 797: 1:Fire Event: DIED
-797: 1:Fire Event: KILL_DESTROY_WALL
+797: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 798: 1:☼☼☼☼☼☼☼☼☼☼☼
 798: 1:☼         ☼
@@ -23887,8 +23887,8 @@
 802: 2:Scores: 455
 802: 2:Answer: ACT
 802: 2:Fire Event: DIED
-802: 2:Fire Event: KILL_DESTROY_WALL
-802: 2:Fire Event: KILL_DESTROY_WALL
+802: 2:Fire Event: KILL_TREASURE_BOX
+802: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 803: 1:☼☼☼☼☼☼☼☼☼☼☼
 803: 1:☼         ☼
@@ -24007,7 +24007,7 @@
 806: 2:Scores: 425
 806: 2:Answer: ACT
 806: 1:Fire Event: DIED
-806: 1:Fire Event: KILL_DESTROY_WALL
+806: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 807: 1:☼☼☼☼☼☼☼☼☼☼☼
 807: 1:☼Ѡ#    #  ☼
@@ -24244,7 +24244,7 @@
 814: 2:Scores: 375
 814: 2:Answer: ACT
 814: 2:Fire Event: DIED
-814: 2:Fire Event: KILL_DESTROY_WALL
+814: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 815: 1:☼☼☼☼☼☼☼☼☼☼☼
 815: 1:☼ #    H  ☼
@@ -24275,8 +24275,8 @@
 815: 2:Scores: 335
 815: 2:Answer: STOP
 815: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-815: 1:Fire Event: KILL_MEAT_CHOPPER
-815: 1:Fire Event: KILL_DESTROY_WALL
+815: 1:Fire Event: KILL_GHOST
+815: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 816: 1:☼☼☼☼☼☼☼☼☼☼☼
 816: 1:☼ #       ☼
@@ -24423,7 +24423,7 @@
 820: 2:Scores: 335
 820: 2:Answer: ACT
 820: 2:Fire Event: DIED
-820: 2:Fire Event: KILL_DESTROY_WALL
+820: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 821: 1:☼☼☼☼☼☼☼☼☼☼☼
 821: 1:☼ #      #☼
@@ -24603,7 +24603,7 @@
 826: 2:Answer: ACT
 826: 2:Fire Event: DIED
 826: 1:Fire Event: KILL_OTHER_HERO
-826: 1:Fire Event: KILL_MEAT_CHOPPER
+826: 1:Fire Event: KILL_GHOST
 ------------------------------------------
 827: 1:☼☼☼☼☼☼☼☼☼☼☼
 827: 1:☼ #      #☼
@@ -24780,7 +24780,7 @@
 832: 2:Scores: 195
 832: 2:Answer: ACT
 832: 2:Fire Event: DIED
-832: 2:Fire Event: KILL_DESTROY_WALL
+832: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 833: 1:☼☼☼☼☼☼☼☼☼☼☼
 833: 1:☼ #  ҉҉҉♣H☼
@@ -24811,7 +24811,7 @@
 833: 2:Scores: 155
 833: 2:Answer: STOP
 833: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-833: 1:Fire Event: KILL_DESTROY_WALL
+833: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 834: 1:☼☼☼☼☼☼☼☼☼☼☼
 834: 1:☼ #      c☼
@@ -24958,9 +24958,9 @@
 838: 2:Scores: 155
 838: 2:Answer: ACT
 838: 2:Fire Event: DIED
-838: 2:Fire Event: KILL_DESTROY_WALL
-838: 2:Fire Event: KILL_DESTROY_WALL
-838: 1:Fire Event: KILL_DESTROY_WALL
+838: 2:Fire Event: KILL_TREASURE_BOX
+838: 2:Fire Event: KILL_TREASURE_BOX
+838: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 839: 1:☼☼☼☼☼☼☼☼☼☼☼
 839: 1:☼ #       ☼
@@ -25137,7 +25137,7 @@
 844: 2:Scores: 125
 844: 2:Answer: ACT
 844: 2:Fire Event: DIED
-844: 2:Fire Event: KILL_DESTROY_WALL
+844: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 845: 1:☼☼☼☼☼☼☼☼☼☼☼
 845: 1:☼ #  H҉҉♣҉☼
@@ -25314,8 +25314,8 @@
 850: 2:Scores: 85
 850: 2:Answer: ACT
 850: 2:Fire Event: DIED
-850: 1:Fire Event: KILL_DESTROY_WALL
-850: 2:Fire Event: KILL_DESTROY_WALL
+850: 1:Fire Event: KILL_TREASURE_BOX
+850: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 851: 1:☼☼☼☼☼☼☼☼☼☼☼
 851: 1:☼ #       ☼
@@ -25493,7 +25493,7 @@
 856: 2:Answer: ACT
 856: 2:Fire Event: DIED
 856: 1:Fire Event: DIED
-856: 1:Fire Event: KILL_DESTROY_WALL
+856: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 857: 1:☼☼☼☼☼☼☼☼☼☼☼
 857: 1:☼ # ҉҉҉♣҉҉☼
@@ -25672,8 +25672,8 @@
 862: 2:Answer: ACT
 862: 2:Fire Event: DIED
 862: 1:Fire Event: KILL_OTHER_HERO
-862: 1:Fire Event: KILL_DESTROY_WALL
-862: 2:Fire Event: KILL_DESTROY_WALL
+862: 1:Fire Event: KILL_TREASURE_BOX
+862: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 863: 1:☼☼☼☼☼☼☼☼☼☼☼
 863: 1:☼ #       ☼
@@ -25997,7 +25997,7 @@
 873: 2:Scores: 0
 873: 2:Answer: ACT
 873: 1:Fire Event: DIED
-873: 1:Fire Event: KILL_DESTROY_WALL
+873: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 874: 1:☼☼☼☼☼☼☼☼☼☼☼
 874: 1:☼##       ☼
@@ -26029,9 +26029,9 @@
 874: 2:Answer: ACT
 874: 1:PLAYER_GAME_OVER -> START_NEW_GAME
 874: 2:Fire Event: DIED
-874: 2:Fire Event: KILL_DESTROY_WALL
-874: 2:Fire Event: KILL_MEAT_CHOPPER
-874: 2:Fire Event: KILL_DESTROY_WALL
+874: 2:Fire Event: KILL_TREASURE_BOX
+874: 2:Fire Event: KILL_GHOST
+874: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 875: 1:☼☼☼☼☼☼☼☼☼☼☼
 875: 1:☼##  #  ☺ ☼
@@ -26357,8 +26357,8 @@
 885: 2:Scores: 70
 885: 2:Answer: ACT
 885: 2:Fire Event: DIED
-885: 2:Fire Event: KILL_DESTROY_WALL
-885: 2:Fire Event: KILL_DESTROY_WALL
+885: 2:Fire Event: KILL_TREASURE_BOX
+885: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 886: 1:☼☼☼☼☼☼☼☼☼☼☼
 886: 1:☼##  ##   ☼
@@ -26476,9 +26476,9 @@
 889: 2:
 889: 2:Scores: 40
 889: 2:Answer: DOWN
-889: 1:Fire Event: KILL_DESTROY_WALL
-889: 1:Fire Event: KILL_DESTROY_WALL
-889: 1:Fire Event: KILL_DESTROY_WALL
+889: 1:Fire Event: KILL_TREASURE_BOX
+889: 1:Fire Event: KILL_TREASURE_BOX
+889: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 890: 1:☼☼☼☼☼☼☼☼☼☼☼
 890: 1:☼##  ## # ☼
@@ -26682,7 +26682,7 @@
 896: 2:
 896: 2:Scores: 40
 896: 2:Answer: ACT
-896: 1:Fire Event: KILL_DESTROY_WALL
+896: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 897: 1:☼☼☼☼☼☼☼☼☼☼☼
 897: 1:☼##  ## # ☼
@@ -26771,7 +26771,7 @@
 899: 2:Scores: 40
 899: 2:Answer: ACT
 899: 2:Fire Event: DIED
-899: 2:Fire Event: KILL_DESTROY_WALL
+899: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 900: 1:☼☼☼☼☼☼☼☼☼☼☼
 900: 1:☼##  ## # ☼
@@ -26831,7 +26831,7 @@
 901: 2:
 901: 2:Scores: 10
 901: 2:Answer: ACT
-901: 1:Fire Event: KILL_DESTROY_WALL
+901: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 902: 1:☼☼☼☼☼☼☼☼☼☼☼
 902: 1:☼##  ## # ☼
@@ -26949,7 +26949,7 @@
 905: 2:Scores: 10
 905: 2:Answer: ACT
 905: 2:Fire Event: DIED
-905: 2:Fire Event: KILL_DESTROY_WALL
+905: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 906: 1:☼☼☼☼☼☼☼☼☼☼☼
 906: 1:☼##  ## # ☼
@@ -27067,7 +27067,7 @@
 909: 2:
 909: 2:Scores: 10
 909: 2:Answer: ACT
-909: 1:Fire Event: KILL_DESTROY_WALL
+909: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 910: 1:☼☼☼☼☼☼☼☼☼☼☼
 910: 1:☼##  ##҉# ☼
@@ -27127,7 +27127,7 @@
 911: 2:Scores: 10
 911: 2:Answer: ACT
 911: 2:Fire Event: DIED
-911: 2:Fire Event: KILL_DESTROY_WALL
+911: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 912: 1:☼☼☼☼☼☼☼☼☼☼☼
 912: 1:☼##  ## # ☼
@@ -27274,7 +27274,7 @@
 916: 2:
 916: 2:Scores: 10
 916: 2:Answer: ACT
-916: 1:Fire Event: KILL_DESTROY_WALL
+916: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 917: 1:☼☼☼☼☼☼☼☼☼☼☼
 917: 1:☼##  ## # ☼
@@ -27307,8 +27307,8 @@
 917: 1:Fire Event: DIED
 917: 2:Fire Event: DIED
 917: 2:Fire Event: KILL_OTHER_HERO
-917: 2:Fire Event: KILL_MEAT_CHOPPER
-917: 2:Fire Event: KILL_DESTROY_WALL
+917: 2:Fire Event: KILL_GHOST
+917: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 918: 1:☼☼☼☼☼☼☼☼☼☼☼
 918: 1:☼##  ## # ☼
@@ -27778,7 +27778,7 @@
 933: 2:Scores: 260
 933: 2:Answer: ACT
 933: 2:Fire Event: DIED
-933: 2:Fire Event: KILL_DESTROY_WALL
+933: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 934: 1:☼☼☼☼☼☼☼☼☼☼☼
 934: 1:☼##  ###H♣☼
@@ -27809,7 +27809,7 @@
 934: 2:Scores: 220
 934: 2:Answer: STOP
 934: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-934: 1:Fire Event: KILL_DESTROY_WALL
+934: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 935: 1:☼☼☼☼☼☼☼☼☼☼☼
 935: 1:☼##  ###r ☼
@@ -28042,8 +28042,8 @@
 942: 2:
 942: 2:Scores: 220
 942: 2:Answer: ACT
-942: 1:Fire Event: KILL_DESTROY_WALL
-942: 1:Fire Event: KILL_DESTROY_WALL
+942: 1:Fire Event: KILL_TREASURE_BOX
+942: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 943: 1:☼☼☼☼☼☼☼☼☼☼☼
 943: 1:☼##  ###  ☼
@@ -28074,7 +28074,7 @@
 943: 2:Scores: 220
 943: 2:Answer: ACT
 943: 2:Fire Event: DIED
-943: 2:Fire Event: KILL_DESTROY_WALL
+943: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 944: 1:☼☼☼☼☼☼☼☼☼☼☼
 944: 1:☼##  ###  ☼
@@ -28251,8 +28251,8 @@
 949: 2:Scores: 180
 949: 2:Answer: ACT
 949: 2:Fire Event: DIED
-949: 2:Fire Event: KILL_DESTROY_WALL
-949: 2:Fire Event: KILL_DESTROY_WALL
+949: 2:Fire Event: KILL_TREASURE_BOX
+949: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 950: 1:☼☼☼☼☼☼☼☼☼☼☼
 950: 1:☼##  ##H♣H☼
@@ -28431,8 +28431,8 @@
 955: 2:Scores: 150
 955: 2:Answer: ACT
 955: 2:Fire Event: DIED
-955: 2:Fire Event: KILL_DESTROY_WALL
-955: 2:Fire Event: KILL_DESTROY_WALL
+955: 2:Fire Event: KILL_TREASURE_BOX
+955: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 956: 1:☼☼☼☼☼☼☼☼☼☼☼
 956: 1:☼##  ##   ☼
@@ -28610,8 +28610,8 @@
 961: 2:Answer: ACT
 961: 2:Fire Event: DIED
 961: 1:Fire Event: DIED
-961: 2:Fire Event: KILL_DESTROY_WALL
-961: 1:Fire Event: KILL_DESTROY_WALL
+961: 2:Fire Event: KILL_TREASURE_BOX
+961: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 962: 1:☼☼☼☼☼☼☼☼☼☼☼
 962: 1:☼##  #H҉҉҉☼
@@ -28789,8 +28789,8 @@
 967: 2:Scores: 80
 967: 2:Answer: ACT
 967: 2:Fire Event: DIED
-967: 1:Fire Event: KILL_DESTROY_WALL
-967: 1:Fire Event: KILL_DESTROY_WALL
+967: 1:Fire Event: KILL_TREASURE_BOX
+967: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 968: 1:☼☼☼☼☼☼☼☼☼☼☼
 968: 1:☼##  #    ☼
@@ -28967,9 +28967,9 @@
 973: 2:Scores: 30
 973: 2:Answer: ACT
 973: 2:Fire Event: DIED
-973: 2:Fire Event: KILL_DESTROY_WALL
-973: 2:Fire Event: KILL_DESTROY_WALL
-973: 2:Fire Event: KILL_DESTROY_WALL
+973: 2:Fire Event: KILL_TREASURE_BOX
+973: 2:Fire Event: KILL_TREASURE_BOX
+973: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 974: 1:☼☼☼☼☼☼☼☼☼☼☼
 974: 1:☼#H♣҉H    ☼
@@ -29146,7 +29146,7 @@
 979: 2:Scores: 30
 979: 2:Answer: ACT
 979: 1:Fire Event: DIED
-979: 1:Fire Event: KILL_DESTROY_WALL
+979: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 980: 1:☼☼☼☼☼☼☼☼☼☼☼
 980: 1:☼#        ☼
@@ -29207,7 +29207,7 @@
 981: 2:Scores: 30
 981: 2:Answer: ACT
 981: 2:Fire Event: DIED
-981: 2:Fire Event: KILL_DESTROY_WALL
+981: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 982: 1:☼☼☼☼☼☼☼☼☼☼☼
 982: 1:☼#      # ☼
@@ -29501,8 +29501,8 @@
 991: 2:Scores: 15
 991: 2:Answer: ACT
 991: 2:Fire Event: DIED
-991: 2:Fire Event: KILL_DESTROY_WALL
-991: 2:Fire Event: KILL_DESTROY_WALL
+991: 2:Fire Event: KILL_TREASURE_BOX
+991: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 992: 1:☼☼☼☼☼☼☼☼☼☼☼
 992: 1:☼#    ☺3# ☼
@@ -29591,7 +29591,7 @@
 994: 2:
 994: 2:Scores: 20
 994: 2:Answer: ACT
-994: 1:Fire Event: KILL_DESTROY_WALL
+994: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 995: 1:☼☼☼☼☼☼☼☼☼☼☼
 995: 1:☼# ♠҉҉҉҉H ☼
@@ -29680,8 +29680,8 @@
 997: 2:Scores: 20
 997: 2:Answer: ACT
 997: 2:Fire Event: DIED
-997: 2:Fire Event: KILL_DESTROY_WALL
-997: 2:Fire Event: KILL_DESTROY_WALL
+997: 2:Fire Event: KILL_TREASURE_BOX
+997: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 998: 1:☼☼☼☼☼☼☼☼☼☼☼
 998: 1:☼H҉♣҉҉҉   ☼
@@ -29770,6 +29770,6 @@
 1000: 2:
 1000: 2:Scores: 20
 1000: 2:Answer: ACT
-1000: 1:Fire Event: KILL_DESTROY_WALL
-1000: 1:Fire Event: KILL_DESTROY_WALL
+1000: 1:Fire Event: KILL_TREASURE_BOX
+1000: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------

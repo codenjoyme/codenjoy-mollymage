@@ -20,12 +20,12 @@
  * #L%
  */
 
-package bomberman
+package hero
 
 type CommonAPI interface {
-	GetBomberman() Point
-	GetOtherBombermans() []Point
-	IsMyBombermanDead() bool
+	GetHero() Point
+	GetOtherHeroes() []Point
+	IsMyHeroDead() bool
 	IsAt(point Point, element Element) bool
 	IsAtAny(point Point, element []Element) bool // boolean isAt(Point point, Collection<Element> elements)
 	IsNear(point Point, element Element) bool
@@ -34,10 +34,10 @@ type CommonAPI interface {
 	GetAt(point Point) Element
 	boardSize() int
 	GetBarriers() []Point
-	GetMeatChoppers() []Point
+	GetGhosts() []Point
 	GetWalls() []Point
-	GetDestroyableWalls() []Point
-	GetBombs() []Point
+	GetTreasureBoxes() []Point
+	GetPotions() []Point
 	GetFutureBlasts() []Point
 	GetPerks() []Point
 }
@@ -80,13 +80,13 @@ func (b *board) pointToIndex(p Point) int {
 	return index
 }
 
-func (b *board) GetBomberman() Point {
-	index := findOne(b.boardContent, BOMBERMAN)
+func (b *board) GetHero() Point {
+	index := findOne(b.boardContent, HERO)
 	return b.indexToPoint(index)
 }
 
-func (b *board) GetOtherBombermans() []Point {
-	indexes := findAll(b.boardContent, OTHER_BOMBERMAN)
+func (b *board) GetOtherHeroes() []Point {
+	indexes := findAll(b.boardContent, OTHER_HERO)
 	others := []Point{}
 	for _, i := range indexes {
 		others = append(others, b.indexToPoint(i))
@@ -94,8 +94,8 @@ func (b *board) GetOtherBombermans() []Point {
 	return others
 }
 
-func (b *board) IsMyBombermanDead() bool {
-	index := findOne(b.boardContent, DEAD_BOMBERMAN)
+func (b *board) IsMyHeroDead() bool {
+	index := findOne(b.boardContent, DEAD_HERO)
 	return index != -1
 }
 
@@ -125,9 +125,9 @@ func (b *board) IsNear(p Point, element Element) bool {
 
 func (b *board) IsBarrierAt(point Point) bool {
 	return b.IsAtAny(point, []Element{
-		BOMBERMAN, BOMB_BOMBERMAN, OTHER_BOMBERMAN, OTHER_BOMB_BOMBERMAN,
-		BOMB_TIMER_5, BOMB_TIMER_4, BOMB_TIMER_3, BOMB_TIMER_2, BOMB_TIMER_1,
-		WALL, DESTROYABLE_WALL, MEAT_CHOPPER,
+		HERO, POTION_HERO, OTHER_HERO, OTHER_POTION_HERO,
+		POTION_TIMER_5, POTION_TIMER_4, POTION_TIMER_3, POTION_TIMER_2, POTION_TIMER_1,
+		WALL, TREASURE_BOX, GHOST,
 	})
 }
 
@@ -158,9 +158,9 @@ func (b *board) boardSize() int {
 
 func (b *board) GetBarriers() []Point {
 	points := []Point{}
-	barrierElements := []rune{BOMB_BOMBERMAN, OTHER_BOMBERMAN, OTHER_BOMB_BOMBERMAN, OTHER_DEAD_BOMBERMAN,
-		BOMB_TIMER_5, BOMB_TIMER_4, BOMB_TIMER_3, BOMB_TIMER_2, BOMB_TIMER_1, BOOM,
-		WALL, DESTROYABLE_WALL, DESTROYED_WALL, MEAT_CHOPPER, DEAD_MEAT_CHOPPER}
+	barrierElements := []rune{POTION_HERO, OTHER_HERO, OTHER_POTION_HERO, OTHER_DEAD_HERO,
+		POTION_TIMER_5, POTION_TIMER_4, POTION_TIMER_3, POTION_TIMER_2, POTION_TIMER_1, BOOM,
+		WALL, TREASURE_BOX, OPENING_TREASURE_BOX, GHOST, DEAD_GHOST}
 
 	for _, barier := range barrierElements {
 		for _, i := range findAll(b.boardContent, barier) {
@@ -171,10 +171,10 @@ func (b *board) GetBarriers() []Point {
 	return points
 }
 
-func (b *board) GetMeatChoppers() []Point {
+func (b *board) GetGhosts() []Point {
 	points := []Point{}
 
-	for _, i := range findAll(b.boardContent, MEAT_CHOPPER) {
+	for _, i := range findAll(b.boardContent, GHOST) {
 		points = append(points, b.indexToPoint(i))
 	}
 	return points
@@ -189,19 +189,19 @@ func (b *board) GetWalls() []Point {
 	return points
 }
 
-func (b *board) GetDestroyableWalls() []Point {
+func (b *board) GetTreasureBoxes() []Point {
 	points := []Point{}
 
-	for _, i := range findAll(b.boardContent, DESTROYABLE_WALL) {
+	for _, i := range findAll(b.boardContent, TREASURE_BOX) {
 		points = append(points, b.indexToPoint(i))
 	}
 	return points
 }
 
-func (b *board) GetBombs() []Point {
+func (b *board) GetPotions() []Point {
 	points := []Point{}
-	barrierElements := []rune{BOMB_BOMBERMAN, OTHER_BOMB_BOMBERMAN,
-		BOMB_TIMER_5, BOMB_TIMER_4, BOMB_TIMER_3, BOMB_TIMER_2, BOMB_TIMER_1}
+	barrierElements := []rune{POTION_HERO, OTHER_POTION_HERO,
+		POTION_TIMER_5, POTION_TIMER_4, POTION_TIMER_3, POTION_TIMER_2, POTION_TIMER_1}
 
 	for _, barier := range barrierElements {
 		for _, i := range findAll(b.boardContent, barier) {
@@ -214,7 +214,7 @@ func (b *board) GetBombs() []Point {
 
 func (b *board) GetPerks() []Point {
 	points := []Point{}
-	perks := []rune{BOMB_BLAST_RADIUS_INCREASE, BOMB_COUNT_INCREASE, BOMB_IMMUNE, BOMB_REMOTE_CONTROL}
+	perks := []rune{POTION_BLAST_RADIUS_INCREASE, POTION_COUNT_INCREASE, POTION_IMMUNE, POTION_REMOTE_CONTROL}
 
 	for _, perk := range perks {
 		for _, i := range findAll(b.boardContent, perk) {
@@ -226,24 +226,24 @@ func (b *board) GetPerks() []Point {
 }
 
 func (b *board) GetFutureBlasts() []Point {
-	bombs := []Point{}
-	barrierElements := []rune{BOMB_BOMBERMAN, OTHER_BOMB_BOMBERMAN,
-		BOMB_TIMER_5, BOMB_TIMER_4, BOMB_TIMER_3, BOMB_TIMER_2, BOMB_TIMER_1}
+	potions := []Point{}
+	barrierElements := []rune{POTION_HERO, OTHER_POTION_HERO,
+		POTION_TIMER_5, POTION_TIMER_4, POTION_TIMER_3, POTION_TIMER_2, POTION_TIMER_1}
 
-	// Get all bombs
+	// Get all potions
 	for _, barier := range barrierElements {
 		for _, i := range findAll(b.boardContent, barier) {
-			bombs = append(bombs, b.indexToPoint(i))
+			potions = append(potions, b.indexToPoint(i))
 		}
 	}
 	futureBlasts := []Point{}
 	// Get all blasts
-	for _, bomb := range bombs {
+	for _, potion := range potions {
 		// Check all 4 directions
 		for i := 1; i <= BLAST_SIZE; i++ {
 			fBlast := Point{
-				X: bomb.X + i,
-				Y: bomb.Y,
+				X: potion.X + i,
+				Y: potion.Y,
 			}
 			if b.IsBarrierAt(fBlast) {
 				break
@@ -252,8 +252,8 @@ func (b *board) GetFutureBlasts() []Point {
 		}
 		for i := 1; i <= BLAST_SIZE; i++ {
 			fBlast := Point{
-				X: bomb.X - i,
-				Y: bomb.Y,
+				X: potion.X - i,
+				Y: potion.Y,
 			}
 			if b.IsBarrierAt(fBlast) {
 				break
@@ -262,8 +262,8 @@ func (b *board) GetFutureBlasts() []Point {
 		}
 		for i := 1; i <= BLAST_SIZE; i++ {
 			fBlast := Point{
-				X: bomb.X,
-				Y: bomb.Y + i,
+				X: potion.X,
+				Y: potion.Y + i,
 			}
 			if b.IsBarrierAt(fBlast) {
 				break
@@ -272,8 +272,8 @@ func (b *board) GetFutureBlasts() []Point {
 		}
 		for i := 1; i <= BLAST_SIZE; i++ {
 			fBlast := Point{
-				X: bomb.X,
-				Y: bomb.Y - i,
+				X: potion.X,
+				Y: potion.Y - i,
 			}
 			if b.IsBarrierAt(fBlast) {
 				break

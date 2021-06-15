@@ -26,44 +26,102 @@ from argparse import ArgumentError
 
 _ELEMENTS = dict(
 
-    # The Bomberman
-    BOMBERMAN = b'\xe2\x98\xba'.decode(),               # '☺' - this is what he usually looks like
-    BOMB_BOMBERMAN = b'\xe2\x98\xbb'.decode(),          # '☻' - this is if he is sitting on own bomb
-    DEAD_BOMBERMAN = b'\xd1\xa0'.decode(),              # 'Ѡ' - oops your Bomberman is dead (don`t worry he will appear somewhere in next move)
-                                                        #       you`re getting -200 for each death
-    # The Enemies
-    OTHER_BOMBERMAN = b'\xe2\x99\xa5'.decode(),         # '♥' - this is what other Bombermans looks like
-    OTHER_BOMB_BOMBERMAN = b'\xe2\x99\xa0'.decode(),    # '♠' - this is if player just set the bomb
-    OTHER_DEAD_BOMBERMAN = b'\xe2\x99\xa3'.decode(),    # '♣' - enemy corpse (it will disappear shortly right on the next move)
-                                                        #       if you`ve done it you`ll get +1000
-    # The Bombs
-    BOMB_TIMER_5 = '5',                                 # '5' - after bomberman set the bomb the timer starts (5 tacts)
-    BOMB_TIMER_4 = '4',                                 # '4' - this will blow up after 4 tacts
-    BOMB_TIMER_3 = '3',                                 # '3' - this after 3
-    BOMB_TIMER_2 = '2',                                 # '2' - two
-    BOMB_TIMER_1 = '1',                                 # '1' - one
-    BOOM = b'\xd2\x89'.decode(),                        # '҉' - Boom! this is what is bomb does everything that is destroyable got destroyed
+## your Molly
 
-    # Walls
-    WALL = b'\xe2\x98\xbc'.decode(),                    # '☼' - indestructible wall - it will not fall from bomb
-    DESTROY_WALL = '#',                                 # '#' - this wall could be blowed up
-    DESTROYED_WALL = 'H',                               # 'H' - this is how broken wall looks like it will dissapear on next move
-                                                        #       if it`s you did it - you`ll get +10 points.
+    # This is what she usually looks like.
+    HERO = b'\xe2\x98\xba'.decode(), # '☺'
 
-    # Meatchoopers
-    MEAT_CHOPPER = '&',                                 # '&' - this guys runs over the board randomly and gets in the way all the time
-                                                        #       if it will touch bomberman - it will die
-    DEAD_MEAT_CHOPPER = 'x',                            # 'x' - you`d better kill this piece of ... meat you`ll get +100 point for it
-                                                        #       this is chopper corpse
+    # This is if she is sitting on own potion.
+    POTION_HERO = b'\xe2\x98\xbb'.decode(), # '☻'
 
-    # Perks
-    BOMB_BLAST_RADIUS_INCREASE = '+',                   # '+' - Bomb blast radius increase. Applicable only to new bombs. The perk is temporary.
-    BOMB_COUNT_INCREASE = 'c',                          # 'c' - Increase available bombs count. Number of extra bombs can be set in settings. Temporary.
-    BOMB_IMMUNE = 'i',                                  # 'i' - Bomb blast not by timer but by second act. Number of RC triggers is limited and can be set in settings.
-    BOMB_REMOTE_CONTROL = 'r',                          # 'r' - Do not die after bomb blast (own bombs and others as well). Temporary.
+    # Oops, your Molly is dead (don't worry,
+    # she will appear somewhere in next move).
+    # You're getting penalty points for each death.
+    DEAD_HERO = b'\xd1\xa0'.decode(), # 'Ѡ'
 
-    # Space
-    NONE = ' '                                          # ' ' - this is the only place where you can move your Bomberman
+## other players heroes
+
+    # This is what other heroes looks like.
+    OTHER_HERO = b'\xe2\x99\xa5'.decode(), # '♥'
+
+    # This is if player is sitting on own potion.
+    OTHER_POTION_HERO = b'\xe2\x99\xa0'.decode(), # '♠'
+
+    # Enemy corpse (it will disappear shortly,
+    # right on the next move).
+    # If you've done it you'll get score points.
+    OTHER_DEAD_HERO = b'\xe2\x99\xa3'.decode(), # '♣'
+
+## the potions
+    # After Molly set the potion, the timer starts (5 ticks).
+    POTION_TIMER_5 = '5',
+
+    # This will blow up after 4 ticks.
+    POTION_TIMER_4 = '4',
+
+    # This after 3...
+    POTION_TIMER_3 = '3',
+
+    # Two..
+    POTION_TIMER_2 = '2',
+
+    # One.
+    POTION_TIMER_1 = '1',
+
+    # Boom! this is what is potion does,
+    # everything that is destroyable got destroyed.
+    BOOM = b'\xd2\x89'.decode(), # '҉'
+
+## walls
+
+    # Indestructible wall - it will not fall from potion.
+    WALL = b'\xe2\x98\xbc'.decode(), # '☼'
+
+    # this is a treasure box, it opens with an explosion.
+    TREASURE_BOX = '#',
+
+    # this is like a treasure box opens looks
+    # like, it will disappear on next move.
+    # if it's you did it - you'll get score
+    # points. Perhaps a prize will appear.
+    OPENING_TREASURE_BOX = 'H',
+
+## soulless creatures
+
+    # This guys runs over the board randomly
+    # and gets in the way all the time.
+    # If it will touch Molly - she will die.
+    # You'd better kill this piece of ... soul,
+    # you'll get score points for it.
+    GHOST = '&',
+
+    # This is ghost corpse.
+    DEAD_GHOST = 'x',
+
+## perks
+
+    # Potion blast radius increase.
+    # Applicable only to new potions.
+    # The perk is temporary.
+    POTION_BLAST_RADIUS_INCREASE = '+',
+
+    # Increase available potions count.
+    # Number of extra potions can be set
+    # in settings. Temporary.
+    POTION_COUNT_INCREASE = 'c',
+
+    # Potion blast not by timer but by second act.
+    # Number of RC triggers is limited and c
+    # an be set in settings.
+    POTION_REMOTE_CONTROL = 'r',
+
+    # Do not die after potion blast
+    # (own potion and others as well). Temporary.
+    POTION_IMMUNE = 'i',
+
+## a void
+    # This is the only place where you can move your Molly.
+    NONE = ' '
 )
 
 
@@ -77,7 +135,7 @@ def value_of(char):
 
 
 class Element:
-    """ Class describes the Element objects for Bomberman game."""
+    """ Class describes the Element objects for Hero game."""
     def __init__(self, n_or_c):
         """ Construct an Element object from given name or char."""
         for n, c in _ELEMENTS.items():

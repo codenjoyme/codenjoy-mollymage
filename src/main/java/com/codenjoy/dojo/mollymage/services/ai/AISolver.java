@@ -48,12 +48,13 @@ public class AISolver implements Solver<Board> {
         Point hero = board.getHero();
 
         boolean nearTreasureBox = board.isNear(hero.getX(), hero.getY(), Element.TREASURE_BOX);
-        boolean nearHero = board.isNear(hero.getX(), hero.getY(), Element.OTHER_HERO);
+        boolean nearOtherHero = board.isNear(hero.getX(), hero.getY(), Element.OTHER_HERO);
+        boolean nearEnemyHero = board.isNear(hero.getX(), hero.getY(), Element.ENEMY_HERO);
         boolean nearGhost = board.isNear(hero.getX(), hero.getY(), Element.GHOST);
         boolean potionNotDropped = !board.isAt(hero.getX(), hero.getY(), Element.POTION_HERO);
 
         bomb = null;
-        if ((nearTreasureBox || nearHero || nearGhost) && potionNotDropped) {
+        if ((nearTreasureBox || nearOtherHero || nearEnemyHero || nearGhost) && potionNotDropped) {
             bomb = new PointImpl(hero);
         }
 

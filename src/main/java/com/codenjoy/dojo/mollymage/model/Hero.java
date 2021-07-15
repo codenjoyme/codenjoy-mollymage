@@ -206,17 +206,22 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
             }
 
             // и если опасности нет, тогда уже рисуем останки
-            return OTHER_DEAD_HERO;
+            return anyHeroFromAnotherTeam(player, heroes) ? ENEMY_DEAD_HERO : OTHER_DEAD_HERO;
         }
 
         // в клетке есть другие активные и живые герои
 
         // под ними бомба
         if (potion != null) {
-            return OTHER_POTION_HERO;
+            return anyHeroFromAnotherTeam(player, heroes) ? ENEMY_POTION_HERO : OTHER_POTION_HERO;
         }
 
-        return OTHER_HERO;
+        return anyHeroFromAnotherTeam(player, heroes) ? ENEMY_HERO : OTHER_HERO;
+    }
+
+    private boolean anyHeroFromAnotherTeam(Player player, List<Hero> heroes) {
+        return heroes.stream()
+                .anyMatch(h -> player.getTeamId() != h.getPlayer().getTeamId());
     }
 
     @Override

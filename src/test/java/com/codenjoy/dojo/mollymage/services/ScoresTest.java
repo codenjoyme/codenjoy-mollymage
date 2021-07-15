@@ -51,6 +51,10 @@ public class ScoresTest {
         scores.event(Events.KILL_OTHER_HERO);
     }
 
+    public void killEnemyHero() {
+        scores.event(Events.KILL_ENEMY_HERO);
+    }
+
     public void dropPerk() {
         scores.event(Events.CATCH_PERK);
     }
@@ -79,6 +83,7 @@ public class ScoresTest {
         killGhost();
 
         killOtherHero();
+        killEnemyHero();
 
         dropPerk();
 
@@ -89,6 +94,7 @@ public class ScoresTest {
                 - settings.integer(DIE_PENALTY)
                 + settings.integer(CATCH_PERK_SCORE)
                 + settings.integer(KILL_OTHER_HERO_SCORE)
+                + settings.integer(KILL_ENEMY_HERO_SCORE)
                 + settings.integer(KILL_GHOST_SCORE)
                 + settings.integer(WIN_ROUND_SCORE), scores.getScore());
     }

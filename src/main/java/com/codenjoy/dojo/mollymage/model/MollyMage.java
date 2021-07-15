@@ -389,18 +389,20 @@ public class MollyMage extends RoundField<Player> implements Field {
 
         // а потом все, кто выжил получают за это очки за всех тех, кого зацепили взрывной волной
         // не стоит беспокоиться что они погибли сами - за это есть регулируемые штрафные очки
-        hunters.forEach(hunter -> {
+        for (Hero hunter : hunters) {
             if (!hunter.hasPlayer()) {
-                return;
+                continue;
             }
-
-            deathMatch.get(hunter).forEach(prey -> {
-                    if (hunter != prey) {
+            for (Hero prey : deathMatch.get(hunter)) {
+                if (hunter != prey) {
+                    if (hunter.getPlayer().getTeamId() != prey.getPlayer().getTeamId()) {
+                        hunter.event(Events.KILL_ENEMY_HERO);
+                    } else {
                         hunter.event(Events.KILL_OTHER_HERO);
                     }
                 }
-            );
-        });
+            }
+        }
     }
 
     private boolean dropPerk(Point pt, Dice dice) {

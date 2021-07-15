@@ -27,6 +27,7 @@ public enum Events {
     KILL_TREASURE_BOX,
     KILL_GHOST,
     KILL_OTHER_HERO,
+    KILL_ENEMY_HERO,
 
     CATCH_PERK,
     DROP_PERK,

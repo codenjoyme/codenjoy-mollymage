@@ -63,6 +63,10 @@ public class Scores implements PlayerScores {
             return settings.integer(KILL_OTHER_HERO_SCORE);
         }
 
+        if (KILL_ENEMY_HERO.equals(event)) {
+            return settings.integer(KILL_ENEMY_HERO_SCORE);
+        }
+
         if (KILL_GHOST.equals(event)) {
             return settings.integer(KILL_GHOST_SCORE);
         }

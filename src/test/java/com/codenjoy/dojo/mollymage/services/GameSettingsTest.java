@@ -65,6 +65,7 @@ public class GameSettingsTest {
                 "  'DEFAULT_PERKS':'r+ic',\n" +
                 "  'DIE_PENALTY':30,\n" +
                 "  'GHOSTS_COUNT':5,\n" +
+                "  'KILL_ENEMY_HERO_SCORE':100,\n" +
                 "  'KILL_GHOST_SCORE':10,\n" +
                 "  'KILL_OTHER_HERO_SCORE':20,\n" +
                 "  'KILL_WALL_SCORE':1,\n" +
@@ -116,6 +117,7 @@ public class GameSettingsTest {
                 "  'DEFAULT_PERKS':'r+ic',\n" +
                 "  'DIE_PENALTY':12,\n" +
                 "  'GHOSTS_COUNT':5,\n" +
+                "  'KILL_ENEMY_HERO_SCORE':100,\n" +
                 "  'KILL_GHOST_SCORE':10,\n" +
                 "  'KILL_OTHER_HERO_SCORE':20,\n" +
                 "  'KILL_WALL_SCORE':1,\n" +
@@ -158,6 +160,7 @@ public class GameSettingsTest {
                 "  'DEFAULT_PERKS':'r+ic',\n" +
                 "  'DIE_PENALTY':12,\n" +
                 "  'GHOSTS_COUNT':5,\n" +
+                "  'KILL_ENEMY_HERO_SCORE':100,\n" +
                 "  'KILL_GHOST_SCORE':10,\n" +
                 "  'KILL_OTHER_HERO_SCORE':20,\n" +
                 "  'KILL_WALL_SCORE':1,\n" +

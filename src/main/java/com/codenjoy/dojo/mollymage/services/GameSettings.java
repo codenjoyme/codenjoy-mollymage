@@ -48,6 +48,7 @@ public class GameSettings extends SettingsImpl
         KILL_WALL_SCORE("[Score] Kill wall score"),
         KILL_GHOST_SCORE("[Score] Kill ghost score"),
         KILL_OTHER_HERO_SCORE("[Score] Kill other hero score"),
+        KILL_ENEMY_HERO_SCORE("[Score] Kill enemy hero score"),
         CATCH_PERK_SCORE("[Score] Catch perk score"),
         DIE_PENALTY("[Score] Your hero's death penalty"),
         WIN_ROUND_SCORE("[Score][Rounds] Win round score"),
@@ -91,6 +92,7 @@ public class GameSettings extends SettingsImpl
         integer(KILL_WALL_SCORE, 1);
         integer(KILL_GHOST_SCORE, 10);
         integer(KILL_OTHER_HERO_SCORE, 20);
+        integer(KILL_ENEMY_HERO_SCORE, 100);
         integer(CATCH_PERK_SCORE, 5);
         integer(DIE_PENALTY, 30);
         integer(WIN_ROUND_SCORE, 30);

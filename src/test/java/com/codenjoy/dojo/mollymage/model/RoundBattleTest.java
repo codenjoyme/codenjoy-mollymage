@@ -301,7 +301,7 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
 
     // если один игрок вынесет обоих, то должен получить за это очки
     @Test
-    public void shouldGetWinRoundScores_whenKillAllEnemies() {
+    public void shouldGetWinRoundScores_whenKillAllOtherHeroes() {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
         setup();
@@ -378,6 +378,91 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, KILL_OTHER_HERO, WIN_ROUND]\n" +
+                "listener(1) => [DIED]\n" +
+                "listener(2) => [DIED]\n");
+    }
+
+    @Test
+    public void shouldGetWinRoundScores_whenKillAllEnemyHeroAndOtherHero() {
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+                .integer(ROUNDS_TIME_BEFORE_START, 1);
+        setup();
+
+        dice(dice,
+                1, 1, // первый игрок
+                0, 1, // второй
+                1, 0); // третий
+
+        givenBoard(DEFAULT_COUNT);
+        player(0).setTeamId(0);
+        player(1).setTeamId(0);
+        player(2).setTeamId(1);
+
+        tick();
+
+        events.verifyAllEvents(
+                "listener(0) => [START_ROUND, [Round 1]]\n" +
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                " ♡   \n", game(0));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                " ♡   \n", game(1));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "♡♡   \n" +
+                " ☺   \n", game(2));
+
+        // когда я выношу одного игрока
+        hero(0).act();
+        tick();
+
+        hero(0).right();
+        tick();
+
+        hero(0).up();
+        tick();
+
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "  ☺  \n" +
+                "♥1   \n" +
+                " ♡   \n", game(0));
+
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                " ҉☺  \n" +
+                "♣҉҉  \n" +
+                " ♧   \n", game(0));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                " ҉♥  \n" +
+                "Ѡ҉҉  \n" +
+                " ♧   \n", game(1));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                " ҉♡  \n" +
+                "♧҉҉  \n" +
+                " Ѡ   \n", game(2));
+
+        events.verifyAllEvents(
+                "listener(0) => [KILL_ENEMY_HERO, KILL_OTHER_HERO, WIN_ROUND]\n" +
                 "listener(1) => [DIED]\n" +
                 "listener(2) => [DIED]\n");
     }
@@ -536,7 +621,7 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
     // если на поле трое, и один игрок имеет преимущество по очкам за вынос другого игрока
     // то по истечении таймаута раунда он получит очки за победу в раунде
     @Test
-    public void shouldGetWinRoundScores_whenKillOneEnemyAdvantage_whenRoundTimeout() {
+    public void shouldGetWinRoundScores_whenKillOneOtherHeroAdvantage_whenRoundTimeout() {
         int count = 3;
 
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, count)
@@ -1400,6 +1485,78 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
 
         // и все игроки активны
         assertEquals(true, hero(0).isActiveAndAlive());
+        assertEquals(true, hero(1).isActiveAndAlive());
+        assertEquals(true, hero(2).isActiveAndAlive());
+    }
+
+    @Test
+    public void shouldGetKillEnemyScore() {
+        int count = 3;
+
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, count)
+                .integer(ROUNDS_TIME_BEFORE_START, 1)
+                .integer(ROUNDS_TIME, 60); // до конца раунда целая минута
+        setup();
+
+        dice(dice,
+                4, 4, // первый игрок
+                4, 3, // второй
+                3, 4); // третий
+
+        givenBoard(count);
+        player(0).setTeamId(0);
+        player(1).setTeamId(1);
+        player(2).setTeamId(1);
+
+        tick();
+
+        events.verifyAllEvents(
+                "listener(0) => [START_ROUND, [Round 1]]\n" +
+                        "listener(1) => [START_ROUND, [Round 1]]\n" +
+                        "listener(2) => [START_ROUND, [Round 1]]\n");
+
+        asrtBrd("   ♡☺\n" +
+                "    ♡\n" +
+                "     \n" +
+                "     \n" +
+                "     \n", game(0));
+
+        asrtBrd("   ♥♡\n" +
+                "    ☺\n" +
+                "     \n" +
+                "     \n" +
+                "     \n", game(1));
+
+        asrtBrd("   ☺♡\n" +
+                "    ♥\n" +
+                "     \n" +
+                "     \n" +
+                "     \n", game(2));
+
+        // бахнем бомбу
+        hero(2).act();
+        tick();
+
+        hero(2).left();
+        tick();
+
+        hero(2).left();
+        tick();
+
+        tick();
+        tick();
+
+        events.verifyAllEvents(
+                "listener(0) => [DIED]\n" +
+                        "listener(1) => []\n" +
+                        "listener(2) => [KILL_ENEMY_HERO]\n");
+
+        assertEquals(0, hero(0).scores());
+        assertEquals(0, hero(1).scores());
+        assertEquals(500, hero(2).scores()); // за победу (enemy)
+
+        assertEquals(true, hero(0).isActive());
+        assertEquals(false, hero(0).isAlive()); // убит
         assertEquals(true, hero(1).isActiveAndAlive());
         assertEquals(true, hero(2).isActiveAndAlive());
     }

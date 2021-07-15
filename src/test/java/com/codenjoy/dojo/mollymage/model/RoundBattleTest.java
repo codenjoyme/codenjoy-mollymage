@@ -1512,8 +1512,8 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
 
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
-                        "listener(1) => [START_ROUND, [Round 1]]\n" +
-                        "listener(2) => [START_ROUND, [Round 1]]\n");
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
 
         asrtBrd("   ♡☺\n" +
                 "    ♡\n" +
@@ -1548,8 +1548,8 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
 
         events.verifyAllEvents(
                 "listener(0) => [DIED]\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => [KILL_ENEMY_HERO]\n");
+                "listener(1) => []\n" +
+                "listener(2) => [KILL_ENEMY_HERO]\n");
 
         assertEquals(0, hero(0).scores());
         assertEquals(0, hero(1).scores());

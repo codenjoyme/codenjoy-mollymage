@@ -1284,10 +1284,10 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         tick();
 
         asrtBrd("     \n" +
-                        "&244&\n" +
-                        " 1#3 \n" +
-                        "&223&\n" +
-                        "☺♥♡♡ \n",
+                "&244&\n" +
+                " 1#3 \n" +
+                "&223&\n" +
+                "☺♥♡♡ \n",
                 game(0));
 
         hero(0).move(0, 0);
@@ -1296,25 +1296,25 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         hero(3).move(3, 3);
 
         asrtBrd("     \n" +
-                        "&24♤&\n" +
-                        " 1#3 \n" +
-                        "&♠2♤&\n" +
-                        "☺    \n",
+                "&24♤&\n" +
+                " 1#3 \n" +
+                "&♠2♤&\n" +
+                "☺    \n",
                 game(0));
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n");
 
         tick();
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
-                        "listener(1) => [DIED, KILL_ENEMY_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                        "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                        "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
+                "listener(1) => [DIED, KILL_ENEMY_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
         asrtBrd(" ҉҉҉ \n" +
                 "x҉҉♧x\n" +
@@ -1326,9 +1326,9 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n");
 
         asrtBrd("     \n" +
                 "   ♧ \n" +

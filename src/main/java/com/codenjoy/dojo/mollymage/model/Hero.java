@@ -221,7 +221,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
 
     private boolean anyHeroFromAnotherTeam(Player player, List<Hero> heroes) {
         return heroes.stream()
-                .anyMatch(h -> player.getTeamId() != h.getPlayer().getTeamId());
+                .anyMatch(hero -> player.getTeamId() != hero.getPlayer().getTeamId());
     }
 
     @Override

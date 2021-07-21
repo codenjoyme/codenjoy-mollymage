@@ -191,7 +191,7 @@ public class AISolverTest {
                 "☼ ☼ ☼ ☼ ☼ ☼ ☼#☼" +
                 "☼ #   #  &    ☼" +
                 "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼",
-                "STOP", Direction.LEFT);
+                "LEFT", Direction.LEFT);
     }
 
     @Test

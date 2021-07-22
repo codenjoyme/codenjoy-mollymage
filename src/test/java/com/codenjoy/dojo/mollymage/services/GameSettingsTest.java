@@ -77,10 +77,10 @@ public class GameSettingsTest {
                 "  'POTION_POWER':3,\n" +
                 "  'REMOTE_CONTROL_COUNT':3,\n" +
                 "  'ROUNDS_ENABLED':true,\n" +
-                "  'ROUNDS_MAX_TEAMS_PER_ROOM':2,\n" +
                 "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                 "  'ROUNDS_PER_MATCH':1,\n" +
                 "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
+                "  'ROUNDS_TEAMS_PER_ROOM':1,\n" +
                 "  'ROUNDS_TIME':200,\n" +
                 "  'ROUNDS_TIME_BEFORE_START':5,\n" +
                 "  'ROUNDS_TIME_FOR_WINNER':1,\n" +
@@ -129,10 +129,10 @@ public class GameSettingsTest {
                 "  'POTION_POWER':3,\n" +
                 "  'REMOTE_CONTROL_COUNT':3,\n" +
                 "  'ROUNDS_ENABLED':false,\n" +
-                "  'ROUNDS_MAX_TEAMS_PER_ROOM':2,\n" +
                 "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                 "  'ROUNDS_PER_MATCH':1,\n" +
                 "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
+                "  'ROUNDS_TEAMS_PER_ROOM':1,\n" +
                 "  'ROUNDS_TIME':200,\n" +
                 "  'ROUNDS_TIME_BEFORE_START':10,\n" +
                 "  'ROUNDS_TIME_FOR_WINNER':1,\n" +
@@ -172,10 +172,10 @@ public class GameSettingsTest {
                 "  'POTION_POWER':3,\n" +
                 "  'REMOTE_CONTROL_COUNT':3,\n" +
                 "  'ROUNDS_ENABLED':false,\n" +
-                "  'ROUNDS_MAX_TEAMS_PER_ROOM':2,\n" +
                 "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                 "  'ROUNDS_PER_MATCH':1,\n" +
                 "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
+                "  'ROUNDS_TEAMS_PER_ROOM':1,\n" +
                 "  'ROUNDS_TIME':200,\n" +
                 "  'ROUNDS_TIME_BEFORE_START':10,\n" +
                 "  'ROUNDS_TIME_FOR_WINNER':1,\n" +

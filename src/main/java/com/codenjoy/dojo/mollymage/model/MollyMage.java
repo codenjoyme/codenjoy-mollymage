@@ -23,10 +23,10 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
+import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.perks.*;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.BoardUtils;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
@@ -37,9 +37,7 @@ import com.google.common.collect.Multimap;
 
 import java.util.*;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BIG_BADABOOM;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BOARD_SIZE;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.PERK_WHOLE_TEAM_GET;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_TEAMS_PER_ROOM;
 import static java.util.stream.Collectors.toList;
 
@@ -56,9 +54,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     private final List<Wall> destroyedWalls = new LinkedList<>();
     private final List<Potion> destroyedPotions = new LinkedList<>();
     private final Dice dice;
-    private List<PerkOnBoard> perks = new LinkedList<>();
-
     private final GameSettings settings;
+    private List<PerkOnBoard> perks = new LinkedList<>();
 
     public MollyMage(Dice dice, GameSettings settings) {
         super(Events.START_ROUND, Events.WIN_ROUND, Events.DIED, settings);
@@ -97,11 +94,11 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void addPerk(int teamId, Perk perk) {
-        players.forEach(player -> {
+        for (Player player : players) {
             if (player.getTeamId() == teamId) {
                 player.getHero().addPerk(perk);
             }
-        });
+        }
     }
 
     private boolean isWholeTeamShouldGetPerk() {
@@ -166,8 +163,8 @@ public class MollyMage extends RoundField<Player> implements Field {
         // тикаем счетчик перка на поле и если просрочка, удаляем
         perks.forEach(perk -> perk.tick());
         perks = perks.stream()
-            .filter(perk -> perk.getPerk().getPickTimeout() > 0)
-            .collect(toList());
+                .filter(perk -> perk.getPerk().getPickTimeout() > 0)
+                .collect(toList());
     }
 
     private void tactAllHeroes() {
@@ -225,7 +222,7 @@ public class MollyMage extends RoundField<Player> implements Field {
             }
 
             // и повторяем все, пока были взорванные бомбы
-        } while(!destroyedPotions.isEmpty());
+        } while (!destroyedPotions.isEmpty());
 
         // потому уже считаем скоры за разрушения
         killAllNear(blasts);
@@ -257,8 +254,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     @Override
     public List<Potion> potions(Hero hero) {
         return potions.stream()
-            .filter(potion -> potion.itsMine(hero))
-            .collect(toList());
+                .filter(potion -> potion.itsMine(hero))
+                .collect(toList());
     }
 
     @Override
@@ -320,7 +317,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         // вначале прибиваем стенки
         preys.forEach(wall -> {
             if (wall instanceof GhostHunter) {
-                ((GhostHunter)wall).die();
+                ((GhostHunter) wall).die();
             } else {
                 destroyedWalls.add(wall);
             }

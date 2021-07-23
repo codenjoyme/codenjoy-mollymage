@@ -52,6 +52,7 @@ public class TestGameSettings extends GameSettings {
         integer(TREASURE_BOX_COUNT, boardSize * boardSize / 10);
 
         bool(BIG_BADABOOM, false);
+        bool(PERK_WHOLE_TEAM_GET,false);
         string(DEFAULT_PERKS, StringUtils.EMPTY);
     }
 }

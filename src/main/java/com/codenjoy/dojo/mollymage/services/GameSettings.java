@@ -58,6 +58,7 @@ public class GameSettings extends SettingsImpl
         BOARD_SIZE("[Level] Board size"),
         TREASURE_BOX_COUNT("[Level] Treasure boxes count"),
         GHOSTS_COUNT("[Level] Ghosts count"),
+        PERK_WHOLE_TEAM_GET("[Perks] All teammates get perk"),
         PERK_DROP_RATIO("[Perks] Perks drop ratio in %"),
         PERK_PICK_TIMEOUT("[Perks] Perks pick timeout"),
         PERK_POTION_BLAST_RADIUS_INC("[Perks] Potion blast radius increase"),
@@ -105,6 +106,7 @@ public class GameSettings extends SettingsImpl
         integer(TREASURE_BOX_COUNT, (boardSize * boardSize) / 10);
         integer(GHOSTS_COUNT, 5);
 
+        bool(PERK_WHOLE_TEAM_GET, false);
         string(DEFAULT_PERKS, StringUtils.EMPTY);
         PerksSettingsWrapper perks =
                 perksSettings()

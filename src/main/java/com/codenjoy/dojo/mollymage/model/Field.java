@@ -23,6 +23,7 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
+import com.codenjoy.dojo.mollymage.model.perks.Perk;
 import com.codenjoy.dojo.mollymage.model.perks.PerkOnBoard;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
@@ -62,6 +63,8 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
     List<PerkOnBoard> perks();
 
     PerkOnBoard pickPerk(Point pt);
+
+    void addPerk(Player player, Perk perk);
 
     Dice dice();
 

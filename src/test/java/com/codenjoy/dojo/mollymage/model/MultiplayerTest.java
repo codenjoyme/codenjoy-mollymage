@@ -24,17 +24,23 @@ package com.codenjoy.dojo.mollymage.model;
 
 
 import com.codenjoy.dojo.games.mollymage.Element;
+import com.codenjoy.dojo.mollymage.model.perks.PerkOnBoard;
+import com.codenjoy.dojo.mollymage.model.perks.PotionImmune;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Joystick;
+import com.codenjoy.dojo.services.PointImpl;
 import org.junit.Before;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_MAX_TEAMS_PER_ROOM;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 public class MultiplayerTest extends AbstractMultiplayerTest {
+
+    public static final int CATCH_PERK_SCORE_FOR_TEST = 10;
 
     @Before
     public void setup() {
@@ -419,6 +425,117 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "     \n" +
                 "33   \n", game(0));
 
+    }
+
+    @Test
+    public void shouldNotTeammateGetPerk_AfterFirstPlayerPickUp_withEnemy() {
+        settings.integer(POTIONS_COUNT, 1);
+        settings.integer(CATCH_PERK_SCORE, CATCH_PERK_SCORE_FOR_TEST);
+        settings.bool(PERK_WHOLE_TEAM_GET,false);
+        settings.integer(ROUNDS_MAX_TEAMS_PER_ROOM,2);
+
+        dice(dice,
+                0, 0,
+                1, 0,
+                2, 0);
+
+        //set up 3 players, 2 in one team, and 1 perk on field
+        givenBoard(3);
+        player(0).setTeamId(0);
+        player(1).setTeamId(0);
+        player(2).setTeamId(1);
+        field.perks().add(new PerkOnBoard(new PointImpl(0, 1), new PotionImmune(settings.integer(TIMEOUT_POTION_IMMUNE))));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "i    \n" +
+                "☺♥♡  \n", game(0));
+
+        //heroes should not have any perks
+        assertEquals(0, hero(0).getPerks().size());
+
+        assertEquals(0, hero(1).getPerks().size());
+
+        assertEquals(0, hero(2).getPerks().size());
+
+        //when first hero get perk
+        hero(0).up();
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n" +
+                " ♥♡  \n", game(0));
+
+        //teammate should not get perk
+        assertEquals(1, hero(0).getPerks().size());
+        assertEquals(0, hero(1).getPerks().size());
+        assertEquals(0, hero(2).getPerks().size());
+        events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
+                               "listener(1) => []\n" +
+                               "listener(2) => []\n");
+
+        assertEquals(CATCH_PERK_SCORE_FOR_TEST, hero(0).scores());
+        assertEquals(0, hero(1).scores());
+        assertEquals(0, hero(2).scores());
+    }
+
+    @Test
+    public void shouldTeammateGetPerk_AfterFirstPlayerPickUp_withEnemy() {
+        settings.integer(POTIONS_COUNT, 1);
+        settings.integer(CATCH_PERK_SCORE, CATCH_PERK_SCORE_FOR_TEST);
+        settings.bool(PERK_WHOLE_TEAM_GET,true);
+        settings.integer(ROUNDS_MAX_TEAMS_PER_ROOM,2);
+
+        dice(dice,
+                0, 0,
+                1, 0,
+                2, 0);
+
+        //set up 3 players, 2 in one team, and 1 perk on field
+        givenBoard(3);
+        player(0).setTeamId(0);
+        player(1).setTeamId(0);
+        player(2).setTeamId(1);
+        field.perks().add(new PerkOnBoard(new PointImpl(0, 1), new PotionImmune(settings.integer(TIMEOUT_POTION_IMMUNE))));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "i    \n" +
+                "☺♥♡  \n", game(0));
+
+
+        //heroes should not have any perks
+        assertEquals(0,player(0).getHero().getPerks().size());
+        assertEquals(0,player(1).getHero().getPerks().size());
+        assertEquals(0,player(2).getHero().getPerks().size());
+
+        //when first hero get perk
+        hero(0).up();
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n" +
+                " ♥♡  \n", game(0));
+
+        //teammate should get perk to
+        events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
+                               "listener(1) => []\n" +
+                               "listener(2) => []\n");
+
+        assertEquals(1,player(0).getHero().getPerks().size());
+        assertEquals(1,player(1).getHero().getPerks().size());
+        assertEquals(0,player(2).getHero().getPerks().size());
+
+        //scores for perk earned only one hero, who picked up perk
+        assertEquals(CATCH_PERK_SCORE_FOR_TEST,player(0).getHero().scores());
+        assertEquals(0,player(1).getHero().scores());
+        assertEquals(0,player(2).getHero().scores());
     }
 
     @Test

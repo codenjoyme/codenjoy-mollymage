@@ -40,7 +40,7 @@ import java.util.*;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BIG_BADABOOM;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BOARD_SIZE;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.PERK_WHOLE_TEAM_GET;
-import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_MAX_TEAMS_PER_ROOM;
+import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_TEAMS_PER_ROOM;
 import static java.util.stream.Collectors.toList;
 
 public class MollyMage extends RoundField<Player> implements Field {
@@ -102,7 +102,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private boolean isWholeTeamShouldGetPerk() {
-        return settings.integer(ROUNDS_MAX_TEAMS_PER_ROOM) > 1 && settings.bool(PERK_WHOLE_TEAM_GET);
+        return settings.integer(ROUNDS_TEAMS_PER_ROOM) > 1 && settings.bool(PERK_WHOLE_TEAM_GET);
     }
 
     @Override

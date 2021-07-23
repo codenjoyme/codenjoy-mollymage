@@ -33,7 +33,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
-import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_MAX_TEAMS_PER_ROOM;
+import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_TEAMS_PER_ROOM;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -432,7 +432,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         settings.integer(POTIONS_COUNT, 1);
         settings.integer(CATCH_PERK_SCORE, CATCH_PERK_SCORE_FOR_TEST);
         settings.bool(PERK_WHOLE_TEAM_GET,false);
-        settings.integer(ROUNDS_MAX_TEAMS_PER_ROOM,2);
+        settings.integer(ROUNDS_TEAMS_PER_ROOM,2);
 
         dice(dice,
                 0, 0,
@@ -486,8 +486,8 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     public void shouldTeammateGetPerk_AfterFirstPlayerPickUp_withEnemy() {
         settings.integer(POTIONS_COUNT, 1);
         settings.integer(CATCH_PERK_SCORE, CATCH_PERK_SCORE_FOR_TEST);
-        settings.bool(PERK_WHOLE_TEAM_GET,true);
-        settings.integer(ROUNDS_MAX_TEAMS_PER_ROOM,2);
+        settings.bool(PERK_WHOLE_TEAM_GET, true);
+        settings.integer(ROUNDS_TEAMS_PER_ROOM, 2);
 
         dice(dice,
                 0, 0,

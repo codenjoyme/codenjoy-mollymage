@@ -90,15 +90,18 @@ public class MollyMage extends RoundField<Player> implements Field {
     @Override
     public void addPerk(Player player, Perk perk) {
         if (isWholeTeamShouldGetPerk()) {
-            final int teamId = player.getTeamId();
-            players.forEach(p -> {
-                if (p.getTeamId() == teamId) {
-                    p.getHero().addPerk(perk);
-                }
-            });
+            addPerk(player.getTeamId(), perk);
         } else {
             player.getHero().addPerk(perk);
         }
+    }
+
+    private void addPerk(int teamId, Perk perk) {
+        players.forEach(player -> {
+            if (player.getTeamId() == teamId) {
+                player.getHero().addPerk(perk);
+            }
+        });
     }
 
     private boolean isWholeTeamShouldGetPerk() {

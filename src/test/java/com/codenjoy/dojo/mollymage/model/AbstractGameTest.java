@@ -76,22 +76,14 @@ public class AbstractGameTest {
         givenBoard(SIZE, 0, 0);
     }
 
-    protected void initHero(int x, int y) {
-        dice(dice, x, y);
-        Level level = settings.getLevel();
-        Hero hero = new Hero(level);
-        when(settings.getHero(any(Level.class))).thenReturn(hero);
-        this.hero = hero;
-    }
-
     protected void givenBoard(int size, int x, int y) {
+        dice(dice, x, y);
         settings.integer(BOARD_SIZE, size);
         field = new MollyMage(dice, settings);
         listener = mock(EventListener.class);
         player = new Player(listener, settings);
         game = new Single(player, printer);
         game.on(field);
-        initHero(x, y); // hero позиция
         game.newGame();
         hero = (Hero)game.getJoystick();
     }

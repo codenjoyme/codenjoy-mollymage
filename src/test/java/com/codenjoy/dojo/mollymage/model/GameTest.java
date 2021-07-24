@@ -33,6 +33,7 @@ import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BIG_BADABOOM;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BOARD_SIZE;
+import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -1683,8 +1684,10 @@ public class GameTest extends AbstractGameTest {
         assertHeroDie();
 
         field.tick();
-        initHero(1, 0);
         game.newGame();
+
+        hero = (Hero) game.getJoystick();
+        hero.move(pt(1, 0));
 
         asrtBrd("     \n" +
                 "     \n" +

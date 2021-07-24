@@ -47,11 +47,34 @@ public class TestGameSettings extends GameSettings {
         integer(POTION_POWER, 3);
         integer(POTIONS_COUNT, 1);
 
-        int boardSize = 33;
-        integer(BOARD_SIZE, boardSize);
-        integer(TREASURE_BOX_COUNT, boardSize * boardSize / 10);
+        integer(TREASURE_BOX_COUNT, 108);
 
         bool(BIG_BADABOOM, false);
         string(DEFAULT_PERKS, StringUtils.EMPTY);
+
+        multiline(LEVEL_MAP,
+                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
+                        "☼                     ☼\n" +
+                        "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                        "☼                     ☼\n" +
+                        "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                        "☼                     ☼\n" +
+                        "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                        "☼                     ☼\n" +
+                        "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                        "☼                     ☼\n" +
+                        "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                        "☼                     ☼\n" +
+                        "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                        "☼                     ☼\n" +
+                        "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                        "☼                     ☼\n" +
+                        "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                        "☼                     ☼\n" +
+                        "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                        "☼                     ☼\n" +
+                        "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                        "☼                     ☼\n" +
+                        "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼");
     }
 }

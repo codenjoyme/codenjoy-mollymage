@@ -61,7 +61,6 @@ public class PerformanceTest {
             @Override
             public GameSettings getSettings() {
                 return super.getSettings()
-                        .integer(BOARD_SIZE, boardSize)
                         .integer(TREASURE_BOX_COUNT, walls)
                         .integer(GHOSTS_COUNT, ghosts);
             }

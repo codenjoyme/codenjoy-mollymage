@@ -58,9 +58,20 @@ public class SmokeTest {
                     @Override
                     public GameSettings getSettings() {
                         GameSettings settings = new TestGameSettings()
-                                .integer(BOARD_SIZE, 11)
                                 .integer(TREASURE_BOX_COUNT, 14)
-                                .integer(GHOSTS_COUNT, 3);
+                                .integer(GHOSTS_COUNT, 3)
+                                .string(LEVEL_MAP,
+                                        "☼☼☼☼☼☼☼☼☼☼☼\n" +
+                                        "☼         ☼\n" +
+                                        "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                                        "☼       ☺ ☼\n" +
+                                        "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                                        "☼         ☼\n" +
+                                        "☼ ☼ ☼ ☼ ☼♥☼\n" +
+                                        "☼         ☼\n" +
+                                        "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                                        "☼         ☼\n" +
+                                        "☼☼☼☼☼☼☼☼☼☼☼\n");
 
                         settings.perksSettings()
                                 .dropRatio(20)

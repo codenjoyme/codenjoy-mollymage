@@ -25,6 +25,7 @@ package com.codenjoy.dojo.mollymage.services;
 
 import com.codenjoy.dojo.mollymage.model.*;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
+import com.codenjoy.dojo.mollymage.model.levels.LevelImpl;
 import com.codenjoy.dojo.mollymage.model.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.Dice;
@@ -56,7 +57,6 @@ public class GameSettings extends SettingsImpl
         BIG_BADABOOM("[Level] Blast activate bomb"),
         POTIONS_COUNT("[Level] Potions count"),
         POTION_POWER("[Level] Potion power"),
-        BOARD_SIZE("[Level] Board size"),
         TREASURE_BOX_COUNT("[Level] Treasure boxes count"),
         GHOSTS_COUNT("[Level] Ghosts count"),
         PERK_DROP_RATIO("[Perks] Perks drop ratio in %"),
@@ -103,9 +103,7 @@ public class GameSettings extends SettingsImpl
         bool(BIG_BADABOOM, false);
         integer(POTIONS_COUNT, 1);
         integer(POTION_POWER, 3);
-        int boardSize = 23;
-        integer(BOARD_SIZE, boardSize);
-        integer(TREASURE_BOX_COUNT, (boardSize * boardSize) / 10);
+        integer(TREASURE_BOX_COUNT, 52);
         integer(GHOSTS_COUNT, 5);
 
         string(DEFAULT_PERKS, StringUtils.EMPTY);
@@ -119,6 +117,7 @@ public class GameSettings extends SettingsImpl
         perks.put(Element.POTION_IMMUNE, 0, timeout);
         perks.put(Element.POTION_COUNT_INCREASE, 4, timeout);
 
+        // TODO: consider drawing maze
         multiline(LEVEL_MAP,
                 "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼                     ☼\n" +
@@ -146,14 +145,11 @@ public class GameSettings extends SettingsImpl
     }
 
     public Level getLevel() {
-        String map = string(LEVEL_MAP);
-        return new Level() {};
+        return new LevelImpl(string(LEVEL_MAP));
     }
 
     public Walls getWalls(Dice dice) {
-        OriginalWalls originalWalls = new OriginalWalls(integerValue(BOARD_SIZE));
-        Ghosts ghosts = new Ghosts(originalWalls, integerValue(GHOSTS_COUNT), dice);
-
+        Ghosts ghosts = new Ghosts(new WallsImpl(), integerValue(GHOSTS_COUNT), dice);
         return new EatSpaceWalls(ghosts, integerValue(TREASURE_BOX_COUNT), dice);
     }
 

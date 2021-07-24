@@ -60,7 +60,6 @@ public class GameSettingsTest {
 
         assertEquals("{\n" +
                 "  'BIG_BADABOOM':false,\n" +
-                "  'BOARD_SIZE':23,\n" +
                 "  'CATCH_PERK_SCORE':5,\n" +
                 "  'DEFAULT_PERKS':'r+ic',\n" +
                 "  'DIE_PENALTY':30,\n" +
@@ -113,7 +112,6 @@ public class GameSettingsTest {
         // then
         assertEquals("{\n" +
                 "  'BIG_BADABOOM':false,\n" +
-                "  'BOARD_SIZE':23,\n" +
                 "  'CATCH_PERK_SCORE':5,\n" +
                 "  'DEFAULT_PERKS':'r+ic',\n" +
                 "  'DIE_PENALTY':12,\n" +
@@ -157,7 +155,6 @@ public class GameSettingsTest {
         // then
         assertEquals("{\n" +
                 "  'BIG_BADABOOM':false,\n" +
-                "  'BOARD_SIZE':23,\n" +
                 "  'CATCH_PERK_SCORE':5,\n" +
                 "  'DEFAULT_PERKS':'r+ic',\n" +
                 "  'DIE_PENALTY':12,\n" +

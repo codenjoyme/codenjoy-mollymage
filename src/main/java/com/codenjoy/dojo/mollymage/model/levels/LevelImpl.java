@@ -4,7 +4,7 @@ package com.codenjoy.dojo.mollymage.model.levels;
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 Codenjoy
+ * Copyright (C) 2018 - 2021 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -23,12 +23,32 @@ package com.codenjoy.dojo.mollymage.model.levels;
  */
 
 import com.codenjoy.dojo.mollymage.model.Wall;
+import com.codenjoy.dojo.services.LengthToXY;
+import com.codenjoy.dojo.utils.LevelUtils;
 
 import java.util.List;
 
-public interface Level {
+import static com.codenjoy.dojo.games.mollymage.Element.WALL;
 
-    int size();
+public class LevelImpl implements Level {
 
-    List<Wall> getWalls();
+    private final String map;
+    private final int size;
+    private final LengthToXY xy;
+
+    public LevelImpl(String map) {
+        this.map = LevelUtils.clear(map);
+        this.size = (int) Math.sqrt(map.length());
+        this.xy = new LengthToXY(size);
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public List<Wall> getWalls() {
+        return LevelUtils.getObjects(xy, map, (point, element) -> new Wall(point), WALL);
+    }
 }

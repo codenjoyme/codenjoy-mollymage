@@ -32,7 +32,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BIG_BADABOOM;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BOARD_SIZE;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 import static org.junit.Assert.*;
@@ -43,9 +42,7 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldBoard_whenStartGame() {
-        settings.integer(BOARD_SIZE, 10);
-
-        MollyMage board = new MollyMage(dice, settings);
+        MollyMage board = new MollyMage(10, dice, settings);
 
         assertEquals(10, board.size());
     }

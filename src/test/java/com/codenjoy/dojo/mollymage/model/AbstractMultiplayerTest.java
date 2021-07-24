@@ -40,7 +40,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BOARD_SIZE;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
@@ -68,12 +67,11 @@ public abstract class AbstractMultiplayerTest {
 
         when(settings.getWalls(dice)).thenReturn(walls);
 
-        field = new MollyMage(dice, settings);
+        field = new MollyMage(SIZE, dice, settings);
     }
 
     protected GameSettings settings() {
         return spy(new TestGameSettings())
-                .integer(BOARD_SIZE, SIZE)
                 .integer(POTION_POWER, 1);
     }
 

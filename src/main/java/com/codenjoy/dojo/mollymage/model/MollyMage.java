@@ -38,7 +38,6 @@ import com.google.common.collect.Multimap;
 import java.util.*;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BIG_BADABOOM;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BOARD_SIZE;
 import static java.util.stream.Collectors.toList;
 
 public class MollyMage extends RoundField<Player> implements Field {
@@ -48,7 +47,11 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     private final List<Player> players = new LinkedList<>();
 
+    private final int size;
     private final Walls walls;
+
+    private List<Wall> wallsElements = new LinkedList<>();
+
     private final List<Potion> potions = new LinkedList<>();
     private final List<Blast> blasts = new LinkedList<>();
     private final List<Wall> destroyedWalls = new LinkedList<>();
@@ -58,13 +61,18 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     private final GameSettings settings;
 
-    public MollyMage(Dice dice, GameSettings settings) {
+    public MollyMage(int size, Dice dice, GameSettings settings) {
         super(Events.START_ROUND, Events.WIN_ROUND, Events.DIED, settings);
+        this.size = size;
         this.settings = settings;
 
         this.dice = dice;
         walls = settings.getWalls(dice);
         walls.init(this);
+    }
+
+    public void setWallsElements(List<Wall> wallsElements) {
+        this.wallsElements = wallsElements;
     }
 
     @Override
@@ -102,7 +110,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     @Override
     public int size() {
-        return settings.integer(BOARD_SIZE);
+        return size;
     }
 
     @Override
@@ -479,6 +487,15 @@ public class MollyMage extends RoundField<Player> implements Field {
             }
         }
 
+        // TODO: test me
+        for (Wall wall : wallsElements) {
+            if (!wall.itsMe(pt)) {
+                continue;
+            }
+            return true;
+        }
+
+
         for (Wall wall : walls) {
             if (!wall.itsMe(pt)) {
                 continue;
@@ -523,6 +540,7 @@ public class MollyMage extends RoundField<Player> implements Field {
                 List<Point> elements = new LinkedList<>();
 
                 elements.addAll(MollyMage.this.heroes(ALL));
+                elements.addAll(MollyMage.this.wallsElements);
                 MollyMage.this.walls().forEach(elements::add);
                 elements.addAll(MollyMage.this.potions());
                 elements.addAll(MollyMage.this.blasts());

@@ -30,6 +30,7 @@ import org.junit.Test;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static org.junit.Assert.assertEquals;
 
+// TODO: double check what is wrong with it
 public class ScoresTest {
 
     private PlayerScores scores;

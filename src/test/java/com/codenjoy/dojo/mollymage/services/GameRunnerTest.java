@@ -48,7 +48,6 @@ public class GameRunnerTest {
         GameRunner gameType = new GameRunner();
 
         GameSettings settings = gameType.getSettings();
-        settings.integer(BOARD_SIZE, size);
 
         int countDestroyWalls = 5;
         settings.integer(TREASURE_BOX_COUNT, 5);

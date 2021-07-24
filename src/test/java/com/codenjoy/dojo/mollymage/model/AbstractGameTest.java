@@ -78,8 +78,7 @@ public class AbstractGameTest {
 
     protected void givenBoard(int size, int x, int y) {
         dice(dice, x, y);
-        settings.integer(BOARD_SIZE, size);
-        field = new MollyMage(dice, settings);
+        field = new MollyMage(size, dice, settings);
         listener = mock(EventListener.class);
         player = new Player(listener, settings);
         game = new Single(player, printer);

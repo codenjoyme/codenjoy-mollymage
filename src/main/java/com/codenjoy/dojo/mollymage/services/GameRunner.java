@@ -29,6 +29,7 @@ import com.codenjoy.dojo.games.mollymage.Board;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.MollyMage;
 import com.codenjoy.dojo.mollymage.model.Player;
+import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.services.ai.AISolver;
 import com.codenjoy.dojo.services.AbstractGameType;
 import com.codenjoy.dojo.services.EventListener;
@@ -39,9 +40,9 @@ import com.codenjoy.dojo.services.multiplayer.MultiplayerType;
 import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.settings.Parameter;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BOARD_SIZE;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_ENABLED;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_PLAYERS_PER_ROOM;
+import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 
 public class GameRunner extends AbstractGameType<GameSettings> {
 
@@ -59,12 +60,16 @@ public class GameRunner extends AbstractGameType<GameSettings> {
 
     @Override
     public GameField createGame(int levelNumber, GameSettings settings) {
-        return new MollyMage(getDice(), settings);
+        Level level = settings.getLevel();
+        MollyMage game = new MollyMage(level.size(), getDice(), settings);
+
+        game.setWallsElements(level.getWalls());
+        return game;
     }
 
     @Override
     public Parameter<Integer> getBoardSize(GameSettings settings) {
-        return settings.integerValue(BOARD_SIZE);
+        return v(settings.getLevel().size());
     }
 
     @Override

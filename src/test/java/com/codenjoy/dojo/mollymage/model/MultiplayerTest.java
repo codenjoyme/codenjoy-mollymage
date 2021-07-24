@@ -352,14 +352,6 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 " ҉   \n" +
                 "♣҉Ѡ  \n", game(1));
 
-        Level level1 = settings.getLevel();
-        Level level2 = settings.getLevel();
-        when(settings.getHero(any(Level.class)))
-                .thenReturn(
-                        new Hero(level1),
-                        new Hero(level2)
-                );
-
         dice(dice,
                 0, 0,
                 1, 0);

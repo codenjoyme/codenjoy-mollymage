@@ -40,10 +40,10 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BOARD_SIZE;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
@@ -65,13 +65,6 @@ public abstract class AbstractMultiplayerTest {
     public void setup() {
         perks = settings.perksSettings();
         givenWalls();
-
-        when(settings.getHero(any(Level.class))).thenAnswer(inv -> {
-            Level level = settings.getLevel();
-            Hero hero = new Hero(level);
-            heroes.add(hero);
-            return hero;
-        });
 
         when(settings.getWalls(dice)).thenReturn(walls);
 
@@ -95,6 +88,7 @@ public abstract class AbstractMultiplayerTest {
             g.on(field);
             g.newGame();
         });
+        resetHeroes();
     }
 
     protected TreasureBox destroyWallAt(int x, int y) {

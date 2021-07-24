@@ -49,10 +49,6 @@ public class PlayerTest {
         settings = spy(new TestGameSettings());
         dice = mock(Dice.class);
 
-        when(settings.getLevel()).thenReturn(mock(Level.class));
-        when(settings.getHero(any(Level.class)))
-                .thenReturn(mock(Hero.class));
-
         field = mock(Field.class);
         when(field.settings()).thenReturn(settings);
         when(field.freeRandom(any())).thenReturn(Optional.of(pt(0, 0)));

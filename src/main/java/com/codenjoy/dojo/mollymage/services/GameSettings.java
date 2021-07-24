@@ -24,6 +24,7 @@ package com.codenjoy.dojo.mollymage.services;
 
 
 import com.codenjoy.dojo.mollymage.model.*;
+import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.Dice;

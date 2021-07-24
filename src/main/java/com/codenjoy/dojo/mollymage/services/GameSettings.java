@@ -146,22 +146,7 @@ public class GameSettings extends SettingsImpl
 
     public Level getLevel() {
         String map = string(LEVEL_MAP);
-        return new Level() {
-            @Override
-            public int potionsCount() {
-                return integer(POTIONS_COUNT);
-            }
-            
-            @Override
-            public int potionsPower() {
-                return integer(POTION_POWER);
-            }
-
-            @Override
-            public int perksDropRate() {
-                return integer(PERK_DROP_RATIO);
-            }
-        };
+        return new Level() {};
     }
 
     public Walls getWalls(Dice dice) {
@@ -169,10 +154,6 @@ public class GameSettings extends SettingsImpl
         Ghosts ghosts = new Ghosts(originalWalls, integerValue(GHOSTS_COUNT), dice);
 
         return new EatSpaceWalls(ghosts, integerValue(TREASURE_BOX_COUNT), dice);
-    }
-
-    public Hero getHero(Level level) {
-        return new Hero(level);
     }
 
     public PerksSettingsWrapper perksSettings() {

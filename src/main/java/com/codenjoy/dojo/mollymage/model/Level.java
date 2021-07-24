@@ -24,11 +24,4 @@ package com.codenjoy.dojo.mollymage.model;
 
 public interface Level {
 
-    int potionsCount();
-
-    int potionsPower();
-
-    default int perksDropRate() {
-        return 0;
-    }
 }

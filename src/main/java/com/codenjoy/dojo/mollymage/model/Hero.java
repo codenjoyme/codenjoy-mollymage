@@ -28,6 +28,7 @@ import com.codenjoy.dojo.mollymage.model.perks.Perk;
 import com.codenjoy.dojo.mollymage.model.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.games.mollymage.Element;
+import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.round.RoundPlayerHero;
 
@@ -35,20 +36,22 @@ import java.util.List;
 
 import static com.codenjoy.dojo.games.mollymage.Element.*;
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTIONS_COUNT;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
 import static com.codenjoy.dojo.services.StateUtils.filter;
 import static com.codenjoy.dojo.services.StateUtils.filterOne;
 
 public class Hero extends RoundPlayerHero<Field> implements State<Element, Player> {
 
-    private Level level;
+    private GameSettings settings;
     private boolean potion;
     private Direction direction;
     private int score;
 
     private HeroPerks perks = new HeroPerks();
 
-    public Hero(Level level) {
-        this.level = level;
+    public Hero(GameSettings settings) {
+        this.settings = settings;
         score = 0;
         direction = null;
     }
@@ -136,7 +139,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
 
         Perk blastPerk = perks.getPerk(POTION_BLAST_RADIUS_INCREASE);
         int boost = (blastPerk == null) ? 0 : blastPerk.getValue();
-        Potion potion = new Potion(this, x, y, level.potionsPower() + boost, field);
+        Potion potion = new Potion(this, x, y, settings.integer(POTION_POWER) + boost, field);
 
         if (remotePerk != null) {
             potion.putOnRemoteControl();
@@ -163,7 +166,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         int boost = (countPerk == null) ? 0 : countPerk.getValue();
 
         // сколько я всего могу
-        int allowed = level.potionsCount() + boost;
+        int allowed = settings.integer(POTIONS_COUNT) + boost;
 
         return placed < allowed;
     }

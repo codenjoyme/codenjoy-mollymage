@@ -45,8 +45,7 @@ public class Player extends RoundGamePlayer<Hero, Field> {
 
     @Override
     public Hero createHero(Point pt) {
-        // TODO либо везде сделать так (в чем я не уверен), либо тут сделать как везде
-        Hero hero = settings().getHero(settings().getLevel());
+        Hero hero = new Hero(settings());
         hero.move(pt);
         return hero;
     }

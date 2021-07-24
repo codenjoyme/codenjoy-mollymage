@@ -66,7 +66,9 @@ public class GameSettings extends SettingsImpl
         TIMEOUT_POTION_COUNT_INC("[Perks] Potion count effect timeout"),
         TIMEOUT_POTION_IMMUNE("[Perks] Potion immune effect timeout"),
         REMOTE_CONTROL_COUNT("[Perks] Number of Potion remote controls (how many times player can use it)"),
-        DEFAULT_PERKS("[Perks] Perks available in this game");
+        DEFAULT_PERKS("[Perks] Perks available in this game"),
+
+        LEVEL_MAP("[Level] map");
 
         private String key;
 
@@ -115,9 +117,35 @@ public class GameSettings extends SettingsImpl
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 2, timeout);
         perks.put(Element.POTION_IMMUNE, 0, timeout);
         perks.put(Element.POTION_COUNT_INCREASE, 4, timeout);
+
+        multiline(LEVEL_MAP,
+                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼                     ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                     ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                     ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                     ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                     ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                     ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                     ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                     ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                     ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                     ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                     ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼");
     }
 
     public Level getLevel() {
+        String map = string(LEVEL_MAP);
         return new Level() {
             @Override
             public int potionsCount() {

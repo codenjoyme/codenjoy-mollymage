@@ -69,6 +69,7 @@ public class GameSettingsTest {
                 "  'KILL_GHOST_SCORE':10,\n" +
                 "  'KILL_OTHER_HERO_SCORE':20,\n" +
                 "  'KILL_WALL_SCORE':1,\n" +
+                "  'LEVEL_MAP':'☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼',\n" +
                 "  'PERK_DROP_RATIO':20,\n" +
                 "  'PERK_PICK_TIMEOUT':30,\n" +
                 "  'PERK_POTION_BLAST_RADIUS_INC':2,\n" +
@@ -121,6 +122,7 @@ public class GameSettingsTest {
                 "  'KILL_GHOST_SCORE':10,\n" +
                 "  'KILL_OTHER_HERO_SCORE':20,\n" +
                 "  'KILL_WALL_SCORE':1,\n" +
+                "  'LEVEL_MAP':'☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼',\n" +
                 "  'PERK_DROP_RATIO':23,\n" +
                 "  'PERK_PICK_TIMEOUT':30,\n" +
                 "  'PERK_POTION_BLAST_RADIUS_INC':4,\n" +
@@ -164,6 +166,7 @@ public class GameSettingsTest {
                 "  'KILL_GHOST_SCORE':10,\n" +
                 "  'KILL_OTHER_HERO_SCORE':20,\n" +
                 "  'KILL_WALL_SCORE':1,\n" +
+                "  'LEVEL_MAP':'☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\\n☼                     ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼',\n" +
                 "  'PERK_DROP_RATIO':23,\n" +
                 "  'PERK_PICK_TIMEOUT':30,\n" +
                 "  'PERK_POTION_BLAST_RADIUS_INC':4,\n" +

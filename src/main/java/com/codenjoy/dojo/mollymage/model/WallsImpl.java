@@ -40,13 +40,6 @@ public class WallsImpl implements Walls {
         walls = new LinkedList<>();
     }
 
-    public WallsImpl(Walls input) {
-        this();
-        for (Wall wall : input) {
-            walls.add(wall.copy());
-        }
-    }
-
     @Override
     public void add(Point pt) {
         add(new Wall(pt));

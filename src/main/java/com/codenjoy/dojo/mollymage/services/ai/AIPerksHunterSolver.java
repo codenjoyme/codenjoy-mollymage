@@ -38,7 +38,7 @@ public class AIPerksHunterSolver implements Solver<Board> {
 
     private DeikstraFindWay way;
     private Direction direction;
-    private Point bomb;
+    private Point potion;
     private Dice dice;
     private Board board;
 

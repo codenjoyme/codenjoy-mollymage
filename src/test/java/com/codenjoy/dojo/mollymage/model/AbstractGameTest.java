@@ -251,7 +251,7 @@ public class AbstractGameTest {
         dice(ghostDice, 1, Direction.UP.value());  // Чертик будет упираться в стенку и стоять на месте
     }
 
-    protected TreasureBox destroyWallAt(int x, int y) {
+    protected TreasureBox boxAt(int x, int y) {
         TreasureBox wall = new TreasureBox(pt(x, y));
         objects.add(wall);
         return wall;
@@ -262,9 +262,9 @@ public class AbstractGameTest {
     }
 
     protected Ghost ghostAt(int x, int y) {
-        Ghost chopper = new Ghost(pt(x, y), field, ghostDice);
-        chopper.stop();
-        objects.add(chopper);
-        return chopper;
+        Ghost ghost = new Ghost(pt(x, y), field, ghostDice);
+        ghost.stop();
+        objects.add(ghost);
+        return ghost;
     }
 }

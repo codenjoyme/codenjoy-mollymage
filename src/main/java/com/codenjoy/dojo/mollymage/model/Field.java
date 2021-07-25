@@ -58,9 +58,9 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     List<Blast> blasts();
 
-    void drop(Potion bomb);
+    void drop(Potion potion);
 
-    void remove(Potion bomb);
+    void remove(Potion potion);
 
     void remove(Wall wall);
 

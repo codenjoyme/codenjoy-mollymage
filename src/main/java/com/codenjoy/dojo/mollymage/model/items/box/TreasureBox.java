@@ -57,9 +57,9 @@ public class TreasureBox extends Wall implements State<Element, Player> {
             return OPENING_TREASURE_BOX;
         }
 
-        GhostHunter chopper = filterOne(alsoAtPoint, GhostHunter.class);
-        if (chopper != null) {
-            return chopper.state(player, alsoAtPoint);
+        GhostHunter ghost = filterOne(alsoAtPoint, GhostHunter.class);
+        if (ghost != null) {
+            return ghost.state(player, alsoAtPoint);
         }
 
         return TREASURE_BOX;

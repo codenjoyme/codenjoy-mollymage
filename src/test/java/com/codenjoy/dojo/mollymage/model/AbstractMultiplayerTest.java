@@ -103,10 +103,10 @@ public abstract class AbstractMultiplayerTest {
     }
 
     protected Ghost ghostAt(int x, int y) {
-        Ghost chopper = new Ghost(pt(x, y), field, dice);
-        chopper.stop();
-        objects.add(chopper);
-        return chopper;
+        Ghost ghost = new Ghost(pt(x, y), field, dice);
+        ghost.stop();
+        objects.add(ghost);
+        return ghost;
     }
 
     protected void asrtBrd(String board, Game game) {

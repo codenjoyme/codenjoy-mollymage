@@ -56,7 +56,7 @@ public class GameSettings extends SettingsImpl
         CATCH_PERK_SCORE("[Score] Catch perk score"),
         DIE_PENALTY("[Score] Your hero's death penalty"),
         WIN_ROUND_SCORE("[Score][Rounds] Win round score"),
-        BIG_BADABOOM("[Level] Blast activate bomb"),
+        BIG_BADABOOM("[Level] Blast activate potion"),
         POTIONS_COUNT("[Level] Potions count"),
         POTION_POWER("[Level] Potion power"),
         TREASURE_BOX_COUNT("[Level] Treasure boxes count"),

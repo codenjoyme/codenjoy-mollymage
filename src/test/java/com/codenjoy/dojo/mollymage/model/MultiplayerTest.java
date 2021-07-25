@@ -169,7 +169,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "☺♥   \n", game(0));
     }
     
-    // бомбермен может идти на приведение, при этом он умирает
+    // герой может идти на привидение, при этом он умирает
     @Test
     public void shouldKllOtherHeroWhenHeroGoToGhost() {
         ghostAt(2, 0);
@@ -187,7 +187,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
         hero(1).right();
         tick();
-        // от имени наблюдателя вижу опасность - приведение
+        // от имени наблюдателя вижу опасность - привидение
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
@@ -207,10 +207,11 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(1) => [DIED]\n");
     }
 
-    // если митчопер убил другого бомбермена, как это на моей доске отобразится? Хочу видеть трупик
+    // если привидение убил другого героя,
+    // как это на моей доске отобразится? Хочу видеть трупик
     @Test
     public void shouldKllOtherHeroWhenGhostGoToIt() {
-        Ghost chopper = ghostAt(2, 0);
+        Ghost ghost = ghostAt(2, 0);
 
         dice(dice,
                 0, 0,
@@ -223,10 +224,10 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "     \n" +
                 "☺♥&  \n", game(0));
 
-        chopper.setDirection(Direction.LEFT);
+        ghost.setDirection(Direction.LEFT);
         tick();
 
-        // от имени наблюдателя я там вижу опасность - приведение, мне не интересны останки игроков
+        // от имени наблюдателя я там вижу опасность - привидение, мне не интересны останки игроков
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
@@ -245,10 +246,11 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(1) => [DIED]\n");
     }
 
-    // А что если бомбермен идет на приведение а тот идет на встречу к нему - бомбермен проскочит или умрет? должен умереть!
+    // А что если герой идет на привидение а тот идет на
+    // встречу к нему - герой проскочит или умрет? должен умереть!
     @Test
     public void shouldKllOtherHeroWhenGhostAndHeroMoves() {
-        Ghost chopper = ghostAt(2, 0);
+        Ghost ghost = ghostAt(2, 0);
 
         dice(dice,
                 0, 0,
@@ -261,7 +263,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "     \n" +
                 "☺♥&  \n", game(0));
 
-        chopper.setDirection(Direction.LEFT);
+        ghost.setDirection(Direction.LEFT);
         hero(1).right();
         tick();
 
@@ -282,7 +284,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(1) => [DIED]\n");
     }
 
-    //  бомбермены не могут ходить по бомбам ни по своим ни по чужим
+    // герои не могут ходить по зелью ни по своему ни по чужому
     @Test
     public void shouldHeroCantGoToBombFromAnotherHero() {
         dice(dice,
@@ -373,7 +375,8 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "♥☺   \n", game(1));
     }
 
-    // на поле можно чтобы каждый поставил то количество бомб которое ему позволено и не более того
+    // на поле можно чтобы каждый поставил то количество
+    // зелья которое ему позволено и не более того
     @Test
     public void shouldTwoBombsOnBoard() {
         settings.integer(POTIONS_COUNT, 1);
@@ -1136,7 +1139,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 3, 0);
         givenBoard(4);
 
-        // бомба, которой все пордорвем
+        // зелье, которым все пордорвем
         hero(0).move(1, 2);
         hero(0).act();
         tick();
@@ -1244,7 +1247,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         player(2).setTeamId(1);
         player(3).setTeamId(1);
 
-        // бомба, которой все пордорвем
+        // зелье, которым все пордорвем
         hero(0).move(1, 2);
         hero(0).act();
         tick();
@@ -1348,7 +1351,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 3, 0);
         givenBoard(4);
 
-        // бомба, которой все пордорвем
+        // зелье, которым все пордорвем
         hero(0).move(1, 2);
         hero(0).act();
         tick();
@@ -1452,7 +1455,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 3, 0);
         givenBoard(4);
 
-        // бомба, которой все пордорвем
+        // зелье, которым все пордорвем
         hero(0).move(1, 2);
         hero(0).act();
         tick();

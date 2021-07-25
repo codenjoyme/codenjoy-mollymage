@@ -159,7 +159,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
     }
 
     private boolean сanDrop(Perk countPerk, List<Potion> potions) {
-        // сколько бомб уже оставили?
+        // сколько зелья уже оставили?
         int placed = potions.size();
         // дополнение от перка, если он есть
         int boost = (countPerk == null) ? 0 : countPerk.getValue();
@@ -185,7 +185,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
 
             // герой наблюдателя жив и активен
 
-            // под ним бомба
+            // под ним зелье
             if (potion != null) {
                 return POTION_HERO;
             }
@@ -197,12 +197,12 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
 
         // в клетке только трупики?
         if (heroes.stream().noneMatch(Hero::isActiveAndAlive)) {
-            // если в клеточке с героем митчопер, рисуем его
+            // если в клеточке с героем привидение, рисуем его
             if (ghost != null) {
                 return ghost.state(player, alsoAtPoint);
             }
 
-            // если митчопера нет, следующий по опасности - бобма
+            // если привидения нет, следующий по опасности - зелье
             if (potion != null) {
                 return potion.state(player, alsoAtPoint);
             }
@@ -213,7 +213,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
 
         // в клетке есть другие активные и живые герои
 
-        // под ними бомба
+        // под ними зелье
         if (potion != null) {
             return anyHeroFromAnotherTeam(player, heroes) ? ENEMY_POTION_HERO : OTHER_POTION_HERO;
         }

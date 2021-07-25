@@ -51,7 +51,7 @@ public class TreasureBoxes extends ObjectsDecorator implements Objects { // TODO
     }
 
     private int freeSpaces() {
-        return (field.size()* field.size() - 1) // TODO -1 это один бомбер, а если их несколько?
+        return (field.size()* field.size() - 1) // TODO -1 это один герой, а если их несколько?
                 - walls.listSubtypes(Wall.class).size();
     }
 
@@ -68,7 +68,7 @@ public class TreasureBoxes extends ObjectsDecorator implements Objects { // TODO
         List<TreasureBox> boxes = walls.listSubtypes(TreasureBox.class);
         int need = this.count.getValue() - boxes.size();
         if (need > freeSpaces()) {  // TODO и это потестить
-            count.update(count.getValue() - (need - freeSpaces()) - 50); // 50 это место под бомберов
+            count.update(count.getValue() - (need - freeSpaces()) - 50); // 50 это место под героев
         }
 
         int count = boxes.size();

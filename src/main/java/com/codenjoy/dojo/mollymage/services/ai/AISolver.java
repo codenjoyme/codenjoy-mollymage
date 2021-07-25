@@ -34,7 +34,7 @@ import static com.codenjoy.dojo.services.PointImpl.pt;
 public class AISolver implements Solver<Board> {
 
     private Direction direction;
-    private Point bomb;
+    private Point potion;
     private Dice dice;
     private Board board;
 
@@ -53,22 +53,22 @@ public class AISolver implements Solver<Board> {
         boolean nearGhost = board.isNear(hero.getX(), hero.getY(), Element.GHOST);
         boolean potionNotDropped = !board.isAt(hero.getX(), hero.getY(), Element.POTION_HERO);
 
-        bomb = null;
+        potion = null;
         if ((nearTreasureBox || nearOtherHero || nearEnemyHero || nearGhost) && potionNotDropped) {
-            bomb = new PointImpl(hero);
+            potion = new PointImpl(hero);
         }
 
         direction = tryToMove(hero);
 
-        String result = mergeCommands(bomb, direction);
+        String result = mergeCommands(potion, direction);
         return StringUtils.isEmpty(result) ? Direction.STOP.toString() : result;
     }
 
-    private String mergeCommands(Point bomb, Direction direction) {
+    private String mergeCommands(Point potion, Direction direction) {
         if (Direction.STOP.equals(direction)) {
-            bomb = null;
+            potion = null;
         }
-        return "" + ((bomb!=null)? Direction.ACT+((direction!=null)?",":""):"") +
+        return "" + ((potion!=null)? Direction.ACT+((direction!=null)?",":""):"") +
                 ((direction!=null)?direction:"");
     }
 
@@ -87,7 +87,7 @@ public class AISolver implements Solver<Board> {
             newX = result.changeX(pt.getX());
             newY = result.changeY(pt.getY());
 
-            boolean bombAtWay = bomb != null && bomb.equals(pt(newX, newY));
+            boolean potionAtWay = potion != null && potion.equals(pt(newX, newY));
             boolean barrierAtWay = board.isBarrierAt(newX, newY);
             boolean blastAtWay = board.getFutureBlasts().contains(pt(newX, newY));
             boolean ghostNearWay = board.isNear(newX, newY, Element.GHOST);
@@ -97,12 +97,12 @@ public class AISolver implements Solver<Board> {
                 return Direction.STOP;
             }
 
-            again = bombAtWay || barrierAtWay || ghostNearWay;
+            again = potionAtWay || barrierAtWay || ghostNearWay;
 
             // TODO продолжить но с тестами
-            boolean deadEndAtWay = board.countNear(newX, newY, Element.NONE) == 0 && bomb != null;
+            boolean deadEndAtWay = board.countNear(newX, newY, Element.NONE) == 0 && potion != null;
             if (deadEndAtWay) {
-                bomb = null;
+                potion = null;
             }
         } while (count++ < 20 && again);
 
@@ -118,7 +118,7 @@ public class AISolver implements Solver<Board> {
         do {
             result = Direction.valueOf(dice.next(4));
         } while (count++ < 10 &&
-                ((result.inverted() == direction && bomb == null) ||
+                ((result.inverted() == direction && potion == null) ||
                         !board.isAt(result.changeX(pt.getX()), result.changeY(pt.getY()), Element.NONE)));
         if (count > 10) {
             return null;

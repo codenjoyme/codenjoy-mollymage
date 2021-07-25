@@ -73,7 +73,7 @@ public class GhostHunter extends Ghost {
     public void tick() {
         // если нарушитель уже того, выпиливаемся тоже
         if (!prey.isActiveAndAlive()) {
-            // митчопер умрет от праведного (ничейного) огня! мы увидим его трупик 1 тик
+            // привидение умрет от праведного (ничейного) огня! мы увидим его трупик 1 тик
             die();
             return;
         }
@@ -118,10 +118,10 @@ public class GhostHunter extends Ghost {
             return DEAD_GHOST;
         }
 
-        // если поднизом бомба, видеть ее важнее, чем трупик митчопера TODO test me
-        Potion bomb = filterOne(alsoAtPoint, Potion.class);
-        if (bomb != null) {
-            return bomb.state(player, alsoAtPoint);
+        // если поднизом зелье, видеть ее важнее, чем трупик привидения TODO test me
+        Potion potion = filterOne(alsoAtPoint, Potion.class);
+        if (potion != null) {
+            return potion.state(player, alsoAtPoint);
         }
 
         return GHOST;

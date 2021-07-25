@@ -82,7 +82,7 @@ public class PerksTest extends AbstractGameTest {
                 "# ####\n");
     }
 
-    // новый бобмер не может появиться на перке
+    // новый герой не может появиться на перке
     @Test
     public void shouldHeroCantSpawnOnPerk() {
         // given
@@ -315,7 +315,7 @@ public class PerksTest extends AbstractGameTest {
 
     }
 
-    // проверяем, что уничтожение перка порождает злого-анти-приведение :)
+    // проверяем, что уничтожение перка порождает злого-анти-привидение :)
     @Test
     public void shouldDropPerk_generateNewGhost() {
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
@@ -359,7 +359,7 @@ public class PerksTest extends AbstractGameTest {
         field.tick();
 
         // перк разрушен
-        // а вместо него злой митчопер
+        // а вместо него злое привидение
         asrtBrd("#H####\n" +
                 "#҉# ##\n" +
                 "#҉   #\n" +
@@ -379,7 +379,7 @@ public class PerksTest extends AbstractGameTest {
         // when
         field.tick();
 
-        // митчопер начал свое движение
+        // привидение начало свое движение
         asrtBrd("#+####\n" +
                 "#☼#☺##\n" +
                 "##   #\n" +
@@ -458,7 +458,7 @@ public class PerksTest extends AbstractGameTest {
                 "# ####\n");
     }
 
-    // а теперь пробуем убить анти-приведение
+    // а теперь пробуем убить анти-привидение
     @Test
     public void shouldDropPerk_generateNewGhost_thenKillIt() {
         canDropPotions(2);
@@ -505,7 +505,7 @@ public class PerksTest extends AbstractGameTest {
         field.tick();
 
         // перк разрушен
-        // а вместо него злой митчопер
+        // а вместо него злое привидение
         asrtBrd("#H####\n" +
                 "#҉# ##\n" +
                 "#҉☺  #\n" +
@@ -519,7 +519,7 @@ public class PerksTest extends AbstractGameTest {
         // when
         field.tick();
 
-        // митчопер начал свое движение
+        // пивидение начало свое движение
         asrtBrd("#+####\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
@@ -530,7 +530,7 @@ public class PerksTest extends AbstractGameTest {
         // when
         field.tick();
 
-        // митчопер нарвался
+        // приведение нарвалось на зелье
         asrtBrd("#+####\n" +
                 "# # ##\n" +
                 "#҉☺  #\n" +
@@ -544,7 +544,6 @@ public class PerksTest extends AbstractGameTest {
         // when
         field.tick();
 
-        // митчопер нарвался
         asrtBrd("#+####\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
@@ -556,7 +555,7 @@ public class PerksTest extends AbstractGameTest {
     }
 
 
-    // генерим три приведение и смотрим как они бегут за мной
+    // генерим три привидение и смотрим как они бегут за мной
     @Test
     public void shouldDropPerk_generateThreeGhosts() {
         shouldDropPerk_generateNewGhost_thenKillIt();
@@ -638,7 +637,7 @@ public class PerksTest extends AbstractGameTest {
         events.verifyAllEvents("[]");
     }
 
-    // если анти-митчоперы не могут найти к тебе короткий путь - они выпиливаются
+    // если анти-привидения не могут найти к тебе короткий путь - они выпиливаются
     // вместо них будут перки
     @Test
     public void shouldDropPerk_generateTwoGhosts_noWayNoPain() {
@@ -648,7 +647,7 @@ public class PerksTest extends AbstractGameTest {
         field.objects().add(new Wall(5, 4));
         field.tick();
 
-        // как митчоперы нормальнеют
+        // как привидения нормальнеют
         asrtBrd("#+##☼☺\n" +
                 "# # ☼☼\n" +
                 "#  &&#\n" +
@@ -713,7 +712,7 @@ public class PerksTest extends AbstractGameTest {
         field.tick();
 
         // перк разрушен
-        // а вместо него злой митчопер
+        // а вместо него злое привидение
         asrtBrd("#H####\n" +
                 "#҉# ##\n" +
                 "#҉   #\n" +
@@ -805,7 +804,7 @@ public class PerksTest extends AbstractGameTest {
                 "#H##########\n");
     }
 
-    // Проверяем что перк BBRI увеличивает длинну волны бомбы
+    // Проверяем что перк BBRI увеличивает длинну взрывной волны зелья
     @Test
     public void shouldPotionBlastRadiusIncrease_whenBBRIperk() {
         // given
@@ -841,8 +840,8 @@ public class PerksTest extends AbstractGameTest {
                 "#H##########\n");
     }
 
-    // Проверяем что два перка BBRI увеличивают длинну волны бомбы на размер второго перка
-    // При этом общее время суммируется. Но так же важно, что перк влияет только на будущие бомбы,
+    // Проверяем что два перка BBRI увеличивают длинну взрывной волны зелья на размер второго перка
+    // При этом общее время суммируется. Но так же важно, что перк влияет только на будущие зелья,
     // а не те, которые уже на поле. И после того как он отработает, все вернется как было.
     @Test
     public void shouldPotionBlastRadiusIncreaseTwice_whenBBRIperk() {
@@ -876,7 +875,7 @@ public class PerksTest extends AbstractGameTest {
                 hero.getPerks().toString());
 
         // второй перк взятый в самый последний момент перед взрывом
-        // бомбы повлияет не на нее, а на следующую бомбу
+        // зелья повлияет не на нее, а на следующее зелье
         int newValue = 3; // проверим, что эти значения суммируются
         int newTimeout = 7;
         player.getHero().addPerk(new PotionBlastRadiusIncrease(newValue, newTimeout));
@@ -949,7 +948,7 @@ public class PerksTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero.getPerks().toString());
 
-        // ставим новую бомбу, чтобы убедиться, что больше перк не сработает
+        // ставим новое зелье, чтобы убедиться, что больше перк не сработает
         hero.act();
         field.tick();
 
@@ -978,9 +977,9 @@ public class PerksTest extends AbstractGameTest {
 
     // BCI - Potion Count Increase perk
     @Test
-    public void shouldPotionCountIncrease_whenBCIperk() {
+    public void shouldPotionCountIncrease_whenBCIPerk() {
         hero.act();
-        // obe bomb by default on lel 1
+        // obe potion by default on lel 1
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
@@ -990,14 +989,14 @@ public class PerksTest extends AbstractGameTest {
         hero.right();
         field.tick();
         hero.act();
-        // no more bombs :(
+        // no more potions :(
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "4☺   \n");
 
-        // add perk that gives 1+3 = 4 player's bombs in total on the board
+        // add perk that gives 1+3 = 4 player's potions in total on the board
         player.getHero().addPerk(new PotionCountIncrease(3, 3));
         hero.act();
         hero.right();
@@ -1021,7 +1020,7 @@ public class PerksTest extends AbstractGameTest {
         hero.right();
         field.tick();
         hero.act();
-        // 4 bombs and no more
+        // 4 potions and no more
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1092,7 +1091,7 @@ public class PerksTest extends AbstractGameTest {
                         "value=2, timeout=1, timer=1, pick=0}]" ,
                 hero.getPerks().toString());
 
-        // поставили первую радиоуправляемую бомбу
+        // поставили первое радиоуправляемое зелье
         hero.act();
         hero.right();
         field.tick();
@@ -1259,7 +1258,7 @@ public class PerksTest extends AbstractGameTest {
 
         asrtBrd("     \n" +
                 "҉    \n" +
-                "҉2  ☺\n" +  // взрывная волна кстати не перекрывает бомбу
+                "҉2  ☺\n" +  // взрывная волна кстати не перекрывает зелье
                 "҉    \n" +
                 "     \n");
 
@@ -1272,7 +1271,7 @@ public class PerksTest extends AbstractGameTest {
 
         asrtBrd("     \n" +
                 "     \n" +
-                " 1  ☻\n" +  // взрывная волна кстати не перекрывает бомбу
+                " 1  ☻\n" +  // взрывная волна кстати не перекрывает зелье
                 "     \n" +
                 "     \n");
 
@@ -1290,7 +1289,7 @@ public class PerksTest extends AbstractGameTest {
                         "value=2, timeout=1, timer=1, pick=0}]" ,
                 hero.getPerks().toString());
 
-        // поставили первую радиоуправляемую бомбу
+        // поставили первое радиоуправляемое зелье
         hero.act();
         hero.right();
         field.tick();
@@ -1480,7 +1479,7 @@ public class PerksTest extends AbstractGameTest {
 
     @Test
     public void shouldSuicide_whenBRCperk_shouldRemoveAfterDeath_andCollectScores() {
-        destroyWallAt(0, 1);
+        boxAt(0, 1);
         ghostAt(3, 0);
 
         canDropPotions(1);
@@ -1491,7 +1490,7 @@ public class PerksTest extends AbstractGameTest {
                         "value=1, timeout=1, timer=1, pick=0}]",
                 hero.getPerks().toString());
 
-        // поставили радиоуправляемую бомбу
+        // поставили радиоуправляемое зелье
         hero.act();
         hero.right();
         field.tick();
@@ -1506,7 +1505,7 @@ public class PerksTest extends AbstractGameTest {
                         "value=1, timeout=1, timer=1, pick=0}]",
                 hero.getPerks().toString());
 
-        // идем к митчоперу на верную смерть
+        // идем к привидению на верную смерть
         hero.right();
         field.tick();
 
@@ -1550,12 +1549,34 @@ public class PerksTest extends AbstractGameTest {
                 hero.getPerks().toString());
     }
 
-    // чертики тоже могут ставить бомбы
-    // Возможность проходить через стены. Бомбер прячется под ней для других польхзователей виден как стена, и только владелец видит себя там где он сейчас
-    // Взорвать разом все бомбы на поле. Вместе с ней подрываются все бомбы на поле
-    // Огнемет. Командой ACT + LEFT/RIGHT/UP/DOWN посылается ударная волна как от взрыва бомбы в заданном направлении на N клеточек
-    // Возможность построить стену на месте бомбера. Сам бомбер при этом прячется под ней, как в модификаторе прохода через стену
-    // Возможность запустить митчепера в заданном направлении. Командой ACT + LEFT/RIGHT/UP/DOWN посылается митчепера. Если этот митчопер поймает другого бомбермена, то очки засчитаются герою (если он жив до сих пор)
-    // Атомная бомба которая прожигает стены насквозь с максимальной ударной волной. О форме ударной волны надо еще подумать
-    // Создаеться клон который на протяжении какого-то времени будет ходить и рандомно ставить бомбы
+    // привидения тоже могут ставить зелье
+
+    // Возможность проходить через стены. Герой прячется под
+    // ней для других польхзователей виден как стена, и только
+    // владелец видит себя там где он сейчас
+
+    // Взорвать разом все зелья на поле. Вместе с ним
+    // подрываются все зелья на поле
+
+    // Огнемет. Командой ACT + LEFT/RIGHT/UP/DOWN посылается
+    // ударная волна как от взрыва зелья в заданном направлении
+    // на N клеточек
+
+    // Возможность построить стену на месте героя.
+    // Сам герой при этом прячется под ней, как в модификаторе
+    // прохода через стену
+
+    // Возможность запустить привидения в заданном
+    // направлении. Командой ACT + LEFT/RIGHT/UP/DOWN
+    // посылается привидение. Если это привидение поймает
+    // другого героя, то очки засчитаются герою отославшему
+    // это привидение (если герой жив до сих пор)
+
+    // Атомное зелье которое прожигает стены насквозь
+    // с максимальной ударной волной. О форме ударной
+    // волны надо еще подумать
+
+    // Создаеться клон который на протяжении какого-то
+    // времени будет ходить и рандомно ставить зелье
+    // от имение героя его породившего.
 }

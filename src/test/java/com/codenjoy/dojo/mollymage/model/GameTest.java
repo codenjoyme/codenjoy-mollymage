@@ -272,7 +272,8 @@ public class GameTest extends AbstractGameTest {
                 "     \n");
     }
 
-    // проверить, что бомбермен не может бомб дропать больше, чем у него в level прописано
+    // проверить, что герой не может класть зелья больше,
+    // чем у него в settings прописано
     @Test
     public void shouldOnlyTwoPotions_whenLevelApproveIt() {
         canDropPotions(2);
@@ -314,7 +315,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n");
     }
 
-    // бомберен не может дропать два бомбы на одно место
+    // герой не может класть два зелья на одно место
     @Test
     public void shouldOnlyOnePotionPerPlace() {
         canDropPotions(2);
@@ -359,7 +360,7 @@ public class GameTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉҉☺  \n");
 
-        field.tick();   // бомб больше нет, иначе тут был бы взрыв второй
+        field.tick();   // зелья больше нет, иначе тут был бы взрыв второй
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -396,7 +397,7 @@ public class GameTest extends AbstractGameTest {
                 "҉҉☺  \n");
     }
 
-    // проверить, что я могу поставить еще одну бомбу, когда другая рванула
+    // проверить, что я могу поставить еще одно зелье, когда другое рвануло
     @Test
     public void shouldCanDropNewPotion_whenOtherBoom() {
         shouldBoom_whenDroppedPotionHas5Ticks();
@@ -417,7 +418,7 @@ public class GameTest extends AbstractGameTest {
                 "  ☻  \n");
     }
 
-    // если бомбермен стоит на бомбе то он умирает после ее взрыва
+    // если герой стоит на зелье то он умирает после его взрыва
     @Test
     public void shouldKillHero_whenPotionExploded() {
         hero.act();
@@ -550,7 +551,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n");
     }
 
-    // если бомбермен стоит под действием ударной волны, он умирает
+    // если герой стоит под действием ударной волны, он умирает
     @Test
     public void shouldKillHero_whenPotionExploded_blastWaveAffect_fromLeft() {
         hero.act();
@@ -862,7 +863,7 @@ public class GameTest extends AbstractGameTest {
 
     }
 
-    // бомбермен не может пойти вперед на стенку
+    // герой не может пойти вперед на стенку
     @Test
     public void shouldHeroStop_whenUpWall() {
         givenBoardWithWalls();
@@ -924,7 +925,7 @@ public class GameTest extends AbstractGameTest {
         }
     }
 
-    // бомбермен не может вернуться на место бомбы, она его не пускает как стена
+    // герой не может вернуться на место зелья, она его не пускает как стена
     @Test
     public void shouldHeroStop_whenGotoPotion() {
         hero.act();
@@ -943,7 +944,7 @@ public class GameTest extends AbstractGameTest {
                 "2☺   \n");
     }
 
-    // проверить, что бомбермен может одноверменно перемещаться по полю и дропать бомбы за один такт, только как именно?
+    // герой может одноверменно перемещаться по полю и класть зелья
     @Test
     public void shouldHeroWalkAndDropPotionsTogetherInOneTact_potionFirstly() {
         hero.act();
@@ -1058,7 +1059,7 @@ public class GameTest extends AbstractGameTest {
         assertHeroAlive();
     }
 
-    // проверить, что разрыв бомбы длинной указанной в level
+    // разрыв зелья длинной указанной в settings
     @Test
     public void shouldChangePotionPower_to2() {
         assertPotionPower(2,
@@ -1101,8 +1102,9 @@ public class GameTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼\n");
     }
 
-    // я немогу модифицировать список бомб на доске, меняя getPotions
-    // но список бомб, что у меня на руках обязательно синхронизирован с теми, что на поле
+    // я немогу модифицировать список зелья на доске, меняя getPotions
+    // но список зелья, что у меня на руках обязательно синхронизирован
+    // с теми, что на поле
     @Test
     public void shouldNoChangeOriginalPotionsWhenUseBoardApiButTimersSynchronized() {
         canDropPotions(2);
@@ -1276,9 +1278,9 @@ public class GameTest extends AbstractGameTest {
                 "#H###\n");
     }
 
-    // появляются чертики, их несоклько за игру
-    // каждый такт чертики куда-то рендомно муваются
-    // если бомбермен и чертик попали в одну клетку - бомбермен умирает
+    // появляются привидения, их несоклько за игру
+    // каждый такт привидения куда-то рендомно муваются
+    // если герой и привидение попали в одну клетку - герой умирает
     @Test
     public void shouldRandomMoveMonster() {
         givenBoardWithGhost(11);
@@ -1432,7 +1434,7 @@ public class GameTest extends AbstractGameTest {
     }
 
 
-    // чертик умирает, если попадает под взывающуюся бомбу
+    // привидение умирает, если попадает под взывающееся зелье
     @Test
     public void shouldDieMonster_whenPotionExploded() {
         SIZE = 11;
@@ -1528,7 +1530,7 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillWall() {
-        destroyWallAt(0, 0);
+        boxAt(0, 0);
 
         givenBoard(SIZE, 1, 0);
 
@@ -1585,9 +1587,9 @@ public class GameTest extends AbstractGameTest {
     @Test
     public void shouldCalculateGhostsAndWallKills() {
         ghostAt(0, 0);
-        destroyWallAt(0, 1);
+        boxAt(0, 1);
         ghostAt(0, 2);
-        destroyWallAt(0, 3);
+        boxAt(0, 3);
 
         givenBoard(SIZE, 1, 0);
 
@@ -1725,9 +1727,9 @@ public class GameTest extends AbstractGameTest {
         settings.bool(BIG_BADABOOM, true);
 
         ghostAt(0, 0);
-        destroyWallAt(0, 1);
+        boxAt(0, 1);
         ghostAt(0, 2);
-        destroyWallAt(0, 3);
+        boxAt(0, 3);
 
         givenBoard(SIZE, 1, 0);
 
@@ -1784,7 +1786,8 @@ public class GameTest extends AbstractGameTest {
         events.verifyAllEvents("[KILL_GHOST, KILL_TREASURE_BOX, KILL_GHOST, KILL_TREASURE_BOX]");
     }
 
-    // если я двинулся за пределы стены и тут же поставил бомбу, то бомба упадет на моем текущем месте
+    // если я двинулся за пределы стены и тут же поставил зелье,
+    // то зелье упадет на моем текущем месте
     @Test
     public void shouldMoveOnBoardAndDropPotionTogether() {
         givenBoardWithOriginalWalls();
@@ -1805,7 +1808,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
     }
 
-    // чертик может ходить по бомбам
+    // привидение может ходить по зелью
     @Test
     public void shouldMonsterCanMoveOnPotion() {
         givenBoardWithGhost(SIZE);
@@ -1912,7 +1915,7 @@ public class GameTest extends AbstractGameTest {
     public void shouldStopBlastWhenHeroOrDestroyWalls() {
         potionsPower(5);
 
-        destroyWallAt(3, 0);
+        boxAt(3, 0);
 
         givenBoard(7, 0, 0); // hero position
         when(dice.next(anyInt())).thenReturn(101); // don't drop perk by accident
@@ -2011,7 +2014,7 @@ public class GameTest extends AbstractGameTest {
         potionsPower(3);
 
         dice(ghostDice, 4, 4, Direction.RIGHT.value());
-        destroyWallAt(3, 0);
+        boxAt(3, 0);
         Ghosts walls = new Ghosts(this.objects, v(1), ghostDice);
         walls.init(field);
         withObjects(walls);
@@ -2045,7 +2048,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n");
     }
 
-    // Чертик не может появится на бомбере!
+    // приведение не может появится на герое!
     @Test
     public void shouldGhostNotAppearOnHero() {
         shouldMonsterCanMoveOnPotion();
@@ -2061,7 +2064,7 @@ public class GameTest extends AbstractGameTest {
 
         dice(ghostDice,
                 0, 0, // на неразрушаемой стене нельзя
-                hero.getX(), hero.getY(), // попытка поселиться на бобмере
+                hero.getX(), hero.getY(), // попытка поселиться на герое
                 3, 3, // попытка - клетка свободна
                 Direction.DOWN.value()); // а это куда он сразу же отправится
 
@@ -2119,7 +2122,7 @@ public class GameTest extends AbstractGameTest {
         field.tick();
         dice(dice,
                 0, 0,                     // на неразрушаемоей стене нельзя
-                hero.getX(), hero.getY(), // на месте бомбера не должен появиться
+                hero.getX(), hero.getY(), // на месте героя не должен появиться
                 1, 1);                    // а вот тут свободно
 
         // then

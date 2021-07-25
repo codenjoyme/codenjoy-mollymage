@@ -61,7 +61,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     private List<Wall> walls = new LinkedList<>();
     private List<Potion> potions = new LinkedList<>();
     private List<Blast> blasts = new LinkedList<>();
-    private List<Wall> destroyedWalls = new LinkedList<>();
+    private List<Wall> destroyedObjects = new LinkedList<>();
     private List<Potion> destroyedPotions = new LinkedList<>();
     private Dice dice;
     private List<PerkOnBoard> perks = new LinkedList<>();
@@ -134,10 +134,10 @@ public class MollyMage extends RoundField<Player> implements Field {
     public void tickField() {
         applyAllHeroes();       // герои ходят
         ghostEatHeroes();       // омномном
-        objects.tick();         // разрушенные стены появляются, а митчоперы водят свой холровод
+        objects.tick();         // сундуки появляются, а привидения водят свой холровод
         ghostEatHeroes();       // омномном
-        disablePotionRemote();  // если остались remote бомбы без хозяев, взрываем
-        tactAllPotions();       // все что касается бомб и взрывов
+        disablePotionRemote();  // если остались remote зелья без хозяев, взрываем
+        tactAllPotions();       // все что касается зелья и взрывов
         tactAllPerks();         // тикаем перки на поле
         tactAllHeroes();        // в том числе и перки
     }
@@ -177,14 +177,14 @@ public class MollyMage extends RoundField<Player> implements Field {
     private void removeBlasts() {
         blasts.clear();
 
-        for (Wall wall : destroyedWalls) {
+        for (Wall wall : destroyedObjects) {
             if (wall instanceof TreasureBox) {
                 dropPerk(wall, dice);
             }
             objects.destroy(wall);
         }
 
-        destroyedWalls.clear();
+        destroyedObjects.clear();
     }
 
     private void ghostEatHeroes() {
@@ -208,7 +208,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
             if (settings.bool(BIG_BADABOOM)) {
 
-                // если бомбу зацепила взрывная волна и ее тоже подрываем
+                // если зелье зацепила взрывная волна и его тоже подрываем
                 for (Potion potion : potions) {
                     if (blasts.contains(potion)) {
                         potion.boom();
@@ -216,7 +216,7 @@ public class MollyMage extends RoundField<Player> implements Field {
                 }
             }
 
-            // и повторяем все, пока были взорванные бомбы
+            // и повторяем все, пока были взорванные зелья
         } while(!destroyedPotions.isEmpty());
 
         // потому уже считаем скоры за разрушения
@@ -277,7 +277,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     @Override
     public void remove(Wall wall) {
-        destroyedWalls.add(wall);
+        destroyedObjects.add(wall);
     }
 
     private List<Blast> makeBlast(Potion potion) {
@@ -320,7 +320,7 @@ public class MollyMage extends RoundField<Player> implements Field {
             if (wall instanceof GhostHunter) {
                 ((GhostHunter)wall).die();
             } else {
-                destroyedWalls.add(wall);
+                destroyedObjects.add(wall);
             }
         });
 
@@ -378,7 +378,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void killHeroes(List<Blast> blasts) {
-        // беремся за бомберов, если у них только нет иммунитета
+        // беремся за героев, если у них только нет иммунитета
         // надо определить кто кого чем кикнул (ызрывные волны могут пересекаться)
         Multimap<Hero, Hero> deathMatch = HashMultimap.create();
         for (Blast blast : blasts) {
@@ -494,7 +494,7 @@ public class MollyMage extends RoundField<Player> implements Field {
             }
         }
 
-        if (!isForHero) {     // TODO test me митчопер или стена не могут появиться на перке
+        if (!isForHero) {     // TODO test me привидение или стена не могут появиться на перке
             if (perks.contains(pt)) {
                 return true;
             }

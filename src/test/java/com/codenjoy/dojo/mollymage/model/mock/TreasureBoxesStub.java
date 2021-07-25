@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.model;
+package com.codenjoy.dojo.mollymage.model.mock;
 
 /*-
  * #%L
@@ -22,6 +22,9 @@ package com.codenjoy.dojo.mollymage.model;
  * #L%
  */
 
+import com.codenjoy.dojo.mollymage.model.Objects;
+import com.codenjoy.dojo.mollymage.model.ObjectsDecorator;
+import com.codenjoy.dojo.mollymage.model.ObjectsImpl;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.services.Point;
 

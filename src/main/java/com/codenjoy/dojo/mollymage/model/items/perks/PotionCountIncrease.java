@@ -32,7 +32,7 @@ public class PotionCountIncrease extends Perk {
 
     /**
      * In case player grabs another such a perk while current one is active still,
-     * timer will be reset to initial time-out value.
+     * timer will be reset to initial time-out value.
      */
     @Override
     public Perk combine(Perk perk) {

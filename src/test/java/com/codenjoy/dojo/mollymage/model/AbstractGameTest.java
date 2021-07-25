@@ -29,6 +29,7 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.TestGameSettings;
+import com.codenjoy.dojo.mollymage.model.mock.TreasureBoxesStub;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;

@@ -90,7 +90,7 @@ public class Ghost extends Wall implements State<Element, Player>, Tickable {
         Point from = this;
         if (direction == null
             || dice.next(5) == 0
-            || field.walls().itsMe(direction.change(from)))
+            || barrier(direction.change(from)))
         {
             direction = selectNew(from);
         }
@@ -122,6 +122,8 @@ public class Ghost extends Wall implements State<Element, Player>, Tickable {
     }
 
     private boolean barrier(Point to) {
-        return field.walls().itsMe(to) || to.isOutOf(field.size());
+        return field.walls().itsMe(to)
+                || field.borders().contains(to)
+                || to.isOutOf(field.size());
     }
 }

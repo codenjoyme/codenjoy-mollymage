@@ -45,6 +45,8 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     List<Potion> potions(Hero hero);
 
+    List<Wall> borders();
+
     Walls walls();
 
     boolean isBarrier(Point pt, boolean isForHero);

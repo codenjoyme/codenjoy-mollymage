@@ -1838,6 +1838,27 @@ public class GameTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
     }
 
+    // привидение не может пойти на стенку
+    @Test
+    public void shouldGhostCantMoveOnWall() {
+        givenBoardWithGhost(SIZE);
+
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼  &☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+
+        dice(ghostDice, Direction.RIGHT.value());
+        field.tick();
+
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼  &☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+    }
+
     @Test
     public void shouldStopBlastWhenHeroOrDestroyWalls() {
         potionsPower(5);

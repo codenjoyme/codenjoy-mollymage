@@ -252,6 +252,11 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
+    public List<Wall> borders() {
+        return wallElements;
+    }
+
+    @Override
     public void drop(Potion potion) {
         if (!existAtPlace(potion.getX(), potion.getY())) {
             potions.add(potion);

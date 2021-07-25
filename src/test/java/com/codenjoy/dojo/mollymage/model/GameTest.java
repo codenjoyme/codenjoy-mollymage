@@ -26,6 +26,7 @@ package com.codenjoy.dojo.mollymage.model;
 import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.Potion;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
@@ -1868,6 +1869,56 @@ public class GameTest extends AbstractGameTest {
         asrtBrd("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+    }
+
+    // привидение не будет ходить, если ему некуда
+    @Test
+    public void shouldGhostCantMoveWhenNoSpaceAround() {
+        givenBoardWithGhost(SIZE);
+        objects.add(new TreasureBox(2, 3));
+        objects.add(new TreasureBox(3, 2));
+
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼ #&☼\n" +
+                "☼ ☼#☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+
+        dice(ghostDice, Direction.RIGHT.value());
+        field.tick();
+
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼ #&☼\n" +
+                "☼ ☼#☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+
+        dice(ghostDice, Direction.UP.value());
+        field.tick();
+
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼ #&☼\n" +
+                "☼ ☼#☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+
+        dice(ghostDice, Direction.LEFT.value());
+        field.tick();
+
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼ #&☼\n" +
+                "☼ ☼#☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+
+        dice(ghostDice, Direction.DOWN.value());
+        field.tick();
+
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼ #&☼\n" +
+                "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
     }

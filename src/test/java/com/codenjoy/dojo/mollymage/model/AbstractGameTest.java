@@ -238,15 +238,15 @@ public class AbstractGameTest {
 
         SIZE = size;
         generateWalls(size);
-        Ghosts walls = new Ghosts(new ObjectsImpl(), v(1), ghostDice);
-        withObjects(walls);
+        Ghosts ghosts = new Ghosts(new ObjectsImpl(), v(1), ghostDice);
+        withObjects(ghosts);
 
         givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
 
-        walls.init(field);
-        walls.regenerate();
+        ghosts.init(field);
+        ghosts.regenerate();
 
-        this.objects = walls;
+        this.objects = ghosts;
 
         dice(ghostDice, 1, Direction.UP.value());  // Чертик будет упираться в стенку и стоять на месте
     }

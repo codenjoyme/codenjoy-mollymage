@@ -110,17 +110,15 @@ public class Ghost extends Wall implements State<Element, Player>, Tickable {
         Direction direction;
         Set<Direction> all = new HashSet<>();
         do {
-            int n = 4;
-            int move = dice.next(n);
-            direction = Direction.valueOf(move);
+            if (iteration++ >= MAX || all.size() == Direction.getValues().size()) {
+                return null;
+            }
+
+            int n = dice.next(4);
+            direction = Direction.valueOf(n);
             all.add(direction);
-
             to = direction.change(from);
-        } while (barrier(to) && iteration++ < MAX && all.size() < 4);
-
-        if (iteration >= MAX) {
-            return null;
-        }
+        } while (barrier(to));
 
         return direction;
     }

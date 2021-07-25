@@ -24,6 +24,7 @@ package com.codenjoy.dojo.mollymage.model;
 
 
 import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.Tickable;
 
@@ -97,4 +98,9 @@ public abstract class ObjectsDecorator implements Objects, Tickable {
     }
 
     protected abstract void tact();
+
+    @Override
+    public GameSettings settings() {
+        return walls.settings();
+    }
 }

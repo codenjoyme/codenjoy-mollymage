@@ -53,7 +53,7 @@ import static org.mockito.Mockito.*;
 public abstract class AbstractMultiplayerTest {
 
     public static final int SIZE = 5;
-    protected Objects objects = new ObjectsImpl();
+    protected Objects objects;
     protected List<Hero> heroes = new LinkedList<>();
     protected List<Game> games = new LinkedList<>();
     private List<EventListener> listeners = new LinkedList<>();
@@ -66,6 +66,7 @@ public abstract class AbstractMultiplayerTest {
     protected EventsListenersAssert events = new EventsListenersAssert(() -> listeners, Events.class);
 
     public void setup() {
+        objects = new ObjectsImpl(settings);
         perks = settings.perksSettings();
         givenObjects();
 

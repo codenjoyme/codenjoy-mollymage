@@ -28,36 +28,34 @@ import com.codenjoy.dojo.mollymage.model.ObjectsDecorator;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
-import com.codenjoy.dojo.services.settings.Parameter;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
 
 public class Ghosts extends ObjectsDecorator implements Objects {
 
     public static final int MAX = 1000;
 
-    private Parameter<Integer> count;
     private Dice dice;
 
-    public Ghosts(Objects walls, Parameter<Integer> count, Dice dice) {
+    public Ghosts(Objects walls, Dice dice) {
         super(walls);
         this.dice = dice;
-        this.count = count;
     }
 
     public void regenerate() {     // TODO потестить
-        if (count.getValue() < 0) {
-            count.update(0);
+        if (settings().integer(GHOSTS_COUNT) < 0) {
+            settings().integer(GHOSTS_COUNT, 0);
         }
 
         int count = walls.listSubtypes(Ghost.class).size();
 
         int iteration = 0;
         Set<Point> checked = new HashSet<>();
-        while (count < this.count.getValue() && iteration++ < MAX) {
+        while (count < settings().integer(GHOSTS_COUNT) && iteration++ < MAX) {
             Point pt = PointImpl.random(dice, field.size());
 
             if (checked.contains(pt) || field.isBarrier(pt, !FOR_HERO)) {

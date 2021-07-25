@@ -150,7 +150,7 @@ public class GameSettings extends SettingsImpl
     }
 
     public Objects objects(Dice dice) {
-        Ghosts ghosts = new Ghosts(new ObjectsImpl(), integerValue(GHOSTS_COUNT), dice);
+        Ghosts ghosts = new Ghosts(new ObjectsImpl(this), dice);
         return new TreasureBoxes(ghosts, integerValue(TREASURE_BOX_COUNT), dice);
     }
 

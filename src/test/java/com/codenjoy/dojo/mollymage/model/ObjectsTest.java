@@ -24,8 +24,10 @@ package com.codenjoy.dojo.mollymage.model;
 
 
 import com.codenjoy.dojo.client.local.LocalGameRunner;
+import com.codenjoy.dojo.mollymage.TestGameSettings;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
+import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.Printer;
@@ -35,6 +37,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.model.AbstractGameTest.generate;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
 import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
@@ -48,6 +51,7 @@ public class ObjectsTest {
     private Objects objects;
     private PrinterFactory factory = new PrinterFactoryImpl();
     private Dice dice = LocalGameRunner.getDice("kgyhfksdfksf", SIZE, 1000);
+    private GameSettings settings = new TestGameSettings();
 
     @Before
     public void setup() {
@@ -100,7 +104,7 @@ public class ObjectsTest {
                 "         \n" +
                 "         \n" +
                 "         \n",
-                print(new ObjectsImpl()));
+                print(new ObjectsImpl(settings)));
     }
 
     @Test
@@ -136,7 +140,8 @@ public class ObjectsTest {
     }
 
     private String givenBoardWithGhosts(int count) {
-        objects = new Ghosts(objects(SIZE), v(count), dice);
+        settings.integer(GHOSTS_COUNT, count);
+        objects = new Ghosts(objects(SIZE), dice);
         objects.init(field);
         objects.tick();
         return print(objects);
@@ -150,7 +155,7 @@ public class ObjectsTest {
     }
 
     private ObjectsImpl objects(int size) {
-        return new ObjectsImpl() {{
+        return new ObjectsImpl(settings) {{
             for (Point pt : generate(size)) {
                 add(pt);
             }

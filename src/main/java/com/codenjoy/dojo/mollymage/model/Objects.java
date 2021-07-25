@@ -24,6 +24,7 @@ package com.codenjoy.dojo.mollymage.model;
 
 
 import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.Tickable;
 
@@ -48,4 +49,6 @@ public interface Objects extends Iterable<Wall>, Tickable {
     Wall destroyExact(Wall wall);
 
     Wall get(Point pt);
+
+    GameSettings settings();
 }

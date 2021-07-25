@@ -56,7 +56,7 @@ public class AbstractGameTest {
     public int SIZE = 5;
     protected Game game;
     protected Hero hero;
-    protected Objects objects = new ObjectsImpl();
+    protected Objects objects;
     protected GameSettings settings;
     protected EventListener listener;
     protected Dice ghostDice;
@@ -78,6 +78,7 @@ public class AbstractGameTest {
         events = new EventsListenersAssert(() -> Arrays.asList(listener), Events.class);
         perks = settings.perksSettings();
         potionsPower(1);
+        objects = new ObjectsImpl(settings);
 
         givenWalls();
 
@@ -182,7 +183,8 @@ public class AbstractGameTest {
     }
 
     protected void givenBoardWithBoxes(int size) {
-        withObjects(new Ghosts(new TreasureBoxesStub(generate(size)), v(0), dice));
+        settings.integer(GHOSTS_COUNT, 0);
+        withObjects(new Ghosts(new TreasureBoxesStub(settings, generate(size)), dice));
         givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
     }
 
@@ -238,7 +240,8 @@ public class AbstractGameTest {
 
         SIZE = size;
         generateWalls(size);
-        Ghosts ghosts = new Ghosts(new ObjectsImpl(), v(1), ghostDice);
+        settings.integer(GHOSTS_COUNT, 1);
+        Ghosts ghosts = new Ghosts(new ObjectsImpl(settings), ghostDice);
         withObjects(ghosts);
 
         givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен

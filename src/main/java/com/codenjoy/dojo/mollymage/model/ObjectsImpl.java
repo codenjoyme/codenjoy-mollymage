@@ -25,6 +25,7 @@ package com.codenjoy.dojo.mollymage.model;
 
 import com.codenjoy.dojo.mollymage.model.items.NotAWall;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Point;
 
 import java.util.Iterator;
@@ -37,8 +38,10 @@ import static java.util.stream.Collectors.toList;
 public class ObjectsImpl implements Objects {
 
     private List<Wall> walls;
+    private GameSettings settings;
 
-    public ObjectsImpl() {
+    public ObjectsImpl(GameSettings settings) {
+        this.settings = settings;
         walls = new LinkedList<>();
     }
 
@@ -117,6 +120,11 @@ public class ObjectsImpl implements Objects {
             return new NotAWall(-1, -1);
         }
         return walls.get(index);
+    }
+
+    @Override
+    public GameSettings settings() {
+        return settings;
     }
 
     @Override

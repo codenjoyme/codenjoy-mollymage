@@ -26,14 +26,15 @@ import com.codenjoy.dojo.mollymage.model.Objects;
 import com.codenjoy.dojo.mollymage.model.ObjectsDecorator;
 import com.codenjoy.dojo.mollymage.model.ObjectsImpl;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
+import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Point;
 
 import java.util.List;
 
 public class TreasureBoxesStub extends ObjectsDecorator implements Objects {
 
-    public TreasureBoxesStub(List<? extends Point> points) {
-        super(new ObjectsImpl());
+    public TreasureBoxesStub(GameSettings settings, List<? extends Point> points) {
+        super(new ObjectsImpl(settings));
         points.forEach(pt -> this.walls.add(new TreasureBox(pt)));
     }
 

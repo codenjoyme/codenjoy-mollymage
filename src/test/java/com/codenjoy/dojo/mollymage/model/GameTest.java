@@ -38,8 +38,7 @@ import org.junit.Test;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BIG_BADABOOM;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 import static org.junit.Assert.*;
@@ -2059,7 +2058,8 @@ public class GameTest extends AbstractGameTest {
         potionsPower(3);
 
         dice(ghostDice, 3, 0, Direction.DOWN.value());
-        Ghosts walls = new Ghosts(new ObjectsImpl(), v(1), ghostDice);
+        settings.integer(GHOSTS_COUNT, 1);
+        Ghosts walls = new Ghosts(new ObjectsImpl(settings), ghostDice);
         walls.init(field);
         withObjects(walls);
 
@@ -2098,7 +2098,8 @@ public class GameTest extends AbstractGameTest {
 
         dice(ghostDice, 4, 4, Direction.RIGHT.value());
         boxAt(3, 0);
-        Ghosts walls = new Ghosts(this.objects, v(1), ghostDice);
+        settings.integer(GHOSTS_COUNT, 1);
+        Ghosts walls = new Ghosts(this.objects, ghostDice);
         walls.init(field);
         withObjects(walls);
 
@@ -2168,7 +2169,7 @@ public class GameTest extends AbstractGameTest {
         dice(wallDice, 2, 1);
 
         generateWalls(size);
-        TreasureBoxes walls = new TreasureBoxes(new ObjectsImpl(), v(1), wallDice);
+        TreasureBoxes walls = new TreasureBoxes(new ObjectsImpl(settings), v(1), wallDice);
         withObjects(walls);
 
         givenBoard(size, 1, 1);  // hero в левом нижнем углу

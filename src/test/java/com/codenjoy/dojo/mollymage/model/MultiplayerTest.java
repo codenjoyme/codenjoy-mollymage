@@ -24,6 +24,7 @@ package com.codenjoy.dojo.mollymage.model;
 
 
 import com.codenjoy.dojo.games.mollymage.Element;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Joystick;
 import org.junit.Before;

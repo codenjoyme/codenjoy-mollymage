@@ -23,8 +23,8 @@ package com.codenjoy.dojo.mollymage.services;
  */
 
 import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.mollymage.model.perks.PerkSettings;
-import com.codenjoy.dojo.mollymage.model.perks.PerksSettingsWrapper;
+import com.codenjoy.dojo.mollymage.model.items.perks.PerkSettings;
+import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.utils.JsonUtils;
 import org.json.JSONObject;
 import org.junit.Test;

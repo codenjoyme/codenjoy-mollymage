@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.model.perks;
+package com.codenjoy.dojo.mollymage.model.items.perks;
 
 /*-
  * #%L
@@ -23,44 +23,43 @@ package com.codenjoy.dojo.mollymage.model.perks;
  */
 
 import com.codenjoy.dojo.games.mollymage.Element;
+import com.codenjoy.dojo.mollymage.model.Player;
+import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.Tickable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+public class PerkOnBoard extends Wall implements State<Element, Player>, Tickable {
 
-public class HeroPerks implements Tickable {
+    private final Perk perk;
 
-    private Map<String, Perk> perks = new HashMap<>();
-
-    public void add(Perk perk) {
-        if (perks.containsKey(perk.getName())) {
-            Perk newPerk = perk.combine(perks.get(perk.getName()));
-            perks.put(perk.getName(), newPerk);
-        } else {
-            perks.put(perk.getName(), perk);
-        }
+    public PerkOnBoard(Point pt, Perk perk) {
+        super(pt);
+        this.perk = perk;
     }
 
-    public Perk getPerk(Element element) {
-        return perks.get(element.name());
+    @Override
+    public Wall copy() {
+        return new PerkOnBoard(this, perk);
     }
 
-    public List<Perk> getPerksList() {
-        return new ArrayList<>(perks.values());
+    @Override
+    public Element state(Player player, Object... alsoAtPoint) {
+        return perk != null ? this.perk.state(player, alsoAtPoint) : Element.NONE;
+    }
+
+    public Perk getPerk() {
+        return perk;
     }
 
     @Override
     public void tick() {
-        Map<String, Perk> active = new HashMap<>();
-        perks.forEach((name, perk) -> {
-            perk.tick();
-            if (perk.isActive()) {
-                active.put(name, perk);
-            }
-        });
+        perk.tickPick();
+    }
 
-        perks = active;
+    @Override
+    public String toString() {
+        return String.format("{PerkOnBoard %s at %s}",
+                perk, super.toString());
     }
 }

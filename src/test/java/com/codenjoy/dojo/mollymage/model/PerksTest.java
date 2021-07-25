@@ -23,10 +23,12 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.mollymage.model.perks.PotionBlastRadiusIncrease;
-import com.codenjoy.dojo.mollymage.model.perks.PotionCountIncrease;
-import com.codenjoy.dojo.mollymage.model.perks.PotionImmune;
-import com.codenjoy.dojo.mollymage.model.perks.PotionRemoteControl;
+import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
+import com.codenjoy.dojo.mollymage.model.items.perks.PotionBlastRadiusIncrease;
+import com.codenjoy.dojo.mollymage.model.items.perks.PotionCountIncrease;
+import com.codenjoy.dojo.mollymage.model.items.perks.PotionImmune;
+import com.codenjoy.dojo.mollymage.model.items.perks.PotionRemoteControl;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.CATCH_PERK_SCORE;

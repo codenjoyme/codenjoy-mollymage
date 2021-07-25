@@ -23,6 +23,11 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
+import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
+import com.codenjoy.dojo.mollymage.model.items.Potion;
+import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.services.*;

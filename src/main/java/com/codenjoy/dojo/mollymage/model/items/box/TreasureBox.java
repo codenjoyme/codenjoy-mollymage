@@ -1,10 +1,10 @@
-package com.codenjoy.dojo.mollymage.model.perks;
+package com.codenjoy.dojo.mollymage.model.items.box;
 
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 - 2020 Codenjoy
+ * Copyright (C) 2018 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -22,44 +22,46 @@ package com.codenjoy.dojo.mollymage.model.perks;
  * #L%
  */
 
+
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Player;
-import com.codenjoy.dojo.mollymage.model.Wall;
+import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
+import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
-import com.codenjoy.dojo.services.Tickable;
 
-public class PerkOnBoard extends Wall implements State<Element, Player>, Tickable {
+import static com.codenjoy.dojo.games.mollymage.Element.TREASURE_BOX;
+import static com.codenjoy.dojo.games.mollymage.Element.OPENING_TREASURE_BOX;
+import static com.codenjoy.dojo.services.StateUtils.filterOne;
 
-    private final Perk perk;
+public class TreasureBox extends Wall implements State<Element, Player> {
 
-    public PerkOnBoard(Point pt, Perk perk) {
+    public TreasureBox(int x, int y) {
+        super(x, y);
+    }
+
+    public TreasureBox(Point pt) {
         super(pt);
-        this.perk = perk;
     }
 
     @Override
     public Wall copy() {
-        return new PerkOnBoard(this, perk);
+        return new TreasureBox(this.x, this.y);
     }
 
     @Override
     public Element state(Player player, Object... alsoAtPoint) {
-        return perk != null ? this.perk.state(player, alsoAtPoint) : Element.NONE;
-    }
+        Blast blast = filterOne(alsoAtPoint, Blast.class);
+        if (blast != null) {
+            return OPENING_TREASURE_BOX;
+        }
 
-    public Perk getPerk() {
-        return perk;
-    }
+        GhostHunter chopper = filterOne(alsoAtPoint, GhostHunter.class);
+        if (chopper != null) {
+            return chopper.state(player, alsoAtPoint);
+        }
 
-    @Override
-    public void tick() {
-        perk.tickPick();
-    }
-
-    @Override
-    public String toString() {
-        return String.format("{PerkOnBoard %s at %s}",
-                perk, super.toString());
+        return TREASURE_BOX;
     }
 }

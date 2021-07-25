@@ -1,10 +1,10 @@
-package com.codenjoy.dojo.mollymage.model;
+package com.codenjoy.dojo.mollymage.model.items.perks;
 
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 Codenjoy
+ * Copyright (C) 2018 - 2020 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -22,32 +22,22 @@ package com.codenjoy.dojo.mollymage.model;
  * #L%
  */
 
-
 import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.services.PointImpl;
-import com.codenjoy.dojo.services.State;
 
-import static com.codenjoy.dojo.games.mollymage.Element.BOOM;
+public class PotionRemoteControl extends Perk {
 
-public class Blast extends PointImpl implements State<Element, Player> {
-
-    private Hero hero;
-
-    public Blast(int x, int y, Hero hero) {
-        super(x, y);
-        this.hero = hero;
-    }
-
-    public boolean itsMine(Hero hero) {
-        return this.hero == hero;
-    }
-
-    public Hero owner() {
-        return hero;
+    public PotionRemoteControl(int value, int timeout) {
+        super(Element.POTION_REMOTE_CONTROL, value, timeout);
     }
 
     @Override
-    public Element state(Player player, Object... alsoAtPoint) {
-        return BOOM;
+    public Perk combine(Perk perk) {
+        return new PotionRemoteControl(getValue(), getTimeout());
+    }
+
+    // We don't countdown by time, only by usage
+    @Override
+    public void tick() {
+        // do nothing
     }
 }

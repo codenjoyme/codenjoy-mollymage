@@ -24,6 +24,10 @@ package com.codenjoy.dojo.mollymage.model;
 
 
 import com.codenjoy.dojo.games.mollymage.Element;
+import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
+import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.items.blast.BoomEngine;
+import com.codenjoy.dojo.mollymage.model.items.blast.BoomEngineOriginal;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.Printer;

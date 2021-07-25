@@ -22,7 +22,7 @@ package com.codenjoy.dojo.mollymage.model.levels;
  * #L%
  */
 
-import com.codenjoy.dojo.mollymage.model.Wall;
+import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.services.LengthToXY;
 import com.codenjoy.dojo.utils.LevelUtils;
 

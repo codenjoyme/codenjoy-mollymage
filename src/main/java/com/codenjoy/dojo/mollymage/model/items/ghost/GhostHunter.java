@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.model;
+package com.codenjoy.dojo.mollymage.model.items.ghost;
 
 /*-
  * #%L
@@ -22,7 +22,12 @@ package com.codenjoy.dojo.mollymage.model;
  * #L%
  */
 
-import com.codenjoy.dojo.mollymage.model.perks.PerkOnBoard;
+import com.codenjoy.dojo.mollymage.model.*;
+import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
+import com.codenjoy.dojo.mollymage.model.items.Potion;
+import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
+import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;

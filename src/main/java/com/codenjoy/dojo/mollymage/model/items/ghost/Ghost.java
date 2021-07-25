@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.model;
+package com.codenjoy.dojo.mollymage.model.items.ghost;
 
 /*-
  * #%L
@@ -24,6 +24,10 @@ package com.codenjoy.dojo.mollymage.model;
 
 
 import com.codenjoy.dojo.games.mollymage.Element;
+import com.codenjoy.dojo.mollymage.model.Field;
+import com.codenjoy.dojo.mollymage.model.Player;
+import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.services.*;
 
 import java.util.HashSet;

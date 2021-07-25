@@ -22,8 +22,12 @@ package com.codenjoy.dojo.mollymage.model;
  * #L%
  */
 
+import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
-import com.codenjoy.dojo.mollymage.model.perks.PerksSettingsWrapper;
+import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.TestGameSettings;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;

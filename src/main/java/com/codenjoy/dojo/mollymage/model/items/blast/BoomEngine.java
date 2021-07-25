@@ -1,10 +1,10 @@
-package com.codenjoy.dojo.mollymage.model.perks;
+package com.codenjoy.dojo.mollymage.model.items.blast;
 
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 - 2020 Codenjoy
+ * Copyright (C) 2018 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -22,20 +22,13 @@ package com.codenjoy.dojo.mollymage.model.perks;
  * #L%
  */
 
-import com.codenjoy.dojo.games.mollymage.Element;
 
-public class PotionCountIncrease extends Perk {
+import com.codenjoy.dojo.services.Point;
 
-    public PotionCountIncrease(int value, int timeout) {
-        super(Element.POTION_COUNT_INCREASE, value, timeout);
-    }
+import java.util.List;
 
-    /**
-     * In case player grabs another such a perk while current one is active still,
-     * timer will be reset to initial time-out value.
-     */
-    @Override
-    public Perk combine(Perk perk) {
-        return new PotionCountIncrease(getValue(), getTimeout());
-    }
+public interface BoomEngine {
+
+    List<Blast> boom(List<? extends Point> barriers, int boardSize, Point source, int radius);
+
 }

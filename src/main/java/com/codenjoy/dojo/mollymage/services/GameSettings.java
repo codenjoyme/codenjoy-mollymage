@@ -24,9 +24,11 @@ package com.codenjoy.dojo.mollymage.services;
 
 
 import com.codenjoy.dojo.mollymage.model.*;
+import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.levels.LevelImpl;
-import com.codenjoy.dojo.mollymage.model.perks.PerksSettingsWrapper;
+import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.round.RoundSettings;

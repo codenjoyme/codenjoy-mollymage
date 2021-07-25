@@ -23,6 +23,8 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
+import com.codenjoy.dojo.mollymage.model.items.NotAWall;
+import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.services.Point;
 
 import java.util.Iterator;

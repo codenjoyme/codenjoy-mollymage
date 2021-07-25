@@ -23,12 +23,13 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
-import com.codenjoy.dojo.mollymage.model.perks.HeroPerks;
-import com.codenjoy.dojo.mollymage.model.perks.Perk;
-import com.codenjoy.dojo.mollymage.model.perks.PerkOnBoard;
+import com.codenjoy.dojo.mollymage.model.items.Potion;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
+import com.codenjoy.dojo.mollymage.model.items.perks.HeroPerks;
+import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
+import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.round.RoundPlayerHero;
 

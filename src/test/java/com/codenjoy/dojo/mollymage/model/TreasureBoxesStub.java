@@ -22,6 +22,7 @@ package com.codenjoy.dojo.mollymage.model;
  * #L%
  */
 
+import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.services.Point;
 
 import java.util.List;

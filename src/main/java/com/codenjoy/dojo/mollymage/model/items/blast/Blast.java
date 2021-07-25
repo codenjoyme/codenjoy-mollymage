@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.model;
+package com.codenjoy.dojo.mollymage.model.items.blast;
 
 /*-
  * #%L
@@ -24,40 +24,32 @@ package com.codenjoy.dojo.mollymage.model;
 
 
 import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.mollymage.model.Hero;
+import com.codenjoy.dojo.mollymage.model.Player;
+import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.State;
 
-import static com.codenjoy.dojo.games.mollymage.Element.TREASURE_BOX;
-import static com.codenjoy.dojo.games.mollymage.Element.OPENING_TREASURE_BOX;
-import static com.codenjoy.dojo.services.StateUtils.filterOne;
+import static com.codenjoy.dojo.games.mollymage.Element.BOOM;
 
-public class TreasureBox extends Wall implements State<Element, Player> {
+public class Blast extends PointImpl implements State<Element, Player> {
 
-    public TreasureBox(int x, int y) {
+    private Hero hero;
+
+    public Blast(int x, int y, Hero hero) {
         super(x, y);
+        this.hero = hero;
     }
 
-    public TreasureBox(Point pt) {
-        super(pt);
+    public boolean itsMine(Hero hero) {
+        return this.hero == hero;
     }
 
-    @Override
-    public Wall copy() {
-        return new TreasureBox(this.x, this.y);
+    public Hero owner() {
+        return hero;
     }
 
     @Override
     public Element state(Player player, Object... alsoAtPoint) {
-        Blast blast = filterOne(alsoAtPoint, Blast.class);
-        if (blast != null) {
-            return OPENING_TREASURE_BOX;
-        }
-
-        GhostHunter chopper = filterOne(alsoAtPoint, GhostHunter.class);
-        if (chopper != null) {
-            return chopper.state(player, alsoAtPoint);
-        }
-
-        return TREASURE_BOX;
+        return BOOM;
     }
 }

@@ -23,8 +23,15 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
+import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
+import com.codenjoy.dojo.mollymage.model.items.Potion;
+import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.items.blast.BoomEngineOriginal;
+import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
+import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
-import com.codenjoy.dojo.mollymage.model.perks.*;
+import com.codenjoy.dojo.mollymage.model.items.perks.*;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.games.mollymage.Element;

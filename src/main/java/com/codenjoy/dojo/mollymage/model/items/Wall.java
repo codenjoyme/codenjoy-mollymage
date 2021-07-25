@@ -1,10 +1,10 @@
-package com.codenjoy.dojo.mollymage.model.perks;
+package com.codenjoy.dojo.mollymage.model.items;
 
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 - 2020 Codenjoy
+ * Copyright (C) 2018 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -22,20 +22,39 @@ package com.codenjoy.dojo.mollymage.model.perks;
  * #L%
  */
 
+
 import com.codenjoy.dojo.games.mollymage.Element;
+import com.codenjoy.dojo.mollymage.model.Player;
+import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.PointImpl;
+import com.codenjoy.dojo.services.State;
+import com.codenjoy.dojo.services.Tickable;
 
-public class PotionRemoteControl extends Perk {
+import static com.codenjoy.dojo.games.mollymage.Element.WALL;
 
-    public PotionRemoteControl(int value, int timeout) {
-        super(Element.POTION_REMOTE_CONTROL, value, timeout);
+public class Wall extends PointImpl implements State<Element, Player>, Tickable {
+
+    public Wall(int x, int y) {
+        super(x, y);
+    }
+
+    public Wall(Point pt) {
+        super(pt);
+    }
+
+    public Wall(Wall wall) {
+        super(wall);
+    }
+
+    public Wall copy() {
+        return new Wall(this);
     }
 
     @Override
-    public Perk combine(Perk perk) {
-        return new PotionRemoteControl(getValue(), getTimeout());
+    public Element state(Player player, Object... alsoAtPoint) {
+        return WALL;
     }
 
-    // We don't countdown by time, only by usage
     @Override
     public void tick() {
         // do nothing

@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.model.perks;
+package com.codenjoy.dojo.mollymage.model.items.perks;
 
 /*-
  * #%L
@@ -24,19 +24,20 @@ package com.codenjoy.dojo.mollymage.model.perks;
 
 import com.codenjoy.dojo.games.mollymage.Element;
 
-public class PotionImmune extends Perk {
+public class PotionBlastRadiusIncrease extends Perk {
 
-    public PotionImmune(int timeout) {
-        super(Element.POTION_IMMUNE, 0, timeout);
+    public PotionBlastRadiusIncrease(int value, int timeout) {
+        super(Element.POTION_BLAST_RADIUS_INCREASE, value, timeout);
     }
-
 
     /**
      * In case player grabs another such a perk while current one is active still,
-     * timer will be reset to initial time-out value.
+     * timer will be increased and power value too.
      */
     @Override
     public Perk combine(Perk perk) {
-        return new PotionImmune(getTimeout());
+        return new PotionBlastRadiusIncrease(
+                this.getValue() + perk.getValue(),
+                this.getTimer() + perk.getTimer());
     }
 }

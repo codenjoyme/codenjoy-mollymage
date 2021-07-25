@@ -24,6 +24,8 @@ package com.codenjoy.dojo.mollymage.model;
 
 
 import com.codenjoy.dojo.client.local.LocalGameRunner;
+import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.Printer;

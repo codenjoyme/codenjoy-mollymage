@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.model.perks;
+package com.codenjoy.dojo.mollymage.model.items.perks;
 
 /*-
  * #%L

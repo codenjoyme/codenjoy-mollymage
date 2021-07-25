@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.model;
+package com.codenjoy.dojo.mollymage.model.items.perks;
 
 /*-
  * #%L
@@ -22,8 +22,20 @@ package com.codenjoy.dojo.mollymage.model;
  * #L%
  */
 
-public class NotAWall extends Wall {
-    public NotAWall(int x, int y) {
-        super(x, y);
+import com.codenjoy.dojo.games.mollymage.Element;
+
+public class PotionCountIncrease extends Perk {
+
+    public PotionCountIncrease(int value, int timeout) {
+        super(Element.POTION_COUNT_INCREASE, value, timeout);
+    }
+
+    /**
+     * In case player grabs another such a perk while current one is active still,
+     * timer will be reset to initial time-out value.
+     */
+    @Override
+    public Perk combine(Perk perk) {
+        return new PotionCountIncrease(getValue(), getTimeout());
     }
 }

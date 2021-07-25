@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.model.perks;
+package com.codenjoy.dojo.mollymage.model.items;
 
 /*-
  * #%L
@@ -22,22 +22,8 @@ package com.codenjoy.dojo.mollymage.model.perks;
  * #L%
  */
 
-import com.codenjoy.dojo.games.mollymage.Element;
-
-public class PotionBlastRadiusIncrease extends Perk {
-
-    public PotionBlastRadiusIncrease(int value, int timeout) {
-        super(Element.POTION_BLAST_RADIUS_INCREASE, value, timeout);
-    }
-
-    /**
-     * In case player grabs another such a perk while current one is active still,
-     * timer will be increased and power value too.
-     */
-    @Override
-    public Perk combine(Perk perk) {
-        return new PotionBlastRadiusIncrease(
-                this.getValue() + perk.getValue(),
-                this.getTimer() + perk.getTimer());
+public class NotAWall extends Wall {
+    public NotAWall(int x, int y) {
+        super(x, y);
     }
 }

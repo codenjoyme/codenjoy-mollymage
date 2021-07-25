@@ -1,10 +1,10 @@
-package com.codenjoy.dojo.mollymage.model;
+package com.codenjoy.dojo.mollymage.model.items.perks;
 
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 Codenjoy
+ * Copyright (C) 2018 - 2020 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -22,40 +22,21 @@ package com.codenjoy.dojo.mollymage.model;
  * #L%
  */
 
-
 import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.PointImpl;
-import com.codenjoy.dojo.services.State;
-import com.codenjoy.dojo.services.Tickable;
 
-import static com.codenjoy.dojo.games.mollymage.Element.WALL;
+public class PotionImmune extends Perk {
 
-public class Wall extends PointImpl implements State<Element, Player>, Tickable {
-
-    public Wall(int x, int y) {
-        super(x, y);
+    public PotionImmune(int timeout) {
+        super(Element.POTION_IMMUNE, 0, timeout);
     }
 
-    public Wall(Point pt) {
-        super(pt);
-    }
 
-    public Wall(Wall wall) {
-        super(wall);
-    }
-
-    public Wall copy() {
-        return new Wall(this);
-    }
-
+    /**
+     * In case player grabs another such a perk while current one is active still,
+     * timer will be reset to initial time-out value.
+     */
     @Override
-    public Element state(Player player, Object... alsoAtPoint) {
-        return WALL;
-    }
-
-    @Override
-    public void tick() {
-        // do nothing
+    public Perk combine(Perk perk) {
+        return new PotionImmune(getTimeout());
     }
 }

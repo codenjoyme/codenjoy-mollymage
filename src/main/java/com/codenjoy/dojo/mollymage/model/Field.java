@@ -23,7 +23,10 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
-import com.codenjoy.dojo.mollymage.model.perks.PerkOnBoard;
+import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
+import com.codenjoy.dojo.mollymage.model.items.Potion;
+import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.round.RoundGameField;

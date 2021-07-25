@@ -2169,7 +2169,8 @@ public class GameTest extends AbstractGameTest {
         dice(wallDice, 2, 1);
 
         generateWalls(size);
-        TreasureBoxes walls = new TreasureBoxes(new ObjectsImpl(settings), v(1), wallDice);
+        settings.integer(TREASURE_BOX_COUNT, 1);
+        TreasureBoxes walls = new TreasureBoxes(new ObjectsImpl(settings), wallDice);
         withObjects(walls);
 
         givenBoard(size, 1, 1);  // hero в левом нижнем углу

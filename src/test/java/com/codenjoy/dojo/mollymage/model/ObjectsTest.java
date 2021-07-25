@@ -38,6 +38,7 @@ import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.model.AbstractGameTest.generate;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
 import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
@@ -148,7 +149,8 @@ public class ObjectsTest {
     }
 
     private String getBoardWithDestroyWalls(int count) {
-        objects = new TreasureBoxes(objects(SIZE), v(count), dice);
+        settings.integer(TREASURE_BOX_COUNT, count);
+        objects = new TreasureBoxes(objects(SIZE), dice);
         objects.init(field);
         objects.tick();
         return print(objects);

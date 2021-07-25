@@ -36,17 +36,16 @@ import java.util.List;
 import java.util.Set;
 
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
 
 public class TreasureBoxes extends ObjectsDecorator implements Objects { // TODO протестить класс
 
     public static final int MAX = 1000;
 
-    private Parameter<Integer> count;
     private Dice dice;
 
-    public TreasureBoxes(Objects walls, Parameter<Integer> count, Dice dice) {
+    public TreasureBoxes(Objects walls, Dice dice) {
         super(walls);
-        this.count = count;
         this.dice = dice;
     }
 
@@ -61,19 +60,20 @@ public class TreasureBoxes extends ObjectsDecorator implements Objects { // TODO
     }
 
     public void regenerate() {
-        if (count.getValue() < 0) {
-            count.update(0);
+        if (settings().integer(TREASURE_BOX_COUNT) < 0) {
+            settings().integer(TREASURE_BOX_COUNT, 0);
         }
 
         List<TreasureBox> boxes = walls.listSubtypes(TreasureBox.class);
-        int need = this.count.getValue() - boxes.size();
+        int boxesCount = settings().integer(TREASURE_BOX_COUNT);
+        int need = boxesCount - boxes.size();
         if (need > freeSpaces()) {  // TODO и это потестить
-            count.update(count.getValue() - (need - freeSpaces()) - 50); // 50 это место под героев
+            settings().integer(TREASURE_BOX_COUNT, boxesCount - (need - freeSpaces()) - 50); // 50 это место под героев
         }
 
         int count = boxes.size();
-        if (count > this.count.getValue()) { // TODO и удаление лишних
-            for (int i = 0; i < (count - this.count.getValue()); i++) {
+        if (count > boxesCount) { // TODO и удаление лишних
+            for (int i = 0; i < (count - boxesCount); i++) {
                 walls.destroy(boxes.remove(0));
             }
             return;
@@ -81,7 +81,7 @@ public class TreasureBoxes extends ObjectsDecorator implements Objects { // TODO
 
         int iteration = 0;
         Set<Point> checked = new HashSet<>();
-        while (count < this.count.getValue() && iteration++ < MAX) {  // TODO и это
+        while (count < boxesCount && iteration++ < MAX) {  // TODO и это
             Point pt = PointImpl.random(dice, field.size());
 
             if (checked.contains(pt) || field.isBarrier(pt, !FOR_HERO)) {

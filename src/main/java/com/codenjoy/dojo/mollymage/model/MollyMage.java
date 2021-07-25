@@ -126,11 +126,11 @@ public class MollyMage extends RoundField<Player> implements Field {
     @Override
     public void tickField() {
         applyAllHeroes();       // герои ходят
-        ghostEatHeroes(); // омномном
+        ghostEatHeroes();       // омномном
         walls.tick();           // разрушенные стены появляются, а митчоперы водят свой холровод
-        ghostEatHeroes(); // омномном
-        disablePotionRemote();    // если остались remote бомбы без хозяев, взрываем
-        tactAllPotions();         // все что касается бомб и взрывов
+        ghostEatHeroes();       // омномном
+        disablePotionRemote();  // если остались remote бомбы без хозяев, взрываем
+        tactAllPotions();       // все что касается бомб и взрывов
         tactAllPerks();         // тикаем перки на поле
         tactAllHeroes();        // в том числе и перки
     }
@@ -181,10 +181,10 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void ghostEatHeroes() {
-        for (Ghost chopper : walls.listSubtypes(Ghost.class)) {
+        for (Ghost ghost : walls.listSubtypes(Ghost.class)) {
             for (Player player : players) {
                 Hero hero = player.getHero();
-                if (hero.isAlive() && chopper.itsMe(hero)) {
+                if (hero.isAlive() && ghost.itsMe(hero)) {
                     player.getHero().die();
                 }
             }

@@ -43,15 +43,13 @@ import static com.codenjoy.dojo.services.StateUtils.filterOne;
 
 public class Hero extends RoundPlayerHero<Field> implements State<Element, Player> {
 
-    private GameSettings settings;
     private boolean potion;
     private Direction direction;
     private int score;
 
     private HeroPerks perks = new HeroPerks();
 
-    public Hero(GameSettings settings) {
-        this.settings = settings;
+    public Hero() {
         score = 0;
         direction = null;
     }
@@ -139,7 +137,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
 
         Perk blastPerk = perks.getPerk(POTION_BLAST_RADIUS_INCREASE);
         int boost = (blastPerk == null) ? 0 : blastPerk.getValue();
-        Potion potion = new Potion(this, x, y, settings.integer(POTION_POWER) + boost, field);
+        Potion potion = new Potion(this, x, y, settings().integer(POTION_POWER) + boost, field);
 
         if (remotePerk != null) {
             potion.putOnRemoteControl();
@@ -166,7 +164,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         int boost = (countPerk == null) ? 0 : countPerk.getValue();
 
         // сколько я всего могу
-        int allowed = settings.integer(POTIONS_COUNT) + boost;
+        int allowed = settings().integer(POTIONS_COUNT) + boost;
 
         return placed < allowed;
     }

@@ -1859,6 +1859,45 @@ public class GameTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
     }
 
+    // взрывная волна не проходит через непробиваемую стенку
+    @Test
+    public void shouldBlastWaveDoesNotPassThroughWall() {
+        settings.integer(POTION_POWER, 3);
+        givenBoardWithWalls(7);
+
+        asrtBrd("☼☼☼☼☼☼☼\n" +
+                "☼     ☼\n" +
+                "☼ ☼ ☼ ☼\n" +
+                "☼     ☼\n" +
+                "☼ ☼ ☼ ☼\n" +
+                "☼☺    ☼\n" +
+                "☼☼☼☼☼☼☼\n");
+
+        hero.right();
+        field.tick();
+
+        hero.right();
+        field.tick();
+
+        hero.up();
+        field.tick();
+
+        hero.act();
+        field.tick();
+        field.tick();
+        field.tick();
+        field.tick();
+        field.tick();
+
+        asrtBrd("☼☼☼☼☼☼☼\n" +
+                "☼  ҉  ☼\n" +
+                "☼ ☼҉☼ ☼\n" +
+                "☼  ҉  ☼\n" +
+                "☼ ☼Ѡ☼ ☼\n" +
+                "☼  ҉  ☼\n" +
+                "☼☼☼☼☼☼☼\n");
+    }
+
     @Test
     public void shouldStopBlastWhenHeroOrDestroyWalls() {
         potionsPower(5);

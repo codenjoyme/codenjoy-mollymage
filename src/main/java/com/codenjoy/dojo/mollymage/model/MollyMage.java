@@ -275,6 +275,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     private List<Blast> makeBlast(Potion potion) {
         List barriers = walls.listSubtypes(Wall.class);
+        barriers.addAll(this.wallsElements);
         barriers.addAll(heroes(ACTIVE_ALIVE));
 
         // TODO move potion inside BoomEngine

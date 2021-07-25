@@ -1923,6 +1923,38 @@ public class GameTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
     }
 
+    // привидение вновь сможет ходить когда его разбарикадируют
+    @Test
+    public void shouldGhostCanMoveWhenSpaceAppear() {
+        shouldGhostCantMoveWhenNoSpaceAround();
+
+        objects.destroy(new TreasureBox(2, 3));
+
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼  &☼\n" +
+                "☼ ☼#☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+
+        dice(ghostDice, Direction.LEFT.value());
+        field.tick();
+
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼ & ☼\n" +
+                "☼ ☼#☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+
+        dice(ghostDice, Direction.LEFT.value());
+        field.tick();
+
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼&  ☼\n" +
+                "☼ ☼#☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+    }
+
     // взрывная волна не проходит через непробиваемую стенку
     @Test
     public void shouldBlastWaveDoesNotPassThroughWall() {

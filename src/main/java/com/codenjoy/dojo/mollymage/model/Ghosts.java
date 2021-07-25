@@ -33,14 +33,14 @@ import java.util.Set;
 
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
 
-public class Ghosts extends WallsDecorator implements Walls {
+public class Ghosts extends ObjectsDecorator implements Objects {
 
     public static final int MAX = 1000;
 
     private Parameter<Integer> count;
     private Dice dice;
 
-    public Ghosts(Walls walls, Parameter<Integer> count, Dice dice) {
+    public Ghosts(Objects walls, Parameter<Integer> count, Dice dice) {
         super(walls);
         this.dice = dice;
         this.count = count;

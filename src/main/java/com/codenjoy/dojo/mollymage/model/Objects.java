@@ -28,7 +28,7 @@ import com.codenjoy.dojo.services.Tickable;
 
 import java.util.List;
 
-public interface Walls extends Iterable<Wall>, Tickable {
+public interface Objects extends Iterable<Wall>, Tickable {
 
     void add(Point pt);
 

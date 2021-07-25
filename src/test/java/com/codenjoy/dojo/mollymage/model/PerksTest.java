@@ -40,7 +40,7 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPerkBeDropped_whenWallIsDestroyed() {
         // given
-        givenBoardWithDestroyWalls(6);
+        givenBoardWithBoxes(6);
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 5, 3);
         perks.dropRatio(20); // 20%
         dice(dice, 10, 30); // must drop 1 perk
@@ -84,7 +84,7 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldHeroCantSpawnOnPerk() {
         // given
-        givenBoardWithDestroyWalls(6);
+        givenBoardWithBoxes(6);
 
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
         perks.dropRatio(20); // 20%
@@ -148,7 +148,7 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldHeroAcquirePerk_whenMoveToFieldWithPerk() {
         // given
-        givenBoardWithDestroyWalls(6);
+        givenBoardWithBoxes(6);
 
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
         perks.dropRatio(20); // 20%
@@ -235,7 +235,7 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldRemovePerk_whenPickTimeout() {
         // given
-        givenBoardWithDestroyWalls(6);
+        givenBoardWithBoxes(6);
 
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
         perks.dropRatio(20); // 20%
@@ -370,9 +370,9 @@ public class PerksTest extends AbstractGameTest {
 
         // такой себе хак, мы в домике
         hero.move(3, 4);
-        field.walls().add(new TreasureBox(1, 2));
-        field.walls().add(new TreasureBox(1, 3));
-        field.walls().add(new Wall(1, 4));
+        field.objects().add(new TreasureBox(1, 2));
+        field.objects().add(new TreasureBox(1, 3));
+        field.objects().add(new Wall(1, 4));
 
         // when
         field.tick();
@@ -564,12 +564,12 @@ public class PerksTest extends AbstractGameTest {
         hero.act();
 
         // строим оборону
-        field.walls().destroy(pt(5, 5));
-        field.walls().destroy(pt(4, 4));
-        field.walls().add(new Wall(4, 4));
-        field.walls().destroy(new Wall(4, 5));
-        field.walls().add(new Wall(4, 5));
-        field.walls().destroy(pt(5, 4));
+        field.objects().destroy(pt(5, 5));
+        field.objects().destroy(pt(4, 4));
+        field.objects().add(new Wall(4, 4));
+        field.objects().destroy(new Wall(4, 5));
+        field.objects().add(new Wall(4, 5));
+        field.objects().destroy(pt(5, 4));
         hero.move(5, 5);
         field.tick();
 
@@ -643,7 +643,7 @@ public class PerksTest extends AbstractGameTest {
         shouldDropPerk_generateThreeGhosts();
 
         // но стоит забарикадироваться
-        field.walls().add(new Wall(5, 4));
+        field.objects().add(new Wall(5, 4));
         field.tick();
 
         // как митчоперы нормальнеют
@@ -776,7 +776,7 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastRadiusIncrease_whenNoBBRIperk() {
         // given
-        givenBoardWithDestroyWalls(12);
+        givenBoardWithBoxes(12);
 
         hero.act();
         field.tick();
@@ -807,7 +807,7 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastRadiusIncrease_whenBBRIperk() {
         // given
-        givenBoardWithDestroyWalls(12);
+        givenBoardWithBoxes(12);
 
         int value = 4;   // на сколько клеток разрывная волна увеличится (по умолчанию 1)
         int timeout = 5; // сколько это безобразие будет длиться
@@ -845,7 +845,7 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastRadiusIncreaseTwice_whenBBRIperk() {
         // given
-        givenBoardWithDestroyWalls(12);
+        givenBoardWithBoxes(12);
 
         int value = 4;   // на сколько клеток разрывная волна увеличится (по умолчанию 1)
         int timeout = 5; // сколько это безобразие будет длиться (времени должно хватить)

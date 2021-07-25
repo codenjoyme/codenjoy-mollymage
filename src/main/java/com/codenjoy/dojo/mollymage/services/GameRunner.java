@@ -29,7 +29,6 @@ import com.codenjoy.dojo.games.mollymage.Board;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.MollyMage;
 import com.codenjoy.dojo.mollymage.model.Player;
-import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.services.ai.AISolver;
 import com.codenjoy.dojo.services.AbstractGameType;
 import com.codenjoy.dojo.services.EventListener;
@@ -60,12 +59,12 @@ public class GameRunner extends AbstractGameType<GameSettings> {
 
     @Override
     public GameField createGame(int levelNumber, GameSettings settings) {
-        return new MollyMage(settings.getLevel(), getDice(), settings);
+        return new MollyMage(settings.level(), getDice(), settings);
     }
 
     @Override
     public Parameter<Integer> getBoardSize(GameSettings settings) {
-        return v(settings.getLevel().size());
+        return v(settings.level().size());
     }
 
     @Override

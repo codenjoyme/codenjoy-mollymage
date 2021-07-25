@@ -29,12 +29,12 @@ import com.codenjoy.dojo.services.Tickable;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class WallsDecorator implements Walls, Tickable {
+public abstract class ObjectsDecorator implements Objects, Tickable {
 
-    protected Walls walls;
+    protected Objects walls;
     protected Field field;
 
-    public WallsDecorator(Walls walls) {
+    public ObjectsDecorator(Objects walls) {
         this.walls = walls;
     }
 

@@ -26,10 +26,10 @@ import com.codenjoy.dojo.services.Point;
 
 import java.util.List;
 
-public class DestroyWalls extends WallsDecorator implements Walls {
+public class TreasureBoxesStub extends ObjectsDecorator implements Objects {
 
-    public DestroyWalls(List<? extends Point> points) {
-        super(new WallsImpl());
+    public TreasureBoxesStub(List<? extends Point> points) {
+        super(new ObjectsImpl());
         points.forEach(pt -> this.walls.add(new TreasureBox(pt)));
     }
 

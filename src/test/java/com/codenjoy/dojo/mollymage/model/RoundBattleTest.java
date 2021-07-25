@@ -936,7 +936,7 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
                 3, 4, // жертва второго
                 4, 3); // жертва второго
 
-        destroyWallAt(3, 2);
+        boxAt(3, 2);
         givenBoard(count);
 
         tick();

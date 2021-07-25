@@ -122,8 +122,8 @@ public class Ghost extends Wall implements State<Element, Player>, Tickable {
     }
 
     private boolean barrier(Point to) {
-        return field.walls().itsMe(to)
-                || field.borders().contains(to)
+        return field.objects().itsMe(to)
+                || field.walls().contains(to)
                 || to.isOutOf(field.size());
     }
 }

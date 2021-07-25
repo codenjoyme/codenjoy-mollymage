@@ -34,21 +34,21 @@ import java.util.Set;
 
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
 
-public class EatSpaceWalls extends WallsDecorator implements Walls { // TODO протестить класс
+public class TreasureBoxes extends ObjectsDecorator implements Objects { // TODO протестить класс
 
     public static final int MAX = 1000;
 
     private Parameter<Integer> count;
     private Dice dice;
 
-    public EatSpaceWalls(Walls walls, Parameter<Integer> count, Dice dice) {
+    public TreasureBoxes(Objects walls, Parameter<Integer> count, Dice dice) {
         super(walls);
         this.count = count;
         this.dice = dice;
     }
 
     private int freeSpaces() {
-        return  (field.size()* field.size() - 1) // TODO -1 это один бомбер, а если их несколько?
+        return (field.size()* field.size() - 1) // TODO -1 это один бомбер, а если их несколько?
                 - walls.listSubtypes(Wall.class).size();
     }
 
@@ -62,16 +62,16 @@ public class EatSpaceWalls extends WallsDecorator implements Walls { // TODO п�
             count.update(0);
         }
 
-        List<TreasureBox> destroy = walls.listSubtypes(TreasureBox.class);
-        int need = this.count.getValue() - destroy.size();
+        List<TreasureBox> boxes = walls.listSubtypes(TreasureBox.class);
+        int need = this.count.getValue() - boxes.size();
         if (need > freeSpaces()) {  // TODO и это потестить
             count.update(count.getValue() - (need - freeSpaces()) - 50); // 50 это место под бомберов
         }
 
-        int count = destroy.size();
+        int count = boxes.size();
         if (count > this.count.getValue()) { // TODO и удаление лишних
             for (int i = 0; i < (count - this.count.getValue()); i++) {
-                walls.destroy(destroy.remove(0));
+                walls.destroy(boxes.remove(0));
             }
             return;
         }

@@ -143,13 +143,13 @@ public class GameSettings extends SettingsImpl
                 "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼");
     }
 
-    public Level getLevel() {
+    public Level level() {
         return new LevelImpl(string(LEVEL_MAP));
     }
 
-    public Walls getWalls(Dice dice) {
-        Ghosts ghosts = new Ghosts(new WallsImpl(), integerValue(GHOSTS_COUNT), dice);
-        return new EatSpaceWalls(ghosts, integerValue(TREASURE_BOX_COUNT), dice);
+    public Objects objects(Dice dice) {
+        Ghosts ghosts = new Ghosts(new ObjectsImpl(), integerValue(GHOSTS_COUNT), dice);
+        return new TreasureBoxes(ghosts, integerValue(TREASURE_BOX_COUNT), dice);
     }
 
     public PerksSettingsWrapper perksSettings() {

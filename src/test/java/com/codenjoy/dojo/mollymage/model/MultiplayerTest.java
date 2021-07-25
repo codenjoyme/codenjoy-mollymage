@@ -32,7 +32,6 @@ import org.junit.Test;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 public class MultiplayerTest extends AbstractMultiplayerTest {
 
@@ -551,7 +550,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldFireEventWhenKillWallOnlyForOneHero() {
-        destroyWallAt(0, 0);
+        boxAt(0, 0);
 
         dice(dice,
                 1, 0,
@@ -633,7 +632,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void bug() {
-        destroyWallAt(0, 0);
+        boxAt(0, 0);
         ghostAt(1, 0);
         ghostAt(2, 0);
 
@@ -683,7 +682,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseDied() {
-        destroyWallAt(1, 0);
+        boxAt(1, 0);
 
         dice(dice,
                 0, 0,
@@ -721,7 +720,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseAlive() {
-        destroyWallAt(1, 0);
+        boxAt(1, 0);
 
         dice(dice,
                 0, 0,
@@ -775,8 +774,8 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseDied() {
-        destroyWallAt(2, 0);
-        destroyWallAt(1, 0);
+        boxAt(2, 0);
+        boxAt(1, 0);
 
         settings.integer(POTION_POWER, 2);
 
@@ -818,7 +817,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied() {
-        destroyWallAt(2, 2);
+        boxAt(2, 2);
 
         dice(dice,
                 1, 2,
@@ -861,9 +860,9 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied_caseNotEqualPosition() {
-        destroyWallAt(1, 1);
-        destroyWallAt(2, 2);
-        destroyWallAt(0, 2);
+        boxAt(1, 1);
+        boxAt(2, 2);
+        boxAt(0, 2);
 
         dice(dice,
                 1, 2,
@@ -906,8 +905,8 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseAlive() {
-        destroyWallAt(2, 0);
-        destroyWallAt(1, 0);
+        boxAt(2, 0);
+        boxAt(1, 0);
 
         settings.integer(POTION_POWER, 2);
 
@@ -1123,7 +1122,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        destroyWallAt(2, 2);
+        boxAt(2, 2);
         ghostAt(0, 1);
         ghostAt(0, 3);
         ghostAt(4, 1);
@@ -1227,7 +1226,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        destroyWallAt(2, 2);
+        boxAt(2, 2);
         ghostAt(0, 1);
         ghostAt(0, 3);
         ghostAt(4, 1);
@@ -1335,7 +1334,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        destroyWallAt(2, 2);
+        boxAt(2, 2);
         ghostAt(0, 1);
         ghostAt(0, 3);
         ghostAt(4, 1);
@@ -1439,7 +1438,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 .bool(BIG_BADABOOM, false)
                 .perksSettings().dropRatio(0);
 
-        destroyWallAt(2, 2);
+        boxAt(2, 2);
         ghostAt(0, 1);
         ghostAt(0, 3);
         ghostAt(4, 1);

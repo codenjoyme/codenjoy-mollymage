@@ -39,11 +39,11 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class WallsTest {
+public class ObjectsTest {
 
     private final static int SIZE = 9;
     private Field field;
-    private Walls walls;
+    private Objects objects;
     private PrinterFactory factory = new PrinterFactoryImpl();
     private Dice dice = LocalGameRunner.getDice("kgyhfksdfksf", SIZE, 1000);
 
@@ -51,9 +51,9 @@ public class WallsTest {
     public void setup() {
         field = mock(Field.class);
         when(field.size()).thenReturn(SIZE);
-        when(field.walls()).thenAnswer(invocation -> walls);
+        when(field.objects()).thenAnswer(invocation -> objects);
         when(field.isBarrier(any(Point.class), anyBoolean()))
-                .thenAnswer(inv -> walls.itsMe(inv.getArgument(0, Point.class)));
+                .thenAnswer(inv -> objects.itsMe(inv.getArgument(0, Point.class)));
     }
 
     @Test
@@ -68,10 +68,10 @@ public class WallsTest {
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n",
-                print(walls(SIZE)));
+                print(objects(SIZE)));
     }
 
-    private String print(final Walls walls) {
+    private String print(final Objects walls) {
         Printer<String> printer = factory.getPrinter(new BoardReader<Player>() {
             @Override
             public int size() {
@@ -98,7 +98,7 @@ public class WallsTest {
                 "         \n" +
                 "         \n" +
                 "         \n",
-                print(new WallsImpl()));
+                print(new ObjectsImpl()));
     }
 
     @Test
@@ -134,23 +134,23 @@ public class WallsTest {
     }
 
     private String givenBoardWithGhosts(int count) {
-        walls = new Ghosts(walls(SIZE), v(count), dice);
-        walls.init(field);
-        walls.tick();
-        return print(walls);
+        objects = new Ghosts(objects(SIZE), v(count), dice);
+        objects.init(field);
+        objects.tick();
+        return print(objects);
     }
 
     private String getBoardWithDestroyWalls(int count) {
-        walls = new EatSpaceWalls(walls(SIZE), v(count), dice);
-        walls.init(field);
-        walls.tick();
-        return print(walls);
+        objects = new TreasureBoxes(objects(SIZE), v(count), dice);
+        objects.init(field);
+        objects.tick();
+        return print(objects);
     }
 
-    private WallsImpl walls(int size) {
-        return new WallsImpl() {{
-            for (Wall wall : generate(size)) {
-                add(wall);
+    private ObjectsImpl objects(int size) {
+        return new ObjectsImpl() {{
+            for (Point pt : generate(size)) {
+                add(pt);
             }
         }};
     }

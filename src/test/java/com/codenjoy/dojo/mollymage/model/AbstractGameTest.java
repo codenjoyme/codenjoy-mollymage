@@ -51,7 +51,7 @@ public class AbstractGameTest {
     public int SIZE = 5;
     protected Game game;
     protected Hero hero;
-    protected Walls walls = new WallsImpl();
+    protected Objects objects = new ObjectsImpl();
     protected GameSettings settings;
     protected EventListener listener;
     protected Dice ghostDice;
@@ -76,7 +76,7 @@ public class AbstractGameTest {
 
         givenWalls();
 
-        withWalls(walls);
+        withObjects(objects);
 
         givenBoard(SIZE, 0, 0);
     }
@@ -172,17 +172,17 @@ public class AbstractGameTest {
         when(level.getWalls()).thenReturn(generate(size));
     }
 
-    protected void givenBoardWithDestroyWalls() {
-        givenBoardWithDestroyWalls(SIZE);
+    protected void givenBoardWithBoxes() {
+        givenBoardWithBoxes(SIZE);
     }
 
-    protected void givenBoardWithDestroyWalls(int size) {
-        withWalls(new Ghosts(new DestroyWalls(generate(size)), v(0), dice));
+    protected void givenBoardWithBoxes(int size) {
+        withObjects(new Ghosts(new TreasureBoxesStub(generate(size)), v(0), dice));
         givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
     }
 
-    protected void withWalls(Walls walls) {
-        when(settings.getWalls(dice)).thenReturn(walls);
+    protected void withObjects(Objects objects) {
+        when(settings.objects(dice)).thenReturn(objects);
     }
 
     protected void givenBoardWithOriginalWalls() {
@@ -233,33 +233,33 @@ public class AbstractGameTest {
 
         SIZE = size;
         generateWalls(size);
-        Ghosts walls = new Ghosts(new WallsImpl(), v(1), ghostDice);
-        withWalls(walls);
+        Ghosts walls = new Ghosts(new ObjectsImpl(), v(1), ghostDice);
+        withObjects(walls);
 
         givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
 
         walls.init(field);
         walls.regenerate();
 
-        this.walls = walls;
+        this.objects = walls;
 
         dice(ghostDice, 1, Direction.UP.value());  // Чертик будет упираться в стенку и стоять на месте
     }
 
     protected TreasureBox destroyWallAt(int x, int y) {
         TreasureBox wall = new TreasureBox(pt(x, y));
-        walls.add(wall);
+        objects.add(wall);
         return wall;
     }
 
     private void givenWalls(Wall... input) {
-        Arrays.asList(input).forEach(walls::add);
+        Arrays.asList(input).forEach(objects::add);
     }
 
     protected Ghost ghostAt(int x, int y) {
         Ghost chopper = new Ghost(pt(x, y), field, ghostDice);
         chopper.stop();
-        walls.add(chopper);
+        objects.add(chopper);
         return chopper;
     }
 }

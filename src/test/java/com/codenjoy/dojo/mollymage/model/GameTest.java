@@ -1208,11 +1208,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldChangeWall_whenUseBoardApi() {
-        givenBoardWithDestroyWalls();
+        givenBoardWithBoxes();
 
-        Walls walls1 = field.walls();
-        Walls walls2 = field.walls();
-        Walls walls3 = field.walls();
+        Objects walls1 = field.objects();
+        Objects walls2 = field.objects();
+        Objects walls3 = field.objects();
         assertSame(walls1, walls2);
         assertSame(walls2, walls3);
         assertSame(walls3, walls1);
@@ -1239,7 +1239,7 @@ public class GameTest extends AbstractGameTest {
     // в настройках уровня так же есть и разрущающиеся стены
     @Test
     public void shouldRandomSetDestroyWalls_whenStart() {
-        givenBoardWithDestroyWalls();
+        givenBoardWithBoxes();
 
         asrtBrd("#####\n" +
                 "#   #\n" +
@@ -1251,7 +1251,7 @@ public class GameTest extends AbstractGameTest {
     // они взрываются от ударной волны
     @Test
     public void shouldDestroyWallsDestroyed_whenPotionExploded() {
-        givenBoardWithDestroyWalls();
+        givenBoardWithBoxes();
 
         hero.act();
         goOut();
@@ -1968,9 +1968,9 @@ public class GameTest extends AbstractGameTest {
         potionsPower(3);
 
         dice(ghostDice, 3, 0, Direction.DOWN.value());
-        Ghosts walls = new Ghosts(new WallsImpl(), v(1), ghostDice);
+        Ghosts walls = new Ghosts(new ObjectsImpl(), v(1), ghostDice);
         walls.init(field);
-        withWalls(walls);
+        withObjects(walls);
 
         givenBoard(SIZE, 0, 0);
 
@@ -2007,9 +2007,9 @@ public class GameTest extends AbstractGameTest {
 
         dice(ghostDice, 4, 4, Direction.RIGHT.value());
         destroyWallAt(3, 0);
-        Ghosts walls = new Ghosts(this.walls, v(1), ghostDice);
+        Ghosts walls = new Ghosts(this.objects, v(1), ghostDice);
         walls.init(field);
-        withWalls(walls);
+        withObjects(walls);
 
         givenBoard(SIZE, 0, 0);
 
@@ -2077,8 +2077,8 @@ public class GameTest extends AbstractGameTest {
         dice(wallDice, 2, 1);
 
         generateWalls(size);
-        EatSpaceWalls walls = new EatSpaceWalls(new WallsImpl(), v(1), wallDice);
-        withWalls(walls);
+        TreasureBoxes walls = new TreasureBoxes(new ObjectsImpl(), v(1), wallDice);
+        withObjects(walls);
 
         givenBoard(size, 1, 1);  // hero в левом нижнем углу
 

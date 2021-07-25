@@ -50,7 +50,7 @@ import static org.mockito.Mockito.*;
 public abstract class AbstractMultiplayerTest {
 
     public static final int SIZE = 5;
-    protected final Walls walls = new WallsImpl();
+    protected Objects objects = new ObjectsImpl();
     protected List<Hero> heroes = new LinkedList<>();
     protected List<Game> games = new LinkedList<>();
     private List<EventListener> listeners = new LinkedList<>();
@@ -64,9 +64,9 @@ public abstract class AbstractMultiplayerTest {
 
     public void setup() {
         perks = settings.perksSettings();
-        givenWalls();
+        givenObjects();
 
-        when(settings.getWalls(dice)).thenReturn(walls);
+        when(settings.objects(dice)).thenReturn(objects);
 
         Level level = mock(Level.class);
         when(level.size()).thenReturn(SIZE);
@@ -93,16 +93,16 @@ public abstract class AbstractMultiplayerTest {
         resetHeroes();
     }
 
-    protected TreasureBox destroyWallAt(int x, int y) {
+    protected TreasureBox boxAt(int x, int y) {
         TreasureBox wall = new TreasureBox(x, y);
-        walls.add(wall);
+        objects.add(wall);
         return wall;
     }
 
     protected Ghost ghostAt(int x, int y) {
         Ghost chopper = new Ghost(pt(x, y), field, dice);
         chopper.stop();
-        walls.add(chopper);
+        objects.add(chopper);
         return chopper;
     }
 
@@ -147,8 +147,8 @@ public abstract class AbstractMultiplayerTest {
         }
     }
 
-    private void givenWalls(Wall... input) {
-        Arrays.asList(input).forEach(walls::add);
+    private void givenObjects(Wall... input) {
+        Arrays.asList(input).forEach(objects::add);
     }
 
     protected void resetHeroes() {

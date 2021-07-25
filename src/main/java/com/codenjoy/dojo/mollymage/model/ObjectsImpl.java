@@ -32,11 +32,11 @@ import java.util.function.Predicate;
 
 import static java.util.stream.Collectors.toList;
 
-public class WallsImpl implements Walls {
+public class ObjectsImpl implements Objects {
 
     private List<Wall> walls;
 
-    public WallsImpl() {
+    public ObjectsImpl() {
         walls = new LinkedList<>();
     }
 

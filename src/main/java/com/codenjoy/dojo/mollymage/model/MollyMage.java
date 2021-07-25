@@ -46,34 +46,33 @@ public class MollyMage extends RoundField<Player> implements Field {
     public static final boolean ACTIVE_ALIVE = true;
     public static final boolean ALL = !ACTIVE_ALIVE;
 
-    private final List<Player> players = new LinkedList<>();
+    private List<Player> players = new LinkedList<>();
 
     private int size;
-    private final Walls walls;
+    private Objects objects;
 
-    private List<Wall> wallsElements = new LinkedList<>();
-
-    private final List<Potion> potions = new LinkedList<>();
-    private final List<Blast> blasts = new LinkedList<>();
-    private final List<Wall> destroyedWalls = new LinkedList<>();
-    private final List<Potion> destroyedPotions = new LinkedList<>();
-    private final Dice dice;
+    private List<Wall> walls = new LinkedList<>();
+    private List<Potion> potions = new LinkedList<>();
+    private List<Blast> blasts = new LinkedList<>();
+    private List<Wall> destroyedWalls = new LinkedList<>();
+    private List<Potion> destroyedPotions = new LinkedList<>();
+    private Dice dice;
     private List<PerkOnBoard> perks = new LinkedList<>();
 
-    private final GameSettings settings;
+    private GameSettings settings;
 
     public MollyMage(Level level, Dice dice, GameSettings settings) {
         super(Events.START_ROUND, Events.WIN_ROUND, Events.DIED, settings);
         this.settings = settings;
         this.dice = dice;
         init(level);
-        walls = settings.getWalls(dice);
-        walls.init(this);
+        objects = settings.objects(dice);
+        objects.init(this);
     }
 
     private void init(Level level) {
         this.size = level.size();
-        this.wallsElements = level.getWalls();
+        this.walls = level.getWalls();
     }
 
     @Override
@@ -128,7 +127,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     public void tickField() {
         applyAllHeroes();       // герои ходят
         ghostEatHeroes();       // омномном
-        walls.tick();           // разрушенные стены появляются, а митчоперы водят свой холровод
+        objects.tick();         // разрушенные стены появляются, а митчоперы водят свой холровод
         ghostEatHeroes();       // омномном
         disablePotionRemote();  // если остались remote бомбы без хозяев, взрываем
         tactAllPotions();       // все что касается бомб и взрывов
@@ -175,14 +174,14 @@ public class MollyMage extends RoundField<Player> implements Field {
             if (wall instanceof TreasureBox) {
                 dropPerk(wall, dice);
             }
-            walls.destroy(wall);
+            objects.destroy(wall);
         }
 
         destroyedWalls.clear();
     }
 
     private void ghostEatHeroes() {
-        for (Ghost ghost : walls.listSubtypes(Ghost.class)) {
+        for (Ghost ghost : objects.listSubtypes(Ghost.class)) {
             for (Player player : players) {
                 Hero hero = player.getHero();
                 if (hero.isAlive() && ghost.itsMe(hero)) {
@@ -253,8 +252,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
-    public List<Wall> borders() {
-        return wallsElements;
+    public List<Wall> walls() {
+        return walls;
     }
 
     @Override
@@ -275,8 +274,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private List<Blast> makeBlast(Potion potion) {
-        List barriers = walls.listSubtypes(Wall.class);
-        barriers.addAll(this.wallsElements);
+        List barriers = objects.listSubtypes(Wall.class);
+        barriers.addAll(this.walls);
         barriers.addAll(heroes(ACTIVE_ALIVE));
 
         // TODO move potion inside BoomEngine
@@ -293,7 +292,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     private void killWallsAndghosts(List<Blast> blasts) {
         // собираем все разрушаемые стенки которые уже есть в радиусе
         // надо определить кто кого чем кикнул (ызрывные волны могут пересекаться)
-        List<Wall> all = walls.listSubtypes(Wall.class);
+        List<Wall> all = objects.listSubtypes(Wall.class);
         Multimap<Hero, Wall> deathMatch = HashMultimap.create();
         for (Blast blast : blasts) {
             Hero hunter = blast.owner();
@@ -366,7 +365,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
                 // TODO может это делать на этапе, когда balsts развиднеется в removeBlasts
                 blasts.remove(perk);
-                walls.add(new GhostHunter(perk, this, hunter));
+                objects.add(new GhostHunter(perk, this, hunter));
             });
         });
     }
@@ -461,8 +460,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
-    public Walls walls() {
-        return walls;
+    public Objects objects() {
+        return objects;
     }
 
     // препятствие это все, чем может быть занята клеточка
@@ -495,7 +494,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         }
 
         // TODO: test me
-        for (Wall wall : wallsElements) {
+        for (Wall wall : walls) {
             if (!wall.itsMe(pt)) {
                 continue;
             }
@@ -503,7 +502,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         }
 
 
-        for (Wall wall : walls) {
+        for (Wall wall : objects) {
             if (!wall.itsMe(pt)) {
                 continue;
             }
@@ -547,8 +546,8 @@ public class MollyMage extends RoundField<Player> implements Field {
                 List<Point> elements = new LinkedList<>();
 
                 elements.addAll(MollyMage.this.heroes(ALL));
-                elements.addAll(MollyMage.this.wallsElements);
-                MollyMage.this.walls().forEach(elements::add);
+                elements.addAll(MollyMage.this.walls);
+                MollyMage.this.objects().forEach(elements::add);
                 elements.addAll(MollyMage.this.potions());
                 elements.addAll(MollyMage.this.blasts());
                 elements.addAll(MollyMage.this.perks());

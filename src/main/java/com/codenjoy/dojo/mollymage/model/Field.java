@@ -23,9 +23,10 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
-import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.Potion;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
+import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
@@ -71,4 +72,6 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
     Dice dice();
 
     Optional<Point> freeRandom(Player player);
+
+    TreasureBoxes boxes();
 }

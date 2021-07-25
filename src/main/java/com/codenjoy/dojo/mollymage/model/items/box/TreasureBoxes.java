@@ -23,78 +23,101 @@ package com.codenjoy.dojo.mollymage.model.items.box;
  */
 
 
-import com.codenjoy.dojo.mollymage.model.Objects;
-import com.codenjoy.dojo.mollymage.model.ObjectsDecorator;
-import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.Field;
+import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
-import com.codenjoy.dojo.services.settings.Parameter;
+import com.codenjoy.dojo.services.Tickable;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
 
-public class TreasureBoxes extends ObjectsDecorator implements Objects { // TODO протестить класс
+public class TreasureBoxes implements Tickable { // TODO протестить класс
 
     public static final int MAX = 1000;
 
     private Dice dice;
+    protected Field field;
+    private List<TreasureBox> boxes;
+    private GameSettings settings;
 
-    public TreasureBoxes(Objects walls, Dice dice) {
-        super(walls);
+    public TreasureBoxes(GameSettings settings, Dice dice) {
+        this.settings = settings;
         this.dice = dice;
+        boxes = new LinkedList<>();
     }
 
     private int freeSpaces() {
         return (field.size()* field.size() - 1) // TODO -1 это один герой, а если их несколько?
-                - walls.listSubtypes(Wall.class).size();
+                - field.walls().size();
     }
 
     @Override
-    public void tact() {
+    public void tick() {
         regenerate();
     }
 
     public void regenerate() {
-        if (settings().integer(TREASURE_BOX_COUNT) < 0) {
-            settings().integer(TREASURE_BOX_COUNT, 0);
+        if (settings.integer(TREASURE_BOX_COUNT) < 0) {
+            settings.integer(TREASURE_BOX_COUNT, 0);
         }
 
-        List<TreasureBox> boxes = walls.listSubtypes(TreasureBox.class);
-        int boxesCount = settings().integer(TREASURE_BOX_COUNT);
-        int need = boxesCount - boxes.size();
-        if (need > freeSpaces()) {  // TODO и это потестить
-            settings().integer(TREASURE_BOX_COUNT, boxesCount - (need - freeSpaces()) - 50); // 50 это место под героев
+        int expected = settings.integer(TREASURE_BOX_COUNT);
+        int actual = boxes.size();
+        int delta = expected - actual;
+        if (delta > freeSpaces()) {  // TODO и это потестить
+            settings.integer(TREASURE_BOX_COUNT, expected - (delta - freeSpaces()) - 50); // 50 это место под героев
         }
 
-        int count = boxes.size();
-        if (count > boxesCount) { // TODO и удаление лишних
-            for (int i = 0; i < (count - boxesCount); i++) {
-                walls.destroy(boxes.remove(0));
+        if (actual > expected) { // TODO и удаление лишних
+            for (int i = 0; i < (actual - expected); i++) {
+                boxes.remove(0);
             }
             return;
         }
 
         int iteration = 0;
         Set<Point> checked = new HashSet<>();
-        while (count < boxesCount && iteration++ < MAX) {  // TODO и это
+        while (actual < expected && iteration++ < MAX) {  // TODO и это
             Point pt = PointImpl.random(dice, field.size());
 
             if (checked.contains(pt) || field.isBarrier(pt, !FOR_HERO)) {
-                checked.add(pt);
                 continue;
             }
 
-            walls.add(new TreasureBox(pt));
-            count++;
+            boxes.add(new TreasureBox(pt));
+            checked.add(pt);
+            actual++;
         }
 
         if (iteration >= MAX) {
-            System.out.println("Dead loop at EatSpaceWalls.generate!");
+            System.out.println("Dead loop at TreasureBoxes.generate!");
         }
+    }
+
+    public void init(Field field) {
+        this.field = field;
+    }
+
+    public List<TreasureBox> all() {
+        return boxes;
+    }
+
+    public void remove(Point pt) {
+        boxes.remove(pt);
+    }
+
+    public void add(TreasureBox box) {
+        boxes.add(box);
+    }
+
+    public boolean contains(Point pt) {
+        return boxes.contains(pt);
     }
 }

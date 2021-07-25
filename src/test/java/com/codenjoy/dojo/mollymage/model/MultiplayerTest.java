@@ -554,12 +554,14 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldFireEventWhenKillWallOnlyForOneHero() {
-        boxAt(0, 0);
 
         dice(dice,
                 1, 0,
                 1, 1);
         givenBoard(2);
+
+        boxesCount(1);
+        boxAt(0, 0);
 
         hero(0).act();
         hero(0).right();
@@ -584,9 +586,11 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(0) => [KILL_TREASURE_BOX]\n" +
                 "listener(1) => []\n");
 
+        dice(dice, // новые коробки
+                4, 4);
         tick();
 
-        asrtBrd(" ♥   \n" +
+        asrtBrd(" ♥  #\n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -636,7 +640,6 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void bug() {
-        boxAt(0, 0);
         ghostAt(1, 0);
         ghostAt(2, 0);
 
@@ -644,6 +647,9 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 1, 1,
                 2, 1);
         givenBoard(2);
+
+        boxesCount(1);
+        boxAt(0, 0);
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -686,12 +692,13 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseDied() {
-        boxAt(1, 0);
-
         dice(dice,
                 0, 0,
                 2, 0);
         givenBoard(2);
+
+        boxesCount(1);
+        boxAt(1, 0);
 
         hero(0).act();
         hero(0).up();
@@ -713,9 +720,11 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
 
+        dice(dice, // новые коробки
+                4, 4);
         tick();
 
-        asrtBrd("     \n" +
+        asrtBrd("    #\n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ ♣  \n" +
@@ -724,12 +733,14 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseAlive() {
-        boxAt(1, 0);
-
         dice(dice,
                 0, 0,
                 2, 0);
+
         givenBoard(2);
+
+        boxesCount(1);
+        boxAt(1, 0);
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -767,9 +778,10 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(0) => [KILL_TREASURE_BOX]\n" +
                 "listener(1) => [KILL_TREASURE_BOX]\n");
 
+        dice(dice, 4, 4); // новая коробка
         tick();
 
-        asrtBrd("     \n" +
+        asrtBrd("    #\n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "     \n" +
@@ -778,15 +790,16 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseDied() {
-        boxAt(2, 0);
-        boxAt(1, 0);
-
         settings.integer(POTION_POWER, 2);
 
         dice(dice,
                 0, 0,
                 3, 0);
         givenBoard(2);
+
+        boxesCount(2);
+        boxAt(2, 0);
+        boxAt(1, 0);
 
         hero(0).act();
         hero(0).up();
@@ -810,10 +823,13 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
 
-         tick();
+        dice(dice, // новые коробки
+                4, 4,
+                4, 3);
+        tick();
 
-        asrtBrd("     \n" +
-                "     \n" +
+        asrtBrd("    #\n" +
+                "    #\n" +
                 "     \n" +
                 "Ѡ  ♣ \n" +
                 "     \n", game(0));
@@ -821,7 +837,6 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied() {
-        boxAt(2, 2);
 
         dice(dice,
                 1, 2,
@@ -829,6 +844,9 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 3, 2,
                 2, 3);
         givenBoard(4);
+
+        boxesCount(1);
+        boxAt(2, 2);
 
         hero(0).act();
         hero(1).act();
@@ -853,9 +871,11 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                         "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
                         "listener(3) => [DIED, KILL_TREASURE_BOX]\n");
 
+        dice(dice, // новые коробки
+                4, 4);
         tick();
 
-        asrtBrd("     \n" +
+        asrtBrd("    #\n" +
                 "  ♣  \n" +
                 " Ѡ ♣ \n" +
                 "  ♣  \n" +
@@ -864,16 +884,17 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied_caseNotEqualPosition() {
-        boxAt(1, 1);
-        boxAt(2, 2);
-        boxAt(0, 2);
-
         dice(dice,
                 1, 2,
                 2, 1,
                 3, 2,
                 2, 3);
         givenBoard(4);
+
+        boxesCount(3);
+        boxAt(1, 1);
+        boxAt(2, 2);
+        boxAt(0, 2);
 
         hero(0).act();
         hero(1).act();
@@ -898,19 +919,21 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(3) => [DIED, KILL_TREASURE_BOX]\n");
 
+        dice(dice, // новые коробки
+                4, 4,
+                4, 3,
+                4, 2);
         tick();
 
-        asrtBrd("     \n" +
-                "  ♣  \n" +
-                " Ѡ ♣ \n" +
+        asrtBrd("    #\n" +
+                "  ♣ #\n" +
+                " Ѡ ♣#\n" +
                 "  ♣  \n" +
                 "     \n", game(0));
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseAlive() {
-        boxAt(2, 0);
-        boxAt(1, 0);
 
         settings.integer(POTION_POWER, 2);
 
@@ -918,6 +941,10 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 0, 0,
                 3, 0);
         givenBoard(2);
+
+        boxesCount(2);
+        boxAt(2, 0);
+        boxAt(1, 0);
 
         hero(0).act();
         hero(0).up();
@@ -947,10 +974,14 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(0) => [KILL_TREASURE_BOX]\n" +
                 "listener(1) => [KILL_TREASURE_BOX]\n");
 
+
+        dice(dice, // новые коробки
+                4, 4,
+                4, 3);
         tick();
 
-        asrtBrd("     \n" +
-                "☺  ♥ \n" +
+        asrtBrd("    #\n" +
+                "☺  ♥#\n" +
                 "     \n" +
                 "     \n" +
                 "     \n", game(0));
@@ -1126,7 +1157,6 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        boxAt(2, 2);
         ghostAt(0, 1);
         ghostAt(0, 3);
         ghostAt(4, 1);
@@ -1138,6 +1168,9 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 2, 0,
                 3, 0);
         givenBoard(4);
+
+        boxesCount(1);
+        boxAt(2, 2);
 
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
@@ -1209,6 +1242,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "x♣҉♣x\n" +
                 "☺҉҉҉ \n", game(0));
 
+        boxesCount(0); // больше не надо коробок
         tick();
 
         events.verifyAllEvents(
@@ -1230,7 +1264,6 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        boxAt(2, 2);
         ghostAt(0, 1);
         ghostAt(0, 3);
         ghostAt(4, 1);
@@ -1242,6 +1275,10 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 2, 0,
                 3, 0);
         givenBoard(4);
+
+        boxesCount(1);
+        boxAt(2, 2);
+
         player(0).setTeamId(0);
         player(1).setTeamId(0);
         player(2).setTeamId(1);
@@ -1317,6 +1354,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "x♣҉♧x\n" +
                 "☺҉҉҉ \n", game(0));
 
+        boxesCount(0); // больше не надо коробок
         tick();
 
         events.verifyAllEvents(
@@ -1338,7 +1376,6 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        boxAt(2, 2);
         ghostAt(0, 1);
         ghostAt(0, 3);
         ghostAt(4, 1);
@@ -1350,6 +1387,9 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 2, 0,
                 3, 0);
         givenBoard(4);
+
+        boxesCount(1);
+        boxAt(2, 2);
 
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
@@ -1421,6 +1461,8 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "x♣҉♣x\n" +
                 " ҉҉҉ \n", game(0));
 
+        dice(dice, // новые коробки
+                4, 4);
         tick();
 
         events.verifyAllEvents(
@@ -1429,7 +1471,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
-        asrtBrd("     \n" +
+        asrtBrd("    #\n" +
                 " Ѡ ♣ \n" +
                 "     \n" +
                 " ♣ ♣ \n" +
@@ -1442,7 +1484,6 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 .bool(BIG_BADABOOM, false)
                 .perksSettings().dropRatio(0);
 
-        boxAt(2, 2);
         ghostAt(0, 1);
         ghostAt(0, 3);
         ghostAt(4, 1);
@@ -1454,6 +1495,9 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 2, 0,
                 3, 0);
         givenBoard(4);
+
+        boxesCount(1);
+        boxAt(2, 2);
 
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
@@ -1525,6 +1569,8 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "&11♠&\n" +
                 "     \n", game(0));
 
+        dice(dice, // новые коробки
+                4, 4);
         tick();
 
         events.verifyAllEvents(
@@ -1533,7 +1579,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(2) => [DIED]\n" +
                 "listener(3) => []\n");
 
-        asrtBrd(" ҉   \n" +
+        asrtBrd(" ҉  #\n" +
                 "xѠ2♠&\n" +
                 " ҉҉1 \n" +
                 "x♣҉1&\n" +
@@ -1547,7 +1593,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(2) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
                 "listener(3) => [DIED]\n");
 
-        asrtBrd("     \n" +
+        asrtBrd("    #\n" +
                 " Ѡ11&\n" +
                 "  ҉҉҉\n" +
                 " ♣҉♣x\n" +
@@ -1561,7 +1607,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(2) => []\n" +
                 "listener(3) => [KILL_GHOST]\n");
 
-        asrtBrd("  ҉҉ \n" +
+        asrtBrd("  ҉҉#\n" +
                 " Ѡ҉♣x\n" +
                 "  ҉҉ \n" +
                 " ♣ ♣ \n" +
@@ -1575,7 +1621,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
-        asrtBrd("     \n" +
+        asrtBrd("    #\n" +
                 " Ѡ ♣ \n" +
                 "     \n" +
                 " ♣ ♣ \n" +

@@ -28,7 +28,8 @@ import com.codenjoy.dojo.mollymage.TestGameSettings;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.Dice;
+import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
@@ -38,10 +39,9 @@ import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.model.AbstractGameTest.generate;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
-import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -53,12 +53,14 @@ public class ObjectsTest {
     private PrinterFactory factory = new PrinterFactoryImpl();
     private Dice dice = LocalGameRunner.getDice("kgyhfksdfksf", SIZE, 1000);
     private GameSettings settings = new TestGameSettings();
+    private TreasureBoxes boxes = new TreasureBoxes(settings, dice);
 
     @Before
     public void setup() {
         field = mock(Field.class);
         when(field.size()).thenReturn(SIZE);
         when(field.objects()).thenAnswer(invocation -> objects);
+        when(field.boxes()).thenReturn(boxes);
         when(field.isBarrier(any(Point.class), anyBoolean()))
                 .thenAnswer(inv -> objects.itsMe(inv.getArgument(0, Point.class)));
     }
@@ -78,7 +80,7 @@ public class ObjectsTest {
                 print(objects(SIZE)));
     }
 
-    private String print(final Objects walls) {
+    private String print(Objects walls) {
         Printer<String> printer = factory.getPrinter(new BoardReader<Player>() {
             @Override
             public int size() {
@@ -109,22 +111,6 @@ public class ObjectsTest {
     }
 
     @Test
-    public void checkPrintDestroyWalls() {
-        String actual = getBoardWithDestroyWalls(20);
-
-        assertEquals(
-                "☼☼☼☼☼☼☼☼☼\n" +
-                "☼# # #  ☼\n" +
-                "☼ ☼#☼ ☼#☼\n" +
-                "☼## ## #☼\n" +
-                "☼#☼ ☼ ☼#☼\n" +
-                "☼  ##   ☼\n" +
-                "☼ ☼#☼#☼#☼\n" +
-                "☼#  ##  ☼\n" +
-                "☼☼☼☼☼☼☼☼☼\n", actual);
-    }
-
-    @Test
     public void checkPrintGhosts() {
         String actual = givenBoardWithGhosts(10);
 
@@ -143,14 +129,6 @@ public class ObjectsTest {
     private String givenBoardWithGhosts(int count) {
         settings.integer(GHOSTS_COUNT, count);
         objects = new Ghosts(objects(SIZE), dice);
-        objects.init(field);
-        objects.tick();
-        return print(objects);
-    }
-
-    private String getBoardWithDestroyWalls(int count) {
-        settings.integer(TREASURE_BOX_COUNT, count);
-        objects = new TreasureBoxes(objects(SIZE), dice);
         objects.init(field);
         objects.tick();
         return print(objects);

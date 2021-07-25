@@ -25,17 +25,17 @@ package com.codenjoy.dojo.mollymage.model.items.box;
 
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Player;
-import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.State;
 
-import static com.codenjoy.dojo.games.mollymage.Element.TREASURE_BOX;
 import static com.codenjoy.dojo.games.mollymage.Element.OPENING_TREASURE_BOX;
+import static com.codenjoy.dojo.games.mollymage.Element.TREASURE_BOX;
 import static com.codenjoy.dojo.services.StateUtils.filterOne;
 
-public class TreasureBox extends Wall implements State<Element, Player> {
+public class TreasureBox extends PointImpl implements State<Element, Player> {
 
     public TreasureBox(int x, int y) {
         super(x, y);

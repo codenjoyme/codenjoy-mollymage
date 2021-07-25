@@ -23,24 +23,20 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
-import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.Potion;
-import com.codenjoy.dojo.mollymage.model.items.Wall;
-import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
-import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
+import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.services.Events;
-import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.Direction;
+import com.codenjoy.dojo.services.Point;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Iterator;
 import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -1213,36 +1209,6 @@ public class GameTest extends AbstractGameTest {
         assertSame(blast23, blast21);
     }
 
-    @Test
-    public void shouldChangeWall_whenUseBoardApi() {
-        givenBoardWithBoxes();
-
-        Objects walls1 = field.objects();
-        Objects walls2 = field.objects();
-        Objects walls3 = field.objects();
-        assertSame(walls1, walls2);
-        assertSame(walls2, walls3);
-        assertSame(walls3, walls1);
-
-        Iterator<Wall> iterator1 = walls1.iterator();
-        Iterator<Wall> iterator2 = walls2.iterator();
-        Iterator<Wall> iterator3 = walls3.iterator();
-
-        Point wall11 = iterator1.next();
-        Point wall12 = iterator2.next();
-        Point wall13 = iterator3.next();
-        assertSame(wall11, wall12);
-        assertSame(wall12, wall13);
-        assertSame(wall13, wall11);
-
-        Point wall21 = iterator1.next();
-        Point wall22 = iterator2.next();
-        Point wall23 = iterator3.next();
-        assertSame(wall21, wall22);
-        assertSame(wall22, wall23);
-        assertSame(wall23, wall21);
-    }
-
     // в настройках уровня так же есть и разрущающиеся стены
     @Test
     public void shouldRandomSetDestroyWalls_whenStart() {
@@ -1530,9 +1496,10 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillWall() {
-        boxAt(0, 0);
-
         givenBoard(SIZE, 1, 0);
+
+        boxesCount(1);
+        boxAt(0, 0);
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -1587,11 +1554,13 @@ public class GameTest extends AbstractGameTest {
     @Test
     public void shouldCalculateGhostsAndWallKills() {
         ghostAt(0, 0);
-        boxAt(0, 1);
         ghostAt(0, 2);
-        boxAt(0, 3);
 
         givenBoard(SIZE, 1, 0);
+
+        boxesCount(2);
+        boxAt(0, 1);
+        boxAt(0, 3);
 
         canDropPotions(4);
         potionsPower(1);
@@ -1645,9 +1614,10 @@ public class GameTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
+        dice(dice, 4, 4); // новая коробка
         field.tick();
 
-        asrtBrd("  ☺  \n" +
+        asrtBrd("  ☺ #\n" +
                 "#1   \n" +
                 "x҉҉  \n" +
                 " ҉   \n" +
@@ -1657,7 +1627,7 @@ public class GameTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd(" ҉☺  \n" +
+        asrtBrd(" ҉☺ #\n" +
                 "H҉҉  \n" +
                 " ҉   \n" +
                 "     \n" +
@@ -1665,6 +1635,7 @@ public class GameTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
+        dice(dice, 4, 3); // новая коробкас
         hero.left();
         field.tick();
 
@@ -1672,8 +1643,8 @@ public class GameTest extends AbstractGameTest {
         hero.act();
         field.tick();
 
-        asrtBrd("     \n" +
-                " ☻   \n" +
+        asrtBrd("    #\n" +
+                " ☻  #\n" +
                 "     \n" +
                 "     \n" +
                 "     \n");
@@ -1683,8 +1654,8 @@ public class GameTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd(" ҉   \n" +
-                "҉Ѡ҉  \n" +
+        asrtBrd(" ҉  #\n" +
+                "҉Ѡ҉ #\n" +
                 " ҉   \n" +
                 "     \n" +
                 "     \n");
@@ -1698,8 +1669,8 @@ public class GameTest extends AbstractGameTest {
         hero = (Hero) game.getJoystick();
         hero.move(pt(1, 0));
 
-        asrtBrd("     \n" +
-                "     \n" +
+        asrtBrd("    #\n" +
+                "    #\n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n");
@@ -1715,8 +1686,8 @@ public class GameTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("     \n" +
-                "     \n" +
+        asrtBrd("    #\n" +
+                "    #\n" +
                 "     \n" +
                 " ҉   \n" +
                 "҉҉҉☺ \n");
@@ -1724,14 +1695,16 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldCalculateGhostsAndWallKills_caseBigBadaboom() {
-        settings.bool(BIG_BADABOOM, true);
+        settings.bool(BIG_BADABOOM, true)
+                .integer(TREASURE_BOX_COUNT, 2);
 
         ghostAt(0, 0);
-        boxAt(0, 1);
         ghostAt(0, 2);
-        boxAt(0, 3);
 
         givenBoard(SIZE, 1, 0);
+
+        boxAt(0, 1);
+        boxAt(0, 3);
 
         canDropPotions(4);
         potionsPower(1);
@@ -1775,11 +1748,14 @@ public class GameTest extends AbstractGameTest {
                 "H҉҉  \n" +
                 "x҉҉  \n");
 
+        dice(dice,
+                2, 2, // новые координаты коробок
+                3, 3);
         field.tick();
 
         asrtBrd("  ☺  \n" +
-                "     \n" +
-                "     \n" +
+                "   # \n" +
+                "  #  \n" +
                 "     \n" +
                 "     \n");
 
@@ -1876,8 +1852,10 @@ public class GameTest extends AbstractGameTest {
     @Test
     public void shouldGhostCantMoveWhenNoSpaceAround() {
         givenBoardWithGhost(SIZE);
-        objects.add(new TreasureBox(2, 3));
-        objects.add(new TreasureBox(3, 2));
+
+        boxesCount(2);
+        boxAt(2, 3);
+        boxAt(3, 2);
 
         asrtBrd("☼☼☼☼☼\n" +
                 "☼ #&☼\n" +
@@ -1927,7 +1905,9 @@ public class GameTest extends AbstractGameTest {
     public void shouldGhostCanMoveWhenSpaceAppear() {
         shouldGhostCantMoveWhenNoSpaceAround();
 
-        objects.destroy(new TreasureBox(2, 3));
+        // минус одна коробка
+        field.boxes().remove(pt(2, 3));
+        boxesCount(boxesCount() - 1);
 
         asrtBrd("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
@@ -1997,9 +1977,12 @@ public class GameTest extends AbstractGameTest {
     public void shouldStopBlastWhenHeroOrDestroyWalls() {
         potionsPower(5);
 
+        givenBoard(7, 0, 0); // hero position
+
+        int count = 1;
+        boxesCount(count);
         boxAt(3, 0);
 
-        givenBoard(7, 0, 0); // hero position
         when(dice.next(anyInt())).thenReturn(101); // don't drop perk by accident
 
         hero.act();
@@ -2097,13 +2080,15 @@ public class GameTest extends AbstractGameTest {
         potionsPower(3);
 
         dice(ghostDice, 4, 4, Direction.RIGHT.value());
-        boxAt(3, 0);
         settings.integer(GHOSTS_COUNT, 1);
         Ghosts walls = new Ghosts(this.objects, ghostDice);
         walls.init(field);
         withObjects(walls);
 
+        boxesCount(1);
         givenBoard(SIZE, 0, 0);
+
+        boxAt(3, 0);
 
         hero.act();
         hero.up();
@@ -2123,10 +2108,11 @@ public class GameTest extends AbstractGameTest {
                 "҉҉҉H \n");
 
         dice(ghostDice, Direction.DOWN.value());
+        dice(dice, 3, 3); // новая коробка
         field.tick();
 
         asrtBrd("     \n" +
-                "    &\n" +
+                "   #&\n" +
                 "     \n" +
                 " ☺   \n" +
                 "     \n");
@@ -2165,18 +2151,13 @@ public class GameTest extends AbstractGameTest {
     @Test
     public void shouldWallNotAppearOnHero() {
         int size = 5;
-        Dice wallDice = mock(Dice.class);
-        dice(wallDice, 2, 1);
-
         generateWalls(size);
-        settings.integer(TREASURE_BOX_COUNT, 1);
-        TreasureBoxes walls = new TreasureBoxes(new ObjectsImpl(settings), wallDice);
-        withObjects(walls);
-
         givenBoard(size, 1, 1);  // hero в левом нижнем углу
 
-        walls.init(field);
-        walls.regenerate();
+        boxesCount(1);
+        dice(dice, 2, 1); // коробка
+
+        field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
                 "☼   ☼\n" +

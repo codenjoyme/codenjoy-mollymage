@@ -28,6 +28,7 @@ import com.codenjoy.dojo.mollymage.model.items.Potion;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.blast.BoomEngineOriginal;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
+import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
@@ -57,11 +58,12 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     private int size;
     private Objects objects;
+    private TreasureBoxes boxes;
 
     private List<Wall> walls = new LinkedList<>();
     private List<Potion> potions = new LinkedList<>();
     private List<Blast> blasts = new LinkedList<>();
-    private List<Wall> destroyedObjects = new LinkedList<>();
+    private List<Point> destroyedObjects = new LinkedList<>();
     private List<Potion> destroyedPotions = new LinkedList<>();
     private Dice dice;
     private List<PerkOnBoard> perks = new LinkedList<>();
@@ -73,8 +75,12 @@ public class MollyMage extends RoundField<Player> implements Field {
         this.settings = settings;
         this.dice = dice;
         init(level);
+
         objects = settings.objects(dice);
         objects.init(this);
+
+        boxes = new TreasureBoxes(settings, dice);
+        boxes.init(this);
     }
 
     private void init(Level level) {
@@ -134,12 +140,13 @@ public class MollyMage extends RoundField<Player> implements Field {
     public void tickField() {
         applyAllHeroes();       // герои ходят
         ghostEatHeroes();       // омномном
-        objects.tick();         // сундуки появляются, а привидения водят свой холровод
+        boxes.tick();           // сундуки появляются
+        objects.tick();         // привидения водят свой холровод
         ghostEatHeroes();       // омномном
         disablePotionRemote();  // если остались remote зелья без хозяев, взрываем
         tactAllPotions();       // все что касается зелья и взрывов
         tactAllPerks();         // тикаем перки на поле
-        tactAllHeroes();        // в том числе и перки
+        tactAllHeroes();        // в том числе и перки героев
     }
 
     private void disablePotionRemote() {
@@ -177,11 +184,13 @@ public class MollyMage extends RoundField<Player> implements Field {
     private void removeBlasts() {
         blasts.clear();
 
-        for (Wall wall : destroyedObjects) {
-            if (wall instanceof TreasureBox) {
-                dropPerk(wall, dice);
+        for (Point pt : destroyedObjects) {
+            if (pt instanceof TreasureBox) {
+                boxes.remove(pt);
+                dropPerk(pt, dice);
+            } else {
+                objects.destroy(pt);
             }
-            objects.destroy(wall);
         }
 
         destroyedObjects.clear();
@@ -207,7 +216,6 @@ public class MollyMage extends RoundField<Player> implements Field {
             makeBlastsFromDestoryedPotions();
 
             if (settings.bool(BIG_BADABOOM)) {
-
                 // если зелье зацепила взрывная волна и его тоже подрываем
                 for (Potion potion : potions) {
                     if (blasts.contains(potion)) {
@@ -217,7 +225,7 @@ public class MollyMage extends RoundField<Player> implements Field {
             }
 
             // и повторяем все, пока были взорванные зелья
-        } while(!destroyedPotions.isEmpty());
+        } while (!destroyedPotions.isEmpty());
 
         // потому уже считаем скоры за разрушения
         killAllNear(blasts);
@@ -283,6 +291,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     private List<Blast> makeBlast(Potion potion) {
         List barriers = objects.listSubtypes(Wall.class);
         barriers.addAll(this.walls);
+        barriers.addAll(this.boxes.all());
         barriers.addAll(heroes(ACTIVE_ALIVE));
 
         // TODO move potion inside BoomEngine
@@ -293,34 +302,36 @@ public class MollyMage extends RoundField<Player> implements Field {
     private void killAllNear(List<Blast> blasts) {
         killHeroes(blasts);
         killPerks(blasts);
-        killWallsAndghosts(blasts);
+        killBoxesAndGhosts(blasts);
     }
 
-    private void killWallsAndghosts(List<Blast> blasts) {
+    private void killBoxesAndGhosts(List<Blast> blasts) {
         // собираем все разрушаемые стенки которые уже есть в радиусе
         // надо определить кто кого чем кикнул (ызрывные волны могут пересекаться)
-        List<Wall> all = objects.listSubtypes(Wall.class);
-        Multimap<Hero, Wall> deathMatch = HashMultimap.create();
+        List<Point> all = (List)objects.listSubtypes(Wall.class);
+        all.addAll(boxes.all());
+
+        Multimap<Hero, Point> deathMatch = HashMultimap.create();
         for (Blast blast : blasts) {
             Hero hunter = blast.owner();
             int index = all.indexOf(blast);
             if (index != -1) {
-                Wall wall = all.get(index);
-                deathMatch.put(hunter, wall);
+                Point object = all.get(index);
+                deathMatch.put(hunter, object);
             }
         }
 
         // у нас есть два списка, прибитые стенки
         // и те, благодаря кому они разрушены
-        Set<Wall> preys = new HashSet<>(deathMatch.values());
+        Set<Point> preys = new HashSet<>(deathMatch.values());
         Set<Hero> hunters = new HashSet<>(deathMatch.keys());
 
         // вначале прибиваем стенки
-        preys.forEach(wall -> {
-            if (wall instanceof GhostHunter) {
-                ((GhostHunter)wall).die();
+        preys.forEach(object -> {
+            if (object instanceof GhostHunter) {
+                ((GhostHunter)object).die();
             } else {
-                destroyedObjects.add(wall);
+                destroyedObjects.add(object);
             }
         });
 
@@ -330,10 +341,10 @@ public class MollyMage extends RoundField<Player> implements Field {
                 return;
             }
 
-            deathMatch.get(hunter).forEach(wall -> {
-                if (wall instanceof Ghost) {
+            deathMatch.get(hunter).forEach(object -> {
+                if (object instanceof Ghost) {
                     hunter.event(Events.KILL_GHOST);
-                } else if (wall instanceof TreasureBox) {
+                } else if (object instanceof TreasureBox) {
                     hunter.event(Events.KILL_TREASURE_BOX);
                 }
             });
@@ -553,6 +564,7 @@ public class MollyMage extends RoundField<Player> implements Field {
                 List<Point> elements = new LinkedList<>();
 
                 elements.addAll(MollyMage.this.heroes(ALL));
+                elements.addAll(MollyMage.this.boxes.all());
                 elements.addAll(MollyMage.this.walls);
                 MollyMage.this.objects().forEach(elements::add);
                 elements.addAll(MollyMage.this.potions());
@@ -567,5 +579,9 @@ public class MollyMage extends RoundField<Player> implements Field {
     @Override
     public GameSettings settings() {
         return settings;
+    }
+
+    public TreasureBoxes boxes() {
+        return boxes;
     }
 }

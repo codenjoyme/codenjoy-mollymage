@@ -45,6 +45,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -75,6 +76,8 @@ public abstract class AbstractMultiplayerTest {
         Level level = mock(Level.class);
         when(level.size()).thenReturn(SIZE);
 
+        boxesCount(0);
+
         field = new MollyMage(level, dice, settings);
     }
 
@@ -97,10 +100,12 @@ public abstract class AbstractMultiplayerTest {
         resetHeroes();
     }
 
-    protected TreasureBox boxAt(int x, int y) {
-        TreasureBox wall = new TreasureBox(x, y);
-        objects.add(wall);
-        return wall;
+    protected void boxAt(int x, int y) {
+        field.boxes().add(new TreasureBox(x, y));
+    }
+
+    protected void boxesCount(int count) {
+        settings.integer(TREASURE_BOX_COUNT, count);
     }
 
     protected Ghost ghostAt(int x, int y) {

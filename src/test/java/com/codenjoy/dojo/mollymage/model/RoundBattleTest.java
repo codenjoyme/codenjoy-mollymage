@@ -27,6 +27,7 @@ import com.codenjoy.dojo.mollymage.services.GameSettings;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
 import static com.codenjoy.dojo.services.Direction.DOWN;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
 import static org.junit.Assert.assertEquals;
@@ -43,7 +44,8 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
                 .integer(ROUNDS_PER_MATCH, 3)
                 .integer(ROUNDS_MIN_TICKS_FOR_WIN, 1)
                 .integer(ROUNDS_TIME, 10)
-                .integer(ROUNDS_TIME_FOR_WINNER, 2);
+                .integer(ROUNDS_TIME_FOR_WINNER, 2)
+                .integer(TREASURE_BOX_COUNT, 0);
     }
 
     // во время старта игры, когда не прошло timeBeforeStart тиков,
@@ -937,8 +939,10 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
                 3, 4, // жертва второго
                 4, 3); // жертва второго
 
-        boxAt(3, 2);
         givenBoard(count);
+
+        boxesCount(1);
+        boxAt(3, 2);
 
         tick();
 
@@ -1070,6 +1074,7 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
                 "listener(5) => [DIED]\n");
 
         // затем пройдет еще некоторое количество тиков, до общего числа = timePerRound
+        boxesCount(0); // больше коробок нам не надо
         tick();
         tick();
         tick();

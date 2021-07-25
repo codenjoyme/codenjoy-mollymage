@@ -150,7 +150,7 @@ public class GameSettings extends SettingsImpl
     }
 
     public Objects objects(Dice dice) {
-        return new TreasureBoxes(new Ghosts(new ObjectsImpl(this), dice), dice);
+        return new Ghosts(new ObjectsImpl(this), dice);
     }
 
     public PerksSettingsWrapper perksSettings() {

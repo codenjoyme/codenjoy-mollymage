@@ -54,7 +54,7 @@ public class GhostHunter extends Ghost {
     }
 
     public DeikstraFindWay.Possible possible(Field field) {
-        List<Wall> walls = field.objects().listEquals(Wall.class);
+        List<Wall> walls = field.walls();
 
         return new DeikstraFindWay.Possible() {
             @Override
@@ -89,7 +89,7 @@ public class GhostHunter extends Ghost {
             this.move(direction.change(from));
 
             // попутно сносим стенки на пути прожженные (если есть)
-            field.objects().destroyExact(new TreasureBox(from));
+            field.boxes().remove(from);
         }
     }
 

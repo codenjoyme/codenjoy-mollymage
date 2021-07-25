@@ -29,7 +29,6 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.TestGameSettings;
-import com.codenjoy.dojo.mollymage.model.mock.TreasureBoxesStub;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;
@@ -82,6 +81,7 @@ public class AbstractGameTest {
 
         givenWalls();
 
+        settings.integer(TREASURE_BOX_COUNT, 0);
         withObjects(objects);
 
         givenBoard(SIZE, 0, 0);
@@ -184,8 +184,12 @@ public class AbstractGameTest {
 
     protected void givenBoardWithBoxes(int size) {
         settings.integer(GHOSTS_COUNT, 0);
-        withObjects(new Ghosts(new TreasureBoxesStub(settings, generate(size)), dice));
+        withObjects(new Ghosts(new ObjectsImpl(settings), dice));
         givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
+
+        List<Wall> walls = generate(size);
+        boxesCount(walls.size());
+        walls.forEach(pt -> boxAt(pt.getX(), pt.getY()));
     }
 
     protected void withObjects(Objects objects) {
@@ -240,7 +244,8 @@ public class AbstractGameTest {
 
         SIZE = size;
         generateWalls(size);
-        settings.integer(GHOSTS_COUNT, 1);
+        settings.integer(TREASURE_BOX_COUNT, 0)
+                .integer(GHOSTS_COUNT, 1);
         Ghosts ghosts = new Ghosts(new ObjectsImpl(settings), ghostDice);
         withObjects(ghosts);
 
@@ -254,10 +259,16 @@ public class AbstractGameTest {
         dice(ghostDice, 1, Direction.UP.value());  // Чертик будет упираться в стенку и стоять на месте
     }
 
-    protected TreasureBox boxAt(int x, int y) {
-        TreasureBox wall = new TreasureBox(pt(x, y));
-        objects.add(wall);
-        return wall;
+    protected void boxAt(int x, int y) {
+        field.boxes().add(new TreasureBox(x, y));
+    }
+
+    protected int boxesCount() {
+        return settings.integer(TREASURE_BOX_COUNT);
+    }
+
+    protected void boxesCount(int count) {
+        settings.integer(TREASURE_BOX_COUNT, count);
     }
 
     private void givenWalls(Wall... input) {

@@ -31,8 +31,7 @@ import com.codenjoy.dojo.mollymage.model.items.perks.PotionImmune;
 import com.codenjoy.dojo.mollymage.model.items.perks.PotionRemoteControl;
 import org.junit.Test;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.CATCH_PERK_SCORE;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.KILL_WALL_SCORE;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.reset;
@@ -71,6 +70,7 @@ public class PerksTest extends AbstractGameTest {
                 "#H####\n");
 
         // when
+        boxesCount(boxesCount() - 2); // две коробки потрачено
         field.tick();
 
         // then
@@ -115,6 +115,7 @@ public class PerksTest extends AbstractGameTest {
                 "#H####\n");
 
         // when
+        boxesCount(boxesCount() - 2); // две коробки потрачено
         field.tick();
 
         // then
@@ -185,6 +186,7 @@ public class PerksTest extends AbstractGameTest {
         events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
+        boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
         field.tick();
 
         // then
@@ -269,8 +271,8 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[]", field.perks().toString());
 
-
         // when
+        boxesCount(boxesCount() - 2); // две коробки потрачено
         field.tick();
 
         // then
@@ -372,8 +374,8 @@ public class PerksTest extends AbstractGameTest {
 
         // такой себе хак, мы в домике
         hero.move(3, 4);
-        field.objects().add(new TreasureBox(1, 2));
-        field.objects().add(new TreasureBox(1, 3));
+        boxAt(1, 2); // две коробки подорвали, две добавили
+        boxAt(1, 3);
         field.objects().add(new Wall(1, 4));
 
         // when
@@ -405,6 +407,7 @@ public class PerksTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
+        boxesCount(boxesCount() - 1); // минус коробка
         field.tick();
 
         asrtBrd("#+####\n" +
@@ -414,6 +417,7 @@ public class PerksTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
+        boxesCount(boxesCount() - 1); // минус коробка
         field.tick();
 
         asrtBrd("#+####\n" +
@@ -517,6 +521,7 @@ public class PerksTest extends AbstractGameTest {
         events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
+        boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
         field.tick();
 
         // пивидение начало свое движение
@@ -542,6 +547,7 @@ public class PerksTest extends AbstractGameTest {
         events.verifyAllEvents("[KILL_GHOST, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
+        boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
         field.tick();
 
         asrtBrd("#+####\n" +
@@ -560,19 +566,31 @@ public class PerksTest extends AbstractGameTest {
     public void shouldDropPerk_generateThreeGhosts() {
         shouldDropPerk_generateNewGhost_thenKillIt();
 
+        asrtBrd("#+####\n" +
+                "# # ##\n" +
+                "# ☺  #\n" +
+                "+++ ##\n" +
+                "     +\n" +
+                "# ####\n");
+
         // бамбанули между двух перков, хак (перк при этом не взяли)
         hero.move(1, 2);
         hero.act();
 
         // строим оборону
-        field.objects().destroy(pt(5, 5));
-        field.objects().destroy(pt(4, 4));
-        field.objects().add(new Wall(4, 4));
-        field.objects().destroy(new Wall(4, 5));
-        field.objects().add(new Wall(4, 5));
-        field.objects().destroy(pt(5, 4));
-        hero.move(5, 5);
+        field.boxes().remove(pt(5, 5));
+        field.boxes().remove(pt(5, 4));
+        field.boxes().remove(pt(4, 4));
+        field.boxes().remove(pt(4, 5));
+
+        field.walls().add(new Wall(4, 4));
+        field.walls().add(new Wall(4, 5));
+
+        hero.move(5, 5); // убегаем в укрытие
+
+        boxesCount(boxesCount() - 4); // на 4 коробки меньше
         field.tick();
+        assertEquals(0, hero.getPerks().size()); // перк не взяли
 
         asrtBrd("#+##☼☺\n" +
                 "# # ☼ \n" +
@@ -643,8 +661,15 @@ public class PerksTest extends AbstractGameTest {
     public void shouldDropPerk_generateTwoGhosts_noWayNoPain() {
         shouldDropPerk_generateThreeGhosts();
 
+        asrtBrd("#+##☼☺\n" +
+                "# # ☼ \n" +
+                "#  xx#\n" +
+                "   x##\n" +
+                "     +\n" +
+                "# ####\n");
+
         // но стоит забарикадироваться
-        field.objects().add(new Wall(5, 4));
+        field.walls().add(new Wall(5, 4));
         field.tick();
 
         // как привидения нормальнеют
@@ -724,6 +749,7 @@ public class PerksTest extends AbstractGameTest {
         events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // охотник идет
+        boxesCount(boxesCount() - 2); // две коробки потрачено взрывом
         field.tick();
         field.tick();
 
@@ -736,6 +762,7 @@ public class PerksTest extends AbstractGameTest {
 
         // мувнули героя и кикнули его
         hero.die();
+        boxesCount(boxesCount() - 1); // одна коробка потречена злым привидением
         field.tick();
 
         asrtBrd("#+####\n" +
@@ -901,9 +928,14 @@ public class PerksTest extends AbstractGameTest {
                 "H҉҉҉҉҉҉    #\n" +
                 "#H##########\n");
 
+
         // when
         hero.act();
         hero.right();
+
+        dice(dice,  // новые коробки
+                9, 1,
+                9, 2);
         field.tick();
 
         hero.right();
@@ -927,8 +959,8 @@ public class PerksTest extends AbstractGameTest {
                 "#  ҉ ☺     #\n" +
                 "# #҉# # # ##\n" +
                 "H҉҉҉҉҉҉҉҉҉҉H\n" +
-                "# #҉# # # ##\n" +
-                "   ҉       #\n" +
+                "# #҉# # ####\n" +
+                "   ҉     # #\n" +
                 "# #H########\n");
 
         assertEquals("[{POTION_BLAST_RADIUS_INCREASE('+') " +
@@ -936,6 +968,11 @@ public class PerksTest extends AbstractGameTest {
                 hero.getPerks().toString());
 
         // when
+        dice(dice,  // новые коробки
+                9, 10,
+                9, 9,
+                9, 8,
+                9, 7);
         field.tick();
 
         // последний шанс воспользоваться, но мы не будем
@@ -959,16 +996,16 @@ public class PerksTest extends AbstractGameTest {
 
         // then
         asrtBrd("### ########\n" +
-                "# # # # # ##\n" +
-                "#          #\n" +
-                "# # # # # ##\n" +
-                "#          #\n" +
+                "# # # # ####\n" +
+                "#        # #\n" +
+                "# # # # ####\n" +
+                "#        # #\n" +
                 "# # #҉# # ##\n" +
                 "#   ҉Ѡ҉    #\n" +
                 "# # #҉# # ##\n" +
                 "            \n" +
-                "# # # # # ##\n" +
-                "           #\n" +
+                "# # # # ####\n" +
+                "         # #\n" +
                 "# # ########\n");
 
         assertEquals("[]" ,
@@ -1479,7 +1516,9 @@ public class PerksTest extends AbstractGameTest {
 
     @Test
     public void shouldSuicide_whenBRCperk_shouldRemoveAfterDeath_andCollectScores() {
+        boxesCount(1);
         boxAt(0, 1);
+
         ghostAt(3, 0);
 
         canDropPotions(1);
@@ -1535,9 +1574,10 @@ public class PerksTest extends AbstractGameTest {
         assertEquals("[]",
                 hero.getPerks().toString());
 
+        dice(dice, 4, 4); // новая коробка
         field.tick();
 
-        asrtBrd("     \n" +
+        asrtBrd("    #\n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +

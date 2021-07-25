@@ -28,8 +28,6 @@ import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.Tickable;
 
-import java.util.Objects;
-
 public abstract class Perk extends PointImpl implements Tickable, State<Element, Player> {
 
     private final String name;
@@ -58,23 +56,6 @@ public abstract class Perk extends PointImpl implements Tickable, State<Element,
         this.value = value;
         this.timeout = timeout;
         this.timer = timeout;
-    }
-
-    public Perk(String name, Element element, int value, int timeout, int pickTimeout) {
-        this.name = name;
-        this.element = element;
-        this.value = value;
-        this.timeout = timeout;
-        this.pickTimeout = pickTimeout;
-    }
-
-    /**
-     * This is for trigger like perks, e.g. nuke button.
-     *
-     * @see Perk#Perk(Element, int, int)
-     */
-    public Perk(Element element, int timeout) {
-        this(element, 0, timeout);
     }
 
     public int getPickTimeout() {
@@ -113,10 +94,6 @@ public abstract class Perk extends PointImpl implements Tickable, State<Element,
         return name;
     }
 
-    public Element getElement() {
-        return element;
-    }
-
     public int getValue() {
         return value;
     }
@@ -127,24 +104,6 @@ public abstract class Perk extends PointImpl implements Tickable, State<Element,
 
     public int getTimer() {
         return timer;
-    }
-
-    protected void setTimer(int timer) {
-        this.timer = timer;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Perk perk = (Perk) o;
-        return getName() == perk.getName();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getName());
     }
 
     @Override

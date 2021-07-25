@@ -23,7 +23,6 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
-import com.codenjoy.dojo.mollymage.model.items.NotAWall;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Point;
@@ -73,13 +72,8 @@ public class ObjectsImpl implements Objects {
         return list(wall -> filter.isAssignableFrom(wall.getClass()));
     }
 
-    @Override
-    public <T extends Wall> List<T> listEquals(Class<T> filter) {
-        return list(wall -> filter.equals(wall.getClass()));
-    }
-
     private List list(Predicate<Wall> predicate) {
-        return (List)walls.stream()
+        return walls.stream()
                 .filter(predicate)
                 .collect(toList());
     }
@@ -96,30 +90,6 @@ public class ObjectsImpl implements Objects {
             return new Wall(-1, -1);
         }
         return walls.remove(index);
-    }
-
-    @Override
-    public Wall destroyExact(Wall wall) {
-        for (int index = 0; index < walls.size(); index++) {
-            Wall item = walls.get(index);
-            // если тот же элемент, или тип тот же и координаты идентичны
-            if (item == wall
-                    || ( item.getClass().equals(wall.getClass())
-                        && item.equals(wall)))
-            {
-                return walls.remove(index);
-            }
-        }
-        return new Wall(-1, -1);
-    }
-
-    @Override
-    public Wall get(Point pt) {
-        int index = walls.indexOf(new Wall(pt));
-        if (index == -1) {
-            return new NotAWall(-1, -1);
-        }
-        return walls.get(index);
     }
 
     @Override

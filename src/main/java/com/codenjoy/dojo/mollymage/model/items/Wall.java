@@ -42,14 +42,6 @@ public class Wall extends PointImpl implements State<Element, Player>, Tickable 
         super(pt);
     }
 
-    public Wall(Wall wall) {
-        super(wall);
-    }
-
-    public Wall copy() {
-        return new Wall(this);
-    }
-
     @Override
     public Element state(Player player, Object... alsoAtPoint) {
         return WALL;

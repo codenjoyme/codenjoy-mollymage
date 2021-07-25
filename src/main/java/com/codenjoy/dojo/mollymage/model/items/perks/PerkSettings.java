@@ -22,8 +22,6 @@ package com.codenjoy.dojo.mollymage.model.items.perks;
  * #L%
  */
 
-import java.util.Objects;
-
 public class PerkSettings {
 
     private final int value;
@@ -40,20 +38,6 @@ public class PerkSettings {
 
     public int timeout() {
         return timeout;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PerkSettings that = (PerkSettings) o;
-        return value == that.value &&
-                timeout == that.timeout;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value, timeout);
     }
 
     @Override

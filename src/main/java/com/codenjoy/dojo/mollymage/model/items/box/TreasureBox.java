@@ -46,11 +46,6 @@ public class TreasureBox extends Wall implements State<Element, Player> {
     }
 
     @Override
-    public Wall copy() {
-        return new TreasureBox(this.x, this.y);
-    }
-
-    @Override
     public Element state(Player player, Object... alsoAtPoint) {
         Blast blast = filterOne(alsoAtPoint, Blast.class);
         if (blast != null) {

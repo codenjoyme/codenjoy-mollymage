@@ -67,11 +67,6 @@ public abstract class ObjectsDecorator implements Objects, Tickable {
     }
 
     @Override
-    public <T extends Wall> List<T> listEquals(Class<T> filter) {
-        return walls.listEquals(filter);
-    }
-
-    @Override
     public void add(Wall wall) {
         walls.add(wall);
     }
@@ -79,16 +74,6 @@ public abstract class ObjectsDecorator implements Objects, Tickable {
     @Override
     public Wall destroy(Point pt) {
         return walls.destroy(pt);
-    }
-
-    @Override
-    public Wall destroyExact(Wall wall) {
-        return walls.destroyExact(wall);
-    }
-
-    @Override
-    public Wall get(Point pt) {
-        return walls.get(pt);
     }
 
     @Override

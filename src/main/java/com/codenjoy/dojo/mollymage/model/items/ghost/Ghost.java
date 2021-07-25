@@ -65,10 +65,6 @@ public class Ghost extends Wall implements State<Element, Player>, Tickable {
         return new Ghost(this.x, this.y);
     }
 
-    public Direction getDirection() {
-        return direction;
-    }
-
     public void setDirection(Direction direction) {
         stop = false;
         this.direction = direction;

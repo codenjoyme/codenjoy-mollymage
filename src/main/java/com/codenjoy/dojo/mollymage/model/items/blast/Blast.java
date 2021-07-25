@@ -40,10 +40,6 @@ public class Blast extends PointImpl implements State<Element, Player> {
         this.hero = hero;
     }
 
-    public boolean itsMine(Hero hero) {
-        return this.hero == hero;
-    }
-
     public Hero owner() {
         return hero;
     }

@@ -40,15 +40,9 @@ public interface Objects extends Iterable<Wall>, Tickable {
 
     <T extends Wall> List<T> listSubtypes(Class<T> filter);
 
-    <T extends Wall> List<T> listEquals(Class<T> filter);
-
     void add(Wall wall);
 
     Wall destroy(Point pt);
-
-    Wall destroyExact(Wall wall);
-
-    Wall get(Point pt);
 
     GameSettings settings();
 }

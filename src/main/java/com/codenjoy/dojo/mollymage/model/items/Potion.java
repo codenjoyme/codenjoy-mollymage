@@ -60,10 +60,6 @@ public class Potion extends PointImpl implements Tickable, State<Element, Player
         field.remove(this);
     }
 
-    public int getTimer() {
-        return timer;
-    }
-
     public int getPower() {
         return power;
     }
@@ -82,10 +78,6 @@ public class Potion extends PointImpl implements Tickable, State<Element, Player
 
     public void putOnRemoteControl() {
         this.onRemote = true;
-    }
-
-    public void deactivateRemote() {
-        this.onRemote = false;
     }
 
     public void activateRemote() {

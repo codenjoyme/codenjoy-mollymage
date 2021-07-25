@@ -23,39 +23,53 @@ package com.codenjoy.dojo.mollymage.model.items.ghost;
  */
 
 
-import com.codenjoy.dojo.mollymage.model.Objects;
-import com.codenjoy.dojo.mollymage.model.ObjectsDecorator;
+import com.codenjoy.dojo.mollymage.model.Field;
+import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
+import com.codenjoy.dojo.services.Tickable;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
 
-public class Ghosts extends ObjectsDecorator implements Objects {
+public class Ghosts implements Tickable {
 
     public static final int MAX = 1000;
 
     private Dice dice;
+    protected Field field;
+    private List<Ghost> ghosts;
+    private GameSettings settings;
 
-    public Ghosts(Objects walls, Dice dice) {
-        super(walls);
+    public Ghosts(GameSettings settings, Dice dice) {
+        this.settings = settings;
         this.dice = dice;
+        ghosts = new LinkedList<>();
+    }
+
+    @Override
+    public void tick() {
+        regenerate();
+        ghosts.forEach(Ghost::tick);
     }
 
     public void regenerate() {     // TODO потестить
-        if (settings().integer(GHOSTS_COUNT) < 0) {
-            settings().integer(GHOSTS_COUNT, 0);
+        if (settings.integer(GHOSTS_COUNT) < 0) {
+            settings.integer(GHOSTS_COUNT, 0);
         }
 
-        int count = walls.listSubtypes(Ghost.class).size();
+        int actual = ghosts.size();
+        int expected = settings.integer(GHOSTS_COUNT);
 
         int iteration = 0;
         Set<Point> checked = new HashSet<>();
-        while (count < settings().integer(GHOSTS_COUNT) && iteration++ < MAX) {
+        while (actual < expected && iteration++ < MAX) {
             Point pt = PointImpl.random(dice, field.size());
 
             if (checked.contains(pt) || field.isBarrier(pt, !FOR_HERO)) {
@@ -63,17 +77,32 @@ public class Ghosts extends ObjectsDecorator implements Objects {
                 continue;
             }
 
-            walls.add(new Ghost(pt, field, dice));
-            count++;
+            ghosts.add(new Ghost(pt, field, dice));
+            actual++;
         }
 
         if (iteration >= MAX) {
-            System.out.println("Dead loop at Ghosts.regenerate!"); // TODO тут часто вылетает :(
+            System.out.println("Dead loop at Ghosts.regenerate!");
         }
     }
 
-    @Override
-    public void tact() {
-        regenerate();
+    public void init(Field field) {
+        this.field = field;
+    }
+
+    public List<Ghost> all() {
+        return ghosts;
+    }
+
+    public void remove(Point pt) {
+        ghosts.remove(pt);
+    }
+
+    public void add(Ghost ghost) {
+        ghosts.add(ghost);
+    }
+
+    public boolean contains(Point pt) {
+        return ghosts.contains(pt);
     }
 }

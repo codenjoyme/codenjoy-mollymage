@@ -837,7 +837,6 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied() {
-
         dice(dice,
                 1, 2,
                 2, 1,
@@ -1264,17 +1263,18 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        ghostAt(0, 1);
-        ghostAt(0, 3);
-        ghostAt(4, 1);
-        ghostAt(4, 3);
-
         dice(dice,
                 0, 0,
                 1, 0,
                 2, 0,
                 3, 0);
         givenBoard(4);
+
+        ghostsCount(4);
+        ghostAt(0, 1);
+        ghostAt(0, 3);
+        ghostAt(4, 1);
+        ghostAt(4, 3);
 
         boxesCount(1);
         boxAt(2, 2);

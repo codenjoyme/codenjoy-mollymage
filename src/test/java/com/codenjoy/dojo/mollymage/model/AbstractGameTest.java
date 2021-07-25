@@ -22,16 +22,18 @@ package com.codenjoy.dojo.mollymage.model;
  * #L%
  */
 
+import com.codenjoy.dojo.mollymage.TestGameSettings;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
-import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
-import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
-import com.codenjoy.dojo.mollymage.TestGameSettings;
+import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.Dice;
+import com.codenjoy.dojo.services.Direction;
+import com.codenjoy.dojo.services.EventListener;
+import com.codenjoy.dojo.services.Game;
 import com.codenjoy.dojo.services.multiplayer.Single;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
@@ -45,7 +47,6 @@ import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
@@ -55,10 +56,8 @@ public class AbstractGameTest {
     public int SIZE = 5;
     protected Game game;
     protected Hero hero;
-    protected Objects objects;
     protected GameSettings settings;
     protected EventListener listener;
-    protected Dice ghostDice;
     protected Dice dice;
     protected Player player;
     protected MollyMage field;
@@ -71,18 +70,14 @@ public class AbstractGameTest {
     public void setUp() {
         dice = mock(Dice.class);
         level = mock(Level.class);
-        ghostDice = mock(Dice.class);
         settings = spy(new TestGameSettings());
         printer = new PrinterFactoryImpl();
         events = new EventsListenersAssert(() -> Arrays.asList(listener), Events.class);
         perks = settings.perksSettings();
         potionsPower(1);
-        objects = new ObjectsImpl(settings);
 
-        givenWalls();
-
-        settings.integer(TREASURE_BOX_COUNT, 0);
-        withObjects(objects);
+        boxesCount(0);
+        ghostsCount(0);
 
         givenBoard(SIZE, 0, 0);
     }
@@ -183,17 +178,12 @@ public class AbstractGameTest {
     }
 
     protected void givenBoardWithBoxes(int size) {
-        settings.integer(GHOSTS_COUNT, 0);
-        withObjects(new Ghosts(new ObjectsImpl(settings), dice));
+        ghostsCount(0);
         givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
 
         List<Wall> walls = generate(size);
         boxesCount(walls.size());
         walls.forEach(pt -> boxAt(pt.getX(), pt.getY()));
-    }
-
-    protected void withObjects(Objects objects) {
-        when(settings.objects(dice)).thenReturn(objects);
     }
 
     protected void givenBoardWithOriginalWalls() {
@@ -240,23 +230,15 @@ public class AbstractGameTest {
     }
 
     protected void givenBoardWithGhost(int size) {
-        dice(ghostDice, size - 2, size - 2);
-
         SIZE = size;
         generateWalls(size);
-        settings.integer(TREASURE_BOX_COUNT, 0)
-                .integer(GHOSTS_COUNT, 1);
-        Ghosts ghosts = new Ghosts(new ObjectsImpl(settings), ghostDice);
-        withObjects(ghosts);
+        boxesCount(0);
+        ghostsCount(1);
 
         givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
 
-        ghosts.init(field);
-        ghosts.regenerate();
-
-        this.objects = ghosts;
-
-        dice(ghostDice, 1, Direction.UP.value());  // Чертик будет упираться в стенку и стоять на месте
+        ghostAt(size - 2, size - 2);       // координаты привидения
+        dice(dice, 1, Direction.UP.value());  // привидение будет упираться в стенку и стоять на месте
     }
 
     protected void boxAt(int x, int y) {
@@ -271,14 +253,17 @@ public class AbstractGameTest {
         settings.integer(TREASURE_BOX_COUNT, count);
     }
 
-    private void givenWalls(Wall... input) {
-        Arrays.asList(input).forEach(objects::add);
+    protected int ghostsCount() {
+        return settings.integer(GHOSTS_COUNT);
+    }
+
+    protected void ghostsCount(int count) {
+        settings.integer(GHOSTS_COUNT, count);
     }
 
     protected Ghost ghostAt(int x, int y) {
-        Ghost ghost = new Ghost(pt(x, y), field, ghostDice);
-        ghost.stop();
-        objects.add(ghost);
+        Ghost ghost = new Ghost(pt(x, y), field, dice);
+        field.ghosts().add(ghost);
         return ghost;
     }
 }

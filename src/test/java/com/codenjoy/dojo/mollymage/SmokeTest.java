@@ -46,7 +46,7 @@ public class SmokeTest {
         Dice dice = LocalGameRunner.getDice("435874345435874365843564398", 100, 200);
 
         // about 3 sec
-        // coverage 912 lines from 1186
+        // coverage 881 lines from 1071
         int ticks = 1000;
 
         Smoke.play(ticks, "SmokeTest.data",
@@ -59,7 +59,7 @@ public class SmokeTest {
                     @Override
                     public GameSettings getSettings() {
                         GameSettings settings = new TestGameSettings()
-                                .integer(TREASURE_BOX_COUNT, 14)
+                                        .integer(TREASURE_BOX_COUNT, 14)
                                 .integer(GHOSTS_COUNT, 3)
                                 .string(LEVEL_MAP,
                                         "☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -75,8 +75,8 @@ public class SmokeTest {
                                         "☼☼☼☼☼☼☼☼☼☼☼\n");
 
                         settings.perksSettings()
-                                .dropRatio(80)
-                                .pickTimeout(11)
+                                .dropRatio(70)
+                                .pickTimeout(16)
                                 .put(Element.POTION_BLAST_RADIUS_INCREASE, 5, 10)
                                 .put(Element.POTION_COUNT_INCREASE, 5, 3)
                                 .put(Element.POTION_REMOTE_CONTROL, 5, 10)

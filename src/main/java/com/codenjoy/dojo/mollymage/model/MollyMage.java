@@ -31,6 +31,7 @@ import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.items.perks.*;
 import com.codenjoy.dojo.mollymage.services.Events;
@@ -57,8 +58,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     private List<Player> players = new LinkedList<>();
 
     private int size;
-    private Objects objects;
     private TreasureBoxes boxes;
+    private Ghosts ghosts;
 
     private List<Wall> walls = new LinkedList<>();
     private List<Potion> potions = new LinkedList<>();
@@ -76,8 +77,8 @@ public class MollyMage extends RoundField<Player> implements Field {
         this.dice = dice;
         init(level);
 
-        objects = settings.objects(dice);
-        objects.init(this);
+        ghosts = new Ghosts(settings, dice);
+        ghosts.init(this);
 
         boxes = new TreasureBoxes(settings, dice);
         boxes.init(this);
@@ -141,7 +142,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         applyAllHeroes();       // герои ходят
         ghostEatHeroes();       // омномном
         boxes.tick();           // сундуки появляются
-        objects.tick();         // привидения водят свой холровод
+        ghosts.tick();          // привидения водят свой хоровод
         ghostEatHeroes();       // омномном
         disablePotionRemote();  // если остались remote зелья без хозяев, взрываем
         tactAllPotions();       // все что касается зелья и взрывов
@@ -188,8 +189,8 @@ public class MollyMage extends RoundField<Player> implements Field {
             if (pt instanceof TreasureBox) {
                 boxes.remove(pt);
                 dropPerk(pt, dice);
-            } else {
-                objects.destroy(pt);
+            } else if (pt instanceof Ghost || pt instanceof GhostHunter) {
+                ghosts.remove(pt);
             }
         }
 
@@ -197,7 +198,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void ghostEatHeroes() {
-        for (Ghost ghost : objects.listSubtypes(Ghost.class)) {
+        for (Ghost ghost : ghosts.all()) {
             for (Player player : players) {
                 Hero hero = player.getHero();
                 if (hero.isAlive() && ghost.itsMe(hero)) {
@@ -284,13 +285,14 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
-    public void remove(Wall wall) {
-        destroyedObjects.add(wall);
+    public void remove(Point pt) {
+        destroyedObjects.add(pt);
     }
 
     private List<Blast> makeBlast(Potion potion) {
-        List barriers = objects.listSubtypes(Wall.class);
+        List barriers = new LinkedList();
         barriers.addAll(this.walls);
+        barriers.addAll(this.ghosts.all());
         barriers.addAll(this.boxes.all());
         barriers.addAll(heroes(ACTIVE_ALIVE));
 
@@ -308,8 +310,9 @@ public class MollyMage extends RoundField<Player> implements Field {
     private void killBoxesAndGhosts(List<Blast> blasts) {
         // собираем все разрушаемые стенки которые уже есть в радиусе
         // надо определить кто кого чем кикнул (ызрывные волны могут пересекаться)
-        List<Point> all = (List)objects.listSubtypes(Wall.class);
+        List<Point> all = new LinkedList<>();
         all.addAll(boxes.all());
+        all.addAll(ghosts.all());
 
         Multimap<Hero, Point> deathMatch = HashMultimap.create();
         for (Blast blast : blasts) {
@@ -326,12 +329,12 @@ public class MollyMage extends RoundField<Player> implements Field {
         Set<Point> preys = new HashSet<>(deathMatch.values());
         Set<Hero> hunters = new HashSet<>(deathMatch.keys());
 
-        // вначале прибиваем стенки
+        // вначале прибиваем объекты
         preys.forEach(object -> {
             if (object instanceof GhostHunter) {
                 ((GhostHunter)object).die();
             } else {
-                destroyedObjects.add(object);
+                remove(object);
             }
         });
 
@@ -383,7 +386,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
                 // TODO может это делать на этапе, когда balsts развиднеется в removeBlasts
                 blasts.remove(perk);
-                objects.add(new GhostHunter(perk, this, hunter));
+                ghosts.add(new GhostHunter(perk, this, hunter));
             });
         });
     }
@@ -477,11 +480,6 @@ public class MollyMage extends RoundField<Player> implements Field {
         return false;
     }
 
-    @Override
-    public Objects objects() {
-        return objects;
-    }
-
     // препятствие это все, чем может быть занята клеточка
     // но если мы для героя смотрим - он может пойти к чоперу и на перк
     @Override
@@ -499,39 +497,35 @@ public class MollyMage extends RoundField<Player> implements Field {
             }
         }
 
-        for (Potion potion : potions) {
-            if (potion.itsMe(pt)) {
-                return true;
-            }
+        if (potions.contains(pt)) {
+            return true;
         }
 
-        if (!isForHero) {     // TODO test me привидение или стена не могут появиться на перке
+        // TODO test me привидение или стена не могут появиться на перке
+        if (!isForHero) {
             if (perks.contains(pt)) {
                 return true;
             }
         }
 
         // TODO: test me
-        for (Wall wall : walls) {
-            if (!wall.itsMe(pt)) {
-                continue;
-            }
+        if (walls.contains(pt)) {
             return true;
         }
 
-
-        for (Wall wall : objects) {
-            if (!wall.itsMe(pt)) {
-                continue;
-            }
-
-            // TODO test me стенка или другой чопер не могут появиться на чопере
-            // TODO но герой может пойти к нему на встречу
-            if (isForHero && wall instanceof Ghost) {
-                return false;
-            }
+        // TODO: test me
+        if (boxes.all().contains(pt)) {
             return true;
         }
+
+        // TODO test me стенка или другой чопер не могут появиться на чопере
+        // TODO но герой может пойти к нему на встречу
+        if (!isForHero) {
+            if (ghosts.all().contains(pt)) {
+                return true;
+            }
+        }
+
         return pt.isOutOf(size());
     }
 
@@ -565,8 +559,8 @@ public class MollyMage extends RoundField<Player> implements Field {
 
                 elements.addAll(MollyMage.this.heroes(ALL));
                 elements.addAll(MollyMage.this.boxes.all());
+                elements.addAll(MollyMage.this.ghosts.all());
                 elements.addAll(MollyMage.this.walls);
-                MollyMage.this.objects().forEach(elements::add);
                 elements.addAll(MollyMage.this.potions());
                 elements.addAll(MollyMage.this.blasts());
                 elements.addAll(MollyMage.this.perks());
@@ -581,7 +575,13 @@ public class MollyMage extends RoundField<Player> implements Field {
         return settings;
     }
 
+    @Override
     public TreasureBoxes boxes() {
         return boxes;
+    }
+
+    @Override
+    public Ghosts ghosts() {
+        return ghosts;
     }
 }

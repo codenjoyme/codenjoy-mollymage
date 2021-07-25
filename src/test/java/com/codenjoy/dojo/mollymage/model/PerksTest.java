@@ -24,14 +24,14 @@ package com.codenjoy.dojo.mollymage.model;
 
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
-import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.perks.PotionBlastRadiusIncrease;
 import com.codenjoy.dojo.mollymage.model.items.perks.PotionCountIncrease;
 import com.codenjoy.dojo.mollymage.model.items.perks.PotionImmune;
 import com.codenjoy.dojo.mollymage.model.items.perks.PotionRemoteControl;
 import org.junit.Test;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.CATCH_PERK_SCORE;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.KILL_WALL_SCORE;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.reset;
@@ -376,7 +376,7 @@ public class PerksTest extends AbstractGameTest {
         hero.move(3, 4);
         boxAt(1, 2); // две коробки подорвали, две добавили
         boxAt(1, 3);
-        field.objects().add(new Wall(1, 4));
+        field.walls().add(new Wall(1, 4));
 
         // when
         field.tick();
@@ -1318,8 +1318,8 @@ public class PerksTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionBlastOnAction_whenBRCperk_caseOnePotion() {
-
         canDropPotions(1);
+
         player.getHero().addPerk(new PotionRemoteControl(2, 1));
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
@@ -1515,11 +1515,11 @@ public class PerksTest extends AbstractGameTest {
     }
 
     @Test
-    public void shouldSuicide_whenBRCperk_shouldRemoveAfterDeath_andCollectScores() {
+    public void shouldSuicide_whenBRCPerk_shouldRemoveAfterDeath_andCollectScores() {
         boxesCount(1);
         boxAt(0, 1);
 
-        ghostAt(3, 0);
+        ghostAt(3, 0).stop();
 
         canDropPotions(1);
         potionsPower(3);

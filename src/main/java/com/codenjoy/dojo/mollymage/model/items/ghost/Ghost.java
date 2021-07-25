@@ -37,7 +37,7 @@ import static com.codenjoy.dojo.games.mollymage.Element.DEAD_GHOST;
 import static com.codenjoy.dojo.games.mollymage.Element.GHOST;
 import static com.codenjoy.dojo.services.StateUtils.filterOne;
 
-public class Ghost extends Wall implements State<Element, Player>, Tickable {
+public class Ghost extends PointImpl implements State<Element, Player>, Tickable {
 
     public static final int MAX = 100;
 
@@ -52,17 +52,12 @@ public class Ghost extends Wall implements State<Element, Player>, Tickable {
         this.dice = dice;
     }
 
-    public Ghost(int x, int y) {
-        super(x, y);
-    }
-
     public void stop() {
         this.stop = true;
     }
 
-    @Override
-    public Wall copy() {
-        return new Ghost(this.x, this.y);
+    public void start() {
+        stop = false;
     }
 
     public void setDirection(Direction direction) {
@@ -120,7 +115,7 @@ public class Ghost extends Wall implements State<Element, Player>, Tickable {
     }
 
     private boolean barrier(Point to) {
-        return field.objects().itsMe(to)
+        return field.ghosts().contains(to)
                 || field.walls().contains(to)
                 || field.boxes().contains(to)
                 || to.isOutOf(field.size());

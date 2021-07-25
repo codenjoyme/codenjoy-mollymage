@@ -27,6 +27,7 @@ import com.codenjoy.dojo.mollymage.model.items.Potion;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
@@ -51,8 +52,6 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     List<Wall> walls();
 
-    Objects objects();
-
     boolean isBarrier(Point pt, boolean isForHero);
 
     void remove(Player player);
@@ -63,7 +62,7 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     void remove(Potion potion);
 
-    void remove(Wall wall);
+    void remove(Point pt);
 
     List<PerkOnBoard> perks();
 
@@ -74,4 +73,6 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
     Optional<Point> freeRandom(Player player);
 
     TreasureBoxes boxes();
+
+    Ghosts ghosts();
 }

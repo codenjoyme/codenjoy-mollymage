@@ -44,8 +44,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -54,7 +54,6 @@ import static org.mockito.Mockito.*;
 public abstract class AbstractMultiplayerTest {
 
     public static final int SIZE = 5;
-    protected Objects objects;
     protected List<Hero> heroes = new LinkedList<>();
     protected List<Game> games = new LinkedList<>();
     private List<EventListener> listeners = new LinkedList<>();
@@ -67,16 +66,13 @@ public abstract class AbstractMultiplayerTest {
     protected EventsListenersAssert events = new EventsListenersAssert(() -> listeners, Events.class);
 
     public void setup() {
-        objects = new ObjectsImpl(settings);
         perks = settings.perksSettings();
-        givenObjects();
-
-        when(settings.objects(dice)).thenReturn(objects);
 
         Level level = mock(Level.class);
         when(level.size()).thenReturn(SIZE);
 
         boxesCount(0);
+        ghostsCount(0);
 
         field = new MollyMage(level, dice, settings);
     }
@@ -104,14 +100,26 @@ public abstract class AbstractMultiplayerTest {
         field.boxes().add(new TreasureBox(x, y));
     }
 
+    protected int boxesCount() {
+        return settings.integer(TREASURE_BOX_COUNT);
+    }
+
     protected void boxesCount(int count) {
         settings.integer(TREASURE_BOX_COUNT, count);
+    }
+
+    protected int ghostsCount() {
+        return settings.integer(GHOSTS_COUNT);
+    }
+
+    protected void ghostsCount(int count) {
+        settings.integer(GHOSTS_COUNT, count);
     }
 
     protected Ghost ghostAt(int x, int y) {
         Ghost ghost = new Ghost(pt(x, y), field, dice);
         ghost.stop();
-        objects.add(ghost);
+        field.ghosts().add(ghost);
         return ghost;
     }
 
@@ -154,10 +162,6 @@ public abstract class AbstractMultiplayerTest {
         for (int value : values) {
             when = when.thenReturn(value);
         }
-    }
-
-    private void givenObjects(Wall... input) {
-        Arrays.asList(input).forEach(objects::add);
     }
 
     protected void resetHeroes() {

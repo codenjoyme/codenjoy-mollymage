@@ -149,10 +149,6 @@ public class GameSettings extends SettingsImpl
         return new LevelImpl(string(LEVEL_MAP));
     }
 
-    public Objects objects(Dice dice) {
-        return new Ghosts(new ObjectsImpl(this), dice);
-    }
-
     public PerksSettingsWrapper perksSettings() {
         return new PerksSettingsWrapper(this);
     }

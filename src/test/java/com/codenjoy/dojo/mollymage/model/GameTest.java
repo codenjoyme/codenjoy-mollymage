@@ -25,7 +25,7 @@ package com.codenjoy.dojo.mollymage.model;
 
 import com.codenjoy.dojo.mollymage.model.items.Potion;
 import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
-import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.services.Direction;
@@ -1263,7 +1263,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(ghostDice, 1, Direction.DOWN.value());
+        dice(dice, 1, Direction.DOWN.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -1278,7 +1278,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(ghostDice, 1);
+        dice(dice, 1);
         field.tick();
         field.tick();
         field.tick();
@@ -1297,7 +1297,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(ghostDice, 0, Direction.LEFT.value());
+        dice(dice, 0, Direction.LEFT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -1332,7 +1332,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(ghostDice, 1, Direction.RIGHT.value());
+        dice(dice, 1, Direction.RIGHT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -1347,11 +1347,11 @@ public class GameTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(ghostDice, 0, Direction.LEFT.value());
+        dice(dice, 0, Direction.LEFT.value());
         field.tick();
         field.tick();
 
-        dice(ghostDice, Direction.LEFT.value());
+        dice(dice, Direction.LEFT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -1366,7 +1366,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(ghostDice, Direction.DOWN.value());
+        dice(dice, Direction.DOWN.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -1399,7 +1399,6 @@ public class GameTest extends AbstractGameTest {
         verify(listener).event(Events.DIED);
     }
 
-
     // привидение умирает, если попадает под взывающееся зелье
     @Test
     public void shouldDieMonster_whenPotionExploded() {
@@ -1418,8 +1417,21 @@ public class GameTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(ghostDice, 1, Direction.DOWN.value());
+        dice(dice, 1, Direction.DOWN.value());
         field.tick();
+
+        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼&☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼☺        ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼☼\n");
+
         field.tick();
         field.tick();
         field.tick();
@@ -1428,8 +1440,21 @@ public class GameTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        dice(ghostDice, 1, Direction.LEFT.value());
+        dice(dice, 1, Direction.LEFT.value());
         field.tick();
+
+        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼☺      & ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼☼\n");
+
         field.tick();
 
         hero.act();
@@ -1468,7 +1493,7 @@ public class GameTest extends AbstractGameTest {
                 "☼҉x       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(ghostDice, SIZE - 2, SIZE - 2, Direction.DOWN.value());
+        dice(dice, SIZE - 2, SIZE - 2, Direction.DOWN.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -1528,9 +1553,10 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillGhost() {
-        ghostAt(0, 0);
-
         givenBoard(SIZE, 1, 0);
+
+        ghostsCount(1);
+        ghostAt(0, 0);
 
         hero.act();
         hero.right();
@@ -1553,14 +1579,15 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldCalculateGhostsAndWallKills() {
-        ghostAt(0, 0);
-        ghostAt(0, 2);
-
         givenBoard(SIZE, 1, 0);
 
         boxesCount(2);
         boxAt(0, 1);
         boxAt(0, 3);
+
+        ghostsCount(2);
+        ghostAt(0, 0);
+        ghostAt(0, 2);
 
         canDropPotions(4);
         potionsPower(1);
@@ -1604,9 +1631,11 @@ public class GameTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_GHOST]");
 
+        dice(dice, 3, 4, Direction.ACT.value()); // новое привидение, стоит не двигается
         field.tick();
+        field.ghosts().all().forEach(Ghost::stop); // и не будет больше двигаться
 
-        asrtBrd("  ☺  \n" +
+        asrtBrd("  ☺& \n" +
                 "#2   \n" +
                 "&1   \n" +
                 "H҉҉  \n" +
@@ -1617,7 +1646,7 @@ public class GameTest extends AbstractGameTest {
         dice(dice, 4, 4); // новая коробка
         field.tick();
 
-        asrtBrd("  ☺ #\n" +
+        asrtBrd("  ☺&#\n" +
                 "#1   \n" +
                 "x҉҉  \n" +
                 " ҉   \n" +
@@ -1625,17 +1654,19 @@ public class GameTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_GHOST]");
 
+        dice(dice, 3, 3, Direction.ACT.value()); // новое привидение, стоит не двигается
         field.tick();
+        field.ghosts().all().forEach(Ghost::stop); // и не будет больше двигаться
 
-        asrtBrd(" ҉☺ #\n" +
-                "H҉҉  \n" +
+        asrtBrd(" ҉☺&#\n" +
+                "H҉҉& \n" +
                 " ҉   \n" +
                 "     \n" +
                 "     \n");
 
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
-        dice(dice, 4, 3); // новая коробкас
+        dice(dice, 4, 3); // новая коробка
         hero.left();
         field.tick();
 
@@ -1643,8 +1674,8 @@ public class GameTest extends AbstractGameTest {
         hero.act();
         field.tick();
 
-        asrtBrd("    #\n" +
-                " ☻  #\n" +
+        asrtBrd("   &#\n" +
+                " ☻ &#\n" +
                 "     \n" +
                 "     \n" +
                 "     \n");
@@ -1654,8 +1685,8 @@ public class GameTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd(" ҉  #\n" +
-                "҉Ѡ҉ #\n" +
+        asrtBrd(" ҉ &#\n" +
+                "҉Ѡ҉&#\n" +
                 " ҉   \n" +
                 "     \n" +
                 "     \n");
@@ -1663,14 +1694,21 @@ public class GameTest extends AbstractGameTest {
         events.verifyAllEvents("[DIED]");
         assertHeroDie();
 
+        dice(dice, 1, 1);
         field.tick();
         game.newGame();
+
+        asrtBrd("   &#\n" +
+                "   &#\n" +
+                "     \n" +
+                " ☺   \n" +
+                "     \n");
 
         hero = (Hero) game.getJoystick();
         hero.move(pt(1, 0));
 
-        asrtBrd("    #\n" +
-                "    #\n" +
+        asrtBrd("   &#\n" +
+                "   &#\n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n");
@@ -1686,8 +1724,8 @@ public class GameTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("    #\n" +
-                "    #\n" +
+        asrtBrd("   &#\n" +
+                "   &#\n" +
                 "     \n" +
                 " ҉   \n" +
                 "҉҉҉☺ \n");
@@ -1695,16 +1733,17 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldCalculateGhostsAndWallKills_caseBigBadaboom() {
-        settings.bool(BIG_BADABOOM, true)
-                .integer(TREASURE_BOX_COUNT, 2);
-
-        ghostAt(0, 0);
-        ghostAt(0, 2);
+        settings.bool(BIG_BADABOOM, true);
 
         givenBoard(SIZE, 1, 0);
 
+        boxesCount(2);
         boxAt(0, 1);
         boxAt(0, 3);
+
+        ghostsCount(2);
+        ghostAt(0, 0);
+        ghostAt(0, 2);
 
         canDropPotions(4);
         potionsPower(1);
@@ -1817,7 +1856,7 @@ public class GameTest extends AbstractGameTest {
                 "☼   ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(ghostDice, Direction.LEFT.value());
+        dice(dice, Direction.LEFT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -1838,7 +1877,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(ghostDice, Direction.RIGHT.value());
+        dice(dice, Direction.RIGHT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -1863,7 +1902,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(ghostDice, Direction.RIGHT.value());
+        dice(dice, Direction.RIGHT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -1872,7 +1911,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(ghostDice, Direction.UP.value());
+        dice(dice, Direction.UP.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -1881,7 +1920,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(ghostDice, Direction.LEFT.value());
+        dice(dice, Direction.LEFT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -1890,7 +1929,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(ghostDice, Direction.DOWN.value());
+        dice(dice, Direction.DOWN.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -1915,7 +1954,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(ghostDice, Direction.LEFT.value());
+        dice(dice, Direction.LEFT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -1924,7 +1963,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(ghostDice, Direction.LEFT.value());
+        dice(dice, Direction.LEFT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -2009,9 +2048,10 @@ public class GameTest extends AbstractGameTest {
     public void shouldStopBlastWhenGhost() {
         potionsPower(5);
 
-        ghostAt(4, 0);
-
         givenBoard(7, 0, 0);
+
+        ghostsCount(1);
+        ghostAt(4, 0).stop();
 
         hero.act();
         hero.up();
@@ -2040,14 +2080,11 @@ public class GameTest extends AbstractGameTest {
     public void shouldGhostAppearAfterKill() {
         potionsPower(3);
 
-        dice(ghostDice, 3, 0, Direction.DOWN.value());
-        settings.integer(GHOSTS_COUNT, 1);
-        Ghosts walls = new Ghosts(new ObjectsImpl(settings), ghostDice);
-        walls.init(field);
-        withObjects(walls);
-
         givenBoard(SIZE, 0, 0);
 
+        dice(dice, 3, 0, Direction.DOWN.value());
+        ghostsCount(1);
+        
         hero.act();
         hero.up();
         field.tick();
@@ -2065,7 +2102,7 @@ public class GameTest extends AbstractGameTest {
                 "҉☺   \n" +
                 "҉҉҉x \n");
 
-        dice(ghostDice, 2, 2, Direction.DOWN.value());
+        dice(dice, 2, 2, Direction.DOWN.value());
         field.tick();
 
         asrtBrd("     \n" +
@@ -2079,16 +2116,13 @@ public class GameTest extends AbstractGameTest {
     public void shouldGhostNotAppearWhenDestroyWall() {
         potionsPower(3);
 
-        dice(ghostDice, 4, 4, Direction.RIGHT.value());
-        settings.integer(GHOSTS_COUNT, 1);
-        Ghosts walls = new Ghosts(this.objects, ghostDice);
-        walls.init(field);
-        withObjects(walls);
-
-        boxesCount(1);
         givenBoard(SIZE, 0, 0);
 
+        dice(dice, 4, 4, Direction.RIGHT.value());
+        ghostsCount(1);
+        
         boxAt(3, 0);
+        boxesCount(1);
 
         hero.act();
         hero.up();
@@ -2107,8 +2141,9 @@ public class GameTest extends AbstractGameTest {
                 "҉☺   \n" +
                 "҉҉҉H \n");
 
-        dice(ghostDice, Direction.DOWN.value());
-        dice(dice, 3, 3); // новая коробка
+        dice(dice,
+                Direction.DOWN.value(), // направление движения привидения
+                3, 3); // новая коробка
         field.tick();
 
         asrtBrd("     \n" +
@@ -2132,7 +2167,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(ghostDice,
+        dice(dice,
                 0, 0, // на неразрушаемой стене нельзя
                 hero.getX(), hero.getY(), // попытка поселиться на герое
                 3, 3, // попытка - клетка свободна

@@ -31,6 +31,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_ENABLED;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.mock;
@@ -39,21 +40,24 @@ public class GameRunnerTest {
 
     private PrinterFactory printerFactory = new PrinterFactoryImpl();
 
-    @Ignore
     @Test
     public void shouldWork() {
-        int size = 11;
+        int size = 23;
+        int boxes = 5;
+        int ghosts = 15;
 
         EventListener listener = mock(EventListener.class);
-        GameRunner gameType = new GameRunner();
+        GameRunner gameType = new GameRunner(){
+            @Override
+            public GameSettings getSettings() {
+                return super.getSettings()
+                            .bool(ROUNDS_ENABLED, false)
+                            .integer(TREASURE_BOX_COUNT, boxes)
+                            .integer(GHOSTS_COUNT, ghosts);
+            }
+        };
 
         GameSettings settings = gameType.getSettings();
-
-        int countDestroyWalls = 5;
-        settings.integer(TREASURE_BOX_COUNT, 5);
-
-        int ghostsCount = 15;
-        settings.integer(GHOSTS_COUNT, ghostsCount);
 
         Game game = TestUtils.buildGame(gameType, listener, printerFactory);
         game.getField().tick();
@@ -61,20 +65,20 @@ public class GameRunnerTest {
         PlayerScores scores = gameType.getPlayerScores(10, settings);
         assertEquals(10, scores.getScore());
         scores.event(Events.KILL_GHOST);
-        assertEquals(110, scores.getScore());
+        assertEquals(20, scores.getScore());
 
         assertEquals(size, gameType.getBoardSize(settings).getValue().intValue());
 
         Joystick joystick = game.getJoystick();
 
-        int countWall = (size - 1) * 4 + (size / 2 - 1) * (size / 2 - 1);
+        int walls = (size - 1) * 4 + (size / 2 - 1) * (size / 2 - 1);
 
         String actual = (String)game.getBoardAsString();
-        assertCharCount(actual, "☼", countWall);
-        assertCharCount(actual, "#", countDestroyWalls);
-        assertCharCount(actual, "☺", 1); // TODO почему тут скачет тест?
-        assertCharCount(actual, "&", ghostsCount);  // TODO тут ошибка опять появилась
-        assertCharCount(actual, " ", size * size - countWall - countDestroyWalls - ghostsCount - 1);
+        assertCharCount(actual, "☼", walls);
+        assertCharCount(actual, "#", boxes);
+        assertCharCount(actual, "☺", 1);
+        assertCharCount(actual, "&", ghosts);
+        assertCharCount(actual, " ", size * size - walls - boxes - ghosts - 1);
 
         assertFalse(game.isGameOver());
 

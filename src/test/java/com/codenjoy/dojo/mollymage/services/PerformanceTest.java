@@ -26,14 +26,16 @@ package com.codenjoy.dojo.mollymage.services;
 import com.codenjoy.dojo.profile.Profiler;
 import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.services.Game;
+import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.utils.TestUtils;
 import org.junit.Test;
 
-import java.util.LinkedList;
 import java.util.List;
 
+import static com.codenjoy.dojo.mollymage.model.AbstractGameTest.generate;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -45,7 +47,7 @@ public class PerformanceTest {
     @Test
     public void test() {
 
-        // about 37 sec
+        // about 32 sec
         int boardSize = 100;
         int walls = 600;
         int ghosts = 100;
@@ -57,16 +59,18 @@ public class PerformanceTest {
         }};
         profiler.start();
 
+        PrinterFactory factory = new PrinterFactoryImpl();
+
+        String level = toString(boardSize, factory);
         GameRunner runner = new GameRunner(){
             @Override
             public GameSettings getSettings() {
                 return super.getSettings()
+                        .string(LEVEL_MAP, level)
                         .integer(TREASURE_BOX_COUNT, walls)
                         .integer(GHOSTS_COUNT, ghosts);
             }
         };
-
-        PrinterFactory factory = new PrinterFactoryImpl();
 
         List<Game> games = TestUtils.getGames(players, runner,
                 factory, () -> mock(EventListener.class));
@@ -94,6 +98,21 @@ public class PerformanceTest {
         // выполнялось единожды
         assertLess("creation", 500 * reserve);
 
+    }
+
+    private String toString(int boardSize, PrinterFactory factory) {
+        String level = (String) factory.getPrinter(new BoardReader() {
+            @Override
+            public int size() {
+                return boardSize;
+            }
+
+            @Override
+            public Iterable<? extends Point> elements(Object player) {
+                return generate(boardSize);
+            }
+        }, null).print();
+        return level;
     }
 
     private void assertLess(String phase, double expected) {

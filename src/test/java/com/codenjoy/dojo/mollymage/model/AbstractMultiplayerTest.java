@@ -23,6 +23,7 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 import com.codenjoy.dojo.mollymage.TestGameSettings;
+import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
@@ -67,7 +68,10 @@ public abstract class AbstractMultiplayerTest {
 
         when(settings.getWalls(dice)).thenReturn(walls);
 
-        field = new MollyMage(SIZE, dice, settings);
+        Level level = mock(Level.class);
+        when(level.size()).thenReturn(SIZE);
+
+        field = new MollyMage(level, dice, settings);
     }
 
     protected GameSettings settings() {

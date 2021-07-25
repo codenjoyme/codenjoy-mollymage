@@ -32,6 +32,7 @@ import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.codenjoy.dojo.mollymage.model.AbstractGameTest.generate;
 import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
@@ -67,7 +68,7 @@ public class WallsTest {
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n",
-                print(new OriginalWalls(v(SIZE))));
+                print(walls(SIZE)));
     }
 
     private String print(final Walls walls) {
@@ -133,17 +134,25 @@ public class WallsTest {
     }
 
     private String givenBoardWithGhosts(int count) {
-        walls = new Ghosts(new OriginalWalls(v(SIZE)), v(count), dice);
+        walls = new Ghosts(walls(SIZE), v(count), dice);
         walls.init(field);
         walls.tick();
         return print(walls);
     }
 
     private String getBoardWithDestroyWalls(int count) {
-        walls = new EatSpaceWalls(new OriginalWalls(v(SIZE)), v(count), dice);
+        walls = new EatSpaceWalls(walls(SIZE), v(count), dice);
         walls.init(field);
         walls.tick();
         return print(walls);
+    }
+
+    private WallsImpl walls(int size) {
+        return new WallsImpl() {{
+            for (Wall wall : generate(size)) {
+                add(wall);
+            }
+        }};
     }
 
 }

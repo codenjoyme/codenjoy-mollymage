@@ -23,6 +23,7 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
+import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.services.*;
 import org.junit.Assert;
@@ -32,6 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BIG_BADABOOM;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 import static org.junit.Assert.*;
@@ -42,7 +44,10 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldBoard_whenStartGame() {
-        MollyMage board = new MollyMage(10, dice, settings);
+        Level level = mock(Level.class);
+        when(level.size()).thenReturn(10);
+
+        MollyMage board = new MollyMage(level, dice, settings);
 
         assertEquals(10, board.size());
     }
@@ -1203,7 +1208,7 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldChangeWall_whenUseBoardApi() {
-        givenBoardWithWalls();
+        givenBoardWithDestroyWalls();
 
         Walls walls1 = field.walls();
         Walls walls2 = field.walls();
@@ -1795,7 +1800,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
     }
 
-    // чертик  может ходить по бомбам
+    // чертик может ходить по бомбам
     @Test
     public void shouldMonsterCanMoveOnPotion() {
         givenBoardWithGhost(SIZE);
@@ -2071,7 +2076,8 @@ public class GameTest extends AbstractGameTest {
         Dice wallDice = mock(Dice.class);
         dice(wallDice, 2, 1);
 
-        EatSpaceWalls walls = new EatSpaceWalls(new OriginalWalls(v(size)), v(1), wallDice);
+        generateWalls(size);
+        EatSpaceWalls walls = new EatSpaceWalls(new WallsImpl(), v(1), wallDice);
         withWalls(walls);
 
         givenBoard(size, 1, 1);  // hero в левом нижнем углу

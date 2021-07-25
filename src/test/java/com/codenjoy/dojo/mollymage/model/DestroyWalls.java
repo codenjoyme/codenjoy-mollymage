@@ -22,11 +22,15 @@ package com.codenjoy.dojo.mollymage.model;
  * #L%
  */
 
+import com.codenjoy.dojo.services.Point;
+
+import java.util.List;
+
 public class DestroyWalls extends WallsDecorator implements Walls {
 
-    public DestroyWalls(Walls walls) {
+    public DestroyWalls(List<? extends Point> points) {
         super(new WallsImpl());
-        walls.forEach(wall -> this.walls.add(new TreasureBox(wall)));
+        points.forEach(pt -> this.walls.add(new TreasureBox(pt)));
     }
 
     @Override

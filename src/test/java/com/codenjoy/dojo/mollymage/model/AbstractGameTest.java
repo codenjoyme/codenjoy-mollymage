@@ -22,6 +22,7 @@ package com.codenjoy.dojo.mollymage.model;
  * #L%
  */
 
+import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.TestGameSettings;
 import com.codenjoy.dojo.mollymage.services.Events;
@@ -35,6 +36,8 @@ import org.junit.Before;
 import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
@@ -58,10 +61,12 @@ public class AbstractGameTest {
     private PrinterFactory printer;
     protected PerksSettingsWrapper perks;
     protected EventsListenersAssert events;
+    protected Level level;
 
     @Before
     public void setUp() {
         dice = mock(Dice.class);
+        level = mock(Level.class);
         ghostDice = mock(Dice.class);
         settings = spy(new TestGameSettings());
         printer = new PrinterFactoryImpl();
@@ -78,7 +83,8 @@ public class AbstractGameTest {
 
     protected void givenBoard(int size, int x, int y) {
         dice(dice, x, y);
-        field = new MollyMage(size, dice, settings);
+        when(level.size()).thenReturn(size);
+        field = new MollyMage(level, dice, settings);
         listener = mock(EventListener.class);
         player = new Player(listener, settings);
         game = new Single(player, printer);
@@ -134,8 +140,36 @@ public class AbstractGameTest {
     }
 
     protected void givenBoardWithWalls(int size) {
-        withWalls(new OriginalWalls(v(size)));
+        generateWalls(size);
         givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
+    }
+
+    public static List<Wall> generate(int size) {
+        List<Wall> result = new LinkedList<>();
+        for (int x = 0; x < size; x++) {
+            result.add(new Wall(x, 0));
+            result.add(new Wall(x, size - 1));
+        }
+
+        final int D = 1;
+        for (int y = D; y < size - D; y++) {
+            result.add(new Wall(0, y));
+            result.add(new Wall(size - 1, y));
+        }
+
+        for (int x = 2; x <= size - 2; x++) {
+            for (int y = 2; y <= size - 2; y++) {
+                if (y % 2 != 0 || x % 2 != 0) {
+                    continue;
+                }
+                result.add(new Wall(x, y));
+            }
+        }
+        return result;
+    }
+
+    protected void generateWalls(int size) {
+        when(level.getWalls()).thenReturn(generate(size));
     }
 
     protected void givenBoardWithDestroyWalls() {
@@ -143,7 +177,7 @@ public class AbstractGameTest {
     }
 
     protected void givenBoardWithDestroyWalls(int size) {
-        withWalls(new Ghosts(new DestroyWalls(new OriginalWalls(v(size))), v(0), dice));
+        withWalls(new Ghosts(new DestroyWalls(generate(size)), v(0), dice));
         givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
     }
 
@@ -156,7 +190,7 @@ public class AbstractGameTest {
     }
 
     protected void givenBoardWithOriginalWalls(int size) {
-        withWalls(new OriginalWalls(v(size)));
+        generateWalls(size);
         givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
     }
 
@@ -198,7 +232,8 @@ public class AbstractGameTest {
         dice(ghostDice, size - 2, size - 2);
 
         SIZE = size;
-        Ghosts walls = new Ghosts(new OriginalWalls(v(size)), v(1), ghostDice);
+        generateWalls(size);
+        Ghosts walls = new Ghosts(new WallsImpl(), v(1), ghostDice);
         withWalls(walls);
 
         givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен

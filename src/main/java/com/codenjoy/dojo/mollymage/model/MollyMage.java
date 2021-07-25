@@ -23,6 +23,7 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
+import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.perks.*;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
@@ -47,7 +48,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     private final List<Player> players = new LinkedList<>();
 
-    private final int size;
+    private int size;
     private final Walls walls;
 
     private List<Wall> wallsElements = new LinkedList<>();
@@ -61,18 +62,18 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     private final GameSettings settings;
 
-    public MollyMage(int size, Dice dice, GameSettings settings) {
+    public MollyMage(Level level, Dice dice, GameSettings settings) {
         super(Events.START_ROUND, Events.WIN_ROUND, Events.DIED, settings);
-        this.size = size;
         this.settings = settings;
-
         this.dice = dice;
+        init(level);
         walls = settings.getWalls(dice);
         walls.init(this);
     }
 
-    public void setWallsElements(List<Wall> wallsElements) {
-        this.wallsElements = wallsElements;
+    private void init(Level level) {
+        this.size = level.size();
+        this.wallsElements = level.getWalls();
     }
 
     @Override
@@ -253,7 +254,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     @Override
     public List<Wall> borders() {
-        return wallElements;
+        return wallsElements;
     }
 
     @Override

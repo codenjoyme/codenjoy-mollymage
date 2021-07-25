@@ -68,7 +68,6 @@ public class GameSettings extends SettingsImpl
         TIMEOUT_POTION_IMMUNE("[Perks] Potion immune effect timeout"),
         REMOTE_CONTROL_COUNT("[Perks] Number of Potion remote controls (how many times player can use it)"),
         DEFAULT_PERKS("[Perks] Perks available in this game"),
-
         LEVEL_MAP("[Level] map");
 
         private String key;

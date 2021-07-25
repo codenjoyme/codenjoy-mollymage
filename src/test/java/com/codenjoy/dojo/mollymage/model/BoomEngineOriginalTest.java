@@ -36,8 +36,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.codenjoy.dojo.mollymage.model.AbstractGameTest.generate;
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 import static org.junit.Assert.assertEquals;
 
 public class BoomEngineOriginalTest {
@@ -143,7 +143,7 @@ public class BoomEngineOriginalTest {
     @Test
     public void testBigBoomAtClassicWalls() {
         List<Wall> barriers = new LinkedList<Wall>();
-        CollectionUtils.addAll(barriers, new OriginalWalls(v(SIZE)).iterator());
+        CollectionUtils.addAll(barriers, generate(SIZE).iterator());
         Point source = pt(11, 11);
         int radius = 3;
         int countBlasts = 4*radius + 1;
@@ -174,8 +174,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testBigBoomAtClassicWalls2() {
-        List<Wall> barriers = new LinkedList<Wall>();
-        CollectionUtils.addAll(barriers, new OriginalWalls(v(SIZE)).iterator());
+        List<Wall> barriers = new LinkedList<>();
+        CollectionUtils.addAll(barriers, generate(SIZE).iterator());
         Point source = pt(12, 11);
         int radius = 3;
         int countBlasts = 2*radius + 1;
@@ -206,8 +206,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testBigBoomAtClassicWalls3() {
-        List<Wall> barriers = new LinkedList<Wall>();
-        CollectionUtils.addAll(barriers, new OriginalWalls(v(SIZE)).iterator());
+        List<Wall> barriers = new LinkedList<>();
+        CollectionUtils.addAll(barriers, generate(SIZE).iterator());
         Point source = pt(11, 12);
         int radius = 3;
         int countBlasts = 2*radius + 1;
@@ -238,8 +238,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testBigBoomAtClassicWalls4() {
-        List<Wall> barriers = new LinkedList<Wall>();
-        CollectionUtils.addAll(barriers, new OriginalWalls(v(SIZE)).iterator());
+        List<Wall> barriers = new LinkedList<>();
+        CollectionUtils.addAll(barriers, generate(SIZE).iterator());
         Point source = pt(1, 1);
         int radius = 15;
         int countBlasts = 2*radius + 1;
@@ -271,7 +271,7 @@ public class BoomEngineOriginalTest {
     @Test
     public void testBigBoomAtClassicWalls5() {
         List<Wall> barriers = new LinkedList<>();
-        CollectionUtils.addAll(barriers, new OriginalWalls(v(SIZE)).iterator());
+        CollectionUtils.addAll(barriers, generate(SIZE).iterator());
         Point source = pt(11, 11);
         int radius = 15;
         int countBlasts = 2 * (SIZE - 2) - 1;
@@ -302,8 +302,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testBigBoomAtClassicWalls6() {
-        List<Wall> barriers = new LinkedList<Wall>();
-        CollectionUtils.addAll(barriers, new OriginalWalls(v(SIZE)).iterator());
+        List<Wall> barriers = new LinkedList<>();
+        CollectionUtils.addAll(barriers, generate(SIZE).iterator());
         Point source = pt(12, 11);
         int radius = 15;
         int countBlasts = SIZE - 2;
@@ -334,8 +334,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testBigBoomAtClassicWalls7() {
-        List<Wall> barriers = new LinkedList<Wall>();
-        CollectionUtils.addAll(barriers, new OriginalWalls(v(SIZE)).iterator());
+        List<Wall> barriers = new LinkedList<>();
+        CollectionUtils.addAll(barriers, generate(SIZE).iterator());
         Point source = pt(11, 12);
         int radius = 15;
         int countBlasts = SIZE - 2;

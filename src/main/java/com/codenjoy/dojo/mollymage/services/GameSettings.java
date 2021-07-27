@@ -41,6 +41,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_TEAMS_PER_ROOM;
 
 public class GameSettings extends SettingsImpl
         implements SettingsReader<GameSettings>,
@@ -61,6 +62,7 @@ public class GameSettings extends SettingsImpl
         POTION_POWER("[Level] Potion power"),
         TREASURE_BOX_COUNT("[Level] Treasure boxes count"),
         GHOSTS_COUNT("[Level] Ghosts count"),
+        PERK_WHOLE_TEAM_GET("[Perks] All teammates get perk"),
         PERK_DROP_RATIO("[Perks] Perks drop ratio in %"),
         PERK_PICK_TIMEOUT("[Perks] Perks pick timeout"),
         PERK_POTION_BLAST_RADIUS_INC("[Perks] Potion blast radius increase"),
@@ -107,6 +109,7 @@ public class GameSettings extends SettingsImpl
         integer(TREASURE_BOX_COUNT, 52);
         integer(GHOSTS_COUNT, 5);
 
+        bool(PERK_WHOLE_TEAM_GET, false);
         string(DEFAULT_PERKS, StringUtils.EMPTY);
         PerksSettingsWrapper perks =
                 perksSettings()
@@ -153,4 +156,7 @@ public class GameSettings extends SettingsImpl
         return new PerksSettingsWrapper(this);
     }
 
+    public boolean isTeamDeathMatch() {
+        return integer(ROUNDS_TEAMS_PER_ROOM) > 1;
+    }
 }

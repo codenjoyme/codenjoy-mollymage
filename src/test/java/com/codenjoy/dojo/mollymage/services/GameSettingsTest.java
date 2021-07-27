@@ -73,6 +73,7 @@ public class GameSettingsTest {
                 "  'PERK_PICK_TIMEOUT':30,\n" +
                 "  'PERK_POTION_BLAST_RADIUS_INC':2,\n" +
                 "  'PERK_POTION_COUNT_INC':4,\n" +
+                "  'PERK_WHOLE_TEAM_GET':false,\n" +
                 "  'POTIONS_COUNT':1,\n" +
                 "  'POTION_POWER':3,\n" +
                 "  'REMOTE_CONTROL_COUNT':3,\n" +
@@ -125,6 +126,7 @@ public class GameSettingsTest {
                 "  'PERK_PICK_TIMEOUT':30,\n" +
                 "  'PERK_POTION_BLAST_RADIUS_INC':4,\n" +
                 "  'PERK_POTION_COUNT_INC':4,\n" +
+                "  'PERK_WHOLE_TEAM_GET':false,\n" +
                 "  'POTIONS_COUNT':1,\n" +
                 "  'POTION_POWER':3,\n" +
                 "  'REMOTE_CONTROL_COUNT':3,\n" +
@@ -168,6 +170,7 @@ public class GameSettingsTest {
                 "  'PERK_PICK_TIMEOUT':30,\n" +
                 "  'PERK_POTION_BLAST_RADIUS_INC':4,\n" +
                 "  'PERK_POTION_COUNT_INC':4,\n" +
+                "  'PERK_WHOLE_TEAM_GET':false,\n" +
                 "  'POTIONS_COUNT':1,\n" +
                 "  'POTION_POWER':3,\n" +
                 "  'REMOTE_CONTROL_COUNT':3,\n" +

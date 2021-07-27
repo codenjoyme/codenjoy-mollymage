@@ -107,7 +107,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
             move(pt);
             PerkOnBoard perk = field.pickPerk(pt);
             if (perk != null) {
-                addPerk(perk.getPerk());
+                field.addPerk((Player) this.getPlayer(), perk.getPerk());
                 event(Events.CATCH_PERK);
             }
         }
@@ -221,6 +221,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         return anyHeroFromAnotherTeam(player, heroes) ? ENEMY_HERO : OTHER_HERO;
     }
 
+    // TODO do we use only settings.isTeamDeathMatch() here?
     private boolean anyHeroFromAnotherTeam(Player player, List<Hero> heroes) {
         return heroes.stream()
                 .anyMatch(hero -> player.getTeamId() != hero.getPlayer().getTeamId());

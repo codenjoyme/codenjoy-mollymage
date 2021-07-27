@@ -23,20 +23,20 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
-import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
+import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.items.Potion;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.blast.BoomEngineOriginal;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
-import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.items.perks.*;
+import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.BoardUtils;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
@@ -48,6 +48,7 @@ import com.google.common.collect.Multimap;
 import java.util.*;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BIG_BADABOOM;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.PERK_WHOLE_TEAM_GET;
 import static java.util.stream.Collectors.toList;
 
 public class MollyMage extends RoundField<Player> implements Field {
@@ -105,6 +106,29 @@ public class MollyMage extends RoundField<Player> implements Field {
             return null;
         }
         return perks.remove(index);
+    }
+
+    @Override
+    public void addPerk(Player player, Perk perk) {
+        if (isWholeTeamShouldGetPerk()) {
+            addPerk(player.getTeamId(), perk);
+        } else {
+            player.getHero().addPerk(perk);
+        }
+    }
+
+    @Override
+    public void addPerk(int teamId, Perk perk) {
+        for (Player player : players) {
+            if (player.getTeamId() == teamId) {
+                player.getHero().addPerk(perk);
+            }
+        }
+    }
+
+    private boolean isWholeTeamShouldGetPerk() {
+        return settings.isTeamDeathMatch()
+                && settings.bool(PERK_WHOLE_TEAM_GET);
     }
 
     @Override
@@ -166,8 +190,8 @@ public class MollyMage extends RoundField<Player> implements Field {
         // тикаем счетчик перка на поле и если просрочка, удаляем
         perks.forEach(perk -> perk.tick());
         perks = perks.stream()
-            .filter(perk -> perk.getPerk().getPickTimeout() > 0)
-            .collect(toList());
+                .filter(perk -> perk.getPerk().getPickTimeout() > 0)
+                .collect(toList());
     }
 
     private void tactAllHeroes() {
@@ -258,8 +282,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     @Override
     public List<Potion> potions(Hero hero) {
         return potions.stream()
-            .filter(potion -> potion.itsMine(hero))
-            .collect(toList());
+                .filter(potion -> potion.itsMine(hero))
+                .collect(toList());
     }
 
     @Override

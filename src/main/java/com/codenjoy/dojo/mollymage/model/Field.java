@@ -29,6 +29,7 @@ import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
+import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.round.RoundGameField;
@@ -67,6 +68,10 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
     List<PerkOnBoard> perks();
 
     PerkOnBoard pickPerk(Point pt);
+
+    void addPerk(Player player, Perk perk);
+
+    void addPerk(int teamId, Perk perk);
 
     Dice dice();
 

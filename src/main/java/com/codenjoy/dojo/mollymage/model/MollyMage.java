@@ -166,6 +166,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         applyAllHeroes();       // герои ходят
         ghostEatHeroes();       // омномном
         boxes.tick();           // сундуки появляются
+        clearDestroyedObjects();
         ghosts.tick();          // привидения водят свой хоровод
         ghostEatHeroes();       // омномном
         disablePotionRemote();  // если остались remote зелья без хозяев, взрываем
@@ -217,7 +218,9 @@ public class MollyMage extends RoundField<Player> implements Field {
                 ghosts.remove(pt);
             }
         }
+    }
 
+    private void clearDestroyedObjects() {
         destroyedObjects.clear();
     }
 
@@ -546,6 +549,13 @@ public class MollyMage extends RoundField<Player> implements Field {
         // TODO но герой может пойти к нему на встречу
         if (!isForHero) {
             if (ghosts.all().contains(pt)) {
+                return true;
+            }
+        }
+        
+        //проверка на спаун сундуков на месте разрушенний
+        if (!isForHero) {
+            if (destroyedObjects.contains(pt)) {
                 return true;
             }
         }

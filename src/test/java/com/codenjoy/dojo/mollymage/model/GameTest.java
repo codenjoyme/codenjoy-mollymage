@@ -2077,6 +2077,68 @@ public class GameTest extends AbstractGameTest {
     }
 
     @Test
+    public void shouldNotAppearBoxesOnDestroyedPlaces() {
+        potionsPower(1);
+        givenBoard(SIZE, 0, 0);
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
+        //hero set bomb and goes away
+        hero.act();
+        hero.up();
+        field.tick();
+        hero.right();
+        field.tick();
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "3    \n");
+
+        //generate boxes around hero from [0,0] to [2,2]
+        boxesCount(9);
+        final int[] square3x3Coordinates = getCoordinatesForPointsInSquare(3);
+        dice(dice, square3x3Coordinates);
+        field.tick();
+        asrtBrd("     \n" +
+                "     \n" +
+                "###  \n" +
+                "#☺#  \n" +
+                "2##  \n");
+        field.tick();
+
+        // two boxes should be destroyed and not appeared on next tick in the same places
+        field.tick();
+        asrtBrd("     \n" +
+                "     \n" +
+                "###  \n" +
+                "H☺#  \n" +
+                "҉H#  \n");
+
+        //all points on the board allowed for boxes regeneration except
+        // [0,1][1,0] - destroyed boxes and [1,1] - hero place
+        //fill board with boxes around hero
+        dice(dice, square3x3Coordinates);
+        field.tick();
+        asrtBrd("     \n" +
+                "     \n" +
+                "###  \n" +
+                " ☺#  \n" +
+                "# #  \n");
+
+        //and now boxes should been generated on [0,1] and [1,0] to
+        dice(dice, square3x3Coordinates);
+        field.tick();
+        asrtBrd("     \n" +
+                "     \n" +
+                "###  \n" +
+                "#☺#  \n" +
+                "###  \n");
+    }
+
+    @Test
     public void shouldGhostAppearAfterKill() {
         potionsPower(3);
 

@@ -41,6 +41,7 @@ import com.codenjoy.dojo.utils.events.EventsListenersAssert;
 import org.junit.Before;
 import org.mockito.stubbing.OngoingStubbing;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -265,5 +266,16 @@ public class AbstractGameTest {
         Ghost ghost = new Ghost(pt(x, y), field, dice);
         field.ghosts().add(ghost);
         return ghost;
+    }
+
+    protected int[] getCoordinatesForPointsInSquare(int size) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                result.add(i);
+                result.add(j);
+            }
+        }
+        return result.stream().mapToInt(i -> i).toArray();
     }
 }

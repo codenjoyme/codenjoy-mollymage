@@ -55,7 +55,6 @@ import static org.mockito.Mockito.*;
 public class AbstractGameTest {
 
     public int SIZE = 5;
-    public int SIZE_3 = 3;
     protected Game game;
     protected Hero hero;
     protected GameSettings settings;

@@ -363,7 +363,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         // вначале прибиваем объекты
         preys.forEach(object -> {
             if (object instanceof GhostHunter) {
-                ((GhostHunter)object).die();
+                ((GhostHunter) object).die();
             } else {
                 remove(object);
             }

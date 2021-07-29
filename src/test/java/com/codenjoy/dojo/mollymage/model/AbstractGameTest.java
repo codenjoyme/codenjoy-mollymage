@@ -271,10 +271,10 @@ public class AbstractGameTest {
 
     protected int[] getCoordinatesForPointsInSquare(int size) {
         List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                result.add(i);
-                result.add(j);
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+                result.add(y);
+                result.add(x);
             }
         }
         return result.stream().mapToInt(i -> i).toArray();

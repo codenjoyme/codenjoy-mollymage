@@ -2085,59 +2085,125 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        //hero set bomb and goes away
+        // when hero set bomb and goes away
         hero.act();
         hero.up();
         field.tick();
         hero.right();
         field.tick();
+
+        // then
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
                 "3    \n");
 
-        //generate boxes around hero from [0,0] to [2,2]
+        // when we allow to create more boxes
+        // boxes should fill square around hero in coordinates from [0,0] to [2,2]
+        // we allow to create 9 boxes and only 7 should be created
         boxesCount(9);
         final int[] square3x3Coordinates = getCoordinatesForPointsInSquare(3);
         dice(dice, square3x3Coordinates);
         field.tick();
+        // then
         asrtBrd("     \n" +
                 "     \n" +
                 "###  \n" +
                 "#☺#  \n" +
                 "2##  \n");
+        assertEquals(7, field.boxes().all().size());
+
+        // when field tick 2 times
+        field.tick();
         field.tick();
 
-        // two boxes should be destroyed and not appeared on next tick in the same places
-        field.tick();
+        //  then two boxes should been destroyed
         asrtBrd("     \n" +
                 "     \n" +
                 "###  \n" +
                 "H☺#  \n" +
                 "҉H#  \n");
 
-        //all points on the board allowed for boxes regeneration except
+        // all points on the board allowed for boxes regeneration except
         // [0,1][1,0] - destroyed boxes and [1,1] - hero place
-        //fill board with boxes around hero
+        // when fill board with boxes around hero
         dice(dice, square3x3Coordinates);
         field.tick();
+
+        // then only 6 boxes should been exist
         asrtBrd("     \n" +
                 "     \n" +
                 "###  \n" +
                 " ☺#  \n" +
                 "# #  \n");
+        assertEquals(6, field.boxes().all().size());
 
-        //and now boxes should been generated on [0,1] and [1,0] to
+
+        // when next tick - empty spaces should been filled by boxes
         dice(dice, square3x3Coordinates);
         field.tick();
+
+        // then boxes should been generated on [0,1] and [1,0] to
         asrtBrd("     \n" +
                 "     \n" +
                 "###  \n" +
                 "#☺#  \n" +
                 "###  \n");
+        assertEquals(8, field.boxes().all().size());
     }
 
+    @Test
+    public void shouldGhostNotAppearOnThePlaceWhereItDie_AfterKill() {
+        potionsPower(3);
+
+        givenBoard(SIZE_3, 0, 0);
+
+        dice(dice, 2, 0, Direction.DOWN.value());
+        ghostsCount(1);
+
+        // when portion explode
+        hero.act();
+        hero.up();
+        field.tick();
+
+        hero.right();
+        field.tick();
+
+        field.tick();
+        field.tick();
+        field.tick();
+
+        // then ghost die
+        asrtBrd("҉  \n" +
+                "҉☺ \n" +
+                "҉҉x\n");
+
+        // when fill free places boxes
+        boxesCount(6);
+        dice(dice, preparedCoordinatesForBoxesAndGhosts());
+        field.tick();
+
+        // then boxes fill whole field except 2 free points([2,2] and [0,2]).
+        // ghost tried to generate on both free places, but appeared only on [2,2]
+        // [0,2] denied as previous place of death
+        asrtBrd("##&\n" +
+                "#☺#\n" +
+                "## \n");
+        assertEquals(1, field.ghosts().all().size());
+    }
+
+    private int[] preparedCoordinatesForBoxesAndGhosts() {
+        int[] result = new int[]
+                {
+                        0, 0, 0, 1,         // boxes, first line
+                        1, 0, 1, 1, 1, 2,  // boxes second line
+                        2, 0, 2, 1,        // boxes third line
+                        0, 2,              // first point for ghost
+                        2, 2,              // second point for ghost
+                };
+        return result;
+    }
     @Test
     public void shouldGhostAppearAfterKill() {
         potionsPower(3);
@@ -2146,7 +2212,7 @@ public class GameTest extends AbstractGameTest {
 
         dice(dice, 3, 0, Direction.DOWN.value());
         ghostsCount(1);
-        
+
         hero.act();
         hero.up();
         field.tick();
@@ -2182,7 +2248,7 @@ public class GameTest extends AbstractGameTest {
 
         dice(dice, 4, 4, Direction.RIGHT.value());
         ghostsCount(1);
-        
+
         boxAt(3, 0);
         boxesCount(1);
 

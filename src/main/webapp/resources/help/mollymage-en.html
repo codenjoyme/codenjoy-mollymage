@@ -69,13 +69,13 @@
                         <p>On her/his way, the hero can meet a ghost – red air-ballon
                             that destroys all heroes on its way.</p>
 
-                        <p>Each destroyed object on the field (hero, ghost,
-                            destroyed walls) is restored in an instant in the other place.
+                        <p>Each destroyed object on the field (hero, ghost) or opened boxes
+                            is restored in an instant in the other place.
                             If the hero is damaged, the penalty points (-50*)
                             are allocated to him.</p>
 
                         <p>The hero whose potion destroyed something on the map receives
-                            bonus points as follows: +10* – for the destroyed walls,
+                            bonus points as follows: +10* – for the opened boxes,
                             +100* – for the ghost, +1000* – for the enemy hero.</p>
 
                         <p>*Please ask Sensei about scores on this game.</p>
@@ -189,16 +189,18 @@
                                // got destroyed
 
     /// walls
-    WALL('☼'),                 // undestroyable wall - it will not fall from potion
-    TREASURE_BOX('#'),         // this wall could be blown up
-    OPENING_TREASURE_BOX('H'), // this is how broken wall looks like, it will disappear on next move
-                               // if it's you did it - you'll get score points points.
+    WALL('☼'),                 // Indestructible wall - it will not fall from potion.
+    TREASURE_BOX('#'),         // this is a treasure box, it opens with an explosion.
+    OPENING_TREASURE_BOX('H'), // this is like a treasure box opens looks
+                               // like, it will disappear on next move.
+                               // if it's you did it - you'll get score
+                               // points. Perhaps a prize will appear.
 
     /// ghosts
     GHOST('&'),          // these guys run over the board randomly and get in the way all the time
                          // if it will touch hero - it will die
                          // you'd better kill this piece of ... soul, you'll get score points for it
-    DEAD_GHOST('x'),     // this is chopper corpse
+    DEAD_GHOST('x'),     // this is defeated ghost
 
     /// perks
     /// Values, time-outs, drop rate of perks can be adjusted by game administrator.
@@ -258,7 +260,7 @@ int boardSize()                               // returns the size of the board
 Collection&lt;Point&gt; getBarriers()               // the coordinates of all objects that hinder the movements
 Collection&lt;Point&gt; getGhosts()           // coordinates of all dangers that can destroy the hero
 Collection&lt;Point&gt; getWalls()                  // coordinates of all concrete walls
-Collection&lt;Point&gt; getTreasureBoxes()       // coordinates of all brick walls (they can be destroyed)
+Collection&lt;Point&gt; getTreasureBoxes()       // coordinates of all brick chests (they can be destroyed)
 Collection&lt;Point&gt; getBombs()                  // coordinates of all potions
 Collection&lt;Point&gt; getFutureBlasts()           // coordinates of all potential hazardous places where the potion 
                                                   // can explode (the potion explodes on N {N will be arranged 

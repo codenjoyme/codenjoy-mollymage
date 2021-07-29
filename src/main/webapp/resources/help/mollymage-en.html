@@ -161,36 +161,43 @@
 
     /// This is your Hero
     HERO('☺'),             // this is what he usually looks like
-    POTION_HERO('☻'),        // this is if he is sitting on own potion
+    POTION_HERO('☻'),      // this is if he is sitting on own potion
     DEAD_HERO('Ѡ'),        // oops, your Hero is dead (don't worry, he will appear
-                                // somewhere in next move)
-                                // you're getting penalty points for each death
+                           // somewhere in next move)
+                           // you're getting penalty points for each death
 
     /// this is other players Heroes
-    OTHER_HERO('♥'),       // this is what other Heroes looks like
-    OTHER_POTION_HERO('♠'),  // this is if player just set the potion
-    OTHER_DEAD_HERO('♣'),  // enemy corpse (it will disappear shortly, right on the next move)
-                                // if you've done it you'll get score points
+    OTHER_HERO('♥'),        // this is what other Heroes looks like
+    OTHER_POTION_HERO('♠'), // this is if player just set the potion
+    OTHER_DEAD_HERO('♣'),   // enemy corpse (it will disappear shortly, right on the next move)
+                            // if you've done it you'll get score points
+
+    /// enemy players heroes
+    ENEMY_HERO('♡'),        // This is what enemy heroes looks like.
+    ENEMY_POTION_HERO('♤'), // This is if enemy hero is sitting on own potion.
+    ENEMY_DEAD_HERO('♧');   // Enemy hero corpse (it will disappear shortly,
+                            // right on the next move).
+                            // If you've done it you'll get score points.
 
     /// the potions
-    POTION_TIMER_5('5'),          // after hero set the potion, the timer starts (5 tacts)
-    POTION_TIMER_4('4'),          // this will blow up after 4 tacts
-    POTION_TIMER_3('3'),          // this after 3
-    POTION_TIMER_2('2'),          // two
-    POTION_TIMER_1('1'),          // one
-    BOOM('҉'),                  // Boom! this is what is potion does, everything that is destroyable
-                                // got destroyed
+    POTION_TIMER_5('5'),       // after hero set the potion, the timer starts (5 tacts)
+    POTION_TIMER_4('4'),       // this will blow up after 4 tacts
+    POTION_TIMER_3('3'),       // this after 3
+    POTION_TIMER_2('2'),       // two
+    POTION_TIMER_1('1'),       // one
+    BOOM('҉'),                 // Boom! this is what is potion does, everything that is destroyable
+                               // got destroyed
 
     /// walls
-    WALL('☼'),                  // undestroyable wall - it will not fall from potion
-    TREASURE_BOX('#'),      // this wall could be blown up
-    OPENING_TREASURE_BOX('H'),        // this is how broken wall looks like, it will disappear on next move
-                                // if it's you did it - you'll get score points points.
+    WALL('☼'),                 // undestroyable wall - it will not fall from potion
+    TREASURE_BOX('#'),         // this wall could be blown up
+    OPENING_TREASURE_BOX('H'), // this is how broken wall looks like, it will disappear on next move
+                               // if it's you did it - you'll get score points points.
 
     /// ghosts
     GHOST('&'),          // these guys run over the board randomly and get in the way all the time
-                                // if it will touch hero - it will die
-                                // you'd better kill this piece of ... soul, you'll get score points for it
+                         // if it will touch hero - it will die
+                         // you'd better kill this piece of ... soul, you'll get score points for it
     DEAD_GHOST('x'),     // this is chopper corpse
 
     /// perks

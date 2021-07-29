@@ -66,6 +66,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     private List<Potion> potions = new LinkedList<>();
     private List<Blast> blasts = new LinkedList<>();
     private List<Point> destroyedObjects = new LinkedList<>();
+    private List<Point> previousTickDestroyedObjects = new LinkedList<>();
     private List<Potion> destroyedPotions = new LinkedList<>();
     private Dice dice;
     private List<PerkOnBoard> perks = new LinkedList<>();
@@ -166,7 +167,6 @@ public class MollyMage extends RoundField<Player> implements Field {
         applyAllHeroes();       // герои ходят
         ghostEatHeroes();       // омномном
         boxes.tick();           // сундуки появляются
-        clearDestroyedObjects();
         ghosts.tick();          // привидения водят свой хоровод
         ghostEatHeroes();       // омномном
         disablePotionRemote();  // если остались remote зелья без хозяев, взрываем
@@ -218,9 +218,13 @@ public class MollyMage extends RoundField<Player> implements Field {
                 ghosts.remove(pt);
             }
         }
+
+        cleanDestroyedObjects();
     }
 
-    private void clearDestroyedObjects() {
+    private void cleanDestroyedObjects() {
+        previousTickDestroyedObjects.clear();
+        previousTickDestroyedObjects.addAll(destroyedObjects);
         destroyedObjects.clear();
     }
 
@@ -552,10 +556,10 @@ public class MollyMage extends RoundField<Player> implements Field {
                 return true;
             }
         }
-        
-        //проверка на спаун сундуков на месте разрушенний
+
+        //  ban on the creation of new elements on the places just destroyed objects
         if (!isForHero) {
-            if (destroyedObjects.contains(pt)) {
+            if (previousTickDestroyedObjects.contains(pt)) {
                 return true;
             }
         }

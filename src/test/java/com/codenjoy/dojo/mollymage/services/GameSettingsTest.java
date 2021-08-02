@@ -43,7 +43,8 @@ public class GameSettingsTest {
         assertEquals("{POTION_BLAST_RADIUS_INCREASE=PerkSettings{value=2, timeout=30}, " +
                         "POTION_COUNT_INCREASE=PerkSettings{value=4, timeout=30}, " +
                         "POTION_IMMUNE=PerkSettings{value=0, timeout=30}, " +
-                        "POTION_REMOTE_CONTROL=PerkSettings{value=3, timeout=1}}",
+                        "POTION_REMOTE_CONTROL=PerkSettings{value=3, timeout=1}, " +
+                        "POISON_THROWER=PerkSettings{value=0, timeout=30}}",
                 allPerkSettings(perksSettings).toString());
     }
 
@@ -61,7 +62,7 @@ public class GameSettingsTest {
         assertEquals("{\n" +
                 "  'BIG_BADABOOM':false,\n" +
                 "  'CATCH_PERK_SCORE':5,\n" +
-                "  'DEFAULT_PERKS':'r+ic',\n" +
+                "  'DEFAULT_PERKS':'r+icT',\n" +
                 "  'DIE_PENALTY':30,\n" +
                 "  'GHOSTS_COUNT':5,\n" +
                 "  'KILL_ENEMY_HERO_SCORE':100,\n" +
@@ -91,6 +92,7 @@ public class GameSettingsTest {
                 "  'SEMIFINAL_RESET_BOARD':true,\n" +
                 "  'SEMIFINAL_SHUFFLE_BOARD':true,\n" +
                 "  'SEMIFINAL_TIMEOUT':900,\n" +
+                "  'TIMEOUT_POISON_THROWER':30,\n" +
                 "  'TIMEOUT_POTION_BLAST_RADIUS_INC':30,\n" +
                 "  'TIMEOUT_POTION_COUNT_INC':30,\n" +
                 "  'TIMEOUT_POTION_IMMUNE':30,\n" +
@@ -114,7 +116,7 @@ public class GameSettingsTest {
         assertEquals("{\n" +
                 "  'BIG_BADABOOM':false,\n" +
                 "  'CATCH_PERK_SCORE':5,\n" +
-                "  'DEFAULT_PERKS':'r+ic',\n" +
+                "  'DEFAULT_PERKS':'r+icT',\n" +
                 "  'DIE_PENALTY':12,\n" +
                 "  'GHOSTS_COUNT':5,\n" +
                 "  'KILL_ENEMY_HERO_SCORE':100,\n" +
@@ -144,6 +146,7 @@ public class GameSettingsTest {
                 "  'SEMIFINAL_RESET_BOARD':true,\n" +
                 "  'SEMIFINAL_SHUFFLE_BOARD':true,\n" +
                 "  'SEMIFINAL_TIMEOUT':900,\n" +
+                "  'TIMEOUT_POISON_THROWER':30,\n" +
                 "  'TIMEOUT_POTION_BLAST_RADIUS_INC':30,\n" +
                 "  'TIMEOUT_POTION_COUNT_INC':12,\n" +
                 "  'TIMEOUT_POTION_IMMUNE':30,\n" +
@@ -158,7 +161,7 @@ public class GameSettingsTest {
         assertEquals("{\n" +
                 "  'BIG_BADABOOM':false,\n" +
                 "  'CATCH_PERK_SCORE':5,\n" +
-                "  'DEFAULT_PERKS':'r+ic',\n" +
+                "  'DEFAULT_PERKS':'r+icT',\n" +
                 "  'DIE_PENALTY':12,\n" +
                 "  'GHOSTS_COUNT':5,\n" +
                 "  'KILL_ENEMY_HERO_SCORE':100,\n" +
@@ -188,6 +191,7 @@ public class GameSettingsTest {
                 "  'SEMIFINAL_RESET_BOARD':true,\n" +
                 "  'SEMIFINAL_SHUFFLE_BOARD':true,\n" +
                 "  'SEMIFINAL_TIMEOUT':900,\n" +
+                "  'TIMEOUT_POISON_THROWER':30,\n" +
                 "  'TIMEOUT_POTION_BLAST_RADIUS_INC':30,\n" +
                 "  'TIMEOUT_POTION_COUNT_INC':12,\n" +
                 "  'TIMEOUT_POTION_IMMUNE':30,\n" +

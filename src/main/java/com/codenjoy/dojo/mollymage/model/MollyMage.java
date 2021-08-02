@@ -492,6 +492,10 @@ public class MollyMage extends RoundField<Player> implements Field {
                 setup(pt, new PotionRemoteControl(perk.value(), perk.timeout()));
                 return true;
 
+            case POISON_THROWER:
+                setup(pt, new PoisonThrower(perk.timeout()));
+                return true;
+
             default:
                 return false;
         }

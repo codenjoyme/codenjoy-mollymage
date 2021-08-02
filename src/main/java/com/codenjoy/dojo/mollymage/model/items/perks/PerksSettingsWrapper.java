@@ -65,6 +65,11 @@ public class PerksSettingsWrapper {
                 settings.integer(REMOTE_CONTROL_COUNT, value);
                 // timeout is always 1
             } break;
+
+            case POISON_THROWER : {
+                // value is always 0
+                settings.integer(TIMEOUT_POISON_THROWER, timeout);
+            } break;
         }
 
         return this;
@@ -114,6 +119,10 @@ public class PerksSettingsWrapper {
                 timeout = 1;
             } break;
 
+            case POISON_THROWER: {
+                value = 0;
+                timeout = settings.integer(TIMEOUT_POISON_THROWER);
+            } break;
             default: {
                 value = 0;
                 timeout = 0;

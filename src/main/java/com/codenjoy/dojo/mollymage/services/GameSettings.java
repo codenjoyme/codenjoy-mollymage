@@ -71,6 +71,7 @@ public class GameSettings extends SettingsImpl
         TIMEOUT_POTION_COUNT_INC("[Perks] Potion count effect timeout"),
         TIMEOUT_POTION_IMMUNE("[Perks] Potion immune effect timeout"),
         TIMEOUT_POISON_THROWER("[Perks] Poison thrower effect timeout"),
+        POISON_THROWER_RECHARGE("[Perks] Poison thrower recharge"),
         REMOTE_CONTROL_COUNT("[Perks] Number of Potion remote controls (how many times player can use it)"),
         DEFAULT_PERKS("[Perks] Perks available in this game"),
         LEVEL_MAP("[Level] map");
@@ -109,6 +110,7 @@ public class GameSettings extends SettingsImpl
         integer(POTION_POWER, 3);
         integer(TREASURE_BOX_COUNT, 52);
         integer(GHOSTS_COUNT, 5);
+        integer(POISON_THROWER_RECHARGE, 3);
 
         bool(PERK_WHOLE_TEAM_GET, false);
         string(DEFAULT_PERKS, StringUtils.EMPTY);

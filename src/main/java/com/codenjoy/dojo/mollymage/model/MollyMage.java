@@ -28,6 +28,7 @@ import com.codenjoy.dojo.mollymage.model.items.Potion;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.blast.BoomEngineOriginal;
+import com.codenjoy.dojo.mollymage.model.items.blast.Poison;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
@@ -64,6 +65,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     private List<Wall> walls = new LinkedList<>();
     private List<Potion> potions = new LinkedList<>();
+    private List<Poison> poisonList = new LinkedList<>();
     private List<Blast> blasts = new LinkedList<>();
     private List<Point> destroyedObjects = new LinkedList<>();
     private List<Point> previousTickDestroyedObjects = new LinkedList<>();
@@ -170,6 +172,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         ghosts.tick();          // привидения водят свой хоровод
         ghostEatHeroes();       // омномном
         disablePotionRemote();  // если остались remote зелья без хозяев, взрываем
+        makeBlastsFromPoisonThrower();  //  heroes throws poison
         tactAllPotions();       // все что касается зелья и взрывов
         tactAllPerks();         // тикаем перки на поле
         tactAllHeroes();        // в том числе и перки героев
@@ -226,6 +229,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         previousTickDestroyedObjects.clear();
         previousTickDestroyedObjects.addAll(destroyedObjects);
         destroyedObjects.clear();
+        poisonList.clear();
     }
 
     private void ghostEatHeroes() {
@@ -281,6 +285,15 @@ public class MollyMage extends RoundField<Player> implements Field {
         destroyedPotions.clear();
     }
 
+    private void makeBlastsFromPoisonThrower() {
+        for (Poison poison : poisonList) {
+            List<Blast> blast = makeBlast(poison);
+            blasts.addAll(blast);
+        }
+        
+        poisonList.clear();
+    }
+
     @Override
     public List<Potion> potions() {
         return potions;
@@ -320,12 +333,26 @@ public class MollyMage extends RoundField<Player> implements Field {
         destroyedObjects.add(pt);
     }
 
-    private List<Blast> makeBlast(Potion potion) {
+
+
+    private List<Blast> makeBlast(Poison poison) {
+        List barriers = getBarriesForBlast();
+
+        return new BoomEngineOriginal(poison.getOwner())
+                .boom(barriers, size(), poison);
+    }
+
+    private List getBarriesForBlast() {
         List barriers = new LinkedList();
         barriers.addAll(this.walls);
         barriers.addAll(this.ghosts.all());
         barriers.addAll(this.boxes.all());
         barriers.addAll(heroes(ACTIVE_ALIVE));
+        return barriers;
+    }
+
+    private List<Blast> makeBlast(Potion potion) {
+        List barriers = getBarriesForBlast();
 
         // TODO move potion inside BoomEngine
         return new BoomEngineOriginal(potion.getOwner())
@@ -625,5 +652,10 @@ public class MollyMage extends RoundField<Player> implements Field {
     @Override
     public Ghosts ghosts() {
         return ghosts;
+    }
+
+    @Override
+    public void addPoison(Poison poison) {
+        poisonList.add(poison);
     }
 }

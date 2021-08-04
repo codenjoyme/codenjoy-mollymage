@@ -4,7 +4,7 @@ package com.codenjoy.dojo.mollymage.model.items.blast;
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 Codenjoy
+ * Copyright (C) 2018 - 2021 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -22,14 +22,31 @@ package com.codenjoy.dojo.mollymage.model.items.blast;
  * #L%
  */
 
+import com.codenjoy.dojo.mollymage.model.Hero;
+import com.codenjoy.dojo.services.Direction;
+import com.codenjoy.dojo.services.PointImpl;
 
-import com.codenjoy.dojo.services.Point;
+public class Poison extends PointImpl {
+    private Hero hero;
+    private Direction direction;
+    private int power;
 
-import java.util.List;
+    public Hero getOwner() {
+        return hero;
+    }
 
-public interface BoomEngine {
+    public int getPower() {
+        return power;
+    }
 
-    List<Blast> boom(List<? extends Point> barriers, int boardSize, Point source, int radius);
+    public Direction getDirection() {
+        return direction;
+    }
 
-    List<Blast> boom(List<? extends Point> barriers, int size, Poison poison);
+    public Poison(Hero hero, Direction direction, int power) {
+        super(hero.getX(), hero.getY());
+        this.direction = direction;
+        this.hero = hero;
+        this.power = power;
+    }
 }

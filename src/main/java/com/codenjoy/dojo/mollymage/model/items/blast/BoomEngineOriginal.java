@@ -25,6 +25,7 @@ package com.codenjoy.dojo.mollymage.model.items.blast;
 
 import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
 
 import java.util.LinkedList;
@@ -79,6 +80,22 @@ public class BoomEngineOriginal implements BoomEngine {
             }
         }
 
+        return blasts;
+    }
+
+    @Override
+    public List<Blast> boom(List<? extends Point> barriers, int size, Poison poison) {
+        List<Blast> blasts = new LinkedList<>();
+
+        final int length = poison.getPower();
+        final Direction direction = poison.getDirection();
+        Point point = hero;
+        for (int i = 0; i < length; i++) {
+            point = direction.change(point);
+            if (!add(barriers, size, blasts, point.getX(), point.getY())) {
+                break;
+            }
+        }
         return blasts;
     }
 

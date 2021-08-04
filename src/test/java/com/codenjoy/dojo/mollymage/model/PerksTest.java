@@ -24,14 +24,10 @@ package com.codenjoy.dojo.mollymage.model;
 
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
-import com.codenjoy.dojo.mollymage.model.items.perks.PotionBlastRadiusIncrease;
-import com.codenjoy.dojo.mollymage.model.items.perks.PotionCountIncrease;
-import com.codenjoy.dojo.mollymage.model.items.perks.PotionImmune;
-import com.codenjoy.dojo.mollymage.model.items.perks.PotionRemoteControl;
+import com.codenjoy.dojo.mollymage.model.items.perks.*;
 import org.junit.Test;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.CATCH_PERK_SCORE;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.KILL_WALL_SCORE;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.reset;
@@ -830,6 +826,293 @@ public class PerksTest extends AbstractGameTest {
                 "HѠ҉        #\n" +
                 "#H##########\n");
     }
+
+    @Test
+    public void shouldNotThrowPoison_withoutPTperk() {
+        // given
+        givenBoardWithBoxes(10);
+        settings.integer(POTION_POWER, 4);
+        settings.integer(POISON_THROWER_RECHARGE, 3);
+
+        // when
+        hero.up();
+        hero.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("##########\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#☺       #\n" +
+                "##########\n");
+    }
+
+
+    @Test
+    public void shouldNotDoAnythingWhenACTWithoutMove_withPTperk() {
+        // given
+        givenBoardWithBoxes(10);
+        settings.integer(POTION_POWER, 4);
+        settings.integer(POISON_THROWER_RECHARGE, 3);
+
+        int timeout = 10;
+        player.getHero().addPerk(new PoisonThrower(timeout));
+
+        // when just ACT(1) without sending direction
+        hero.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("##########\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#☺       #\n" +
+                "##########\n");
+    }
+
+    @Test
+    public void shouldThrowPoisonThroughThePotion_withPTperk() {
+        // given
+        givenBoardWithWalls(10);
+        settings.integer(POTION_POWER, 4);
+        settings.integer(POISON_THROWER_RECHARGE, 3);
+
+        int timeout = 30;
+        player.getHero().addPerk(new PoisonThrower(timeout));
+
+        // when hero set the potion and shoot through it
+        hero.up();
+        field.tick();
+        hero.up();
+        field.tick();
+
+        hero.act();
+        hero.down();
+        field.tick();
+        hero.down();
+        field.tick();
+
+        // then
+        asrtBrd("☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼        ☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼        ☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼3       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼☺       ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼\n");
+
+        // when hero throwpoison
+        hero.up();
+        hero.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼        ☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼҉       ☼\n" +
+                "☼҉☼ ☼ ☼ ☼☼\n" +
+                "☼2       ☼\n" +
+                "☼҉☼ ☼ ☼ ☼☼\n" +
+                "☼☺       ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼\n");
+    }
+
+    @Test
+    public void shouldDetonatePotionWhenThrowPoison_withPTperk_withBadaBoom() {
+        // given
+        givenBoardWithWalls(10);
+        settings.integer(POTION_POWER, 4);
+        settings.integer(POISON_THROWER_RECHARGE, 3);
+        settings.bool(BIG_BADABOOM, true);
+
+        int timeout = 30;
+        player.getHero().addPerk(new PoisonThrower(timeout));
+
+        // when hero set the potion and shoot through it
+        hero.up();
+        field.tick();
+        hero.up();
+        field.tick();
+
+        hero.act();
+        hero.down();
+        field.tick();
+        hero.down();
+        field.tick();
+
+        // then
+        asrtBrd("☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼        ☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼        ☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼3       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼☺       ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼\n");
+
+        // when hero throwpoison
+        hero.up();
+        hero.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼҉       ☼\n" +
+                "☼҉☼ ☼ ☼ ☼☼\n" +
+                "☼҉       ☼\n" +
+                "☼҉☼ ☼ ☼ ☼☼\n" +
+                "☼҉҉҉҉҉   ☼\n" +
+                "☼҉☼ ☼ ☼ ☼☼\n" +
+                "☼Ѡ       ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼\n");
+    }
+
+    @Test
+    public void shouldThrowPoison_whenPTperk() {
+        // given
+        givenBoardWithBoxes(10);
+        settings.integer(POTION_POWER,4);
+        settings.integer(POISON_THROWER_RECHARGE,3);
+
+        int timeout = 10;
+
+        player.getHero().addPerk(new PoisonThrower(timeout));
+
+        // when
+        hero.up();
+        hero.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("##########\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#҉       #\n" +
+                "#҉# # # ##\n" +
+                "#҉       #\n" +
+                "#҉# # # ##\n" +
+                "#☺       #\n" +
+                "##########\n");
+
+        // when recharge hero should not throw poison
+        hero.up();
+        hero.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("##########\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#☺       #\n" +
+                "##########\n");
+
+        // when recharge hero should not throw poison
+        hero.up();
+        hero.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("##########\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#☺       #\n" +
+                "##########\n");
+
+        // when recharge done should throw again
+        hero.up();
+        hero.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("##########\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#҉       #\n" +
+                "#҉# # # ##\n" +
+                "#҉       #\n" +
+                "#҉# # # ##\n" +
+                "#☺       #\n" +
+                "##########\n");
+
+        // when and going to recharge again
+        hero.up();
+        hero.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("##########\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#☺       #\n" +
+                "##########\n");
+    }
+
+    @Test
+    public void shouldThrowPoisonWithIncreasedPower_withPT_withPBRI_perks() {
+        // given
+        givenBoardWithBoxes(10);
+        settings.integer(POTION_POWER, 4);
+        settings.integer(POISON_THROWER_RECHARGE, 3);
+
+        int value = 2;
+        int timeout = 10;
+        player.getHero().addPerk(new PoisonThrower(timeout));
+        player.getHero().addPerk(new PotionBlastRadiusIncrease(value, timeout));
+
+
+        // when
+        hero.up();
+        hero.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("##########\n" +
+                "# # # # ##\n" +
+                "#҉       #\n" +
+                "#҉# # # ##\n" +
+                "#҉       #\n" +
+                "#҉# # # ##\n" +
+                "#҉       #\n" +
+                "#҉# # # ##\n" +
+                "#☺       #\n" +
+                "##########\n");
+    }
+
 
     // Проверяем что перк BBRI увеличивает длинну взрывной волны зелья
     @Test

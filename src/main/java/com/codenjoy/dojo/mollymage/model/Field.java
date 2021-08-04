@@ -26,6 +26,7 @@ package com.codenjoy.dojo.mollymage.model;
 import com.codenjoy.dojo.mollymage.model.items.Potion;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
+import com.codenjoy.dojo.mollymage.model.items.blast.Poison;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
@@ -80,4 +81,6 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
     TreasureBoxes boxes();
 
     Ghosts ghosts();
+
+    void addPoison(Poison poison);
 }

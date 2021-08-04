@@ -24,6 +24,7 @@ package com.codenjoy.dojo.mollymage.model;
 
 
 import com.codenjoy.dojo.mollymage.model.items.Potion;
+import com.codenjoy.dojo.mollymage.model.items.blast.Poison;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.perks.HeroPerks;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
@@ -37,8 +38,7 @@ import java.util.List;
 
 import static com.codenjoy.dojo.games.mollymage.Element.*;
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTIONS_COUNT;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.StateUtils.filter;
 import static com.codenjoy.dojo.services.StateUtils.filterOne;
 
@@ -47,12 +47,15 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
     private boolean potion;
     private Direction direction;
     private int score;
+    private boolean throwPoison;
+    private int recharge;
 
     private HeroPerks perks = new HeroPerks();
 
     public Hero() {
         score = 0;
         direction = null;
+        recharge = 0;
     }
 
     @Override
@@ -87,6 +90,15 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
     public void act(int... p) {
         if (!isActiveAndAlive()) return;
 
+        Act is = new Act(p);
+        if (is.act(1)) {
+            if (direction != null) {
+                throwPoison = true;
+            }
+            return;
+        }
+
+
         if (direction != null) {
             potion = true;
         } else {
@@ -98,6 +110,14 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         if (!isActiveAndAlive()) return;
 
         if (direction == null) {
+            return;
+        }
+
+        if (throwPoison) {
+            throwPoison(direction);
+
+            throwPoison = false;
+            direction = null;
             return;
         }
 
@@ -119,6 +139,17 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         }
     }
 
+    private void throwPoison(Direction direction) {
+        Perk perk = perks.getPerk(POISON_THROWER);
+
+        if (perk == null || recharge != 0) {
+            return;
+        }
+        field.addPoison(new Poison(this, direction, getBlastPower()));
+
+        recharge += settings().integer(POISON_THROWER_RECHARGE);
+    }
+
     private void setPotion(int x, int y) {
         List<Potion> potions = field.potions(this);
 
@@ -136,15 +167,20 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
             return;
         }
 
-        Perk blastPerk = perks.getPerk(POTION_BLAST_RADIUS_INCREASE);
-        int boost = (blastPerk == null) ? 0 : blastPerk.getValue();
-        Potion potion = new Potion(this, x, y, settings().integer(POTION_POWER) + boost, field);
+        final int blastPower = getBlastPower();
+        Potion potion = new Potion(this, x, y, blastPower, field);
 
         if (remotePerk != null) {
             potion.putOnRemoteControl();
         }
 
         field.drop(potion);
+    }
+
+    private int getBlastPower() {
+        Perk blastPerk = perks.getPerk(POTION_BLAST_RADIUS_INCREASE);
+        int boost = (blastPerk == null) ? 0 : blastPerk.getValue();
+        return settings().integer(POTION_POWER) + boost;
     }
 
     private boolean tryActivateRemote(List<Potion> potions) {
@@ -168,6 +204,10 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         int allowed = settings().integer(POTIONS_COUNT) + boost;
 
         return placed < allowed;
+    }
+
+    private void rechargeTick() {
+        recharge = Math.max(--recharge, 0);
     }
 
     @Override
@@ -231,6 +271,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
     public void tick() {
         // TODO добавить проверку if (!isActiveAndAlive()) return;
         perks.tick();
+        rechargeTick();
     }
 
     public List<Perk> getPerks() {

@@ -1,10 +1,10 @@
-package com.codenjoy.dojo.mollymage.model.items.blast;
+package com.codenjoy.dojo.mollymage.model;
 
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 Codenjoy
+ * Copyright (C) 2018 - 2021 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -22,14 +22,19 @@ package com.codenjoy.dojo.mollymage.model.items.blast;
  * #L%
  */
 
+public class Act {
 
-import com.codenjoy.dojo.services.Point;
+    private int[] data;
 
-import java.util.List;
+    public Act(int... data) {
+        this.data = data;
+    }
 
-public interface BoomEngine {
+    boolean act() {
+        return data.length == 0;
+    }
 
-    List<Blast> boom(List<? extends Point> barriers, int boardSize, Point source, int radius);
-
-    List<Blast> boom(List<? extends Point> barriers, int size, Poison poison);
+    boolean act(int input) {
+        return !act() && data[0] == input;
+    }
 }

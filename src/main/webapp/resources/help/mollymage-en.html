@@ -216,6 +216,10 @@
 
     POTION_REMOTE_CONTROL('r'), // Bomb blast not by timer but by second act. Number of RC triggers is limited to 3 by default.
 
+    POISON_THROWER('T'),       // Poison Thrower. Allows the hero to throw poisonous liquid. Shot range is the same as at the potions.
+                            // Activated by the command АСТ(1) + Direction(example: RIGHT,ACT(1) ), works parallel with potions.
+                            // After using you need to "recharge"(3 ticks by default).
+
     /// a void
     NONE(' ');                 // this is the only place where you can move your Hero</pre>
                         <p>The game is turn-based, every second the server sends to your client
@@ -231,6 +235,10 @@
                             left and plant a potion there or we plant a potion and run away to the left.
                             If a player uses the ACT command only, the potion will be planted under
                             the hero without her/his move on the field.</p>
+
+                        <p>The command АСТ(1). Used only with perk POISON_THROWER.  Allows the hero to throw poisonous liquid.
+                            Works with the command to change direction. Order (LEFT, ACT(1)) or (ACT(1), LEFT) - does not matter.
+                            Without direction, just command ACT(1) nothing will happen. Hero just will stay on place. </p>
 
                         <p>The first task is to write a client’s WebSocket which will connect to the
                             server. Then you should “force” the hero to listen to the commands. This

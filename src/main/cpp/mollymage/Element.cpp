@@ -55,7 +55,7 @@ ElementMap Element::initialiseElements() {
     mapOfElements[LL("HERO")] = LL('☺');
 
     // This is if she is sitting on own potion.
-    mapOfElements[LL("POTION_HERO")] = LL('☻');
+     mapOfElements[LL("POTION_HERO")] = LL('☻');
 
     // Oops, your Molly is dead (don't worry,
     // she will appear somewhere in next move).
@@ -141,6 +141,9 @@ ElementMap Element::initialiseElements() {
     // Do not die after potion blast
     // (own potion and others as well). Temporary.
     mapOfElements[LL("POTION_IMMUNE")] = LL('i');
+
+    // Poison Thrower. Allows the hero to throw poisonous liquid.
+    mapOfElements[LL("POISON_THROWER")] = LL('T');
 
 /// a void
     // This is the only place where you can move your Molly.

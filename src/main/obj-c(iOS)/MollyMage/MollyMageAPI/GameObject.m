@@ -105,6 +105,10 @@
                                                                                             if ([symbol isEqualToString:@"i"]) {
                                                                                                 type = POTION_IMMUNE;
                                                                                                 isBarrier = NO;
+                                                                                            } else
+                                                                                                if ([symbol isEqualToString:@"T"]) {
+                                                                                                    type = POISON_THROWER;
+                                                                                                    isBarrier = NO;
                                                                                             }
 
 	}

@@ -115,6 +115,9 @@ const (
     // (own potion and others as well). Temporary.
     POTION_IMMUNE = 'i'
 
+    // Poison Thrower. Allows the hero to throw poisonous liquid.
+    POISON_THROWER = 'T'
+
 /// a void
     // This is the only place where you can move your Molly.
     NONE = ' '

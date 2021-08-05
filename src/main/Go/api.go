@@ -214,7 +214,7 @@ func (b *board) GetPotions() []Point {
 
 func (b *board) GetPerks() []Point {
 	points := []Point{}
-	perks := []rune{POTION_BLAST_RADIUS_INCREASE, POTION_COUNT_INCREASE, POTION_IMMUNE, POTION_REMOTE_CONTROL}
+	perks := []rune{POTION_BLAST_RADIUS_INCREASE, POTION_COUNT_INCREASE, POTION_IMMUNE, POTION_REMOTE_CONTROL, POISON_THROWER}
 
 	for _, perk := range perks {
 		for _, i := range findAll(b.boardContent, perk) {

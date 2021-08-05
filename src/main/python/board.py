@@ -132,6 +132,7 @@ class Board:
         points.update(self._find_all(Element('POTION_COUNT_INCREASE')))
         points.update(self._find_all(Element('POTION_IMMUNE')))
         points.update(self._find_all(Element('POTION_REMOTE_CONTROL')))
+        points.update(self._find_all(Element('POISON_THROWER')))
         return list(points)
 
     def is_near(self, x, y, elem):

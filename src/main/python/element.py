@@ -119,6 +119,10 @@ _ELEMENTS = dict(
     # (own potion and others as well). Temporary.
     POTION_IMMUNE = 'i',
 
+    # Hero can shoot by poison cloud
+    # Temporary.
+    POISON_THROWER = 'T',
+
 ## a void
     # This is the only place where you can move your Molly.
     NONE = ' '

@@ -196,6 +196,10 @@ var Element = {
     // (own potion and others as well). Temporary.
     POTION_IMMUNE : 'i',
 
+    // Hero can shoot by poison cloud
+    // Temporary.
+    POISON_THROWER : 'T',
+
 /// a void
     // This is the only place where you can move your Molly.
     NONE : ' '
@@ -464,6 +468,7 @@ var Board = function(board){
         result = result.concat(findAll(Element.POTION_COUNT_INCREASE));
         result = result.concat(findAll(Element.POTION_REMOTE_CONTROL));
         result = result.concat(findAll(Element.POTION_IMMUNE));
+        result = result.concat(findAll(Element.POISON_THROWER));
         return result;
    }
 

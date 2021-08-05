@@ -119,6 +119,10 @@ typedef enum{
     // (own potion and others as well). Temporary.
     POTION_IMMUNE,
 
+    // Hero can shoot by poison cloud
+    // Temporary.
+    POISON_THROWER,
+
 /// a void
     // This is the only place where you can move your Molly.
     NONE  = -1

@@ -132,6 +132,10 @@ ELEMENTS = Hash.new
     # (own potion and others as well). Temporary.
     ELEMENTS[:POTION_IMMUNE] = 'i'
 
+    # Hero can shoot by poison cloud
+    # Temporary.
+    ELEMENTS[:POISON_THROWER] = 'T'
+
 ## a void
     # This is the only place where you can move your Molly.
     ELEMENTS[:NONE] = ' '

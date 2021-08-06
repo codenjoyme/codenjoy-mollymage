@@ -24,6 +24,7 @@ package com.codenjoy.dojo.mollymage.model.items.blast;
 
 
 import com.codenjoy.dojo.games.mollymage.Element;
+import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
@@ -35,8 +36,10 @@ import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import org.apache.commons.collections4.CollectionUtils;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,6 +52,7 @@ public class BoomEngineOriginalTest {
 
     private static final int SIZE = 21;
     private BoomEngine engine = new BoomEngineOriginal(null);
+    private Poison poison;
     private PrinterFactory printerFactory = new PrinterFactoryImpl();
 
     @Test
@@ -369,8 +373,207 @@ public class BoomEngineOriginalTest {
                 "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n");
     }
 
+    @Test
+    public void testPoisonBoom_1() {
+        List<Wall> barriers = new LinkedList<>();
+        barriers.addAll(getWallsForPoisonTest());
+        Point source = pt(11, 11);
+        int range = 4;
+        int countBlasts = 4;
+
+        prepareDateForPoisonTests(source, Direction.LEFT, range);
+
+        assertPoisonBoom(barriers, source, range, countBlasts, poison,
+                "☼                   ☼\n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "    ☼  ҉҉҉҉☻         \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "☼                   ☼\n");
+    }
+
+    @Test
+    public void testPoisonBoom_2() {
+        List<Wall> barriers = new LinkedList<>();
+        barriers.addAll(getWallsForPoisonTest());
+        Point source = pt(11, 11);
+        int range = 4;
+        int countBlasts = 4;
+
+        prepareDateForPoisonTests(source, Direction.UP, range);
+
+        assertPoisonBoom(barriers, source, range, countBlasts, poison,
+                "☼                   ☼\n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "           ҉         \n" +
+                        "           ҉         \n" +
+                        "           ҉         \n" +
+                        "           ҉         \n" +
+                        "    ☼      ☻         \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "☼                   ☼\n");
+    }
+
+    @Test
+    public void testPoisonBoom_3() {
+        List<Wall> barriers = new LinkedList<>();
+        barriers.addAll(getWallsForPoisonTest());
+        Point source = pt(11, 11);
+        int range = 4;
+        int countBlasts = 4;
+
+        prepareDateForPoisonTests(source, Direction.RIGHT, range);
+
+        assertPoisonBoom(barriers, source, range, countBlasts, poison,
+                "☼                   ☼\n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "    ☼      ☻҉҉҉҉     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "☼                   ☼\n");
+    }
+
+    @Test
+    public void testPoisonBoom_4() {
+        List<Wall> barriers = new LinkedList<>();
+        barriers.addAll(getWallsForPoisonTest());
+        Point source = pt(11, 11);
+        int range = 4;
+        int countBlasts = 4;
+
+        prepareDateForPoisonTests(source, Direction.DOWN, range);
+
+        assertPoisonBoom(barriers, source, range, countBlasts, poison,
+                "☼                   ☼\n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "    ☼      ☻         \n" +
+                        "           ҉         \n" +
+                        "           ҉         \n" +
+                        "           ҉         \n" +
+                        "           ҉         \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "☼                   ☼\n");
+    }
+
+    @Test
+    public void testPoisonBoomAtWalls_WallShouldStopBlast() {
+        List<Wall> barriers = new LinkedList<>();
+        barriers.addAll(getWallsForPoisonTest());
+        Point source = pt(11, 11);
+        int range = 8;
+        int countBlasts = 6;
+
+        prepareDateForPoisonTests(source, Direction.LEFT, range);
+
+        assertPoisonBoom(barriers, source, range, countBlasts, poison,
+                "☼                   ☼\n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "    ☼҉҉҉҉҉҉☻         \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "                     \n" +
+                        "☼                   ☼\n");
+    }
+
+    private void prepareDateForPoisonTests(Point source, Direction direction, int range) {
+        Hero hero = new Hero();
+        engine = new BoomEngineOriginal(hero);
+        hero.setX(source.getX());
+        hero.setY(source.getY());
+        poison = new Poison(hero, direction, range);
+    }
+
+    private List<Wall> getWallsForPoisonTest(){
+        List<Wall> result = new ArrayList<>();
+        result.add(new Wall(4,11));
+        result.add(new Wall(0,0));
+        result.add(new Wall(0,20));
+        result.add(new Wall(20,0));
+        result.add(new Wall(20,20));
+
+        return result;
+    }
+
     private void assertBoom(List<? extends Wall> barriers, Point source, int radius, int countBlasts, String expected) {
         List<Blast> blasts = engine.boom(barriers, SIZE, source, radius);
+
+        assertEquals(countBlasts, blasts.size());
+
+        String actual = print(blasts, barriers, source);
+
+        assertEquals(expected, actual);
+    }
+
+    private void assertPoisonBoom(List<? extends Wall> barriers, Point source, int radius, int countBlasts, Poison poison, String expected) {
+        List<Blast> blasts = engine.boom(barriers, SIZE, poison);
 
         assertEquals(countBlasts, blasts.size());
 

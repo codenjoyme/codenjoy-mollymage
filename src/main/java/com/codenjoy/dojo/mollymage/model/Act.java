@@ -31,7 +31,7 @@ public class Act {
     }
 
     boolean act() {
-        return data.length == 0;
+        return data == null || data.length == 0;
     }
 
     boolean act(int input) {

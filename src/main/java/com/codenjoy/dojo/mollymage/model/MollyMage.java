@@ -65,7 +65,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     private List<Wall> walls = new LinkedList<>();
     private List<Potion> potions = new LinkedList<>();
-    private List<Poison> poisonList = new LinkedList<>();
+    private List<Poison> toxins = new LinkedList<>();
     private List<Blast> blasts = new LinkedList<>();
     private List<Point> destroyedObjects = new LinkedList<>();
     private List<Point> previousTickDestroyedObjects = new LinkedList<>();
@@ -229,7 +229,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         previousTickDestroyedObjects.clear();
         previousTickDestroyedObjects.addAll(destroyedObjects);
         destroyedObjects.clear();
-        poisonList.clear();
+        toxins.clear();
     }
 
     private void ghostEatHeroes() {
@@ -286,12 +286,12 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void makeBlastsFromPoisonThrower() {
-        for (Poison poison : poisonList) {
+        for (Poison poison : toxins) {
             List<Blast> blast = makeBlast(poison);
             blasts.addAll(blast);
         }
         
-        poisonList.clear();
+        toxins.clear();
     }
 
     @Override
@@ -656,6 +656,6 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     @Override
     public void addPoison(Poison poison) {
-        poisonList.add(poison);
+        toxins.add(poison);
     }
 }

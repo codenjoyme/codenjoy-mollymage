@@ -46,13 +46,7 @@ public class BoomEngineOriginal implements BoomEngine {
         add(barriers, boardSize, blasts, source);
 
         for (Direction direction : Direction.getValues()) {
-            Point point = source.copy();
-            for (int i = 0; i < radius; i++) {
-                point = direction.change(point);
-                if (!add(barriers, boardSize, blasts, point)) {
-                    break;
-                }
-            }
+            addBlast(barriers, boardSize, blasts, radius, direction, source);
         }
 
         return blasts;
@@ -62,16 +56,19 @@ public class BoomEngineOriginal implements BoomEngine {
     public List<Blast> boom(List<? extends Point> barriers, int size, Poison poison) {
         List<Blast> blasts = new LinkedList<>();
 
-        final int length = poison.getPower();
-        final Direction direction = poison.getDirection();
-        Point point = hero.copy();
+        addBlast(barriers, size, blasts, poison.getPower(), poison.getDirection(), hero);
+
+        return blasts;
+    }
+
+    private void addBlast(List<? extends Point> barriers, int size, List<Blast> blasts, int length, Direction direction, Point point) {
+        Point pt = point.copy();
         for (int i = 0; i < length; i++) {
-            point = direction.change(point);
-            if (!add(barriers, size, blasts, point)) {
+            pt = direction.change(pt);
+            if (!add(barriers, size, blasts, pt)) {
                 break;
             }
         }
-        return blasts;
     }
 
     private boolean add(List<? extends Point> barriers, int boardSize, List<Blast> blasts, Point pt) {

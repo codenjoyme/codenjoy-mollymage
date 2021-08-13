@@ -23,9 +23,10 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 import com.codenjoy.dojo.mollymage.TestGameSettings;
-import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
+import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
+import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.services.Events;
@@ -33,6 +34,7 @@ import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.services.Game;
+import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.multiplayer.Single;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
@@ -98,6 +100,10 @@ public abstract class AbstractMultiplayerTest {
 
     protected void boxAt(int x, int y) {
         field.boxes().add(new TreasureBox(x, y));
+    }
+
+    protected void perkAt(int x, int y, Perk perk) {
+        field.perks().add(new PerkOnBoard(new PointImpl(x, y), perk));
     }
 
     protected int boxesCount() {

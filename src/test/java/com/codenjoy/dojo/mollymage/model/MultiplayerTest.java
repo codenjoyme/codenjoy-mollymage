@@ -25,7 +25,10 @@ package com.codenjoy.dojo.mollymage.model;
 
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
+import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
+import com.codenjoy.dojo.mollymage.model.items.perks.PoisonThrower;
+import com.codenjoy.dojo.mollymage.model.items.perks.PotionCountIncrease;
 import com.codenjoy.dojo.mollymage.model.items.perks.PotionImmune;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Joystick;
@@ -1223,6 +1226,355 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 " Ѡ ♣ \n" +
                 "  ♣  \n" +
                 "     \n", game(0));
+    }
+
+    /**  hero1 should get score for killing hero2 when then different blasts crossed
+     *   PT - Poison Thrower
+     */
+    @Test
+    public void shouldKillEnemyByPTAndScorePoints_whenCrossBlast() {
+        // given
+        givenBoardForPoisonThrower();
+        int killScore = 10;
+        settings.integer(KILL_OTHER_HERO_SCORE, killScore);
+        Hero hero1 = hero(0);
+        Hero hero2 = hero(1);
+        assertEquals(0, hero1.scores());
+        assertEquals(0, hero2.scores());
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "T    \n" +
+                "☺ ♥  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "T    \n" +
+                "♥ ☺  \n", game(1));
+
+        // when hero2 set potion, hero1 get perk
+        hero1.up();
+        hero2.act();
+        hero2.up();
+        field.tick();
+
+        // then
+        events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
+                "listener(1) => []\n");
+
+        //when heroes are going on the position
+        hero1.up();
+        hero2.up();
+        field.tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺ ♥  \n" +
+                "     \n" +
+                "  3  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥ ☺  \n" +
+                "     \n" +
+                "  3  \n", game(1));
+
+        // when potion boom, hero1 should shoot by poison thrower
+        field.tick();
+        field.tick();
+        hero1.right();
+        hero1.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺҉♣  \n" +
+                "  ҉  \n" +
+                "҉҉҉҉҉\n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥҉Ѡ  \n" +
+                "  ҉  \n" +
+                "҉҉҉҉҉\n", game(1));
+        events.verifyAllEvents("listener(0) => [KILL_OTHER_HERO]\n" +
+                "listener(1) => [DIED]\n");
+
+        assertEquals(killScore, hero1.scores());
+        assertEquals(0, hero2.scores());
+    }
+
+    /**  both heroes should get score for killing ghost when then different blasts crossed
+     *   PT - Poison Thrower
+     */
+    @Test
+    public void shouldKillGhostByPTAndScorePoints_whenCrossBlast() {
+        // given
+        givenBoardForPoisonThrower();
+        ghostAt(2,2);
+        int killScore = 10;
+        settings.integer(KILL_GHOST_SCORE, killScore);
+        Hero hero1 = hero(0);
+        Hero hero2 = hero(1);
+        assertEquals(0, hero1.scores());
+        assertEquals(0, hero2.scores());
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "  &  \n" +
+                "T    \n" +
+                "☺ ♥  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "  &  \n" +
+                "T    \n" +
+                "♥ ☺  \n", game(1));
+
+        // when hero2 set potion, hero1 get perk
+        hero1.up();
+        hero2.act();
+        hero2.up();
+        field.tick();
+
+        hero1.up();
+        hero2.right();
+        field.tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺ &  \n" +
+                "   ♥ \n" +
+                "  3  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥ &  \n" +
+                "   ☺ \n" +
+                "  3  \n", game(1));
+        events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
+                "listener(1) => []\n");
+
+        // when potion boom, hero1 should shoot by poison thrower
+        field.tick();
+        field.tick();
+        hero1.right();
+        hero1.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺҉x  \n" +
+                "  ҉♥ \n" +
+                "҉҉҉҉҉\n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥҉x  \n" +
+                "  ҉☺ \n" +
+                "҉҉҉҉҉\n", game(1));
+        events.verifyAllEvents("listener(0) => [KILL_GHOST]\n" +
+                "listener(1) => [KILL_GHOST]\n");
+
+        assertEquals(killScore, hero1.scores());
+        assertEquals(killScore, hero2.scores());
+    }
+
+    /**  both heroes should get score for killing box when then different blasts crossed
+     *   PT - Poison Thrower
+     */
+    @Test
+    public void shouldKillBoxByPTAndScorePoints_whenCrossBlast() {
+        // given
+        givenBoardForPoisonThrower();
+        boxesCount(1);
+        boxAt(2,2);
+        int killScore = 10;
+        settings.integer(KILL_WALL_SCORE, killScore);
+        Hero hero1 = hero(0);
+        Hero hero2 = hero(1);
+        assertEquals(0, hero1.scores());
+        assertEquals(0, hero2.scores());
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "  #  \n" +
+                "T    \n" +
+                "☺ ♥  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "  #  \n" +
+                "T    \n" +
+                "♥ ☺  \n", game(1));
+
+        // when hero2 set potion, hero1 get perk
+        hero1.up();
+        hero2.act();
+        hero2.up();
+        field.tick();
+
+        hero1.up();
+        hero2.right();
+        field.tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺ #  \n" +
+                "   ♥ \n" +
+                "  3  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥ #  \n" +
+                "   ☺ \n" +
+                "  3  \n", game(1));
+        events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
+                "listener(1) => []\n");
+
+        // when potion boom - hero1 should shoot by poison thrower
+        field.tick();
+        field.tick();
+        hero1.right();
+        hero1.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺҉H  \n" +
+                "  ҉♥ \n" +
+                "҉҉҉҉҉\n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥҉H  \n" +
+                "  ҉☺ \n" +
+                "҉҉҉҉҉\n", game(1));
+        events.verifyAllEvents("listener(0) => [KILL_TREASURE_BOX]\n" +
+                "listener(1) => [KILL_TREASURE_BOX]\n");
+
+        assertEquals(killScore, hero1.scores());
+        assertEquals(killScore, hero2.scores());
+    }
+
+    /**  both heroes should kill perk when then different blasts crossed
+     *   and get personal hunter perks. GhostHunters should double.
+     *   PT - Poison Thrower
+     */
+    @Test
+    public void shouldKillOnePerkAndGetTwoHuntedGhost_CrossBlastPortionAndPoisonThrow() {
+        // given
+        givenBoardForPoisonThrower();
+        int killScore = 10;
+        settings.integer(KILL_GHOST_SCORE, killScore);
+        Hero hero1 = hero(0);
+        Hero hero2 = hero(1);
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "T    \n" +
+                "☺ ♥  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "T    \n" +
+                "♥ ☺  \n", game(1));
+
+        // when hero2 set potion, hero1 get perk
+        hero1.up();
+        hero2.act();
+        hero2.up();
+        field.tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "☺ ♥  \n" +
+                "  4  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "♥ ☺  \n" +
+                "  4  \n", game(1));
+        events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
+                "listener(1) => []\n");
+
+
+        // when move heroes on position and set perk for destroy
+        hero1.up();
+        hero2.right();
+        field.tick();
+        hero2.right();
+        field.tick();
+        hero2.up();
+        field.tick();
+        perkAt(2,2,new PotionCountIncrease(1,10));
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺ c ♥\n" +
+                "     \n" +
+                "  1  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥ c ☺\n" +
+                "     \n" +
+                "  1  \n", game(1));
+
+
+        // when both heroes kill one perk
+        hero1.right();
+        hero1.act(1);
+        field.tick();
+
+        // then two GhostHunters should born on the one Point
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺҉x ♥\n" +
+                "  ҉  \n" +
+                "҉҉҉҉҉\n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥҉x ☺\n" +
+                "  ҉  \n" +
+                "҉҉҉҉҉\n", game(1));
+        events.verifyAllEvents("listener(0) => [DROP_PERK]\n" +
+                "listener(1) => [DROP_PERK]\n");
+        assertEquals(2, field.ghosts().all().size());
+
+        for (Ghost ghost : field.ghosts().all()) {
+            assertEquals(ghost.getClass(), GhostHunter.class);
+        }
+
+        // when field tick
+        field.tick();
+
+        // then both hunters are visible and haunting heroes
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺x x♥\n" +
+                "     \n" +
+                "     \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥x x☺\n" +
+                "     \n" +
+                "     \n", game(1));
+    }
+
+    private void givenBoardForPoisonThrower() {
+        dice(dice,
+                0, 0, 2, 0);
+        givenBoard(2);
+        perkAt(0, 1, new PoisonThrower(10));
+        settings.integer(POTION_POWER, 2);
+        settings.integer(CATCH_PERK_SCORE, 0);
     }
 
     @Test

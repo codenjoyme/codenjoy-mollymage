@@ -31,6 +31,6 @@ public class PoisonThrower extends Perk {
 
     @Override
     public Perk combine(Perk perk) {
-        return null;
+        return new PoisonThrower(this.getTimer() + perk.getTimer());
     }
 }

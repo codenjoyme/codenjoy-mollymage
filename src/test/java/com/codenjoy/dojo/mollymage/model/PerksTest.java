@@ -986,6 +986,76 @@ public class PerksTest extends AbstractGameTest {
     }
 
     @Test
+    public void shouldPerkWorksAfterCombine_WithPTPerk() {
+        // given
+        givenBoardWithWalls();
+        settings.integer(POTION_POWER, 4);
+        settings.integer(POISON_THROWER_RECHARGE, 1);
+        final int timeout = 10;
+        perkAt(1, 2, new PoisonThrower(timeout));
+
+        // then
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼T☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+
+        // when hero get perk
+        hero.up();
+        field.tick();
+
+        // then
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼☺☼ ☼\n" +
+                "☼   ☼\n" +
+                "☼☼☼☼☼\n");
+        events.verifyAllEvents("[CATCH_PERK]");
+
+        // when hero used perk
+        hero.down();
+        hero.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼☺☼ ☼\n" +
+                "☼҉  ☼\n" +
+                "☼☼☼☼☼\n");
+        assertEquals(timeout - 2, hero.getPerk(Element.POISON_THROWER).getTimer());
+
+        // when hero picked one more perk
+        perkAt(1, 3, new PoisonThrower(timeout));
+        hero.up();
+        field.tick();
+
+        // then perk timer should be doubled minus few steps
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼☺  ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼   ☼\n" +
+                "☼☼☼☼☼\n");
+        events.verifyAllEvents("[CATCH_PERK]");
+        assertEquals(timeout * 2 - 3, hero.getPerk(Element.POISON_THROWER).getTimer());
+
+        // when hero use PT
+        hero.down();
+        hero.act(1);
+        field.tick();
+
+        // then
+        asrtBrd("☼☼☼☼☼\n" +
+                "☼☺  ☼\n" +
+                "☼҉☼ ☼\n" +
+                "☼҉  ☼\n" +
+                "☼☼☼☼☼\n");
+        assertEquals(timeout * 2 - 4, hero.getPerk(Element.POISON_THROWER).getTimer());
+    }
+
+
+    @Test
     public void shouldThrowPoison_whenPTperk() {
         // given
         givenBoardWithBoxes(10);

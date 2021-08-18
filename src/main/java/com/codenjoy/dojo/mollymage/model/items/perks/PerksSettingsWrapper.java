@@ -70,6 +70,11 @@ public class PerksSettingsWrapper {
                 // value is always 0
                 settings.integer(TIMEOUT_POISON_THROWER, timeout);
             } break;
+
+            case POTION_EXPLODER: {
+                settings.integer(POTION_EXPLODER_COUNT, value);
+                // timeout is always 1
+            } break;
         }
 
         return this;

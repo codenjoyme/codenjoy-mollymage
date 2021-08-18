@@ -73,6 +73,8 @@ public class GameSettings extends SettingsImpl
         TIMEOUT_POISON_THROWER("[Perks] Poison thrower effect timeout"),
         POISON_THROWER_RECHARGE("[Perks] Poison thrower recharge"),
         REMOTE_CONTROL_COUNT("[Perks] Number of Potion remote controls (how many times player can use it)"),
+        POTION_EXPLODER_COUNT("[Perks] Number of Potion Exploder (how many times player can use it)"),
+        STEAL_POINTS("[Perks] Steal points from potion owner (works with Potion Exploder perk)"),
         DEFAULT_PERKS("[Perks] Perks available in this game"),
         LEVEL_MAP("[Level] map");
 
@@ -114,6 +116,7 @@ public class GameSettings extends SettingsImpl
 
         bool(PERK_WHOLE_TEAM_GET, false);
         string(DEFAULT_PERKS, StringUtils.EMPTY);
+        bool(STEAL_POINTS, false);
         PerksSettingsWrapper perks =
                 perksSettings()
                     .dropRatio(20) // Set value to 0% = perks is disabled.
@@ -124,6 +127,7 @@ public class GameSettings extends SettingsImpl
         perks.put(Element.POTION_IMMUNE, 0, timeout);
         perks.put(Element.POTION_COUNT_INCREASE, 4, timeout);
         perks.put(Element.POISON_THROWER, 0, timeout);
+        perks.put(Element.POTION_EXPLODER, 1, 1);
 
         // TODO: consider drawing maze
         multiline(LEVEL_MAP,

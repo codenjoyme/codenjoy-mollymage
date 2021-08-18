@@ -71,6 +71,7 @@ public class GameSettings extends SettingsImpl
         TIMEOUT_POTION_COUNT_INC("[Perks] Potion count effect timeout"),
         TIMEOUT_POTION_IMMUNE("[Perks] Potion immune effect timeout"),
         TIMEOUT_POISON_THROWER("[Perks] Poison thrower effect timeout"),
+        TIMEOUT_POTION_EXPLODER("[Perks] Potion exploder effect timeout"),
         POISON_THROWER_RECHARGE("[Perks] Poison thrower recharge"),
         REMOTE_CONTROL_COUNT("[Perks] Number of Potion remote controls (how many times player can use it)"),
         POTION_EXPLODER_COUNT("[Perks] Number of Potion Exploder (how many times player can use it)"),
@@ -127,7 +128,7 @@ public class GameSettings extends SettingsImpl
         perks.put(Element.POTION_IMMUNE, 0, timeout);
         perks.put(Element.POTION_COUNT_INCREASE, 4, timeout);
         perks.put(Element.POISON_THROWER, 0, timeout);
-        perks.put(Element.POTION_EXPLODER, 1, 1);
+        perks.put(Element.POTION_EXPLODER, 1, timeout);
 
         // TODO: consider drawing maze
         multiline(LEVEL_MAP,

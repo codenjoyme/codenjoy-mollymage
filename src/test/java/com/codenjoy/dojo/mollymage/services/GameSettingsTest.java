@@ -98,6 +98,7 @@ public class GameSettingsTest {
                 "  'TIMEOUT_POISON_THROWER':30,\n" +
                 "  'TIMEOUT_POTION_BLAST_RADIUS_INC':30,\n" +
                 "  'TIMEOUT_POTION_COUNT_INC':30,\n" +
+                "  'TIMEOUT_POTION_EXPLODER':30,\n" +
                 "  'TIMEOUT_POTION_IMMUNE':30,\n" +
                 "  'TREASURE_BOX_COUNT':52,\n" +
                 "  'WIN_ROUND_SCORE':30\n" +
@@ -155,6 +156,7 @@ public class GameSettingsTest {
                 "  'TIMEOUT_POISON_THROWER':30,\n" +
                 "  'TIMEOUT_POTION_BLAST_RADIUS_INC':30,\n" +
                 "  'TIMEOUT_POTION_COUNT_INC':12,\n" +
+                "  'TIMEOUT_POTION_EXPLODER':30,\n" +
                 "  'TIMEOUT_POTION_IMMUNE':30,\n" +
                 "  'TREASURE_BOX_COUNT':52,\n" +
                 "  'WIN_ROUND_SCORE':30\n" +
@@ -203,6 +205,7 @@ public class GameSettingsTest {
                 "  'TIMEOUT_POISON_THROWER':30,\n" +
                 "  'TIMEOUT_POTION_BLAST_RADIUS_INC':30,\n" +
                 "  'TIMEOUT_POTION_COUNT_INC':12,\n" +
+                "  'TIMEOUT_POTION_EXPLODER':30,\n" +
                 "  'TIMEOUT_POTION_IMMUNE':30,\n" +
                 "  'TREASURE_BOX_COUNT':52,\n" +
                 "  'WIN_ROUND_SCORE':30\n" +

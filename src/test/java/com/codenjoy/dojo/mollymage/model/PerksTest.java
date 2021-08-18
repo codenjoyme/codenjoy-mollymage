@@ -34,6 +34,8 @@ import static org.mockito.Mockito.reset;
 
 public class PerksTest extends AbstractGameTest {
 
+    public static final int PERKS_TIMEOUT = 10;
+
     @Test
     public void shouldPerkBeDropped_whenWallIsDestroyed() {
         // given
@@ -1940,6 +1942,369 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[]",
                 hero.getPerks().toString());
+    }
+
+    @Test
+    public void shouldDestroyAllPotion_WithPerkPE() {
+        // given
+        givenBoard(6, 0, 0);
+        perkAt(0, 1, getPotionExploderPerk());
+        hero.addPerk(new PotionCountIncrease(3, 30));
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "A     \n" +
+                "☺     \n");
+        assertEquals(1, hero.getPerks().size());
+
+        // when hero get perk PE
+        hero.up();
+        field.tick();
+
+        // then
+        events.verifyAllEvents("[CATCH_PERK]");
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "☺     \n" +
+                "      \n");
+        assertEquals(2, hero.getPerks().size());
+
+        // when hero plant different potions
+        hero.act();
+        hero.up();
+        field.tick();
+
+        hero.addPerk(new PotionRemoteControl(3, 30));
+        hero.act();
+        hero.up();
+        field.tick();
+        hero.right();
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                " ☺    \n" +
+                "5     \n" +
+                "2     \n" +
+                "      \n");
+        assertEquals(3, hero.getPerks().size());
+
+        // when hero explode all potions
+        hero.act(2);
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "҉☺    \n" +
+                "҉҉    \n" +
+                "҉҉    \n" +
+                "҉     \n");
+    }
+
+    // PE - Potion Explored
+    @Test
+    public void shouldNotDestroyAllPotion_WithoutPerkPE() {
+        // given
+        givenBoard(6, 0, 0);
+        hero.addPerk(new PotionCountIncrease(3, 30));
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "☺     \n");
+
+        // when hero plant different potions
+        hero.act();
+        hero.up();
+        field.tick();
+
+        hero.addPerk(new PotionRemoteControl(3, 30));
+        hero.act();
+        hero.up();
+        field.tick();
+        hero.right();
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                " ☺    \n" +
+                "5     \n" +
+                "2     \n");
+
+        // when hero tried explode all potions but can't without PE perk
+        hero.act(2);
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                " ☺    \n" +
+                "5     \n" +
+                "1     \n");
+    }
+
+    @Test
+    public void shouldMoveWhileUsingPerk_WithPerkPE() {
+        // given
+        givenBoard(6, 0, 0);
+        perkAt(0, 1, getPotionExploderPerk());
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "A     \n" +
+                "☺     \n");
+
+        // when hero catch perk and plant potion
+        hero.act();
+        hero.up();
+        field.tick();
+
+        hero.right();
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                " ☺    \n" +
+                "3     \n");
+        events.verifyAllEvents("[CATCH_PERK]");
+
+        // when hero explode potions and move right
+        hero.act(2);
+        hero.right();
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "҉ ☺   \n" +
+                "҉҉    \n");
+    }
+
+    private PotionExploder getPotionExploderPerk() {
+        return new PotionExploder(1, PERKS_TIMEOUT);
+    }
+
+    @Test
+    public void shouldMoveWhileUsingPerk_WithoutPerkPE() {
+        // given
+        givenBoard(6, 0, 0);
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "☺     \n");
+
+        // when hero plant potion
+        hero.act();
+        hero.up();
+        field.tick();
+
+        hero.right();
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                " ☺    \n" +
+                "3     \n");
+
+        // when hero tried explode potions(but cant) and move right
+        hero.act(2);
+        hero.right();
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "  ☺   \n" +
+                "2     \n");
+    }
+
+    @Test
+    public void shouldWorkOnlyOneTime_WithPerkPE() {
+        // given
+        givenBoard(6, 0, 0);
+        perkAt(0, 1, getPotionExploderPerk());
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "A     \n" +
+                "☺     \n");
+
+        // when hero catch perk and plant potion
+        hero.act();
+        hero.up();
+        field.tick();
+
+        hero.right();
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                " ☺    \n" +
+                "3     \n");
+        events.verifyAllEvents("[CATCH_PERK]");
+
+        // when hero explode potions and move right
+        hero.act(2);
+        hero.right();
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "҉ ☺   \n" +
+                "҉҉    \n");
+
+        // when hero plant again
+        hero.act();
+        hero.up();
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "  ☺   \n" +
+                "  4   \n" +
+                "      \n");
+
+        // when hero act(2) potion shouldn't boom
+        hero.act(2);
+        hero.right();
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "   ☺  \n" +
+                "  3   \n" +
+                "      \n");
+
+    }
+
+    // PE - Potion Explored
+    @Test
+    public void shouldCombinePerk_WithPerkPE() {
+        // given
+        givenBoard(6, 0, 0);
+        perkAt(0, 1, getPotionExploderPerk());
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "A     \n" +
+                "☺     \n");
+
+        // when hero catch perk and plant potion
+        hero.act();
+        hero.up();
+        field.tick();
+
+        // then
+        events.verifyAllEvents("[CATCH_PERK]");
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "☺     \n" +
+                "4     \n");
+
+
+        // one more perk
+        perkAt(0, 2, getPotionExploderPerk());
+
+        // when hero catch one more perk
+        hero.up();
+        field.tick();
+
+        // then
+        events.verifyAllEvents("[CATCH_PERK]");
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                "☺     \n" +
+                "      \n" +
+                "3     \n");
+
+
+        // when hero explode potion and move right
+        hero.act(2);
+        hero.right();
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                "      \n" +
+                " ☺    \n" +
+                "҉     \n" +
+                "҉҉    \n");
+
+        // when hero plant again
+        hero.act();
+        hero.up();
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                " ☺    \n" +
+                " 4    \n" +
+                "      \n" +
+                "      \n");
+
+        // when hero act(2) potion should boom
+        hero.act(2);
+        hero.right();
+        field.tick();
+
+        // then
+        asrtBrd("      \n" +
+                "      \n" +
+                " ҉☺   \n" +
+                "҉҉҉   \n" +
+                " ҉    \n" +
+                "      \n");
     }
 
     // привидения тоже могут ставить зелье

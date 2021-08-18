@@ -48,6 +48,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
     private Direction direction;
     private int score;
     private boolean throwPoison;
+    private boolean explodeAllPotions;
     private int recharge;
 
     private HeroPerks perks = new HeroPerks();
@@ -98,6 +99,10 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
             return;
         }
 
+        if (is.act(2)) {
+            explodeAllPotions = true;
+            return;
+        }
 
         if (direction != null) {
             potion = true;
@@ -108,6 +113,11 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
 
     public void apply() {
         if (!isActiveAndAlive()) return;
+
+        if (explodeAllPotions) {
+            explodeAllPotionsOnField();
+            explodeAllPotions = false;
+        }
 
         if (direction == null) {
             return;
@@ -139,6 +149,16 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         }
     }
 
+    private void explodeAllPotionsOnField() {
+        Perk perk = perks.getPerk(POTION_EXPLODER);
+
+        if (perk == null || perk.getValue() <= 0) {
+            return;
+        }
+        field.explodeAllPotions(this);
+        perk.decrease();
+    }
+
     private void throwPoison(Direction direction) {
         Perk perk = perks.getPerk(POISON_THROWER);
 
@@ -156,7 +176,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         Perk remotePerk = perks.getPerk(POTION_REMOTE_CONTROL);
         if (remotePerk != null) {
             // activate potions that were set on remote control previously
-            if (tryActivateRemote(potions)) {
+            if (tryActivateRemote(potions, this)) {
                 remotePerk.decrease();
                 return;
             }
@@ -183,11 +203,11 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         return settings().integer(POTION_POWER) + boost;
     }
 
-    private boolean tryActivateRemote(List<Potion> potions) {
+    private boolean tryActivateRemote(List<Potion> potions, Hero hero) {
         boolean activated = false;
         for (Potion potion : potions) {
             if (potion.isOnRemote()) {
-                potion.activateRemote();
+                potion.activateRemote(hero);
                 activated = true;
             }
         }

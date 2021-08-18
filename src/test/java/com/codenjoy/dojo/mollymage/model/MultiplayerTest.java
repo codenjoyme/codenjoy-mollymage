@@ -26,10 +26,7 @@ package com.codenjoy.dojo.mollymage.model;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
-import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
-import com.codenjoy.dojo.mollymage.model.items.perks.PoisonThrower;
-import com.codenjoy.dojo.mollymage.model.items.perks.PotionCountIncrease;
-import com.codenjoy.dojo.mollymage.model.items.perks.PotionImmune;
+import com.codenjoy.dojo.mollymage.model.items.perks.*;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Joystick;
 import com.codenjoy.dojo.services.PointImpl;
@@ -43,6 +40,7 @@ import static org.junit.Assert.*;
 public class MultiplayerTest extends AbstractMultiplayerTest {
 
     public static final int CATCH_PERK_SCORE_FOR_TEST = 10;
+    public static final int PERK_TIMEOUT_FOR_TEST = 10;
 
     @Before
     public void setup() {
@@ -2094,5 +2092,616 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "     \n" +
                 " ♣ ♣ \n" +
                 "     \n", game(0));
+    }
+
+    @Test
+    public void shouldExplodeBothPotionsOnBoard_WithPE_Test1() {
+        // given
+        settings.integer(POTIONS_COUNT, 1);
+
+        dice(dice,
+                0, 0,
+                1, 0);
+        givenBoard(2);
+
+        //when hero0 catch perk and both heroes act and move
+        perkAt(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+        hero(0).act();
+        hero(0).up();
+
+        hero(1).act();
+        hero(1).up();
+
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "44   \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                "44   \n", game(1));
+        events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
+                "listener(1) => []\n");
+
+        //when hero0 with PE perk explode own potion and hero1's simple potion
+        hero(0).act(2);
+        hero(0).up();
+
+        hero(1).up();
+
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "҉҉   \n" +
+                "҉҉҉  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                "҉҉   \n" +
+                "҉҉҉  \n", game(1));
+        events.verifyAllEvents("listener(0) => []\n" +
+                "listener(1) => []\n");
+    }
+
+    @Test
+    public void shouldExplodeBothPotionsOnBoard_WithPE_Test2() {
+        // given
+        settings.integer(POTIONS_COUNT, 1);
+
+        dice(dice,
+                0, 0,
+                1, 0);
+        givenBoard(2);
+        //when both heroes set Remote_Control potions. Hero0 get PE perk
+        perkAt(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+        hero(0).addPerk(new PotionRemoteControl(1, 10));
+        hero(1).addPerk(new PotionRemoteControl(1, 10));
+
+        hero(0).act();
+        hero(0).up();
+
+        hero(1).act();
+        hero(1).up();
+
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "55   \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                "55   \n", game(1));
+        events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
+                "listener(1) => []\n");
+
+        // when hero0 uses PE perk and explode both potions
+        hero(0).act(2);
+        hero(0).up();
+
+        hero(1).up();
+
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "҉҉   \n" +
+                "҉҉҉  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                "҉҉   \n" +
+                "҉҉҉  \n", game(1));
+        events.verifyAllEvents("listener(0) => []\n" +
+                "listener(1) => []\n");
+    }
+
+    // Remote Control and Perk Exploder should works together.
+    @Test
+    public void shouldExplodeBothPotionsOnBoard_WithPE_Test3() {
+        // given
+        settings.integer(POTIONS_COUNT, 1);
+
+        dice(dice,
+                0, 0,
+                1, 0);
+        givenBoard(2);
+
+        perkAt(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+
+        // when hero0 sets usually potion. Hero1 sets RC potion.
+        hero(1).addPerk(new PotionRemoteControl(1, 10));
+        ghostAt(2, 0);
+
+        hero(0).act();
+        hero(0).up();
+
+        hero(1).act();
+        hero(1).up();
+
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "45&  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                "45&  \n", game(1));
+        events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
+                "listener(1) => []\n");
+
+
+        // when hero0 explode all, hero1 explode own remote control perk
+        hero(0).act(2);
+        hero(0).up();
+
+        hero(1).act();
+        hero(1).up();
+
+        tick();
+
+        // then both heroes kill ghost
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "҉҉   \n" +
+                "҉҉x  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                "҉҉   \n" +
+                "҉҉x  \n", game(1));
+        events.verifyAllEvents("listener(0) => [KILL_GHOST]\n" +
+                "listener(1) => [KILL_GHOST]\n");
+    }
+
+    // Both Heroes have Perk Exploder.
+    @Test
+    public void shouldExplodeBothPotionsOnBoardAndKillGhost_WithPE() {
+        // given
+        settings.integer(POTIONS_COUNT, 1);
+
+        dice(dice,
+                0, 0,
+                1, 0);
+        givenBoard(2);
+
+        perkAt(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+        perkAt(1, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+
+        // when heroes plant potions and catch perk
+        ghostAt(2, 0);
+
+        hero(0).act();
+        hero(0).up();
+
+        hero(1).act();
+        hero(1).up();
+
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "44&  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                "44&  \n", game(1));
+        events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
+                "listener(1) => [CATCH_PERK]\n");
+
+        // when hero0 and hero1 explode all, both should kill ghost
+        hero(0).act(2);
+        hero(0).up();
+
+        hero(1).act(2);
+        hero(1).up();
+
+        tick();
+
+        // then both heroes kill ghost
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "҉҉   \n" +
+                "҉҉x  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                "҉҉   \n" +
+                "҉҉x  \n", game(1));
+        events.verifyAllEvents("listener(0) => [KILL_GHOST]\n" +
+                "listener(1) => [KILL_GHOST]\n");
+    }
+
+    @Test
+    public void shouldPotionOwnerGetScoresTo_WithPE() {
+        // given
+        settings.integer(POTIONS_COUNT, 1);
+        settings.bool(STEAL_POINTS, false);
+
+        dice(dice,
+                0, 0,
+                1, 0);
+        givenBoard(2);
+        ghostAt(2, 0);
+        perkAt(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+
+        // when both heroes set simple potions
+        hero(0).act();
+        hero(0).up();
+
+        hero(1).act();
+        hero(1).up();
+
+        tick();
+        hero(0).up();
+        hero(1).up();
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "     \n" +
+                "33&  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                "     \n" +
+                "33&  \n", game(1));
+        events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
+                "listener(1) => []\n");
+
+        // when potions timers almost end
+        tick();
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "     \n" +
+                "11&  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                "     \n" +
+                "11&  \n", game(1));
+
+
+        // when hero0 explode all, both heroes should earn scores
+        hero(0).act(2);
+
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "҉҉   \n" +
+                "҉҉x  \n", game(0));
+        events.verifyAllEvents("listener(0) => [KILL_GHOST]\n" +
+                "listener(1) => [KILL_GHOST]\n");
+    }
+
+    @Test
+    public void shouldNotPotionOwnerGetScores_WithPE() {
+        // given
+        settings.integer(POTIONS_COUNT, 1);
+        settings.bool(STEAL_POINTS, true);
+
+        dice(dice,
+                0, 0,
+                1, 0);
+        givenBoard(2);
+        ghostAt(2, 0);
+        perkAt(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+
+        // when both heroes set simple potions
+        hero(0).act();
+        hero(0).up();
+
+        hero(1).act();
+        hero(1).up();
+
+        tick();
+        hero(0).up();
+        hero(1).up();
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "     \n" +
+                "33&  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                "     \n" +
+                "33&  \n", game(1));
+        events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
+                "listener(1) => []\n");
+
+        // when potions timers almost end
+        tick();
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "     \n" +
+                "11&  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                "     \n" +
+                "11&  \n", game(1));
+
+        // when hero0 explode all, only hero0 should kill ghost
+        hero(0).act(2);
+
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺♥   \n" +
+                "҉҉   \n" +
+                "҉҉x  \n", game(0));
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥☺   \n" +
+                "҉҉   \n" +
+                "҉҉x  \n", game(1));
+        events.verifyAllEvents("listener(0) => [KILL_GHOST]\n" +
+                "listener(1) => []\n");
+    }
+
+    @Test
+    public void shouldBothHeroesGerPersonalHunterAfterKillingPerk_WithPE_Test1() {
+        // given
+        dice(dice,
+                1, 2,
+                2, 0);
+        givenBoard(2);
+
+        //when hero0 plant Remote_Control potions. and go to position
+        hero(0).addPerk(new PotionRemoteControl(1, PERK_TIMEOUT_FOR_TEST));
+        hero(0).addPerk(new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+        hero(1).addPerk(new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+
+
+        hero(0).act();
+        hero(0).up();
+        tick();
+
+        hero(0).up();
+        tick();
+
+        hero(0).up();
+        tick();
+
+        hero(0).right();
+        tick();
+        perkAt(2, 2, new PotionRemoteControl(10, PERK_TIMEOUT_FOR_TEST));
+
+        // then
+        asrtBrd("  ☺  \n" +
+                "     \n" +
+                " 5r  \n" +
+                "     \n" +
+                "  ♥  \n", game(0));
+        asrtBrd("  ♥  \n" +
+                "     \n" +
+                " 5r  \n" +
+                "     \n" +
+                "  ☺  \n", game(1));
+
+        // when heroes explode potion and kill perk
+        hero(0).act(2);
+        hero(1).act(2);
+        tick();
+
+        // then
+        events.verifyAllEvents("listener(0) => [DROP_PERK]\n" +
+                "listener(1) => [DROP_PERK]\n");
+        asrtBrd("  ☺  \n" +
+                " ҉   \n" +
+                "҉҉x  \n" +
+                " ҉   \n" +
+                "  ♥  \n", game(0));
+        asrtBrd("  ♥  \n" +
+                " ҉   \n" +
+                "҉҉x  \n" +
+                " ҉   \n" +
+                "  ☺  \n", game(1));
+        assertEquals(2, field.ghosts().all().size());
+
+        // when next tick two ghostHunters should been visible
+        tick();
+
+        // then
+        asrtBrd("  ☺  \n" +
+                "  x  \n" +
+                "     \n" +
+                "  x  \n" +
+                "  ♥  \n", game(0));
+        asrtBrd("  ♥  \n" +
+                "  x  \n" +
+                "     \n" +
+                "  x  \n" +
+                "  ☺  \n", game(1));
+    }
+
+    @Test
+    public void shouldBothHeroesGerPersonalHunterAfterKillingPerk_WithPE_Test2() {
+        // given
+        dice(dice,
+                1, 2,
+                2, 0);
+        givenBoard(2);
+        settings.bool(STEAL_POINTS, false);
+
+        //when hero0 plant potion and go to position
+        hero(1).addPerk(new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+
+        hero(0).act();
+        hero(0).up();
+        tick();
+
+        hero(0).up();
+        tick();
+
+        hero(0).up();
+        tick();
+
+        hero(0).right();
+        tick();
+        perkAt(2, 2, new PotionRemoteControl(10, PERK_TIMEOUT_FOR_TEST));
+
+        // then
+        asrtBrd("  ☺  \n" +
+                "     \n" +
+                " 1r  \n" +
+                "     \n" +
+                "  ♥  \n", game(0));
+        asrtBrd("  ♥  \n" +
+                "     \n" +
+                " 1r  \n" +
+                "     \n" +
+                "  ☺  \n", game(1));
+
+        // when hero1 explode potion, hero0 get events after the potion timer end
+        hero(1).act(2);
+        tick();
+
+        // then both heroes kill perk
+        events.verifyAllEvents("listener(0) => [DROP_PERK]\n" +
+                "listener(1) => [DROP_PERK]\n");
+        asrtBrd("  ☺  \n" +
+                " ҉   \n" +
+                "҉҉x  \n" +
+                " ҉   \n" +
+                "  ♥  \n", game(0));
+        asrtBrd("  ♥  \n" +
+                " ҉   \n" +
+                "҉҉x  \n" +
+                " ҉   \n" +
+                "  ☺  \n", game(1));
+        assertEquals(2, field.ghosts().all().size());
+
+        // when next tick two ghostHunters should been visible
+        tick();
+
+        // then
+        asrtBrd("  ☺  \n" +
+                "  x  \n" +
+                "     \n" +
+                "  x  \n" +
+                "  ♥  \n", game(0));
+        asrtBrd("  ♥  \n" +
+                "  x  \n" +
+                "     \n" +
+                "  x  \n" +
+                "  ☺  \n", game(1));
+    }
+
+    @Test
+    public void shouldNotGetGhostHunterWhenPointsStealing_WithPE() {
+        // given
+        dice(dice,
+                1, 2,
+                2, 0);
+        givenBoard(2);
+        settings.bool(STEAL_POINTS, true);
+
+        //when hero0 plant potion and go to position
+        hero(1).addPerk(new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+
+        hero(0).act();
+        hero(0).up();
+        tick();
+
+        hero(0).up();
+        tick();
+
+        hero(0).up();
+        tick();
+
+        hero(0).right();
+        tick();
+        perkAt(2, 2, new PotionRemoteControl(10, PERK_TIMEOUT_FOR_TEST));
+
+        // then
+        asrtBrd("  ☺  \n" +
+                "     \n" +
+                " 1r  \n" +
+                "     \n" +
+                "  ♥  \n", game(0));
+        asrtBrd("  ♥  \n" +
+                "     \n" +
+                " 1r  \n" +
+                "     \n" +
+                "  ☺  \n", game(1));
+
+        // when hero1 explode potion, hero0 does not get events after the potion timer end
+        hero(1).act(2);
+        tick();
+
+        // then both heroes kill perk
+        events.verifyAllEvents("listener(0) => []\n" +
+                "listener(1) => [DROP_PERK]\n");
+        asrtBrd("  ☺  \n" +
+                " ҉   \n" +
+                "҉҉x  \n" +
+                " ҉   \n" +
+                "  ♥  \n", game(0));
+        asrtBrd("  ♥  \n" +
+                " ҉   \n" +
+                "҉҉x  \n" +
+                " ҉   \n" +
+                "  ☺  \n", game(1));
+        assertEquals(1, field.ghosts().all().size());
+
+        // when next tick only one ghostHunter should been visible
+        tick();
+
+        // then
+        asrtBrd("  ☺  \n" +
+                "     \n" +
+                "     \n" +
+                "  x  \n" +
+                "  ♥  \n", game(0));
+        asrtBrd("  ♥  \n" +
+                "     \n" +
+                "     \n" +
+                "  x  \n" +
+                "  ☺  \n", game(1));
     }
 }

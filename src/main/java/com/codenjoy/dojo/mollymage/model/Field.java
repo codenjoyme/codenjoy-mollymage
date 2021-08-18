@@ -83,4 +83,6 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
     Ghosts ghosts();
 
     void addPoison(Poison poison);
+
+    void explodeAllPotions(Hero hero);
 }

@@ -31,11 +31,19 @@ import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.Tickable;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.STEAL_POINTS;
+
 public class Potion extends PointImpl implements Tickable, State<Element, Player> {
 
     protected int timer = 5;
     protected int power;
     private final Hero owner;
+    private Set<Hero> interceptors;
     private final Field field;
     private boolean onRemote = false;
 
@@ -44,6 +52,7 @@ public class Potion extends PointImpl implements Tickable, State<Element, Player
         this.power = power;
         this.owner = owner;
         this.field = field;
+        interceptors = new LinkedHashSet<>();
     }
 
     public void tick() {
@@ -56,8 +65,34 @@ public class Potion extends PointImpl implements Tickable, State<Element, Player
         }
     }
 
+    public List<Hero> getOwners() {
+        List<Hero> results = new ArrayList<>();
+        if (interceptors == null || interceptors.size() == 0) {
+            results.add(owner);
+        } else {
+            results.addAll(interceptors);
+        }
+        return results;
+    }
+
+    public void intercept(Hero hero) {
+        addBlastOwner(hero);
+        putOnRemoteControl();
+    }
+
+    private void addBlastOwner(Hero hero) {
+        interceptors.add(hero);
+    }
+
     public void boom() {
+        if (isOwnerGetScoresFromHisPotion()) {
+            addBlastOwner(owner);
+        }
         field.remove(this);
+    }
+
+    private boolean isOwnerGetScoresFromHisPotion() {
+        return !field.settings().bool(STEAL_POINTS);
     }
 
     public int getPower() {
@@ -69,7 +104,7 @@ public class Potion extends PointImpl implements Tickable, State<Element, Player
     }
 
     public boolean itsMine(Hero hero) {
-        return this.owner == hero;
+        return getOwner() == hero;
     }
 
     public Hero getOwner() {
@@ -80,7 +115,8 @@ public class Potion extends PointImpl implements Tickable, State<Element, Player
         this.onRemote = true;
     }
 
-    public void activateRemote() {
+    public void activateRemote(Hero hero) {
+        intercept(hero);
         this.timer = 0;
     }
 

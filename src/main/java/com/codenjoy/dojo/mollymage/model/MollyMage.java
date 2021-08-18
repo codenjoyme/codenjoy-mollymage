@@ -183,7 +183,7 @@ public class MollyMage extends RoundField<Player> implements Field {
             Hero owner = potion.getOwner();
             if (!owner.isActiveAndAlive()) {
                 if (potion.isOnRemote()) {
-                    potion.activateRemote();
+                    potion.activateRemote(owner);
                     owner.getPerk(Element.POTION_REMOTE_CONTROL).decrease();
                 }
             }
@@ -355,8 +355,12 @@ public class MollyMage extends RoundField<Player> implements Field {
         List barriers = getBarriesForBlast();
 
         // TODO move potion inside BoomEngine
-        return new BoomEngineOriginal(potion.getOwner())
-                .boom(barriers, size(), potion, potion.getPower());
+        List<Blast> result = new ArrayList<>();
+        for (Hero owner : potion.getOwners()) {
+            result.addAll(new BoomEngineOriginal(owner)
+                    .boom(barriers, size(), potion, potion.getPower()));
+        }
+        return result;
     }
 
     private void killAllNear(List<Blast> blasts) {
@@ -523,6 +527,10 @@ public class MollyMage extends RoundField<Player> implements Field {
                 setup(pt, new PoisonThrower(perk.timeout()));
                 return true;
 
+            case POTION_EXPLODER:
+                setup(pt, new PotionExploder(perk.value(), perk.timeout()));
+                return true;
+
             default:
                 return false;
         }
@@ -657,5 +665,13 @@ public class MollyMage extends RoundField<Player> implements Field {
     @Override
     public void addPoison(Poison poison) {
         toxins.add(poison);
+    }
+
+    @Override
+    public void explodeAllPotions(Hero hero) {
+        for (Potion potion : potions) {
+            potion.intercept(hero);
+            potion.activateRemote(hero);
+        }
     }
 }

@@ -79,7 +79,7 @@ public class GameSettingsTest {
                 "  'POTIONS_COUNT':1,\n" +
                 "  'POTION_POWER':3,\n" +
                 "  'REMOTE_CONTROL_COUNT':3,\n" +
-                "  'ROUNDS_ENABLED':true,\n" +
+                "  'ROUNDS_ENABLED':false,\n" +
                 "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                 "  'ROUNDS_PER_MATCH':1,\n" +
                 "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
@@ -106,7 +106,7 @@ public class GameSettingsTest {
                 "  'DIE_PENALTY':12,\n" +
                 "  'PERK_POTION_BLAST_RADIUS_INC':4,\n" +
                 "  'PERK_DROP_RATIO':23,\n" +
-                "  'ROUNDS_ENABLED':false,\n" +
+                "  'ROUNDS_ENABLED':true,\n" +
                 "  'ROUNDS_TIME_BEFORE_START':10,\n" +
                 "  'SEMIFINAL_LIMIT':150,\n" +
                 "  'SEMIFINAL_PERCENTAGE':false,\n" +
@@ -134,7 +134,7 @@ public class GameSettingsTest {
                 "  'POTIONS_COUNT':1,\n" +
                 "  'POTION_POWER':3,\n" +
                 "  'REMOTE_CONTROL_COUNT':3,\n" +
-                "  'ROUNDS_ENABLED':false,\n" +
+                "  'ROUNDS_ENABLED':true,\n" +
                 "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                 "  'ROUNDS_PER_MATCH':1,\n" +
                 "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
@@ -180,7 +180,7 @@ public class GameSettingsTest {
                 "  'POTIONS_COUNT':1,\n" +
                 "  'POTION_POWER':3,\n" +
                 "  'REMOTE_CONTROL_COUNT':3,\n" +
-                "  'ROUNDS_ENABLED':false,\n" +
+                "  'ROUNDS_ENABLED':true,\n" +
                 "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                 "  'ROUNDS_PER_MATCH':1,\n" +
                 "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +

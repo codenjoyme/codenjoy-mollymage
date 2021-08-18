@@ -94,6 +94,7 @@ public class GameSettingsTest {
                 "  'SEMIFINAL_RESET_BOARD':true,\n" +
                 "  'SEMIFINAL_SHUFFLE_BOARD':true,\n" +
                 "  'SEMIFINAL_TIMEOUT':900,\n" +
+                "  'STEAL_POINTS':false,\n" +
                 "  'TIMEOUT_POISON_THROWER':30,\n" +
                 "  'TIMEOUT_POTION_BLAST_RADIUS_INC':30,\n" +
                 "  'TIMEOUT_POTION_COUNT_INC':30,\n" +
@@ -150,6 +151,7 @@ public class GameSettingsTest {
                 "  'SEMIFINAL_RESET_BOARD':true,\n" +
                 "  'SEMIFINAL_SHUFFLE_BOARD':true,\n" +
                 "  'SEMIFINAL_TIMEOUT':900,\n" +
+                "  'STEAL_POINTS':false,\n" +
                 "  'TIMEOUT_POISON_THROWER':30,\n" +
                 "  'TIMEOUT_POTION_BLAST_RADIUS_INC':30,\n" +
                 "  'TIMEOUT_POTION_COUNT_INC':12,\n" +
@@ -197,6 +199,7 @@ public class GameSettingsTest {
                 "  'SEMIFINAL_RESET_BOARD':true,\n" +
                 "  'SEMIFINAL_SHUFFLE_BOARD':true,\n" +
                 "  'SEMIFINAL_TIMEOUT':900,\n" +
+                "  'STEAL_POINTS':false,\n" +
                 "  'TIMEOUT_POISON_THROWER':30,\n" +
                 "  'TIMEOUT_POTION_BLAST_RADIUS_INC':30,\n" +
                 "  'TIMEOUT_POTION_COUNT_INC':12,\n" +

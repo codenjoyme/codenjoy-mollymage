@@ -109,6 +109,10 @@
                                                                                                 if ([symbol isEqualToString:@"T"]) {
                                                                                                     type = POISON_THROWER;
                                                                                                     isBarrier = NO;
+                                                                                            } else
+                                                                                                if ([symbol isEqualToString:@"A"]) {
+                                                                                                    type = POTION_EXPLODER;
+                                                                                                    isBarrier = NO;
                                                                                             }
 
 	}

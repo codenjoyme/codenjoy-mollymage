@@ -120,8 +120,14 @@ typedef enum{
     POTION_IMMUNE,
 
     // Hero can shoot by poison cloud
+    // Using Act(1) + Direction
     // Temporary.
     POISON_THROWER,
+
+    // Hero can explode all potions on the field
+    // Using: ACT(2)
+    // Temporary.
+    POTION_EXPLODER,
 
 /// a void
     // This is the only place where you can move your Molly.

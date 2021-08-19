@@ -200,6 +200,11 @@ var Element = {
     // Temporary.
     POISON_THROWER : 'T',
 
+    // Hero can explode all potions on the field
+    // Using: ACT(2)
+    // Temporary.
+    POTION_EXPLODER : 'A',
+
 /// a void
     // This is the only place where you can move your Molly.
     NONE : ' '
@@ -469,6 +474,7 @@ var Board = function(board){
         result = result.concat(findAll(Element.POTION_REMOTE_CONTROL));
         result = result.concat(findAll(Element.POTION_IMMUNE));
         result = result.concat(findAll(Element.POISON_THROWER));
+        result = result.concat(findAll(Element.POTION_EXPLODER));
         return result;
    }
 

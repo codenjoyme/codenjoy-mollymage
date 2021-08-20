@@ -29,6 +29,7 @@ import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
+import com.codenjoy.dojo.mollymage.model.levels.LevelImpl;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Dice;
@@ -42,7 +43,6 @@ import com.codenjoy.dojo.utils.events.EventsListenersAssert;
 import org.mockito.Mockito;
 import org.mockito.stubbing.OngoingStubbing;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -55,7 +55,6 @@ import static org.mockito.Mockito.*;
 
 public abstract class AbstractMultiplayerTest {
 
-    public static final int SIZE = 5;
     protected List<Hero> heroes = new LinkedList<>();
     protected List<Game> games = new LinkedList<>();
     private List<EventListener> listeners = new LinkedList<>();
@@ -70,8 +69,12 @@ public abstract class AbstractMultiplayerTest {
     public void setup() {
         perks = settings.perksSettings();
 
-        Level level = mock(Level.class);
-        when(level.size()).thenReturn(SIZE);
+        Level level = new LevelImpl(
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
 
         boxesCount(0);
         ghostsCount(0);

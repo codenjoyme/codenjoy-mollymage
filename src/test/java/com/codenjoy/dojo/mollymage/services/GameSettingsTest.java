@@ -44,7 +44,8 @@ public class GameSettingsTest {
                         "POTION_COUNT_INCREASE=PerkSettings{value=4, timeout=30}, " +
                         "POTION_IMMUNE=PerkSettings{value=0, timeout=30}, " +
                         "POTION_REMOTE_CONTROL=PerkSettings{value=3, timeout=1}, " +
-                        "POISON_THROWER=PerkSettings{value=0, timeout=30}}",
+                        "POISON_THROWER=PerkSettings{value=0, timeout=30}, " +
+                        "POTION_EXPLODER=PerkSettings{value=1, timeout=30}}",
                 allPerkSettings(perksSettings).toString());
     }
 

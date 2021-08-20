@@ -117,6 +117,10 @@ public class TreasureBoxes implements Tickable { // TODO протестить к
         boxes.add(box);
     }
 
+    public void addAll(List<TreasureBox> boxes) {
+        this.boxes.addAll(boxes);
+    }
+
     public boolean contains(Point pt) {
         return boxes.contains(pt);
     }

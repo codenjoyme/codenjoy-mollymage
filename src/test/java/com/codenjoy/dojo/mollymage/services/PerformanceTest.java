@@ -23,6 +23,7 @@ package com.codenjoy.dojo.mollymage.services;
  */
 
 
+import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.profile.Profiler;
 import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.services.Game;
@@ -33,9 +34,9 @@ import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.utils.TestUtils;
 import org.junit.Test;
 
+import java.util.LinkedList;
 import java.util.List;
 
-import static com.codenjoy.dojo.mollymage.model.AbstractGameTest.generate;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -113,6 +114,30 @@ public class PerformanceTest {
             }
         }, null).print();
         return level;
+    }
+
+    private List<Wall> generate(int size) {
+        List<Wall> result = new LinkedList<>();
+        for (int x = 0; x < size; x++) {
+            result.add(new Wall(x, 0));
+            result.add(new Wall(x, size - 1));
+        }
+
+        final int D = 1;
+        for (int y = D; y < size - D; y++) {
+            result.add(new Wall(0, y));
+            result.add(new Wall(size - 1, y));
+        }
+
+        for (int x = 2; x <= size - 2; x++) {
+            for (int y = 2; y <= size - 2; y++) {
+                if (y % 2 != 0 || x % 2 != 0) {
+                    continue;
+                }
+                result.add(new Wall(x, y));
+            }
+        }
+        return result;
     }
 
     private void assertLess(String phase, double expected) {

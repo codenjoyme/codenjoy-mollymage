@@ -55,11 +55,21 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldBoard_whenStartGame2() {
-        assertEquals(SIZE, field.size());
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
+        assertEquals(level.size(), field.size());
     }
 
     @Test
     public void shouldHeroOnBoardAtInitPos_whenGameStart() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
@@ -69,6 +79,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroOnBoardOneRightStep_whenCallRightCommand() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.right();
         field.tick();
 
@@ -81,6 +96,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroOnBoardTwoRightSteps_whenCallRightCommandTwice() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.right();
         field.tick();
 
@@ -96,6 +116,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroOnBoardOneUpStep_whenCallDownCommand() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.up();
         field.tick();
 
@@ -108,6 +133,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkUp() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.up();
         field.tick();
 
@@ -126,6 +156,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenGoToWallDown() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.down();
         field.tick();
 
@@ -138,6 +173,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkLeft() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.right();
         field.tick();
 
@@ -156,6 +196,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenGoToWallLeft() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.left();
         field.tick();
 
@@ -168,6 +213,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenGoToWallRight() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         gotoMaxRight();
 
         asrtBrd("     \n" +
@@ -179,6 +229,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenGoToWallUp() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         gotoMaxUp();
 
         asrtBrd("☺    \n" +
@@ -190,6 +245,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroMovedOncePerTact() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.down();
         hero.up();
         hero.left();
@@ -217,6 +277,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionDropped_whenHeroDropPotion() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.act();
         field.tick();
 
@@ -229,6 +294,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionDropped_whenHeroDropPotionAtAnotherPlace() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.up();
         field.tick();
 
@@ -247,6 +317,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionsDropped_whenHeroDropThreePotion() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         canDropPotions(3);
 
         hero.up();
@@ -272,6 +347,11 @@ public class GameTest extends AbstractGameTest {
     // чем у него в settings прописано
     @Test
     public void shouldOnlyTwoPotions_whenLevelApproveIt() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         canDropPotions(2);
 
         asrtBrd("     \n" +
@@ -314,6 +394,11 @@ public class GameTest extends AbstractGameTest {
     // герой не может класть два зелья на одно место
     @Test
     public void shouldOnlyOnePotionPerPlace() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         canDropPotions(2);
 
         hero.act();
@@ -367,6 +452,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldBoom_whenDroppedPotionHas5Ticks() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.act();
         field.tick();
 
@@ -396,6 +486,11 @@ public class GameTest extends AbstractGameTest {
     // проверить, что я могу поставить еще одно зелье, когда другое рвануло
     @Test
     public void shouldCanDropNewPotion_whenOtherBoom() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         shouldBoom_whenDroppedPotionHas5Ticks();
 
         asrtBrd("     \n" +
@@ -417,6 +512,11 @@ public class GameTest extends AbstractGameTest {
     // если герой стоит на зелье то он умирает после его взрыва
     @Test
     public void shouldKillHero_whenPotionExploded() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.act();
         hero.right();
         field.tick();
@@ -459,6 +559,11 @@ public class GameTest extends AbstractGameTest {
     // после смерти ходить больше нельзя
     @Test
     public void shouldException_whenTryToMoveIfDead_goLeft() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         killPotioner();
 
         hero.left();
@@ -493,6 +598,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldException_whenTryToMoveIfDead_goUp() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         killPotioner();
 
         hero.up();
@@ -507,6 +617,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldException_whenTryToMoveIfDead_goDown() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         killPotioner();
 
         hero.down();
@@ -521,6 +636,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldException_whenTryToMoveIfDead_goRight() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         killPotioner();
 
         hero.right();
@@ -535,6 +655,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldException_whenTryToMoveIfDead_dropPotion() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         killPotioner();
 
         hero.act();
@@ -550,6 +675,11 @@ public class GameTest extends AbstractGameTest {
     // если герой стоит под действием ударной волны, он умирает
     @Test
     public void shouldKillHero_whenPotionExploded_blastWaveAffect_fromLeft() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.act();
         field.tick();
 
@@ -592,6 +722,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldKillHero_whenPotionExploded_blastWaveAffect_fromRight() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.right();
         field.tick();
 
@@ -636,6 +771,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldKillHero_whenPotionExploded_blastWaveAffect_fromUp() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.up();
         hero.act();
         field.tick();
@@ -678,6 +818,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldKillHero_whenPotionExploded_blastWaveAffect_fromDown() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.down();
         field.tick();
 
@@ -722,6 +867,12 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldNoKillHero_whenPotionExploded_blastWaveAffect_fromDownRight() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
+
         hero.down();
         field.tick();
 
@@ -758,11 +909,21 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldSameHero_whenNetFromBoard() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         assertSame(hero, game.getJoystick());
     }
 
     @Test
     public void shouldBlastAfter_whenPotionExposed() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.act();
         field.tick();
 
@@ -784,6 +945,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldBlastAfter_whenPotionExposed_inOtherCorner() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         gotoMaxUp();
         gotoMaxRight();
 
@@ -808,6 +974,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldBlastAfter_whenPotionExposed_HeroDie() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         gotoBoardCenter();
 
         hero.act();
@@ -840,29 +1011,14 @@ public class GameTest extends AbstractGameTest {
         assertHeroDie();
     }
 
-    // появляются стенки, которые конфигурятся извне
+    // герой не может пойти вперед на стенку
     @Test
-    public void shouldHeroNotAtWall() {
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "☺    \n");
-
-        givenBoardWithWalls();
-
-        asrtBrd("☼☼☼☼☼\n" +
+    public void shouldHeroStop_whenUpWall() {
+        givenBr("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
-
-    }
-
-    // герой не может пойти вперед на стенку
-    @Test
-    public void shouldHeroStop_whenUpWall() {
-        givenBoardWithWalls();
 
         hero.down();
         field.tick();
@@ -876,7 +1032,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenLeftWall() {
-        givenBoardWithWalls();
+        givenBr("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
 
         hero.left();
         field.tick();
@@ -890,7 +1050,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenRightWall() {
-        givenBoardWithWalls();
+        givenBr("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
 
         gotoMaxRight();
 
@@ -903,7 +1067,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenDownWall() {
-        givenBoardWithWalls();
+        givenBr("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
 
         gotoMaxUp();
 
@@ -915,7 +1083,7 @@ public class GameTest extends AbstractGameTest {
     }
 
     private void gotoMaxRight() {
-        for (int x = 0; x <= SIZE + 1; x++) {
+        for (int x = 0; x <= level.size() + 1; x++) {
             hero.right();
             field.tick();
         }
@@ -924,6 +1092,11 @@ public class GameTest extends AbstractGameTest {
     // герой не может вернуться на место зелья, она его не пускает как стена
     @Test
     public void shouldHeroStop_whenGotoPotion() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.act();
         field.tick();
 
@@ -943,6 +1116,11 @@ public class GameTest extends AbstractGameTest {
     // герой может одноверменно перемещаться по полю и класть зелья
     @Test
     public void shouldHeroWalkAndDropPotionsTogetherInOneTact_potionFirstly() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.act();
         hero.right();
         field.tick();
@@ -956,6 +1134,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkAndDropPotionsTogetherInOneTact_moveFirstly() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.right();
         hero.act();
         field.tick();
@@ -978,6 +1161,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkAndDropPotionsTogetherInOneTact_potionThanMove() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.act();
         field.tick();
 
@@ -993,6 +1181,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkAndDropPotionsTogetherInOneTact_moveThanPotion() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.right();
         field.tick();
 
@@ -1017,7 +1210,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldWallProtectsHero() {
-        givenBoardWithOriginalWalls();
+        givenBr("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
 
         hero.act();
         goOut();
@@ -1041,6 +1238,15 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldWallProtectsHero2() {
+        givenBr("☼☼☼☼☼☼☼☼☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼☺      ☼\n" +
+                "☼☼☼☼☼☼☼☼☼\n");
         assertPotionPower(5,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
@@ -1058,6 +1264,15 @@ public class GameTest extends AbstractGameTest {
     // разрыв зелья длинной указанной в settings
     @Test
     public void shouldChangePotionPower_to2() {
+        givenBr("☼☼☼☼☼☼☼☼☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼☺      ☼\n" +
+                "☼☼☼☼☼☼☼☼☼\n");
         assertPotionPower(2,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
@@ -1072,6 +1287,15 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldChangePotionPower_to3() {
+        givenBr("☼☼☼☼☼☼☼☼☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼☺      ☼\n" +
+                "☼☼☼☼☼☼☼☼☼\n");
         assertPotionPower(3,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
@@ -1086,6 +1310,15 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldChangePotionPower_to6() {
+        givenBr("☼☼☼☼☼☼☼☼☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼☺      ☼\n" +
+                "☼☼☼☼☼☼☼☼☼\n");
         assertPotionPower(6,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼҉      ☼\n" +
@@ -1103,6 +1336,11 @@ public class GameTest extends AbstractGameTest {
     // с теми, что на поле
     @Test
     public void shouldNoChangeOriginalPotionsWhenUseBoardApiButTimersSynchronized() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         canDropPotions(2);
         hero.act();
         hero.right();
@@ -1158,6 +1396,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldReturnShouldNotSynchronizedPotionsList_whenUseBoardApi() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.act();
         hero.right();
         field.tick();
@@ -1178,6 +1421,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldChangeBlast_whenUseBoardApi() {  // TODO а нода вообще такое? стреляет по перформансу перекладывать объекты и усложняет код
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.act();
         hero.right();
         field.tick();
@@ -1212,7 +1460,11 @@ public class GameTest extends AbstractGameTest {
     // в настройках уровня так же есть и разрущающиеся стены
     @Test
     public void shouldRandomSetDestroyWalls_whenStart() {
-        givenBoardWithBoxes();
+        givenBr("#####\n" +
+                "#   #\n" +
+                "# # #\n" +
+                "#☺  #\n" +
+                "#####\n");
 
         asrtBrd("#####\n" +
                 "#   #\n" +
@@ -1224,7 +1476,11 @@ public class GameTest extends AbstractGameTest {
     // они взрываются от ударной волны
     @Test
     public void shouldDestroyWallsDestroyed_whenPotionExploded() {
-        givenBoardWithBoxes();
+        givenBr("#####\n" +
+                "#   #\n" +
+                "# # #\n" +
+                "#☺  #\n" +
+                "#####\n");
 
         hero.act();
         goOut();
@@ -1249,8 +1505,20 @@ public class GameTest extends AbstractGameTest {
     // если герой и привидение попали в одну клетку - герой умирает
     @Test
     public void shouldRandomMoveMonster() {
-        givenBoardWithGhost(11);
+        givenBr("☼☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼☺        ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼☼\n");
 
+        ghostsCount(1);
+        ghostAt(9, 9);
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼        &☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
@@ -1402,9 +1670,20 @@ public class GameTest extends AbstractGameTest {
     // привидение умирает, если попадает под взывающееся зелье
     @Test
     public void shouldDieMonster_whenPotionExploded() {
-        SIZE = 11;
-        givenBoardWithGhost(SIZE);
+        givenBr("☼☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼☺        ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼☼\n");
 
+        ghostsCount(1);
+        ghostAt(9, 9);
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼        &☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
@@ -1493,7 +1772,7 @@ public class GameTest extends AbstractGameTest {
                 "☼҉x       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(dice, SIZE - 2, SIZE - 2, Direction.DOWN.value());
+        dice(dice, level.size() - 2, level.size() - 2, Direction.DOWN.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -1511,6 +1790,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldNoEventsWhenHeroNotMove() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         field.tick();
         field.tick();
         field.tick();
@@ -1521,7 +1805,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillWall() {
-        givenBoard(SIZE, 1, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n");
 
         boxesCount(1);
         boxAt(0, 0);
@@ -1553,7 +1841,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillGhost() {
-        givenBoard(SIZE, 1, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n");
 
         ghostsCount(1);
         ghostAt(0, 0);
@@ -1579,7 +1871,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldCalculateGhostsAndWallKills() {
-        givenBoard(SIZE, 1, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n");
 
         boxesCount(2);
         boxAt(0, 1);
@@ -1735,7 +2031,11 @@ public class GameTest extends AbstractGameTest {
     public void shouldCalculateGhostsAndWallKills_caseBigBadaboom() {
         settings.bool(BIG_BADABOOM, true);
 
-        givenBoard(SIZE, 1, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n");
 
         boxesCount(2);
         boxAt(0, 1);
@@ -1805,7 +2105,11 @@ public class GameTest extends AbstractGameTest {
     // то зелье упадет на моем текущем месте
     @Test
     public void shouldMoveOnBoardAndDropPotionTogether() {
-        givenBoardWithOriginalWalls();
+        givenBr("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
         hero.up();
         field.tick();
 
@@ -1826,8 +2130,14 @@ public class GameTest extends AbstractGameTest {
     // привидение может ходить по зелью
     @Test
     public void shouldMonsterCanMoveOnPotion() {
-        givenBoardWithGhost(SIZE);
+        givenBr("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
 
+        ghostsCount(1);
+        ghostAt(3, 3);
         asrtBrd("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
@@ -1869,8 +2179,13 @@ public class GameTest extends AbstractGameTest {
     // привидение не может пойти на стенку
     @Test
     public void shouldGhostCantMoveOnWall() {
-        givenBoardWithGhost(SIZE);
+        givenBr("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
 
+        ghostAt(3, 3);
         asrtBrd("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
@@ -1890,7 +2205,14 @@ public class GameTest extends AbstractGameTest {
     // привидение не будет ходить, если ему некуда
     @Test
     public void shouldGhostCantMoveWhenNoSpaceAround() {
-        givenBoardWithGhost(SIZE);
+        givenBr("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+
+        ghostsCount(1);
+        ghostAt(3, 3);
 
         boxesCount(2);
         boxAt(2, 3);
@@ -1977,7 +2299,13 @@ public class GameTest extends AbstractGameTest {
     @Test
     public void shouldBlastWaveDoesNotPassThroughWall() {
         settings.integer(POTION_POWER, 3);
-        givenBoardWithWalls(7);
+        givenBr("☼☼☼☼☼☼☼\n" +
+                "☼     ☼\n" +
+                "☼ ☼ ☼ ☼\n" +
+                "☼     ☼\n" +
+                "☼ ☼ ☼ ☼\n" +
+                "☼☺    ☼\n" +
+                "☼☼☼☼☼☼☼\n");
 
         asrtBrd("☼☼☼☼☼☼☼\n" +
                 "☼     ☼\n" +
@@ -2016,7 +2344,13 @@ public class GameTest extends AbstractGameTest {
     public void shouldStopBlastWhenHeroOrDestroyWalls() {
         potionsPower(5);
 
-        givenBoard(7, 0, 0); // hero position
+        givenBr("       \n" +
+                "       \n" +
+                "       \n" +
+                "       \n" +
+                "       \n" +
+                "       \n" +
+                "☺      \n");
 
         int count = 1;
         boxesCount(count);
@@ -2048,7 +2382,13 @@ public class GameTest extends AbstractGameTest {
     public void shouldStopBlastWhenGhost() {
         potionsPower(5);
 
-        givenBoard(7, 0, 0);
+        givenBr("       \n" +
+                "       \n" +
+                "       \n" +
+                "       \n" +
+                "       \n" +
+                "       \n" +
+                "☺      \n");
 
         ghostsCount(1);
         ghostAt(4, 0).stop();
@@ -2079,7 +2419,11 @@ public class GameTest extends AbstractGameTest {
     @Test
     public void shouldNotAppearBoxesOnDestroyedPlaces() {
         potionsPower(1);
-        givenBoard(SIZE, 0, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
@@ -2157,7 +2501,9 @@ public class GameTest extends AbstractGameTest {
     public void shouldGhostNotAppearOnThePlaceWhereItDie_AfterKill() {
         potionsPower(3);
 
-        givenBoard(SIZE_3, 0, 0);
+        givenBr("   \n" +
+                "   \n" +
+                "☺  \n");
 
         dice(dice, 2, 0, Direction.DOWN.value());
         ghostsCount(1);
@@ -2208,7 +2554,11 @@ public class GameTest extends AbstractGameTest {
     public void shouldGhostAppearAfterKill() {
         potionsPower(3);
 
-        givenBoard(SIZE, 0, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
 
         dice(dice, 3, 0, Direction.DOWN.value());
         ghostsCount(1);
@@ -2244,7 +2594,11 @@ public class GameTest extends AbstractGameTest {
     public void shouldGhostNotAppearWhenDestroyWall() {
         potionsPower(3);
 
-        givenBoard(SIZE, 0, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
 
         dice(dice, 4, 4, Direction.RIGHT.value());
         ghostsCount(1);
@@ -2313,9 +2667,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldWallNotAppearOnHero() {
-        int size = 5;
-        generateWalls(size);
-        givenBoard(size, 1, 1);  // hero в левом нижнем углу
+        givenBr("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
 
         boxesCount(1);
         dice(dice, 2, 1); // коробка

@@ -39,7 +39,12 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPerkBeDropped_whenWallIsDestroyed() {
         // given
-        givenBoardWithBoxes(6);
+        givenBr("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "#☺   #\n" +
+                "######\n");
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 5, 3);
         perks.dropRatio(20); // 20%
         dice(dice, 10, 30); // must drop 1 perk
@@ -84,7 +89,12 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldHeroCantSpawnOnPerk() {
         // given
-        givenBoardWithBoxes(6);
+        givenBr("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "#☺   #\n" +
+                "######\n");
 
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
         perks.dropRatio(20); // 20%
@@ -149,7 +159,12 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldHeroAcquirePerk_whenMoveToFieldWithPerk() {
         // given
-        givenBoardWithBoxes(6);
+        givenBr("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "#☺   #\n" +
+                "######\n");
 
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
         perks.dropRatio(20); // 20%
@@ -237,7 +252,12 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldRemovePerk_whenPickTimeout() {
         // given
-        givenBoardWithBoxes(6);
+        givenBr("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "#☺   #\n" +
+                "######\n");
 
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
         perks.dropRatio(20); // 20%
@@ -778,6 +798,11 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPerkBeDeactivated_whenTimeout() {
         // given
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");;
         int timeout = 3; // время работы перка
 
         int value = 4;   // показатель его влияния, в тесте не интересно
@@ -802,7 +827,18 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastRadiusIncrease_whenNoBBRIperk() {
         // given
-        givenBoardWithBoxes(12);
+        givenBr("############\n" +
+                "# # # # # ##\n" +
+                "#          #\n" +
+                "# # # # # ##\n" +
+                "#          #\n" +
+                "# # # # # ##\n" +
+                "#          #\n" +
+                "# # # # # ##\n" +
+                "#          #\n" +
+                "# # # # # ##\n" +
+                "#☺         #\n" +
+                "############\n");
 
         hero.act();
         field.tick();
@@ -832,7 +868,16 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldNotThrowPoison_withoutPTperk() {
         // given
-        givenBoardWithBoxes(10);
+        givenBr("##########\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#☺       #\n" +
+                "##########\n");
         settings.integer(POTION_POWER, 4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
 
@@ -858,7 +903,16 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldNotDoAnythingWhenACTWithoutMove_withPTperk() {
         // given
-        givenBoardWithBoxes(10);
+        givenBr("##########\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#☺       #\n" +
+                "##########\n");
         settings.integer(POTION_POWER, 4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
 
@@ -885,7 +939,16 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoisonThroughThePotion_withPTperk() {
         // given
-        givenBoardWithWalls(10);
+        givenBr("☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼        ☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼        ☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼        ☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼☺       ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼\n");
         settings.integer(POTION_POWER, 4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
 
@@ -937,7 +1000,16 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldDetonatePotionWhenThrowPoison_withPTperk_withBadaBoom() {
         // given
-        givenBoardWithWalls(10);
+        givenBr("☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼        ☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼        ☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼        ☼\n" +
+                "☼ ☼ ☼ ☼ ☼☼\n" +
+                "☼☺       ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼\n");
         settings.integer(POTION_POWER, 4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
         settings.bool(BIG_BADABOOM, true);
@@ -990,7 +1062,11 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPerkWorksAfterCombine_WithPTPerk() {
         // given
-        givenBoardWithWalls();
+        givenBr("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
         settings.integer(POTION_POWER, 4);
         settings.integer(POISON_THROWER_RECHARGE, 1);
         final int timeout = 10;
@@ -1060,7 +1136,16 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoison_whenPTperk() {
         // given
-        givenBoardWithBoxes(10);
+        givenBr("##########\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#☺       #\n" +
+                "##########\n");
         settings.integer(POTION_POWER,4);
         settings.integer(POISON_THROWER_RECHARGE,3);
 
@@ -1157,7 +1242,16 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoisonWithIncreasedPower_withPT_withPBRI_perks() {
         // given
-        givenBoardWithBoxes(10);
+        givenBr("##########\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#        #\n" +
+                "# # # # ##\n" +
+                "#☺       #\n" +
+                "##########\n");
         settings.integer(POTION_POWER, 4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
 
@@ -1190,7 +1284,18 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastRadiusIncrease_whenBBRIperk() {
         // given
-        givenBoardWithBoxes(12);
+        givenBr("############\n" +
+                "# # # # # ##\n" +
+                "#          #\n" +
+                "# # # # # ##\n" +
+                "#          #\n" +
+                "# # # # # ##\n" +
+                "#          #\n" +
+                "# # # # # ##\n" +
+                "#          #\n" +
+                "# # # # # ##\n" +
+                "#☺         #\n" +
+                "############\n");
 
         int value = 4;   // на сколько клеток разрывная волна увеличится (по умолчанию 1)
         int timeout = 5; // сколько это безобразие будет длиться
@@ -1228,7 +1333,18 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastRadiusIncreaseTwice_whenBBRIperk() {
         // given
-        givenBoardWithBoxes(12);
+        givenBr("############\n" +
+                "# # # # # ##\n" +
+                "#          #\n" +
+                "# # # # # ##\n" +
+                "#          #\n" +
+                "# # # # # ##\n" +
+                "#          #\n" +
+                "# # # # # ##\n" +
+                "#          #\n" +
+                "# # # # # ##\n" +
+                "#☺         #\n" +
+                "############\n");
 
         int value = 4;   // на сколько клеток разрывная волна увеличится (по умолчанию 1)
         int timeout = 5; // сколько это безобразие будет длиться (времени должно хватить)
@@ -1370,6 +1486,11 @@ public class PerksTest extends AbstractGameTest {
     // BCI - Potion Count Increase perk
     @Test
     public void shouldPotionCountIncrease_whenBCIPerk() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.act();
         // obe potion by default on lel 1
         asrtBrd("     \n" +
@@ -1424,6 +1545,11 @@ public class PerksTest extends AbstractGameTest {
     // BI - Potion Immune perk
     @Test
     public void shouldHeroKeepAlive_whenBIperk() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero.act();
         hero.right();
         field.tick();
@@ -1475,6 +1601,11 @@ public class PerksTest extends AbstractGameTest {
     // BRC - Potion remote control perk
     @Test
     public void shouldPotionBlastOnAction_whenBRCperk_caseTwoPotions() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
 
         canDropPotions(2);
         player.getHero().addPerk(new PotionRemoteControl(2, 1));
@@ -1673,6 +1804,11 @@ public class PerksTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionBlastOnAction_whenBRCperk_caseOnePotion() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         canDropPotions(1);
 
         player.getHero().addPerk(new PotionRemoteControl(2, 1));
@@ -1871,6 +2007,11 @@ public class PerksTest extends AbstractGameTest {
 
     @Test
     public void shouldSuicide_whenBRCPerk_shouldRemoveAfterDeath_andCollectScores() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         boxesCount(1);
         boxAt(0, 1);
 
@@ -1947,7 +2088,12 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldDestroyAllPotion_WithPerkPE() {
         // given
-        givenBoard(6, 0, 0);
+        givenBr("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "☺     \n");;
         perkAt(0, 1, getPotionExploderPerk());
         hero.addPerk(new PotionCountIncrease(3, 30));
 
@@ -2012,7 +2158,12 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldNotDestroyAllPotion_WithoutPerkPE() {
         // given
-        givenBoard(6, 0, 0);
+        givenBr("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "☺     \n");
         hero.addPerk(new PotionCountIncrease(3, 30));
 
         // then
@@ -2059,7 +2210,12 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldMoveWhileUsingPerk_WithPerkPE() {
         // given
-        givenBoard(6, 0, 0);
+        givenBr("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "☺     \n");
         perkAt(0, 1, getPotionExploderPerk());
 
         // then
@@ -2108,7 +2264,12 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldMoveWhileUsingPerk_WithoutPerkPE() {
         // given
-        givenBoard(6, 0, 0);
+        givenBr("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "☺     \n");
 
         // then
         asrtBrd("      \n" +
@@ -2151,7 +2312,12 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldWorkOnlyOneTime_WithPerkPE() {
         // given
-        givenBoard(6, 0, 0);
+        givenBr("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "☺     \n");
         perkAt(0, 1, getPotionExploderPerk());
 
         // then
@@ -2224,7 +2390,12 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldCombinePerk_WithPerkPE() {
         // given
-        givenBoard(6, 0, 0);
+        givenBr("      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "☺     \n");
         perkAt(0, 1, getPotionExploderPerk());
 
         // then

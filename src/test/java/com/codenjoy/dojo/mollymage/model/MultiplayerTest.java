@@ -436,9 +436,9 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
         //set up 3 players, 2 in one team, and 1 perk on field
         givenBoard(3);
-        player(0).setTeamId(0);
-        player(1).setTeamId(0);
-        player(2).setTeamId(1);
+        player(0).inTeam(0);
+        player(1).inTeam(0);
+        player(2).inTeam(1);
         field.perks().add(new PerkOnBoard(new PointImpl(0, 1), new PotionImmune(settings.integer(TIMEOUT_POTION_IMMUNE))));
 
         asrtBrd("     \n" +
@@ -491,9 +491,9 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
         //set up 3 players, 2 in one team, and 1 perk on field
         givenBoard(3);
-        player(0).setTeamId(0);
-        player(1).setTeamId(0);
-        player(2).setTeamId(1);
+        player(0).inTeam(0);
+        player(1).inTeam(0);
+        player(2).inTeam(1);
         field.perks().add(new PerkOnBoard(new PointImpl(0, 1), new PotionImmune(settings.integer(TIMEOUT_POTION_IMMUNE))));
 
         asrtBrd("     \n" +
@@ -541,8 +541,8 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 0, 0,
                 1, 0);
         givenBoard(2);
-        player(0).setTeamId(0);
-        player(1).setTeamId(1);
+        player(0).inTeam(0);
+        player(1).inTeam(1);
 
         hero(0).act();
         hero(0).up();
@@ -1745,10 +1745,10 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         boxesCount(1);
         boxAt(2, 2);
 
-        player(0).setTeamId(0);
-        player(1).setTeamId(0);
-        player(2).setTeamId(1);
-        player(3).setTeamId(1);
+        player(0).inTeam(0);
+        player(1).inTeam(0);
+        player(2).inTeam(1);
+        player(3).inTeam(1);
 
         // зелье, которым все пордорвем
         hero(0).move(1, 2);

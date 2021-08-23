@@ -53,366 +53,238 @@ public class BoomEngineOriginalTest {
     @Test
     public void testOneBarrier() {
         Level level = new LevelImpl(
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "  ☼☼                 \n" +
-                "  ☼☼                 \n" +
-                "                     \n" +
-                "   ☻                 \n");
+                "           \n" +
+                "           \n" +
+                "           \n" +
+                "           \n" +
+                "           \n" +
+                "           \n" +
+                "           \n" +
+                "  ☼☼       \n" +
+                "  ☼☼       \n" +
+                "           \n" +
+                "   ☻       \n");
         Point source = pt(3, 0);
         int radius = 7;
         int countBlasts = radius + 1 + 1 + 3;
 
         assertBoom(level, source, radius, countBlasts,
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "  ☼☼                 \n" +
-                "  ☼☼                 \n" +
-                "   ҉                 \n" +
-                "҉҉҉☻҉҉҉҉҉҉҉          \n");
+                "           \n" +
+                "           \n" +
+                "           \n" +
+                "           \n" +
+                "           \n" +
+                "           \n" +
+                "           \n" +
+                "  ☼☼       \n" +
+                "  ☼☼       \n" +
+                "   ҉       \n" +
+                "҉҉҉☻҉҉҉҉҉҉҉\n");
     }
 
     @Test
     public void testOneBarrierAtCenter() {
         Level level = new LevelImpl(
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "            ☼☼       \n" +
-                "         ☻  ☼☼       \n" +
-                "                     \n" +
-                "                     \n" +
-                "        ☼☼           \n" +
-                "        ☼☼           \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n");
-        Point source = pt(9, 12);
+                "            \n" +
+                "            \n" +
+                "            \n" +
+                "            \n" +
+                "            \n" +
+                "            \n" +
+                "          ☼☼\n" +
+                "       ☻  ☼☼\n" +
+                "            \n" +
+                "            \n" +
+                "      ☼☼    \n" +
+                "      ☼☼    \n");
+        Point source = pt(7, 4);
         int radius = 7;
         int countBlasts = 2*radius + 2 + 2 + 1;
 
         assertBoom(level, source, radius, countBlasts,
-                "                     \n" +
-                "         ҉           \n" +
-                "         ҉           \n" +
-                "         ҉           \n" +
-                "         ҉           \n" +
-                "         ҉           \n" +
-                "         ҉           \n" +
-                "         ҉  ☼☼       \n" +
-                "  ҉҉҉҉҉҉҉☻҉҉☼☼       \n" +
-                "         ҉           \n" +
-                "         ҉           \n" +
-                "        ☼☼           \n" +
-                "        ☼☼           \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n");
+                "       ҉    \n" +
+                "       ҉    \n" +
+                "       ҉    \n" +
+                "       ҉    \n" +
+                "       ҉    \n" +
+                "       ҉    \n" +
+                "       ҉  ☼☼\n" +
+                "҉҉҉҉҉҉҉☻҉҉☼☼\n" +
+                "       ҉    \n" +
+                "       ҉    \n" +
+                "      ☼☼    \n" +
+                "      ☼☼    \n");
     }
 
     @Test
     public void testOneBarrier2() {
         Level level = new LevelImpl(
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "        ☼☼   ☻       \n" +
-                "        ☼☼           \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n"
+                "          \n" +
+                "          \n" +
+                "          \n" +
+                "          \n" +
+                "          \n" +
+                "☼☼   ☻    \n" +
+                "☼☼        \n" +
+                "          \n" +
+                "          \n" +
+                "          \n"
         );
-        Point source = pt(13, 9);
+        Point source = pt(5, 4);
         int radius = 4;
         int countBlasts = 3*radius + 1 + 3;
 
         assertBoom(level, source, radius, countBlasts,
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "             ҉       \n" +
-                "             ҉       \n" +
-                "             ҉       \n" +
-                "             ҉       \n" +
-                "        ☼☼҉҉҉☻҉҉҉҉   \n" +
-                "        ☼☼   ҉       \n" +
-                "             ҉       \n" +
-                "             ҉       \n" +
-                "             ҉       \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n");
+                "          \n" +
+                "     ҉    \n" +
+                "     ҉    \n" +
+                "     ҉    \n" +
+                "     ҉    \n" +
+                "☼☼҉҉҉☻҉҉҉҉\n" +
+                "☼☼   ҉    \n" +
+                "     ҉    \n" +
+                "     ҉    \n" +
+                "     ҉    \n");
     }
 
     @Test
     public void testBigBoomAtClassicWalls() {
         Level level = new LevelImpl(
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼          ☻        ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n");
-        Point source = pt(11, 11);
+                "☼☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "           \n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼    ☻    ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "           \n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼☼\n");
+        Point source = pt(5, 5);
         int radius = 3;
         int countBlasts = 4*radius + 1;
 
         assertBoom(level, source, radius, countBlasts,
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼҉☼ ☼ ☼ ☼ ☼\n" +
-                "☼          ҉        ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼҉☼ ☼ ☼ ☼ ☼\n" +
-                "☼       ҉҉҉☻҉҉҉     ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼҉☼ ☼ ☼ ☼ ☼\n" +
-                "☼          ҉        ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼҉☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n");
+                "☼☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼҉☼ ☼ ☼\n" +
+                "     ҉     \n" +
+                "☼ ☼ ☼҉☼ ☼ ☼\n" +
+                "☼ ҉҉҉☻҉҉҉ ☼\n" +
+                "☼ ☼ ☼҉☼ ☼ ☼\n" +
+                "     ҉     \n" +
+                "☼ ☼ ☼҉☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼☼\n");
     }
 
     @Test
     public void testBigBoomAtClassicWalls2() {
         Level level = new LevelImpl(
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼           ☻       ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n");
-        Point source = pt(12, 11);
+                "☼☼☼☼☼☼☼☼☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼   ☻   ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼       ☼\n" +
+                "☼☼☼☼☼☼☼☼☼\n");
+        Point source = pt(4, 5);
         int radius = 3;
         int countBlasts = 2*radius + 1;
 
         assertBoom(level, source, radius, countBlasts,
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼        ҉҉҉☻҉҉҉    ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n");
+                "☼☼☼☼☼☼☼☼☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼҉҉҉☻҉҉҉☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼       ☼\n" +
+                "☼ ☼ ☼ ☼ ☼\n" +
+                "☼       ☼\n" +
+                "☼☼☼☼☼☼☼☼☼\n");
     }
 
     @Test
     public void testBigBoomAtClassicWalls3() {
         Level level = new LevelImpl(
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼☻☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n");
-        Point source = pt(11, 12);
+                "☼☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼         ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼☻☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼         ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼☼\n");
+        Point source = pt(5, 5);
         int radius = 3;
         int countBlasts = 2*radius + 1;
 
         assertBoom(level, source, radius, countBlasts,
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼          ҉        ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼҉☼ ☼ ☼ ☼ ☼\n" +
-                "☼          ҉        ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼☻☼ ☼ ☼ ☼ ☼\n" +
-                "☼          ҉        ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼҉☼ ☼ ☼ ☼ ☼\n" +
-                "☼          ҉        ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n");
+                "☼☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼         ☼\n" +
+                "☼    ҉    ☼\n" +
+                "☼ ☼ ☼҉☼ ☼ ☼\n" +
+                "☼    ҉    ☼\n" +
+                "☼ ☼ ☼☻☼ ☼ ☼\n" +
+                "☼    ҉    ☼\n" +
+                "☼ ☼ ☼҉☼ ☼ ☼\n" +
+                "☼    ҉    ☼\n" +
+                "☼         ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼☼\n");
     }
 
     @Test
     public void testBigBoomAtClassicWalls4() {
         Level level = new LevelImpl(
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼☻                  ☼\n" +
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n");
+                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼                 ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                 ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                 ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                 ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                 ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                 ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                 ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼                 ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼☻                ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n");
         Point source = pt(1, 1);
         int radius = 15;
         int countBlasts = 2*radius + 1;
 
         assertBoom(level, source, radius, countBlasts,
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
-                "☼                   ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼                   ☼\n" +
-                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼҉                  ☼\n" +
-                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼҉                  ☼\n" +
-                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼҉                  ☼\n" +
-                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼҉                  ☼\n" +
-                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼҉                  ☼\n" +
-                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼҉                  ☼\n" +
-                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼҉                  ☼\n" +
-                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼☻҉҉҉҉҉҉҉҉҉҉҉҉҉҉҉   ☼\n" +
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n");
+                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼                 ☼\n" +
+                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼҉                ☼\n" +
+                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼҉                ☼\n" +
+                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼҉                ☼\n" +
+                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼҉                ☼\n" +
+                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼҉                ☼\n" +
+                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼҉                ☼\n" +
+                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼҉                ☼\n" +
+                "☼҉☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼☻҉҉҉҉҉҉҉҉҉҉҉҉҉҉҉ ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n");
     }
 
     @Test
@@ -574,271 +446,149 @@ public class BoomEngineOriginalTest {
     @Test
     public void testPoisonBoom_1() {
         Level level = new LevelImpl(
-                "☼                   ☼\n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "    ☼      ☻         \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "☼                   ☼\n");
-        Point source = pt(11, 11);
+                "☼      ☼\n" +
+                "        \n" +
+                "        \n" +
+                "        \n" +
+                "☼      ☻\n" +
+                "        \n" +
+                "        \n" +
+                "☼      ☼\n");
+        Point source = pt(7, 3);
         int range = 4;
         int countBlasts = 4;
 
         prepareDateForPoisonTests(source, Direction.LEFT, range);
 
         assertPoisonBoom(level, source, range, countBlasts, poison,
-                "☼                   ☼\n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "    ☼  ҉҉҉҉☻         \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "☼                   ☼\n");
+                "☼      ☼\n" +
+                "        \n" +
+                "        \n" +
+                "        \n" +
+                "☼  ҉҉҉҉☻\n" +
+                "        \n" +
+                "        \n" +
+                "☼      ☼\n");
     }
 
     @Test
     public void testPoisonBoom_2() {
         Level level = new LevelImpl(
-                "☼                   ☼\n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "    ☼      ☻         \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "☼                   ☼\n");
-        Point source = pt(11, 11);
+                "☼     ☼\n" +
+                "       \n" +
+                "       \n" +
+                "       \n" +
+                "       \n" +
+                " ☼  ☻  \n" +
+                "☼     ☼\n");
+        Point source = pt(4, 1);
         int range = 4;
         int countBlasts = 4;
 
         prepareDateForPoisonTests(source, Direction.UP, range);
 
         assertPoisonBoom(level, source, range, countBlasts, poison,
-                "☼                   ☼\n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "           ҉         \n" +
-                "           ҉         \n" +
-                "           ҉         \n" +
-                "           ҉         \n" +
-                "    ☼      ☻         \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "☼                   ☼\n");
+                "☼     ☼\n" +
+                "    ҉  \n" +
+                "    ҉  \n" +
+                "    ҉  \n" +
+                "    ҉  \n" +
+                " ☼  ☻  \n" +
+                "☼     ☼\n");
     }
 
     @Test
     public void testPoisonBoom_3() {
         Level level = new LevelImpl(
-                "☼                   ☼\n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "    ☼      ☻         \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "☼                   ☼\n");
-        Point source = pt(11, 11);
+                "☼           ☼\n" +
+                "             \n" +
+                "             \n" +
+                "             \n" +
+                "             \n" +
+                "             \n" +
+                " ☼      ☻    \n" +
+                "             \n" +
+                "             \n" +
+                "             \n" +
+                "             \n" +
+                "             \n" +
+                "☼           ☼\n");
+        Point source = pt(8, 6);
         int range = 4;
         int countBlasts = 4;
 
         prepareDateForPoisonTests(source, Direction.RIGHT, range);
 
         assertPoisonBoom(level, source, range, countBlasts, poison,
-                "☼                   ☼\n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "    ☼      ☻҉҉҉҉     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "☼                   ☼\n");
+                "☼           ☼\n" +
+                "             \n" +
+                "             \n" +
+                "             \n" +
+                "             \n" +
+                "             \n" +
+                " ☼      ☻҉҉҉҉\n" +
+                "             \n" +
+                "             \n" +
+                "             \n" +
+                "             \n" +
+                "             \n" +
+                "☼           ☼\n");
     }
 
     @Test
     public void testPoisonBoom_4() {
         Level level = new LevelImpl(
-                "☼                   ☼\n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "    ☼      ☻         \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "☼                   ☼\n");
-        Point source = pt(11, 11);
+                "☼     ☼\n" +
+                " ☼ ☻   \n" +
+                "   ҉   \n" +
+                "   ҉   \n" +
+                "   ҉   \n" +
+                "   ҉   \n" +
+                "☼     ☼\n");
+        Point source = pt(3, 5);
         int range = 4;
         int countBlasts = 4;
 
         prepareDateForPoisonTests(source, Direction.DOWN, range);
 
         assertPoisonBoom(level, source, range, countBlasts, poison,
-                "☼                   ☼\n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "    ☼      ☻         \n" +
-                "           ҉         \n" +
-                "           ҉         \n" +
-                "           ҉         \n" +
-                "           ҉         \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "☼                   ☼\n");
+                "☼     ☼\n" +
+                " ☼ ☻   \n" +
+                "   ҉   \n" +
+                "   ҉   \n" +
+                "   ҉   \n" +
+                "   ҉   \n" +
+                "☼     ☼\n");
     }
 
     @Test
     public void testPoisonBoomAtWalls_WallShouldStopBlast() {
         Level level = new LevelImpl(
-                "☼                   ☼\n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "    ☼      ☻         \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "☼                   ☼\n");
-        Point source = pt(11, 11);
+                "☼       ☼\n" +
+                "         \n" +
+                "         \n" +
+                "         \n" +
+                " ☼      ☻\n" +
+                "         \n" +
+                "         \n" +
+                "         \n" +
+                "☼       ☼\n");
+        Point source = pt(8, 4);
         int range = 8;
         int countBlasts = 6;
 
         prepareDateForPoisonTests(source, Direction.LEFT, range);
 
         assertPoisonBoom(level, source, range, countBlasts, poison,
-                "☼                   ☼\n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "    ☼҉҉҉҉҉҉☻         \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "                     \n" +
-                "☼                   ☼\n");
+                "☼       ☼\n" +
+                "         \n" +
+                "         \n" +
+                "         \n" +
+                " ☼҉҉҉҉҉҉☻\n" +
+                "         \n" +
+                "         \n" +
+                "         \n" +
+                "☼       ☼\n");
     }
 
     private void prepareDateForPoisonTests(Point source, Direction direction, int range) {

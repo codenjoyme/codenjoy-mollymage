@@ -55,6 +55,11 @@ import static org.mockito.Mockito.*;
 
 public abstract class AbstractGameTest {
 
+    public static final int DEFAULT_COUNT = 3;
+
+    public static final int CATCH_PERK_SCORE_FOR_TEST = 10;
+    public static final int PERK_TIMEOUT_FOR_TEST = 10;
+
     protected List<EventListener> listeners = new ArrayList<>();
     protected List<Player> players = new ArrayList<>();
     protected List<Game> games = new ArrayList<>();

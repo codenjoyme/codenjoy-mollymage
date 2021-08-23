@@ -88,7 +88,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        assertSame(hero, game.getJoystick());
+        assertSame(hero(), game().getJoystick());
     }
 
     @Test
@@ -105,10 +105,10 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
         // when hero set bomb and goes away
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
-        hero.right();
+        hero().right();
         field.tick();
 
         // then
@@ -188,11 +188,11 @@ public class GameTest extends AbstractGameTest {
         boxAt(3, 0);
         boxesCount(1);
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         field.tick();
@@ -222,7 +222,7 @@ public class GameTest extends AbstractGameTest {
     public void shouldGhostNotAppearOnHero() {
         shouldMonsterCanMoveOnPotion();
 
-        hero.down();
+        hero().down();
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -233,7 +233,7 @@ public class GameTest extends AbstractGameTest {
 
         dice(dice,
                 0, 0, // на неразрушаемой стене нельзя
-                hero.getX(), hero.getY(), // попытка поселиться на герое
+                hero().getX(), hero().getY(), // попытка поселиться на герое
                 3, 3, // попытка - клетка свободна
                 Direction.DOWN.value()); // а это куда он сразу же отправится
 
@@ -266,16 +266,16 @@ public class GameTest extends AbstractGameTest {
                 "☼☺# ☼\n" +
                 "☼☼☼☼☼\n");
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         field.tick();
@@ -289,7 +289,7 @@ public class GameTest extends AbstractGameTest {
         field.tick();
         dice(dice,
                 0, 0,                     // на неразрушаемоей стене нельзя
-                hero.getX(), hero.getY(), // на месте героя не должен появиться
+                hero().getX(), hero().getY(), // на месте героя не должен появиться
                 1, 1);                    // а вот тут свободно
 
         // then
@@ -309,7 +309,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -326,10 +326,10 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -346,7 +346,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.up();
+        hero().up();
         field.tick();
 
         asrtBrd("     \n" +
@@ -363,13 +363,13 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.down();
+        hero().down();
         field.tick();
 
         asrtBrd("     \n" +
@@ -386,7 +386,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.down();
+        hero().down();
         field.tick();
 
         asrtBrd("     \n" +
@@ -403,13 +403,13 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.left();
+        hero().left();
         field.tick();
 
         asrtBrd("     \n" +
@@ -426,7 +426,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.left();
+        hero().left();
         field.tick();
 
         asrtBrd("     \n" +
@@ -475,10 +475,10 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.down();
-        hero.up();
-        hero.left();
-        hero.right();
+        hero().down();
+        hero().up();
+        hero().left();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -487,10 +487,10 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 " ☺   \n");
 
-        hero.right();
-        hero.left();
-        hero.down();
-        hero.up();
+        hero().right();
+        hero().left();
+        hero().down();
+        hero().up();
         field.tick();
 
         asrtBrd("     \n" +
@@ -509,7 +509,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        hero.down();
+        hero().down();
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -527,7 +527,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        hero.left();
+        hero().left();
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -579,13 +579,13 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.left();
+        hero().left();
         field.tick();
 
         asrtBrd("     \n" +
@@ -603,8 +603,8 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -621,8 +621,8 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.right();
-        hero.act();
+        hero().right();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -631,7 +631,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 " ☻   \n");
 
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -648,10 +648,10 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -668,10 +668,10 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -680,7 +680,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 " ☻   \n");
 
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -853,8 +853,8 @@ public class GameTest extends AbstractGameTest {
                 "☼Ѡ        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        Assert.assertTrue(game.isGameOver());
-        verify(listener).event(Events.DIED);
+        Assert.assertTrue(game().isGameOver());
+        verify(listener()).event(Events.DIED);
     }
 
     // если я двинулся за пределы стены и тут же поставил зелье,
@@ -866,14 +866,14 @@ public class GameTest extends AbstractGameTest {
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.left();
-        hero.act();
+        hero().left();
+        hero().act();
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -900,20 +900,20 @@ public class GameTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.right();
-        hero.act();
+        hero().right();
+        hero().act();
         field.tick();
 
-        hero.left();
+        hero().left();
         field.tick();
 
-        hero.down();
+        hero().down();
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -1060,7 +1060,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1077,13 +1077,13 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1102,16 +1102,16 @@ public class GameTest extends AbstractGameTest {
                 "☺    \n");
         canDropPotions(3);
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1138,8 +1138,8 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
-        hero.up();
-        hero.act();
+        hero().up();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1148,8 +1148,8 @@ public class GameTest extends AbstractGameTest {
                 "☻    \n" +
                 "     \n");
 
-        hero.up();
-        hero.act();
+        hero().up();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1158,8 +1158,8 @@ public class GameTest extends AbstractGameTest {
                 "3    \n" +
                 "     \n");
 
-        hero.up();
-        hero.act();
+        hero().up();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1179,10 +1179,10 @@ public class GameTest extends AbstractGameTest {
                 "☺    \n");
         canDropPotions(2);
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1193,7 +1193,7 @@ public class GameTest extends AbstractGameTest {
 
         assertEquals(1, field.potions().size());
 
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1202,7 +1202,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "2☺   \n");
 
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1235,13 +1235,13 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         field.tick();
@@ -1277,7 +1277,7 @@ public class GameTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉҉☺  \n");
 
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1294,13 +1294,13 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         field.tick();
@@ -1323,13 +1323,13 @@ public class GameTest extends AbstractGameTest {
         gotoMaxUp();
         gotoMaxRight();
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.left();
+        hero().left();
         field.tick();
 
-        hero.left();
+        hero().left();
         field.tick();
 
         field.tick();
@@ -1350,7 +1350,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        hero.act();
+        hero().act();
         goOut();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -1476,11 +1476,11 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
         canDropPotions(2);
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
 
         List<Potion> potions1 = field.potions();
@@ -1535,8 +1535,8 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
 
         List<Potion> potions1 = field.potions();
@@ -1560,10 +1560,10 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
-        hero.right();
+        hero().right();
         field.tick();
         field.tick();
         field.tick();
@@ -1611,16 +1611,16 @@ public class GameTest extends AbstractGameTest {
                 "☼☺    ☼\n" +
                 "☼☼☼☼☼☼☼\n");
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.act();
+        hero().act();
         field.tick();
         field.tick();
         field.tick();
@@ -1654,11 +1654,11 @@ public class GameTest extends AbstractGameTest {
 
         when(dice.next(anyInt())).thenReturn(101); // don't drop perk by accident
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
         field.tick();
@@ -1689,17 +1689,17 @@ public class GameTest extends AbstractGameTest {
         ghostsCount(1);
         ghostAt(4, 0).stop();
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
         field.tick();
 
@@ -1722,8 +1722,8 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
 
         field.tick();
@@ -1771,7 +1771,7 @@ public class GameTest extends AbstractGameTest {
                 "☺    \n");
         killPotioner();
 
-        hero.left();
+        hero().left();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1782,11 +1782,11 @@ public class GameTest extends AbstractGameTest {
     }
 
     private void killPotioner() {
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.right();
-        hero.act();
+        hero().right();
+        hero().act();
         field.tick();
 
         field.tick();
@@ -1810,7 +1810,7 @@ public class GameTest extends AbstractGameTest {
                 "☺    \n");
         killPotioner();
 
-        hero.up();
+        hero().up();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1829,7 +1829,7 @@ public class GameTest extends AbstractGameTest {
                 "☺    \n");
         killPotioner();
 
-        hero.down();
+        hero().down();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1848,7 +1848,7 @@ public class GameTest extends AbstractGameTest {
                 "☺    \n");
         killPotioner();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1867,7 +1867,7 @@ public class GameTest extends AbstractGameTest {
                 "☺    \n");
         killPotioner();
 
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1885,10 +1885,10 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         field.tick();
@@ -1932,13 +1932,13 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.left();
+        hero().left();
         field.tick();
 
         field.tick();
@@ -1981,11 +1981,11 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.up();
-        hero.act();
+        hero().up();
+        hero().act();
         field.tick();
 
-        hero.down();
+        hero().down();
         field.tick();
 
         field.tick();
@@ -2028,13 +2028,13 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.down();
+        hero().down();
         field.tick();
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
         field.tick();
@@ -2078,19 +2078,19 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
-        hero.down();
+        hero().down();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.left();
+        hero().left();
         field.tick();
 
         field.tick();
@@ -2121,10 +2121,10 @@ public class GameTest extends AbstractGameTest {
                 "☺    \n");
         gotoBoardCenter();
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.down();
+        hero().down();
         field.tick();
 
         field.tick();
@@ -2160,7 +2160,7 @@ public class GameTest extends AbstractGameTest {
                 "#☺  #\n" +
                 "#####\n");
 
-        hero.act();
+        hero().act();
         goOut();
 
         asrtBrd("#####\n" +
@@ -2247,11 +2247,11 @@ public class GameTest extends AbstractGameTest {
 
         field.tick();
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
         field.tick();
@@ -2312,11 +2312,11 @@ public class GameTest extends AbstractGameTest {
         dice(dice, 3, 0, Direction.DOWN.value());
         ghostsCount(1);
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         field.tick();
@@ -2353,7 +2353,7 @@ public class GameTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        verifyNoMoreInteractions(listener);
+        verifyNoMoreInteractions(listener());
     }
 
     @Test
@@ -2373,12 +2373,12 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "#☺   \n");
 
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
-        hero.right();
+        hero().right();
         field.tick();
-        hero.right();
+        hero().right();
         field.tick();
         field.tick();
         field.tick();
@@ -2389,7 +2389,7 @@ public class GameTest extends AbstractGameTest {
                 " ҉   \n" +
                 "H҉҉ ☺\n");
 
-        verify(listener).event(Events.KILL_TREASURE_BOX);
+        verify(listener()).event(Events.KILL_TREASURE_BOX);
     }
 
     @Test
@@ -2403,12 +2403,12 @@ public class GameTest extends AbstractGameTest {
         ghostsCount(1);
         ghostAt(0, 0);
 
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
-        hero.right();
+        hero().right();
         field.tick();
-        hero.right();
+        hero().right();
         field.tick();
         field.tick();
         field.tick();
@@ -2419,7 +2419,7 @@ public class GameTest extends AbstractGameTest {
                 " ҉   \n" +
                 "x҉҉ ☺\n");
 
-        verify(listener).event(Events.KILL_GHOST);
+        verify(listener()).event(Events.KILL_GHOST);
     }
 
     @Test
@@ -2447,20 +2447,20 @@ public class GameTest extends AbstractGameTest {
                 "#    \n" +
                 "&☺   \n");
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
         asrtBrd(" ☺   \n" +
@@ -2469,7 +2469,7 @@ public class GameTest extends AbstractGameTest {
                 "#2   \n" +
                 "&1   \n");
 
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd("  ☺  \n" +
@@ -2516,11 +2516,11 @@ public class GameTest extends AbstractGameTest {
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
         dice(dice, 4, 3); // новая коробка
-        hero.left();
+        hero().left();
         field.tick();
 
-        hero.down();
-        hero.act();
+        hero().down();
+        hero().act();
         field.tick();
 
         asrtBrd("   &#\n" +
@@ -2545,7 +2545,7 @@ public class GameTest extends AbstractGameTest {
 
         dice(dice, 1, 1);
         field.tick();
-        game.newGame();
+        game().newGame();
 
         asrtBrd("   &#\n" +
                 "   &#\n" +
@@ -2553,8 +2553,8 @@ public class GameTest extends AbstractGameTest {
                 " ☺   \n" +
                 "     \n");
 
-        hero = (Hero) game.getJoystick();
-        hero.move(pt(1, 0));
+        heroes.set(0, (Hero) game().getJoystick());
+        hero().move(pt(1, 0));
 
         asrtBrd("   &#\n" +
                 "   &#\n" +
@@ -2562,11 +2562,11 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 " ☺   \n");
 
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         field.tick();
@@ -2607,20 +2607,20 @@ public class GameTest extends AbstractGameTest {
                 "#    \n" +
                 "&☺   \n");
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
         asrtBrd(" ☺   \n" +
@@ -2631,7 +2631,7 @@ public class GameTest extends AbstractGameTest {
 
         events.verifyAllEvents("[]");
 
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd(" ҉☺  \n" +
@@ -2666,11 +2666,11 @@ public class GameTest extends AbstractGameTest {
         ghostsCount(1);
 
         // when portion explode
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         field.tick();

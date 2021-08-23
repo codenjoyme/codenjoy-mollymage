@@ -10,12 +10,12 @@ package com.codenjoy.dojo.mollymage.game.singleplayer;
  * it under the terms of the GNU General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
@@ -55,12 +55,13 @@ import static org.mockito.Mockito.*;
 
 public abstract class AbstractGameTest {
 
-    protected Game game;
-    protected Hero hero;
+    protected List<EventListener> listeners = new ArrayList<>();
+    protected List<Player> players = new ArrayList<>();
+    protected List<Game> games = new ArrayList<>();
+    protected List<Hero> heroes = new ArrayList<>();
+
     protected GameSettings settings;
-    protected EventListener listener;
     protected Dice dice;
-    protected Player player;
     protected MollyMage field;
     private PrinterFactory printer;
     protected PerksSettingsWrapper perks;
@@ -72,7 +73,7 @@ public abstract class AbstractGameTest {
         dice = mock(Dice.class);
         settings = spy(new TestGameSettings());
         printer = new PrinterFactoryImpl();
-        events = new EventsListenersAssert(() -> Arrays.asList(listener), Events.class);
+        events = new EventsListenersAssert(() -> listeners, Events.class);
         perks = settings.perksSettings();
         potionsPower(1);
 
@@ -81,10 +82,16 @@ public abstract class AbstractGameTest {
     }
 
     protected void givenBr(String map) {
+        givenBr(map, 1);
+    }
+
+    protected void givenBr(String map, int count) {
+        for (int i = 0; i < count; i++) {
+            listeners.add(mock(EventListener.class));
+            players.add(new Player(listeners.get(i), settings));
+            games.add(new Single(players.get(i), printer));
+        }
         level = new LevelImpl(map);
-        listener = mock(EventListener.class);
-        player = new Player(listener, settings);
-        game = new Single(player, printer);
 
         Point heroPosition = level.getHeroPosition();
         dice(dice, heroPosition.getX(), heroPosition.getY());
@@ -94,31 +101,50 @@ public abstract class AbstractGameTest {
         boxesCount(boxes.size());
         field.boxes().addAll(boxes);
 
-        game.on(field);
-        game.newGame();
-        hero = (Hero) game.getJoystick();
+        for (Game game : games) {
+            game.on(field);
+            game.newGame();
+        }
+        heroes.clear();
+        players.forEach(player -> heroes.add(player.getHero()));
+    }
+
+    protected EventListener listener() {
+        return listeners.get(0);
+    }
+
+    protected Player player() {
+        return players.get(0);
+    }
+
+    protected Game game() {
+        return games.get(0);
+    }
+
+    protected Hero hero() {
+        return heroes.get(0);
     }
 
     protected void gotoMaxUp() {
         for (int y = 0; y <= level.size() + 1; y++) {
-            hero.up();
+            hero().up();
             field.tick();
         }
     }
 
     protected void gotoMaxRight() {
         for (int x = 0; x <= level.size() + 1; x++) {
-            hero.right();
+            hero().right();
             field.tick();
         }
     }
 
     protected void newGameForDied() {
-        if (!player.isAlive()) {
-            field.newGame(player);
+        if (!player().isAlive()) {
+            field.newGame(player());
         }
-        hero = player.getHero();
-        hero.setAlive(true);
+        heroes.set(0, player().getHero());
+        hero().setAlive(true);
     }
 
     protected void canDropPotions(int count) {
@@ -126,25 +152,25 @@ public abstract class AbstractGameTest {
     }
 
     protected void assertHeroDie() {
-        assertEquals("Expected game over", true, game.isGameOver());
+        assertEquals("Expected game over", true, game().isGameOver());
     }
 
     protected void assertHeroAlive() {
-        assertFalse(game.isGameOver());
+        assertFalse(game().isGameOver());
     }
 
     protected void gotoBoardCenter() {
         for (int y = 0; y < level.size() / 2; y++) {
-            hero.up();
+            hero().up();
             field.tick();
-            hero.right();
+            hero().right();
             field.tick();
         }
     }
 
     protected void asrtBrd(String expected) {
         assertEquals(expected, printer.getPrinter(
-                field.reader(), player).print());
+                field.reader(), player()).print());
     }
 
     protected void potionsPower(int power) {
@@ -154,7 +180,7 @@ public abstract class AbstractGameTest {
     protected void assertPotionPower(int power, String expected) {
         potionsPower(power);
 
-        hero.act();
+        hero().act();
         goOut();
         field.tick();
 
@@ -162,13 +188,13 @@ public abstract class AbstractGameTest {
     }
 
     protected void goOut() {
-        hero.right();
+        hero().right();
         field.tick();
-        hero.right();
+        hero().right();
         field.tick();
-        hero.up();
+        hero().up();
         field.tick();
-        hero.up();
+        hero().up();
         field.tick();
     }
 

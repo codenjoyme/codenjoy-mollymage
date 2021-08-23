@@ -58,10 +58,10 @@ public class PerksTest extends AbstractGameTest {
 
         dice(dice, 10); // must drop 2 perks
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         field.tick();
@@ -131,13 +131,13 @@ public class PerksTest extends AbstractGameTest {
 
         dice(dice, 10); // must drop 2 perks
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         field.tick();
@@ -180,18 +180,18 @@ public class PerksTest extends AbstractGameTest {
                 "+  ☺ #\n" +
                 "#+####\n");
 
-        hero.left();
+        hero().left();
         field.tick();
 
-        hero.left();
+        hero().left();
         field.tick();
 
-        int before = hero.scores();
+        int before = hero().scores();
         assertEquals(2 * settings.integer(KILL_WALL_SCORE), before);
 
         // when
         // go for perk
-        hero.left();
+        hero().left();
         field.tick();
 
         // then
@@ -203,8 +203,8 @@ public class PerksTest extends AbstractGameTest {
                 "#+####\n");
 
         events.verifyAllEvents("[CATCH_PERK]");
-        assertEquals(before + settings.integer(CATCH_PERK_SCORE), hero.scores());
-        assertEquals("Hero had to acquire new perk", 1, player.getHero().getPerks().size());
+        assertEquals(before + settings.integer(CATCH_PERK_SCORE), hero().scores());
+        assertEquals("Hero had to acquire new perk", 1, player().getHero().getPerks().size());
     }
 
     @Test
@@ -220,16 +220,16 @@ public class PerksTest extends AbstractGameTest {
         perks.dropRatio(20); // 20%
         dice(dice, 10, 30); // must drop 1 perk
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         // when
@@ -273,13 +273,13 @@ public class PerksTest extends AbstractGameTest {
 
         dice(dice, 10); // must drop 2 perks
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         field.tick();
@@ -347,9 +347,9 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldDropPerk_generateNewGhost() {
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
-        reset(listener);
+        reset(listener());
 
-        hero.right();
+        hero().right();
         field.tick();
 
         // then
@@ -360,16 +360,16 @@ public class PerksTest extends AbstractGameTest {
                 " ☺   #\n" +
                 "#+####\n");
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
         // перед взрывом
@@ -399,7 +399,7 @@ public class PerksTest extends AbstractGameTest {
         events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // такой себе хак, мы в домике
-        hero.move(3, 4);
+        hero().move(3, 4);
         boxAt(1, 2); // две коробки подорвали, две добавили
         boxAt(1, 3);
         field.walls().add(new Wall(1, 4));
@@ -494,9 +494,9 @@ public class PerksTest extends AbstractGameTest {
         canDropPotions(2);
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
-        reset(listener);
+        reset(listener());
 
-        hero.right();
+        hero().right();
         field.tick();
 
         // then
@@ -507,17 +507,17 @@ public class PerksTest extends AbstractGameTest {
                 " ☺   #\n" +
                 "#+####\n");
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
         field.tick();
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         // перед взрывом
@@ -599,8 +599,8 @@ public class PerksTest extends AbstractGameTest {
                 "# ####\n");
 
         // бамбанули между двух перков, хак (перк при этом не взяли)
-        hero.move(1, 2);
-        hero.act();
+        hero().move(1, 2);
+        hero().act();
 
         // строим оборону
         field.boxes().remove(pt(5, 5));
@@ -611,11 +611,11 @@ public class PerksTest extends AbstractGameTest {
         field.walls().add(new Wall(4, 4));
         field.walls().add(new Wall(4, 5));
 
-        hero.move(5, 5); // убегаем в укрытие
+        hero().move(5, 5); // убегаем в укрытие
 
         boxesCount(boxesCount() - 4); // на 4 коробки меньше
         field.tick();
-        assertEquals(0, hero.getPerks().size()); // перк не взяли
+        assertEquals(0, hero().getPerks().size()); // перк не взяли
 
         asrtBrd("#+##☼☺\n" +
                 "# # ☼ \n" +
@@ -722,9 +722,9 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldDropPerk_generateNewGhost_thenSuicide_willKillChopperAlso() {
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
-        reset(listener);
+        reset(listener());
 
-        hero.right();
+        hero().right();
         field.tick();
 
         // then
@@ -735,16 +735,16 @@ public class PerksTest extends AbstractGameTest {
                 " ☺   #\n" +
                 "#+####\n");
 
-        hero.act();
+        hero().act();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
         // перед взрывом
@@ -786,7 +786,7 @@ public class PerksTest extends AbstractGameTest {
                 "#  ###\n");
 
         // мувнули героя и кикнули его
-        hero.die();
+        hero().die();
         boxesCount(boxesCount() - 1); // одна коробка потречена злым привидением
         field.tick();
 
@@ -816,9 +816,9 @@ public class PerksTest extends AbstractGameTest {
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, value, timeout);
         perks.dropRatio(20);
 
-        player.getHero().addPerk(new PotionBlastRadiusIncrease(value, timeout));
+        player().getHero().addPerk(new PotionBlastRadiusIncrease(value, timeout));
         assertEquals("Hero had to acquire new perk",
-                1, player.getHero().getPerks().size());
+                1, player().getHero().getPerks().size());
 
         // when
         field.tick();
@@ -827,7 +827,7 @@ public class PerksTest extends AbstractGameTest {
 
         // then
         assertEquals("Hero had to lose perk",
-                0, player.getHero().getPerks().size());
+                0, player().getHero().getPerks().size());
     }
 
 // _________________________________________________________AFFECT______________________________________________________
@@ -849,7 +849,7 @@ public class PerksTest extends AbstractGameTest {
                 "#☺         #\n" +
                 "############\n");
 
-        hero.act();
+        hero().act();
         field.tick();
 
         field.tick();
@@ -891,8 +891,8 @@ public class PerksTest extends AbstractGameTest {
         settings.integer(POISON_THROWER_RECHARGE, 3);
 
         // when
-        hero.up();
-        hero.act(1);
+        hero().up();
+        hero().act(1);
         field.tick();
 
         // then
@@ -925,10 +925,10 @@ public class PerksTest extends AbstractGameTest {
         settings.integer(POISON_THROWER_RECHARGE, 3);
 
         int timeout = 10;
-        player.getHero().addPerk(new PoisonThrower(timeout));
+        player().getHero().addPerk(new PoisonThrower(timeout));
 
         // when just ACT(1) without sending direction
-        hero.act(1);
+        hero().act(1);
         field.tick();
 
         // then
@@ -961,18 +961,18 @@ public class PerksTest extends AbstractGameTest {
         settings.integer(POISON_THROWER_RECHARGE, 3);
 
         int timeout = 30;
-        player.getHero().addPerk(new PoisonThrower(timeout));
+        player().getHero().addPerk(new PoisonThrower(timeout));
 
         // when hero set the potion and shoot through it
-        hero.up();
+        hero().up();
         field.tick();
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.act();
-        hero.down();
+        hero().act();
+        hero().down();
         field.tick();
-        hero.down();
+        hero().down();
         field.tick();
 
         // then
@@ -988,8 +988,8 @@ public class PerksTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼\n");
 
         // when hero throwpoison
-        hero.up();
-        hero.act(1);
+        hero().up();
+        hero().act(1);
         field.tick();
 
         // then
@@ -1023,18 +1023,18 @@ public class PerksTest extends AbstractGameTest {
         settings.bool(BIG_BADABOOM, true);
 
         int timeout = 30;
-        player.getHero().addPerk(new PoisonThrower(timeout));
+        player().getHero().addPerk(new PoisonThrower(timeout));
 
         // when hero set the potion and shoot through it
-        hero.up();
+        hero().up();
         field.tick();
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.act();
-        hero.down();
+        hero().act();
+        hero().down();
         field.tick();
-        hero.down();
+        hero().down();
         field.tick();
 
         // then
@@ -1050,8 +1050,8 @@ public class PerksTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼\n");
 
         // when hero throwpoison
-        hero.up();
-        hero.act(1);
+        hero().up();
+        hero().act(1);
         field.tick();
 
         // then
@@ -1088,7 +1088,7 @@ public class PerksTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
 
         // when hero get perk
-        hero.up();
+        hero().up();
         field.tick();
 
         // then
@@ -1100,8 +1100,8 @@ public class PerksTest extends AbstractGameTest {
         events.verifyAllEvents("[CATCH_PERK]");
 
         // when hero used perk
-        hero.down();
-        hero.act(1);
+        hero().down();
+        hero().act(1);
         field.tick();
 
         // then
@@ -1110,11 +1110,11 @@ public class PerksTest extends AbstractGameTest {
                 "☼☺☼ ☼\n" +
                 "☼҉  ☼\n" +
                 "☼☼☼☼☼\n");
-        assertEquals(timeout - 2, hero.getPerk(Element.POISON_THROWER).getTimer());
+        assertEquals(timeout - 2, hero().getPerk(Element.POISON_THROWER).getTimer());
 
         // when hero picked one more perk
         perkAt(1, 3, new PoisonThrower(timeout));
-        hero.up();
+        hero().up();
         field.tick();
 
         // then perk timer should be doubled minus few steps
@@ -1124,11 +1124,11 @@ public class PerksTest extends AbstractGameTest {
                 "☼   ☼\n" +
                 "☼☼☼☼☼\n");
         events.verifyAllEvents("[CATCH_PERK]");
-        assertEquals(timeout * 2 - 3, hero.getPerk(Element.POISON_THROWER).getTimer());
+        assertEquals(timeout * 2 - 3, hero().getPerk(Element.POISON_THROWER).getTimer());
 
         // when hero use PT
-        hero.down();
-        hero.act(1);
+        hero().down();
+        hero().act(1);
         field.tick();
 
         // then
@@ -1137,7 +1137,7 @@ public class PerksTest extends AbstractGameTest {
                 "☼҉☼ ☼\n" +
                 "☼҉  ☼\n" +
                 "☼☼☼☼☼\n");
-        assertEquals(timeout * 2 - 4, hero.getPerk(Element.POISON_THROWER).getTimer());
+        assertEquals(timeout * 2 - 4, hero().getPerk(Element.POISON_THROWER).getTimer());
     }
 
     @Test
@@ -1158,11 +1158,11 @@ public class PerksTest extends AbstractGameTest {
 
         int timeout = 10;
 
-        player.getHero().addPerk(new PoisonThrower(timeout));
+        player().getHero().addPerk(new PoisonThrower(timeout));
 
         // when
-        hero.up();
-        hero.act(1);
+        hero().up();
+        hero().act(1);
         field.tick();
 
         // then
@@ -1178,8 +1178,8 @@ public class PerksTest extends AbstractGameTest {
                 "##########\n");
 
         // when recharge hero should not throw poison
-        hero.up();
-        hero.act(1);
+        hero().up();
+        hero().act(1);
         field.tick();
 
         // then
@@ -1195,8 +1195,8 @@ public class PerksTest extends AbstractGameTest {
                 "##########\n");
 
         // when recharge hero should not throw poison
-        hero.up();
-        hero.act(1);
+        hero().up();
+        hero().act(1);
         field.tick();
 
         // then
@@ -1212,8 +1212,8 @@ public class PerksTest extends AbstractGameTest {
                 "##########\n");
 
         // when recharge done should throw again
-        hero.up();
-        hero.act(1);
+        hero().up();
+        hero().act(1);
         field.tick();
 
         // then
@@ -1229,8 +1229,8 @@ public class PerksTest extends AbstractGameTest {
                 "##########\n");
 
         // when and going to recharge again
-        hero.up();
-        hero.act(1);
+        hero().up();
+        hero().act(1);
         field.tick();
 
         // then
@@ -1264,13 +1264,13 @@ public class PerksTest extends AbstractGameTest {
 
         int value = 2;
         int timeout = 10;
-        player.getHero().addPerk(new PoisonThrower(timeout));
-        player.getHero().addPerk(new PotionBlastRadiusIncrease(value, timeout));
+        player().getHero().addPerk(new PoisonThrower(timeout));
+        player().getHero().addPerk(new PotionBlastRadiusIncrease(value, timeout));
 
 
         // when
-        hero.up();
-        hero.act(1);
+        hero().up();
+        hero().act(1);
         field.tick();
 
         // then
@@ -1306,9 +1306,9 @@ public class PerksTest extends AbstractGameTest {
         int value = 4;   // на сколько клеток разрывная волна увеличится (по умолчанию 1)
         int timeout = 5; // сколько это безобразие будет длиться
 
-        player.getHero().addPerk(new PotionBlastRadiusIncrease(value, timeout));
+        player().getHero().addPerk(new PotionBlastRadiusIncrease(value, timeout));
 
-        hero.act();
+        hero().act();
         field.tick();
 
         field.tick();
@@ -1355,38 +1355,38 @@ public class PerksTest extends AbstractGameTest {
         int value = 4;   // на сколько клеток разрывная волна увеличится (по умолчанию 1)
         int timeout = 5; // сколько это безобразие будет длиться (времени должно хватить)
 
-        player.getHero().addPerk(new PotionBlastRadiusIncrease(value, timeout));
+        player().getHero().addPerk(new PotionBlastRadiusIncrease(value, timeout));
 
         assertEquals("[{POTION_BLAST_RADIUS_INCREASE('+') " +
                         "value=4, timeout=5, timer=5, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         assertEquals("[{POTION_BLAST_RADIUS_INCREASE('+') " +
                         "value=4, timeout=5, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // второй перк взятый в самый последний момент перед взрывом
         // зелья повлияет не на нее, а на следующее зелье
         int newValue = 3; // проверим, что эти значения суммируются
         int newTimeout = 7;
-        player.getHero().addPerk(new PotionBlastRadiusIncrease(newValue, newTimeout));
+        player().getHero().addPerk(new PotionBlastRadiusIncrease(newValue, newTimeout));
 
         assertEquals("[{POTION_BLAST_RADIUS_INCREASE('+') " +
                         "value=7, timeout=8, timer=8, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // when
         field.tick();
@@ -1407,21 +1407,21 @@ public class PerksTest extends AbstractGameTest {
 
 
         // when
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
 
         dice(dice,  // новые коробки
                 9, 1,
                 9, 2);
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
-        hero.up();
+        hero().up();
         field.tick();
 
         field.tick();
@@ -1442,7 +1442,7 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[{POTION_BLAST_RADIUS_INCREASE('+') " +
                         "value=7, timeout=8, timer=2, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // when
         dice(dice,  // новые коробки
@@ -1455,15 +1455,15 @@ public class PerksTest extends AbstractGameTest {
         // последний шанс воспользоваться, но мы не будем
         assertEquals("[{POTION_BLAST_RADIUS_INCREASE('+') " +
                         "value=7, timeout=8, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         field.tick();
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // ставим новое зелье, чтобы убедиться, что больше перк не сработает
-        hero.act();
+        hero().act();
         field.tick();
 
         field.tick();
@@ -1486,7 +1486,7 @@ public class PerksTest extends AbstractGameTest {
                 "# # ########\n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
     }
 
     // BCI - Potion Count Increase perk
@@ -1497,7 +1497,7 @@ public class PerksTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.act();
+        hero().act();
         // obe potion by default on lel 1
         asrtBrd("     \n" +
                 "     \n" +
@@ -1505,9 +1505,9 @@ public class PerksTest extends AbstractGameTest {
                 "     \n" +
                 "☻    \n");
 
-        hero.right();
+        hero().right();
         field.tick();
-        hero.act();
+        hero().act();
         // no more potions :(
         asrtBrd("     \n" +
                 "     \n" +
@@ -1516,29 +1516,29 @@ public class PerksTest extends AbstractGameTest {
                 "4☺   \n");
 
         // add perk that gives 1+3 = 4 player's potions in total on the board
-        player.getHero().addPerk(new PotionCountIncrease(3, 3));
-        hero.act();
-        hero.right();
+        player().getHero().addPerk(new PotionCountIncrease(3, 3));
+        hero().act();
+        hero().right();
         field.tick();
-        hero.act();
+        hero().act();
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "34☻  \n");
 
-        hero.right();
+        hero().right();
         field.tick();
-        hero.act();
+        hero().act();
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "234☻ \n");
 
-        hero.right();
+        hero().right();
         field.tick();
-        hero.act();
+        hero().act();
         // 4 potions and no more
         asrtBrd("     \n" +
                 "     \n" +
@@ -1556,8 +1556,8 @@ public class PerksTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
         asrtBrd("     \n" +
                 "     \n" +
@@ -1565,7 +1565,7 @@ public class PerksTest extends AbstractGameTest {
                 "     \n" +
                 "4☺   \n");
 
-        player.getHero().addPerk(new PotionImmune(6));
+        player().getHero().addPerk(new PotionImmune(6));
 
         field.tick();
         field.tick();
@@ -1578,7 +1578,7 @@ public class PerksTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉☺   \n");
 
-        hero.act();
+        hero().act();
         field.tick();
         asrtBrd("     \n" +
                 "     \n" +
@@ -1614,15 +1614,15 @@ public class PerksTest extends AbstractGameTest {
                 "☺    \n");
 
         canDropPotions(2);
-        player.getHero().addPerk(new PotionRemoteControl(2, 1));
+        player().getHero().addPerk(new PotionRemoteControl(2, 1));
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=2, timeout=1, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // поставили первое радиоуправляемое зелье
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1633,10 +1633,10 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=2, timeout=1, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // видим, что она стоит и ждет
-        hero.up();
+        hero().up();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1647,10 +1647,10 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=2, timeout=1, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // взорвали ее
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1661,10 +1661,10 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=1, timeout=1, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // ставим еще одну
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1675,10 +1675,10 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=1, timeout=1, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // отошли, смотрим
-        hero.up();
+        hero().up();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1687,7 +1687,7 @@ public class PerksTest extends AbstractGameTest {
                 " 5   \n" +
                 "     \n");
 
-        hero.left();
+        hero().left();
         field.tick();
 
         // долго потикали, ничего не меняется, таймаутов нет
@@ -1711,10 +1711,10 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=1, timeout=1, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // взорвали ее
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1724,10 +1724,10 @@ public class PerksTest extends AbstractGameTest {
                 " ҉   \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // ставим новую
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1737,10 +1737,10 @@ public class PerksTest extends AbstractGameTest {
                 "     \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // если отойдем, то увидим, что это обычная
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1750,11 +1750,11 @@ public class PerksTest extends AbstractGameTest {
                 "     \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // еще одну, у нас ведь их две
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1764,11 +1764,11 @@ public class PerksTest extends AbstractGameTest {
                 "     \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // больше не могу
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1778,11 +1778,11 @@ public class PerksTest extends AbstractGameTest {
                 "     \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // еще не могу
-        hero.right();
-        hero.act();
+        hero().right();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1792,10 +1792,10 @@ public class PerksTest extends AbstractGameTest {
                 "     \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // и только когда ударная волна уйдет, тогда смогу
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1805,7 +1805,7 @@ public class PerksTest extends AbstractGameTest {
                 "     \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
     }
 
     @Test
@@ -1817,15 +1817,15 @@ public class PerksTest extends AbstractGameTest {
                 "☺    \n");
         canDropPotions(1);
 
-        player.getHero().addPerk(new PotionRemoteControl(2, 1));
+        player().getHero().addPerk(new PotionRemoteControl(2, 1));
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=2, timeout=1, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // поставили первое радиоуправляемое зелье
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1836,10 +1836,10 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=2, timeout=1, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // видим, что она стоит и ждет
-        hero.up();
+        hero().up();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1850,10 +1850,10 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=2, timeout=1, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // взорвали ее
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1864,10 +1864,10 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=1, timeout=1, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // ставим еще одну
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1878,10 +1878,10 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=1, timeout=1, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // отошли, смотрим
-        hero.up();
+        hero().up();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1890,7 +1890,7 @@ public class PerksTest extends AbstractGameTest {
                 " 5   \n" +
                 "     \n");
 
-        hero.left();
+        hero().left();
         field.tick();
 
         // долго потикали, ничего не меняется, таймаутов нет
@@ -1914,10 +1914,10 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=1, timeout=1, timer=1, pick=0}]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // взорвали ее
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1927,10 +1927,10 @@ public class PerksTest extends AbstractGameTest {
                 " ҉   \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // ставим новую
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1940,10 +1940,10 @@ public class PerksTest extends AbstractGameTest {
                 "     \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // если отойдем, то увидим, что это обычная
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1953,11 +1953,11 @@ public class PerksTest extends AbstractGameTest {
                 "     \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // больше не могу - у меня одна
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1967,11 +1967,11 @@ public class PerksTest extends AbstractGameTest {
                 "     \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // больше не могу
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1981,11 +1981,11 @@ public class PerksTest extends AbstractGameTest {
                 "     \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // и теперь не могу - есть еще взрывная волна
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -1995,10 +1995,10 @@ public class PerksTest extends AbstractGameTest {
                 "     \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // а теперь пожалуйста
-        hero.act();
+        hero().act();
         field.tick();
 
         asrtBrd("     \n" +
@@ -2008,7 +2008,7 @@ public class PerksTest extends AbstractGameTest {
                 "     \n");
 
         assertEquals("[]" ,
-                hero.getPerks().toString());
+                hero().getPerks().toString());
     }
 
     @Test
@@ -2025,15 +2025,15 @@ public class PerksTest extends AbstractGameTest {
 
         canDropPotions(1);
         potionsPower(3);
-        player.getHero().addPerk(new PotionRemoteControl(1, 1));
+        player().getHero().addPerk(new PotionRemoteControl(1, 1));
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=1, timeout=1, timer=1, pick=0}]",
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // поставили радиоуправляемое зелье
-        hero.act();
-        hero.right();
+        hero().act();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -2044,10 +2044,10 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=1, timeout=1, timer=1, pick=0}]",
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // идем к привидению на верную смерть
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -2058,10 +2058,10 @@ public class PerksTest extends AbstractGameTest {
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
                         "value=1, timeout=1, timer=1, pick=0}]",
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         // самоубился и всех выпилил )
-        hero.right();
+        hero().right();
         field.tick();
 
         asrtBrd("     \n" +
@@ -2074,7 +2074,7 @@ public class PerksTest extends AbstractGameTest {
 
         // только сейчас перк забрался
         assertEquals("[]",
-                hero.getPerks().toString());
+                hero().getPerks().toString());
 
         dice(dice, 4, 4); // новая коробка
         field.tick();
@@ -2088,7 +2088,7 @@ public class PerksTest extends AbstractGameTest {
         events.verifyAllEvents("[]");
 
         assertEquals("[]",
-                hero.getPerks().toString());
+                hero().getPerks().toString());
     }
 
     @Test
@@ -2101,7 +2101,7 @@ public class PerksTest extends AbstractGameTest {
                 "      \n" +
                 "☺     \n");;
         perkAt(0, 1, getPotionExploderPerk());
-        hero.addPerk(new PotionCountIncrease(3, 30));
+        hero().addPerk(new PotionCountIncrease(3, 30));
 
         // then
         asrtBrd("      \n" +
@@ -2110,10 +2110,10 @@ public class PerksTest extends AbstractGameTest {
                 "      \n" +
                 "A     \n" +
                 "☺     \n");
-        assertEquals(1, hero.getPerks().size());
+        assertEquals(1, hero().getPerks().size());
 
         // when hero get perk PE
-        hero.up();
+        hero().up();
         field.tick();
 
         // then
@@ -2124,18 +2124,18 @@ public class PerksTest extends AbstractGameTest {
                 "      \n" +
                 "☺     \n" +
                 "      \n");
-        assertEquals(2, hero.getPerks().size());
+        assertEquals(2, hero().getPerks().size());
 
         // when hero plant different potions
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.addPerk(new PotionRemoteControl(3, 30));
-        hero.act();
-        hero.up();
+        hero().addPerk(new PotionRemoteControl(3, 30));
+        hero().act();
+        hero().up();
         field.tick();
-        hero.right();
+        hero().right();
         field.tick();
 
         // then
@@ -2145,10 +2145,10 @@ public class PerksTest extends AbstractGameTest {
                 "5     \n" +
                 "2     \n" +
                 "      \n");
-        assertEquals(3, hero.getPerks().size());
+        assertEquals(3, hero().getPerks().size());
 
         // when hero explode all potions
-        hero.act(2);
+        hero().act(2);
         field.tick();
 
         // then
@@ -2170,7 +2170,7 @@ public class PerksTest extends AbstractGameTest {
                 "      \n" +
                 "      \n" +
                 "☺     \n");
-        hero.addPerk(new PotionCountIncrease(3, 30));
+        hero().addPerk(new PotionCountIncrease(3, 30));
 
         // then
         asrtBrd("      \n" +
@@ -2181,15 +2181,15 @@ public class PerksTest extends AbstractGameTest {
                 "☺     \n");
 
         // when hero plant different potions
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.addPerk(new PotionRemoteControl(3, 30));
-        hero.act();
-        hero.up();
+        hero().addPerk(new PotionRemoteControl(3, 30));
+        hero().act();
+        hero().up();
         field.tick();
-        hero.right();
+        hero().right();
         field.tick();
 
         // then
@@ -2201,7 +2201,7 @@ public class PerksTest extends AbstractGameTest {
                 "2     \n");
 
         // when hero tried explode all potions but can't without PE perk
-        hero.act(2);
+        hero().act(2);
         field.tick();
 
         // then
@@ -2233,11 +2233,11 @@ public class PerksTest extends AbstractGameTest {
                 "☺     \n");
 
         // when hero catch perk and plant potion
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         // then
@@ -2250,8 +2250,8 @@ public class PerksTest extends AbstractGameTest {
         events.verifyAllEvents("[CATCH_PERK]");
 
         // when hero explode potions and move right
-        hero.act(2);
-        hero.right();
+        hero().act(2);
+        hero().right();
         field.tick();
 
         // then
@@ -2282,11 +2282,11 @@ public class PerksTest extends AbstractGameTest {
                 "☺     \n");
 
         // when hero plant potion
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         // then
@@ -2298,8 +2298,8 @@ public class PerksTest extends AbstractGameTest {
                 "3     \n");
 
         // when hero tried explode potions(but cant) and move right
-        hero.act(2);
-        hero.right();
+        hero().act(2);
+        hero().right();
         field.tick();
 
         // then
@@ -2331,11 +2331,11 @@ public class PerksTest extends AbstractGameTest {
                 "☺     \n");
 
         // when hero catch perk and plant potion
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
-        hero.right();
+        hero().right();
         field.tick();
 
         // then
@@ -2348,8 +2348,8 @@ public class PerksTest extends AbstractGameTest {
         events.verifyAllEvents("[CATCH_PERK]");
 
         // when hero explode potions and move right
-        hero.act(2);
-        hero.right();
+        hero().act(2);
+        hero().right();
         field.tick();
 
         // then
@@ -2361,8 +2361,8 @@ public class PerksTest extends AbstractGameTest {
                 "҉҉    \n");
 
         // when hero plant again
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
         // then
@@ -2374,8 +2374,8 @@ public class PerksTest extends AbstractGameTest {
                 "      \n");
 
         // when hero act(2) potion shouldn't boom
-        hero.act(2);
-        hero.right();
+        hero().act(2);
+        hero().right();
         field.tick();
 
         // then
@@ -2409,8 +2409,8 @@ public class PerksTest extends AbstractGameTest {
                 "☺     \n");
 
         // when hero catch perk and plant potion
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
         // then
@@ -2427,7 +2427,7 @@ public class PerksTest extends AbstractGameTest {
         perkAt(0, 2, getPotionExploderPerk());
 
         // when hero catch one more perk
-        hero.up();
+        hero().up();
         field.tick();
 
         // then
@@ -2441,8 +2441,8 @@ public class PerksTest extends AbstractGameTest {
 
 
         // when hero explode potion and move right
-        hero.act(2);
-        hero.right();
+        hero().act(2);
+        hero().right();
         field.tick();
 
         // then
@@ -2454,8 +2454,8 @@ public class PerksTest extends AbstractGameTest {
                 "҉҉    \n");
 
         // when hero plant again
-        hero.act();
-        hero.up();
+        hero().act();
+        hero().up();
         field.tick();
 
         // then
@@ -2467,8 +2467,8 @@ public class PerksTest extends AbstractGameTest {
                 "      \n");
 
         // when hero act(2) potion should boom
-        hero.act(2);
-        hero.right();
+        hero().act(2);
+        hero().right();
         field.tick();
 
         // then

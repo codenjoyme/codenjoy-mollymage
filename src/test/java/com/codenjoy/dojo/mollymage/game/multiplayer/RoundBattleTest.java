@@ -22,6 +22,7 @@ package com.codenjoy.dojo.mollymage.game.multiplayer;
  * #L%
  */
 
+import com.codenjoy.dojo.mollymage.game.singleplayer.AbstractGameTest;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import org.junit.Test;
@@ -32,7 +33,7 @@ import static com.codenjoy.dojo.services.Direction.DOWN;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
 import static org.junit.Assert.assertEquals;
 
-public class RoundBattleTest extends AbstractMultiplayerTest {
+public class RoundBattleTest extends AbstractGameTest {
 
     public static final int DEFAULT_COUNT = 3;
 
@@ -55,13 +56,13 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
     @Test
     public void shouldAllPlayersOnBoardIsInactive_whenStart() {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT);
-        setup();
+        
 
         dice(dice,
                 0, 0,
                 1, 0,
                 1, 1);
-        givenBoard(DEFAULT_COUNT);
+        givenBr(DEFAULT_COUNT);
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -211,13 +212,13 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1); // TODO а что будет если тут 0 игра хоть начнется?
 
-        setup();
+        
 
         dice(dice,
                 0, 0,
                 1, 0,
                 1, 1);
-        givenBoard(DEFAULT_COUNT);
+        givenBr(DEFAULT_COUNT);
 
         tick();
 
@@ -312,16 +313,14 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
-        setup();
-
-        Ghost ghost = ghostAt(1, 1);
 
         dice(dice,
                 0, 0, // первый игрок
                 1, 0, // второй
                 2, 0); // третий
+        givenBr(DEFAULT_COUNT);
 
-        givenBoard(DEFAULT_COUNT);
+        Ghost ghost = ghostAt(1, 1);
 
         tick();
 
@@ -402,16 +401,14 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
-        setup();
-
-        Ghost ghost = ghostAt(1, 1);
 
         dice(dice,
                 0, 0, // первый игрок
                 1, 0, // второй
                 2, 0); // третий
+        givenBr(DEFAULT_COUNT);
 
-        givenBoard(DEFAULT_COUNT);
+        Ghost ghost = ghostAt(1, 1);
 
         tick();
 
@@ -537,14 +534,14 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
-        setup();
+        
 
         dice(dice,
                 0, 0, // первый игрок
                 1, 0, // второй
                 2, 0); // третий
 
-        givenBoard(DEFAULT_COUNT);
+        givenBr(DEFAULT_COUNT);
 
         tick();
 
@@ -802,14 +799,14 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
                 .integer(POTION_POWER, 3) // зелье с большим радиусом, чем обычно
                 .integer(ROUNDS_TIME, 60)
                 .integer(ROUNDS_TIME_FOR_WINNER, 15); // после победы я хочу еще чуть повисеть на уровне
-        setup();
+        
 
         dice(dice,
                 0, 0, // первый игрок
                 1, 0, // второй
                 2, 0); // третий
 
-        givenBoard(DEFAULT_COUNT);
+        givenBr(DEFAULT_COUNT);
 
         tick();
 
@@ -983,14 +980,14 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
     public void shouldGetWinRoundScores_whenKillAllOtherHeroes() {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
-        setup();
+        
 
         dice(dice,
                 1, 1, // первый игрок
                 0, 1, // второй
                 1, 0); // третий
 
-        givenBoard(DEFAULT_COUNT);
+        givenBr(DEFAULT_COUNT);
 
         tick();
 
@@ -1065,14 +1062,14 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
     public void shouldGetWinRoundScores_whenKillAllEnemyHeroAndOtherHero() {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
-        setup();
+        
 
         dice(dice,
                 1, 1, // первый игрок
                 0, 1, // второй
                 1, 0); // третий
 
-        givenBoard(DEFAULT_COUNT);
+        givenBr(DEFAULT_COUNT);
         player(0).setTeamId(0);
         player(1).setTeamId(0);
         player(2).setTeamId(1);
@@ -1152,14 +1149,14 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
     public void shouldGetWinRoundScores_whenKillOneAndAnotherLeaveTheGame() {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
-        setup();
+        
 
         dice(dice,
                 1, 1, // первый игрок, кто побежит
                 0, 1, // второй, жертва
                 4, 4); // третий, тот кто покинет комнату
 
-        givenBoard(DEFAULT_COUNT);
+        givenBr(DEFAULT_COUNT);
 
         tick();
 
@@ -1305,14 +1302,14 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
 
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, count)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
-        setup();
+        
 
         dice(dice,
                 1, 1, // первый игрок
                 0, 2, // второй - его не накроет волной
                 1, 0); // третий - его накроет волной
 
-        givenBoard(count);
+        givenBr(count);
 
         tick();
 
@@ -1427,7 +1424,6 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
 
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, count)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
-        setup();
 
         dice(dice,
                 1, 1, // первый активный игрок - будет победителем
@@ -1436,7 +1432,7 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
                 0, 1, // жертва первого
                 3, 4); // единственная жертва второго, потому он проиграет по очкам
 
-        givenBoard(count);
+        givenBr(count);
 
         tick();
 
@@ -1605,7 +1601,6 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
 
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, count)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
-        setup();
 
         dice(dice,
                 1, 1, // первый активный игрок - будет проигравшим
@@ -1615,7 +1610,7 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
                 3, 4, // жертва второго
                 4, 3); // жертва второго
 
-        givenBoard(count);
+        givenBr(count);
 
         boxesCount(1);
         boxAt(3, 2);
@@ -1809,14 +1804,14 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, count)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 60); // до конца раунда целая минута
-        setup();
+        
 
         dice(dice,
                 4, 4, // первый игрок
                 4, 3, // второй
                 3, 4); // третий
 
-        givenBoard(count);
+        givenBr(count);
 
         tick();
 
@@ -1922,14 +1917,14 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, count)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 60); // до конца раунда целая минута
-        setup();
+        
 
         dice(dice,
                 4, 4, // первый игрок
                 4, 3, // второй
                 3, 4); // третий
 
-        givenBoard(count);
+        givenBr(count);
         player(0).setTeamId(0);
         player(1).setTeamId(1);
         player(2).setTeamId(1);

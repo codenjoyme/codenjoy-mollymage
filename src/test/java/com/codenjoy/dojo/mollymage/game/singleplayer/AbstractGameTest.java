@@ -35,16 +35,19 @@ import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.levels.LevelImpl;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.Dice;
+import com.codenjoy.dojo.services.EventListener;
+import com.codenjoy.dojo.services.Game;
+import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.multiplayer.Single;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.utils.events.EventsListenersAssert;
 import org.junit.Before;
+import org.mockito.Mockito;
 import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
@@ -60,29 +63,31 @@ public abstract class AbstractGameTest {
     protected List<Game> games = new ArrayList<>();
     protected List<Hero> heroes = new ArrayList<>();
 
-    protected GameSettings settings;
-    protected Dice dice;
+    protected GameSettings settings = settings();
+    protected Dice dice = mock(Dice.class);
     protected MollyMage field;
-    private PrinterFactory printer;
-    protected PerksSettingsWrapper perks;
-    protected EventsListenersAssert events;
+    private PrinterFactory printer = new PrinterFactoryImpl();
+    protected PerksSettingsWrapper perks = settings.perksSettings();
+    protected EventsListenersAssert events = new EventsListenersAssert(() -> listeners, Events.class);
     protected Level level;
 
     @Before
     public void setUp() {
-        dice = mock(Dice.class);
-        settings = spy(new TestGameSettings());
-        printer = new PrinterFactoryImpl();
-        events = new EventsListenersAssert(() -> listeners, Events.class);
-        perks = settings.perksSettings();
         potionsPower(1);
-
         boxesCount(0);
         ghostsCount(0);
     }
 
     protected void givenBr(String map) {
         givenBr(map, 1);
+    }
+
+    protected void givenBr(int count) {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n", count);
     }
 
     protected void givenBr(String map, int count) {
@@ -93,9 +98,6 @@ public abstract class AbstractGameTest {
         }
         level = new LevelImpl(map);
 
-        Point heroPosition = level.getHeroPosition();
-        dice(dice, heroPosition.getX(), heroPosition.getY());
-
         field = new MollyMage(level, dice, settings);
         List<TreasureBox> boxes = level.getBoxes();
         boxesCount(boxes.size());
@@ -105,24 +107,48 @@ public abstract class AbstractGameTest {
             game.on(field);
             game.newGame();
         }
-        heroes.clear();
-        players.forEach(player -> heroes.add(player.getHero()));
+        resetHeroes();
+    }
+
+    protected GameSettings settings() {
+        return spy(new TestGameSettings())
+                .integer(POTION_POWER, 1);
     }
 
     protected EventListener listener() {
         return listeners.get(0);
     }
 
+    protected EventListener listener(int index) {
+        return listeners.get(index);
+    }
+
     protected Player player() {
         return players.get(0);
+    }
+
+    protected Player player(int index) {
+        return players.get(index);
     }
 
     protected Game game() {
         return games.get(0);
     }
 
+    protected Game game(int index) {
+        return games.get(index);
+    }
+
     protected Hero hero() {
         return heroes.get(0);
+    }
+
+    protected Hero hero(int index) {
+        return heroes.get(index);
+    }
+
+    protected void tick() {
+        field.tick();
     }
 
     protected void gotoMaxUp() {
@@ -171,6 +197,26 @@ public abstract class AbstractGameTest {
     protected void asrtBrd(String expected) {
         assertEquals(expected, printer.getPrinter(
                 field.reader(), player()).print());
+    }
+
+    protected void asrtBrd(String board, Game game) {
+        assertEquals(board, game.getBoardAsString());
+    }
+
+    protected void assertBoards(String expected, Integer... indexes) {
+        events.assertAll(expected, games.size(), indexes, index -> {
+            Object actual = game(index).getBoardAsString();
+            return String.format("game(%s)\n%s\n", index, actual);
+        });
+    }
+
+    protected void newGameForAllDied() {
+        players.forEach(player -> {
+            if (!player.isAlive()) {
+                field.newGame(player(players.indexOf(player)));
+            }
+        });
+        resetHeroes();
     }
 
     protected void potionsPower(int power) {
@@ -228,6 +274,7 @@ public abstract class AbstractGameTest {
 
     protected Ghost ghostAt(int x, int y) {
         Ghost ghost = new Ghost(pt(x, y), field, dice);
+        ghost.stop();
         field.ghosts().add(ghost);
         return ghost;
     }
@@ -245,5 +292,14 @@ public abstract class AbstractGameTest {
             }
         }
         return result.stream().mapToInt(i -> i).toArray();
+    }
+
+    protected void resetHeroes() {
+        heroes.clear();
+        players.forEach(player -> heroes.add(player.getHero()));
+    }
+
+    protected void resetListeners() {
+        listeners.forEach(Mockito::reset);
     }
 }

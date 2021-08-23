@@ -24,7 +24,7 @@ package com.codenjoy.dojo.mollymage.game.multiplayer;
 
 
 import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.mollymage.game.multiplayer.AbstractMultiplayerTest;
+import com.codenjoy.dojo.mollymage.game.singleplayer.AbstractGameTest;
 import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
@@ -32,22 +32,16 @@ import com.codenjoy.dojo.mollymage.model.items.perks.*;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Joystick;
 import com.codenjoy.dojo.services.PointImpl;
-import org.junit.Before;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_TEAMS_PER_ROOM;
 import static org.junit.Assert.*;
 
-public class MultiplayerTest extends AbstractMultiplayerTest {
+public class MultiplayerTest extends AbstractGameTest {
 
     public static final int CATCH_PERK_SCORE_FOR_TEST = 10;
     public static final int PERK_TIMEOUT_FOR_TEST = 10;
-
-    @Before
-    public void setup() {
-        super.setup();
-    }
 
 // _____________________________________________________GAME_TEST_______________________________________________________
 
@@ -56,7 +50,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
 
         hero(0).act();
         hero(1).up();
@@ -92,7 +86,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
 
         assertSame(hero(0), game(0).getJoystick());
         assertSame(hero(1), game(1).getJoystick());
@@ -115,7 +109,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
 
         hero(0).act();
         hero(0).up();
@@ -172,13 +166,13 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void bug() {
-        ghostAt(1, 0);
-        ghostAt(2, 0);
-
         dice(dice,
                 1, 1,
                 2, 1);
-        givenBoard(2);
+        givenBr(2);
+
+        ghostAt(1, 0);
+        ghostAt(2, 0);
 
         boxesCount(1);
         boxAt(0, 0);
@@ -229,7 +223,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
 
         hero(0).right();
         tick();
@@ -247,7 +241,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
 
         hero(1).act();
         hero(1).right();
@@ -287,7 +281,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
 
         hero(0).act();
         hero(0).up();
@@ -326,7 +320,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
         player(0).setTeamId(0);
         player(1).setTeamId(1);
 
@@ -367,7 +361,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
 
         hero(0).act();
         hero(0).up();
@@ -419,7 +413,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
 
         hero(0).act();
         hero(0).up();
@@ -462,7 +456,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
 
         hero(0).act();
         hero(0).up();
@@ -489,12 +483,12 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     // герой может идти на привидение, при этом он умирает
     @Test
     public void shouldKllOtherHeroWhenHeroGoToGhost() {
-        ghostAt(2, 0);
-
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
+
+        ghostAt(2, 0);
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -528,12 +522,12 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     // как это на моей доске отобразится? Хочу видеть трупик
     @Test
     public void shouldKllOtherHeroWhenGhostGoToIt() {
-        Ghost ghost = ghostAt(2, 0);
-
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
+
+        Ghost ghost = ghostAt(2, 0);
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -567,12 +561,12 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     // встречу к нему - герой проскочит или умрет? должен умереть!
     @Test
     public void shouldKllOtherHeroWhenGhostAndHeroMoves() {
-        Ghost ghost = ghostAt(2, 0);
-
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
+
+        Ghost ghost = ghostAt(2, 0);
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -628,7 +622,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 1, 0,
                 1, 1);
-        givenBoard(2);
+        givenBr(2);
 
         boxesCount(1);
         boxAt(0, 0);
@@ -669,12 +663,12 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldFireEventWhenKillGhost() {
-        ghostAt(0, 0);
-
         dice(dice,
                 1, 0,
                 1, 1);
-        givenBoard(2);
+        givenBr(2);
+
+        ghostAt(0, 0);
 
         hero(0).act();
         hero(0).right();
@@ -713,7 +707,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 2, 0);
-        givenBoard(2);
+        givenBr(2);
 
         boxesCount(1);
         boxAt(1, 0);
@@ -755,7 +749,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 0, 0,
                 2, 0);
 
-        givenBoard(2);
+        givenBr(2);
 
         boxesCount(1);
         boxAt(1, 0);
@@ -813,7 +807,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 3, 0);
-        givenBoard(2);
+        givenBr(2);
 
         boxesCount(2);
         boxAt(2, 0);
@@ -860,7 +854,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 2, 1,
                 3, 2,
                 2, 3);
-        givenBoard(4);
+        givenBr(4);
 
         boxesCount(1);
         boxAt(2, 2);
@@ -906,7 +900,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 2, 1,
                 3, 2,
                 2, 3);
-        givenBoard(4);
+        givenBr(4);
 
         boxesCount(3);
         boxAt(1, 1);
@@ -957,7 +951,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 3, 0);
-        givenBoard(2);
+        givenBr(2);
 
         boxesCount(2);
         boxAt(2, 0);
@@ -1006,12 +1000,12 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenGhost_caseDied() {
-        ghostAt(1, 0);
-
         dice(dice,
                 0, 0,
                 2, 0);
-        givenBoard(2);
+        givenBr(2);
+
+        ghostAt(1, 0);
 
         hero(0).act();
         hero(0).up();
@@ -1044,12 +1038,12 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenGhost_caseAlive() {
-        ghostAt(1, 0);
-
         dice(dice,
                 0, 0,
                 2, 0);
-        givenBoard(2);
+        givenBr(2);
+
+        ghostAt(1, 0);
 
         hero(0).act();
         hero(0).up();
@@ -1086,14 +1080,14 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourGhosts_caseDied() {
-        ghostAt(2, 2);
-
         dice(dice,
                 1, 2,
                 2, 1,
                 3, 2,
                 2, 3);
-        givenBoard(4);
+        givenBr(4);
+
+        ghostAt(2, 2);
 
         hero(0).act();
         hero(1).act();
@@ -1133,17 +1127,17 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        ghostAt(0, 1);
-        ghostAt(0, 3);
-        ghostAt(4, 1);
-        ghostAt(4, 3);
-
         dice(dice,
                 0, 0,
                 1, 0,
                 2, 0,
                 3, 0);
-        givenBoard(4);
+        givenBr(4);
+
+        ghostAt(0, 1);
+        ghostAt(0, 3);
+        ghostAt(4, 1);
+        ghostAt(4, 3);
 
         boxesCount(1);
         boxAt(2, 2);
@@ -1245,7 +1239,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 1, 0,
                 2, 0,
                 3, 0);
-        givenBoard(4);
+        givenBr(4);
 
         ghostsCount(4);
         ghostAt(0, 1);
@@ -1353,17 +1347,17 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        ghostAt(0, 1);
-        ghostAt(0, 3);
-        ghostAt(4, 1);
-        ghostAt(4, 3);
-
         dice(dice,
                 0, 0,
                 1, 0,
                 2, 0,
                 3, 0);
-        givenBoard(4);
+        givenBr(4);
+
+        ghostAt(0, 1);
+        ghostAt(0, 3);
+        ghostAt(4, 1);
+        ghostAt(4, 3);
 
         boxesCount(1);
         boxAt(2, 2);
@@ -1461,17 +1455,17 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 .bool(BIG_BADABOOM, false)
                 .perksSettings().dropRatio(0);
 
-        ghostAt(0, 1);
-        ghostAt(0, 3);
-        ghostAt(4, 1);
-        ghostAt(4, 3);
-
         dice(dice,
                 0, 0,
                 1, 0,
                 2, 0,
                 3, 0);
-        givenBoard(4);
+        givenBr(4);
+
+        ghostAt(0, 1);
+        ghostAt(0, 3);
+        ghostAt(4, 1);
+        ghostAt(4, 3);
 
         boxesCount(1);
         boxAt(2, 2);
@@ -1620,7 +1614,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 2, 0);
 
         //set up 3 players, 2 in one team, and 1 perk on field
-        givenBoard(3);
+        givenBr(3);
         player(0).setTeamId(0);
         player(1).setTeamId(0);
         player(2).setTeamId(1);
@@ -1675,7 +1669,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 2, 0);
 
         //set up 3 players, 2 in one team, and 1 perk on field
-        givenBoard(3);
+        givenBr(3);
         player(0).setTeamId(0);
         player(1).setTeamId(0);
         player(2).setTeamId(1);
@@ -1724,7 +1718,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     @Test
     public void shouldKillEnemyByPTAndScorePoints_whenCrossBlast() {
         // given
-        givenBoardForPoisonThrower();
+        givenBrForPoisonThrower();
         int killScore = 10;
         settings.integer(KILL_OTHER_HERO_SCORE, killScore);
         Hero hero1 = hero(0);
@@ -1802,7 +1796,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     @Test
     public void shouldKillGhostByPTAndScorePoints_whenCrossBlast() {
         // given
-        givenBoardForPoisonThrower();
+        givenBrForPoisonThrower();
         ghostAt(2,2);
         int killScore = 10;
         settings.integer(KILL_GHOST_SCORE, killScore);
@@ -1878,7 +1872,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     @Test
     public void shouldKillBoxByPTAndScorePoints_whenCrossBlast() {
         // given
-        givenBoardForPoisonThrower();
+        givenBrForPoisonThrower();
         boxesCount(1);
         boxAt(2,2);
         int killScore = 10;
@@ -1956,7 +1950,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     @Test
     public void shouldKillOnePerkAndGetTwoHuntedGhost_CrossBlastPortionAndPoisonThrow() {
         // given
-        givenBoardForPoisonThrower();
+        givenBrForPoisonThrower();
         int killScore = 10;
         settings.integer(KILL_GHOST_SCORE, killScore);
         Hero hero1 = hero(0);
@@ -2058,10 +2052,10 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "     \n", game(1));
     }
 
-    private void givenBoardForPoisonThrower() {
+    private void givenBrForPoisonThrower() {
         dice(dice,
                 0, 0, 2, 0);
-        givenBoard(2);
+        givenBr(2);
         perkAt(0, 1, new PoisonThrower(10));
         settings.integer(POTION_POWER, 2);
         settings.integer(CATCH_PERK_SCORE, 0);
@@ -2069,11 +2063,11 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldPerkCantSpawnFromGhost() {
-        ghostAt(1, 0);
-
         dice(dice,
                 0, 0);
-        givenBoard(1);
+        givenBr(1);
+
+        ghostAt(1, 0);
 
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
         perks.dropRatio(20); // 20%
@@ -2116,7 +2110,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
 
         //when hero0 catch perk and both heroes act and move
         perkAt(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
@@ -2173,7 +2167,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
         //when both heroes set Remote_Control potions. Hero0 get PE perk
         perkAt(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
         hero(0).addPerk(new PotionRemoteControl(1, 10));
@@ -2233,7 +2227,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
 
         perkAt(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
 
@@ -2297,7 +2291,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
 
         perkAt(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
         perkAt(1, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
@@ -2360,7 +2354,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
         ghostAt(2, 0);
         perkAt(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
 
@@ -2431,7 +2425,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 0, 0,
                 1, 0);
-        givenBoard(2);
+        givenBr(2);
         ghostAt(2, 0);
         perkAt(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
 
@@ -2503,7 +2497,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 1, 2,
                 2, 0);
-        givenBoard(2);
+        givenBr(2);
 
         //when hero0 plant Remote_Control potions. and go to position
         hero(0).addPerk(new PotionRemoteControl(1, PERK_TIMEOUT_FOR_TEST));
@@ -2579,7 +2573,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 1, 2,
                 2, 0);
-        givenBoard(2);
+        givenBr(2);
         settings.bool(STEAL_POINTS, false);
 
         //when hero0 plant potion and go to position
@@ -2652,7 +2646,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         dice(dice,
                 1, 2,
                 2, 0);
-        givenBoard(2);
+        givenBr(2);
         settings.bool(STEAL_POINTS, true);
 
         //when hero0 plant potion and go to position

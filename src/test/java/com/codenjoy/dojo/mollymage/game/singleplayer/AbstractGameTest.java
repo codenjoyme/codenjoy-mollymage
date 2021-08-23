@@ -35,10 +35,7 @@ import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.levels.LevelImpl;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.services.Dice;
-import com.codenjoy.dojo.services.EventListener;
-import com.codenjoy.dojo.services.Game;
-import com.codenjoy.dojo.services.PointImpl;
+import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.multiplayer.Single;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
@@ -79,6 +76,8 @@ public abstract class AbstractGameTest {
     }
 
     protected void givenBr(String map) {
+        Point heroPosition = new LevelImpl(map).getHeroPosition();
+        dice(dice, heroPosition.getX(), heroPosition.getY());
         givenBr(map, 1);
     }
 
@@ -87,7 +86,7 @@ public abstract class AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺    \n", count);
+                "     \n", count);
     }
 
     protected void givenBr(String map, int count) {

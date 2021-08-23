@@ -46,12 +46,11 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldHeroCantSpawnOnPerk() {
         // given
-        dice(dice, 1, 1);
         givenBr("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
-                "#    #\n" +
+                "#☺   #\n" +
                 "######\n");
 
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
@@ -119,12 +118,11 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldHeroAcquirePerk_whenMoveToFieldWithPerk() {
         // given
-        dice(dice, 1, 1);
         givenBr("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
-                "#    #\n" +
+                "#☺   #\n" +
                 "######\n");
 
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
@@ -212,12 +210,11 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPerkBeDropped_whenWallIsDestroyed() {
         // given
-        dice(dice, 1, 1);
         givenBr("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
-                "#    #\n" +
+                "#☺   #\n" +
                 "######\n");
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 5, 3);
         perks.dropRatio(20); // 20%
@@ -263,12 +260,11 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldRemovePerk_whenPickTimeout() {
         // given
-        dice(dice, 1, 1);
         givenBr("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
-                "#    #\n" +
+                "#☺   #\n" +
                 "######\n");
 
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
@@ -840,7 +836,6 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastRadiusIncrease_whenNoBBRIperk() {
         // given
-        dice(dice, 1, 1);
         givenBr("############\n" +
                 "# # # # # ##\n" +
                 "#          #\n" +
@@ -851,7 +846,7 @@ public class PerksTest extends AbstractGameTest {
                 "# # # # # ##\n" +
                 "#          #\n" +
                 "# # # # # ##\n" +
-                "#          #\n" +
+                "#☺         #\n" +
                 "############\n");
 
         hero().act();
@@ -882,7 +877,6 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldNotThrowPoison_withoutPTperk() {
         // given
-        dice(dice, 1, 1);
         givenBr("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
@@ -891,7 +885,7 @@ public class PerksTest extends AbstractGameTest {
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
-                "#        #\n" +
+                "#☺       #\n" +
                 "##########\n");
         settings.integer(POTION_POWER, 4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
@@ -917,7 +911,6 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldNotDoAnythingWhenACTWithoutMove_withPTperk() {
         // given
-        dice(dice, 1, 1);
         givenBr("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
@@ -926,7 +919,7 @@ public class PerksTest extends AbstractGameTest {
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
-                "#        #\n" +
+                "#☺       #\n" +
                 "##########\n");
         settings.integer(POTION_POWER, 4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
@@ -954,7 +947,6 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoisonThroughThePotion_withPTperk() {
         // given
-        dice(dice, 1, 1);
         givenBr("☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼        ☼\n" +
@@ -963,7 +955,7 @@ public class PerksTest extends AbstractGameTest {
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼        ☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
-                "☼        ☼\n" +
+                "☼☺       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼\n");
         settings.integer(POTION_POWER, 4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
@@ -1016,7 +1008,6 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldDetonatePotionWhenThrowPoison_withPTperk_withBadaBoom() {
         // given
-        dice(dice, 1, 1);
         givenBr("☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼        ☼\n" +
@@ -1025,7 +1016,7 @@ public class PerksTest extends AbstractGameTest {
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼        ☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
-                "☼        ☼\n" +
+                "☼☺       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼\n");
         settings.integer(POTION_POWER, 4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
@@ -1079,11 +1070,10 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPerkWorksAfterCombine_WithPTPerk() {
         // given
-        dice(dice, 1, 1);
         givenBr("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
-                "☼   ☼\n" +
+                "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
         settings.integer(POTION_POWER, 4);
         settings.integer(POISON_THROWER_RECHARGE, 1);
@@ -1153,7 +1143,6 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoison_whenPTperk() {
         // given
-        dice(dice, 1, 1);
         givenBr("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
@@ -1162,7 +1151,7 @@ public class PerksTest extends AbstractGameTest {
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
-                "#        #\n" +
+                "#☺       #\n" +
                 "##########\n");
         settings.integer(POTION_POWER,4);
         settings.integer(POISON_THROWER_RECHARGE,3);
@@ -1260,7 +1249,6 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoisonWithIncreasedPower_withPT_withPBRI_perks() {
         // given
-        dice(dice, 1, 1);
         givenBr("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
@@ -1269,7 +1257,7 @@ public class PerksTest extends AbstractGameTest {
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
-                "#        #\n" +
+                "#☺       #\n" +
                 "##########\n");
         settings.integer(POTION_POWER, 4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
@@ -1302,7 +1290,6 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastRadiusIncrease_whenBBRIperk() {
         // given
-        dice(dice, 1, 1);
         givenBr("############\n" +
                 "# # # # # ##\n" +
                 "#          #\n" +
@@ -1313,7 +1300,7 @@ public class PerksTest extends AbstractGameTest {
                 "# # # # # ##\n" +
                 "#          #\n" +
                 "# # # # # ##\n" +
-                "#          #\n" +
+                "#☺         #\n" +
                 "############\n");
 
         int value = 4;   // на сколько клеток разрывная волна увеличится (по умолчанию 1)
@@ -1352,7 +1339,6 @@ public class PerksTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastRadiusIncreaseTwice_whenBBRIperk() {
         // given
-        dice(dice, 1, 1);
         givenBr("############\n" +
                 "# # # # # ##\n" +
                 "#          #\n" +
@@ -1363,7 +1349,7 @@ public class PerksTest extends AbstractGameTest {
                 "# # # # # ##\n" +
                 "#          #\n" +
                 "# # # # # ##\n" +
-                "#          #\n" +
+                "#☺         #\n" +
                 "############\n");
 
         int value = 4;   // на сколько клеток разрывная волна увеличится (по умолчанию 1)

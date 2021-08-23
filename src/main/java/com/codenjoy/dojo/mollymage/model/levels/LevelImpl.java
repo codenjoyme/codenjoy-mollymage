@@ -52,12 +52,7 @@ public class LevelImpl implements Level {
 
     @Override
     public Point getHeroPosition() {
-        for (int index = 0; index < map.length(); index++) {
-            if (map.charAt(index) == HERO.ch()) {
-                return xy.getXY(index);
-            }
-        }
-        throw new NoSuchElementException("no hero");
+        return LevelUtils.getObjects(xy, map, (point, element) -> point, HERO).get(0);
     }
 
     @Override

@@ -106,6 +106,13 @@ public abstract class AbstractGameTest {
         }
     }
 
+    protected void gotoMaxRight() {
+        for (int x = 0; x <= level.size() + 1; x++) {
+            hero.right();
+            field.tick();
+        }
+    }
+
     protected void newGameForDied() {
         if (!player.isAlive()) {
             field.newGame(player);

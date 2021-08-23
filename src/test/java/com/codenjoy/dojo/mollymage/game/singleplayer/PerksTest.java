@@ -36,54 +36,11 @@ public class PerksTest extends AbstractGameTest {
 
     public static final int PERKS_TIMEOUT = 10;
 
-    @Test
-    public void shouldPerkBeDropped_whenWallIsDestroyed() {
-        // given
-        givenBr("######\n" +
-                "# # ##\n" +
-                "#    #\n" +
-                "# # ##\n" +
-                "#☺   #\n" +
-                "######\n");
-        perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 5, 3);
-        perks.dropRatio(20); // 20%
-        dice(dice, 10, 30); // must drop 1 perk
-
-        hero.act();
-        field.tick();
-
-        hero.up();
-        field.tick();
-
-        hero.up();
-        field.tick();
-
-        hero.right();
-        field.tick();
-
-        // when
-        field.tick();
-
-        // then
-        asrtBrd("######\n" +
-                "# # ##\n" +
-                "# ☺  #\n" +
-                "#҉# ##\n" +
-                "H҉҉  #\n" +
-                "#H####\n");
-
-        // when
-        boxesCount(boxesCount() - 2); // две коробки потрачено
-        field.tick();
-
-        // then
-        asrtBrd("######\n" +
-                "# # ##\n" +
-                "# ☺  #\n" +
-                "# # ##\n" +
-                "+    #\n" +
-                "# ####\n");
+    private PotionExploder getPotionExploderPerk() {
+        return new PotionExploder(1, PERKS_TIMEOUT);
     }
+
+// _____________________________________________________GAME_TEST_______________________________________________________
 
     // новый герой не может появиться на перке
     @Test
@@ -151,6 +108,8 @@ public class PerksTest extends AbstractGameTest {
                 "+    #\n" +
                 "#+####\n");
     }
+
+// ____________________________________________________LOSE_/_ACQUIRE___________________________________________________
 
     // BBRI = Potion Blast Radius Increase perk
     // проверяем, что перков может появиться два
@@ -246,6 +205,55 @@ public class PerksTest extends AbstractGameTest {
         events.verifyAllEvents("[CATCH_PERK]");
         assertEquals(before + settings.integer(CATCH_PERK_SCORE), hero.scores());
         assertEquals("Hero had to acquire new perk", 1, player.getHero().getPerks().size());
+    }
+
+    @Test
+    public void shouldPerkBeDropped_whenWallIsDestroyed() {
+        // given
+        givenBr("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "#☺   #\n" +
+                "######\n");
+        perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 5, 3);
+        perks.dropRatio(20); // 20%
+        dice(dice, 10, 30); // must drop 1 perk
+
+        hero.act();
+        field.tick();
+
+        hero.up();
+        field.tick();
+
+        hero.up();
+        field.tick();
+
+        hero.right();
+        field.tick();
+
+        // when
+        field.tick();
+
+        // then
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "# ☺  #\n" +
+                "#҉# ##\n" +
+                "H҉҉  #\n" +
+                "#H####\n");
+
+        // when
+        boxesCount(boxesCount() - 2); // две коробки потрачено
+        field.tick();
+
+        // then
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "# ☺  #\n" +
+                "# # ##\n" +
+                "+    #\n" +
+                "# ####\n");
     }
 
     // проверяем, что перк удалится с поля через N тиков если его никто не возьмет
@@ -578,7 +586,6 @@ public class PerksTest extends AbstractGameTest {
         events.verifyAllEvents("[]");
     }
 
-
     // генерим три привидение и смотрим как они бегут за мной
     @Test
     public void shouldDropPerk_generateThreeGhosts() {
@@ -823,6 +830,8 @@ public class PerksTest extends AbstractGameTest {
                 0, player.getHero().getPerks().size());
     }
 
+// _________________________________________________________AFFECT______________________________________________________
+
     // Проверяем длинну волны взрывной в отсутствии перка BBRI
     @Test
     public void shouldPotionBlastRadiusIncrease_whenNoBBRIperk() {
@@ -898,7 +907,6 @@ public class PerksTest extends AbstractGameTest {
                 "#☺       #\n" +
                 "##########\n");
     }
-
 
     @Test
     public void shouldNotDoAnythingWhenACTWithoutMove_withPTperk() {
@@ -1132,7 +1140,6 @@ public class PerksTest extends AbstractGameTest {
         assertEquals(timeout * 2 - 4, hero.getPerk(Element.POISON_THROWER).getTimer());
     }
 
-
     @Test
     public void shouldThrowPoison_whenPTperk() {
         // given
@@ -1278,7 +1285,6 @@ public class PerksTest extends AbstractGameTest {
                 "#☺       #\n" +
                 "##########\n");
     }
-
 
     // Проверяем что перк BBRI увеличивает длинну взрывной волны зелья
     @Test
@@ -2255,10 +2261,6 @@ public class PerksTest extends AbstractGameTest {
                 "      \n" +
                 "҉ ☺   \n" +
                 "҉҉    \n");
-    }
-
-    private PotionExploder getPotionExploderPerk() {
-        return new PotionExploder(1, PERKS_TIMEOUT);
     }
 
     @Test

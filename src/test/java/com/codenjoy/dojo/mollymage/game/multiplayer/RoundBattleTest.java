@@ -22,7 +22,6 @@ package com.codenjoy.dojo.mollymage.game.multiplayer;
  * #L%
  */
 
-import com.codenjoy.dojo.mollymage.game.multiplayer.AbstractMultiplayerTest;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import org.junit.Test;
@@ -48,6 +47,8 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
                 .integer(ROUNDS_TIME_FOR_WINNER, 2)
                 .integer(TREASURE_BOX_COUNT, 0);
     }
+
+// _____________________________________________________GAME_TEST_______________________________________________________
 
     // во время старта игры, когда не прошло timeBeforeStart тиков,
     // все игроки неактивны (видно их трупики)
@@ -302,6 +303,680 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
                 "     \n" +
                 "♥    \n", game(2));
     }
+
+    // проверил как отрисуется привидение если под ним будет трупик героя:
+    // - от имени наблюдателя я там вижу опасность - привидение, мне не интересны останки игроков
+    // - от имени жертвы я вижу свой трупик, мне пофиг уже что на карте происходит, главное где поставить памятник герою
+    @Test
+    public void shouldDrawGhost_onPlaceOfDeath() {
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+                .integer(ROUNDS_TIME_BEFORE_START, 1)
+                .integer(ROUNDS_TIME, 20);
+        setup();
+
+        Ghost ghost = ghostAt(1, 1);
+
+        dice(dice,
+                0, 0, // первый игрок
+                1, 0, // второй
+                2, 0); // третий
+
+        givenBoard(DEFAULT_COUNT);
+
+        tick();
+
+        // ставлю зелье
+        hero(0).act();
+        tick();
+
+        // и тикать
+        hero(0).up();
+        tick();
+
+        hero(0).up();
+        tick();
+        tick();
+
+        // взрыв
+        tick();
+
+        // идем назад
+        hero(0).down();
+        tick();
+
+        hero(0).down();
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " &   \n" +
+                "☺♣♥  \n", game(0));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " &   \n" +
+                "♥Ѡ♥  \n", game(1));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " &   \n" +
+                "♥♣☺  \n", game(2));
+
+        // попробуем привидением сходить на место падшего героя
+        ghost.move(DOWN.change(ghost));
+
+        // от имени наблюдателя в клеточке с останками я вижу живого привидения
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺&♥  \n", game(0));
+
+        // от имени пострадавшего в клеточке я вижу свои останки, привидение хоть и есть там, я его не вижу
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "♥Ѡ♥  \n", game(1));
+
+        // от имени наблюдателя в клеточке с останками я вижу живое привидение
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "♥&☺  \n", game(2));
+    }
+
+    // проверил как отрисуется привидение если под ним будет не только трупик героя но и зелье:
+    // - от имени наблюдателя я там вижу опасность - привидения, мне не интересны останки игроков
+    // - от имени жертвы я вижу свой трупик, мне пофиг уже что на карте происходит, главное где поставить памятник герою
+    // но если привидения нет, и зелье с останками, то подобно описанному выше:
+    // - я от имени наблюдателя вижу тикающее зелье
+    // - а от имени пострадавшего - свои останки
+    // приоритет прорисовки такой: 1) привидение 2) зелье 3) останки
+    @Test
+    public void shouldDrawGhost_onPlaceOfDeath_withBomb() {
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+                .integer(ROUNDS_TIME_BEFORE_START, 1)
+                .integer(ROUNDS_TIME, 20);
+        setup();
+
+        Ghost ghost = ghostAt(1, 1);
+
+        dice(dice,
+                0, 0, // первый игрок
+                1, 0, // второй
+                2, 0); // третий
+
+        givenBoard(DEFAULT_COUNT);
+
+        tick();
+
+        // ставлю зелье
+        hero(0).act();
+        tick();
+
+        // и тикать
+        hero(0).up();
+        tick();
+
+        hero(0).up();
+        tick();
+        tick();
+
+        // взрыв
+        tick();
+
+        // идем назад
+        hero(0).down();
+        tick();
+
+        hero(0).down();
+        tick();
+
+        hero(0).right();
+        hero(0).act();
+        tick();
+
+        hero(0).left();
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " &   \n" +
+                "☺3♥  \n", game(0));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " &   \n" +
+                "♥Ѡ♥  \n", game(1));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " &   \n" +
+                "♥3☺  \n", game(2));
+
+        // попробуем привидением сходить на место падшего героя
+        ghost.move(DOWN.change(ghost));
+
+        // от имени наблюдателя в клеточке с останками
+        // я вижу живое привидение, он по моему опаснее чем зелье
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺&♥  \n", game(0));
+
+        // от имени пострадавшего в клеточке я вижу свои
+        // останки, привиедние хоть и есть там, я его не вижу
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "♥Ѡ♥  \n", game(1));
+
+        // от имени наблюдателя в клеточке с останками
+        // я вижу живое привидение, он по моему опаснее чем зелье
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "♥&☺  \n", game(2));
+    }
+
+// ____________________________________________________KILL_/_DEATH_____________________________________________________
+
+    // останки другого героя не являются препятствием для прохождения любым героем
+    // так же отрисовка живого и мертвого героя в одной клетке от имени трех типов героев
+    // 1) тот которого вынесли видит свой трупик
+    // 2) тот кто стоит в той же клетке видит себя
+    // 3) сторонний наблюдатель видит живого соперника
+    @Test
+    public void shouldPlaceOfDeath_isNotABarrierForOtherHero() {
+        givenCaseWhenPlaceOfDeathOnMyWay();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♣♥  \n", game(0));
+
+        // а вот и попытка пойти на место трупика
+        hero(0).right();
+        tick();
+
+        // от имени того кто стоит на месте смерти другого героя он видет себя
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺♥  \n", game(0));
+
+        // от имени того кого вынесли он видит свой трупик
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                " Ѡ♥  \n", game(1));
+
+        // от имени стороннего наблюдателя - он видит живую угрозу
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                " ♥☺  \n", game(2));
+    }
+
+    private void givenCaseWhenPlaceOfDeathOnMyWay() {
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+                .integer(ROUNDS_TIME_BEFORE_START, 1)
+                .integer(ROUNDS_TIME, 20);
+        setup();
+
+        dice(dice,
+                0, 0, // первый игрок
+                1, 0, // второй
+                2, 0); // третий
+
+        givenBoard(DEFAULT_COUNT);
+
+        tick();
+
+        events.verifyAllEvents(
+                "listener(0) => [START_ROUND, [Round 1]]\n" +
+                        "listener(1) => [START_ROUND, [Round 1]]\n" +
+                        "listener(2) => [START_ROUND, [Round 1]]\n");
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♥♥  \n", game(0));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "♥☺♥  \n", game(1));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "♥♥☺  \n", game(2));
+
+        // когда я выношу одного игрока
+        hero(0).act();
+        tick();
+
+        hero(0).up();
+        tick();
+
+        hero(0).up();
+        tick();
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺    \n" +
+                "     \n" +
+                "1♥♥  \n", game(0));
+
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺    \n" +
+                "҉    \n" +
+                "҉♣♥  \n", game(0));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥    \n" +
+                "҉    \n" +
+                "҉Ѡ♥  \n", game(1));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥    \n" +
+                "҉    \n" +
+                "҉♣☺  \n", game(2));
+
+        events.verifyAllEvents(
+                "listener(0) => [KILL_OTHER_HERO]\n" +
+                        "listener(1) => [DIED]\n" +
+                        "listener(2) => []\n");
+
+        hero(0).down();
+        tick();
+
+        hero(0).down();
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♣♥  \n", game(0));
+    }
+
+    // я не могу подрывать уже убитого героя
+    // а в отрисовке, на месте трупика я не вижу
+    // взрывной волны, там всегда будет трупик
+    @Test
+    public void shouldCantDestroyHeroPlaceOfDeath() {
+        givenCaseWhenPlaceOfDeathOnMyWay();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♣♥  \n", game(0));
+
+        hero(0).act();
+        tick();
+
+        hero(0).up();
+        tick();
+
+        hero(0).up();
+        tick();
+
+        tick();
+        tick();
+
+        events.verifyAllEvents(
+                "listener(0) => []\n" +
+                        "listener(1) => []\n" +
+                        "listener(2) => []\n");
+
+        // на месте героя которого вынесли я как сторонний наблюдатель
+        // вижу его останки, а не взрывную волну
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺    \n" +
+                "҉    \n" +
+                "҉♣♥  \n", game(0));
+
+        // я как тот которого вынесли, на месте взрыва вижу себя
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥    \n" +
+                "҉    \n" +
+                "҉Ѡ♥  \n", game(1));
+
+        // на месте героя которого вынесли я как сторонний наблюдатель
+        // вижу его останки, а не взрывную волну
+        asrtBrd("     \n" +
+                "     \n" +
+                "♥    \n" +
+                "҉    \n" +
+                "҉♣☺  \n", game(2));
+    }
+
+    // люой герой может зайти на место трупика и там его можно прибить, так что
+    // будет у нас двап трупика в одной клетке
+    @Test
+    public void shouldDestroySecondHero_whenItOnDeathPlace() {
+        shouldPlaceOfDeath_isNotABarrierForOtherHero();
+
+        // вижу себя в клетке где еще трупик
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺♥  \n", game(0));
+
+        // вижу свой трупик, раз меня вынесли
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                " Ѡ♥  \n", game(1));
+
+        // вижу своего соперника в клетке, где трупик
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                " ♥☺  \n", game(2));
+
+        // ставим зелье и убегаем
+        hero(2).act();
+        tick();
+
+        hero(2).right();
+        tick();
+
+        hero(2).up();
+        tick();
+
+        tick();
+        tick();
+
+        // что в результате
+
+        // я вижу свой трупик в клетке, где есть еще один такой же
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "  ҉♥ \n" +
+                " Ѡ҉҉ \n", game(0));
+
+        // я вижу свой трупик в клетке, где есть еще один такой же
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "  ҉♥ \n" +
+                " Ѡ҉҉ \n", game(1));
+
+        // я вижу трупик одного из убитых там героев (их там двое)
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "  ҉☺ \n" +
+                " ♣҉҉ \n", game(2));
+
+        events.verifyAllEvents(
+                "listener(0) => [DIED]\n" +
+                        "listener(1) => []\n" +
+                        "listener(2) => [KILL_OTHER_HERO, WIN_ROUND]\n");
+    }
+
+    // просто любопытно как рванут два героя, вместе с привидение и трупом под зельем
+    @Test
+    public void shouldDestroyGhost_withOtherHeroes_onDeathPlace() {
+        shouldDrawGhost_onPlaceOfDeath_withBomb();
+
+        resetListeners();
+
+        tick();
+        tick();
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ҉   \n" +
+                "Ѡx♣  \n", game(0));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ҉   \n" +
+                "♣Ѡ♣  \n", game(1));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ҉   \n" +
+                "♣xѠ  \n", game(2));
+
+        // победителей нет
+        events.verifyAllEvents(
+                "listener(0) => [DIED, KILL_OTHER_HERO, KILL_GHOST]\n" +
+                        "listener(1) => []\n" +
+                        "listener(2) => [DIED]\n");
+
+        tick();
+
+        events.verifyAllEvents(
+                "listener(0) => []\n" +
+                        "listener(1) => []\n" +
+                        "listener(2) => []\n");
+    }
+
+    // в этом тесте проверяется что взрывная волна не проходит через живого героя,
+    // но его останки не являются препятствием
+    @Test
+    public void shouldPlaceOfDeath_isNotABarrierForBlast() {
+
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+                .integer(ROUNDS_TIME_BEFORE_START, 1)
+                .integer(POTION_POWER, 3) // зелье с большим радиусом, чем обычно
+                .integer(ROUNDS_TIME, 60)
+                .integer(ROUNDS_TIME_FOR_WINNER, 15); // после победы я хочу еще чуть повисеть на уровне
+        setup();
+
+        dice(dice,
+                0, 0, // первый игрок
+                1, 0, // второй
+                2, 0); // третий
+
+        givenBoard(DEFAULT_COUNT);
+
+        tick();
+
+        events.verifyAllEvents(
+                "listener(0) => [START_ROUND, [Round 1]]\n" +
+                        "listener(1) => [START_ROUND, [Round 1]]\n" +
+                        "listener(2) => [START_ROUND, [Round 1]]\n");
+
+
+        // выношу одного игрока мощным снарядом
+        hero(0).act();
+        tick();
+
+        hero(0).up();
+        tick();
+
+        hero(0).right();
+        tick();
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "1♥♥  \n", game(0));
+
+        tick();
+
+        // второй не погибает - его экранирует обычный герой
+        asrtBrd("     \n" +
+                "҉    \n" +
+                "҉    \n" +
+                "҉☺   \n" +
+                "҉♣♥  \n", game(0));
+
+        asrtBrd("     \n" +
+                "҉    \n" +
+                "҉    \n" +
+                "҉♥   \n" +
+                "҉Ѡ♥  \n", game(1));
+
+        asrtBrd("     \n" +
+                "҉    \n" +
+                "҉    \n" +
+                "҉♥   \n" +
+                "҉♣☺  \n", game(2));
+
+        events.verifyAllEvents(
+                "listener(0) => [KILL_OTHER_HERO]\n" +
+                        "listener(1) => [DIED]\n" +
+                        "listener(2) => []\n");
+
+        hero(0).left();
+        tick();
+
+        hero(0).down();
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♣♥  \n", game(0));
+
+        // а теперь пробую то же, но через останки только что
+        // поверженного соперника - они не должны мешать взрывной волне
+        hero(0).act();
+        tick();
+
+        hero(0).up();
+        tick();
+
+        hero(0).right();
+        tick();
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "1♣♥  \n", game(0));
+
+        tick();
+
+        // второй так же падет
+        asrtBrd("     \n" +
+                "҉    \n" +
+                "҉    \n" +
+                "҉☺   \n" +
+                "҉♣♣  \n", game(0));
+
+        asrtBrd("     \n" +
+                "҉    \n" +
+                "҉    \n" +
+                "҉♥   \n" +
+                "҉Ѡ♣  \n", game(1));
+
+        asrtBrd("     \n" +
+                "҉    \n" +
+                "҉    \n" +
+                "҉♥   \n" +
+                "҉♣Ѡ  \n", game(2));
+
+        events.verifyAllEvents(
+                "listener(0) => [KILL_OTHER_HERO, WIN_ROUND]\n" +
+                        "listener(1) => []\n" +
+                        "listener(2) => [DIED]\n");
+
+        // ну и напоследок вернемся на место
+        hero(0).left();
+        tick();
+
+        hero(0).down();
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♣♣  \n", game(0));
+
+        // а теперь посмотрим как взорвется зелье на двух трупиках
+        // они должны быть полностью прозрачна для взрывной волны
+        hero(0).act();
+        tick();
+
+        hero(0).up();
+        tick();
+
+        hero(0).right();
+        tick();
+        tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "1♣♣  \n", game(0));
+
+        tick();
+
+        // второй так же падет
+        asrtBrd("     \n" +
+                "҉    \n" +
+                "҉    \n" +
+                "҉☺   \n" +
+                "҉♣♣҉ \n", game(0));
+
+        asrtBrd("     \n" +
+                "҉    \n" +
+                "҉    \n" +
+                "҉♥   \n" +
+                "҉Ѡ♣҉ \n", game(1));
+
+        asrtBrd("     \n" +
+                "҉    \n" +
+                "҉    \n" +
+                "҉♥   \n" +
+                "҉♣Ѡ҉ \n", game(2));
+
+        events.verifyAllEvents(
+                "listener(0) => []\n" +
+                        "listener(1) => []\n" +
+                        "listener(2) => []\n");
+    }
+
+// _______________________________________________________SCORES________________________________________________________
 
     // если один игрок вынесет обоих, то должен получить за это очки
     @Test
@@ -1123,263 +1798,6 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
                 "listener(5) => []\n");
     }
 
-    // останки другого героя не являются препятствием для прохождения любым героем
-    // так же отрисовка живого и мертвого героя в одной клетке от имени трех типов героев
-    // 1) тот которого вынесли видит свой трупик
-    // 2) тот кто стоит в той же клетке видит себя
-    // 3) сторонний наблюдатель видит живого соперника
-    @Test
-    public void shouldPlaceOfDeath_isNotABarrierForOtherHero() {
-        givenCaseWhenPlaceOfDeathOnMyWay();
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "☺♣♥  \n", game(0));
-
-        // а вот и попытка пойти на место трупика
-        hero(0).right();
-        tick();
-
-        // от имени того кто стоит на месте смерти другого героя он видет себя
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                " ☺♥  \n", game(0));
-
-        // от имени того кого вынесли он видит свой трупик
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                " Ѡ♥  \n", game(1));
-
-        // от имени стороннего наблюдателя - он видит живую угрозу
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                " ♥☺  \n", game(2));
-    }
-
-    private void givenCaseWhenPlaceOfDeathOnMyWay() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
-                .integer(ROUNDS_TIME_BEFORE_START, 1)
-                .integer(ROUNDS_TIME, 20);
-        setup();
-
-        dice(dice,
-                0, 0, // первый игрок
-                1, 0, // второй
-                2, 0); // третий
-
-        givenBoard(DEFAULT_COUNT);
-
-        tick();
-
-        events.verifyAllEvents(
-                "listener(0) => [START_ROUND, [Round 1]]\n" +
-                "listener(1) => [START_ROUND, [Round 1]]\n" +
-                "listener(2) => [START_ROUND, [Round 1]]\n");
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "☺♥♥  \n", game(0));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "♥☺♥  \n", game(1));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "♥♥☺  \n", game(2));
-
-        // когда я выношу одного игрока
-        hero(0).act();
-        tick();
-
-        hero(0).up();
-        tick();
-
-        hero(0).up();
-        tick();
-        tick();
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "☺    \n" +
-                "     \n" +
-                "1♥♥  \n", game(0));
-
-        tick();
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "☺    \n" +
-                "҉    \n" +
-                "҉♣♥  \n", game(0));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "♥    \n" +
-                "҉    \n" +
-                "҉Ѡ♥  \n", game(1));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "♥    \n" +
-                "҉    \n" +
-                "҉♣☺  \n", game(2));
-
-        events.verifyAllEvents(
-                "listener(0) => [KILL_OTHER_HERO]\n" +
-                "listener(1) => [DIED]\n" +
-                "listener(2) => []\n");
-
-        hero(0).down();
-        tick();
-
-        hero(0).down();
-        tick();
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "☺♣♥  \n", game(0));
-    }
-
-    // я не могу подрывать уже убитого героя
-    // а в отрисовке, на месте трупика я не вижу
-    // взрывной волны, там всегда будет трупик
-    @Test
-    public void shouldCantDestroyHeroPlaceOfDeath() {
-        givenCaseWhenPlaceOfDeathOnMyWay();
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "☺♣♥  \n", game(0));
-
-        hero(0).act();
-        tick();
-
-        hero(0).up();
-        tick();
-
-        hero(0).up();
-        tick();
-
-        tick();
-        tick();
-
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n");
-
-        // на месте героя которого вынесли я как сторонний наблюдатель
-        // вижу его останки, а не взрывную волну
-        asrtBrd("     \n" +
-                "     \n" +
-                "☺    \n" +
-                "҉    \n" +
-                "҉♣♥  \n", game(0));
-
-        // я как тот которого вынесли, на месте взрыва вижу себя
-        asrtBrd("     \n" +
-                "     \n" +
-                "♥    \n" +
-                "҉    \n" +
-                "҉Ѡ♥  \n", game(1));
-
-        // на месте героя которого вынесли я как сторонний наблюдатель
-        // вижу его останки, а не взрывную волну
-        asrtBrd("     \n" +
-                "     \n" +
-                "♥    \n" +
-                "҉    \n" +
-                "҉♣☺  \n", game(2));
-    }
-
-    // люой герой может зайти на место трупика и там его можно прибить, так что
-    // будет у нас двап трупика в одной клетке
-    @Test
-    public void shouldDestroySecondHero_whenItOnDeathPlace() {
-        shouldPlaceOfDeath_isNotABarrierForOtherHero();
-
-        // вижу себя в клетке где еще трупик
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                " ☺♥  \n", game(0));
-
-        // вижу свой трупик, раз меня вынесли
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                " Ѡ♥  \n", game(1));
-
-        // вижу своего соперника в клетке, где трупик
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                " ♥☺  \n", game(2));
-
-        // ставим зелье и убегаем
-        hero(2).act();
-        tick();
-
-        hero(2).right();
-        tick();
-
-        hero(2).up();
-        tick();
-
-        tick();
-        tick();
-
-        // что в результате
-
-        // я вижу свой трупик в клетке, где есть еще один такой же
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "  ҉♥ \n" +
-                " Ѡ҉҉ \n", game(0));
-
-        // я вижу свой трупик в клетке, где есть еще один такой же
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "  ҉♥ \n" +
-                " Ѡ҉҉ \n", game(1));
-
-        // я вижу трупик одного из убитых там героев (их там двое)
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "  ҉☺ \n" +
-                " ♣҉҉ \n", game(2));
-
-        events.verifyAllEvents(
-                "listener(0) => [DIED]\n" +
-                "listener(1) => []\n" +
-                "listener(2) => [KILL_OTHER_HERO, WIN_ROUND]\n");
-    }
-
     // проверяем, что при clearScore обнуляется:
     // - таймеры раунда
     // - очки заработанные в этом раунде
@@ -1569,419 +1987,6 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
         assertEquals(true, hero(2).isActiveAndAlive());
     }
 
-    // проверил как отрисуется привидение если под ним будет трупик героя:
-    // - от имени наблюдателя я там вижу опасность - привидение, мне не интересны останки игроков
-    // - от имени жертвы я вижу свой трупик, мне пофиг уже что на карте происходит, главное где поставить памятник герою
-    @Test
-    public void shouldDrawGhost_onPlaceOfDeath() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
-                .integer(ROUNDS_TIME_BEFORE_START, 1)
-                .integer(ROUNDS_TIME, 20);
-        setup();
-
-        Ghost ghost = ghostAt(1, 1);
-
-        dice(dice,
-                0, 0, // первый игрок
-                1, 0, // второй
-                2, 0); // третий
-
-        givenBoard(DEFAULT_COUNT);
-
-        tick();
-
-        // ставлю зелье
-        hero(0).act();
-        tick();
-
-        // и тикать
-        hero(0).up();
-        tick();
-
-        hero(0).up();
-        tick();
-        tick();
-
-        // взрыв
-        tick();
-
-        // идем назад
-        hero(0).down();
-        tick();
-
-        hero(0).down();
-        tick();
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " &   \n" +
-                "☺♣♥  \n", game(0));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " &   \n" +
-                "♥Ѡ♥  \n", game(1));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " &   \n" +
-                "♥♣☺  \n", game(2));
-
-        // попробуем привидением сходить на место падшего героя
-        ghost.move(DOWN.change(ghost));
-
-        // от имени наблюдателя в клеточке с останками я вижу живого привидения
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "☺&♥  \n", game(0));
-
-        // от имени пострадавшего в клеточке я вижу свои останки, привидение хоть и есть там, я его не вижу
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "♥Ѡ♥  \n", game(1));
-
-        // от имени наблюдателя в клеточке с останками я вижу живое привидение
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "♥&☺  \n", game(2));
-    }
-
-    // проверил как отрисуется привидение если под ним будет не только трупик героя но и зелье:
-    // - от имени наблюдателя я там вижу опасность - привидения, мне не интересны останки игроков
-    // - от имени жертвы я вижу свой трупик, мне пофиг уже что на карте происходит, главное где поставить памятник герою
-    // но если привидения нет, и зелье с останками, то подобно описанному выше:
-    // - я от имени наблюдателя вижу тикающее зелье
-    // - а от имени пострадавшего - свои останки
-    // приоритет прорисовки такой: 1) привидение 2) зелье 3) останки
-    @Test
-    public void shouldDrawGhost_onPlaceOfDeath_withBomb() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
-                .integer(ROUNDS_TIME_BEFORE_START, 1)
-                .integer(ROUNDS_TIME, 20);
-        setup();
-
-        Ghost ghost = ghostAt(1, 1);
-
-        dice(dice,
-                0, 0, // первый игрок
-                1, 0, // второй
-                2, 0); // третий
-
-        givenBoard(DEFAULT_COUNT);
-
-        tick();
-
-        // ставлю зелье
-        hero(0).act();
-        tick();
-
-        // и тикать
-        hero(0).up();
-        tick();
-
-        hero(0).up();
-        tick();
-        tick();
-
-        // взрыв
-        tick();
-
-        // идем назад
-        hero(0).down();
-        tick();
-
-        hero(0).down();
-        tick();
-
-        hero(0).right();
-        hero(0).act();
-        tick();
-
-        hero(0).left();
-        tick();
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " &   \n" +
-                "☺3♥  \n", game(0));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " &   \n" +
-                "♥Ѡ♥  \n", game(1));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " &   \n" +
-                "♥3☺  \n", game(2));
-
-        // попробуем привидением сходить на место падшего героя
-        ghost.move(DOWN.change(ghost));
-
-        // от имени наблюдателя в клеточке с останками
-        // я вижу живое привидение, он по моему опаснее чем зелье
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "☺&♥  \n", game(0));
-
-        // от имени пострадавшего в клеточке я вижу свои
-        // останки, привиедние хоть и есть там, я его не вижу
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "♥Ѡ♥  \n", game(1));
-
-        // от имени наблюдателя в клеточке с останками
-        // я вижу живое привидение, он по моему опаснее чем зелье
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "♥&☺  \n", game(2));
-    }
-
-    // просто любопытно как рванут два героя, вместе с привидение и трупом под зельем
-    @Test
-    public void shouldDestroyGhost_withOtherHeroes_onDeathPlace() {
-        shouldDrawGhost_onPlaceOfDeath_withBomb();
-
-        resetListeners();
-
-        tick();
-        tick();
-        tick();
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ҉   \n" +
-                "Ѡx♣  \n", game(0));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ҉   \n" +
-                "♣Ѡ♣  \n", game(1));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ҉   \n" +
-                "♣xѠ  \n", game(2));
-
-        // победителей нет
-        events.verifyAllEvents(
-                "listener(0) => [DIED, KILL_OTHER_HERO, KILL_GHOST]\n" +
-                "listener(1) => []\n" +
-                "listener(2) => [DIED]\n");
-
-        tick();
-
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n");
-    }
-
-    // в этом тесте проверяется что взрывная волна не проходит через живого героя,
-    // но его останки не являются препятствием
-    @Test
-    public void shouldPlaceOfDeath_isNotABarrierForBlast() {
-
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
-                .integer(ROUNDS_TIME_BEFORE_START, 1)
-                .integer(POTION_POWER, 3) // зелье с большим радиусом, чем обычно
-                .integer(ROUNDS_TIME, 60)
-                .integer(ROUNDS_TIME_FOR_WINNER, 15); // после победы я хочу еще чуть повисеть на уровне
-        setup();
-
-        dice(dice,
-                0, 0, // первый игрок
-                1, 0, // второй
-                2, 0); // третий
-
-        givenBoard(DEFAULT_COUNT);
-
-        tick();
-
-        events.verifyAllEvents(
-                "listener(0) => [START_ROUND, [Round 1]]\n" +
-                "listener(1) => [START_ROUND, [Round 1]]\n" +
-                "listener(2) => [START_ROUND, [Round 1]]\n");
-
-
-        // выношу одного игрока мощным снарядом
-        hero(0).act();
-        tick();
-
-        hero(0).up();
-        tick();
-
-        hero(0).right();
-        tick();
-        tick();
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ☺   \n" +
-                "1♥♥  \n", game(0));
-
-        tick();
-
-        // второй не погибает - его экранирует обычный герой
-        asrtBrd("     \n" +
-                "҉    \n" +
-                "҉    \n" +
-                "҉☺   \n" +
-                "҉♣♥  \n", game(0));
-
-        asrtBrd("     \n" +
-                "҉    \n" +
-                "҉    \n" +
-                "҉♥   \n" +
-                "҉Ѡ♥  \n", game(1));
-
-        asrtBrd("     \n" +
-                "҉    \n" +
-                "҉    \n" +
-                "҉♥   \n" +
-                "҉♣☺  \n", game(2));
-
-        events.verifyAllEvents(
-                "listener(0) => [KILL_OTHER_HERO]\n" +
-                "listener(1) => [DIED]\n" +
-                "listener(2) => []\n");
-
-        hero(0).left();
-        tick();
-
-        hero(0).down();
-        tick();
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "☺♣♥  \n", game(0));
-
-        // а теперь пробую то же, но через останки только что
-        // поверженного соперника - они не должны мешать взрывной волне
-        hero(0).act();
-        tick();
-
-        hero(0).up();
-        tick();
-
-        hero(0).right();
-        tick();
-        tick();
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ☺   \n" +
-                "1♣♥  \n", game(0));
-
-        tick();
-
-        // второй так же падет
-        asrtBrd("     \n" +
-                "҉    \n" +
-                "҉    \n" +
-                "҉☺   \n" +
-                "҉♣♣  \n", game(0));
-
-        asrtBrd("     \n" +
-                "҉    \n" +
-                "҉    \n" +
-                "҉♥   \n" +
-                "҉Ѡ♣  \n", game(1));
-
-        asrtBrd("     \n" +
-                "҉    \n" +
-                "҉    \n" +
-                "҉♥   \n" +
-                "҉♣Ѡ  \n", game(2));
-
-        events.verifyAllEvents(
-                "listener(0) => [KILL_OTHER_HERO, WIN_ROUND]\n" +
-                "listener(1) => []\n" +
-                "listener(2) => [DIED]\n");
-
-        // ну и напоследок вернемся на место
-        hero(0).left();
-        tick();
-
-        hero(0).down();
-        tick();
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "☺♣♣  \n", game(0));
-
-        // а теперь посмотрим как взорвется зелье на двух трупиках
-        // они должны быть полностью прозрачна для взрывной волны
-        hero(0).act();
-        tick();
-
-        hero(0).up();
-        tick();
-
-        hero(0).right();
-        tick();
-        tick();
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ☺   \n" +
-                "1♣♣  \n", game(0));
-
-        tick();
-
-        // второй так же падет
-        asrtBrd("     \n" +
-                "҉    \n" +
-                "҉    \n" +
-                "҉☺   \n" +
-                "҉♣♣҉ \n", game(0));
-
-        asrtBrd("     \n" +
-                "҉    \n" +
-                "҉    \n" +
-                "҉♥   \n" +
-                "҉Ѡ♣҉ \n", game(1));
-
-        asrtBrd("     \n" +
-                "҉    \n" +
-                "҉    \n" +
-                "҉♥   \n" +
-                "҉♣Ѡ҉ \n", game(2));
-
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n");
-    }
-
     // в этом тесте я проверяю, что после победы героя на уровне
     // в случае, если timeForWinner > 1 то герой повисит некоторое время на поле сам
     // и в конечном счете начнется новый раунд
@@ -2024,4 +2029,6 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
                         "listener(1) => []\n" +
                         "listener(2) => []\n");
     }
+
+// _____________________________________________________________________________________________________________________
 }

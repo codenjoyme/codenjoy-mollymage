@@ -64,7 +64,6 @@ public class MollyMage extends RoundField<Player> implements Field {
     private TreasureBoxes boxes;
     private Ghosts ghosts;
 
-    private List<Potion> potions = new LinkedList<>();
     private List<Poison> toxins = new LinkedList<>();
     private List<Blast> blasts = new LinkedList<>();
     private List<Point> destroyedObjects = new LinkedList<>();
@@ -179,7 +178,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void disablePotionRemote() {
-        for (Potion potion : potions) {
+        for (Potion potion : potions()) {
             Hero owner = potion.getOwner();
             if (!owner.isActiveAndAlive()) {
                 if (potion.isOnRemote()) {
@@ -244,7 +243,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void tactAllPotions() {
-        for (Potion potion : potions) {
+        for (Potion potion : potions()) {
             potion.tick();
         }
 
@@ -253,7 +252,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
             if (settings.bool(BIG_BADABOOM)) {
                 // если зелье зацепила взрывная волна и его тоже подрываем
-                for (Potion potion : potions) {
+                for (Potion potion : potions()) {
                     if (blasts.contains(potion)) {
                         potion.boom();
                     }
@@ -277,7 +276,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     private void makeBlastsFromDestoryedPotions() {
         // все взрываем, чтобы было пекло
         for (Potion potion : destroyedPotions) {
-            potions.remove(potion);
+            potions().remove(potion);
 
             List<Blast> blast = makeBlast(potion);
             blasts.addAll(blast);
@@ -295,13 +294,13 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
-    public List<Potion> potions() {
-        return potions;
+    public PointField.Accessor<Potion> potions() {
+        return field.of(Potion.class);
     }
 
     @Override
     public List<Potion> potions(Hero hero) {
-        return potions.stream()
+        return potions().all().stream()
                 .filter(potion -> potion.itsMine(hero))
                 .collect(toList());
     }
@@ -319,7 +318,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     @Override
     public void drop(Potion potion) {
         if (!existAtPlace(potion.getX(), potion.getY())) {
-            potions.add(potion);
+            potions().add(potion);
         }
     }
 
@@ -542,7 +541,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private boolean existAtPlace(int x, int y) {
-        for (Potion potion : potions) {
+        for (Potion potion : potions()) {
             if (potion.getX() == x && potion.getY() == y) {
                 return true;
             }
@@ -567,7 +566,7 @@ public class MollyMage extends RoundField<Player> implements Field {
             }
         }
 
-        if (potions.contains(pt)) {
+        if (potions().contains(pt)) {
             return true;
         }
 
@@ -638,7 +637,7 @@ public class MollyMage extends RoundField<Player> implements Field {
                 elements.addAll(MollyMage.this.boxes.all());
                 elements.addAll(MollyMage.this.ghosts.all());
                 elements.addAll(MollyMage.this.walls().all());
-                elements.addAll(MollyMage.this.potions());
+                elements.addAll(MollyMage.this.potions().all());
                 elements.addAll(MollyMage.this.blasts());
                 elements.addAll(MollyMage.this.perks());
 
@@ -669,7 +668,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     @Override
     public void explodeAllPotions(Hero hero) {
-        for (Potion potion : potions) {
+        for (Potion potion : potions()) {
             potion.intercept(hero);
             potion.activateRemote(hero);
         }

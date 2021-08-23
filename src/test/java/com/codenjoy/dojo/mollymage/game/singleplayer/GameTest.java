@@ -1483,26 +1483,26 @@ public class GameTest extends AbstractGameTest {
         hero.right();
         field.tick();
 
-        List<Potion> potions1 = field.potions();
-        List<Potion> potions2 = field.potions();
-        List<Potion> potions3 = field.potions();
-        assertSame(potions1, potions2);
-        assertSame(potions2, potions3);
-        assertSame(potions3, potions1);
+        List<Potion> potions1 = field.potions().all();
+        List<Potion> potions2 = field.potions().all();
+        List<Potion> potions3 = field.potions().all();
+        assertEquals(potions1.toString(), potions2.toString());
+        assertEquals(potions2.toString(), potions3.toString());
+        assertEquals(potions3.toString(), potions1.toString());
 
         Potion potion11 = potions1.get(0);
         Potion potion12 = potions2.get(0);
         Potion potion13 = potions3.get(0);
-        assertSame(potion11, potion12);
-        assertSame(potion12, potion13);
-        assertSame(potion13, potion11);
+        assertEquals(potion11.toString(), potion12.toString());
+        assertEquals(potion12.toString(), potion13.toString());
+        assertEquals(potion13.toString(), potion11.toString());
 
         Potion potion21 = potions1.get(1);
         Potion potion22 = potions2.get(1);
         Potion potion23 = potions3.get(1);
-        assertSame(potion21, potion22);
-        assertSame(potion22, potion23);
-        assertSame(potion23, potion21);
+        assertEquals(potion21.toString(), potion22.toString());
+        assertEquals(potion22.toString(), potion23.toString());
+        assertEquals(potion23.toString(), potion21.toString());
 
         field.tick();
         field.tick();
@@ -1539,7 +1539,7 @@ public class GameTest extends AbstractGameTest {
         hero.right();
         field.tick();
 
-        List<Potion> potions1 = field.potions();
+        List<Potion> potions1 = field.potions().all();
         assertEquals(1, potions1.size());
 
         field.tick();
@@ -1547,10 +1547,10 @@ public class GameTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        List<Potion> potions2 = field.potions();
+        List<Potion> potions2 = field.potions().all();
         assertEquals(0, potions2.size());
-        assertEquals(0, potions1.size());
-        assertSame(potions1, potions2);
+        assertEquals(1, potions1.size());
+        assertNotEquals(potions1.toString(), potions2.toString());
     }
 
     @Test

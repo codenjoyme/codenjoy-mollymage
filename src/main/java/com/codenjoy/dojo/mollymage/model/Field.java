@@ -49,7 +49,7 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     List<Hero> heroes(boolean activeAliveOnly);
 
-    List<Potion> potions();
+    PointField.Accessor<Potion> potions();
 
     List<Potion> potions(Hero hero);
 

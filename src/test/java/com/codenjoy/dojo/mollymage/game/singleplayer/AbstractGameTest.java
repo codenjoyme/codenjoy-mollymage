@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.model;
+package com.codenjoy.dojo.mollymage.game.singleplayer;
 
 /*-
  * #%L
@@ -23,13 +23,16 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 import com.codenjoy.dojo.mollymage.TestGameSettings;
-import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.Hero;
+import com.codenjoy.dojo.mollymage.model.MollyMage;
+import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
+import com.codenjoy.dojo.mollymage.model.levels.LevelImpl;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;
@@ -42,7 +45,6 @@ import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
@@ -51,10 +53,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
 
-public class AbstractGameTest {
+public abstract class AbstractGameTest {
 
-    public int SIZE = 5;
-    public int SIZE_3 = 3;
     protected Game game;
     protected Hero hero;
     protected GameSettings settings;
@@ -70,7 +70,6 @@ public class AbstractGameTest {
     @Before
     public void setUp() {
         dice = mock(Dice.class);
-        level = mock(Level.class);
         settings = spy(new TestGameSettings());
         printer = new PrinterFactoryImpl();
         events = new EventsListenersAssert(() -> Arrays.asList(listener), Events.class);
@@ -79,25 +78,37 @@ public class AbstractGameTest {
 
         boxesCount(0);
         ghostsCount(0);
-
-        givenBoard(SIZE, 0, 0);
     }
 
-    protected void givenBoard(int size, int x, int y) {
-        dice(dice, x, y);
-        when(level.size()).thenReturn(size);
-        field = new MollyMage(level, dice, settings);
+    protected void givenBr(String map) {
+        level = new LevelImpl(map);
         listener = mock(EventListener.class);
         player = new Player(listener, settings);
         game = new Single(player, printer);
+
+        Point heroPosition = level.getHeroPosition();
+        dice(dice, heroPosition.getX(), heroPosition.getY());
+
+        field = new MollyMage(level, dice, settings);
+        List<TreasureBox> boxes = level.getBoxes();
+        boxesCount(boxes.size());
+        field.boxes().addAll(boxes);
+
         game.on(field);
         game.newGame();
-        hero = (Hero)game.getJoystick();
+        hero = (Hero) game.getJoystick();
     }
 
     protected void gotoMaxUp() {
-        for (int y = 0; y <= SIZE + 1; y++) {
+        for (int y = 0; y <= level.size() + 1; y++) {
             hero.up();
+            field.tick();
+        }
+    }
+
+    protected void gotoMaxRight() {
+        for (int x = 0; x <= level.size() + 1; x++) {
+            hero.right();
             field.tick();
         }
     }
@@ -123,7 +134,7 @@ public class AbstractGameTest {
     }
 
     protected void gotoBoardCenter() {
-        for (int y = 0; y < SIZE / 2; y++) {
+        for (int y = 0; y < level.size() / 2; y++) {
             hero.up();
             field.tick();
             hero.right();
@@ -136,72 +147,11 @@ public class AbstractGameTest {
                 field.reader(), player).print());
     }
 
-
-    protected void givenBoardWithWalls() {
-        givenBoardWithWalls(SIZE);
-    }
-
-    protected void givenBoardWithWalls(int size) {
-        generateWalls(size);
-        givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
-    }
-
-    public static List<Wall> generate(int size) {
-        List<Wall> result = new LinkedList<>();
-        for (int x = 0; x < size; x++) {
-            result.add(new Wall(x, 0));
-            result.add(new Wall(x, size - 1));
-        }
-
-        final int D = 1;
-        for (int y = D; y < size - D; y++) {
-            result.add(new Wall(0, y));
-            result.add(new Wall(size - 1, y));
-        }
-
-        for (int x = 2; x <= size - 2; x++) {
-            for (int y = 2; y <= size - 2; y++) {
-                if (y % 2 != 0 || x % 2 != 0) {
-                    continue;
-                }
-                result.add(new Wall(x, y));
-            }
-        }
-        return result;
-    }
-
-    protected void generateWalls(int size) {
-        when(level.getWalls()).thenReturn(generate(size));
-    }
-
-    protected void givenBoardWithBoxes() {
-        givenBoardWithBoxes(SIZE);
-    }
-
-    protected void givenBoardWithBoxes(int size) {
-        ghostsCount(0);
-        givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
-
-        List<Wall> walls = generate(size);
-        boxesCount(walls.size());
-        walls.forEach(pt -> boxAt(pt.getX(), pt.getY()));
-    }
-
-    protected void givenBoardWithOriginalWalls() {
-        givenBoardWithOriginalWalls(SIZE);
-    }
-
-    protected void givenBoardWithOriginalWalls(int size) {
-        generateWalls(size);
-        givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
-    }
-
     protected void potionsPower(int power) {
         settings.integer(POTION_POWER, power);
     }
 
     protected void assertPotionPower(int power, String expected) {
-        givenBoardWithOriginalWalls(9);
         potionsPower(power);
 
         hero.act();
@@ -228,18 +178,6 @@ public class AbstractGameTest {
         for (int value : values) {
             when = when.thenReturn(value);
         }
-    }
-
-    protected void givenBoardWithGhost(int size) {
-        SIZE = size;
-        generateWalls(size);
-        boxesCount(0);
-        ghostsCount(1);
-
-        givenBoard(size, 1, 1); // hero в левом нижнем углу с учетом стен
-
-        ghostAt(size - 2, size - 2);       // координаты привидения
-        dice(dice, 1, Direction.UP.value());  // привидение будет упираться в стенку и стоять на месте
     }
 
     protected void boxAt(int x, int y) {

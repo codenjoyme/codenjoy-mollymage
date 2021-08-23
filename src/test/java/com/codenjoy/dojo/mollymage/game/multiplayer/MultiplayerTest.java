@@ -111,7 +111,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     }
 
     @Test
-    public void shouldPrintOtherBombHero() {
+    public void shouldPrintOtherPotionHero() {
         dice(dice,
                 0, 0,
                 1, 0);
@@ -135,7 +135,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     @Test
     public void shouldNewGamesWhenKillAll() {
-        shouldBombKillAllHero();
+        shouldPotionKillAllHero();
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -243,7 +243,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
 
     // герои не могут ходить по зелью ни по своему ни по чужому
     @Test
-    public void shouldHeroCantGoToBombFromAnotherHero() {
+    public void shouldHeroCantGoToPotionFromAnotherHero() {
         dice(dice,
                 0, 0,
                 1, 0);
@@ -281,7 +281,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     // на поле можно чтобы каждый поставил то количество
     // зелья которое ему позволено и не более того
     @Test
-    public void shouldTwoBombsOnBoard() {
+    public void shouldTwoPotionsOnBoard() {
         settings.integer(POTIONS_COUNT, 1);
 
         dice(dice,
@@ -320,7 +320,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     }
 
     @Test
-    public void shouldTwoBombsOnBoard_withEnemy() {
+    public void shouldTwoPotionsOnBoard_withEnemy() {
         settings.integer(POTIONS_COUNT, 1);
 
         dice(dice,
@@ -361,7 +361,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     }
 
     @Test
-    public void shouldFourBombsOnBoard() {
+    public void shouldFourPotionsOnBoard() {
         settings.integer(POTIONS_COUNT, 2);
 
         dice(dice,
@@ -413,7 +413,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     }
 
     @Test
-    public void shouldFourBombsOnBoard_checkTwoBombsPerHero() {
+    public void shouldFourPotionsOnBoard_checkTwoPotionsPerHero() {
         settings.integer(POTIONS_COUNT, 2);
 
         dice(dice,
@@ -602,8 +602,8 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     }
 
     @Test
-    public void shouldBombKillAllHero() {
-        shouldHeroCantGoToBombFromAnotherHero();
+    public void shouldPotionKillAllHero() {
+        shouldHeroCantGoToPotionFromAnotherHero();
 
         tick();
 

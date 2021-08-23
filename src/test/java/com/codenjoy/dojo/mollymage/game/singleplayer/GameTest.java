@@ -1569,26 +1569,26 @@ public class GameTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        List<Blast> blasts1 = field.blasts();
-        List<Blast> blasts2 = field.blasts();
-        List<Blast> blasts3 = field.blasts();
-        assertSame(blasts1, blasts2);
-        assertSame(blasts2, blasts3);
-        assertSame(blasts3, blasts1);
+        List<Blast> blasts1 = field.blasts().all();
+        List<Blast> blasts2 = field.blasts().all();
+        List<Blast> blasts3 = field.blasts().all();
+        assertEquals(blasts1.toString(), blasts2.toString());
+        assertEquals(blasts2.toString(), blasts3.toString());
+        assertEquals(blasts3.toString(), blasts1.toString());
 
         Point blast11 = blasts1.get(0);
         Point blast12 = blasts2.get(0);
         Point blast13 = blasts3.get(0);
-        assertSame(blast11, blast12);
-        assertSame(blast12, blast13);
-        assertSame(blast13, blast11);
+        assertEquals(blast11.toString(), blast12.toString());
+        assertEquals(blast12.toString(), blast13.toString());
+        assertEquals(blast13.toString(), blast11.toString());
 
         Point blast21 = blasts1.get(1);
         Point blast22 = blasts2.get(1);
         Point blast23 = blasts3.get(1);
-        assertSame(blast21, blast22);
-        assertSame(blast22, blast23);
-        assertSame(blast23, blast21);
+        assertEquals(blast21.toString(), blast22.toString());
+        assertEquals(blast22.toString(), blast23.toString());
+        assertEquals(blast23.toString(), blast21.toString());
     }
 
     // взрывная волна не проходит через непробиваемую стенку

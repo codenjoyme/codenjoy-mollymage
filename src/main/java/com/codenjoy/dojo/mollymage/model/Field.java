@@ -55,8 +55,6 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     void remove(Player player);
 
-    List<Blast> blasts();
-
     void drop(Potion potion);
 
     void remove(Potion potion);
@@ -88,4 +86,7 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
     PointField.Accessor<Wall> walls();
 
     PointField.Accessor<Potion> potions();
+
+    PointField.Accessor<Blast> blasts();
+
 }

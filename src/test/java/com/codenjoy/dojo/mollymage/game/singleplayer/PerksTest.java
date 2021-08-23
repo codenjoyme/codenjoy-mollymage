@@ -570,7 +570,7 @@ public class PerksTest extends AbstractGameTest {
                 "# ####\n");
 
         // пошел сигнал об этом
-        events.verifyAllEvents("[KILL_GHOST, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_GHOST, KILL_TREASURE_BOX]");
 
         // when
         boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
@@ -2070,7 +2070,7 @@ public class PerksTest extends AbstractGameTest {
                 "H    \n" +
                 "҉҉҉Ѡ \n");
 
-        events.verifyAllEvents("[DIED, KILL_GHOST, KILL_TREASURE_BOX]");
+        events.verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_GHOST]");
 
         // только сейчас перк забрался
         assertEquals("[]",

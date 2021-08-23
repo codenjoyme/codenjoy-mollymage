@@ -1744,8 +1744,8 @@
 59: 2:
 59: 2:Scores: 305
 59: 2:Answer: ACT
-59: 1:Fire Event: KILL_TREASURE_BOX
 59: 1:Fire Event: KILL_GHOST
+59: 1:Fire Event: KILL_TREASURE_BOX
 59: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 60: 1:☼☼☼☼☼☼☼☼☼☼☼
@@ -4099,8 +4099,8 @@
 138: 2:
 138: 2:Scores: 365
 138: 2:Answer: ACT
-138: 1:Fire Event: KILL_TREASURE_BOX
 138: 1:Fire Event: KILL_GHOST
+138: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 139: 1:☼☼☼☼☼☼☼☼☼☼☼
 139: 1:☼      ♠# ☼
@@ -6326,8 +6326,8 @@
 213: 2:Scores: 150
 213: 2:Answer: STOP
 213: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-213: 1:Fire Event: KILL_GHOST
 213: 1:Fire Event: KILL_TREASURE_BOX
+213: 1:Fire Event: KILL_GHOST
 ------------------------------------------
 214: 1:☼☼☼☼☼☼☼☼☼☼☼
 214: 1:☼r   H҉x҉҉☼
@@ -10436,8 +10436,8 @@
 352: 2:
 352: 2:Scores: 100
 352: 2:Answer: ACT
-352: 2:Fire Event: DIED
 352: 1:Fire Event: DIED
+352: 2:Fire Event: DIED
 352: 2:Fire Event: KILL_OTHER_HERO
 352: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
@@ -14658,8 +14658,8 @@
 493: 2:Answer: ACT
 493: 2:Fire Event: DROP_PERK
 493: 2:Fire Event: KILL_TREASURE_BOX
-493: 1:Fire Event: KILL_TREASURE_BOX
 493: 1:Fire Event: KILL_GHOST
+493: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 494: 1:☼☼☼☼☼☼☼☼☼☼☼
 494: 1:☼#   H####☼
@@ -15407,8 +15407,8 @@
 518: 2:
 518: 2:Scores: 880
 518: 2:Answer: RIGHT
-518: 1:Fire Event: KILL_TREASURE_BOX
 518: 1:Fire Event: KILL_GHOST
+518: 1:Fire Event: KILL_TREASURE_BOX
 518: 1:Fire Event: KILL_GHOST
 ------------------------------------------
 519: 1:☼☼☼☼☼☼☼☼☼☼☼
@@ -18715,8 +18715,8 @@
 629: 2:
 629: 2:Scores: 1040
 629: 2:Answer: ACT
-629: 2:Fire Event: DIED
 629: 1:Fire Event: DIED
+629: 2:Fire Event: DIED
 629: 2:Fire Event: KILL_OTHER_HERO
 629: 2:Fire Event: DROP_PERK
 629: 2:Fire Event: KILL_TREASURE_BOX
@@ -20536,8 +20536,8 @@
 690: 2:Scores: 1000
 690: 2:Answer: DOWN
 690: 1:Fire Event: DIED
-690: 1:Fire Event: KILL_TREASURE_BOX
 690: 1:Fire Event: KILL_GHOST
+690: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 691: 1:☼☼☼☼☼☼☼☼☼☼☼
 691: 1:☼    i# # ☼
@@ -21649,8 +21649,8 @@
 727: 2:
 727: 2:Scores: 800
 727: 2:Answer: DOWN
-727: 1:Fire Event: KILL_TREASURE_BOX
 727: 1:Fire Event: KILL_GHOST
+727: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 728: 1:☼☼☼☼☼☼☼☼☼☼☼
 728: 1:☼&   # #  ☼
@@ -27002,8 +27002,8 @@
 907: 2:
 907: 2:Scores: 600
 907: 2:Answer: ACT
-907: 2:Fire Event: DIED
 907: 1:Fire Event: DIED
+907: 2:Fire Event: DIED
 907: 2:Fire Event: KILL_OTHER_HERO
 ------------------------------------------
 908: 1:☼☼☼☼☼☼☼☼☼☼☼

@@ -64,7 +64,6 @@ public class MollyMage extends RoundField<Player> implements Field {
     private TreasureBoxes boxes;
     private Ghosts ghosts;
 
-    private List<Poison> toxins = new LinkedList<>();
     private List<Blast> blasts = new LinkedList<>();
     private List<Point> destroyedObjects = new LinkedList<>();
     private List<Point> previousTickDestroyedObjects = new LinkedList<>();
@@ -228,7 +227,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         previousTickDestroyedObjects.clear();
         previousTickDestroyedObjects.addAll(destroyedObjects);
         destroyedObjects.clear();
-        toxins.clear();
+        toxins().clear();
     }
 
     private void ghostEatHeroes() {
@@ -285,12 +284,12 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void makeBlastsFromPoisonThrower() {
-        for (Poison poison : toxins) {
+        for (Poison poison : toxins()) {
             List<Blast> blast = makeBlast(poison);
             blasts.addAll(blast);
         }
         
-        toxins.clear();
+        toxins().clear();
     }
 
     @Override
@@ -316,6 +315,11 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
+    public PointField.Accessor<Poison> toxins() {
+        return field.of(Poison.class);
+    }
+
+    @Override
     public void drop(Potion potion) {
         if (!existAtPlace(potion.getX(), potion.getY())) {
             potions().add(potion);
@@ -332,16 +336,14 @@ public class MollyMage extends RoundField<Player> implements Field {
         destroyedObjects.add(pt);
     }
 
-
-
     private List<Blast> makeBlast(Poison poison) {
-        List barriers = getBarriesForBlast();
+        List barriers = getBarriersForBlast();
 
         return new BoomEngineOriginal(poison.getOwner())
                 .boom(barriers, size(), poison);
     }
 
-    private List getBarriesForBlast() {
+    private List getBarriersForBlast() {
         List barriers = new LinkedList();
         barriers.addAll(this.walls().all());
         barriers.addAll(this.ghosts.all());
@@ -351,7 +353,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private List<Blast> makeBlast(Potion potion) {
-        List barriers = getBarriesForBlast();
+        List barriers = getBarriersForBlast();
 
         // TODO move potion inside BoomEngine
         List<Blast> result = new ArrayList<>();
@@ -663,7 +665,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     @Override
     public void addPoison(Poison poison) {
-        toxins.add(poison);
+        toxins().add(poison);
     }
 
     @Override

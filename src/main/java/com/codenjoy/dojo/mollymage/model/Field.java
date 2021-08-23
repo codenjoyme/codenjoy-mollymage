@@ -49,11 +49,7 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     List<Hero> heroes(boolean activeAliveOnly);
 
-    PointField.Accessor<Potion> potions();
-
     List<Potion> potions(Hero hero);
-
-    PointField.Accessor<Wall> walls();
 
     boolean isBarrier(Point pt, boolean isForHero);
 
@@ -86,4 +82,10 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
     void addPoison(Poison poison);
 
     void explodeAllPotions(Hero hero);
+
+    PointField.Accessor<Poison> toxins();
+
+    PointField.Accessor<Wall> walls();
+
+    PointField.Accessor<Potion> potions();
 }

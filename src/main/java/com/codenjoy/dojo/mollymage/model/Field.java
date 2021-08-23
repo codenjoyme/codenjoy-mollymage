@@ -33,6 +33,7 @@ import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.PointField;
 import com.codenjoy.dojo.services.round.RoundGameField;
 
 import java.util.List;
@@ -52,7 +53,7 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     List<Potion> potions(Hero hero);
 
-    List<Wall> walls();
+    PointField.Accessor<Wall> walls();
 
     boolean isBarrier(Point pt, boolean isForHero);
 

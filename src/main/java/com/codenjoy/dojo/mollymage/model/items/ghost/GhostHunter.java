@@ -54,7 +54,7 @@ public class GhostHunter extends Ghost {
     }
 
     public DeikstraFindWay.Possible possible(Field field) {
-        List<Wall> walls = field.walls();
+        List<Wall> walls = field.walls().all();
 
         return new DeikstraFindWay.Possible() {
             @Override

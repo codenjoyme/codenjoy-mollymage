@@ -41,6 +41,7 @@ import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.BoardUtils;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.PointField;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.round.RoundField;
 import com.google.common.collect.HashMultimap;
@@ -59,11 +60,10 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     private List<Player> players = new LinkedList<>();
 
-    private int size;
+    private PointField field;
     private TreasureBoxes boxes;
     private Ghosts ghosts;
 
-    private List<Wall> walls = new LinkedList<>();
     private List<Potion> potions = new LinkedList<>();
     private List<Poison> toxins = new LinkedList<>();
     private List<Blast> blasts = new LinkedList<>();
@@ -89,8 +89,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void init(Level level) {
-        this.size = level.size();
-        this.walls = level.getWalls();
+        field = new PointField(level.size());
+        field.addAll(level.getWalls());
     }
 
     @Override
@@ -151,7 +151,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     @Override
     public int size() {
-        return size;
+        return field.size();
     }
 
     @Override
@@ -312,8 +312,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
-    public List<Wall> walls() {
-        return walls;
+    public PointField.Accessor<Wall> walls() {
+        return field.of(Wall.class);
     }
 
     @Override
@@ -344,7 +344,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     private List getBarriesForBlast() {
         List barriers = new LinkedList();
-        barriers.addAll(this.walls);
+        barriers.addAll(this.walls().all());
         barriers.addAll(this.ghosts.all());
         barriers.addAll(this.boxes.all());
         barriers.addAll(heroes(ACTIVE_ALIVE));
@@ -579,7 +579,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         }
 
         // TODO: test me
-        if (walls.contains(pt)) {
+        if (field.of(Wall.class).contains(pt)) {
             return true;
         }
 
@@ -637,7 +637,7 @@ public class MollyMage extends RoundField<Player> implements Field {
                 elements.addAll(MollyMage.this.heroes(ALL));
                 elements.addAll(MollyMage.this.boxes.all());
                 elements.addAll(MollyMage.this.ghosts.all());
-                elements.addAll(MollyMage.this.walls);
+                elements.addAll(MollyMage.this.walls().all());
                 elements.addAll(MollyMage.this.potions());
                 elements.addAll(MollyMage.this.blasts());
                 elements.addAll(MollyMage.this.perks());

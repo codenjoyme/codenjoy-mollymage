@@ -48,7 +48,7 @@ public abstract class Perk extends PointImpl implements Tickable, State<Element,
     /**
      * After timeout disappears from the board if wasn't picked up.
      * */
-    private int pickTimeout;
+    private int pick;
 
     public Perk(Element element, int value, int timeout) {
         this.element = element;
@@ -58,12 +58,12 @@ public abstract class Perk extends PointImpl implements Tickable, State<Element,
         this.timer = timeout;
     }
 
-    public int getPickTimeout() {
-        return pickTimeout;
+    public int getPick() {
+        return pick;
     }
 
-    public void setPickTimeout(int pickTimeout) {
-        this.pickTimeout = pickTimeout;
+    public void setPick(int pick) {
+        this.pick = pick;
     }
 
     public boolean isActive() {
@@ -109,11 +109,11 @@ public abstract class Perk extends PointImpl implements Tickable, State<Element,
     @Override
     public String toString() {
         return String.format("{%s('%s') value=%s, timeout=%s, timer=%s, pick=%s}",
-                name, element, value, timeout, timer, pickTimeout);
+                name, element, value, timeout, timer, pick);
     }
 
     public void tickPick() {
-        pickTimeout--;
+        pick--;
     }
 
     public void decrease() {

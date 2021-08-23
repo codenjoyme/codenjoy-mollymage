@@ -69,7 +69,6 @@ public class MollyMage extends RoundField<Player> implements Field {
     private List<Point> previousTickDestroyedObjects = new LinkedList<>();
     private List<Potion> destroyedPotions = new LinkedList<>();
     private Dice dice;
-    private List<PerkOnBoard> perks = new LinkedList<>();
 
     private GameSettings settings;
 
@@ -96,17 +95,16 @@ public class MollyMage extends RoundField<Player> implements Field {
         return players;
     }
 
-    @Override
-    public List<PerkOnBoard> perks() {
-        return perks;
-    }
-
-    public PerkOnBoard pickPerk(Point pt) {
-        int index = perks.indexOf(pt);
-        if (index == -1) {
-            return null;
+    public List<PerkOnBoard> pickPerk(Point pt) {
+        List<PerkOnBoard> result = perks().getAt(pt);
+        if (result.isEmpty()) {
+            return result;
         }
-        return perks.remove(index);
+
+        // TODO написать тест на случай подбирания двух перков подряд если они лежат в окдной клетке
+        PerkOnBoard next = result.iterator().next();
+        perks().remove(next);
+        return Arrays.asList(next);
     }
 
     @Override
@@ -190,10 +188,12 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     private void tactAllPerks() {
         // тикаем счетчик перка на поле и если просрочка, удаляем
-        perks.forEach(perk -> perk.tick());
-        perks = perks.stream()
-                .filter(perk -> perk.getPerk().getPickTimeout() > 0)
+        perks().forEach(PerkOnBoard::tick);
+        List<PerkOnBoard> alive = perks().stream()
+                .filter(perk -> perk.getPerk().getPick() > 0)
                 .collect(toList());
+        perks().clear();
+        perks().addAll(alive);
     }
 
     private void tactAllHeroes() {
@@ -265,10 +265,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         blastKillAllNear();
 
         // убираем взрывную волну над обнаженными перками, тут взрыв сделал свое дело
-        List<Blast> blastsOnPerks = blasts().all().stream()
-                .filter(blast -> perks.contains(blast))
-                .collect(toList());
-        blasts().removeIn(blastsOnPerks);
+        blasts().removeIn(perks().all());
 
     }
 
@@ -294,7 +291,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     @Override
     public List<Potion> potions(Hero hero) {
-        return potions().all().stream()
+        return potions().stream()
                 .filter(potion -> potion.itsMine(hero))
                 .collect(toList());
     }
@@ -317,6 +314,11 @@ public class MollyMage extends RoundField<Player> implements Field {
     @Override
     public PointField.Accessor<Potion> potions() {
         return field.of(Potion.class);
+    }
+
+    @Override
+    public PointField.Accessor<PerkOnBoard> perks() {
+        return field.of(PerkOnBoard.class);
     }
 
     @Override
@@ -423,11 +425,8 @@ public class MollyMage extends RoundField<Player> implements Field {
         Multimap<Hero, PerkOnBoard> deathMatch = HashMultimap.create();
         for (Blast blast : blasts()) {
             Hero hunter = blast.owner();
-            int index = perks.indexOf(blast);
-            if (index != -1) {
-                PerkOnBoard perk = perks.get(index);
-                deathMatch.put(hunter, perk);
-            }
+            perks().getAt(blast)
+                    .forEach(perk -> deathMatch.put(hunter, perk));
         }
 
         // у нас есть два списка, прибитые перки
@@ -538,8 +537,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void setup(Point pt, Perk perk) {
-        perk.setPickTimeout(settings.perksSettings().pickTimeout());
-        perks.add(new PerkOnBoard(pt, perk));
+        perk.setPick(settings.perksSettings().pickTimeout());
+        perks().add(new PerkOnBoard(pt, perk));
     }
 
     private boolean existAtPlace(int x, int y) {
@@ -574,7 +573,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
         // TODO test me привидение или стена не могут появиться на перке
         if (!isForHero) {
-            if (perks.contains(pt)) {
+            if (perks().contains(pt)) {
                 return true;
             }
         }
@@ -641,7 +640,7 @@ public class MollyMage extends RoundField<Player> implements Field {
                 elements.addAll(MollyMage.this.walls().all());
                 elements.addAll(MollyMage.this.potions().all());
                 elements.addAll(MollyMage.this.blasts().all());
-                elements.addAll(MollyMage.this.perks());
+                elements.addAll(MollyMage.this.perks().all());
 
                 return elements;
             }

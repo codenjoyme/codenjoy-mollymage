@@ -61,9 +61,7 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     void remove(Point pt);
 
-    List<PerkOnBoard> perks();
-
-    PerkOnBoard pickPerk(Point pt);
+    List<PerkOnBoard> pickPerk(Point pt);
 
     void addPerk(Player player, Perk perk);
 
@@ -89,4 +87,5 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     PointField.Accessor<Blast> blasts();
 
+    PointField.Accessor<PerkOnBoard> perks();
 }

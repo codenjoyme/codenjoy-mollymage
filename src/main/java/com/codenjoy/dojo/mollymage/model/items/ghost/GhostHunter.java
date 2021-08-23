@@ -94,12 +94,16 @@ public class GhostHunter extends Ghost {
     }
 
     public void die() {
+        if (!alive) {
+            return;
+        }
+
         field.remove(this);
         alive = false;
         // ларчик просто открывался, перки надо не убивать
         // а собирать, иначе они за тобой будут гнаться
-        perk.move(this);
         field.perks().add(perk);
+        perk.move(this);
     }
 
     @Override

@@ -135,11 +135,10 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
 
         if (!field.isBarrier(pt, FOR_HERO)) {
             move(pt);
-            PerkOnBoard perk = field.pickPerk(pt);
-            if (perk != null) {
+            field.pickPerk(pt).forEach(perk -> {
                 field.addPerk((Player) this.getPlayer(), perk.getPerk());
                 event(Events.CATCH_PERK);
-            }
+            });
         }
         direction = null;
 

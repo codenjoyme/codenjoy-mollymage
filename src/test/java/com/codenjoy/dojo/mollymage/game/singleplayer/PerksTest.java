@@ -42,6 +42,76 @@ public class PerksTest extends AbstractGameTest {
 
 // _____________________________________________________GAME_TEST_______________________________________________________
 
+    // перк исчезает спустя некоторое время
+    @Test
+    public void shouldPerkDissapearWhenTimeout() {
+        // given
+        settings.integer(PERK_PICK_TIMEOUT, 5);
+
+        givenBr("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "#☺   #\n" +
+                "######\n");
+
+        perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
+        perks.dropRatio(20); // 20%
+
+        dice(dice, 10); // must drop 2 perks
+
+        hero.act();
+        field.tick();
+
+        hero.right();
+        field.tick();
+
+        hero.right();
+        field.tick();
+
+        field.tick();
+
+        field.tick();
+
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "#҉# ##\n" +
+                "H҉҉☺ #\n" +
+                "#H####\n");
+
+        field.tick();
+
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "+  ☺ #\n" +
+                "#+####\n");
+
+        field.tick();
+        field.tick();
+        field.tick();
+
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "+  ☺ #\n" +
+                "#+####\n");
+
+        // when
+        field.tick();
+
+        // then
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "   ☺ #\n" +
+                "# ####\n");
+    }
+
     // новый герой не может появиться на перке
     @Test
     public void shouldHeroCantSpawnOnPerk() {
@@ -153,7 +223,7 @@ public class PerksTest extends AbstractGameTest {
                 "H҉҉☺ #\n" +
                 "#H####\n");
 
-        assertEquals("[]", field.perks().toString());
+        assertPerks("[]");
 
         events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
@@ -168,6 +238,9 @@ public class PerksTest extends AbstractGameTest {
                 "# # ##\n" +
                 "+  ☺ #\n" +
                 "#+####\n");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [0,1]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [1,0]}]");
 
         // when
         field.tick();
@@ -295,7 +368,7 @@ public class PerksTest extends AbstractGameTest {
                 "H҉҉☺ #\n" +
                 "#H####\n");
 
-        assertEquals("[]", field.perks().toString());
+        assertPerks("[]");
 
         // when
         boxesCount(boxesCount() - 2); // две коробки потрачено
@@ -309,8 +382,8 @@ public class PerksTest extends AbstractGameTest {
                 "+  ☺ #\n" +
                 "#+####\n");
 
-        assertEquals("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=4} at [0,1]}, " +
-                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=4} at [1,0]}]", field.perks().toString());
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=4} at [0,1]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=4} at [1,0]}]");
 
         // when
         field.tick();
@@ -325,8 +398,8 @@ public class PerksTest extends AbstractGameTest {
                 "+  ☺ #\n" +
                 "#+####\n");
 
-        assertEquals("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=1} at [0,1]}, " +
-                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=1} at [1,0]}]", field.perks().toString());
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=1} at [0,1]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=1} at [1,0]}]");
 
         // when
         field.tick();
@@ -339,7 +412,7 @@ public class PerksTest extends AbstractGameTest {
                 "   ☺ #\n" +
                 "# ####\n");
 
-        assertEquals("[]", field.perks().toString());
+        assertPerks("[]");
 
     }
 
@@ -453,6 +526,9 @@ public class PerksTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=45} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=45} at [5,1]}]");
+
         field.tick();
 
         asrtBrd("#+####\n" +
@@ -464,6 +540,9 @@ public class PerksTest extends AbstractGameTest {
 
         events.verifyAllEvents("[DIED]");
 
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=44} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=44} at [5,1]}]");
+
         field.tick();
 
         asrtBrd("#+####\n" +
@@ -473,10 +552,18 @@ public class PerksTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=43} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=39} at [3,4]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=43} at [5,1]}]");
+
         dice(dice,
                 1, 1);
         field.tick();
         newGameForDied(); // это сделает сервер
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=42} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=38} at [3,4]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=42} at [5,1]}]");
 
         field.tick();
 
@@ -486,6 +573,24 @@ public class PerksTest extends AbstractGameTest {
                 "#   ##\n" +
                 " ☺   +\n" +
                 "# ####\n");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=41} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=37} at [3,4]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=41} at [5,1]}]");
+
+
+        field.tick();
+
+        asrtBrd("#+####\n" +
+                "#☼#+##\n" +
+                "##   #\n" +
+                "#   ##\n" +
+                " ☺   +\n" +
+                "# ####\n");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=40} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=36} at [3,4]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=40} at [5,1]}]");
     }
 
     // а теперь пробуем убить анти-привидение
@@ -558,6 +663,9 @@ public class PerksTest extends AbstractGameTest {
                 " x   +\n" +
                 "# ####\n");
 
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [5,1]}]");
+
         // when
         field.tick();
 
@@ -572,6 +680,10 @@ public class PerksTest extends AbstractGameTest {
         // пошел сигнал об этом
         events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_GHOST, KILL_TREASURE_BOX]");
 
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=39} at [1,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [5,1]}]");
+
         // when
         boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
         field.tick();
@@ -584,6 +696,309 @@ public class PerksTest extends AbstractGameTest {
                 "# ####\n");
 
         events.verifyAllEvents("[]");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [0,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=38} at [1,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=47} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [2,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=47} at [5,1]}]");
+
+        // when
+        field.tick();
+
+        asrtBrd("#+####\n" +
+                "# # ##\n" +
+                "# ☺  #\n" +
+                "+++ ##\n" +
+                "     +\n" +
+                "# ####\n");
+
+        events.verifyAllEvents("[]");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [0,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=37} at [1,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=46} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [2,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=46} at [5,1]}]");
+    }
+
+    // а теперь пробуем убить анти-привидение и одновременно с этим выпиливаемся на той же бомбе
+    @Test
+    public void shouldKillGhostWithSuicide() {
+        canDropPotions(2);
+
+        shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
+        reset(listener);
+        hero.getPerks().clear(); // удаляем любые перки
+        potionsPower(5); // взрывная волна большая
+
+        hero.right();
+        field.tick();
+
+        // then
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                " ☺   #\n" +
+                "#+####\n");
+
+        hero.act();
+        hero.up();
+        field.tick();
+
+        field.tick();
+
+        hero.act();
+        hero.up();
+        field.tick();
+
+        hero.right();
+        field.tick();
+
+        // перед взрывом
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "# ☺  #\n" +
+                "#3# ##\n" +
+                " 1   #\n" +
+                "#+####\n");
+
+        // все тихо
+        events.verifyAllEvents("[]");
+
+        // when
+        field.tick();
+
+        // перк разрушен
+        // а вместо него злое привидение
+        asrtBrd("#H####\n" +
+                "#҉# ##\n" +
+                "#҉☺  #\n" +
+                "#2# ##\n" +
+                "҉҉҉҉҉H\n" +
+                "#x####\n");
+
+        // пошел сигнал об этом
+        events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+
+        // when
+        boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
+        hero.left();
+        field.tick();
+
+        // привидение начало свое движение
+        asrtBrd("#+####\n" +
+                "# # ##\n" +
+                "#☺   #\n" +
+                "#1# ##\n" +
+                " x   +\n" +
+                "# ####\n");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [5,1]}]");
+
+        // when
+        field.tick();
+
+        // приведение нарвалось на зелье
+        // но и мы подорвались с ним
+        asrtBrd("#+####\n" +
+                "# # ##\n" +
+                "#Ѡ   #\n" +
+                "H&H ##\n" +
+                " ҉   +\n" +
+                "#҉####\n");
+
+        // пошел сигнал об этом
+        events.verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_GHOST, KILL_TREASURE_BOX]");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=39} at [1,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [5,1]}]");
+
+        // when
+        boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
+
+        dice(dice, 0, 1);
+        newGameForDied(); // это сделает сервер
+
+        field.tick();
+
+        asrtBrd("#+####\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "+++ ##\n" +
+                "☺    +\n" +
+                "# ####\n");
+
+        events.verifyAllEvents("[]");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [0,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=38} at [1,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=47} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [2,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=47} at [5,1]}]");
+
+        // when
+        field.tick();
+
+        asrtBrd("#+####\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "+++ ##\n" +
+                "☺    +\n" +
+                "# ####\n");
+
+        events.verifyAllEvents("[]");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [0,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=37} at [1,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=46} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [2,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=46} at [5,1]}]");
+    }
+
+    // а теперь пробуем убить анти-привидение сразу после того как оно меня скушает
+    @Test
+    public void shouldKillGhostAfterEatMe() {
+        canDropPotions(2);
+
+        shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
+        reset(listener);
+
+        hero.right();
+        field.tick();
+
+        // then
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                " ☺   #\n" +
+                "#+####\n");
+
+        hero.act();
+        hero.up();
+        field.tick();
+
+        field.tick();
+
+        hero.up();
+        field.tick();
+
+        hero.right();
+        field.tick();
+
+        // перед взрывом
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "# ☺  #\n" +
+                "# # ##\n" +
+                " 1   #\n" +
+                "#+####\n");
+
+        // все тихо
+        events.verifyAllEvents("[]");
+
+        // when
+        hero.act();
+        field.tick();
+
+        // перк разрушен
+        // а вместо него злое привидение
+        asrtBrd("#H####\n" +
+                "#҉# ##\n" +
+                "#҉☻  #\n" +
+                "#҉# ##\n" +
+                "҉҉҉҉҉H\n" +
+                "#x####\n");
+
+        // пошел сигнал об этом
+        events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+
+        // when
+        boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
+        hero.left();
+        field.tick();
+
+        // пивидение начало свое движение
+        asrtBrd("#+####\n" +
+                "# # ##\n" +
+                "#☺3  #\n" +
+                "# # ##\n" +
+                " x   +\n" +
+                "# ####\n");
+
+        // when
+        field.tick();
+
+        asrtBrd("#+####\n" +
+                "# # ##\n" +
+                "#☺2  #\n" +
+                "#x# ##\n" +
+                "     +\n" +
+                "# ####\n");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [5,1]}]");
+
+        // when
+        field.tick();
+
+        // приведение скушало героя
+        asrtBrd("#+####\n" +
+                "# # ##\n" +
+                "#Ѡ1  #\n" +
+                "# # ##\n" +
+                "     +\n" +
+                "# ####\n");
+
+        // пошел сигнал об этом
+        events.verifyAllEvents("[DIED]");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=47} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=47} at [5,1]}]");
+
+        // when
+        dice(dice, 0, 1);
+        newGameForDied(); // это сделает сервер
+
+        field.tick();
+
+        // умирающий охотник подорвался на оставшейся после героя бомбе
+        asrtBrd("#+####\n" +
+                "# H ##\n" +
+                "#&҉҉ #\n" +
+                "# H ##\n" +
+                "☺    +\n" +
+                "# ####\n");
+
+        events.verifyAllEvents("[]");
+
+        // появился перк
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=39} at [1,3]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=46} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=46} at [5,1]}]");
+
+        // when
+        field.tick();
+
+        asrtBrd("#+####\n" +
+                "# + ##\n" +
+                "#+   #\n" +
+                "# + ##\n" +
+                "☺#   +\n" +
+                "# ####\n");
+
+        events.verifyAllEvents("[]");
+
+        // и еще два после рахрушенных стен
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=38} at [1,3]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=45} at [1,5]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [2,2]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [2,4]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=45} at [5,1]}]");
     }
 
     // генерим три привидение и смотрим как они бегут за мной
@@ -693,6 +1108,9 @@ public class PerksTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=38} at [1,5]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=38} at [5,1]}]");
+
         // но стоит забарикадироваться
         field.walls().add(new Wall(5, 4));
         field.tick();
@@ -705,6 +1123,12 @@ public class PerksTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=37} at [1,5]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=43} at [3,2]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=32} at [3,3]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=43} at [4,3]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=37} at [5,1]}]");
+
         // и после выпиливаются
         field.tick();
 
@@ -716,6 +1140,39 @@ public class PerksTest extends AbstractGameTest {
                 "# ####\n");
 
         events.verifyAllEvents("[]");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=36} at [1,5]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=42} at [3,2]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=31} at [3,3]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=42} at [4,3]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=36} at [5,1]}]");
+
+        // перки дальше тикаются нормально
+        field.tick();
+
+        asrtBrd("#+##☼☺\n" +
+                "# # ☼☼\n" +
+                "#  ++#\n" +
+                "   +##\n" +
+                "     +\n" +
+                "# ####\n");
+
+        events.verifyAllEvents("[]");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=35} at [1,5]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=41} at [3,2]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=30} at [3,3]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=41} at [4,3]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=35} at [5,1]}]");
+
+    }
+
+    private void assertPerks(String expected) {
+        assertEquals(expected, fix(field.perks().all().toString()));
+    }
+
+    private String fix(String string) {
+        return string.replace("}, {", "},\n {");
     }
 
     // если мы вызвали потустороннюю нечисть, то наш суицид ее успокоит, отправив обратно
@@ -785,6 +1242,9 @@ public class PerksTest extends AbstractGameTest {
                 "  x  +\n" +
                 "#  ###\n");
 
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [1,5]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [5,1]}]");
+
         // мувнули героя и кикнули его
         hero.die();
         boxesCount(boxesCount() - 1); // одна коробка потречена злым привидением
@@ -797,7 +1257,39 @@ public class PerksTest extends AbstractGameTest {
                 "  &  +\n" +
                 "#  ###\n");
 
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=47} at [1,5]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=39} at [2,1]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=47} at [5,1]}]");
+
         events.verifyAllEvents("[DIED]");
+
+        // превратился в перк обратно
+        field.tick();
+
+        asrtBrd("#+####\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# #Ѡ##\n" +
+                "  +  +\n" +
+                "#  ###\n");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=46} at [1,5]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=38} at [2,1]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=46} at [5,1]}]");
+
+        // и тикается каждую секунду как и тот, что не трогали на поле
+        field.tick();
+
+        asrtBrd("#+####\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# #Ѡ##\n" +
+                "  +  +\n" +
+                "#  ###\n");
+
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=45} at [1,5]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=37} at [2,1]},\n " +
+                "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=45} at [5,1]}]");
 
     }
 

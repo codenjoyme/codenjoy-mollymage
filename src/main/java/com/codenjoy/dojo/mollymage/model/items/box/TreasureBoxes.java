@@ -55,7 +55,7 @@ public class TreasureBoxes implements Tickable { // TODO протестить к
 
     private int freeSpaces() {
         return (field.size()* field.size() - 1) // TODO -1 это один герой, а если их несколько?
-                - field.walls().all().size();
+                - field.walls().size();
     }
 
     @Override

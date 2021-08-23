@@ -68,13 +68,6 @@ public abstract class AbstractGameTest {
     protected EventsListenersAssert events = new EventsListenersAssert(() -> listeners, Events.class);
     protected Level level;
 
-    @Before
-    public void setUp() {
-        potionsPower(1);
-        boxesCount(0);
-        ghostsCount(0);
-    }
-
     protected void givenBr(String map) {
         Point heroPosition = new LevelImpl(map).getHeroPosition();
         dice(dice, heroPosition.getX(), heroPosition.getY());
@@ -111,7 +104,9 @@ public abstract class AbstractGameTest {
 
     protected GameSettings settings() {
         return spy(new TestGameSettings())
-                .integer(POTION_POWER, 1);
+                .integer(POTION_POWER, 1)
+                .integer(TREASURE_BOX_COUNT, 0)
+                .integer(GHOSTS_COUNT, 0);
     }
 
     protected EventListener listener() {

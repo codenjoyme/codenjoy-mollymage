@@ -1073,9 +1073,9 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
                 1, 0); // третий
 
         givenBoard(DEFAULT_COUNT);
-        player(0).setTeamId(0);
-        player(1).setTeamId(0);
-        player(2).setTeamId(1);
+        player(0).inTeam(0);
+        player(1).inTeam(0);
+        player(2).inTeam(1);
 
         tick();
 
@@ -1930,9 +1930,9 @@ public class RoundBattleTest extends AbstractMultiplayerTest {
                 3, 4); // третий
 
         givenBoard(count);
-        player(0).setTeamId(0);
-        player(1).setTeamId(1);
-        player(2).setTeamId(1);
+        player(0).inTeam(0);
+        player(1).inTeam(1);
+        player(2).inTeam(1);
 
         tick();
 

@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.game.multiplayer;
+package com.codenjoy.dojo.mollymage.game;
 
 /*-
  * #%L
@@ -24,7 +24,6 @@ package com.codenjoy.dojo.mollymage.game.multiplayer;
 
 
 import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.mollymage.game.singleplayer.AbstractGameTest;
 import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;

@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.game.singleplayer;
+package com.codenjoy.dojo.mollymage.game;
 
 /*-
  * #%L

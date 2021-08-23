@@ -724,8 +724,8 @@ public class PotionTest extends AbstractGameTest {
                 0, 0,
                 1, 0);
         givenBr(2);
-        player(0).setTeamId(0);
-        player(1).setTeamId(1);
+        player(0).inTeam(0);
+        player(1).inTeam(1);
 
         hero(0).act();
         hero(0).up();

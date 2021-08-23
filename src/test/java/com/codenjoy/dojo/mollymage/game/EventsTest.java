@@ -1020,10 +1020,10 @@ public class EventsTest extends AbstractGameTest {
         boxesCount(1);
         boxAt(2, 2);
 
-        player(0).setTeamId(0);
-        player(1).setTeamId(0);
-        player(2).setTeamId(1);
-        player(3).setTeamId(1);
+        player(0).inTeam(0);
+        player(1).inTeam(0);
+        player(2).inTeam(1);
+        player(3).inTeam(1);
 
         // зелье, которым все пордорвем
         hero(0).move(1, 2);

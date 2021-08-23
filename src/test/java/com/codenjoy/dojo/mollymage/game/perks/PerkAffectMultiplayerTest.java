@@ -30,9 +30,9 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         //set up 3 players, 2 in one team, and 1 perk on field
         givenBr(3);
-        player(0).setTeamId(0);
-        player(1).setTeamId(0);
-        player(2).setTeamId(1);
+        player(0).inTeam(0);
+        player(1).inTeam(0);
+        player(2).inTeam(1);
         field.perks().add(new PerkOnBoard(new PointImpl(0, 1), new PotionImmune(settings.integer(TIMEOUT_POTION_IMMUNE))));
 
         asrtBrd("     \n" +
@@ -85,9 +85,9 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         //set up 3 players, 2 in one team, and 1 perk on field
         givenBr(3);
-        player(0).setTeamId(0);
-        player(1).setTeamId(0);
-        player(2).setTeamId(1);
+        player(0).inTeam(0);
+        player(1).inTeam(0);
+        player(2).inTeam(1);
         field.perks().add(new PerkOnBoard(new PointImpl(0, 1), new PotionImmune(settings.integer(TIMEOUT_POTION_IMMUNE))));
 
         asrtBrd("     \n" +

@@ -2068,7 +2068,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
     }
 
     @Test
-    public void shouldPerkCantSpawnFromMeetChopper() {
+    public void shouldPerkCantSpawnFromGhost() {
         ghostAt(1, 0);
 
         dice(dice,

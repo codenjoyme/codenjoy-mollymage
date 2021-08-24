@@ -166,6 +166,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         ghostEatHeroes();       // омномном
         boxes.tick();           // сундуки появляются
         ghosts.tick();          // привидения водят свой хоровод
+        hunters().tick();       // охотники охотятся
         ghostEatHeroes();       // омномном
         disablePotionRemote();  // если остались remote зелья без хозяев, взрываем
         makeBlastsFromPoisonThrower();  //  heroes throws poison
@@ -215,8 +216,10 @@ public class MollyMage extends RoundField<Player> implements Field {
             if (pt instanceof TreasureBox) {
                 boxes.remove(pt);
                 dropPerk(pt, dice);
-            } else if (pt instanceof Ghost || pt instanceof GhostHunter) {
-                ghosts.remove(pt);
+            } else if (pt instanceof GhostHunter) {
+                hunters().remove(pt);
+            } else if (pt instanceof Ghost) {
+                ghosts().remove(pt);
             }
         }
 
@@ -231,20 +234,21 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void ghostEatHeroes() {
-        for (Ghost ghost : ghosts.all()) {
-            for (Player player : players) {
-                Hero hero = player.getHero();
-                if (hero.isAlive() && ghost.itsMe(hero)) {
-                    player.getHero().die();
-                }
+        ghosts().forEach(ghost -> eatBy(ghost));
+        hunters().forEach(hunter -> eatBy(hunter));
+    }
+
+    private void eatBy(Ghost ghost) {
+        for (Player player : players) {
+            Hero hero = player.getHero();
+            if (hero.isAlive() && ghost.itsMe(hero)) {
+                player.getHero().die();
             }
         }
     }
 
     private void tactAllPotions() {
-        for (Potion potion : potions()) {
-            potion.tick();
-        }
+        potions().tick();
 
         do {
             makeBlastsFromDestroyedPotions();
@@ -317,6 +321,16 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
+    public PointField.Accessor<Ghost> ghosts() {
+        return field.of(Ghost.class);
+    }
+
+    @Override
+    public PointField.Accessor<GhostHunter> hunters() {
+        return field.of(GhostHunter.class);
+    }
+
+    @Override
     public PointField.Accessor<PerkOnBoard> perks() {
         return field.of(PerkOnBoard.class);
     }
@@ -348,7 +362,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     private List<Point> getBarriersForBlast() {
         List<Point> result = new LinkedList();
         result.addAll(this.walls().all());
-        result.addAll(this.ghosts.all());
+        result.addAll(this.ghosts().all());
+        result.addAll(this.hunters().all());
         result.addAll(this.boxes.all());
         result.addAll(heroes(ACTIVE_ALIVE));
         return result;
@@ -377,7 +392,8 @@ public class MollyMage extends RoundField<Player> implements Field {
         // надо определить кто кого чем кикнул (ызрывные волны могут пересекаться)
         List<Point> all = new LinkedList<>();
         all.addAll(boxes.all());
-        all.addAll(ghosts.all());
+        all.addAll(ghosts().all());
+        all.addAll(hunters().all());
 
         Multimap<Hero, Point> deathMatch = LinkedHashMultimap.create();
         for (Blast blast : blasts()) {
@@ -448,7 +464,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
                 // TODO может это делать на этапе, когда balsts развиднеется в removeBlasts
                 blasts().remove(perk);
-                ghosts.add(new GhostHunter(perk, this, hunter));
+                hunters().add(new GhostHunter(perk, this, hunter));
             });
         });
     }
@@ -591,7 +607,10 @@ public class MollyMage extends RoundField<Player> implements Field {
         // TODO test me стенка или другой чопер не могут появиться на чопере
         // TODO но герой может пойти к нему на встречу
         if (!isForHero) {
-            if (ghosts.all().contains(pt)) {
+            if (ghosts().contains(pt)) {
+                return true;
+            }
+            if (hunters().contains(pt)) {
                 return true;
             }
         }
@@ -636,7 +655,8 @@ public class MollyMage extends RoundField<Player> implements Field {
 
                 elements.addAll(MollyMage.this.heroes(ALL));
                 elements.addAll(MollyMage.this.boxes.all());
-                elements.addAll(MollyMage.this.ghosts.all());
+                elements.addAll(MollyMage.this.ghosts().all());
+                elements.addAll(MollyMage.this.hunters().all());
                 elements.addAll(MollyMage.this.walls().all());
                 elements.addAll(MollyMage.this.potions().all());
                 elements.addAll(MollyMage.this.blasts().all());
@@ -655,11 +675,6 @@ public class MollyMage extends RoundField<Player> implements Field {
     @Override
     public TreasureBoxes boxes() {
         return boxes;
-    }
-
-    @Override
-    public Ghosts ghosts() {
-        return ghosts;
     }
 
     @Override

@@ -28,7 +28,8 @@ import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.blast.Poison;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
-import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
+import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.services.Dice;
@@ -73,8 +74,6 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     TreasureBoxes boxes();
 
-    Ghosts ghosts();
-
     void addPoison(Poison poison);
 
     void explodeAllPotions(Hero hero);
@@ -87,5 +86,9 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     PointField.Accessor<Blast> blasts();
 
+    PointField.Accessor<GhostHunter> hunters();
+
     PointField.Accessor<PerkOnBoard> perks();
+
+    PointField.Accessor<Ghost> ghosts();
 }

@@ -44,19 +44,21 @@ public class Ghosts implements Tickable {
 
     private Dice dice;
     protected Field field;
-    private List<Ghost> ghosts;
     private GameSettings settings;
 
     public Ghosts(GameSettings settings, Dice dice) {
         this.settings = settings;
         this.dice = dice;
-        ghosts = new LinkedList<>();
+    }
+
+    public void init(Field field) {
+        this.field = field;
     }
 
     @Override
     public void tick() {
         regenerate();
-        ghosts.forEach(Ghost::tick);
+        field.ghosts().tick();
     }
 
     public void regenerate() {     // TODO потестить
@@ -64,7 +66,7 @@ public class Ghosts implements Tickable {
             settings.integer(GHOSTS_COUNT, 0);
         }
 
-        int actual = ghosts.size();
+        int actual = field.ghosts().size();
         int expected = settings.integer(GHOSTS_COUNT);
 
         int iteration = 0;
@@ -77,32 +79,12 @@ public class Ghosts implements Tickable {
                 continue;
             }
 
-            ghosts.add(new Ghost(pt, field, dice));
+            field.ghosts().add(new Ghost(pt, field, dice));
             actual++;
         }
 
         if (iteration >= MAX) {
             System.out.println("Dead loop at Ghosts.regenerate!");
         }
-    }
-
-    public void init(Field field) {
-        this.field = field;
-    }
-
-    public List<Ghost> all() {
-        return ghosts;
-    }
-
-    public void remove(Point pt) {
-        ghosts.remove(pt);
-    }
-
-    public void add(Ghost ghost) {
-        ghosts.add(ghost);
-    }
-
-    public boolean contains(Point pt) {
-        return ghosts.contains(pt);
     }
 }

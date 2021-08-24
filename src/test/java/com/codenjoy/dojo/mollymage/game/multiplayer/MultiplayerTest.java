@@ -2036,11 +2036,8 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "҉҉҉҉҉\n", game(1));
         events.verifyAllEvents("listener(0) => [DROP_PERK]\n" +
                 "listener(1) => [DROP_PERK]\n");
-        assertEquals(2, field.ghosts().all().size());
+        assertEquals(2, field.hunters().size());
 
-        for (Ghost ghost : field.ghosts().all()) {
-            assertEquals(ghost.getClass(), GhostHunter.class);
-        }
 
         // when field tick
         field.tick();
@@ -2555,7 +2552,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "҉҉x  \n" +
                 " ҉   \n" +
                 "  ☺  \n", game(1));
-        assertEquals(2, field.ghosts().all().size());
+        assertEquals(2, field.hunters().size());
 
         // when next tick two ghostHunters should been visible
         tick();
@@ -2628,7 +2625,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "҉҉x  \n" +
                 " ҉   \n" +
                 "  ☺  \n", game(1));
-        assertEquals(2, field.ghosts().all().size());
+        assertEquals(2, field.hunters().size());
 
         // when next tick two ghostHunters should been visible
         tick();
@@ -2701,7 +2698,7 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
                 "҉҉x  \n" +
                 " ҉   \n" +
                 "  ☺  \n", game(1));
-        assertEquals(1, field.ghosts().all().size());
+        assertEquals(1, field.hunters().size());
 
         // when next tick only one ghostHunter should been visible
         tick();

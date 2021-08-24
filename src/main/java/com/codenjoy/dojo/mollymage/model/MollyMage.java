@@ -245,7 +245,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         makeBlastsFromPoisonThrower();  //  heroes throws poison
         tactAllPotions();       // все что касается зелья и взрывов
         tactAllPerks();         // тикаем перки на поле
-        tactAllHeroes();        // в том числе и перки героев
+        heroes().tick();        // в том числе и героев (их перки и все что у них там может быть)
     }
 
     private void disablePotionRemote() {
@@ -271,9 +271,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void tactAllHeroes() {
-        for (Player player : players) {
-            player.getHero().tick();
-        }
+
     }
 
     private void applyAllHeroes() {

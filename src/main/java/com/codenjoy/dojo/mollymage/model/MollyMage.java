@@ -579,7 +579,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         }
 
         // TODO: test me
-        if (field.of(Wall.class).contains(pt)) {
+        if (walls().contains(pt)) {
             return true;
         }
 

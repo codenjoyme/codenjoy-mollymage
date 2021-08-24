@@ -980,9 +980,9 @@ public class PerksTest extends AbstractGameTest {
 
         events.verifyAllEvents("[]");
 
-        // появился перк
-        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=39} at [1,3]},\n" +
-                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=46} at [1,5]},\n" +
+        // появился перк и сразу же сгорел в огненном пламени
+        // TODO если будет желание поковырять квест, кажется тут логично чтобы он оставался и взрыв его не брал, а может и нет
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=46} at [1,5]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=46} at [5,1]}]");
 
         // when
@@ -990,7 +990,7 @@ public class PerksTest extends AbstractGameTest {
 
         asrtBrd("#+####\n" +
                 "# + ##\n" +
-                "#+   #\n" +
+                "#    #\n" +
                 "# + ##\n" +
                 "☺#   +\n" +
                 "# ####\n");
@@ -998,8 +998,7 @@ public class PerksTest extends AbstractGameTest {
         events.verifyAllEvents("[]");
 
         // и еще два после рахрушенных стен
-        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=38} at [1,3]},\n" +
-                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=45} at [1,5]},\n" +
+        assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=45} at [1,5]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [2,2]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [2,4]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=45} at [5,1]}]");

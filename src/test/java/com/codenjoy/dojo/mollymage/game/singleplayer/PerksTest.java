@@ -27,8 +27,12 @@ import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.perks.*;
 import org.junit.Test;
 
+import java.util.Comparator;
+
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.reset;
 
@@ -678,7 +682,7 @@ public class PerksTest extends AbstractGameTest {
                 "# ####\n");
 
         // пошел сигнал об этом
-        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_GHOST, KILL_TREASURE_BOX]");
+        events.verifyAllEvents("[KILL_GHOST, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=39} at [1,2]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [1,5]},\n" +
@@ -811,7 +815,7 @@ public class PerksTest extends AbstractGameTest {
                 "#҉####\n");
 
         // пошел сигнал об этом
-        events.verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_GHOST, KILL_TREASURE_BOX]");
+        events.verifyAllEvents("[DIED, KILL_GHOST, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=39} at [1,2]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [1,5]},\n" +
@@ -1168,7 +1172,11 @@ public class PerksTest extends AbstractGameTest {
     }
 
     private void assertPerks(String expected) {
-        assertEquals(expected, fix(field.perks().all().toString()));
+        assertEquals(expected,
+                fix(field.perks().stream()
+                        .sorted(Comparator.comparing(PerkOnBoard::copy))
+                        .collect(toList())
+                        .toString()));
     }
 
     private String fix(String string) {
@@ -2562,7 +2570,7 @@ public class PerksTest extends AbstractGameTest {
                 "H    \n" +
                 "҉҉҉Ѡ \n");
 
-        events.verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_GHOST]");
+        events.verifyAllEvents("[DIED, KILL_GHOST, KILL_TREASURE_BOX]");
 
         // только сейчас перк забрался
         assertEquals("[]",

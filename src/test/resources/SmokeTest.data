@@ -175,8 +175,8 @@
 6: 2:Answer: STOP
 6: 2:PLAYER_GAME_OVER -> START_NEW_GAME
 6: 1:Fire Event: KILL_TREASURE_BOX
-6: 1:Fire Event: KILL_TREASURE_BOX
 6: 1:Fire Event: KILL_GHOST
+6: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 7: 1:☼☼☼☼☼☼☼☼☼☼☼
 7: 1:☼ &  # H##☼
@@ -4099,8 +4099,8 @@
 138: 2:
 138: 2:Scores: 365
 138: 2:Answer: ACT
-138: 1:Fire Event: KILL_GHOST
 138: 1:Fire Event: KILL_TREASURE_BOX
+138: 1:Fire Event: KILL_GHOST
 ------------------------------------------
 139: 1:☼☼☼☼☼☼☼☼☼☼☼
 139: 1:☼      ♠# ☼
@@ -6326,8 +6326,8 @@
 213: 2:Scores: 150
 213: 2:Answer: STOP
 213: 2:PLAYER_GAME_OVER -> START_NEW_GAME
-213: 1:Fire Event: KILL_TREASURE_BOX
 213: 1:Fire Event: KILL_GHOST
+213: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 214: 1:☼☼☼☼☼☼☼☼☼☼☼
 214: 1:☼r   H҉x҉҉☼
@@ -8775,8 +8775,8 @@
 296: 2:
 296: 2:Scores: 50
 296: 2:Answer: DOWN
-296: 1:Fire Event: KILL_TREASURE_BOX
 296: 1:Fire Event: KILL_GHOST
+296: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 297: 1:☼☼☼☼☼☼☼☼☼☼☼
 297: 1:☼    # ҉☺ ☼
@@ -10436,8 +10436,8 @@
 352: 2:
 352: 2:Scores: 100
 352: 2:Answer: ACT
-352: 1:Fire Event: DIED
 352: 2:Fire Event: DIED
+352: 1:Fire Event: DIED
 352: 2:Fire Event: KILL_OTHER_HERO
 352: 2:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
@@ -14658,8 +14658,8 @@
 493: 2:Answer: ACT
 493: 2:Fire Event: DROP_PERK
 493: 2:Fire Event: KILL_TREASURE_BOX
-493: 1:Fire Event: KILL_GHOST
 493: 1:Fire Event: KILL_TREASURE_BOX
+493: 1:Fire Event: KILL_GHOST
 ------------------------------------------
 494: 1:☼☼☼☼☼☼☼☼☼☼☼
 494: 1:☼#   H####☼
@@ -15408,8 +15408,8 @@
 518: 2:Scores: 880
 518: 2:Answer: RIGHT
 518: 1:Fire Event: KILL_GHOST
-518: 1:Fire Event: KILL_TREASURE_BOX
 518: 1:Fire Event: KILL_GHOST
+518: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 519: 1:☼☼☼☼☼☼☼☼☼☼☼
 519: 1:☼### #####☼
@@ -18151,8 +18151,8 @@
 610: 2:Scores: 1060
 610: 2:Answer: ACT
 610: 2:Fire Event: DIED
-610: 2:Fire Event: KILL_GHOST
 610: 2:Fire Event: KILL_TREASURE_BOX
+610: 2:Fire Event: KILL_GHOST
 ------------------------------------------
 611: 1:☼☼☼☼☼☼☼☼☼☼☼
 611: 1:☼☺#҉ # ###☼
@@ -18715,8 +18715,8 @@
 629: 2:
 629: 2:Scores: 1040
 629: 2:Answer: ACT
-629: 1:Fire Event: DIED
 629: 2:Fire Event: DIED
+629: 1:Fire Event: DIED
 629: 2:Fire Event: KILL_OTHER_HERO
 629: 2:Fire Event: DROP_PERK
 629: 2:Fire Event: KILL_TREASURE_BOX
@@ -20536,8 +20536,8 @@
 690: 2:Scores: 1000
 690: 2:Answer: DOWN
 690: 1:Fire Event: DIED
-690: 1:Fire Event: KILL_GHOST
 690: 1:Fire Event: KILL_TREASURE_BOX
+690: 1:Fire Event: KILL_GHOST
 ------------------------------------------
 691: 1:☼☼☼☼☼☼☼☼☼☼☼
 691: 1:☼    i# # ☼
@@ -21649,8 +21649,8 @@
 727: 2:
 727: 2:Scores: 800
 727: 2:Answer: DOWN
-727: 1:Fire Event: KILL_GHOST
 727: 1:Fire Event: KILL_TREASURE_BOX
+727: 1:Fire Event: KILL_GHOST
 ------------------------------------------
 728: 1:☼☼☼☼☼☼☼☼☼☼☼
 728: 1:☼&   # #  ☼
@@ -27002,8 +27002,8 @@
 907: 2:
 907: 2:Scores: 600
 907: 2:Answer: ACT
-907: 1:Fire Event: DIED
 907: 2:Fire Event: DIED
+907: 1:Fire Event: DIED
 907: 2:Fire Event: KILL_OTHER_HERO
 ------------------------------------------
 908: 1:☼☼☼☼☼☼☼☼☼☼☼
@@ -27818,8 +27818,8 @@
 934: 2:Scores: 590
 934: 2:Answer: ACT
 934: 1:Fire Event: DIED
-934: 1:Fire Event: KILL_TREASURE_BOX
 934: 1:Fire Event: KILL_GHOST
+934: 1:Fire Event: KILL_TREASURE_BOX
 ------------------------------------------
 935: 1:☼☼☼☼☼☼☼☼☼☼☼
 935: 1:☼      &  ☼

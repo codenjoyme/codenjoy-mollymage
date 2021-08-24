@@ -1562,8 +1562,8 @@ public class GameTest extends AbstractGameTest {
 
         List<Potion> potions2 = field.potions().all();
         assertEquals(0, potions2.size());
-        assertEquals(1, potions1.size());
-        assertNotEquals(potions1.toString(), potions2.toString());
+        assertEquals(0, potions1.size());
+        assertEquals(potions1.toString(), potions2.toString());
     }
 
     @Test

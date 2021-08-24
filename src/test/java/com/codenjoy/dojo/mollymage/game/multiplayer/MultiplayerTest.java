@@ -1207,9 +1207,9 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         tick();
 
         events.verifyAllEvents(
-                "listener(0) => [KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(0) => [KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
                         "listener(1) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                        "listener(2) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
+                        "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
                         "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
         asrtBrd(" ҉҉҉ \n" +
@@ -1320,10 +1320,10 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         tick();
 
         events.verifyAllEvents(
-                "listener(0) => [KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                        "listener(1) => [DIED, KILL_ENEMY_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                        "listener(2) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
-                        "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
+                "listener(0) => [KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
+                "listener(1) => [DIED, KILL_ENEMY_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
         asrtBrd(" ҉҉҉ \n" +
                 "x҉҉♧x\n" +
@@ -1427,9 +1427,9 @@ public class MultiplayerTest extends AbstractMultiplayerTest {
         tick();
 
         events.verifyAllEvents(
-                "listener(0) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(0) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
                         "listener(1) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                        "listener(2) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
+                        "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
                         "listener(3) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
         asrtBrd(" ҉҉҉ \n" +

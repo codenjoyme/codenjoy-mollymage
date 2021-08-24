@@ -632,7 +632,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
             @Override
             public Iterable<? extends Point> elements(Player player) {
-                List<Point> elements = new LinkedList<>();
+                List<Point> elements = new PointField.ListOfList<>();
 
                 elements.addAll(MollyMage.this.heroes(ALL));
                 elements.addAll(MollyMage.this.boxes.all());

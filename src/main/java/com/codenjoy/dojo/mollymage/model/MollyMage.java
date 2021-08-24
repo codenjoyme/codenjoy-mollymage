@@ -58,9 +58,9 @@ public class MollyMage extends RoundField<Player> implements Field {
     private Dice dice;
     private GameSettings settings;
 
-    private List<Point> destroyedObjects = new LinkedList<>();
-    private List<Point> previousTickDestroyedObjects = new LinkedList<>();
-    private List<Potion> destroyedPotions = new LinkedList<>();
+    private List<Point> destroyedObjects;
+    private List<Point> previousTickDestroyedObjects;
+    private List<Potion> destroyedPotions;
 
     public MollyMage(Level level, Dice dice, GameSettings settings) {
         super(Events.START_ROUND, Events.WIN_ROUND, Events.DIED, settings);
@@ -69,6 +69,10 @@ public class MollyMage extends RoundField<Player> implements Field {
         players = new LinkedList<>();
         this.dice = dice;
         this.settings = settings;
+
+        destroyedObjects = new LinkedList<>();
+        previousTickDestroyedObjects = new LinkedList<>();
+        destroyedPotions = new LinkedList<>();
     }
 
     @Override

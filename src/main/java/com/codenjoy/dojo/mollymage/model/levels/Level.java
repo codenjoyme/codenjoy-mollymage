@@ -24,8 +24,8 @@ package com.codenjoy.dojo.mollymage.model.levels;
 
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
-import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.PointField;
 
 import java.util.List;
 
@@ -38,4 +38,6 @@ public interface Level {
     List<Wall> getWalls();
 
     List<TreasureBox> getBoxes();
+
+    PointField field();
 }

@@ -48,8 +48,6 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     int size();
 
-    List<Hero> heroes(boolean activeAliveOnly);
-
     List<Potion> potions(Hero hero);
 
     boolean isBarrier(Point pt, boolean isForHero);
@@ -91,4 +89,6 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
     PointField.Accessor<Ghost> ghosts();
 
     PointField.Accessor<TreasureBox> boxes();
+
+    PointField.Accessor<Hero> heroes();
 }

@@ -28,6 +28,7 @@ import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.EventListener;
+import com.codenjoy.dojo.services.PointField;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.stubbing.OngoingStubbing;
@@ -52,6 +53,7 @@ public class PlayerTest {
         field = mock(Field.class);
         when(field.settings()).thenReturn(settings);
         when(field.freeRandom(any())).thenReturn(Optional.of(pt(0, 0)));
+        when(field.heroes()).thenReturn(mock(PointField.Accessor.class));
 
         listener = mock(EventListener.class);
     }

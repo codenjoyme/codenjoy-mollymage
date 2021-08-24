@@ -26,6 +26,7 @@ import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.services.LengthToXY;
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.PointField;
 import com.codenjoy.dojo.utils.LevelUtils;
 
 import java.util.List;
@@ -63,5 +64,13 @@ public class LevelImpl implements Level {
     @Override
     public List<TreasureBox> getBoxes() {
         return LevelUtils.getObjects(xy, map, (point, element) -> new TreasureBox(point), TREASURE_BOX);
+    }
+
+    @Override
+    public PointField field() {
+        PointField result = new PointField(size());
+        result.addAll(getWalls());
+        result.addAll(getBoxes());
+        return result;
     }
 }

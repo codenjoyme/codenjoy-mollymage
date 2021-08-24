@@ -60,6 +60,13 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
     }
 
     @Override
+    public void init(Field field) {
+        super.init(field);
+
+        field.heroes().add(this);
+    }
+
+    @Override
     public void right() {
         if (!isActiveAndAlive()) return;
 

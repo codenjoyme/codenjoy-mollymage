@@ -42,6 +42,7 @@ import com.codenjoy.dojo.services.BoardUtils;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointField;
+import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.round.RoundField;
 import com.google.common.collect.HashMultimap;
@@ -56,38 +57,57 @@ import static java.util.stream.Collectors.toList;
 
 public class MollyMage extends RoundField<Player> implements Field {
 
-    public static final boolean ACTIVE_ALIVE = true;
-    public static final boolean ALL = !ACTIVE_ALIVE;
-
-    private List<Player> players = new LinkedList<>();
-
     private PointField field;
+    private List<Player> players;
+    private Dice dice;
+    private GameSettings settings;
+
     private TreasureBoxes boxes;
     private Ghosts ghosts;
-
     private List<Point> destroyedObjects = new LinkedList<>();
     private List<Point> previousTickDestroyedObjects = new LinkedList<>();
     private List<Potion> destroyedPotions = new LinkedList<>();
-    private Dice dice;
 
-    private GameSettings settings;
+    @Override
+    public void remove(Player player) {
+        super.remove(player);
+        removeAloneHeroes();
+    }
+
+    public void newGame(Player player) {
+        if (!players.contains(player)) {
+            players.add(player);
+        }
+        player.newHero(this);
+        removeAloneHeroes();
+    }
+
+    // TODO DF3D попробовать избавиться от этого метода
+    private void removeAloneHeroes() {
+        heroes().removeNotSame(players.stream().
+                map(GamePlayer::getHero)
+                .collect(toList()));
+    }
+
+    @Override
+    public void start(int round) {
+        super.start(round);
+        removeAloneHeroes();
+    }
 
     public MollyMage(Level level, Dice dice, GameSettings settings) {
         super(Events.START_ROUND, Events.WIN_ROUND, Events.DIED, settings);
-        this.settings = settings;
+
+        field = level.field();
+        players = new LinkedList<>();
         this.dice = dice;
-        init(level);
+        this.settings = settings;
 
         ghosts = new Ghosts(settings, dice);
         ghosts.init(this);
 
         boxes = new TreasureBoxes(settings, dice);
         boxes.init(this);
-    }
-
-    private void init(Level level) {
-        field = new PointField(level.size());
-        field.addAll(level.getWalls());
     }
 
     @Override
@@ -301,46 +321,6 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
-    public PointField.Accessor<Blast> blasts() {
-        return field.of(Blast.class);
-    }
-
-    @Override
-    public PointField.Accessor<Wall> walls() {
-        return field.of(Wall.class);
-    }
-
-    @Override
-    public PointField.Accessor<Poison> toxins() {
-        return field.of(Poison.class);
-    }
-
-    @Override
-    public PointField.Accessor<Potion> potions() {
-        return field.of(Potion.class);
-    }
-
-    @Override
-    public PointField.Accessor<Ghost> ghosts() {
-        return field.of(Ghost.class);
-    }
-
-    @Override
-    public PointField.Accessor<GhostHunter> hunters() {
-        return field.of(GhostHunter.class);
-    }
-
-    @Override
-    public PointField.Accessor<PerkOnBoard> perks() {
-        return field.of(PerkOnBoard.class);
-    }
-
-    @Override
-    public PointField.Accessor<TreasureBox> boxes() {
-        return field.of(TreasureBox.class);
-    }
-
-    @Override
     public void drop(Potion potion) {
         if (!existAtPlace(potion.getX(), potion.getY())) {
             potions().add(potion);
@@ -365,12 +345,14 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private List<Point> getBarriersForBlast() {
-        List<Point> result = new LinkedList();
-        result.addAll(this.walls().all());
-        result.addAll(this.ghosts().all());
-        result.addAll(this.hunters().all());
-        result.addAll(this.boxes().all());
-        result.addAll(heroes(ACTIVE_ALIVE));
+        List<Point> result = new LinkedList<>();
+        result.addAll(walls().all());
+        result.addAll(ghosts().all());
+        result.addAll(hunters().all());
+        result.addAll(boxes().all());
+        result.addAll(heroes().stream()
+                .filter(Hero::isActiveAndAlive)
+                .collect(toList()));
         return result;
     }
 
@@ -630,19 +612,11 @@ public class MollyMage extends RoundField<Player> implements Field {
         return pt.isOutOf(size());
     }
 
-    @Override
     public List<Hero> heroes(boolean activeAliveOnly) {
         return players.stream()
                 .map(Player::getHero)
                 .filter(hero -> !activeAliveOnly || hero.isActiveAndAlive())
                 .collect(toList());
-    }
-
-    public void newGame(Player player) {
-        if (!players.contains(player)) {
-            players.add(player);
-        }
-        player.newHero(this);
     }
 
     public BoardReader reader() {
@@ -658,7 +632,7 @@ public class MollyMage extends RoundField<Player> implements Field {
             public Iterable<? extends Point> elements(Player player) {
                 List<Point> elements = new LinkedList<>();
 
-                elements.addAll(MollyMage.this.heroes(ALL));
+                elements.addAll(MollyMage.this.heroes().all());
                 elements.addAll(MollyMage.this.boxes().all());
                 elements.addAll(MollyMage.this.ghosts().all());
                 elements.addAll(MollyMage.this.hunters().all());
@@ -689,4 +663,50 @@ public class MollyMage extends RoundField<Player> implements Field {
             potion.activateRemote(hero);
         }
     }
+
+    @Override
+    public PointField.Accessor<Blast> blasts() {
+        return field.of(Blast.class);
+    }
+
+    @Override
+    public PointField.Accessor<Wall> walls() {
+        return field.of(Wall.class);
+    }
+
+    @Override
+    public PointField.Accessor<Poison> toxins() {
+        return field.of(Poison.class);
+    }
+
+    @Override
+    public PointField.Accessor<Potion> potions() {
+        return field.of(Potion.class);
+    }
+
+    @Override
+    public PointField.Accessor<Ghost> ghosts() {
+        return field.of(Ghost.class);
+    }
+
+    @Override
+    public PointField.Accessor<GhostHunter> hunters() {
+        return field.of(GhostHunter.class);
+    }
+
+    @Override
+    public PointField.Accessor<PerkOnBoard> perks() {
+        return field.of(PerkOnBoard.class);
+    }
+
+    @Override
+    public PointField.Accessor<TreasureBox> boxes() {
+        return field.of(TreasureBox.class);
+    }
+
+    @Override
+    public PointField.Accessor<Hero> heroes() {
+        return field.of(Hero.class);
+    }
+
 }

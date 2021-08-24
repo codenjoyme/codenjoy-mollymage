@@ -97,9 +97,9 @@ public abstract class AbstractMultiplayerTest {
             games.add(new Single(player(i), printerFactory));
         }
 
-        games.forEach(g -> {
-            g.on(field);
-            g.newGame();
+        games.forEach(game -> {
+            game.on(field);
+            game.newGame();
         });
         resetHeroes();
     }

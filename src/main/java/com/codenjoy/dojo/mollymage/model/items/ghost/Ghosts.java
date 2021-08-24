@@ -43,7 +43,7 @@ public class Ghosts implements Tickable {
     public static final int MAX = 1000;
 
     private Dice dice;
-    protected Field field;
+    private Field field;
     private GameSettings settings;
 
     public Ghosts(GameSettings settings, Dice dice) {

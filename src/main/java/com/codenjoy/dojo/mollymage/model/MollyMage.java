@@ -214,7 +214,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
         for (Point pt : destroyedObjects) {
             if (pt instanceof TreasureBox) {
-                boxes.remove(pt);
+                boxes().remove(pt);
                 dropPerk(pt, dice);
             } else if (pt instanceof GhostHunter) {
                 hunters().remove(pt);
@@ -336,6 +336,11 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
+    public PointField.Accessor<TreasureBox> boxes() {
+        return field.of(TreasureBox.class);
+    }
+
+    @Override
     public void drop(Potion potion) {
         if (!existAtPlace(potion.getX(), potion.getY())) {
             potions().add(potion);
@@ -364,7 +369,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         result.addAll(this.walls().all());
         result.addAll(this.ghosts().all());
         result.addAll(this.hunters().all());
-        result.addAll(this.boxes.all());
+        result.addAll(this.boxes().all());
         result.addAll(heroes(ACTIVE_ALIVE));
         return result;
     }
@@ -391,7 +396,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         // собираем все разрушаемые стенки которые уже есть в радиусе
         // надо определить кто кого чем кикнул (ызрывные волны могут пересекаться)
         List<Point> all = new LinkedList<>();
-        all.addAll(boxes.all());
+        all.addAll(boxes().all());
         all.addAll(ghosts().all());
         all.addAll(hunters().all());
 
@@ -600,7 +605,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         }
 
         // TODO: test me
-        if (boxes.all().contains(pt)) {
+        if (boxes().contains(pt)) {
             return true;
         }
 
@@ -654,7 +659,7 @@ public class MollyMage extends RoundField<Player> implements Field {
                 List<Point> elements = new LinkedList<>();
 
                 elements.addAll(MollyMage.this.heroes(ALL));
-                elements.addAll(MollyMage.this.boxes.all());
+                elements.addAll(MollyMage.this.boxes().all());
                 elements.addAll(MollyMage.this.ghosts().all());
                 elements.addAll(MollyMage.this.hunters().all());
                 elements.addAll(MollyMage.this.walls().all());
@@ -670,11 +675,6 @@ public class MollyMage extends RoundField<Player> implements Field {
     @Override
     public GameSettings settings() {
         return settings;
-    }
-
-    @Override
-    public TreasureBoxes boxes() {
-        return boxes;
     }
 
     @Override

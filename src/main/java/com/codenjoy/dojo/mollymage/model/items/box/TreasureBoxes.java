@@ -43,19 +43,21 @@ public class TreasureBoxes implements Tickable { // TODO протестить к
     public static final int MAX = 1000;
 
     private Dice dice;
-    protected Field field;
-    private List<TreasureBox> boxes;
+    private Field field;
     private GameSettings settings;
 
     public TreasureBoxes(GameSettings settings, Dice dice) {
         this.settings = settings;
         this.dice = dice;
-        boxes = new LinkedList<>();
     }
 
     private int freeSpaces() {
         return (field.size()* field.size() - 1) // TODO -1 это один герой, а если их несколько?
                 - field.walls().size();
+    }
+
+    public void init(Field field) {
+        this.field = field;
     }
 
     @Override
@@ -69,7 +71,7 @@ public class TreasureBoxes implements Tickable { // TODO протестить к
         }
 
         int expected = settings.integer(TREASURE_BOX_COUNT);
-        int actual = boxes.size();
+        int actual = field.boxes().size();
         int delta = expected - actual;
         if (delta > freeSpaces()) {  // TODO и это потестить
             settings.integer(TREASURE_BOX_COUNT, expected - (delta - freeSpaces()) - 50); // 50 это место под героев
@@ -77,7 +79,7 @@ public class TreasureBoxes implements Tickable { // TODO протестить к
 
         if (actual > expected) { // TODO и удаление лишних
             for (int i = 0; i < (actual - expected); i++) {
-                boxes.remove(0);
+                field.boxes().remove(0);
             }
             return;
         }
@@ -91,7 +93,7 @@ public class TreasureBoxes implements Tickable { // TODO протестить к
                 continue;
             }
 
-            boxes.add(new TreasureBox(pt));
+            field.boxes().add(new TreasureBox(pt));
             checked.add(pt);
             actual++;
         }
@@ -99,29 +101,5 @@ public class TreasureBoxes implements Tickable { // TODO протестить к
         if (iteration >= MAX) {
             System.out.println("Dead loop at TreasureBoxes.generate!");
         }
-    }
-
-    public void init(Field field) {
-        this.field = field;
-    }
-
-    public List<TreasureBox> all() {
-        return boxes;
-    }
-
-    public void remove(Point pt) {
-        boxes.remove(pt);
-    }
-
-    public void add(TreasureBox box) {
-        boxes.add(box);
-    }
-
-    public void addAll(List<TreasureBox> boxes) {
-        this.boxes.addAll(boxes);
-    }
-
-    public boolean contains(Point pt) {
-        return boxes.contains(pt);
     }
 }

@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.game.singleplayer;
+package com.codenjoy.dojo.mollymage.game;
 
 /*-
  * #%L
@@ -10,12 +10,12 @@ package com.codenjoy.dojo.mollymage.game.singleplayer;
  * it under the terms of the GNU General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
@@ -41,10 +41,10 @@ import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.utils.events.EventsListenersAssert;
 import org.junit.Before;
+import org.mockito.Mockito;
 import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
@@ -55,70 +55,121 @@ import static org.mockito.Mockito.*;
 
 public abstract class AbstractGameTest {
 
-    protected Game game;
-    protected Hero hero;
-    protected GameSettings settings;
-    protected EventListener listener;
-    protected Dice dice;
-    protected Player player;
+    public static final int DEFAULT_COUNT = 3;
+
+    public static final int CATCH_PERK_SCORE_FOR_TEST = 10;
+    public static final int PERK_TIMEOUT_FOR_TEST = 10;
+
+    protected List<EventListener> listeners = new ArrayList<>();
+    protected List<Player> players = new ArrayList<>();
+    protected List<Game> games = new ArrayList<>();
+    protected List<Hero> heroes = new ArrayList<>();
+
+    protected GameSettings settings = settings();
+    protected Dice dice = mock(Dice.class);
     protected MollyMage field;
-    private PrinterFactory printer;
-    protected PerksSettingsWrapper perks;
-    protected EventsListenersAssert events;
+    private PrinterFactory printer = new PrinterFactoryImpl();
+    protected PerksSettingsWrapper perks = settings.perksSettings();
+    protected EventsListenersAssert events = new EventsListenersAssert(() -> listeners, Events.class);
     protected Level level;
 
-    @Before
-    public void setUp() {
-        dice = mock(Dice.class);
-        settings = spy(new TestGameSettings());
-        printer = new PrinterFactoryImpl();
-        events = new EventsListenersAssert(() -> Arrays.asList(listener), Events.class);
-        perks = settings.perksSettings();
-        potionsPower(1);
-
-        boxesCount(0);
-        ghostsCount(0);
+    protected void givenBr(String map) {
+        Point heroPosition = new LevelImpl(map).getHeroPosition();
+        dice(dice, heroPosition.getX(), heroPosition.getY());
+        givenBr(map, 1);
     }
 
-    protected void givenBr(String map) {
-        level = new LevelImpl(map);
-        listener = mock(EventListener.class);
-        player = new Player(listener, settings);
-        game = new Single(player, printer);
+    protected void givenBr(int count) {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n", count);
+    }
 
-        Point heroPosition = level.getHeroPosition();
-        dice(dice, heroPosition.getX(), heroPosition.getY());
+    protected void givenBr(String map, int count) {
+        for (int i = 0; i < count; i++) {
+            listeners.add(mock(EventListener.class));
+            players.add(new Player(listeners.get(i), settings));
+            games.add(new Single(players.get(i), printer));
+        }
+        level = new LevelImpl(map);
 
         field = new MollyMage(level, dice, settings);
         List<TreasureBox> boxes = level.getBoxes();
         boxesCount(boxes.size());
         field.boxes().addAll(boxes);
 
-        game.on(field);
-        game.newGame();
-        hero = (Hero) game.getJoystick();
+        for (Game game : games) {
+            game.on(field);
+            game.newGame();
+        }
+        resetHeroes();
+    }
+
+    protected GameSettings settings() {
+        return spy(new TestGameSettings())
+                .integer(POTION_POWER, 1)
+                .integer(TREASURE_BOX_COUNT, 0)
+                .integer(GHOSTS_COUNT, 0);
+    }
+
+    protected EventListener listener() {
+        return listeners.get(0);
+    }
+
+    protected EventListener listener(int index) {
+        return listeners.get(index);
+    }
+
+    protected Player player() {
+        return players.get(0);
+    }
+
+    protected Player player(int index) {
+        return players.get(index);
+    }
+
+    protected Game game() {
+        return games.get(0);
+    }
+
+    protected Game game(int index) {
+        return games.get(index);
+    }
+
+    protected Hero hero() {
+        return heroes.get(0);
+    }
+
+    protected Hero hero(int index) {
+        return heroes.get(index);
+    }
+
+    protected void tick() {
+        field.tick();
     }
 
     protected void gotoMaxUp() {
         for (int y = 0; y <= level.size() + 1; y++) {
-            hero.up();
+            hero().up();
             field.tick();
         }
     }
 
     protected void gotoMaxRight() {
         for (int x = 0; x <= level.size() + 1; x++) {
-            hero.right();
+            hero().right();
             field.tick();
         }
     }
 
     protected void newGameForDied() {
-        if (!player.isAlive()) {
-            field.newGame(player);
+        if (!player().isAlive()) {
+            field.newGame(player());
         }
-        hero = player.getHero();
-        hero.setAlive(true);
+        heroes.set(0, player().getHero());
+        hero().setAlive(true);
     }
 
     protected void canDropPotions(int count) {
@@ -126,25 +177,45 @@ public abstract class AbstractGameTest {
     }
 
     protected void assertHeroDie() {
-        assertEquals("Expected game over", true, game.isGameOver());
+        assertEquals("Expected game over", true, game().isGameOver());
     }
 
     protected void assertHeroAlive() {
-        assertFalse(game.isGameOver());
+        assertFalse(game().isGameOver());
     }
 
     protected void gotoBoardCenter() {
         for (int y = 0; y < level.size() / 2; y++) {
-            hero.up();
+            hero().up();
             field.tick();
-            hero.right();
+            hero().right();
             field.tick();
         }
     }
 
     protected void asrtBrd(String expected) {
         assertEquals(expected, printer.getPrinter(
-                field.reader(), player).print());
+                field.reader(), player()).print());
+    }
+
+    protected void asrtBrd(String board, Game game) {
+        assertEquals(board, game.getBoardAsString());
+    }
+
+    protected void assertBoards(String expected, Integer... indexes) {
+        events.assertAll(expected, games.size(), indexes, index -> {
+            Object actual = game(index).getBoardAsString();
+            return String.format("game(%s)\n%s\n", index, actual);
+        });
+    }
+
+    protected void newGameForAllDied() {
+        players.forEach(player -> {
+            if (!player.isAlive()) {
+                field.newGame(player(players.indexOf(player)));
+            }
+        });
+        resetHeroes();
     }
 
     protected void potionsPower(int power) {
@@ -154,7 +225,7 @@ public abstract class AbstractGameTest {
     protected void assertPotionPower(int power, String expected) {
         potionsPower(power);
 
-        hero.act();
+        hero().act();
         goOut();
         field.tick();
 
@@ -162,13 +233,13 @@ public abstract class AbstractGameTest {
     }
 
     protected void goOut() {
-        hero.right();
+        hero().right();
         field.tick();
-        hero.right();
+        hero().right();
         field.tick();
-        hero.up();
+        hero().up();
         field.tick();
-        hero.up();
+        hero().up();
         field.tick();
     }
 
@@ -202,6 +273,7 @@ public abstract class AbstractGameTest {
 
     protected Ghost ghostAt(int x, int y) {
         Ghost ghost = new Ghost(pt(x, y), field, dice);
+        ghost.stop();
         field.ghosts().add(ghost);
         return ghost;
     }
@@ -219,5 +291,14 @@ public abstract class AbstractGameTest {
             }
         }
         return result.stream().mapToInt(i -> i).toArray();
+    }
+
+    protected void resetHeroes() {
+        heroes.clear();
+        players.forEach(player -> heroes.add(player.getHero()));
+    }
+
+    protected void resetListeners() {
+        listeners.forEach(Mockito::reset);
     }
 }

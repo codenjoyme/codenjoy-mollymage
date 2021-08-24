@@ -46,6 +46,76 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         return new PotionExploder(1, PERKS_TIMEOUT);
     }
 
+    // перк исчезает спустя некоторое время
+    @Test
+    public void shouldPerkDissapearWhenTimeout() {
+        // given
+        settings.integer(PERK_PICK_TIMEOUT, 5);
+
+        givenBr("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "#☺   #\n" +
+                "######\n");
+
+        perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
+        perks.dropRatio(20); // 20%
+
+        dice(dice, 10); // must drop 2 perks
+
+        hero().act();
+        field.tick();
+
+        hero().right();
+        field.tick();
+
+        hero().right();
+        field.tick();
+
+        field.tick();
+
+        field.tick();
+
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "#҉# ##\n" +
+                "H҉҉☺ #\n" +
+                "#H####\n");
+
+        field.tick();
+
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "+  ☺ #\n" +
+                "#+####\n");
+
+        field.tick();
+        field.tick();
+        field.tick();
+
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "+  ☺ #\n" +
+                "#+####\n");
+
+        // when
+        field.tick();
+
+        // then
+        asrtBrd("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "   ☺ #\n" +
+                "# ####\n");
+    }
+
     // новый герой не может появиться на перке
     @Test
     public void shouldHeroCantSpawnOnPerk() {

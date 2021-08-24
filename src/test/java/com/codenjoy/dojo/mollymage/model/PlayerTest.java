@@ -54,6 +54,7 @@ public class PlayerTest {
         when(field.settings()).thenReturn(settings);
         when(field.freeRandom(any())).thenReturn(Optional.of(pt(0, 0)));
         when(field.heroes()).thenReturn(mock(PointField.Accessor.class));
+        when(field.heroes()).thenReturn(mock(PointField.Accessor.class));
 
         listener = mock(EventListener.class);
     }

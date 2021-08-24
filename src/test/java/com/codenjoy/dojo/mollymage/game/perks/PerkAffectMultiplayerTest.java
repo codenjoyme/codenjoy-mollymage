@@ -62,6 +62,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(1, hero(0).getPerks().size());
         assertEquals(0, hero(1).getPerks().size());
         assertEquals(0, hero(2).getPerks().size());
+
         events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n" +
                 "listener(2) => []\n");
@@ -147,6 +148,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "T    \n" +
                 "☺ ♥  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
@@ -174,6 +176,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺ ♥  \n" +
                 "     \n" +
                 "  3  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥ ☺  \n" +
@@ -193,11 +196,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺҉♣  \n" +
                 "  ҉  \n" +
                 "҉҉҉҉҉\n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥҉Ѡ  \n" +
                 "  ҉  \n" +
                 "҉҉҉҉҉\n", game(1));
+
         events.verifyAllEvents("listener(0) => [KILL_OTHER_HERO]\n" +
                 "listener(1) => [DIED]\n");
 
@@ -226,6 +231,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "  &  \n" +
                 "T    \n" +
                 "☺ ♥  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "  &  \n" +
@@ -248,11 +254,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺ &  \n" +
                 "   ♥ \n" +
                 "  3  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥ &  \n" +
                 "   ☺ \n" +
                 "  3  \n", game(1));
+
         events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
@@ -269,11 +277,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺҉x  \n" +
                 "  ҉♥ \n" +
                 "҉҉҉҉҉\n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥҉x  \n" +
                 "  ҉☺ \n" +
                 "҉҉҉҉҉\n", game(1));
+
         events.verifyAllEvents("listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_GHOST]\n");
 
@@ -303,6 +313,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "  #  \n" +
                 "T    \n" +
                 "☺ ♥  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "  #  \n" +
@@ -325,11 +336,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺ #  \n" +
                 "   ♥ \n" +
                 "  3  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥ #  \n" +
                 "   ☺ \n" +
                 "  3  \n", game(1));
+
         events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
@@ -346,11 +359,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺҉H  \n" +
                 "  ҉♥ \n" +
                 "҉҉҉҉҉\n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥҉H  \n" +
                 "  ҉☺ \n" +
                 "҉҉҉҉҉\n", game(1));
+
         events.verifyAllEvents("listener(0) => [KILL_TREASURE_BOX]\n" +
                 "listener(1) => [KILL_TREASURE_BOX]\n");
 
@@ -377,6 +392,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "T    \n" +
                 "☺ ♥  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
@@ -395,11 +411,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺ ♥  \n" +
                 "  4  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥ ☺  \n" +
                 "  4  \n", game(1));
+
         events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
@@ -420,6 +438,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺ c ♥\n" +
                 "     \n" +
                 "  1  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥ c ☺\n" +
@@ -438,18 +457,17 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺҉x ♥\n" +
                 "  ҉  \n" +
                 "҉҉҉҉҉\n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥҉x ☺\n" +
                 "  ҉  \n" +
                 "҉҉҉҉҉\n", game(1));
+
         events.verifyAllEvents("listener(0) => [DROP_PERK]\n" +
                 "listener(1) => [DROP_PERK]\n");
-        assertEquals(2, field.ghosts().all().size());
 
-        for (Ghost ghost : field.ghosts().all()) {
-            assertEquals(ghost.getClass(), GhostHunter.class);
-        }
+        assertEquals(2, field.hunters().size());
 
         // when field tick
         field.tick();
@@ -460,6 +478,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺x x♥\n" +
                 "     \n" +
                 "     \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥x x☺\n" +
@@ -543,11 +562,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "44   \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "44   \n", game(1));
+
         events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
@@ -565,11 +586,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺♥   \n" +
                 "҉҉   \n" +
                 "҉҉҉  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
                 "҉҉҉  \n", game(1));
+
         events.verifyAllEvents("listener(0) => []\n" +
                 "listener(1) => []\n");
     }
@@ -602,11 +625,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "55   \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "55   \n", game(1));
+
         events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
@@ -624,11 +649,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺♥   \n" +
                 "҉҉   \n" +
                 "҉҉҉  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
                 "҉҉҉  \n", game(1));
+
         events.verifyAllEvents("listener(0) => []\n" +
                 "listener(1) => []\n");
     }
@@ -664,11 +691,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "45&  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "45&  \n", game(1));
+
         events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
@@ -688,11 +717,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺♥   \n" +
                 "҉҉   \n" +
                 "҉҉x  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
                 "҉҉x  \n", game(1));
+
         events.verifyAllEvents("listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_GHOST]\n");
     }
@@ -728,11 +759,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "44&  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "44&  \n", game(1));
+
         events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => [CATCH_PERK]\n");
 
@@ -751,11 +784,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺♥   \n" +
                 "҉҉   \n" +
                 "҉҉x  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
                 "҉҉x  \n", game(1));
+
         events.verifyAllEvents("listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_GHOST]\n");
     }
@@ -791,11 +826,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺♥   \n" +
                 "     \n" +
                 "33&  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "     \n" +
                 "33&  \n", game(1));
+
         events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
@@ -809,6 +846,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺♥   \n" +
                 "     \n" +
                 "11&  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥☺   \n" +
@@ -827,6 +865,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺♥   \n" +
                 "҉҉   \n" +
                 "҉҉x  \n", game(0));
+
         events.verifyAllEvents("listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_GHOST]\n");
     }
@@ -862,11 +901,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺♥   \n" +
                 "     \n" +
                 "33&  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "     \n" +
                 "33&  \n", game(1));
+
         events.verifyAllEvents("listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
@@ -880,6 +921,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺♥   \n" +
                 "     \n" +
                 "11&  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥☺   \n" +
@@ -897,11 +939,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺♥   \n" +
                 "҉҉   \n" +
                 "҉҉x  \n", game(0));
+
         asrtBrd("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
                 "҉҉x  \n", game(1));
+
         events.verifyAllEvents("listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => []\n");
     }
@@ -940,6 +984,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 " 5r  \n" +
                 "     \n" +
                 "  ♥  \n", game(0));
+
         asrtBrd("  ♥  \n" +
                 "     \n" +
                 " 5r  \n" +
@@ -954,17 +999,20 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         // then
         events.verifyAllEvents("listener(0) => [DROP_PERK]\n" +
                 "listener(1) => [DROP_PERK]\n");
+
         asrtBrd("  ☺  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
                 "  ♥  \n", game(0));
+
         asrtBrd("  ♥  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
                 "  ☺  \n", game(1));
-        assertEquals(2, field.ghosts().all().size());
+
+        assertEquals(2, field.hunters().size());
 
         // when next tick two ghostHunters should been visible
         tick();
@@ -975,6 +1023,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "  x  \n" +
                 "  ♥  \n", game(0));
+
         asrtBrd("  ♥  \n" +
                 "  x  \n" +
                 "     \n" +
@@ -1014,6 +1063,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 " 1r  \n" +
                 "     \n" +
                 "  ♥  \n", game(0));
+
         asrtBrd("  ♥  \n" +
                 "     \n" +
                 " 1r  \n" +
@@ -1027,17 +1077,20 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         // then both heroes kill perk
         events.verifyAllEvents("listener(0) => [DROP_PERK]\n" +
                 "listener(1) => [DROP_PERK]\n");
+
         asrtBrd("  ☺  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
                 "  ♥  \n", game(0));
+
         asrtBrd("  ♥  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
                 "  ☺  \n", game(1));
-        assertEquals(2, field.ghosts().all().size());
+
+        assertEquals(2, field.hunters().size());
 
         // when next tick two ghostHunters should been visible
         tick();
@@ -1048,6 +1101,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "  x  \n" +
                 "  ♥  \n", game(0));
+
         asrtBrd("  ♥  \n" +
                 "  x  \n" +
                 "     \n" +
@@ -1087,6 +1141,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 " 1r  \n" +
                 "     \n" +
                 "  ♥  \n", game(0));
+
         asrtBrd("  ♥  \n" +
                 "     \n" +
                 " 1r  \n" +
@@ -1100,17 +1155,20 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         // then both heroes kill perk
         events.verifyAllEvents("listener(0) => []\n" +
                 "listener(1) => [DROP_PERK]\n");
+
         asrtBrd("  ☺  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
                 "  ♥  \n", game(0));
+
         asrtBrd("  ♥  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
                 "  ☺  \n", game(1));
-        assertEquals(1, field.ghosts().all().size());
+
+        assertEquals(1, field.hunters().size());
 
         // when next tick only one ghostHunter should been visible
         tick();
@@ -1121,6 +1179,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "  x  \n" +
                 "  ♥  \n", game(0));
+
         asrtBrd("  ♥  \n" +
                 "     \n" +
                 "     \n" +

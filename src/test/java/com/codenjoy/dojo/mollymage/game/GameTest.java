@@ -27,6 +27,7 @@ import com.codenjoy.dojo.mollymage.model.MollyMage;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Joystick;
+import com.codenjoy.dojo.services.PointField;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -39,7 +40,7 @@ public class GameTest extends AbstractGameTest {
     @Test
     public void shouldBoard_whenStartGame() {
         Level level = mock(Level.class);
-        when(level.size()).thenReturn(10);
+        when(level.field()).thenReturn(new PointField(10));
 
         MollyMage board = new MollyMage(level, dice, settings);
 

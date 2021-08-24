@@ -287,11 +287,24 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().act();
         field.tick();
 
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☻    \n");
+
         hero().right();
         field.tick();
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "3☺   \n");
 
         hero().left();
         field.tick();

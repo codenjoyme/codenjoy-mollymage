@@ -337,7 +337,6 @@ public class MollyMage extends RoundField<Player> implements Field {
 
         // убираем взрывную волну над обнаженными перками, тут взрыв сделал свое дело
         blasts().removeIn(perks().all());
-
     }
 
     private void makeBlastsFromDestroyedPotions() {
@@ -356,7 +355,6 @@ public class MollyMage extends RoundField<Player> implements Field {
             List<Blast> blast = makeBlast(poison);
             blasts().addAll(blast);
         }
-
         toxins().clear();
     }
 
@@ -422,8 +420,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void blastKillBoxesAndGhosts() {
-        // собираем все разрушаемые стенки которые уже есть в радиусе
-        // надо определить кто кого чем кикнул (ызрывные волны могут пересекаться)
+        // собираем все ящики и привидения которые уже есть в радиусе
+        // надо определить кто кого чем кикнул (взрывные волны могут пересекаться)
         List<Point> all = new LinkedList<>();
         all.addAll(boxes().all());
         all.addAll(ghosts().all());
@@ -432,11 +430,9 @@ public class MollyMage extends RoundField<Player> implements Field {
         Multimap<Hero, Point> deathMatch = LinkedHashMultimap.create();
         for (Blast blast : blasts()) {
             Hero hunter = blast.owner();
-            int index = all.indexOf(blast);
-            if (index != -1) {
-                Point object = all.get(index);
-                deathMatch.put(hunter, object);
-            }
+            all.stream()
+                    .filter(object -> object.itsMe(blast))
+                    .forEach(object -> deathMatch.put(hunter, object));
         }
 
         // у нас есть два списка, прибитые стенки
@@ -509,15 +505,11 @@ public class MollyMage extends RoundField<Player> implements Field {
         Multimap<Hero, Hero> deathMatch = HashMultimap.create();
         for (Blast blast : blasts()) {
             Hero hunter = blast.owner();
-            for (Player player : aliveActive()) {
-                Hero prey = player.getHero();
-                if (prey.itsMe(blast)) {
-                    Perk immune = prey.getPerk(Element.POTION_IMMUNE);
-                    if (immune == null) {
-                        deathMatch.put(hunter, prey);
-                    }
-                }
-            }
+            aliveActive().stream()
+                    .map(Player::getHero)
+                    .filter(hero -> hero.itsMe(blast))
+                    .filter(prey -> prey.getPerk(Element.POTION_IMMUNE) == null)
+                    .forEach(prey -> deathMatch.put(hunter, prey));
         }
 
         // у нас есть два списка, те кого прибили

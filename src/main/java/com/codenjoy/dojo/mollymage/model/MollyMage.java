@@ -68,6 +68,21 @@ public class MollyMage extends RoundField<Player> implements Field {
     private List<Point> previousTickDestroyedObjects = new LinkedList<>();
     private List<Potion> destroyedPotions = new LinkedList<>();
 
+    public MollyMage(Level level, Dice dice, GameSettings settings) {
+        super(Events.START_ROUND, Events.WIN_ROUND, Events.DIED, settings);
+
+        field = level.field();
+        players = new LinkedList<>();
+        this.dice = dice;
+        this.settings = settings;
+
+        ghosts = new Ghosts(settings, dice);
+        ghosts.init(this);
+
+        boxes = new TreasureBoxes(settings, dice);
+        boxes.init(this);
+    }
+
     @Override
     public void remove(Player player) {
         super.remove(player);
@@ -87,27 +102,6 @@ public class MollyMage extends RoundField<Player> implements Field {
         heroes().removeNotSame(players.stream().
                 map(GamePlayer::getHero)
                 .collect(toList()));
-    }
-
-    @Override
-    public void start(int round) {
-        super.start(round);
-        removeAloneHeroes();
-    }
-
-    public MollyMage(Level level, Dice dice, GameSettings settings) {
-        super(Events.START_ROUND, Events.WIN_ROUND, Events.DIED, settings);
-
-        field = level.field();
-        players = new LinkedList<>();
-        this.dice = dice;
-        this.settings = settings;
-
-        ghosts = new Ghosts(settings, dice);
-        ghosts.init(this);
-
-        boxes = new TreasureBoxes(settings, dice);
-        boxes.init(this);
     }
 
     @Override

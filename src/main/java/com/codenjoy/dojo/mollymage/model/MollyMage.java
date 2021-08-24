@@ -620,30 +620,15 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     public BoardReader reader() {
-        return new BoardReader<Player>() {
-            private final int size = MollyMage.this.size();
-
-            @Override
-            public int size() {
-                return size;
-            }
-
-            @Override
-            public Iterable<? extends Point> elements(Player player) {
-                List<Point> elements = new LinkedList<>();
-
-                elements.addAll(MollyMage.this.heroes().all());
-                elements.addAll(MollyMage.this.boxes().all());
-                elements.addAll(MollyMage.this.ghosts().all());
-                elements.addAll(MollyMage.this.hunters().all());
-                elements.addAll(MollyMage.this.walls().all());
-                elements.addAll(MollyMage.this.potions().all());
-                elements.addAll(MollyMage.this.blasts().all());
-                elements.addAll(MollyMage.this.perks().all());
-
-                return elements;
-            }
-        };
+        return field.reader(
+                Hero.class,
+                TreasureBox.class,
+                Ghost.class,
+                GhostHunter.class,
+                Wall.class,
+                Potion.class,
+                Blast.class,
+                PerkOnBoard.class);
     }
 
     @Override

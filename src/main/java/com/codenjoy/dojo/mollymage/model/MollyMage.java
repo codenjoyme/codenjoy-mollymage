@@ -243,8 +243,8 @@ public class MollyMage extends RoundField<Player> implements Field {
         ghostEatHeroes();       // омномном
         disablePotionRemote();  // если остались remote зелья без хозяев, взрываем
         makeBlastsFromPoisonThrower();  //  heroes throws poison
-        tactAllPotions();       // все что касается зелья и взрывов
-        tactAllPerks();         // тикаем перки на поле
+        tickAllPotions();       // все что касается зелья и взрывов
+        tickAllPerks();         // тикаем перки на поле
         heroes().tick();        // в том числе и героев (их перки и все что у них там может быть)
     }
 
@@ -260,7 +260,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         }
     }
 
-    private void tactAllPerks() {
+    private void tickAllPerks() {
         // тикаем счетчик перка на поле и если просрочка, удаляем
         perks().forEach(PerkOnBoard::tick);
         List<PerkOnBoard> alive = perks().stream()
@@ -268,10 +268,6 @@ public class MollyMage extends RoundField<Player> implements Field {
                 .collect(toList());
         perks().clear();
         perks().addAll(alive);
-    }
-
-    private void tactAllHeroes() {
-
     }
 
     private void applyAllHeroes() {
@@ -318,7 +314,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         }
     }
 
-    private void tactAllPotions() {
+    private void tickAllPotions() {
         potions().tick();
 
         do {

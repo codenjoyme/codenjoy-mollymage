@@ -30,18 +30,13 @@ import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.blast.BoomEngineOriginal;
 import com.codenjoy.dojo.mollymage.model.items.blast.Poison;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
-import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
-import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.model.items.perks.*;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.services.BoardUtils;
-import com.codenjoy.dojo.services.Dice;
-import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.PointField;
+import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.round.RoundField;
@@ -51,19 +46,18 @@ import com.google.common.collect.Multimap;
 
 import java.util.*;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BIG_BADABOOM;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.PERK_WHOLE_TEAM_GET;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static java.util.stream.Collectors.toList;
 
 public class MollyMage extends RoundField<Player> implements Field {
+
+    public static final int MAX = 1000;
 
     private PointField field;
     private List<Player> players;
     private Dice dice;
     private GameSettings settings;
 
-    private TreasureBoxes boxes;
-    private Ghosts ghosts;
     private List<Point> destroyedObjects = new LinkedList<>();
     private List<Point> previousTickDestroyedObjects = new LinkedList<>();
     private List<Potion> destroyedPotions = new LinkedList<>();
@@ -75,12 +69,6 @@ public class MollyMage extends RoundField<Player> implements Field {
         players = new LinkedList<>();
         this.dice = dice;
         this.settings = settings;
-
-        ghosts = new Ghosts(settings, dice);
-        ghosts.init(this);
-
-        boxes = new TreasureBoxes(settings, dice);
-        boxes.init(this);
     }
 
     @Override
@@ -107,6 +95,76 @@ public class MollyMage extends RoundField<Player> implements Field {
     @Override
     protected List<Player> players() {
         return players;
+    }
+
+    public void regenerateGhosts() {     // TODO потестить
+        if (settings.integer(GHOSTS_COUNT) < 0) {
+            settings.integer(GHOSTS_COUNT, 0);
+        }
+
+        int actual = ghosts().size();
+        int expected = settings.integer(GHOSTS_COUNT);
+
+        int iteration = 0;
+        Set<Point> checked = new HashSet<>();
+        while (actual < expected && iteration++ < MAX) {
+            Point pt = PointImpl.random(dice, field.size());
+
+            if (checked.contains(pt) || isBarrier(pt, !FOR_HERO)) {
+                checked.add(pt);
+                continue;
+            }
+
+            ghosts().add(new Ghost(pt, this, dice));
+            actual++;
+        }
+
+        if (iteration >= MAX) {
+            System.out.println("Dead loop at Ghosts.regenerate!");
+        }
+    }
+
+    private int freeSpaces() {
+        return (field.size()* field.size() - 1) // TODO -1 это один герой, а если их несколько?
+                - walls().size();
+    }
+
+    public void regenerateBoxes() {
+        if (settings.integer(TREASURE_BOX_COUNT) < 0) {
+            settings.integer(TREASURE_BOX_COUNT, 0);
+        }
+
+        int expected = settings.integer(TREASURE_BOX_COUNT);
+        int actual = boxes().size();
+        int delta = expected - actual;
+        if (delta > freeSpaces()) {  // TODO и это потестить
+            settings.integer(TREASURE_BOX_COUNT, expected - (delta - freeSpaces()) - 50); // 50 это место под героев
+        }
+
+        if (actual > expected) { // TODO и удаление лишних
+            for (int i = 0; i < (actual - expected); i++) {
+                boxes().remove(0);
+            }
+            return;
+        }
+
+        int iteration = 0;
+        Set<Point> checked = new HashSet<>();
+        while (actual < expected && iteration++ < MAX) {  // TODO и это
+            Point pt = PointImpl.random(dice, field.size());
+
+            if (checked.contains(pt) || isBarrier(pt, !FOR_HERO)) {
+                continue;
+            }
+
+            boxes().add(new TreasureBox(pt));
+            checked.add(pt);
+            actual++;
+        }
+
+        if (iteration >= MAX) {
+            System.out.println("Dead loop at TreasureBoxes.generate!");
+        }
     }
 
     public List<PerkOnBoard> pickPerk(Point pt) {
@@ -178,8 +236,9 @@ public class MollyMage extends RoundField<Player> implements Field {
     public void tickField() {
         applyAllHeroes();       // герои ходят
         ghostEatHeroes();       // омномном
-        boxes.tick();           // сундуки появляются
-        ghosts.tick();          // привидения водят свой хоровод
+        regenerateBoxes();      // сундуки появляются
+        regenerateGhosts();     // приведения появляются
+        ghosts().tick();        // привидения водят свой хоровод
         hunters().tick();       // охотники охотятся
         ghostEatHeroes();       // омномном
         disablePotionRemote();  // если остались remote зелья без хозяев, взрываем
@@ -212,8 +271,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void tactAllHeroes() {
-        for (Player p : players) {
-            p.getHero().tick();
+        for (Player player : players) {
+            player.getHero().tick();
         }
     }
 

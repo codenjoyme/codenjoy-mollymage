@@ -34,6 +34,7 @@ import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
@@ -47,7 +48,7 @@ public class PerformanceTest {
     @Test
     public void test() {
 
-        // about 12 sec
+        // about 9 sec
         int boardSize = 100;
         int walls = 1500;
         int ghosts = 200;
@@ -129,8 +130,8 @@ public class PerformanceTest {
             }
 
             @Override
-            public Iterable<? extends Point> elements(Object player) {
-                return generate(boardSize);
+            public void addAll(Object player, Consumer process) {
+                process.accept(generate(boardSize));
             }
         }, null).print();
         return level;

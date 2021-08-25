@@ -40,6 +40,7 @@ import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
@@ -647,13 +648,14 @@ public class BoomEngineOriginalTest {
             }
 
             @Override
-            public Iterable<? extends Point> elements(Player player) {
-                return new LinkedList<>() {{
+            public void addAll(Player player, Consumer<Iterable<? extends Point>> process) {
+                process.accept(new LinkedList<>() {{
                     addAll(level.getWalls());
                     add(new B(source));
                     addAll(blast);
-                }};
+                }});
             }
+
         }, null);
         return printer.print();
     }

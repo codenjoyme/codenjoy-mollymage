@@ -24,9 +24,11 @@ package com.codenjoy.dojo.mollymage.model.items.perks;
 
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Player;
+import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.Tickable;
+import com.codenjoy.dojo.services.field.Multimap;
 
 import java.util.List;
 
@@ -73,7 +75,7 @@ public abstract class Perk extends PointImpl implements Tickable, State<Element,
     }
 
     @Override
-    public Element state(Player player, List<State> alsoAtPoint) {
+    public Element state(Player player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
         return isActive() ? this.element : Element.NONE;
     }
 

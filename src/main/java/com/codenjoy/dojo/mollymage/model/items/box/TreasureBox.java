@@ -30,6 +30,7 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.State;
+import com.codenjoy.dojo.services.field.Multimap;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class TreasureBox extends PointImpl implements State<Element, Player> {
     }
 
     @Override
-    public Element state(Player player, List<State> alsoAtPoint) {
+    public Element state(Player player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
         Blast blast = filterOne(alsoAtPoint, Blast.class);
         if (blast != null) {
             return OPENING_TREASURE_BOX;

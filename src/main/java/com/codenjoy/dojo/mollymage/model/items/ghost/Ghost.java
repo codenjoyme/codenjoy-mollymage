@@ -29,6 +29,7 @@ import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.field.Multimap;
 
 import java.util.HashSet;
 import java.util.List;
@@ -67,7 +68,7 @@ public class Ghost extends PointImpl implements State<Element, Player>, Tickable
     }
 
     @Override
-    public Element state(Player player, List<State> alsoAtPoint) {
+    public Element state(Player player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
         Blast blast = filterOne(alsoAtPoint, Blast.class);
         if (blast != null) {
             return DEAD_GHOST;

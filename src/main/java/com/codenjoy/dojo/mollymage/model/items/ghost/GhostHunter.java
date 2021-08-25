@@ -34,6 +34,7 @@ import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.algs.DeikstraFindWay;
 import com.codenjoy.dojo.services.field.Accessor;
+import com.codenjoy.dojo.services.field.Multimap;
 
 import java.util.Arrays;
 import java.util.List;
@@ -109,7 +110,7 @@ public class GhostHunter extends Ghost {
     }
 
     @Override
-    public Element state(Player player, List<State> alsoAtPoint) {
+    public Element state(Player player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
         if (alive) {
             TreasureBox wall = filterOne(alsoAtPoint, TreasureBox.class);
             if (wall != null) {

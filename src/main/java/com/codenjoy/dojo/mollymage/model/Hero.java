@@ -28,10 +28,10 @@ import com.codenjoy.dojo.mollymage.model.items.blast.Poison;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.perks.HeroPerks;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
-import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.field.Multimap;
 import com.codenjoy.dojo.services.round.RoundPlayerHero;
 
 import java.util.List;
@@ -237,7 +237,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
     }
 
     @Override
-    public Element state(Player player, List<State> alsoAtPoint) {
+    public Element state(Player player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
         Potion potion = filterOne(alsoAtPoint, Potion.class);
         List<Hero> heroes = filter(alsoAtPoint, Hero.class);
         Ghost ghost = filterOne(alsoAtPoint, Ghost.class);

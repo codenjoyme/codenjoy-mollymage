@@ -33,6 +33,7 @@ import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.levels.LevelImpl;
 import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.field.Multimap;
 import com.codenjoy.dojo.services.field.PointField;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.Printer;
@@ -649,7 +650,7 @@ public class BoomEngineOriginalTest {
                 }
 
                 @Override
-                public Element state(Object player, List<State> alsoAtPoint) {
+                public Element state(Object player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
                     return Element.POTION_HERO;
                 }
             }

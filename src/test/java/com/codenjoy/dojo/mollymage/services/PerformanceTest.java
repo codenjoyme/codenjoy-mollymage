@@ -25,9 +25,7 @@ package com.codenjoy.dojo.mollymage.services;
 
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.profile.Profiler;
-import com.codenjoy.dojo.services.EventListener;
-import com.codenjoy.dojo.services.Game;
-import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
@@ -38,6 +36,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
@@ -48,10 +47,10 @@ public class PerformanceTest {
     @Test
     public void test() {
 
-        // about 20 sec
+        // about 17 sec
         int boardSize = 100;
-        int walls = 600;
-        int ghosts = 100;
+        int walls = 1500;
+        int ghosts = 200;
         int players = 100;
         int ticks = 100;
 
@@ -67,7 +66,9 @@ public class PerformanceTest {
             @Override
             public GameSettings getSettings() {
                 return super.getSettings()
+                        .bool(ROUNDS_ENABLED, false)
                         .string(LEVEL_MAP, level)
+                        .integer(POTION_POWER, 10)
                         .integer(TREASURE_BOX_COUNT, walls)
                         .integer(GHOSTS_COUNT, ghosts);
             }
@@ -80,13 +81,32 @@ public class PerformanceTest {
 
         for (int i = 0; i < ticks; i++) {
             for (Game game : games) {
-                game.getField().tick();
+                Joystick joystick = game.getJoystick();
+                int next = new RandomDice().next(5);
+                if (next % 2 == 0) {
+                    joystick.act();
+                }
+                switch (next) {
+                    case 0: joystick.left(); break;
+                    case 1: joystick.right(); break;
+                    case 2: joystick.up(); break;
+                    case 3: joystick.down(); break;
+                }
+            }
+            // because of MULTIPLE there is only one tick for all
+            games.get(0).getField().tick();
+            for (Game game : games) {
+                if (game.isGameOver()) {
+                    game.newGame();
+                }
             }
             profiler.done("tick");
 
+            Object board = null;
             for (int j = 0; j < games.size(); j++) {
-                games.get(j).getBoardAsString();
+                board = games.get(j).getBoardAsString();
             }
+//            System.out.println(board);
             profiler.done("print");
         }
 
@@ -94,10 +114,10 @@ public class PerformanceTest {
 
         int reserve = 3;
         // сколько пользователей - столько раз выполнялось
-        assertLess("print", 12000 * reserve);
-        assertLess("tick", 26000 * reserve);
+        assertLess("print", 10000 * reserve);
+        assertLess("tick", 6000 * reserve);
         // выполнялось единожды
-        assertLess("creation", 500 * reserve);
+        assertLess("creation", 2000 * reserve);
 
     }
 

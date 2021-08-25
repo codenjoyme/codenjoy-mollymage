@@ -27,7 +27,7 @@ import com.codenjoy.dojo.mollymage.model.MollyMage;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Joystick;
-import com.codenjoy.dojo.services.PointField;
+import com.codenjoy.dojo.services.field.PointField;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -26,11 +26,10 @@ import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.services.LengthToXY;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.PointField;
+import com.codenjoy.dojo.services.field.PointField;
 import com.codenjoy.dojo.utils.LevelUtils;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static com.codenjoy.dojo.games.mollymage.Element.*;
 

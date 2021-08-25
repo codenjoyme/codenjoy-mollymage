@@ -25,7 +25,7 @@ package com.codenjoy.dojo.mollymage.model.levels;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.PointField;
+import com.codenjoy.dojo.services.field.PointField;
 
 import java.util.List;
 

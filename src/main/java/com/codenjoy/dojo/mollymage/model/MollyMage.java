@@ -149,7 +149,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
         if (actual > expected) { // TODO и удаление лишних
             for (int i = 0; i < (actual - expected); i++) {
-                boxes().remove(0);
+                boxes().removeAny();
             }
             return;
         }

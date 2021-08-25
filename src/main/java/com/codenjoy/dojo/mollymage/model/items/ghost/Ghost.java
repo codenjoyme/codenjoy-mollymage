@@ -31,6 +31,7 @@ import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.services.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static com.codenjoy.dojo.games.mollymage.Element.DEAD_GHOST;
@@ -66,7 +67,7 @@ public class Ghost extends PointImpl implements State<Element, Player>, Tickable
     }
 
     @Override
-    public Element state(Player player, Object... alsoAtPoint) {
+    public Element state(Player player, List<State> alsoAtPoint) {
         Blast blast = filterOne(alsoAtPoint, Blast.class);
         if (blast != null) {
             return DEAD_GHOST;

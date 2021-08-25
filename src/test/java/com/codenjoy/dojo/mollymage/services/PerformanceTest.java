@@ -26,12 +26,14 @@ package com.codenjoy.dojo.mollymage.services;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.profile.Profiler;
 import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.field.PointField;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.utils.TestUtils;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class PerformanceTest {
     @Test
     public void test() {
 
-        // about 12 sec
+        // about 9 sec
         int boardSize = 100;
         int walls = 1500;
         int ghosts = 200;
@@ -129,8 +131,15 @@ public class PerformanceTest {
             }
 
             @Override
-            public Iterable<? extends Point> elements(Object player) {
-                return generate(boardSize);
+            public List<Class<? extends Point>> order() {
+                return Arrays.asList(Wall.class);
+            }
+
+            @Override
+            public PointField elements(Object player) {
+                return new PointField(size()){{
+                    addAll(generate(boardSize));
+                }};
             }
         }, null).print();
         return level;

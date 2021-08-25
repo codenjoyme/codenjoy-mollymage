@@ -29,8 +29,6 @@ import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.Tickable;
 
-import java.util.List;
-
 public class PerkOnBoard extends Wall implements State<Element, Player>, Tickable {
 
     private final Perk perk;
@@ -46,7 +44,7 @@ public class PerkOnBoard extends Wall implements State<Element, Player>, Tickabl
     }
 
     @Override
-    public Element state(Player player, List<State> alsoAtPoint) {
+    public Element state(Player player, Object... alsoAtPoint) {
         return perk != null ? this.perk.state(player, alsoAtPoint) : Element.NONE;
     }
 

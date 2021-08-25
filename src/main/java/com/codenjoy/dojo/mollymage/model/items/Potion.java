@@ -125,7 +125,7 @@ public class Potion extends PointImpl implements Tickable, State<Element, Player
     }
 
     @Override
-    public Element state(Player player, List<State> alsoAtPoint) {
+    public Element state(Player player, Object... alsoAtPoint) {
         switch (timer) {
             case 1:
                 return Element.POTION_TIMER_1;

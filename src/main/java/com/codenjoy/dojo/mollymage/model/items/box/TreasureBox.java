@@ -31,8 +31,6 @@ import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.State;
 
-import java.util.List;
-
 import static com.codenjoy.dojo.games.mollymage.Element.OPENING_TREASURE_BOX;
 import static com.codenjoy.dojo.games.mollymage.Element.TREASURE_BOX;
 import static com.codenjoy.dojo.services.StateUtils.filterOne;
@@ -48,7 +46,7 @@ public class TreasureBox extends PointImpl implements State<Element, Player> {
     }
 
     @Override
-    public Element state(Player player, List<State> alsoAtPoint) {
+    public Element state(Player player, Object... alsoAtPoint) {
         Blast blast = filterOne(alsoAtPoint, Blast.class);
         if (blast != null) {
             return OPENING_TREASURE_BOX;

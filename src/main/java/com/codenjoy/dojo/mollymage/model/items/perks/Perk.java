@@ -28,8 +28,6 @@ import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.Tickable;
 
-import java.util.List;
-
 public abstract class Perk extends PointImpl implements Tickable, State<Element, Player> {
 
     private final String name;
@@ -73,7 +71,7 @@ public abstract class Perk extends PointImpl implements Tickable, State<Element,
     }
 
     @Override
-    public Element state(Player player, List<State> alsoAtPoint) {
+    public Element state(Player player, Object... alsoAtPoint) {
         return isActive() ? this.element : Element.NONE;
     }
 

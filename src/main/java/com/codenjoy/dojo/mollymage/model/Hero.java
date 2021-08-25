@@ -237,7 +237,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
     }
 
     @Override
-    public Element state(Player player, List<State> alsoAtPoint) {
+    public Element state(Player player, Object... alsoAtPoint) {
         Potion potion = filterOne(alsoAtPoint, Potion.class);
         List<Hero> heroes = filter(alsoAtPoint, Hero.class);
         Ghost ghost = filterOne(alsoAtPoint, Ghost.class);

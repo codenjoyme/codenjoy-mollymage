@@ -32,6 +32,7 @@ import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.algs.DeikstraFindWay;
+import com.codenjoy.dojo.services.field.Accessor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +55,7 @@ public class GhostHunter extends Ghost {
     }
 
     public DeikstraFindWay.Possible possible(Field field) {
-        List<Wall> walls = field.walls().all();
+        Accessor<Wall> walls = field.walls();
 
         return new DeikstraFindWay.Possible() {
             @Override

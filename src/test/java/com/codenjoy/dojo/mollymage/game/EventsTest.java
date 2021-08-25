@@ -181,7 +181,7 @@ public class EventsTest extends AbstractGameTest {
 
         dice(dice, 3, 4, Direction.ACT.value()); // новое привидение, стоит не двигается
         field.tick();
-        field.ghosts().all().forEach(Ghost::stop); // и не будет больше двигаться
+        field.ghosts().stream().forEach(Ghost::stop); // и не будет больше двигаться
 
         asrtBrd("  ☺& \n" +
                 "#2   \n" +
@@ -204,7 +204,7 @@ public class EventsTest extends AbstractGameTest {
 
         dice(dice, 3, 3, Direction.ACT.value()); // новое привидение, стоит не двигается
         field.tick();
-        field.ghosts().all().forEach(Ghost::stop); // и не будет больше двигаться
+        field.ghosts().stream().forEach(Ghost::stop); // и не будет больше двигаться
 
         asrtBrd(" ҉☺&#\n" +
                 "H҉҉& \n" +
@@ -393,7 +393,7 @@ public class EventsTest extends AbstractGameTest {
         asrtBrd("##&\n" +
                 "#☺#\n" +
                 "## \n");
-        assertEquals(1, field.ghosts().all().size());
+        assertEquals(1, field.ghosts().size());
     }
 
     private int[] preparedCoordinatesForBoxesAndGhosts() {

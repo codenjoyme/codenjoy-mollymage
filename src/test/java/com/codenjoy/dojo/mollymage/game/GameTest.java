@@ -121,7 +121,7 @@ public class GameTest extends AbstractGameTest {
                 "###  \n" +
                 "#☺#  \n" +
                 "2##  \n");
-        assertEquals(7, field.boxes().all().size());
+        assertEquals(7, field.boxes().size());
 
         // when field tick 2 times
         field.tick();
@@ -146,7 +146,7 @@ public class GameTest extends AbstractGameTest {
                 "###  \n" +
                 " ☺#  \n" +
                 "# #  \n");
-        assertEquals(6, field.boxes().all().size());
+        assertEquals(6, field.boxes().size());
 
 
         // when next tick - empty spaces should been filled by boxes
@@ -159,7 +159,7 @@ public class GameTest extends AbstractGameTest {
                 "###  \n" +
                 "#☺#  \n" +
                 "###  \n");
-        assertEquals(8, field.boxes().all().size());
+        assertEquals(8, field.boxes().size());
     }
 
     @Test

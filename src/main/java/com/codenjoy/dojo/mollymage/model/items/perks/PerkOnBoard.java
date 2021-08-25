@@ -28,7 +28,6 @@ import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.Tickable;
-import com.codenjoy.dojo.services.field.Multimap;
 
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class PerkOnBoard extends Wall implements State<Element, Player>, Tickabl
     }
 
     @Override
-    public Element state(Player player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
+    public Element state(Player player, List<State> alsoAtPoint) {
         return perk != null ? this.perk.state(player, alsoAtPoint) : Element.NONE;
     }
 

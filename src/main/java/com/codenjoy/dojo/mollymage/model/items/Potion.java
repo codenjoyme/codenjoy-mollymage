@@ -27,11 +27,9 @@ import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Field;
 import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.Player;
-import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.Tickable;
-import com.codenjoy.dojo.services.field.Multimap;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -127,7 +125,7 @@ public class Potion extends PointImpl implements Tickable, State<Element, Player
     }
 
     @Override
-    public Element state(Player player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
+    public Element state(Player player, List<State> alsoAtPoint) {
         switch (timer) {
             case 1:
                 return Element.POTION_TIMER_1;

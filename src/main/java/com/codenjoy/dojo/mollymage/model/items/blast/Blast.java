@@ -26,10 +26,8 @@ package com.codenjoy.dojo.mollymage.model.items.blast;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.Player;
-import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.State;
-import com.codenjoy.dojo.services.field.Multimap;
 
 import java.util.List;
 
@@ -49,7 +47,7 @@ public class Blast extends PointImpl implements State<Element, Player> {
     }
 
     @Override
-    public Element state(Player player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
+    public Element state(Player player, List<State> alsoAtPoint) {
         return BOOM;
     }
 }

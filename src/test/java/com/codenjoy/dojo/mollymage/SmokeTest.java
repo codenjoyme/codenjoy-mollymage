@@ -45,7 +45,7 @@ public class SmokeTest {
     public void test() {
         Dice dice = LocalGameRunner.getDice("435874345435874365843564398", 100, 200);
 
-        // about 3 sec
+        // about 2.5 sec
         // coverage 881 lines from 1071
         int ticks = 1000;
 

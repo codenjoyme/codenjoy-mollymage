@@ -648,8 +648,8 @@ public class BoomEngineOriginalTest {
             }
 
             @Override
-            public void addAll(Player player, Consumer<Iterable<? extends Point>> process) {
-                process.accept(new LinkedList<>() {{
+            public void addAll(Player player, Consumer<Iterable<? extends Point>> processor) {
+                processor.accept(new LinkedList<>() {{
                     addAll(level.getWalls());
                     add(new B(source));
                     addAll(blast);

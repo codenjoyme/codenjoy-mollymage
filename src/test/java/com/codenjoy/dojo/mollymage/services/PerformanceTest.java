@@ -130,8 +130,8 @@ public class PerformanceTest {
             }
 
             @Override
-            public void addAll(Object player, Consumer process) {
-                process.accept(generate(boardSize));
+            public void addAll(Object player, Consumer processor) {
+                processor.accept(generate(boardSize));
             }
         }, null).print();
         return level;

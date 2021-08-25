@@ -31,7 +31,6 @@ import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.algs.DeikstraFindWay;
 import com.codenjoy.dojo.services.field.Accessor;
 
@@ -109,7 +108,7 @@ public class GhostHunter extends Ghost {
     }
 
     @Override
-    public Element state(Player player, List<State> alsoAtPoint) {
+    public Element state(Player player, Object... alsoAtPoint) {
         if (alive) {
             TreasureBox wall = filterOne(alsoAtPoint, TreasureBox.class);
             if (wall != null) {

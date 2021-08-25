@@ -29,19 +29,15 @@ import com.codenjoy.dojo.mollymage.model.Field;
 import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.MollyMage;
 import com.codenjoy.dojo.mollymage.model.Player;
-import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.levels.LevelImpl;
 import com.codenjoy.dojo.services.*;
-import com.codenjoy.dojo.services.field.Multimap;
-import com.codenjoy.dojo.services.field.PointField;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -638,11 +634,6 @@ public class BoomEngineOriginalTest {
                 return level.size();
             }
 
-            @Override
-            public List<Class<? extends Point>> order() {
-                return Arrays.asList(Wall.class, B.class, Blast.class);
-            }
-
             class B extends PointImpl implements State<Element, Object> {
 
                 public B(Point point) {
@@ -650,14 +641,14 @@ public class BoomEngineOriginalTest {
                 }
 
                 @Override
-                public Element state(Object player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
+                public Element state(Object player, Object... alsoAtPoint) {
                     return Element.POTION_HERO;
                 }
             }
 
             @Override
-            public PointField elements(Player player) {
-                return new PointField(size()) {{
+            public Iterable<? extends Point> elements(Player player) {
+                return new LinkedList<>() {{
                     addAll(level.getWalls());
                     add(new B(source));
                     addAll(blast);

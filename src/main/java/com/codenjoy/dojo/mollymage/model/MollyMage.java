@@ -389,32 +389,16 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private List<Blast> makeBlast(Poison poison) {
-        List barriers = getBarriersForBlast();
-
-        return new BoomEngineOriginal(poison.getOwner())
-                .boom(barriers, size(), poison);
-    }
-
-    private List<Point> getBarriersForBlast() {
-        List<Point> result = new LinkedList<>();
-        result.addAll(walls().all());
-        result.addAll(ghosts().all());
-        result.addAll(hunters().all());
-        result.addAll(boxes().all());
-        result.addAll(heroes().stream()
-                .filter(Hero::isActiveAndAlive)
-                .collect(toList()));
-        return result;
+        return new BoomEngineOriginal(this, poison.getOwner())
+                .boom(poison);
     }
 
     private List<Blast> makeBlast(Potion potion) {
-        List<Point> barriers = getBarriersForBlast();
-
         // TODO move potion inside BoomEngine
         List<Blast> result = new ArrayList<>();
         for (Hero owner : potion.getOwners()) {
-            result.addAll(new BoomEngineOriginal(owner)
-                    .boom(barriers, size(), potion, potion.getPower()));
+            result.addAll(new BoomEngineOriginal(this, owner)
+                    .boom(potion, potion.getPower()));
         }
         return result;
     }

@@ -29,7 +29,7 @@ import java.util.List;
 
 public interface BoomEngine {
 
-    List<Blast> boom(List<? extends Point> barriers, int boardSize, Point source, int radius);
+    List<Blast> boom(Point source, int radius);
 
-    List<Blast> boom(List<? extends Point> barriers, int size, Poison poison);
+    List<Blast> boom(Poison poison);
 }

@@ -23,6 +23,7 @@ package com.codenjoy.dojo.mollymage.model.items.blast;
  */
 
 
+import com.codenjoy.dojo.mollymage.model.Field;
 import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.services.Direction;
@@ -33,53 +34,70 @@ import java.util.List;
 
 public class BoomEngineOriginal implements BoomEngine {
 
+    private Field field;
     private Hero hero;
 
-    public BoomEngineOriginal(Hero hero) {
+    public BoomEngineOriginal(Field field, Hero hero) {
         this.hero = hero;
+        this.field = field;
     }
 
     @Override
-    public List<Blast> boom(List<? extends Point> barriers, int boardSize, Point source, int radius) {
+    public List<Blast> boom(Point source, int radius) {
         List<Blast> blasts = new LinkedList<>();
 
-        add(barriers, boardSize, blasts, source);
+        add(blasts, source);
 
         for (Direction direction : Direction.getValues()) {
-            addBlast(barriers, boardSize, blasts, radius, direction, source);
+            addBlast(blasts, radius, direction, source);
         }
 
         return blasts;
     }
 
     @Override
-    public List<Blast> boom(List<? extends Point> barriers, int size, Poison poison) {
+    public List<Blast> boom(Poison poison) {
         List<Blast> blasts = new LinkedList<>();
 
-        addBlast(barriers, size, blasts, poison.getPower(), poison.getDirection(), hero);
+        addBlast(blasts, poison.getPower(), poison.getDirection(), hero);
 
         return blasts;
     }
 
-    private void addBlast(List<? extends Point> barriers, int size, List<Blast> blasts, int length, Direction direction, Point point) {
+    private boolean barriersAt(Point pt) {
+        return field.ghosts().contains(pt)
+                || field.hunters().contains(pt)
+                || field.boxes().contains(pt)
+                || field.heroes().stream()
+                        .filter(Hero::isActiveAndAlive)
+                        .anyMatch(hero -> hero.itsMe(pt));
+    }
+
+    private boolean wallAt(Point pt) {
+        return field.walls().contains(pt);
+    }
+
+    private void addBlast(List<Blast> blasts, int length, Direction direction, Point point) {
         Point pt = point.copy();
         for (int i = 0; i < length; i++) {
             pt = direction.change(pt);
-            if (!add(barriers, size, blasts, pt)) {
+            if (!add(blasts, pt)) {
                 break;
             }
         }
     }
 
-    private boolean add(List<? extends Point> barriers, int boardSize, List<Blast> blasts, Point pt) {
-        if (pt.isOutOf(boardSize)) {
+    private boolean add(List<Blast> blasts, Point pt) {
+        if (pt.isOutOf(field.size())) {
             return false;
         }
 
-        if (barriers.contains(pt)) {
-            if (isNotWall(barriers, pt)) {
-                blasts.add(new Blast(pt.getX(), pt.getY(), hero));
-            }
+        if (wallAt(pt)) {
+            return false;
+        }
+
+        if (barriersAt(pt)) {
+            blasts.add(new Blast(pt.getX(), pt.getY(), hero));
             return false;
         }
 

@@ -34,7 +34,7 @@ import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.field.PointField;
+import com.codenjoy.dojo.services.field.Accessor;
 import com.codenjoy.dojo.services.round.RoundGameField;
 
 import java.util.List;
@@ -74,21 +74,21 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     void explodeAllPotions(Hero hero);
 
-    PointField.Accessor<Poison> toxins();
+    Accessor<Poison> toxins();
 
-    PointField.Accessor<Wall> walls();
+    Accessor<Wall> walls();
 
-    PointField.Accessor<Potion> potions();
+    Accessor<Potion> potions();
 
-    PointField.Accessor<Blast> blasts();
+    Accessor<Blast> blasts();
 
-    PointField.Accessor<GhostHunter> hunters();
+    Accessor<GhostHunter> hunters();
 
-    PointField.Accessor<PerkOnBoard> perks();
+    Accessor<PerkOnBoard> perks();
 
-    PointField.Accessor<Ghost> ghosts();
+    Accessor<Ghost> ghosts();
 
-    PointField.Accessor<TreasureBox> boxes();
+    Accessor<TreasureBox> boxes();
 
-    PointField.Accessor<Hero> heroes();
+    Accessor<Hero> heroes();
 }

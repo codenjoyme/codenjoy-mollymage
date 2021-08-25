@@ -37,6 +37,7 @@ import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.field.Accessor;
 import com.codenjoy.dojo.services.field.PointField;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
@@ -694,47 +695,47 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
-    public PointField.Accessor<Blast> blasts() {
+    public Accessor<Blast> blasts() {
         return field.of(Blast.class);
     }
 
     @Override
-    public PointField.Accessor<Wall> walls() {
+    public Accessor<Wall> walls() {
         return field.of(Wall.class);
     }
 
     @Override
-    public PointField.Accessor<Poison> toxins() {
+    public Accessor<Poison> toxins() {
         return field.of(Poison.class);
     }
 
     @Override
-    public PointField.Accessor<Potion> potions() {
+    public Accessor<Potion> potions() {
         return field.of(Potion.class);
     }
 
     @Override
-    public PointField.Accessor<Ghost> ghosts() {
+    public Accessor<Ghost> ghosts() {
         return field.of(Ghost.class);
     }
 
     @Override
-    public PointField.Accessor<GhostHunter> hunters() {
+    public Accessor<GhostHunter> hunters() {
         return field.of(GhostHunter.class);
     }
 
     @Override
-    public PointField.Accessor<PerkOnBoard> perks() {
+    public Accessor<PerkOnBoard> perks() {
         return field.of(PerkOnBoard.class);
     }
 
     @Override
-    public PointField.Accessor<TreasureBox> boxes() {
+    public Accessor<TreasureBox> boxes() {
         return field.of(TreasureBox.class);
     }
 
     @Override
-    public PointField.Accessor<Hero> heroes() {
+    public Accessor<Hero> heroes() {
         return field.of(Hero.class);
     }
 

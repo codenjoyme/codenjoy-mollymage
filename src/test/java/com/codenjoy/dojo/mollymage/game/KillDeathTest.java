@@ -717,7 +717,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => [DIED]\n");
+                "listener(1) => [DIED]\n");
     }
 
     // если привидение убил другого героя,
@@ -756,7 +756,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => [DIED]\n");
+                "listener(1) => [DIED]\n");
     }
 
     // А что если герой идет на привидение а тот идет на
@@ -794,6 +794,6 @@ public class KillDeathTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => [DIED]\n");
+                "listener(1) => [DIED]\n");
     }
 }

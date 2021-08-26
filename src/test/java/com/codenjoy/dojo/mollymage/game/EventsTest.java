@@ -522,7 +522,7 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
-                        "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
+                "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
 
         dice(dice, // новые коробки
                 4, 4);
@@ -580,7 +580,7 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_TREASURE_BOX]\n" +
-                        "listener(1) => [KILL_TREASURE_BOX]\n");
+                "listener(1) => [KILL_TREASURE_BOX]\n");
 
         dice(dice, 4, 4); // новая коробка
         tick();
@@ -625,7 +625,7 @@ public class EventsTest extends AbstractGameTest {
         // по 1 ачивке за стенку, потому что взрывная волна не проходит через стенку
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
-                        "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
+                "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
 
         dice(dice, // новые коробки
                 4, 4,
@@ -670,9 +670,9 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
-                        "listener(1) => [DIED, KILL_TREASURE_BOX]\n" +
-                        "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
-                        "listener(3) => [DIED, KILL_TREASURE_BOX]\n");
+                "listener(1) => [DIED, KILL_TREASURE_BOX]\n" +
+                "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
+                "listener(3) => [DIED, KILL_TREASURE_BOX]\n");
 
         dice(dice, // новые коробки
                 4, 4);
@@ -718,9 +718,9 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n" +
-                        "listener(1) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n" +
-                        "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
-                        "listener(3) => [DIED, KILL_TREASURE_BOX]\n");
+                "listener(1) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n" +
+                "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
+                "listener(3) => [DIED, KILL_TREASURE_BOX]\n");
 
         dice(dice, // новые коробки
                 4, 4,
@@ -775,7 +775,7 @@ public class EventsTest extends AbstractGameTest {
         // по 1 ачивке за стенку, потому что взрывная волна не проходит через стенку
         events.verifyAllEvents(
                 "listener(0) => [KILL_TREASURE_BOX]\n" +
-                        "listener(1) => [KILL_TREASURE_BOX]\n");
+                "listener(1) => [KILL_TREASURE_BOX]\n");
 
 
         dice(dice, // новые коробки
@@ -817,7 +817,7 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_GHOST]\n" +
-                        "listener(1) => [DIED, KILL_GHOST]\n");
+                "listener(1) => [DIED, KILL_GHOST]\n");
 
         tick();
 
@@ -859,7 +859,7 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
-                        "listener(1) => [KILL_GHOST]\n");
+                "listener(1) => [KILL_GHOST]\n");
 
         tick();
 
@@ -900,9 +900,9 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_GHOST]\n" +
-                        "listener(1) => [DIED, KILL_GHOST]\n" +
-                        "listener(2) => [DIED, KILL_GHOST]\n" +
-                        "listener(3) => [DIED, KILL_GHOST]\n");
+                "listener(1) => [DIED, KILL_GHOST]\n" +
+                "listener(2) => [DIED, KILL_GHOST]\n" +
+                "listener(3) => [DIED, KILL_GHOST]\n");
 
         tick();
 
@@ -966,10 +966,10 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         asrtBrd("     \n" +
-                        "&244&\n" +
-                        " 1#3 \n" +
-                        "&223&\n" +
-                        "☺♥♥♥ \n",
+                "&244&\n" +
+                " 1#3 \n" +
+                "&223&\n" +
+                "☺♥♥♥ \n",
                 game(0));
 
         hero(0).move(0, 0);
@@ -978,25 +978,25 @@ public class EventsTest extends AbstractGameTest {
         hero(3).move(3, 3);
 
         asrtBrd("     \n" +
-                        "&24♠&\n" +
-                        " 1#3 \n" +
-                        "&♠2♠&\n" +
-                        "☺    \n",
+                "&24♠&\n" +
+                " 1#3 \n" +
+                "&♠2♠&\n" +
+                "☺    \n",
                 game(0));
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n");
 
         tick();
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
-                        "listener(1) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                        "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                        "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
+                "listener(1) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
         asrtBrd(" ҉҉҉ \n" +
                 "x҉҉♣x\n" +
@@ -1009,9 +1009,9 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n");
 
         asrtBrd("     \n" +
                 "   ♣ \n" +
@@ -1079,10 +1079,10 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         asrtBrd("     \n" +
-                        "&244&\n" +
-                        " 1#3 \n" +
-                        "&223&\n" +
-                        "☺♥♡♡ \n",
+                "&244&\n" +
+                " 1#3 \n" +
+                "&223&\n" +
+                "☺♥♡♡ \n",
                 game(0));
 
         hero(0).move(0, 0);
@@ -1091,25 +1091,25 @@ public class EventsTest extends AbstractGameTest {
         hero(3).move(3, 3);
 
         asrtBrd("     \n" +
-                        "&24♤&\n" +
-                        " 1#3 \n" +
-                        "&♠2♤&\n" +
-                        "☺    \n",
+                "&24♤&\n" +
+                " 1#3 \n" +
+                "&♠2♤&\n" +
+                "☺    \n",
                 game(0));
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n");
 
         tick();
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
-                        "listener(1) => [DIED, KILL_ENEMY_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                        "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                        "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
+                "listener(1) => [DIED, KILL_ENEMY_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
         asrtBrd(" ҉҉҉ \n" +
                 "x҉҉♧x\n" +
@@ -1122,9 +1122,9 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n");
 
         asrtBrd("     \n" +
                 "   ♧ \n" +
@@ -1186,10 +1186,10 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         asrtBrd("     \n" +
-                        "&244&\n" +
-                        " 1#3 \n" +
-                        "&223&\n" +
-                        "☺♥♥♥ \n",
+                "&244&\n" +
+                " 1#3 \n" +
+                "&223&\n" +
+                "☺♥♥♥ \n",
                 game(0));
 
         hero(0).move(1, 3);
@@ -1198,25 +1198,25 @@ public class EventsTest extends AbstractGameTest {
         hero(3).move(3, 3);
 
         asrtBrd("     \n" +
-                        "&☻4♠&\n" +
-                        " 1#3 \n" +
-                        "&♠2♠&\n" +
-                        "     \n",
+                "&☻4♠&\n" +
+                " 1#3 \n" +
+                "&♠2♠&\n" +
+                "     \n",
                 game(0));
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n");
 
         tick();
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
-                        "listener(1) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                        "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                        "listener(3) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n");
+                "listener(1) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(3) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
         asrtBrd(" ҉҉҉ \n" +
                 "xѠ҉♣x\n" +
@@ -1230,9 +1230,9 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n");
 
         asrtBrd("    #\n" +
                 " Ѡ ♣ \n" +
@@ -1294,10 +1294,10 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         asrtBrd("     \n" +
-                        "&244&\n" +
-                        " 1#3 \n" +
-                        "&223&\n" +
-                        "☺♥♥♥ \n",
+                "&244&\n" +
+                " 1#3 \n" +
+                "&223&\n" +
+                "☺♥♥♥ \n",
                 game(0));
 
         hero(0).move(1, 3);
@@ -1306,25 +1306,25 @@ public class EventsTest extends AbstractGameTest {
         hero(3).move(3, 3);
 
         asrtBrd("     \n" +
-                        "&☻4♠&\n" +
-                        " 1#3 \n" +
-                        "&♠2♠&\n" +
-                        "     \n",
+                "&☻4♠&\n" +
+                " 1#3 \n" +
+                "&♠2♠&\n" +
+                "     \n",
                 game(0));
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n");
 
         tick();
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX]\n" +
-                        "listener(1) => [DIED]\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n");
+                "listener(1) => [DIED]\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n");
 
         asrtBrd("     \n" +
                 "&Ѡ3♠&\n" +
@@ -1338,9 +1338,9 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
-                        "listener(1) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
-                        "listener(2) => [DIED]\n" +
-                        "listener(3) => []\n");
+                "listener(1) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
+                "listener(2) => [DIED]\n" +
+                "listener(3) => []\n");
 
         asrtBrd(" ҉  #\n" +
                 "xѠ2♠&\n" +
@@ -1352,9 +1352,9 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
-                        "listener(3) => [DIED]\n");
+                "listener(1) => []\n" +
+                "listener(2) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
+                "listener(3) => [DIED]\n");
 
         asrtBrd("    #\n" +
                 " Ѡ11&\n" +
@@ -1366,9 +1366,9 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => [KILL_GHOST]\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n" +
+                "listener(3) => [KILL_GHOST]\n");
 
         asrtBrd("  ҉҉#\n" +
                 " Ѡ҉♣x\n" +
@@ -1380,9 +1380,9 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n");
 
         asrtBrd("    #\n" +
                 " Ѡ ♣ \n" +

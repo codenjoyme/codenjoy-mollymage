@@ -383,7 +383,7 @@ public class GameTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
-                        "listener(1) => [KILL_GHOST]\n");
+                "listener(1) => [KILL_GHOST]\n");
 
         tick();
 

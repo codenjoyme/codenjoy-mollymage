@@ -540,8 +540,8 @@ public class RoundBattleTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
-                        "listener(1) => [START_ROUND, [Round 1]]\n" +
-                        "listener(2) => [START_ROUND, [Round 1]]\n");
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -600,8 +600,8 @@ public class RoundBattleTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                        "listener(1) => [DIED]\n" +
-                        "listener(2) => []\n");
+                "listener(1) => [DIED]\n" +
+                "listener(2) => []\n");
 
         hero(0).down();
         tick();
@@ -643,8 +643,8 @@ public class RoundBattleTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n");
 
         // на месте героя которого вынесли я как сторонний наблюдатель
         // вижу его останки, а не взрывную волну
@@ -735,8 +735,8 @@ public class RoundBattleTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [DIED]\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => [KILL_OTHER_HERO, WIN_ROUND]\n");
+                "listener(1) => []\n" +
+                "listener(2) => [KILL_OTHER_HERO, WIN_ROUND]\n");
     }
 
     // просто любопытно как рванут два героя, вместе с привидение и трупом под зельем
@@ -771,14 +771,14 @@ public class RoundBattleTest extends AbstractGameTest {
         // победителей нет
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_OTHER_HERO, KILL_GHOST]\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => [DIED]\n");
+                "listener(1) => []\n" +
+                "listener(2) => [DIED]\n");
 
         tick();
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n");
     }
 }

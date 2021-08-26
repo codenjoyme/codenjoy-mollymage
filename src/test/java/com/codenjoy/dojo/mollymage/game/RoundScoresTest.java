@@ -62,8 +62,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
-                        "listener(1) => [START_ROUND, [Round 1]]\n" +
-                        "listener(2) => [START_ROUND, [Round 1]]\n");
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -123,8 +123,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, KILL_OTHER_HERO, WIN_ROUND]\n" +
-                        "listener(1) => [DIED]\n" +
-                        "listener(2) => [DIED]\n");
+                "listener(1) => [DIED]\n" +
+                "listener(2) => [DIED]\n");
     }
 
     @Test
@@ -147,8 +147,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
-                        "listener(1) => [START_ROUND, [Round 1]]\n" +
-                        "listener(2) => [START_ROUND, [Round 1]]\n");
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -208,8 +208,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_ENEMY_HERO, KILL_OTHER_HERO, WIN_ROUND]\n" +
-                        "listener(1) => [DIED]\n" +
-                        "listener(2) => [DIED]\n");
+                "listener(1) => [DIED]\n" +
+                "listener(2) => [DIED]\n");
     }
 
     // если на карте один вынес другого, а последний противник покинул игру
@@ -231,8 +231,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
-                        "listener(1) => [START_ROUND, [Round 1]]\n" +
-                        "listener(2) => [START_ROUND, [Round 1]]\n");
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
 
         asrtBrd("    ♥\n" +
                 "     \n" +
@@ -292,8 +292,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                        "listener(1) => [DIED]\n" +
-                        "listener(2) => []\n");
+                "listener(1) => [DIED]\n" +
+                "listener(2) => []\n");
 
         // а теперь самое интересное - выходим из комнаты оставшимся игроком
         field.remove(player(2));
@@ -338,8 +338,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [WIN_ROUND]\n" + // заслуженная победа
-                        "listener(1) => []\n" +
-                        "listener(2) => [DIED]\n"); // за то что он трус )
+                "listener(1) => []\n" +
+                "listener(2) => [DIED]\n"); // за то что он трус )
 
     }
 
@@ -358,8 +358,8 @@ public class RoundScoresTest extends AbstractGameTest {
         // никто больше не должен ничего получить
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n");
 
     }
 
@@ -384,8 +384,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
-                        "listener(1) => [START_ROUND, [Round 1]]\n" +
-                        "listener(2) => [START_ROUND, [Round 1]]\n");
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -445,8 +445,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => [DIED]\n");
+                "listener(1) => []\n" +
+                "listener(2) => [DIED]\n");
 
         // затем пройдет еще некоторое количество тиков, до общего числа = timePerRound
         tick();
@@ -462,8 +462,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n");
 
         // вот он последний тик раунда, тут все и случится
         dice(dice,
@@ -480,8 +480,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [WIN_ROUND]\n" +
-                        "listener(1) => [[Time is over]]\n" +
-                        "listener(2) => []\n");
+                "listener(1) => [[Time is over]]\n" +
+                "listener(2) => []\n");
     }
 
     // если на поле группа игроков, два из них активны и расставляют зелье
@@ -507,47 +507,47 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
-                        "listener(1) => [START_ROUND, [Round 1]]\n" +
-                        "listener(2) => [START_ROUND, [Round 1]]\n" +
-                        "listener(3) => [START_ROUND, [Round 1]]\n" +
-                        "listener(4) => [START_ROUND, [Round 1]]\n");
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n" +
+                "listener(3) => [START_ROUND, [Round 1]]\n" +
+                "listener(4) => [START_ROUND, [Round 1]]\n");
 
         assertBoards(
                 "game(0)\n" +
-                        "   ♥ \n" +
-                        "   ♥ \n" +
-                        "     \n" +
-                        "♥☺   \n" +
-                        " ♥   \n" +
-                        "\n" +
-                        "game(1)\n" +
-                        "   ♥ \n" +
-                        "   ☺ \n" +
-                        "     \n" +
-                        "♥♥   \n" +
-                        " ♥   \n" +
-                        "\n" +
-                        "game(2)\n" +
-                        "   ♥ \n" +
-                        "   ♥ \n" +
-                        "     \n" +
-                        "♥♥   \n" +
-                        " ☺   \n" +
-                        "\n" +
-                        "game(3)\n" +
-                        "   ♥ \n" +
-                        "   ♥ \n" +
-                        "     \n" +
-                        "☺♥   \n" +
-                        " ♥   \n" +
-                        "\n" +
-                        "game(4)\n" +
-                        "   ☺ \n" +
-                        "   ♥ \n" +
-                        "     \n" +
-                        "♥♥   \n" +
-                        " ♥   \n" +
-                        "\n");
+                "   ♥ \n" +
+                "   ♥ \n" +
+                "     \n" +
+                "♥☺   \n" +
+                " ♥   \n" +
+                "\n" +
+                "game(1)\n" +
+                "   ♥ \n" +
+                "   ☺ \n" +
+                "     \n" +
+                "♥♥   \n" +
+                " ♥   \n" +
+                "\n" +
+                "game(2)\n" +
+                "   ♥ \n" +
+                "   ♥ \n" +
+                "     \n" +
+                "♥♥   \n" +
+                " ☺   \n" +
+                "\n" +
+                "game(3)\n" +
+                "   ♥ \n" +
+                "   ♥ \n" +
+                "     \n" +
+                "☺♥   \n" +
+                " ♥   \n" +
+                "\n" +
+                "game(4)\n" +
+                "   ☺ \n" +
+                "   ♥ \n" +
+                "     \n" +
+                "♥♥   \n" +
+                " ♥   \n" +
+                "\n");
 
         // пошла движуха
         hero(0).act();
@@ -574,47 +574,47 @@ public class RoundScoresTest extends AbstractGameTest {
 
         assertBoards(
                 "game(0)\n" +
-                        "   ♣ \n" +
-                        " ♥҉҉҉\n" +
-                        " ҉ ҉ \n" +
-                        "♣҉҉☺ \n" +
-                        " ♣   \n" +
-                        "\n" +
-                        "game(1)\n" +
-                        "   ♣ \n" +
-                        " ☺҉҉҉\n" +
-                        " ҉ ҉ \n" +
-                        "♣҉҉♥ \n" +
-                        " ♣   \n" +
-                        "\n" +
-                        "game(2)\n" +
-                        "   ♣ \n" +
-                        " ♥҉҉҉\n" +
-                        " ҉ ҉ \n" +
-                        "♣҉҉♥ \n" +
-                        " Ѡ   \n" +
-                        "\n" +
-                        "game(3)\n" +
-                        "   ♣ \n" +
-                        " ♥҉҉҉\n" +
-                        " ҉ ҉ \n" +
-                        "Ѡ҉҉♥ \n" +
-                        " ♣   \n" +
-                        "\n" +
-                        "game(4)\n" +
-                        "   Ѡ \n" +
-                        " ♥҉҉҉\n" +
-                        " ҉ ҉ \n" +
-                        "♣҉҉♥ \n" +
-                        " ♣   \n" +
-                        "\n");
+                "   ♣ \n" +
+                " ♥҉҉҉\n" +
+                " ҉ ҉ \n" +
+                "♣҉҉☺ \n" +
+                " ♣   \n" +
+                "\n" +
+                "game(1)\n" +
+                "   ♣ \n" +
+                " ☺҉҉҉\n" +
+                " ҉ ҉ \n" +
+                "♣҉҉♥ \n" +
+                " ♣   \n" +
+                "\n" +
+                "game(2)\n" +
+                "   ♣ \n" +
+                " ♥҉҉҉\n" +
+                " ҉ ҉ \n" +
+                "♣҉҉♥ \n" +
+                " Ѡ   \n" +
+                "\n" +
+                "game(3)\n" +
+                "   ♣ \n" +
+                " ♥҉҉҉\n" +
+                " ҉ ҉ \n" +
+                "Ѡ҉҉♥ \n" +
+                " ♣   \n" +
+                "\n" +
+                "game(4)\n" +
+                "   Ѡ \n" +
+                " ♥҉҉҉\n" +
+                " ҉ ҉ \n" +
+                "♣҉҉♥ \n" +
+                " ♣   \n" +
+                "\n");
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, KILL_OTHER_HERO]\n" +
-                        "listener(1) => [KILL_OTHER_HERO]\n" +
-                        "listener(2) => [DIED]\n" +
-                        "listener(3) => [DIED]\n" +
-                        "listener(4) => [DIED]\n");
+                "listener(1) => [KILL_OTHER_HERO]\n" +
+                "listener(2) => [DIED]\n" +
+                "listener(3) => [DIED]\n" +
+                "listener(4) => [DIED]\n");
 
         // затем пройдет еще некоторое количество тиков, до общего числа = timePerRound
         tick();
@@ -630,10 +630,10 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n" +
-                        "listener(4) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n" +
+                "listener(4) => []\n");
 
         // вот он последний тик раунда, тут все и случится
         dice(dice,
@@ -653,10 +653,10 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [WIN_ROUND]\n" +
-                        "listener(1) => [[Time is over]]\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n" +
-                        "listener(4) => []\n");
+                "listener(1) => [[Time is over]]\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n" +
+                "listener(4) => []\n");
     }
 
     // если на поле группа игроков, два из них активны и расставляют зелье
@@ -688,55 +688,55 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
-                        "listener(1) => [START_ROUND, [Round 1]]\n" +
-                        "listener(2) => [START_ROUND, [Round 1]]\n" +
-                        "listener(3) => [START_ROUND, [Round 1]]\n" +
-                        "listener(4) => [START_ROUND, [Round 1]]\n" +
-                        "listener(5) => [START_ROUND, [Round 1]]\n");
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n" +
+                "listener(3) => [START_ROUND, [Round 1]]\n" +
+                "listener(4) => [START_ROUND, [Round 1]]\n" +
+                "listener(5) => [START_ROUND, [Round 1]]\n");
 
         assertBoards(
                 "game(0)\n" +
-                        "   ♥ \n" +
-                        "   ♥♥\n" +
-                        "   # \n" +
-                        "♥☺   \n" +
-                        " ♥   \n" +
-                        "\n" +
-                        "game(1)\n" +
-                        "   ♥ \n" +
-                        "   ☺♥\n" +
-                        "   # \n" +
-                        "♥♥   \n" +
-                        " ♥   \n" +
-                        "\n" +
-                        "game(2)\n" +
-                        "   ♥ \n" +
-                        "   ♥♥\n" +
-                        "   # \n" +
-                        "♥♥   \n" +
-                        " ☺   \n" +
-                        "\n" +
-                        "game(3)\n" +
-                        "   ♥ \n" +
-                        "   ♥♥\n" +
-                        "   # \n" +
-                        "☺♥   \n" +
-                        " ♥   \n" +
-                        "\n" +
-                        "game(4)\n" +
-                        "   ☺ \n" +
-                        "   ♥♥\n" +
-                        "   # \n" +
-                        "♥♥   \n" +
-                        " ♥   \n" +
-                        "\n" +
-                        "game(5)\n" +
-                        "   ♥ \n" +
-                        "   ♥☺\n" +
-                        "   # \n" +
-                        "♥♥   \n" +
-                        " ♥   \n" +
-                        "\n");
+                "   ♥ \n" +
+                "   ♥♥\n" +
+                "   # \n" +
+                "♥☺   \n" +
+                " ♥   \n" +
+                "\n" +
+                "game(1)\n" +
+                "   ♥ \n" +
+                "   ☺♥\n" +
+                "   # \n" +
+                "♥♥   \n" +
+                " ♥   \n" +
+                "\n" +
+                "game(2)\n" +
+                "   ♥ \n" +
+                "   ♥♥\n" +
+                "   # \n" +
+                "♥♥   \n" +
+                " ☺   \n" +
+                "\n" +
+                "game(3)\n" +
+                "   ♥ \n" +
+                "   ♥♥\n" +
+                "   # \n" +
+                "☺♥   \n" +
+                " ♥   \n" +
+                "\n" +
+                "game(4)\n" +
+                "   ☺ \n" +
+                "   ♥♥\n" +
+                "   # \n" +
+                "♥♥   \n" +
+                " ♥   \n" +
+                "\n" +
+                "game(5)\n" +
+                "   ♥ \n" +
+                "   ♥☺\n" +
+                "   # \n" +
+                "♥♥   \n" +
+                " ♥   \n" +
+                "\n");
 
         // пошла движуха
         hero(0).act();
@@ -763,55 +763,55 @@ public class RoundScoresTest extends AbstractGameTest {
 
         assertBoards(
                 "game(0)\n" +
-                        "   ♣ \n" +
-                        " ♥҉҉♣\n" +
-                        " ҉ H \n" +
-                        "♣҉҉☺ \n" +
-                        " ♣   \n" +
-                        "\n" +
-                        "game(1)\n" +
-                        "   ♣ \n" +
-                        " ☺҉҉♣\n" +
-                        " ҉ H \n" +
-                        "♣҉҉♥ \n" +
-                        " ♣   \n" +
-                        "\n" +
-                        "game(2)\n" +
-                        "   ♣ \n" +
-                        " ♥҉҉♣\n" +
-                        " ҉ H \n" +
-                        "♣҉҉♥ \n" +
-                        " Ѡ   \n" +
-                        "\n" +
-                        "game(3)\n" +
-                        "   ♣ \n" +
-                        " ♥҉҉♣\n" +
-                        " ҉ H \n" +
-                        "Ѡ҉҉♥ \n" +
-                        " ♣   \n" +
-                        "\n" +
-                        "game(4)\n" +
-                        "   Ѡ \n" +
-                        " ♥҉҉♣\n" +
-                        " ҉ H \n" +
-                        "♣҉҉♥ \n" +
-                        " ♣   \n" +
-                        "\n" +
-                        "game(5)\n" +
-                        "   ♣ \n" +
-                        " ♥҉҉Ѡ\n" +
-                        " ҉ H \n" +
-                        "♣҉҉♥ \n" +
-                        " ♣   \n" +
-                        "\n");
+                "   ♣ \n" +
+                " ♥҉҉♣\n" +
+                " ҉ H \n" +
+                "♣҉҉☺ \n" +
+                " ♣   \n" +
+                "\n" +
+                "game(1)\n" +
+                "   ♣ \n" +
+                " ☺҉҉♣\n" +
+                " ҉ H \n" +
+                "♣҉҉♥ \n" +
+                " ♣   \n" +
+                "\n" +
+                "game(2)\n" +
+                "   ♣ \n" +
+                " ♥҉҉♣\n" +
+                " ҉ H \n" +
+                "♣҉҉♥ \n" +
+                " Ѡ   \n" +
+                "\n" +
+                "game(3)\n" +
+                "   ♣ \n" +
+                " ♥҉҉♣\n" +
+                " ҉ H \n" +
+                "Ѡ҉҉♥ \n" +
+                " ♣   \n" +
+                "\n" +
+                "game(4)\n" +
+                "   Ѡ \n" +
+                " ♥҉҉♣\n" +
+                " ҉ H \n" +
+                "♣҉҉♥ \n" +
+                " ♣   \n" +
+                "\n" +
+                "game(5)\n" +
+                "   ♣ \n" +
+                " ♥҉҉Ѡ\n" +
+                " ҉ H \n" +
+                "♣҉҉♥ \n" +
+                " ♣   \n" +
+                "\n");
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, KILL_OTHER_HERO]\n" +
-                        "listener(1) => [KILL_OTHER_HERO, KILL_OTHER_HERO, KILL_TREASURE_BOX]\n" +
-                        "listener(2) => [DIED]\n" +
-                        "listener(3) => [DIED]\n" +
-                        "listener(4) => [DIED]\n" +
-                        "listener(5) => [DIED]\n");
+                "listener(1) => [KILL_OTHER_HERO, KILL_OTHER_HERO, KILL_TREASURE_BOX]\n" +
+                "listener(2) => [DIED]\n" +
+                "listener(3) => [DIED]\n" +
+                "listener(4) => [DIED]\n" +
+                "listener(5) => [DIED]\n");
 
         // затем пройдет еще некоторое количество тиков, до общего числа = timePerRound
         boxesCount(0); // больше коробок нам не надо
@@ -828,11 +828,11 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n" +
-                        "listener(4) => []\n" +
-                        "listener(5) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n" +
+                "listener(4) => []\n" +
+                "listener(5) => []\n");
 
         // вот он последний тик раунда, тут все и случится
         dice(dice,
@@ -855,11 +855,11 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [[Time is over]]\n" +
-                        "listener(1) => [WIN_ROUND]\n" +
-                        "listener(2) => []\n" +
-                        "listener(3) => []\n" +
-                        "listener(4) => []\n" +
-                        "listener(5) => []\n");
+                "listener(1) => [WIN_ROUND]\n" +
+                "listener(2) => []\n" +
+                "listener(3) => []\n" +
+                "listener(4) => []\n" +
+                "listener(5) => []\n");
     }
 
     // проверяем, что при clearScore обнуляется:
@@ -886,8 +886,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
-                        "listener(1) => [START_ROUND, [Round 1]]\n" +
-                        "listener(2) => [START_ROUND, [Round 1]]\n");
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
 
         asrtBrd("   ♥☺\n" +
                 "    ♥\n" +
@@ -922,8 +922,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [DIED]\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => [KILL_OTHER_HERO]\n");
+                "listener(1) => []\n" +
+                "listener(2) => [KILL_OTHER_HERO]\n");
 
         assertEquals(0, hero(0).scores());
         assertEquals(0, hero(1).scores());
@@ -947,8 +947,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
-                        "listener(1) => [START_ROUND, [Round 1]]\n" +
-                        "listener(2) => [START_ROUND, [Round 1]]\n");
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -1002,8 +1002,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
-                        "listener(1) => [START_ROUND, [Round 1]]\n" +
-                        "listener(2) => [START_ROUND, [Round 1]]\n");
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
 
         asrtBrd("   ♡☺\n" +
                 "    ♡\n" +
@@ -1038,8 +1038,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [DIED]\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => [KILL_ENEMY_HERO]\n");
+                "listener(1) => []\n" +
+                "listener(2) => [KILL_ENEMY_HERO]\n");
 
         assertEquals(0, hero(0).scores());
         assertEquals(0, hero(1).scores());
@@ -1074,8 +1074,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
-                        "listener(1) => [START_ROUND, [Round 1]]\n" +
-                        "listener(2) => [START_ROUND, [Round 1]]\n");
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
 
 
         // выношу одного игрока мощным снарядом
@@ -1118,8 +1118,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                        "listener(1) => [DIED]\n" +
-                        "listener(2) => []\n");
+                "listener(1) => [DIED]\n" +
+                "listener(2) => []\n");
 
         hero(0).left();
         tick();
@@ -1174,8 +1174,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, WIN_ROUND]\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => [DIED]\n");
+                "listener(1) => []\n" +
+                "listener(2) => [DIED]\n");
 
         // ну и напоследок вернемся на место
         hero(0).left();
@@ -1231,8 +1231,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n");
     }
 
     // в этом тесте я проверяю, что после победы героя на уровне
@@ -1258,23 +1258,23 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n");
 
         // и начнется новый раунд
         tick();
 
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 2]]\n" +
-                        "listener(1) => [START_ROUND, [Round 2]]\n" +
-                        "listener(2) => [START_ROUND, [Round 2]]\n");
+                "listener(1) => [START_ROUND, [Round 2]]\n" +
+                "listener(2) => [START_ROUND, [Round 2]]\n");
 
         // а дальше все как обычно
         tick();
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
-                        "listener(1) => []\n" +
-                        "listener(2) => []\n");
+                "listener(1) => []\n" +
+                "listener(2) => []\n");
     }
 }

@@ -40,7 +40,6 @@ import com.codenjoy.dojo.services.multiplayer.Single;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.utils.events.EventsListenersAssert;
-import org.junit.Before;
 import org.mockito.Mockito;
 import org.mockito.stubbing.OngoingStubbing;
 
@@ -73,29 +72,29 @@ public abstract class AbstractGameTest {
     protected EventsListenersAssert events = new EventsListenersAssert(() -> listeners, Events.class);
     protected Level level;
 
-    protected void givenBr(String map) {
-        Point heroPosition = new LevelImpl(map).getHeroPosition();
-        dice(dice, heroPosition.getX(), heroPosition.getY());
-        givenBr(map, 1);
-    }
-
     protected void givenBr(int count) {
         givenBr("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "     \n", count);
+                "     \n");
     }
 
-    protected void givenBr(String map, int count) {
-        for (int i = 0; i < count; i++) {
-            listeners.add(mock(EventListener.class));
-            players.add(new Player(listeners.get(i), settings));
-            games.add(new Single(players.get(i), printer));
-        }
+    protected void givenBr(String map) {
         level = new LevelImpl(map);
+        List<Hero> heroes = level.getHeroes();
+        OngoingStubbing<Integer> diceWhen = dice(dice);
+        for (int index = 0; index < heroes.size(); index++) {
+            Hero hero = heroes.get(index);
+            diceWhen = diceWhen.thenReturn(hero.getX(), hero.getY());
+
+            listeners.add(mock(EventListener.class));
+            players.add(new Player(listeners.get(index), settings));
+            games.add(new Single(players.get(index), printer));
+        }
 
         field = new MollyMage(level, dice, settings);
+
         List<TreasureBox> boxes = level.getBoxes();
         boxesCount(boxes.size());
         field.boxes().addAll(boxes);
@@ -243,12 +242,13 @@ public abstract class AbstractGameTest {
         field.tick();
     }
 
-    protected void dice(Dice dice, int... values) {
+    protected OngoingStubbing<Integer> dice(Dice dice, int... values) {
         reset(dice);
         OngoingStubbing<Integer> when = when(dice.next(anyInt()));
         for (int value : values) {
             when = when.thenReturn(value);
         }
+        return when;
     }
 
     protected void boxAt(int x, int y) {

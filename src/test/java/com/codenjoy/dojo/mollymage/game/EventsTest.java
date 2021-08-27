@@ -537,11 +537,11 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseAlive() {
-        dice(dice,
-                0, 0,
-                2, 0);
-
-        givenBr(2);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺ ☺  \n");
 
         boxesCount(1);
         boxAt(1, 0);
@@ -595,15 +595,11 @@ public class EventsTest extends AbstractGameTest {
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseDied() {
         settings.integer(POTION_POWER, 2);
-
-        dice(dice,
-                0, 0,
-                3, 0);
-        givenBr(2);
-
-        boxesCount(2);
-        boxAt(2, 0);
-        boxAt(1, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺##☺ \n");
 
         hero(0).act();
         hero(0).up();
@@ -641,15 +637,11 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied() {
-        dice(dice,
-                1, 2,
-                2, 1,
-                3, 2,
-                2, 3);
-        givenBr(4);
-
-        boxesCount(1);
-        boxAt(2, 2);
+        givenBr("     \n" +
+                "  ☺  \n" +
+                " ☺#☺ \n" +
+                "  ☺  \n" +
+                "     \n");
 
         hero(0).act();
         hero(1).act();
@@ -663,8 +655,8 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         asrtBrd("  ҉  \n" +
-                " ҉♣҉ \n" +
-                "҉ѠH♣҉\n" +
+                " ҉Ѡ҉ \n" +
+                "҉♣H♣҉\n" +
                 " ҉♣҉ \n" +
                 "  ҉  \n", game(0));
 
@@ -679,25 +671,19 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         asrtBrd("    #\n" +
-                "  ♣  \n" +
-                " Ѡ ♣ \n" +
+                "  Ѡ  \n" +
+                " ♣ ♣ \n" +
                 "  ♣  \n" +
                 "     \n", game(0));
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied_caseNotEqualPosition() {
-        dice(dice,
-                1, 2,
-                2, 1,
-                3, 2,
-                2, 3);
-        givenBr(4);
-
-        boxesCount(3);
-        boxAt(1, 1);
-        boxAt(2, 2);
-        boxAt(0, 2);
+        givenBr("     \n" +
+                "  ☺  \n" +
+                "#☺#☺ \n" +
+                " #☺  \n" +
+                "     \n");
 
         hero(0).act();
         hero(1).act();
@@ -711,16 +697,16 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         asrtBrd("  ҉  \n" +
-                " ҉♣҉ \n" +
-                "HѠH♣҉\n" +  // первую стенку подбил монополист, центральную все
-                " H♣҉ \n" +  // эту стенку подбили только лвое
+                " ҉Ѡ҉ \n" +
+                "H♣H♣҉\n" +  // первую стенку подбил монополист, центральную все
+                " H♣҉ \n" +  // эту стенку подбили только двое
                 "  ҉  \n", game(0));
 
         events.verifyAllEvents(
-                "listener(0) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n" +
-                "listener(1) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n" +
+                "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
+                "listener(1) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n" +
                 "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
-                "listener(3) => [DIED, KILL_TREASURE_BOX]\n");
+                "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n");
 
         dice(dice, // новые коробки
                 4, 4,
@@ -729,25 +715,20 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         asrtBrd("    #\n" +
-                "  ♣ #\n" +
-                " Ѡ ♣#\n" +
+                "  Ѡ #\n" +
+                " ♣ ♣#\n" +
                 "  ♣  \n" +
                 "     \n", game(0));
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseAlive() {
-
         settings.integer(POTION_POWER, 2);
-
-        dice(dice,
-                0, 0,
-                3, 0);
-        givenBr(2);
-
-        boxesCount(2);
-        boxAt(2, 0);
-        boxAt(1, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺##☺ \n");
 
         hero(0).act();
         hero(0).up();

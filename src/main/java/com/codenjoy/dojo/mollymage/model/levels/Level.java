@@ -22,6 +22,7 @@ package com.codenjoy.dojo.mollymage.model.levels;
  * #L%
  */
 
+import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.services.Point;
@@ -33,7 +34,7 @@ public interface Level {
 
     int size();
 
-    Point getHeroPosition();
+    List<Hero> getHeroes();
 
     List<Wall> getWalls();
 

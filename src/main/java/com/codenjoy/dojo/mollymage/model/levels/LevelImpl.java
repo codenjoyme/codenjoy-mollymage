@@ -22,10 +22,10 @@ package com.codenjoy.dojo.mollymage.model.levels;
  * #L%
  */
 
+import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.services.LengthToXY;
-import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.field.PointField;
 import com.codenjoy.dojo.utils.LevelUtils;
 
@@ -51,18 +51,21 @@ public class LevelImpl implements Level {
     }
 
     @Override
-    public Point getHeroPosition() {
-        return LevelUtils.getObjects(xy, map, (point, element) -> point, HERO).get(0);
+    public List<Hero> getHeroes() {
+        return LevelUtils.getObjects(xy, map,
+                (point, element) -> new Hero(point), HERO);
     }
 
     @Override
     public List<Wall> getWalls() {
-        return LevelUtils.getObjects(xy, map, (point, element) -> new Wall(point), WALL);
+        return LevelUtils.getObjects(xy, map,
+                (point, element) -> new Wall(point), WALL);
     }
 
     @Override
     public List<TreasureBox> getBoxes() {
-        return LevelUtils.getObjects(xy, map, (point, element) -> new TreasureBox(point), TREASURE_BOX);
+        return LevelUtils.getObjects(xy, map,
+                (point, element) -> new TreasureBox(point), TREASURE_BOX);
     }
 
     @Override

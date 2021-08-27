@@ -59,6 +59,11 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         recharge = 0;
     }
 
+    public Hero(Point pt) {
+        this();
+        move(pt);
+    }
+
     @Override
     public void init(Field field) {
         super.init(field);

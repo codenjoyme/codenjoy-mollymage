@@ -48,6 +48,63 @@ public class GameTest extends AbstractGameTest {
     }
 
     @Test
+    public void heroesCanBeRemovedFromTheGame() {
+        // given
+        dice(dice,
+                0, 0,
+                1, 1,
+                2, 2);
+        givenBr(DEFAULT_COUNT);
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "  ♥  \n" +
+                " ♥   \n" +
+                "☺    \n", game(0));
+
+        // when
+        game(1).close();
+
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "  ♥  \n" +
+                "     \n" +
+                "☺    \n", game(0));
+    }
+
+    @Test
+    public void heroesCanBeRestartedInTheGame() {
+        // given
+        dice(dice,
+                0, 0,
+                1, 1,
+                2, 2);
+        givenBr(DEFAULT_COUNT);
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "  ♥  \n" +
+                " ♥   \n" +
+                "☺    \n", game(0));
+
+        // when
+        dice(dice, 4, 0);
+        game(1).newGame();
+
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "  ♥  \n" +
+                "     \n" +
+                "☺   ♥\n", game(0));
+    }
+
+    @Test
     public void shouldBoard_whenStartGame2() {
         givenBr("     \n" +
                 "     \n" +

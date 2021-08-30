@@ -44,6 +44,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         field.tick();
         field.tick();
         field.tick();
@@ -54,15 +55,11 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillWall() {
-        dice(dice, 1, 0);
         givenBr("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " ☺   \n");
-
-        boxesCount(1);
-        boxAt(0, 0);
+                "#☺   \n");
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -91,15 +88,11 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillGhost() {
-        dice(dice, 1, 0);
         givenBr("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " ☺   \n");
-
-        ghostsCount(1);
-        ghostAt(0, 0);
+                "&☺   \n");
 
         hero().act();
         hero().right();
@@ -122,20 +115,11 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCalculateGhostsAndWallKills() {
-        dice(dice, 1, 0);
         givenBr("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                " ☺   \n");
-
-        boxesCount(2);
-        boxAt(0, 1);
-        boxAt(0, 3);
-
-        ghostsCount(2);
-        ghostAt(0, 0);
-        ghostAt(0, 2);
+                "#    \n" +
+                "&    \n" +
+                "#    \n" +
+                "&☺   \n");
 
         canDropPotions(4);
         potionsPower(1);
@@ -283,20 +267,11 @@ public class EventsTest extends AbstractGameTest {
     public void shouldCalculateGhostsAndWallKills_caseBigBadaboom() {
         settings.bool(BIG_BADABOOM, true);
 
-        dice(dice, 1, 0);
         givenBr("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                " ☺   \n");
-
-        boxesCount(2);
-        boxAt(0, 1);
-        boxAt(0, 3);
-
-        ghostsCount(2);
-        ghostAt(0, 0);
-        ghostAt(0, 2);
+                "#    \n" +
+                "&    \n" +
+                "#    \n" +
+                "&☺   \n");
 
         canDropPotions(4);
         potionsPower(1);
@@ -360,10 +335,7 @@ public class EventsTest extends AbstractGameTest {
 
         givenBr("   \n" +
                 "   \n" +
-                "☺  \n");
-
-        dice(dice, 2, 0, Direction.DOWN.value());
-        ghostsCount(1);
+                "☺ &\n");
 
         // when portion explode
         hero().act();
@@ -410,99 +382,93 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillWallOnlyForOneHero() {
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "#☺   \n");
 
-        dice(dice,
-                1, 0,
-                1, 1);
-        givenBr(2);
-
-        boxesCount(1);
-        boxAt(0, 0);
-
-        hero(0).act();
-        hero(0).right();
-        hero(1).up();
+        hero(1).act();
+        hero(1).right();
+        hero(0).up();
         tick();
-        hero(0).right();
-        hero(1).up();
+        hero(1).right();
+        hero(0).up();
         tick();
-        hero(0).right();
-        hero(1).up();
+        hero(1).right();
+        hero(0).up();
         tick();
         tick();
         tick();
 
-        asrtBrd(" ♥   \n" +
+        asrtBrd(" ☺   \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "H҉҉ ☺\n", game(0));
+                "H҉҉ ♥\n", game(0));
 
         events.verifyAllEvents(
-                "listener(0) => [KILL_TREASURE_BOX]\n" +
-                        "listener(1) => []\n");
+                "listener(0) => []\n" +
+                "listener(1) => [KILL_TREASURE_BOX]\n");
 
         dice(dice, // новые коробки
                 4, 4);
         tick();
 
-        asrtBrd(" ♥  #\n" +
+        asrtBrd(" ☺  #\n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "    ☺\n", game(0));
+                "    ♥\n", game(0));
     }
 
     @Test
     public void shouldFireEventWhenKillGhostMultiplayer() {
-        dice(dice,
-                1, 0,
-                1, 1);
-        givenBr(2);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "&☺   \n");
 
-        ghostAt(0, 0);
-
-        hero(0).act();
-        hero(0).right();
-        hero(1).up();
+        hero(1).act();
+        hero(1).right();
+        hero(0).up();
         tick();
-        hero(0).right();
-        hero(1).up();
+        hero(1).right();
+        hero(0).up();
         tick();
-        hero(0).right();
-        hero(1).up();
+        hero(1).right();
+        hero(0).up();
         tick();
         tick();
         tick();
 
-        asrtBrd(" ♥   \n" +
+        asrtBrd(" ☺   \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "x҉҉ ☺\n", game(0));
+                "x҉҉ ♥\n", game(0));
 
         events.verifyAllEvents(
-                "listener(0) => [KILL_GHOST]\n" +
-                        "listener(1) => []\n");
+                "listener(0) => []\n" +
+                "listener(1) => [KILL_GHOST]\n");
 
         tick();
 
-        asrtBrd(" ♥   \n" +
+        asrtBrd(" ☺   \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "    ☺\n", game(0));
+                "    ♥\n", game(0));
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseDied() {
-        dice(dice,
-                0, 0,
-                2, 0);
-        givenBr(2);
-
-        boxesCount(1);
-        boxAt(1, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺#☺  \n");
 
         hero(0).act();
         hero(0).up();
@@ -541,10 +507,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺ ☺  \n");
-
-        boxesCount(1);
-        boxAt(1, 0);
+                "☺#☺  \n");
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -730,6 +693,12 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "☺##☺ \n");
 
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺##♥ \n", game(0));
+
         hero(0).act();
         hero(0).up();
         hero(1).act();
@@ -773,12 +742,11 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenGhost_caseDied() {
-        dice(dice,
-                0, 0,
-                2, 0);
-        givenBr(2);
-
-        ghostAt(1, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺&☺  \n");
 
         hero(0).act();
         hero(0).up();
@@ -800,6 +768,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => [DIED, KILL_GHOST]\n" +
                 "listener(1) => [DIED, KILL_GHOST]\n");
 
+        ghostsCount(0); // больще не надо привидений
         tick();
 
         asrtBrd("     \n" +
@@ -811,12 +780,11 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenGhost_caseAlive() {
-        dice(dice,
-                0, 0,
-                2, 0);
-        givenBr(2);
-
-        ghostAt(1, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺&☺  \n");
 
         hero(0).act();
         hero(0).up();
@@ -841,7 +809,8 @@ public class EventsTest extends AbstractGameTest {
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_GHOST]\n");
-
+        
+        ghostsCount(0); // чтобы новый не появлялся
         tick();
 
         asrtBrd("     \n" +
@@ -853,14 +822,11 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourGhosts_caseDied() {
-        dice(dice,
-                1, 2,
-                2, 1,
-                3, 2,
-                2, 3);
-        givenBr(4);
-
-        ghostAt(2, 2);
+        givenBr("     \n" +
+                "  ☺  \n" +
+                " ☺&☺ \n" +
+                "  ☺  \n" +
+                "     \n");
 
         hero(0).act();
         hero(1).act();
@@ -874,8 +840,8 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         asrtBrd("  ҉  \n" +
-                " ҉♣҉ \n" +
-                "҉Ѡx♣҉\n" +
+                " ҉Ѡ҉ \n" +
+                "҉♣x♣҉\n" +
                 " ҉♣҉ \n" +
                 "  ҉  \n", game(0));
 
@@ -885,35 +851,27 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [DIED, KILL_GHOST]\n" +
                 "listener(3) => [DIED, KILL_GHOST]\n");
 
+        ghostsCount(0); // чтобы новый не появлялся
         tick();
 
         asrtBrd("     \n" +
-                "  ♣  \n" +
-                " Ѡ ♣ \n" +
+                "  Ѡ  \n" +
+                " ♣ ♣ \n" +
                 "  ♣  \n" +
                 "     \n", game(0));
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenBigBadaboom() {
-        settings.integer(POTIONS_COUNT, 2)
+        canDropPotions(2)
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        dice(dice,
-                0, 0,
-                1, 0,
-                2, 0,
-                3, 0);
-        givenBr(4);
-
-        ghostAt(0, 1);
-        ghostAt(0, 3);
-        ghostAt(4, 1);
-        ghostAt(4, 3);
-
-        boxesCount(1);
-        boxAt(2, 2);
+        givenBr("     \n" +
+                "&   &\n" +
+                "  #  \n" +
+                "&   &\n" +
+                "☺☺☺☺ \n");
 
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
@@ -1007,21 +965,11 @@ public class EventsTest extends AbstractGameTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        dice(dice,
-                0, 0,
-                1, 0,
-                2, 0,
-                3, 0);
-        givenBr(4);
-
-        ghostsCount(4);
-        ghostAt(0, 1);
-        ghostAt(0, 3);
-        ghostAt(4, 1);
-        ghostAt(4, 3);
-
-        boxesCount(1);
-        boxAt(2, 2);
+        givenBr("     \n" +
+                "&   &\n" +
+                "  #  \n" +
+                "&   &\n" +
+                "☺☺☺☺ \n");
 
         player(0).inTeam(0);
         player(1).inTeam(0);
@@ -1120,20 +1068,11 @@ public class EventsTest extends AbstractGameTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        dice(dice,
-                0, 0,
-                1, 0,
-                2, 0,
-                3, 0);
-        givenBr(4);
-
-        ghostAt(0, 1);
-        ghostAt(0, 3);
-        ghostAt(4, 1);
-        ghostAt(4, 3);
-
-        boxesCount(1);
-        boxAt(2, 2);
+        givenBr("     \n" +
+                "&   &\n" +
+                "  #  \n" +
+                "&   &\n" +
+                "☺☺☺☺ \n");
 
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
@@ -1228,20 +1167,11 @@ public class EventsTest extends AbstractGameTest {
                 .bool(BIG_BADABOOM, false)
                 .perksSettings().dropRatio(0);
 
-        dice(dice,
-                0, 0,
-                1, 0,
-                2, 0,
-                3, 0);
-        givenBr(4);
-
-        ghostAt(0, 1);
-        ghostAt(0, 3);
-        ghostAt(4, 1);
-        ghostAt(4, 3);
-
-        boxesCount(1);
-        boxAt(2, 2);
+        givenBr("     \n" +
+                "&   &\n" +
+                "  #  \n" +
+                "&   &\n" +
+                "☺☺☺☺ \n");
 
         // зелье, которым все пордорвем
         hero(0).move(1, 2);

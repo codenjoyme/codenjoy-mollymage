@@ -29,8 +29,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTIONS_COUNT;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertSame;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -45,6 +43,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().act();
         field.tick();
 
@@ -62,6 +61,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().up();
         field.tick();
 
@@ -80,12 +80,12 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionsDropped_whenHeroDropThreePotion() {
+        canDropPotions(3);
         givenBr("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        canDropPotions(3);
 
         hero().up();
         field.tick();
@@ -110,14 +110,8 @@ public class PotionTest extends AbstractGameTest {
     // чем у него в settings прописано
     @Test
     public void shouldOnlyTwoPotions_whenLevelApproveIt() {
-        givenBr("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "☺    \n");
         canDropPotions(2);
-
-        asrtBrd("     \n" +
+        givenBr("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -157,12 +151,12 @@ public class PotionTest extends AbstractGameTest {
     // герой не может класть два зелья на одно место
     @Test
     public void shouldOnlyOnePotionPerPlace() {
+        canDropPotions(2);
         givenBr("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        canDropPotions(2);
 
         hero().act();
         field.tick();
@@ -220,6 +214,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().act();
         field.tick();
 
@@ -254,6 +249,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         shouldBoom_whenDroppedPotionHas5Ticks();
 
         asrtBrd("     \n" +
@@ -279,6 +275,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().act();
         field.tick();
 
@@ -305,6 +302,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         gotoMaxUp();
         gotoMaxRight();
 
@@ -366,6 +364,7 @@ public class PotionTest extends AbstractGameTest {
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼☺      ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n");
+
         assertPotionPower(5,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
@@ -392,6 +391,7 @@ public class PotionTest extends AbstractGameTest {
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼☺      ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n");
+
         assertPotionPower(2,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
@@ -415,6 +415,7 @@ public class PotionTest extends AbstractGameTest {
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼☺      ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n");
+
         assertPotionPower(3,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
@@ -438,6 +439,7 @@ public class PotionTest extends AbstractGameTest {
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼☺      ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n");
+
         assertPotionPower(6,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼҉      ☼\n" +
@@ -455,12 +457,13 @@ public class PotionTest extends AbstractGameTest {
     // с теми, что на поле
     @Test
     public void shouldNoChangeOriginalPotionsWhenUseBoardApiButTimersSynchronized() {
+        canDropPotions(2);
         givenBr("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        canDropPotions(2);
+
         hero().act();
         hero().right();
         field.tick();
@@ -520,6 +523,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().act();
         hero().right();
         field.tick();
@@ -545,6 +549,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().act();
         hero().right();
         field.tick();
@@ -579,7 +584,7 @@ public class PotionTest extends AbstractGameTest {
     // взрывная волна не проходит через непробиваемую стенку
     @Test
     public void shouldBlastWaveDoesNotPassThroughWall() {
-        settings.integer(POTION_POWER, 3);
+        potionsPower(3);
         givenBr("☼☼☼☼☼☼☼\n" +
                 "☼     ☼\n" +
                 "☼ ☼ ☼ ☼\n" +
@@ -624,7 +629,6 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldStopBlastWhenHeroOrDestroyWalls() {
         potionsPower(5);
-
         givenBr("       \n" +
                 "       \n" +
                 "       \n" +
@@ -635,7 +639,7 @@ public class PotionTest extends AbstractGameTest {
 
         int count = 1;
         boxesCount(count);
-        boxAt(3, 0);
+        newBox(3, 0);
 
         when(dice.next(anyInt())).thenReturn(101); // don't drop perk by accident
 
@@ -662,17 +666,13 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldStopBlastWhenGhost() {
         potionsPower(5);
-
         givenBr("       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
-                "☺      \n");
-
-        ghostsCount(1);
-        ghostAt(4, 0).stop();
+                "☺   &  \n");
 
         hero().act();
         hero().up();
@@ -701,12 +701,12 @@ public class PotionTest extends AbstractGameTest {
     // зелья которое ему позволено и не более того
     @Test
     public void shouldTwoPotionsOnBoard() {
-        settings.integer(POTIONS_COUNT, 1);
-
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        canDropPotions(1);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
         hero(0).act();
         hero(0).up();
@@ -735,17 +735,17 @@ public class PotionTest extends AbstractGameTest {
                 "☺♥   \n" +
                 "     \n" +
                 "33   \n", game(0));
-
     }
 
     @Test
     public void shouldTwoPotionsOnBoard_withEnemy() {
-        settings.integer(POTIONS_COUNT, 1);
+        canDropPotions(1);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
         player(0).inTeam(0);
         player(1).inTeam(1);
 
@@ -776,17 +776,16 @@ public class PotionTest extends AbstractGameTest {
                 "☺♡   \n" +
                 "     \n" +
                 "33   \n", game(0));
-
     }
 
     @Test
     public void shouldFourPotionsOnBoard() {
-        settings.integer(POTIONS_COUNT, 2);
-
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        canDropPotions(2);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
         hero(0).act();
         hero(0).up();
@@ -833,12 +832,12 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldFourPotionsOnBoard_checkTwoPotionsPerHero() {
-        settings.integer(POTIONS_COUNT, 2);
-
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        canDropPotions(2);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
         hero(0).act();
         hero(0).up();

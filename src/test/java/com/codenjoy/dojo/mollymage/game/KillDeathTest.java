@@ -36,6 +36,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().act();
         hero().right();
         field.tick();
@@ -199,6 +200,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().act();
         field.tick();
 
@@ -246,6 +248,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().right();
         field.tick();
 
@@ -295,6 +298,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().up();
         hero().act();
         field.tick();
@@ -342,6 +346,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().down();
         field.tick();
 
@@ -508,20 +513,8 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
         ghostsCount(1);
-        ghostAt(9, 9).start();
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
-                "☼        &☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼         ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼         ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼         ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼☺        ☼\n" +
-                "☼☼☼☼☼☼☼☼☼☼☼\n");
-
-        dice(dice, 1, Direction.DOWN.value());
+        dice(dice, 9, 9,
+                1, Direction.DOWN.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -537,6 +530,19 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
         field.tick();
+
+        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼        &☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼☺        ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼☼\n");
+
         field.tick();
         field.tick();
         field.tick();
@@ -621,10 +627,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺    \n");
-
-        dice(dice, 3, 0, Direction.DOWN.value());
-        ghostsCount(1);
+                "☺  & \n");
 
         hero().act();
         hero().up();
@@ -655,10 +658,11 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldOnlyOneListenerWorksWhenOneHeroKillAnother() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
         hero(0).act();
         hero(0).up();
@@ -679,18 +683,17 @@ public class KillDeathTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                        "listener(1) => [DIED]\n");
+                "listener(1) => [DIED]\n");
     }
 
     // герой может идти на привидение, при этом он умирает
     @Test
     public void shouldKllOtherHeroWhenHeroGoToGhost() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
-
-        ghostAt(2, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺&  \n");
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -705,7 +708,6 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-
                 "☺ &  \n", game(0));
 
         // от имени жертвы вижу свой трупик
@@ -724,12 +726,13 @@ public class KillDeathTest extends AbstractGameTest {
     // как это на моей доске отобразится? Хочу видеть трупик
     @Test
     public void shouldKllOtherHeroWhenGhostGoToIt() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺&  \n");
 
-        Ghost ghost = ghostAt(2, 0);
+        Ghost ghost = ghost(2, 0);
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -737,6 +740,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥&  \n", game(0));
 
+        ghost.start();
         ghost.setDirection(Direction.LEFT);
         tick();
 
@@ -763,12 +767,13 @@ public class KillDeathTest extends AbstractGameTest {
     // встречу к нему - герой проскочит или умрет? должен умереть!
     @Test
     public void shouldKllOtherHeroWhenGhostAndHeroMoves() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺&  \n");
 
-        Ghost ghost = ghostAt(2, 0);
+        Ghost ghost = ghost(2, 0);
 
         asrtBrd("     \n" +
                 "     \n" +

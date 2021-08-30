@@ -26,9 +26,9 @@ package com.codenjoy.dojo.mollymage.model.items.ghost;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Field;
 import com.codenjoy.dojo.mollymage.model.Player;
-import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.field.Fieldable;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,7 +37,7 @@ import static com.codenjoy.dojo.games.mollymage.Element.DEAD_GHOST;
 import static com.codenjoy.dojo.games.mollymage.Element.GHOST;
 import static com.codenjoy.dojo.services.StateUtils.filterOne;
 
-public class Ghost extends PointImpl implements State<Element, Player>, Tickable {
+public class Ghost extends PointImpl implements State<Element, Player>, Fieldable<Field>, Tickable {
 
     public static final int MAX = 100;
 
@@ -46,10 +46,13 @@ public class Ghost extends PointImpl implements State<Element, Player>, Tickable
     protected Direction direction;
     protected boolean stop = false;
 
-    public Ghost(Point pt, Field field, Dice dice) {
+    public Ghost(Point pt) {
         super(pt);
+    }
+
+    public void init(Field field) {
         this.field = field;
-        this.dice = dice;
+        this.dice = field.dice();
     }
 
     public void stop() {

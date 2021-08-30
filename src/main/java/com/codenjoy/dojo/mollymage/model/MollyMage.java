@@ -67,10 +67,11 @@ public class MollyMage extends RoundField<Player> implements Field {
     public MollyMage(Level level, Dice dice, GameSettings settings) {
         super(Events.START_ROUND, Events.WIN_ROUND, Events.DIED, settings);
 
-        field = level.field();
-        players = new LinkedList<>();
         this.dice = dice;
         this.settings = settings;
+        players = new LinkedList<>();
+        field = level.field();
+        field.init(this);
 
         destroyedObjects = new LinkedList<>();
         previousTickDestroyedObjects = new LinkedList<>();
@@ -121,7 +122,9 @@ public class MollyMage extends RoundField<Player> implements Field {
                 continue;
             }
 
-            ghosts().add(new Ghost(pt, this, dice));
+            Ghost ghost = new Ghost(pt);
+            ghost.init(this);
+            ghosts().add(ghost);
             actual++;
         }
 
@@ -482,7 +485,7 @@ public class MollyMage extends RoundField<Player> implements Field {
             deathMatch.get(hunter).forEach(perk -> {
                 hunter.event(Events.DROP_PERK);
 
-                // TODO может это делать на этапе, когда balsts развиднеется в removeBlasts
+                // TODO может это делать на этапе, когда blasts развиднеется в removeBlasts
                 blasts().remove(perk);
                 hunters().add(new GhostHunter(perk, this, hunter));
             });

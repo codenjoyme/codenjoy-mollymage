@@ -24,19 +24,11 @@ package com.codenjoy.dojo.mollymage.game.perks;
 
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.game.AbstractGameTest;
-import com.codenjoy.dojo.mollymage.model.Hero;
-import com.codenjoy.dojo.mollymage.model.items.Wall;
-import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
-import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.items.perks.*;
-import com.codenjoy.dojo.services.PointImpl;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
-import static com.codenjoy.dojo.services.PointImpl.pt;
-import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_TEAMS_PER_ROOM;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.reset;
 
 public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
@@ -228,6 +220,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldNotThrowPoison_withoutPTperk() {
         // given
+        potionsPower(4);
+        settings.integer(POISON_THROWER_RECHARGE, 3);
+
         givenBr("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
@@ -238,8 +233,6 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "# # # # ##\n" +
                 "#☺       #\n" +
                 "##########\n");
-        settings.integer(POTION_POWER, 4);
-        settings.integer(POISON_THROWER_RECHARGE, 3);
 
         // when
         hero().up();
@@ -262,6 +255,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldNotDoAnythingWhenACTWithoutMove_withPTperk() {
         // given
+        potionsPower(4);
+        settings.integer(POISON_THROWER_RECHARGE, 3);
+
         givenBr("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
@@ -272,8 +268,6 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "# # # # ##\n" +
                 "#☺       #\n" +
                 "##########\n");
-        settings.integer(POTION_POWER, 4);
-        settings.integer(POISON_THROWER_RECHARGE, 3);
 
         int timeout = 10;
         player().getHero().addPerk(new PoisonThrower(timeout));
@@ -298,6 +292,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoisonThroughThePotion_withPTperk() {
         // given
+        potionsPower(4);
+        settings.integer(POISON_THROWER_RECHARGE, 3);
+
         givenBr("☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼        ☼\n" +
@@ -308,8 +305,6 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼☺       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼\n");
-        settings.integer(POTION_POWER, 4);
-        settings.integer(POISON_THROWER_RECHARGE, 3);
 
         int timeout = 30;
         player().getHero().addPerk(new PoisonThrower(timeout));
@@ -359,6 +354,10 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldDetonatePotionWhenThrowPoison_withPTperk_withBadaBoom() {
         // given
+        potionsPower(4);
+        settings.integer(POISON_THROWER_RECHARGE, 3);
+        settings.bool(BIG_BADABOOM, true);
+
         givenBr("☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼        ☼\n" +
@@ -369,9 +368,6 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼☺       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼\n");
-        settings.integer(POTION_POWER, 4);
-        settings.integer(POISON_THROWER_RECHARGE, 3);
-        settings.bool(BIG_BADABOOM, true);
 
         int timeout = 30;
         player().getHero().addPerk(new PoisonThrower(timeout));
@@ -421,15 +417,17 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldPerkWorksAfterCombine_WithPTPerk() {
         // given
+        potionsPower(4);
+        settings.integer(POISON_THROWER_RECHARGE, 1);
+
         givenBr("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
-        settings.integer(POTION_POWER, 4);
-        settings.integer(POISON_THROWER_RECHARGE, 1);
+
         final int timeout = 10;
-        perkAt(1, 2, new PoisonThrower(timeout));
+        newPerk(1, 2, new PoisonThrower(timeout));
 
         // then
         asrtBrd("☼☼☼☼☼\n" +
@@ -464,7 +462,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals(timeout - 2, hero().getPerk(Element.POISON_THROWER).getTimer());
 
         // when hero picked one more perk
-        perkAt(1, 3, new PoisonThrower(timeout));
+        newPerk(1, 3, new PoisonThrower(timeout));
         hero().up();
         field.tick();
 
@@ -488,12 +486,16 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼҉☼ ☼\n" +
                 "☼҉  ☼\n" +
                 "☼☼☼☼☼\n");
+
         assertEquals(timeout * 2 - 4, hero().getPerk(Element.POISON_THROWER).getTimer());
     }
 
     @Test
     public void shouldThrowPoison_whenPTperk() {
         // given
+        potionsPower(4);
+        settings.integer(POISON_THROWER_RECHARGE, 3);
+
         givenBr("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
@@ -504,12 +506,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "# # # # ##\n" +
                 "#☺       #\n" +
                 "##########\n");
-        settings.integer(POTION_POWER,4);
-        settings.integer(POISON_THROWER_RECHARGE,3);
 
-        int timeout = 10;
-
-        player().getHero().addPerk(new PoisonThrower(timeout));
+        player().getHero().addPerk(new PoisonThrower(10));
 
         // when
         hero().up();
@@ -600,6 +598,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoisonWithIncreasedPower_withPT_withPBRI_perks() {
         // given
+        potionsPower(4);
+        settings.integer(POISON_THROWER_RECHARGE, 3);
+
         givenBr("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
@@ -610,14 +611,11 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "# # # # ##\n" +
                 "#☺       #\n" +
                 "##########\n");
-        settings.integer(POTION_POWER, 4);
-        settings.integer(POISON_THROWER_RECHARGE, 3);
 
         int value = 2;
         int timeout = 10;
         player().getHero().addPerk(new PoisonThrower(timeout));
         player().getHero().addPerk(new PotionBlastRadiusIncrease(value, timeout));
-
 
         // when
         hero().up();
@@ -848,7 +846,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().act();
+
         // obe potion by default on lel 1
         asrtBrd("     \n" +
                 "     \n" +
@@ -857,8 +857,11 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☻    \n");
 
         hero().right();
+
         field.tick();
+
         hero().act();
+
         // no more potions :(
         asrtBrd("     \n" +
                 "     \n" +
@@ -870,7 +873,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         player().getHero().addPerk(new PotionCountIncrease(3, 3));
         hero().act();
         hero().right();
+
         field.tick();
+
         hero().act();
         asrtBrd("     \n" +
                 "     \n" +
@@ -879,7 +884,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "34☻  \n");
 
         hero().right();
+
         field.tick();
+
         hero().act();
         asrtBrd("     \n" +
                 "     \n" +
@@ -890,6 +897,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         field.tick();
         hero().act();
+
         // 4 potions and no more
         asrtBrd("     \n" +
                 "     \n" +
@@ -909,7 +917,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☺    \n");
         hero().act();
         hero().right();
+
         field.tick();
+
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
@@ -930,7 +940,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "҉☺   \n");
 
         hero().act();
+
         field.tick();
+
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
@@ -938,6 +950,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 " ☻   \n");
 
         field.tick();
+
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
@@ -948,6 +961,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
         field.tick();
         field.tick();
+
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
@@ -958,13 +972,13 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     // BRC - Potion remote control perk
     @Test
     public void shouldPotionBlastOnAction_whenBRCperk_caseTwoPotions() {
+        canDropPotions(2);
         givenBr("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
 
-        canDropPotions(2);
         player().getHero().addPerk(new PotionRemoteControl(2, 1));
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
@@ -1161,12 +1175,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionBlastOnAction_whenBRCperk_caseOnePotion() {
+        canDropPotions(1);
         givenBr("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        canDropPotions(1);
 
         player().getHero().addPerk(new PotionRemoteControl(2, 1));
 
@@ -1364,18 +1378,14 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
     @Test
     public void shouldSuicide_whenBRCPerk_shouldRemoveAfterDeath_andCollectScores() {
+        canDropPotions(1);
+        potionsPower(3);
         givenBr("     \n" +
                 "     \n" +
                 "     \n" +
-                "     \n" +
-                "☺    \n");
-        boxesCount(1);
-        boxAt(0, 1);
+                "#    \n" +
+                "☺  & \n");
 
-        ghostAt(3, 0).stop();
-
-        canDropPotions(1);
-        potionsPower(3);
         player().getHero().addPerk(new PotionRemoteControl(1, 1));
 
         assertEquals("[{POTION_REMOTE_CONTROL('r') " +
@@ -1451,7 +1461,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "      \n" +
                 "      \n" +
                 "☺     \n");;
-        perkAt(0, 1, getPotionExploderPerk());
+        newPerk(0, 1, getPotionExploderPerk());
         hero().addPerk(new PotionCountIncrease(3, 30));
 
         // then
@@ -1573,7 +1583,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "      \n" +
                 "      \n" +
                 "☺     \n");
-        perkAt(0, 1, getPotionExploderPerk());
+        newPerk(0, 1, getPotionExploderPerk());
 
         // then
         asrtBrd("      \n" +
@@ -1671,7 +1681,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "      \n" +
                 "      \n" +
                 "☺     \n");
-        perkAt(0, 1, getPotionExploderPerk());
+        newPerk(0, 1, getPotionExploderPerk());
 
         // then
         asrtBrd("      \n" +
@@ -1749,7 +1759,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "      \n" +
                 "      \n" +
                 "☺     \n");
-        perkAt(0, 1, getPotionExploderPerk());
+        newPerk(0, 1, getPotionExploderPerk());
 
         // then
         asrtBrd("      \n" +
@@ -1775,7 +1785,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
 
         // one more perk
-        perkAt(0, 2, getPotionExploderPerk());
+        newPerk(0, 2, getPotionExploderPerk());
 
         // when hero catch one more perk
         hero().up();

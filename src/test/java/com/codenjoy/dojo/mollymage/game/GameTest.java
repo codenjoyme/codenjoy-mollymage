@@ -50,17 +50,17 @@ public class GameTest extends AbstractGameTest {
     @Test
     public void heroesCanBeRemovedFromTheGame() {
         // given
-        dice(dice,
-                0, 0,
-                1, 1,
-                2, 2);
-        givenBr(DEFAULT_COUNT);
+        givenBr("     \n" +
+                "     \n" +
+                "  ☺  \n" +
+                " ☺   \n" +
+                "☺    \n");
 
         asrtBrd("     \n" +
                 "     \n" +
-                "  ♥  \n" +
+                "  ☺  \n" +
                 " ♥   \n" +
-                "☺    \n", game(0));
+                "♥    \n", game(0));
 
         // when
         game(1).close();
@@ -70,25 +70,25 @@ public class GameTest extends AbstractGameTest {
         // then
         asrtBrd("     \n" +
                 "     \n" +
-                "  ♥  \n" +
+                "  ☺  \n" +
                 "     \n" +
-                "☺    \n", game(0));
+                "♥    \n", game(0));
     }
 
     @Test
     public void heroesCanBeRestartedInTheGame() {
         // given
-        dice(dice,
-                0, 0,
-                1, 1,
-                2, 2);
-        givenBr(DEFAULT_COUNT);
+        givenBr("     \n" +
+                "     \n" +
+                "  ☺  \n" +
+                " ☺   \n" +
+                "☺    \n");
 
         asrtBrd("     \n" +
                 "     \n" +
-                "  ♥  \n" +
+                "  ☺  \n" +
                 " ♥   \n" +
-                "☺    \n", game(0));
+                "♥    \n", game(0));
 
         // when
         dice(dice, 4, 0);
@@ -99,9 +99,9 @@ public class GameTest extends AbstractGameTest {
         // then
         asrtBrd("     \n" +
                 "     \n" +
-                "  ♥  \n" +
+                "  ☺  \n" +
                 "     \n" +
-                "☺   ♥\n", game(0));
+                "♥   ♥\n", game(0));
     }
 
     @Test
@@ -121,6 +121,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
@@ -135,6 +136,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         assertSame(hero(), game().getJoystick());
     }
 
@@ -146,11 +148,13 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         // when hero set bomb and goes away
         hero().act();
         hero().up();
@@ -172,12 +176,14 @@ public class GameTest extends AbstractGameTest {
         final int[] square3x3Coordinates = getCoordinatesForPointsInSquare(3);
         dice(dice, square3x3Coordinates);
         field.tick();
+
         // then
         asrtBrd("     \n" +
                 "     \n" +
                 "###  \n" +
                 "#☺#  \n" +
                 "2##  \n");
+
         assertEquals(7, field.boxes().size());
 
         // when field tick 2 times
@@ -203,8 +209,8 @@ public class GameTest extends AbstractGameTest {
                 "###  \n" +
                 " ☺#  \n" +
                 "# #  \n");
-        assertEquals(6, field.boxes().size());
 
+        assertEquals(6, field.boxes().size());
 
         // when next tick - empty spaces should been filled by boxes
         dice(dice, square3x3Coordinates);
@@ -216,6 +222,7 @@ public class GameTest extends AbstractGameTest {
                 "###  \n" +
                 "#☺#  \n" +
                 "###  \n");
+
         assertEquals(8, field.boxes().size());
     }
 
@@ -232,7 +239,7 @@ public class GameTest extends AbstractGameTest {
         dice(dice, 4, 4, Direction.RIGHT.value());
         ghostsCount(1);
 
-        boxAt(3, 0);
+        newBox(3, 0);
         boxesCount(1);
 
         hero().act();
@@ -319,10 +326,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldGameReturnsRealJoystick() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
         hero(0).act();
         hero(1).up();
@@ -355,10 +363,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldGetTwoHeroesOnBoard() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
         assertSame(hero(0), game(0).getJoystick());
         assertSame(hero(1), game(1).getJoystick());
@@ -378,10 +387,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldPrintOtherPotionHero() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
         hero(0).act();
         hero(0).up();
@@ -401,16 +411,11 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void bug() {
-        dice(dice,
-                1, 1,
-                2, 1);
-        givenBr(2);
-
-        ghostAt(1, 0);
-        ghostAt(2, 0);
-
-        boxesCount(1);
-        boxAt(0, 0);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺☺  \n" +
+                "#&&  \n");
 
         asrtBrd("     \n" +
                 "     \n" +
@@ -442,6 +447,7 @@ public class GameTest extends AbstractGameTest {
                 "listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_GHOST]\n");
 
+        ghostsCount(0); // больше не надо привидений
         tick();
 
         asrtBrd("     \n" +

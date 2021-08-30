@@ -26,7 +26,6 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import org.junit.Test;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
 import static com.codenjoy.dojo.services.Direction.DOWN;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
@@ -51,31 +50,30 @@ public class RoundBattleTest extends AbstractGameTest {
     @Test
     public void shouldAllPlayersOnBoardIsInactive_whenStart() {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT);
-        
 
-        dice(dice,
-                0, 0,
-                1, 0,
-                1, 1);
-        givenBr(DEFAULT_COUNT);
-
-        asrtBrd("     \n" +
+        givenBr("     \n" +
                 "     \n" +
                 "     \n" +
-                " ♣   \n" +
-                "Ѡ♣   \n", game(0));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ♣   \n" +
-                "♣Ѡ   \n", game(1));
+                " ☺   \n" +
+                "☺☺   \n");
 
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
-                "♣♣   \n", game(2));
+                "♣♣   \n", game(0));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♣   \n" +
+                "Ѡ♣   \n", game(1));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♣   \n" +
+                "♣Ѡ   \n", game(2));
     }
 
     // после старта идет отсчет обратного времени
@@ -127,20 +125,20 @@ public class RoundBattleTest extends AbstractGameTest {
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
-                " ♣   \n" +
-                "Ѡ♣   \n", game(0));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ♣   \n" +
-                "♣Ѡ   \n", game(1));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
                 " Ѡ   \n" +
-                "♣♣   \n", game(2));
+                "♣♣   \n", game(0));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♣   \n" +
+                "Ѡ♣   \n", game(1));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♣   \n" +
+                "♣Ѡ   \n", game(2));
 
         // и я не могу ничего поделать с ними
         hero(0).up();
@@ -159,45 +157,45 @@ public class RoundBattleTest extends AbstractGameTest {
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
-                " ♥   \n" +
-                "☺♥   \n", game(0));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ♥   \n" +
-                "♥☺   \n", game(1));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
                 " ☺   \n" +
-                "♥♥   \n", game(2));
+                "♥♥   \n", game(0));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♥   \n" +
+                "☺♥   \n", game(1));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♥   \n" +
+                "♥☺   \n", game(2));
 
         // ... и когда я муваю героев, они откликаются
         hero(0).up();
-        hero(1).right();
-        hero(2).up();
+        hero(1).up();
+        hero(2).right();
 
         tick();
 
         asrtBrd("     \n" +
                 "     \n" +
-                " ♥   \n" +
-                "☺    \n" +
+                " ☺   \n" +
+                "♥    \n" +
                 "  ♥  \n", game(0));
 
         asrtBrd("     \n" +
                 "     \n" +
                 " ♥   \n" +
-                "♥    \n" +
-                "  ☺  \n", game(1));
+                "☺    \n" +
+                "  ♥  \n", game(1));
 
         asrtBrd("     \n" +
                 "     \n" +
-                " ☺   \n" +
+                " ♥   \n" +
                 "♥    \n" +
-                "  ♥  \n", game(2));
+                "  ☺  \n", game(2));
     }
 
     // если один игрок вынесет другого но на поле есть едще игроки,
@@ -207,13 +205,11 @@ public class RoundBattleTest extends AbstractGameTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1); // TODO а что будет если тут 0 игра хоть начнется?
 
-        
-
-        dice(dice,
-                0, 0,
-                1, 0,
-                1, 1);
-        givenBr(DEFAULT_COUNT);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "☺☺   \n");
 
         tick();
 
@@ -225,29 +221,29 @@ public class RoundBattleTest extends AbstractGameTest {
         asrtBrd("     \n" +
                 "     \n" +
                 "     \n" +
-                " ♥   \n" +
-                "☺♥   \n", game(0));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ♥   \n" +
-                "♥☺   \n", game(1));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
                 " ☺   \n" +
-                "♥♥   \n", game(2));
+                "♥♥   \n", game(0));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♥   \n" +
+                "☺♥   \n", game(1));
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♥   \n" +
+                "♥☺   \n", game(2));
 
         // когда я выношу одного игрока
-        hero(2).act();
+        hero(0).act();
         tick();
 
-        hero(2).right();
+        hero(0).right();
         tick();
 
-        hero(2).up();
+        hero(0).up();
         tick();
 
         tick();
@@ -256,48 +252,48 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n" +
                 " 1   \n" +
-                "♥♥   \n", game(2));
+                "♥♥   \n", game(0));
 
         // игрок активный и живой
-        assertEquals(true, hero(1).isActive());
-        assertEquals(true, hero(1).isAlive());
-        assertEquals(true, player(1).wantToStay());
-        assertEquals(false, player(1).shouldLeave());
+        assertEquals(true, hero(2).isActive());
+        assertEquals(true, hero(2).isAlive());
+        assertEquals(true, player(2).wantToStay());
+        assertEquals(false, player(2).shouldLeave());
 
         tick();
 
         // игрок активный но неживой (cервер ему сделает newGame)
-        assertEquals(true, hero(1).isActive());
-        assertEquals(false, hero(1).isAlive());
+        assertEquals(true, hero(2).isActive());
+        assertEquals(false, hero(2).isAlive());
         // тут без изменений
-        assertEquals(true, player(1).wantToStay());
-        assertEquals(false, player(1).shouldLeave());
+        assertEquals(true, player(2).wantToStay());
+        assertEquals(false, player(2).shouldLeave());
 
 
         asrtBrd("     \n" +
                 "     \n" +
                 " ҉☺  \n" +
                 "҉҉҉  \n" +
-                "♥♣   \n", game(2));
+                "♥♣   \n", game(0));
 
         tick();
 
         dice(dice, 3, 4); // новые координаты для героя
-        field.newGame(player(1)); // это сделоает сервер в ответ на isAlive = false
+        field.newGame(player(2)); // это сделоает сервер в ответ на isAlive = false
         resetHeroes();
 
         // игрок уже живой но неактивный до начала следующего раунда
-        assertEquals(false, hero(1).isActive());
-        assertEquals(true, hero(1).isAlive());
+        assertEquals(false, hero(2).isActive());
+        assertEquals(true, hero(2).isAlive());
         // тут без изменений
-        assertEquals(true, player(1).wantToStay());
-        assertEquals(false, player(1).shouldLeave());
+        assertEquals(true, player(2).wantToStay());
+        assertEquals(false, player(2).shouldLeave());
 
         asrtBrd("   ♣ \n" +
                 "     \n" +
                 "  ☺  \n" +
                 "     \n" +
-                "♥    \n", game(2));
+                "♥    \n", game(0));
     }
 
     // проверил как отрисуется привидение если под ним будет трупик героя:
@@ -309,13 +305,13 @@ public class RoundBattleTest extends AbstractGameTest {
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
 
-        dice(dice,
-                0, 0, // первый игрок
-                1, 0, // второй
-                2, 0); // третий
-        givenBr(DEFAULT_COUNT);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                " &   \n" +
+                "☺☺☺  \n");
 
-        Ghost ghost = ghostAt(1, 1);
+        Ghost ghost = ghost(1, 1);
 
         tick();
 
@@ -397,13 +393,13 @@ public class RoundBattleTest extends AbstractGameTest {
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
 
-        dice(dice,
-                0, 0, // первый игрок
-                1, 0, // второй
-                2, 0); // третий
-        givenBr(DEFAULT_COUNT);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                " &   \n" +
+                "☺☺☺  \n");
 
-        Ghost ghost = ghostAt(1, 1);
+        Ghost ghost = ghost(1, 1);
 
         tick();
 
@@ -527,14 +523,12 @@ public class RoundBattleTest extends AbstractGameTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
-        
 
-        dice(dice,
-                0, 0, // первый игрок
-                1, 0, // второй
-                2, 0); // третий
-
-        givenBr(DEFAULT_COUNT);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺☺  \n");
 
         tick();
 

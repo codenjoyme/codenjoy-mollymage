@@ -83,21 +83,23 @@ public abstract class AbstractGameTest {
     protected void givenBr(String map) {
         level = new LevelImpl(map);
         List<Hero> heroes = level.getHeroes();
-        OngoingStubbing<Integer> diceWhen = dice(dice);
-        for (int index = 0; index < heroes.size(); index++) {
-            Hero hero = heroes.get(index);
-            diceWhen = diceWhen.thenReturn(hero.getX(), hero.getY());
+        if (heroes.size() > 0) {
+            OngoingStubbing<Integer> diceWhen = dice(dice);
+            for (int index = 0; index < heroes.size(); index++) {
+                Hero hero = heroes.get(index);
+                diceWhen = diceWhen.thenReturn(hero.getX(), hero.getY());
 
-            listeners.add(mock(EventListener.class));
-            players.add(new Player(listeners.get(index), settings));
-            games.add(new Single(players.get(index), printer));
+                listeners.add(mock(EventListener.class));
+                players.add(new Player(listeners.get(index), settings));
+                games.add(new Single(players.get(index), printer));
+            }
         }
 
         field = new MollyMage(level, dice, settings);
 
-        List<TreasureBox> boxes = level.getBoxes();
-        boxesCount(boxes.size());
-        field.boxes().addAll(boxes);
+        boxesCount(level.getBoxes().size());
+        ghostsCount(level.getGhosts().size());
+        stopGhosts(); // по умолчанию все привидения стоят на месте
 
         for (Game game : games) {
             game.on(field);
@@ -171,8 +173,8 @@ public abstract class AbstractGameTest {
         hero().setAlive(true);
     }
 
-    protected void canDropPotions(int count) {
-        settings.integer(POTIONS_COUNT, count);
+    protected GameSettings canDropPotions(int count) {
+        return settings.integer(POTIONS_COUNT, count);
     }
 
     protected void assertHeroDie() {
@@ -217,8 +219,8 @@ public abstract class AbstractGameTest {
         resetHeroes();
     }
 
-    protected void potionsPower(int power) {
-        settings.integer(POTION_POWER, power);
+    protected GameSettings potionsPower(int power) {
+        return settings.integer(POTION_POWER, power);
     }
 
     protected void assertPotionPower(int power, String expected) {
@@ -251,8 +253,15 @@ public abstract class AbstractGameTest {
         return when;
     }
 
-    protected void boxAt(int x, int y) {
+    protected void newBox(int x, int y) {
         field.boxes().add(new TreasureBox(x, y));
+    }
+
+    protected void newGhost(int x, int y) {
+        Ghost ghost = new Ghost(pt(x, y));
+        ghost.init(field);
+        ghostsCount(ghostsCount() + 1);
+        field.ghosts().add(ghost);
     }
 
     protected int boxesCount() {
@@ -271,14 +280,11 @@ public abstract class AbstractGameTest {
         settings.integer(GHOSTS_COUNT, count);
     }
 
-    protected Ghost ghostAt(int x, int y) {
-        Ghost ghost = new Ghost(pt(x, y), field, dice);
-        ghost.stop();
-        field.ghosts().add(ghost);
-        return ghost;
+    protected Ghost ghost(int x, int y) {
+        return field.ghosts().getAt(pt(x, y)).get(0);
     }
 
-    protected void perkAt(int x, int y, Perk perk) {
+    protected void newPerk(int x, int y, Perk perk) {
         field.perks().add(new PerkOnBoard(new PointImpl(x, y), perk));
     }
 
@@ -300,5 +306,9 @@ public abstract class AbstractGameTest {
 
     protected void resetListeners() {
         listeners.forEach(Mockito::reset);
+    }
+
+    protected void stopGhosts() {
+        field.ghosts().forEach(Ghost::stop);
     }
 }

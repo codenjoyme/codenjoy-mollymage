@@ -39,6 +39,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().right();
         field.tick();
 
@@ -56,6 +57,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().right();
         field.tick();
 
@@ -76,6 +78,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().up();
         field.tick();
 
@@ -93,6 +96,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().up();
         field.tick();
 
@@ -116,6 +120,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().down();
         field.tick();
 
@@ -133,6 +138,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().right();
         field.tick();
 
@@ -156,6 +162,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().left();
         field.tick();
 
@@ -173,6 +180,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         gotoMaxRight();
 
         asrtBrd("     \n" +
@@ -189,6 +197,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         gotoMaxUp();
 
         asrtBrd("☺    \n" +
@@ -205,6 +214,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().down();
         hero().up();
         hero().left();
@@ -346,6 +356,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().act();
         hero().right();
         field.tick();
@@ -364,6 +375,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().right();
         hero().act();
         field.tick();
@@ -391,6 +403,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().act();
         field.tick();
 
@@ -411,6 +424,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         hero().right();
         field.tick();
 
@@ -451,20 +465,8 @@ public class MovementTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
         ghostsCount(1);
-        ghostAt(9, 9).start();
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
-                "☼        &☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼         ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼         ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼         ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼☺        ☼\n" +
-                "☼☼☼☼☼☼☼☼☼☼☼\n");
-
-        dice(dice, 1, Direction.DOWN.value());
+        dice(dice, 9, 9,
+                1, Direction.DOWN.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -609,6 +611,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
+
         hero().up();
         field.tick();
 
@@ -630,13 +633,13 @@ public class MovementTest extends AbstractGameTest {
     @Test
     public void shouldMonsterCanMoveOnPotion() {
         givenBr("☼☼☼☼☼\n" +
-                "☼   ☼\n" +
+                "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        ghostsCount(1);
-        ghostAt(3, 3).start();
+        ghost(3, 3).start();
+
         asrtBrd("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
@@ -709,12 +712,13 @@ public class MovementTest extends AbstractGameTest {
     @Test
     public void shouldGhostCantMoveOnWall() {
         givenBr("☼☼☼☼☼\n" +
-                "☼   ☼\n" +
+                "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        ghostAt(3, 3);
+        ghost(3, 3).start();
+
         asrtBrd("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
@@ -735,17 +739,12 @@ public class MovementTest extends AbstractGameTest {
     @Test
     public void shouldGhostCantMoveWhenNoSpaceAround() {
         givenBr("☼☼☼☼☼\n" +
-                "☼   ☼\n" +
-                "☼ ☼ ☼\n" +
+                "☼ #&☼\n" +
+                "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        ghostsCount(1);
-        ghostAt(3, 3).start();
-
-        boxesCount(2);
-        boxAt(2, 3);
-        boxAt(3, 2);
+        ghost(3, 3).start();
 
         asrtBrd("☼☼☼☼☼\n" +
                 "☼ #&☼\n" +
@@ -826,10 +825,11 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroCantGoToAnotherHero() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
         hero(0).right();
         tick();
@@ -844,10 +844,11 @@ public class MovementTest extends AbstractGameTest {
     // герои не могут ходить по зелью ни по своему ни по чужому
     @Test
     public void shouldHeroCantGoToPotionFromAnotherHero() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
         hero(1).act();
         hero(1).right();

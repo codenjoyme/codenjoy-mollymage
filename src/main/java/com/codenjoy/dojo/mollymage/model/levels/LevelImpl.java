@@ -25,6 +25,7 @@ package com.codenjoy.dojo.mollymage.model.levels;
 import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.services.LengthToXY;
 import com.codenjoy.dojo.services.field.PointField;
 import com.codenjoy.dojo.utils.LevelUtils;
@@ -69,10 +70,17 @@ public class LevelImpl implements Level {
     }
 
     @Override
+    public List<Ghost> getGhosts() {
+        return LevelUtils.getObjects(xy, map,
+                (point, element) -> new Ghost(point), GHOST);
+    }
+
+    @Override
     public PointField field() {
         PointField result = new PointField(size());
         result.addAll(getWalls());
         result.addAll(getBoxes());
+        result.addAll(getGhosts());
         return result;
     }
 }

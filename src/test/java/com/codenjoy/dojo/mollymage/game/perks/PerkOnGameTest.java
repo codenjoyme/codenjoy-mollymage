@@ -332,8 +332,8 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // такой себе хак, мы в домике
         hero().move(3, 4);
-        boxAt(1, 2); // две коробки подорвали, две добавили
-        boxAt(1, 3);
+        newBox(1, 2); // две коробки подорвали, две добавили
+        newBox(1, 3);
         field.walls().add(new Wall(1, 4));
 
         // when

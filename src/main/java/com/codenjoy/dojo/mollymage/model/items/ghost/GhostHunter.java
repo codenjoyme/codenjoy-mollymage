@@ -48,7 +48,8 @@ public class GhostHunter extends Ghost {
     private boolean alive = true;
 
     public GhostHunter(PerkOnBoard perk, Field field, Hero prey) {
-        super(perk.copy(), field, field.dice());
+        super(perk.copy());
+        super.init(field);
         this.prey = prey;
         this.perk = perk;
         this.way = new DeikstraFindWay();

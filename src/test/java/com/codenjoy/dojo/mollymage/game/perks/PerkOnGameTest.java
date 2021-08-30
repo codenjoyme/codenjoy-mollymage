@@ -48,7 +48,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     @Test
     public void shouldHeroAcquirePerk_whenMoveToFieldWithPerk() {
         // given
-        givenBr("######\n" +
+        givenFl("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -143,7 +143,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     @Test
     public void shouldPerkBeDropped_whenWallIsDestroyed() {
         // given
-        givenBr("######\n" +
+        givenFl("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -193,7 +193,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     @Test
     public void shouldRemovePerk_whenPickTimeout() {
         // given
-        givenBr("######\n" +
+        givenFl("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -1164,7 +1164,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     @Test
     public void shouldPerkBeDeactivated_whenTimeout() {
         // given
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -1192,7 +1192,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     @Test
     public void shouldCatchSeveralPerks_whenTherAreInTheOneCell() {
         // given
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +

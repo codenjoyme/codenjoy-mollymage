@@ -51,7 +51,7 @@ public class RoundBattleTest extends AbstractGameTest {
     public void shouldAllPlayersOnBoardIsInactive_whenStart() {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
@@ -205,7 +205,7 @@ public class RoundBattleTest extends AbstractGameTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1); // TODO а что будет если тут 0 игра хоть начнется?
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
@@ -305,7 +305,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 " &   \n" +
@@ -393,7 +393,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 " &   \n" +
@@ -524,7 +524,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +

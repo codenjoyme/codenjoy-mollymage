@@ -34,7 +34,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroOnBoardOneRightStep_whenCallRightCommand() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -52,7 +52,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroOnBoardTwoRightSteps_whenCallRightCommandTwice() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -73,7 +73,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroOnBoardOneUpStep_whenCallDownCommand() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -91,7 +91,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkUp() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -115,7 +115,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenGoToWallDown() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -133,7 +133,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkLeft() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -157,7 +157,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenGoToWallLeft() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -175,7 +175,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenGoToWallRight() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -192,7 +192,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenGoToWallUp() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -209,7 +209,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroMovedOncePerTact() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -243,7 +243,7 @@ public class MovementTest extends AbstractGameTest {
     // герой не может пойти вперед на стенку
     @Test
     public void shouldHeroStop_whenUpWall() {
-        givenBr("☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -261,7 +261,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenLeftWall() {
-        givenBr("☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -279,7 +279,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenRightWall() {
-        givenBr("☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -296,7 +296,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenDownWall() {
-        givenBr("☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -314,7 +314,7 @@ public class MovementTest extends AbstractGameTest {
     // герой не может вернуться на место зелья, она его не пускает как стена
     @Test
     public void shouldHeroStop_whenGotoPotion() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -351,7 +351,7 @@ public class MovementTest extends AbstractGameTest {
     // герой может одноверменно перемещаться по полю и класть зелья
     @Test
     public void shouldHeroWalkAndDropPotionsTogetherInOneTact_potionFirstly() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -370,7 +370,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkAndDropPotionsTogetherInOneTact_moveFirstly() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -398,7 +398,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkAndDropPotionsTogetherInOneTact_potionThanMove() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -419,7 +419,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkAndDropPotionsTogetherInOneTact_moveThanPotion() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -452,7 +452,7 @@ public class MovementTest extends AbstractGameTest {
     // если герой и привидение попали в одну клетку - герой умирает
     @Test
     public void shouldRandomMoveMonster() {
-        givenBr("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -606,7 +606,7 @@ public class MovementTest extends AbstractGameTest {
     // то зелье упадет на моем текущем месте
     @Test
     public void shouldMoveOnBoardAndDropPotionTogether() {
-        givenBr("☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -632,7 +632,7 @@ public class MovementTest extends AbstractGameTest {
     // привидение может ходить по зелью
     @Test
     public void shouldMonsterCanMoveOnPotion() {
-        givenBr("☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -711,7 +711,7 @@ public class MovementTest extends AbstractGameTest {
     // привидение не может пойти на стенку
     @Test
     public void shouldGhostCantMoveOnWall() {
-        givenBr("☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -738,7 +738,7 @@ public class MovementTest extends AbstractGameTest {
     // привидение не будет ходить, если ему некуда
     @Test
     public void shouldGhostCantMoveWhenNoSpaceAround() {
-        givenBr("☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼\n" +
                 "☼ #&☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
@@ -825,7 +825,7 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroCantGoToAnotherHero() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -844,7 +844,7 @@ public class MovementTest extends AbstractGameTest {
     // герои не могут ходить по зелью ни по своему ни по чужому
     @Test
     public void shouldHeroCantGoToPotionFromAnotherHero() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +

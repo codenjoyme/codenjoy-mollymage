@@ -50,7 +50,7 @@ public class RoundScoresTest extends AbstractGameTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺☺   \n" +
@@ -130,7 +130,7 @@ public class RoundScoresTest extends AbstractGameTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺☺   \n" +
@@ -216,7 +216,7 @@ public class RoundScoresTest extends AbstractGameTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
 
-        givenBr("    ☺\n" + // тот кто покинет комнату
+        givenFl("    ☺\n" + // тот кто покинет комнату
                 "     \n" +
                 "     \n" +
                 "☺☺   \n" + // жертва и тот, кто побежит
@@ -368,7 +368,7 @@ public class RoundScoresTest extends AbstractGameTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "☺    \n" + // его не накроет волной
                 " ☺   \n" +
@@ -486,7 +486,7 @@ public class RoundScoresTest extends AbstractGameTest {
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, 5)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
 
-        givenBr("   ☺ \n" + // 3, 4 - единственная жертва второго, потому он проиграет по очкам
+        givenFl("   ☺ \n" + // 3, 4 - единственная жертва второго, потому он проиграет по очкам
                 "   ☺ \n" + // 3, 3 - второй активный игрок - будет проигравшим
                 "     \n" + // 0, 1 - жертва первого
                 "☺☺   \n" + // 1, 1 - первый активный игрок - будет победителем
@@ -666,7 +666,7 @@ public class RoundScoresTest extends AbstractGameTest {
         // 0, 1 - жертва первого
         // 3, 4 - жертва второго
         // 4, 3 - жертва второго
-        givenBr("   ☺ \n" +
+        givenFl("   ☺ \n" +
                 "   ☺☺\n" +
                 "   # \n" +
                 "☺☺   \n" +
@@ -862,7 +862,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 60); // до конца раунда целая минута
 
-        givenBr("   ☺☺\n" +
+        givenFl("   ☺☺\n" +
                 "    ☺\n" +
                 "     \n" +
                 "     \n" +
@@ -973,7 +973,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 60); // до конца раунда целая минута
 
-        givenBr("   ☺☺\n" +
+        givenFl("   ☺☺\n" +
                 "    ☺\n" +
                 "     \n" +
                 "     \n" +
@@ -1047,7 +1047,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 .integer(ROUNDS_TIME, 60)
                 .integer(ROUNDS_TIME_FOR_WINNER, 15); // после победы я хочу еще чуть повисеть на уровне
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +

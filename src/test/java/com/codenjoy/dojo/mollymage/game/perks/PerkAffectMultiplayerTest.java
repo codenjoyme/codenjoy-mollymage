@@ -43,7 +43,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         settings.bool(PERK_WHOLE_TEAM_GET,false);
         settings.integer(ROUNDS_TEAMS_PER_ROOM, 2);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -101,7 +101,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         settings.bool(PERK_WHOLE_TEAM_GET, true);
         settings.integer(ROUNDS_TEAMS_PER_ROOM, 2);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -164,7 +164,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         int killScore = 10;
         settings.integer(KILL_OTHER_HERO_SCORE, killScore);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -260,7 +260,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         int killScore = 10;
         settings.integer(KILL_GHOST_SCORE, killScore);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "  &  \n" +
                 "     \n" +
@@ -354,7 +354,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         int killScore = 10;
         settings.integer(KILL_WALL_SCORE, killScore);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "  #  \n" +
                 "     \n" +
@@ -448,7 +448,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         int killScore = 10;
         settings.integer(KILL_GHOST_SCORE, killScore);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -562,7 +562,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
     @Test
     public void shouldPerkCantSpawnFromGhost() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -609,7 +609,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         // given
         canDropPotions(1);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -674,7 +674,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         // given
         canDropPotions(1);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -743,7 +743,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         // given
         canDropPotions(1);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -813,7 +813,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         // given
         canDropPotions(1);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -881,7 +881,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         canDropPotions(1);
         settings.bool(STEAL_POINTS, false);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -959,7 +959,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         canDropPotions(1);
         settings.bool(STEAL_POINTS, true);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -1039,7 +1039,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldBothHeroesGerPersonalHunterAfterKillingPerk_WithPE_Test1() {
         // given
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 " ☺   \n" +
                 "     \n" +
@@ -1124,7 +1124,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         // given
         settings.bool(STEAL_POINTS, false);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 " ☺   \n" +
                 "     \n" +
@@ -1205,7 +1205,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         // given
         settings.bool(STEAL_POINTS, true);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 " ☺   \n" +
                 "     \n" +

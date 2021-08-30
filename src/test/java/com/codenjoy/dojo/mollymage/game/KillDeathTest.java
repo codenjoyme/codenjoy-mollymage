@@ -31,7 +31,7 @@ public class KillDeathTest extends AbstractGameTest {
     // если герой стоит на зелье то он умирает после его взрыва
     @Test
     public void shouldKillHero_whenPotionExploded() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -79,7 +79,7 @@ public class KillDeathTest extends AbstractGameTest {
     // после смерти ходить больше нельзя
     @Test
     public void shouldException_whenTryToMoveIfDead_goLeft() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -118,7 +118,7 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldException_whenTryToMoveIfDead_goUp() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -137,7 +137,7 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldException_whenTryToMoveIfDead_goDown() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -156,7 +156,7 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldException_whenTryToMoveIfDead_goRight() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -175,7 +175,7 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldException_whenTryToMoveIfDead_dropPotion() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -195,7 +195,7 @@ public class KillDeathTest extends AbstractGameTest {
     // если герой стоит под действием ударной волны, он умирает
     @Test
     public void shouldKillHero_whenPotionExploded_blastWaveAffect_fromLeft() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -243,7 +243,7 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldKillHero_whenPotionExploded_blastWaveAffect_fromRight() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -293,7 +293,7 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldKillHero_whenPotionExploded_blastWaveAffect_fromUp() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -341,7 +341,7 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldKillHero_whenPotionExploded_blastWaveAffect_fromDown() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -391,7 +391,7 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldNoKillHero_whenPotionExploded_blastWaveAffect_fromDownRight() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -433,7 +433,7 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldBlastAfter_whenPotionExposed_HeroDie() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -473,7 +473,7 @@ public class KillDeathTest extends AbstractGameTest {
     // они взрываются от ударной волны
     @Test
     public void shouldDestroyWallsDestroyed_whenPotionExploded() {
-        givenBr("#####\n" +
+        givenFl("#####\n" +
                 "#   #\n" +
                 "# # #\n" +
                 "#☺  #\n" +
@@ -500,7 +500,7 @@ public class KillDeathTest extends AbstractGameTest {
     // привидение умирает, если попадает под взывающееся зелье
     @Test
     public void shouldDieMonster_whenPotionExploded() {
-        givenBr("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -623,7 +623,7 @@ public class KillDeathTest extends AbstractGameTest {
     public void shouldGhostAppearAfterKill() {
         potionsPower(3);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -658,7 +658,7 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldOnlyOneListenerWorksWhenOneHeroKillAnother() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -689,7 +689,7 @@ public class KillDeathTest extends AbstractGameTest {
     // герой может идти на привидение, при этом он умирает
     @Test
     public void shouldKllOtherHeroWhenHeroGoToGhost() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -726,7 +726,7 @@ public class KillDeathTest extends AbstractGameTest {
     // как это на моей доске отобразится? Хочу видеть трупик
     @Test
     public void shouldKllOtherHeroWhenGhostGoToIt() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -767,7 +767,7 @@ public class KillDeathTest extends AbstractGameTest {
     // встречу к нему - герой проскочит или умрет? должен умереть!
     @Test
     public void shouldKllOtherHeroWhenGhostAndHeroMoves() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +

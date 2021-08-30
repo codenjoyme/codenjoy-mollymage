@@ -50,7 +50,7 @@ public class GameTest extends AbstractGameTest {
     @Test
     public void heroesCanBeRemovedFromTheGame() {
         // given
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "  ☺  \n" +
                 " ☺   \n" +
@@ -78,7 +78,7 @@ public class GameTest extends AbstractGameTest {
     @Test
     public void heroesCanBeRestartedInTheGame() {
         // given
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "  ☺  \n" +
                 " ☺   \n" +
@@ -106,7 +106,7 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldBoard_whenStartGame2() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -116,7 +116,7 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroOnBoardAtInitPos_whenGameStart() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -131,7 +131,7 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldSameHero_whenNetFromBoard() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -143,7 +143,7 @@ public class GameTest extends AbstractGameTest {
     @Test
     public void shouldNotAppearBoxesOnDestroyedPlaces() {
         potionsPower(1);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -230,7 +230,7 @@ public class GameTest extends AbstractGameTest {
     public void shouldGhostNotAppearWhenDestroyWall() {
         potionsPower(3);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -273,7 +273,7 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldWallNotAppearOnHero() {
-        givenBr("☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -326,7 +326,7 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldGameReturnsRealJoystick() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -363,7 +363,7 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldGetTwoHeroesOnBoard() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -387,7 +387,7 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldPrintOtherPotionHero() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -411,7 +411,7 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void bug() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺☺  \n" +

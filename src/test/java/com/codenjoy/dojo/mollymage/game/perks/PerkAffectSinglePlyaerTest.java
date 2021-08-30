@@ -44,7 +44,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         // given
         settings.integer(PERK_PICK_TIMEOUT, 5);
 
-        givenBr("######\n" +
+        givenFl("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -112,7 +112,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldHeroCantSpawnOnPerk() {
         // given
-        givenBr("######\n" +
+        givenFl("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -179,7 +179,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastRadiusIncrease_whenNoBBRIperk() {
         // given
-        givenBr("############\n" +
+        givenFl("############\n" +
                 "# # # # # ##\n" +
                 "#          #\n" +
                 "# # # # # ##\n" +
@@ -223,7 +223,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         potionsPower(4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
 
-        givenBr("##########\n" +
+        givenFl("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
@@ -258,7 +258,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         potionsPower(4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
 
-        givenBr("##########\n" +
+        givenFl("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
@@ -295,7 +295,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         potionsPower(4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
 
-        givenBr("☼☼☼☼☼☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼        ☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
@@ -358,7 +358,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         settings.integer(POISON_THROWER_RECHARGE, 3);
         settings.bool(BIG_BADABOOM, true);
 
-        givenBr("☼☼☼☼☼☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼        ☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
@@ -420,7 +420,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         potionsPower(4);
         settings.integer(POISON_THROWER_RECHARGE, 1);
 
-        givenBr("☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -496,7 +496,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         potionsPower(4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
 
-        givenBr("##########\n" +
+        givenFl("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
@@ -601,7 +601,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         potionsPower(4);
         settings.integer(POISON_THROWER_RECHARGE, 3);
 
-        givenBr("##########\n" +
+        givenFl("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
@@ -639,7 +639,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastRadiusIncrease_whenBBRIperk() {
         // given
-        givenBr("############\n" +
+        givenFl("############\n" +
                 "# # # # # ##\n" +
                 "#          #\n" +
                 "# # # # # ##\n" +
@@ -688,7 +688,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastRadiusIncreaseTwice_whenBBRIperk() {
         // given
-        givenBr("############\n" +
+        givenFl("############\n" +
                 "# # # # # ##\n" +
                 "#          #\n" +
                 "# # # # # ##\n" +
@@ -841,7 +841,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     // BCI - Potion Count Increase perk
     @Test
     public void shouldPotionCountIncrease_whenBCIPerk() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -910,7 +910,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     // BI - Potion Immune perk
     @Test
     public void shouldHeroKeepAlive_whenBIperk() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -973,7 +973,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastOnAction_whenBRCperk_caseTwoPotions() {
         canDropPotions(2);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -1176,7 +1176,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastOnAction_whenBRCperk_caseOnePotion() {
         canDropPotions(1);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -1380,7 +1380,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     public void shouldSuicide_whenBRCPerk_shouldRemoveAfterDeath_andCollectScores() {
         canDropPotions(1);
         potionsPower(3);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "#    \n" +
@@ -1455,7 +1455,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldDestroyAllPotion_WithPerkPE() {
         // given
-        givenBr("      \n" +
+        givenFl("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1525,7 +1525,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldNotDestroyAllPotion_WithoutPerkPE() {
         // given
-        givenBr("      \n" +
+        givenFl("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1577,7 +1577,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldMoveWhileUsingPerk_WithPerkPE() {
         // given
-        givenBr("      \n" +
+        givenFl("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1627,7 +1627,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldMoveWhileUsingPerk_WithoutPerkPE() {
         // given
-        givenBr("      \n" +
+        givenFl("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1675,7 +1675,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldWorkOnlyOneTime_WithPerkPE() {
         // given
-        givenBr("      \n" +
+        givenFl("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1753,7 +1753,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldCombinePerk_WithPerkPE() {
         // given
-        givenBr("      \n" +
+        givenFl("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +

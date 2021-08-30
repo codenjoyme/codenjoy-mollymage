@@ -39,7 +39,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldNoEventsWhenHeroNotMove() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -55,7 +55,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillWall() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -88,7 +88,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillGhost() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -115,7 +115,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCalculateGhostsAndWallKills() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "#    \n" +
                 "&    \n" +
                 "#    \n" +
@@ -267,7 +267,7 @@ public class EventsTest extends AbstractGameTest {
     public void shouldCalculateGhostsAndWallKills_caseBigBadaboom() {
         settings.bool(BIG_BADABOOM, true);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "#    \n" +
                 "&    \n" +
                 "#    \n" +
@@ -333,7 +333,7 @@ public class EventsTest extends AbstractGameTest {
     public void shouldGhostNotAppearOnThePlaceWhereItDie_AfterKill() {
         potionsPower(3);
 
-        givenBr("   \n" +
+        givenFl("   \n" +
                 "   \n" +
                 "☺ &\n");
 
@@ -382,7 +382,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillWallOnlyForOneHero() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
@@ -424,7 +424,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillGhostMultiplayer() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
@@ -464,7 +464,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseDied() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -503,7 +503,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseAlive() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -558,7 +558,7 @@ public class EventsTest extends AbstractGameTest {
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseDied() {
         settings.integer(POTION_POWER, 2);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -600,7 +600,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "  ☺  \n" +
                 " ☺#☺ \n" +
                 "  ☺  \n" +
@@ -642,7 +642,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied_caseNotEqualPosition() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "  ☺  \n" +
                 "#☺#☺ \n" +
                 " #☺  \n" +
@@ -687,7 +687,7 @@ public class EventsTest extends AbstractGameTest {
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseAlive() {
         settings.integer(POTION_POWER, 2);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -742,7 +742,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenGhost_caseDied() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -780,7 +780,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenGhost_caseAlive() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -822,7 +822,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourGhosts_caseDied() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "  ☺  \n" +
                 " ☺&☺ \n" +
                 "  ☺  \n" +
@@ -867,7 +867,7 @@ public class EventsTest extends AbstractGameTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "&   &\n" +
                 "  #  \n" +
                 "&   &\n" +
@@ -965,7 +965,7 @@ public class EventsTest extends AbstractGameTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "&   &\n" +
                 "  #  \n" +
                 "&   &\n" +
@@ -1068,7 +1068,7 @@ public class EventsTest extends AbstractGameTest {
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "&   &\n" +
                 "  #  \n" +
                 "&   &\n" +
@@ -1167,7 +1167,7 @@ public class EventsTest extends AbstractGameTest {
                 .bool(BIG_BADABOOM, false)
                 .perksSettings().dropRatio(0);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "&   &\n" +
                 "  #  \n" +
                 "&   &\n" +

@@ -38,7 +38,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionDropped_whenHeroDropPotion() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -56,7 +56,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionDropped_whenHeroDropPotionAtAnotherPlace() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -81,7 +81,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldPotionsDropped_whenHeroDropThreePotion() {
         canDropPotions(3);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -111,7 +111,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldOnlyTwoPotions_whenLevelApproveIt() {
         canDropPotions(2);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -152,7 +152,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldOnlyOnePotionPerPlace() {
         canDropPotions(2);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -209,7 +209,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldBoom_whenDroppedPotionHas5Ticks() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -264,7 +264,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldBlastAfter_whenPotionExposed() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -291,7 +291,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldBlastAfter_whenPotionExposed_inOtherCorner() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -321,7 +321,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldWallProtectsHero() {
-        givenBr("☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -349,7 +349,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldWallProtectsHero2() {
-        givenBr("☼☼☼☼☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼       ☼\n" +
@@ -376,7 +376,7 @@ public class PotionTest extends AbstractGameTest {
     // разрыв зелья длинной указанной в settings
     @Test
     public void shouldChangePotionPower_to2() {
-        givenBr("☼☼☼☼☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼       ☼\n" +
@@ -400,7 +400,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldChangePotionPower_to3() {
-        givenBr("☼☼☼☼☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼       ☼\n" +
@@ -424,7 +424,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldChangePotionPower_to6() {
-        givenBr("☼☼☼☼☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼       ☼\n" +
@@ -452,7 +452,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldNoChangeOriginalPotionsWhenUseBoardApiButTimersSynchronized() {
         canDropPotions(2);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -512,7 +512,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldReturnShouldNotSynchronizedPotionsList_whenUseBoardApi() {
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -538,7 +538,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldChangeBlast_whenUseBoardApi() {  // TODO а нода вообще такое? стреляет по перформансу перекладывать объекты и усложняет код
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -579,7 +579,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldBlastWaveDoesNotPassThroughWall() {
         potionsPower(3);
-        givenBr("☼☼☼☼☼☼☼\n" +
+        givenFl("☼☼☼☼☼☼☼\n" +
                 "☼     ☼\n" +
                 "☼ ☼ ☼ ☼\n" +
                 "☼     ☼\n" +
@@ -623,7 +623,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldStopBlastWhenHeroOrDestroyWalls() {
         potionsPower(5);
-        givenBr("       \n" +
+        givenFl("       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
@@ -660,7 +660,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldStopBlastWhenGhost() {
         potionsPower(5);
-        givenBr("       \n" +
+        givenFl("       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
@@ -696,7 +696,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldTwoPotionsOnBoard() {
         canDropPotions(1);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -734,7 +734,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldTwoPotionsOnBoard_withEnemy() {
         canDropPotions(1);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -775,7 +775,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldFourPotionsOnBoard() {
         canDropPotions(2);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -827,7 +827,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldFourPotionsOnBoard_checkTwoPotionsPerHero() {
         canDropPotions(2);
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +

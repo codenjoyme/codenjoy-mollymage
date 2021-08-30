@@ -71,7 +71,7 @@ public abstract class AbstractGameTest {
     protected EventsListenersAssert events = new EventsListenersAssert(() -> listeners, Events.class);
     protected LevelImpl level;
 
-    protected void givenBr(String map) {
+    protected void givenFl(String map) {
         settings.string(LEVEL_MAP, map);
         level = (LevelImpl) settings.level();
 

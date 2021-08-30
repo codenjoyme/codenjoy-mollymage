@@ -96,10 +96,6 @@ public class GhostHunter extends Ghost {
     }
 
     public void die() {
-        if (!alive) {
-            return;
-        }
-
         field.remove(this);
         alive = false;
         // ларчик просто открывался, перки надо не убивать

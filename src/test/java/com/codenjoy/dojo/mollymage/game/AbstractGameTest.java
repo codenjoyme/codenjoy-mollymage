@@ -31,7 +31,6 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
-import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.model.levels.LevelImpl;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
@@ -70,11 +69,11 @@ public abstract class AbstractGameTest {
     private PrinterFactory printer = new PrinterFactoryImpl();
     protected PerksSettingsWrapper perks = settings.perksSettings();
     protected EventsListenersAssert events = new EventsListenersAssert(() -> listeners, Events.class);
-    protected Level level;
+    protected LevelImpl level;
 
     protected void givenBr(String map) {
         level = new LevelImpl(map);
-        List<Hero> heroes = level.getHeroes();
+        List<Hero> heroes = level.heroes();
         if (heroes.size() > 0) {
             OngoingStubbing<Integer> diceWhen = dice(dice);
             for (int index = 0; index < heroes.size(); index++) {
@@ -89,8 +88,8 @@ public abstract class AbstractGameTest {
 
         field = new MollyMage(level, dice, settings);
 
-        boxesCount(level.getBoxes().size());
-        ghostsCount(level.getGhosts().size());
+        boxesCount(field.boxes().size());
+        ghostsCount(field.ghosts().size());
         stopGhosts(); // по умолчанию все привидения стоят на месте
 
         for (Game game : games) {

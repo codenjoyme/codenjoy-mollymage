@@ -51,26 +51,22 @@ public class LevelImpl implements Level {
         return size;
     }
 
-    @Override
-    public List<Hero> getHeroes() {
+    public List<Hero> heroes() {
         return LevelUtils.getObjects(xy, map,
                 (point, element) -> new Hero(point), HERO);
     }
 
-    @Override
-    public List<Wall> getWalls() {
+    public List<Wall> walls() {
         return LevelUtils.getObjects(xy, map,
                 (point, element) -> new Wall(point), WALL);
     }
 
-    @Override
-    public List<TreasureBox> getBoxes() {
+    public List<TreasureBox> boxes() {
         return LevelUtils.getObjects(xy, map,
                 (point, element) -> new TreasureBox(point), TREASURE_BOX);
     }
 
-    @Override
-    public List<Ghost> getGhosts() {
+    public List<Ghost> ghosts() {
         return LevelUtils.getObjects(xy, map,
                 (point, element) -> new Ghost(point), GHOST);
     }
@@ -78,9 +74,9 @@ public class LevelImpl implements Level {
     @Override
     public PointField field() {
         PointField result = new PointField(size());
-        result.addAll(getWalls());
-        result.addAll(getBoxes());
-        result.addAll(getGhosts());
+        result.addAll(walls());
+        result.addAll(boxes());
+        result.addAll(ghosts());
         return result;
     }
 }

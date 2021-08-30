@@ -42,6 +42,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static com.codenjoy.dojo.services.Direction.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -51,15 +52,16 @@ public class BoomEngineOriginalTest {
     private BoomEngine engine;
     private Poison poison;
     private Level level;
-    private PrinterFactory printerFactory = new PrinterFactoryImpl();
+    private PrinterFactory printerFactory;
     private Field field;
 
     private void givenBr(String board) {
         level = new LevelImpl(board);
         field = new MollyMage(level, mock(Dice.class), new TestGameSettings());
         engine = new BoomEngineOriginal(field, null);
+        printerFactory = new PrinterFactoryImpl();
     }
-    
+
     @Test
     public void testOneBarrier() {
         givenBr("           \n" +
@@ -467,9 +469,9 @@ public class BoomEngineOriginalTest {
         int range = 4;
         int countBlasts = 4;
 
-        prepareDateForPoisonTests(source, Direction.LEFT, range);
+        prepareDateForPoisonTests(source, LEFT, range);
 
-        assertPoisonBoom(source, range, countBlasts, poison,
+        assertPoisonBoom(source, countBlasts, poison,
                 "☼      ☼\n" +
                 "        \n" +
                 "        \n" +
@@ -494,9 +496,9 @@ public class BoomEngineOriginalTest {
         int range = 4;
         int countBlasts = 4;
 
-        prepareDateForPoisonTests(source, Direction.UP, range);
+        prepareDateForPoisonTests(source, UP, range);
 
-        assertPoisonBoom(source, range, countBlasts, poison,
+        assertPoisonBoom(source, countBlasts, poison,
                 "☼     ☼\n" +
                 "    ҉  \n" +
                 "    ҉  \n" +
@@ -526,9 +528,9 @@ public class BoomEngineOriginalTest {
         int range = 4;
         int countBlasts = 4;
 
-        prepareDateForPoisonTests(source, Direction.RIGHT, range);
+        prepareDateForPoisonTests(source, RIGHT, range);
 
-        assertPoisonBoom(source, range, countBlasts, poison,
+        assertPoisonBoom(source, countBlasts, poison,
                 "☼           ☼\n" +
                 "             \n" +
                 "             \n" +
@@ -558,9 +560,9 @@ public class BoomEngineOriginalTest {
         int range = 4;
         int countBlasts = 4;
 
-        prepareDateForPoisonTests(source, Direction.DOWN, range);
+        prepareDateForPoisonTests(source, DOWN, range);
 
-        assertPoisonBoom(source, range, countBlasts, poison,
+        assertPoisonBoom(source, countBlasts, poison,
                 "☼     ☼\n" +
                 " ☼ ☻   \n" +
                 "   ҉   \n" +
@@ -586,9 +588,9 @@ public class BoomEngineOriginalTest {
         int range = 8;
         int countBlasts = 6;
 
-        prepareDateForPoisonTests(source, Direction.LEFT, range);
+        prepareDateForPoisonTests(source, LEFT, range);
 
-        assertPoisonBoom(source, range, countBlasts, poison,
+        assertPoisonBoom(source, countBlasts, poison,
                 "☼       ☼\n" +
                 "         \n" +
                 "         \n" +
@@ -613,22 +615,22 @@ public class BoomEngineOriginalTest {
 
         assertEquals(countBlasts, blasts.size());
 
-        String actual = print(blasts, level, source);
+        String actual = print(blasts, source);
 
         assertEquals(expected, actual);
     }
 
-    private void assertPoisonBoom(Point source, int radius, int countBlasts, Poison poison, String expected) {
+    private void assertPoisonBoom(Point source, int countBlasts, Poison poison, String expected) {
         List<Blast> blasts = engine.boom(poison);
 
         assertEquals(countBlasts, blasts.size());
 
-        String actual = print(blasts, level, source);
+        String actual = print(blasts, source);
 
         assertEquals(expected, actual);
     }
 
-    public String print(List<Blast> blast, Level level, Point source) {
+    public String print(List<Blast> blast, Point source) {
         Printer<String> printer = printerFactory.getPrinter(new BoardReader<Player>() {
             @Override
             public int size() {
@@ -650,7 +652,7 @@ public class BoomEngineOriginalTest {
             @Override
             public void addAll(Player player, Consumer<Iterable<? extends Point>> processor) {
                 processor.accept(new LinkedList<>() {{
-                    addAll(level.getWalls());
+                    addAll(field.walls().all());
                     add(new B(source));
                     addAll(blast);
                 }});

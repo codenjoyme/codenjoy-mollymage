@@ -41,7 +41,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         canDropPotions(1);
         settings.integer(CATCH_PERK_SCORE, CATCH_PERK_SCORE_FOR_TEST);
         settings.bool(PERK_WHOLE_TEAM_GET,false);
-        settings.integer(ROUNDS_TEAMS_PER_ROOM,2);
+        settings.integer(ROUNDS_TEAMS_PER_ROOM, 2);
 
         givenBr("     \n" +
                 "     \n" +
@@ -121,10 +121,10 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺♥♡  \n", game(0));
 
 
-        //heroes should not have any perks
-        assertEquals(0,player(0).getHero().getPerks().size());
-        assertEquals(0,player(1).getHero().getPerks().size());
-        assertEquals(0,player(2).getHero().getPerks().size());
+        // heroes should not have any perks
+        assertEquals(0, player(0).getHero().getPerks().size());
+        assertEquals(0, player(1).getHero().getPerks().size());
+        assertEquals(0, player(2).getHero().getPerks().size());
 
         //when first hero get perk
         hero(0).up();
@@ -144,12 +144,12 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         assertEquals(1,player(0).getHero().getPerks().size());
         assertEquals(1,player(1).getHero().getPerks().size());
-        assertEquals(0,player(2).getHero().getPerks().size());
+        assertEquals(0, player(2).getHero().getPerks().size());
 
         //scores for perk earned only one hero, who picked up perk
         assertEquals(CATCH_PERK_SCORE_FOR_TEST,player(0).getHero().scores());
-        assertEquals(0,player(1).getHero().scores());
-        assertEquals(0,player(2).getHero().scores());
+        assertEquals(0, player(1).getHero().scores());
+        assertEquals(0, player(2).getHero().scores());
     }
 
     /**  hero1 should get score for killing hero2 when then different blasts crossed
@@ -503,7 +503,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         field.tick();
         hero2.up();
         field.tick();
-        newPerk(2,2,new PotionCountIncrease(1,10));
+        newPerk(2, 2, new PotionCountIncrease(1, 10));
 
         // then
         asrtBrd("     \n" +

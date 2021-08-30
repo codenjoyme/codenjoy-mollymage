@@ -1167,7 +1167,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺    \n");;
+                "☺    \n");
         int timeout = 3; // время работы перка
 
         int value = 4;   // показатель его влияния, в тесте не интересно

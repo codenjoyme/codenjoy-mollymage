@@ -40,7 +40,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
     // перк исчезает спустя некоторое время
     @Test
-    public void shouldPerkDissapearWhenTimeout() {
+    public void shouldPerkDisappearWhenTimeout() {
         // given
         settings.integer(PERK_PICK_TIMEOUT, 5);
 
@@ -1460,7 +1460,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "      \n" +
                 "      \n" +
                 "      \n" +
-                "☺     \n");;
+                "☺     \n");
         newPerk(0, 1, getPotionExploderPerk());
         hero().addPerk(new PotionCountIncrease(3, 30));
 

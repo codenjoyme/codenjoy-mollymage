@@ -72,31 +72,30 @@ public abstract class AbstractGameTest {
     protected LevelImpl level;
 
     protected void givenBr(String map) {
-        level = new LevelImpl(map);
-        List<Hero> heroes = level.heroes();
-        if (heroes.size() > 0) {
-            OngoingStubbing<Integer> diceWhen = dice(dice);
-            for (int index = 0; index < heroes.size(); index++) {
-                Hero hero = heroes.get(index);
-                diceWhen = diceWhen.thenReturn(hero.getX(), hero.getY());
-
-                listeners.add(mock(EventListener.class));
-                players.add(new Player(listeners.get(index), settings));
-                games.add(new Single(players.get(index), printer));
-            }
-        }
+        settings.string(LEVEL_MAP, map);
+        level = (LevelImpl) settings.level();
 
         field = new MollyMage(level, dice, settings);
+        level.heroes().forEach(hero -> givenPlayer(hero));
+        resetHeroes();
 
         boxesCount(field.boxes().size());
         ghostsCount(field.ghosts().size());
         stopGhosts(); // по умолчанию все привидения стоят на месте
+    }
 
-        for (Game game : games) {
-            game.on(field);
-            game.newGame();
-        }
-        resetHeroes();
+    public Player givenPlayer(Point pt) {
+        EventListener listener = mock(EventListener.class);
+        listeners.add(listener);
+        Player player = new Player(listener, settings);
+        players.add(player);
+        Game game = new Single(player, printer);
+        games.add(game);
+
+        dice(dice, pt.getX(), pt.getY());
+        game.on(field);
+        game.newGame();
+        return player;
     }
 
     protected GameSettings settings() {

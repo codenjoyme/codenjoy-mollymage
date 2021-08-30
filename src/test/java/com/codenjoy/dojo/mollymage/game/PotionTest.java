@@ -244,12 +244,6 @@ public class PotionTest extends AbstractGameTest {
     // проверить, что я могу поставить еще одно зелье, когда другое рвануло
     @Test
     public void shouldCanDropNewPotion_whenOtherBoom() {
-        givenBr("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "☺    \n");
-
         shouldBoom_whenDroppedPotionHas5Ticks();
 
         asrtBrd("     \n" +

@@ -163,7 +163,8 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_GHOST]");
 
-        dice(dice, 3, 4, Direction.ACT.value()); // новое привидение, стоит не двигается
+        // новое привидение, стоит не двигается
+        dice(3, 4, Direction.ACT.value());
         field.tick();
         field.ghosts().stream().forEach(Ghost::stop); // и не будет больше двигаться
 
@@ -175,7 +176,8 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
-        dice(dice, 4, 4); // новая коробка
+        // новая коробка
+        dice(4, 4);
         field.tick();
 
         asrtBrd("  ☺&#\n" +
@@ -186,7 +188,8 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_GHOST]");
 
-        dice(dice, 3, 3, Direction.ACT.value()); // новое привидение, стоит не двигается
+        // новое привидение, стоит не двигается
+        dice(3, 3, Direction.ACT.value());
         field.tick();
         field.ghosts().stream().forEach(Ghost::stop); // и не будет больше двигаться
 
@@ -198,7 +201,8 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
-        dice(dice, 4, 3); // новая коробка
+        // новая коробка
+        dice(4, 3);
         hero().left();
         field.tick();
 
@@ -226,7 +230,7 @@ public class EventsTest extends AbstractGameTest {
         events.verifyAllEvents("[DIED]");
         assertHeroDie();
 
-        dice(dice, 1, 1);
+        dice(1, 1);
         field.tick();
         game().newGame();
 
@@ -315,9 +319,8 @@ public class EventsTest extends AbstractGameTest {
                 "H҉҉  \n" +
                 "x҉҉  \n");
 
-        dice(dice,
-                2, 2, // новые координаты коробок
-                3, 3);
+        // новые координаты коробок
+        dice(2, 2, 3, 3);
         field.tick();
 
         asrtBrd("  ☺  \n" +
@@ -356,7 +359,7 @@ public class EventsTest extends AbstractGameTest {
 
         // when fill free places boxes
         boxesCount(6);
-        dice(dice, preparedCoordinatesForBoxesAndGhosts());
+        dice(preparedCoordinatesForBoxesAndGhosts());
         field.tick();
 
         // then boxes fill whole field except 2 free points([2,2] and [0,2]).
@@ -411,8 +414,8 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => []\n" +
                 "listener(1) => [KILL_TREASURE_BOX]\n");
 
-        dice(dice, // новые коробки
-                4, 4);
+        // новые коробки
+        dice(4, 4);
         tick();
 
         asrtBrd(" ☺  #\n" +
@@ -490,8 +493,8 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
 
-        dice(dice, // новые коробки
-                4, 4);
+        // новые коробки
+        dice(4, 4);
         tick();
 
         asrtBrd("    #\n" +
@@ -545,7 +548,8 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => [KILL_TREASURE_BOX]\n" +
                 "listener(1) => [KILL_TREASURE_BOX]\n");
 
-        dice(dice, 4, 4); // новая коробка
+        // новая коробка
+        dice(4, 4);
         tick();
 
         asrtBrd("    #\n" +
@@ -586,9 +590,8 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
 
-        dice(dice, // новые коробки
-                4, 4,
-                4, 3);
+        // новые коробки
+        dice(4, 4, 4, 3);
         tick();
 
         asrtBrd("    #\n" +
@@ -629,8 +632,8 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(3) => [DIED, KILL_TREASURE_BOX]\n");
 
-        dice(dice, // новые коробки
-                4, 4);
+        // новые коробки
+        dice(4, 4);
         tick();
 
         asrtBrd("    #\n" +
@@ -671,10 +674,8 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n");
 
-        dice(dice, // новые коробки
-                4, 4,
-                4, 3,
-                4, 2);
+        // новые коробки
+        dice(4, 4, 4, 3, 4, 2);
         tick();
 
         asrtBrd("    #\n" +
@@ -728,9 +729,8 @@ public class EventsTest extends AbstractGameTest {
                 "listener(1) => [KILL_TREASURE_BOX]\n");
 
 
-        dice(dice, // новые коробки
-                4, 4,
-                4, 3);
+        // новые коробки
+        dice(4, 4, 4, 3);
         tick();
 
         asrtBrd("    #\n" +
@@ -1144,8 +1144,8 @@ public class EventsTest extends AbstractGameTest {
                 "x♣҉♣x\n" +
                 " ҉҉҉ \n", game(0));
 
-        dice(dice, // новые коробки
-                4, 4);
+        // новые коробки
+        dice(4, 4);
         tick();
 
         events.verifyAllEvents(
@@ -1243,8 +1243,8 @@ public class EventsTest extends AbstractGameTest {
                 "&11♠&\n" +
                 "     \n", game(0));
 
-        dice(dice, // новые коробки
-                4, 4);
+        // новые коробки
+        dice(4, 4);
         tick();
 
         events.verifyAllEvents(

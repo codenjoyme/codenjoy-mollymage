@@ -278,7 +278,8 @@ public class RoundBattleTest extends AbstractGameTest {
 
         tick();
 
-        dice(dice, 3, 4); // новые координаты для героя
+        // новые координаты для героя
+        dice(3, 4);
         field.newGame(player(2)); // это сделоает сервер в ответ на isAlive = false
         resetHeroes();
 

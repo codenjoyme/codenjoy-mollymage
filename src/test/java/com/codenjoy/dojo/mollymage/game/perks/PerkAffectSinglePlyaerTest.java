@@ -54,7 +54,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
         perks.dropRatio(20); // 20%
 
-        dice(dice, 10); // must drop 2 perks
+        // must drop 2 perks
+        dice(10);
 
         hero().act();
         field.tick();
@@ -122,7 +123,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 4, 3);
         perks.dropRatio(20); // 20%
 
-        dice(dice, 10); // must drop 2 perks
+        // must drop 2 perks
+        dice(10);
 
         hero().act();
         field.tick();
@@ -159,10 +161,10 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // вот он последний тик перед взрывом, тут все и случится
-        dice(dice,
-                0, 1,   // пробуем разместить героя поверх перка1
-                1, 0,   // пробуем разместить героя поверх перка2
-                3, 3);  // а потом в свободное место
+        // пробуем разместить героя поверх перка1
+        // пробуем разместить героя поверх перка2
+        // а потом в свободное место
+        dice(0, 1, 1, 0, 3, 3);
         field.tick();
         newGameForDied(); // это сделает сервер
 
@@ -759,9 +761,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         hero().right();
 
-        dice(dice,  // новые коробки
-                9, 1,
-                9, 2);
+        // новые коробки
+        dice(9, 1, 9, 2);
         field.tick();
 
         hero().right();
@@ -794,11 +795,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 hero().getPerks().toString());
 
         // when
-        dice(dice,  // новые коробки
-                9, 10,
-                9, 9,
-                9, 8,
-                9, 7);
+        // новые коробки
+        dice(9, 10, 9, 9, 9, 8, 9, 7);
         field.tick();
 
         // последний шанс воспользоваться, но мы не будем
@@ -1437,7 +1435,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]",
                 hero().getPerks().toString());
 
-        dice(dice, 4, 4); // новая коробка
+        // новая коробка
+        dice(4, 4);
         field.tick();
 
         asrtBrd("    #\n" +

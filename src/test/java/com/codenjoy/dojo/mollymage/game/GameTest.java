@@ -91,7 +91,7 @@ public class GameTest extends AbstractGameTest {
                 "♥    \n", game(0));
 
         // when
-        dice(dice, 4, 0);
+        dice(4, 0);
         game(1).newGame();
 
         tick();
@@ -174,7 +174,7 @@ public class GameTest extends AbstractGameTest {
         // we allow to create 9 boxes and only 7 should be created
         boxesCount(9);
         final int[] square3x3Coordinates = getCoordinatesForPointsInSquare(3);
-        dice(dice, square3x3Coordinates);
+        dice(square3x3Coordinates);
         field.tick();
 
         // then
@@ -200,7 +200,7 @@ public class GameTest extends AbstractGameTest {
         // all points on the board allowed for boxes regeneration except
         // [0,1][1,0] - destroyed boxes and [1,1] - hero place
         // when fill board with boxes around hero
-        dice(dice, square3x3Coordinates);
+        dice(square3x3Coordinates);
         field.tick();
 
         // then only 6 boxes should been exist
@@ -213,7 +213,7 @@ public class GameTest extends AbstractGameTest {
         assertEquals(6, field.boxes().size());
 
         // when next tick - empty spaces should been filled by boxes
-        dice(dice, square3x3Coordinates);
+        dice(square3x3Coordinates);
         field.tick();
 
         // then boxes should been generated on [0,1] and [1,0] to
@@ -236,7 +236,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
-        dice(dice, 4, 4, Direction.RIGHT.value());
+        dice(4, 4, Direction.RIGHT.value());
         ghostsCount(1);
 
         newBox(3, 0);
@@ -259,9 +259,9 @@ public class GameTest extends AbstractGameTest {
                 "҉☺   \n" +
                 "҉҉҉H \n");
 
-        dice(dice,
-                Direction.DOWN.value(), // направление движения привидения
-                3, 3); // новая коробка
+        // направление движения привидения
+        // новая коробка
+        dice(Direction.DOWN.value(), 3, 3);
         field.tick();
 
         asrtBrd("     \n" +
@@ -280,7 +280,8 @@ public class GameTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
 
         boxesCount(1);
-        dice(dice, 2, 1); // коробка
+        // коробка
+        dice(2, 1);
 
         field.tick();
 
@@ -311,10 +312,10 @@ public class GameTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
         // when
         field.tick();
-        dice(dice,
-                0, 0,                     // на неразрушаемоей стене нельзя
-                hero().getX(), hero().getY(), // на месте героя не должен появиться
-                1, 1);                    // а вот тут свободно
+        // на неразрушаемоей стене нельзя
+        // на месте героя не должен появиться
+        // а вот тут свободно
+        dice(0, 0, hero().getX(), hero().getY(), 1, 1);
 
         // then
         asrtBrd("☼☼☼☼☼\n" +
@@ -350,9 +351,7 @@ public class GameTest extends AbstractGameTest {
         Joystick joystick2 = game(0).getJoystick();
 
         // when
-        dice(dice,
-                0, 0,
-                1, 0);
+        dice(0, 0, 1, 0);
         game(0).newGame();
         game(1).newGame();
 

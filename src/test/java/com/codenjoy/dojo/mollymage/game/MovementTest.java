@@ -465,8 +465,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
         ghostsCount(1);
-        dice(dice, 9, 9,
-                1, Direction.DOWN.value());
+        dice(9, 9, 1, Direction.DOWN.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -481,7 +480,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(dice, 1);
+        dice(1);
         field.tick();
         field.tick();
         field.tick();
@@ -500,7 +499,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(dice, 0, Direction.LEFT.value());
+        dice(0, Direction.LEFT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -535,7 +534,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(dice, 1, Direction.RIGHT.value());
+        dice(1, Direction.RIGHT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -550,11 +549,11 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(dice, 0, Direction.LEFT.value());
+        dice(0, Direction.LEFT.value());
         field.tick();
         field.tick();
 
-        dice(dice, Direction.LEFT.value());
+        dice(Direction.LEFT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -569,7 +568,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(dice, Direction.DOWN.value());
+        dice(Direction.DOWN.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -668,7 +667,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼   ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.LEFT.value());
+        dice(Direction.LEFT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -692,11 +691,11 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice,
-                0, 0, // на неразрушаемой стене нельзя
-                hero().getX(), hero().getY(), // попытка поселиться на герое
-                3, 3, // попытка - клетка свободна
-                Direction.DOWN.value()); // а это куда он сразу же отправится
+        // на неразрушаемой стене нельзя
+        // попытка поселиться на герое
+        // попытка - клетка свободна
+        // а это куда он сразу же отправится
+        dice(0, 0, hero().getX(), hero().getY(), 3, 3, Direction.DOWN.value());
 
         // when пришла пора регенериться чоперу
         field.tick();
@@ -725,7 +724,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.RIGHT.value());
+        dice(Direction.RIGHT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -752,7 +751,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.RIGHT.value());
+        dice(Direction.RIGHT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -761,7 +760,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.UP.value());
+        dice(Direction.UP.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -770,7 +769,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.LEFT.value());
+        dice(Direction.LEFT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -779,7 +778,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.DOWN.value());
+        dice(Direction.DOWN.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -804,7 +803,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.LEFT.value());
+        dice(Direction.LEFT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -813,7 +812,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.LEFT.value());
+        dice(Direction.LEFT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼\n" +
@@ -912,9 +911,7 @@ public class MovementTest extends AbstractGameTest {
                 " ҉   \n" +
                 "♣҉Ѡ  \n", game(1));
 
-        dice(dice,
-                0, 0,
-                1, 0);
+        dice(0, 0, 1, 0);
         game(0).newGame();
         game(1).newGame();
 

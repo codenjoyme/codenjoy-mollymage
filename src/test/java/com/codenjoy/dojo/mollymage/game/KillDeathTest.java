@@ -513,8 +513,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
         ghostsCount(1);
-        dice(dice, 9, 9,
-                1, Direction.DOWN.value());
+        dice(9, 9, 1, Direction.DOWN.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -550,7 +549,7 @@ public class KillDeathTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        dice(dice, 1, Direction.LEFT.value());
+        dice(1, Direction.LEFT.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -603,7 +602,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼҉x       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(dice, level.size() - 2, level.size() - 2, Direction.DOWN.value());
+        dice(level.size() - 2, level.size() - 2, Direction.DOWN.value());
         field.tick();
 
         asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -646,7 +645,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "҉☺   \n" +
                 "҉҉҉x \n");
 
-        dice(dice, 2, 2, Direction.DOWN.value());
+        dice(2, 2, Direction.DOWN.value());
         field.tick();
 
         asrtBrd("     \n" +

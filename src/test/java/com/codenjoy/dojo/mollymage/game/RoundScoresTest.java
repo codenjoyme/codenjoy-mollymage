@@ -460,10 +460,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(2) => []\n");
 
         // вот он последний тик раунда, тут все и случится
-        dice(dice,
-                0, 0,
-                1, 0,
-                1, 1);
+        dice(0, 0, 1, 0, 1, 1);
         tick();
 
         asrtBrd("     \n" +
@@ -625,12 +622,8 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(4) => []\n");
 
         // вот он последний тик раунда, тут все и случится
-        dice(dice,
-                0, 2,  // размещаем всех в свободные места
-                1, 2,
-                2, 2,
-                3, 2,
-                4, 2);
+        // размещаем всех в свободные места
+        dice(0, 2, 1, 2, 2, 2, 3, 2, 4, 2);
         tick();
         newGameForAllDied(); // это сделает сервер (вообще он это сделал намного раньше, но для наглядности тут)
 
@@ -823,15 +816,10 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(5) => []\n");
 
         // вот он последний тик раунда, тут все и случится
-        dice(dice,
-                0, 1,  // на трупики нельзя!
-                1, 0,  // на трупики нельзя!
-                0, 2,  // теперь размещаем всех в свободные места
-                1, 2,
-                2, 2,
-                3, 2,
-                4, 2,
-                4, 1);
+        // на трупики нельзя!
+        // на трупики нельзя!
+        // теперь размещаем всех в свободные места
+        dice(0, 1, 1, 0, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 4, 1);
         tick();
         newGameForAllDied(); // это сделает сервер (вообще он это сделал намного раньше, но для наглядности тут)
 
@@ -921,10 +909,10 @@ public class RoundScoresTest extends AbstractGameTest {
         assertEquals(true, hero(2).isActiveAndAlive());
 
         // делаем очистку очков
-        dice(dice,
-                0, 0, // первый игрок
-                0, 1, // второй
-                1, 0); // третий
+        // первый игрок
+        // второй
+        // третий
+        dice(0, 0, 0, 1, 1, 0);
         field.clearScore();
         resetHeroes();
 

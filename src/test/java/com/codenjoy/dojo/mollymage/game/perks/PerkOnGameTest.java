@@ -59,7 +59,8 @@ public class PerkOnGameTest extends AbstractGameTest {
         perks.dropRatio(20); // 20%
         perks.pickTimeout(50);
 
-        dice(dice, 10); // must drop 2 perks
+        // must drop 2 perks
+        dice(10);
 
         hero().act();
         field.tick();
@@ -151,7 +152,8 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "######\n");
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 5, 3);
         perks.dropRatio(20); // 20%
-        dice(dice, 10, 30); // must drop 1 perk
+        // must drop 1 perk
+        dice(10, 30);
 
         hero().act();
         field.tick();
@@ -204,7 +206,8 @@ public class PerkOnGameTest extends AbstractGameTest {
         perks.dropRatio(20); // 20%
         perks.pickTimeout(5);
 
-        dice(dice, 10); // must drop 2 perks
+        // must drop 2 perks
+        dice(10);
 
         hero().act();
         field.tick();
@@ -416,8 +419,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=39} at [3,4]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=43} at [5,1]}]");
 
-        dice(dice,
-                1, 1);
+        dice(1, 1);
         field.tick();
         newGameForDied(); // это сделает сервер
 
@@ -681,7 +683,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // when
         boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
 
-        dice(dice, 0, 1);
+        dice(0, 1);
         newGameForDied(); // это сделает сервер
 
         field.tick();
@@ -822,7 +824,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=47} at [5,1]}]");
 
         // when
-        dice(dice, 0, 1);
+        dice(0, 1);
         newGameForDied(); // это сделает сервер
 
         field.tick();

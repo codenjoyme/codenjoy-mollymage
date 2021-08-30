@@ -92,7 +92,7 @@ public abstract class AbstractGameTest {
         Game game = new Single(player, printer);
         games.add(game);
 
-        dice(dice, pt.getX(), pt.getY());
+        dice(pt.getX(), pt.getY());
         game.on(field);
         game.newGame();
         return player;
@@ -234,13 +234,11 @@ public abstract class AbstractGameTest {
         field.tick();
     }
 
-    protected OngoingStubbing<Integer> dice(Dice dice, int... values) {
-        reset(dice);
+    public void dice(int... ints) {
         OngoingStubbing<Integer> when = when(dice.next(anyInt()));
-        for (int value : values) {
-            when = when.thenReturn(value);
+        for (int i : ints) {
+            when = when.thenReturn(i);
         }
-        return when;
     }
 
     protected void newBox(int x, int y) {

@@ -72,14 +72,6 @@ public abstract class AbstractGameTest {
     protected EventsListenersAssert events = new EventsListenersAssert(() -> listeners, Events.class);
     protected Level level;
 
-    protected void givenBr(int count) {
-        givenBr("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n");
-    }
-
     protected void givenBr(String map) {
         level = new LevelImpl(map);
         List<Hero> heroes = level.getHeroes();

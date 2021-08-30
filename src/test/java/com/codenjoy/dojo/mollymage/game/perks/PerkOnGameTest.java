@@ -27,6 +27,7 @@ import com.codenjoy.dojo.mollymage.game.AbstractGameTest;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.PotionBlastRadiusIncrease;
+import com.codenjoy.dojo.mollymage.model.items.perks.PotionCountIncrease;
 import org.junit.Test;
 
 import java.util.Comparator;
@@ -1186,5 +1187,97 @@ public class PerkOnGameTest extends AbstractGameTest {
         // then
         assertEquals("Hero had to lose perk",
                 0, player().getHero().getPerks().size());
+    }
+
+    @Test
+    public void shouldCatchSeveralPerks_whenTherAreInTheOneCell() {
+        // given
+        givenBr("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
+
+        int timeout = 4;
+        newPerk(0, 1, new PotionCountIncrease(1, timeout));
+        newPerk(0, 1, new PotionBlastRadiusIncrease(2, timeout));
+
+        assertPerks("[{PerkOnBoard {POTION_COUNT_INCREASE('c') value=1, timeout=4, timer=4, pick=0} at [0,1]},\n" +
+                " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=2, timeout=4, timer=4, pick=0} at [0,1]}]");
+
+        assertEquals("[]" ,
+                hero().getPerks().toString());
+
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "c    \n" +
+                "☺    \n");
+
+        // when
+        hero().up();
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n" +
+                "     \n");
+
+        assertPerks("[]");
+
+        assertEquals("[{POTION_COUNT_INCREASE('c') value=1, timeout=4, timer=3, pick=0}, " +
+                        "{POTION_BLAST_RADIUS_INCREASE('+') value=2, timeout=4, timer=3, pick=-1}]" ,
+                hero().getPerks().toString());
+
+        // when
+        hero().up();
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺    \n" +
+                "     \n" +
+                "     \n");
+
+        assertPerks("[]");
+
+        assertEquals("[{POTION_COUNT_INCREASE('c') value=1, timeout=4, timer=2, pick=0}, " +
+                        "{POTION_BLAST_RADIUS_INCREASE('+') value=2, timeout=4, timer=2, pick=-1}]" ,
+                hero().getPerks().toString());
+
+        // when
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺    \n" +
+                "     \n" +
+                "     \n");
+
+        assertPerks("[]");
+
+        assertEquals("[{POTION_COUNT_INCREASE('c') value=1, timeout=4, timer=1, pick=0}, " +
+                        "{POTION_BLAST_RADIUS_INCREASE('+') value=2, timeout=4, timer=1, pick=-1}]" ,
+                hero().getPerks().toString());
+
+        // when
+        tick();
+
+        // then
+        asrtBrd("     \n" +
+                "     \n" +
+                "☺    \n" +
+                "     \n" +
+                "     \n");
+
+        assertPerks("[]");
+
+        assertEquals("[]" ,
+                hero().getPerks().toString());
+
     }
 }

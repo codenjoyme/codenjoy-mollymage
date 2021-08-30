@@ -178,27 +178,23 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     public List<PerkOnBoard> pickPerk(Point pt) {
         List<PerkOnBoard> result = perks().getAt(pt);
-        if (result.isEmpty()) {
-            return result;
+        if (!result.isEmpty()) {
+            perks().remove(pt);
         }
-
-        // TODO написать тест на случай подбирания двух перков подряд если они лежат в окдной клетке
-        PerkOnBoard next = result.iterator().next();
-        perks().remove(next);
-        return Arrays.asList(next);
+        return result;
     }
 
     @Override
-    public void addPerk(Player player, Perk perk) {
+    public void pickPerkBy(Player player, Perk perk) {
         if (isWholeTeamShouldGetPerk()) {
-            addPerk(player.getTeamId(), perk);
+            pickPerkBy(player.getTeamId(), perk);
         } else {
             player.getHero().addPerk(perk);
         }
     }
 
     @Override
-    public void addPerk(int teamId, Perk perk) {
+    public void pickPerkBy(int teamId, Perk perk) {
         for (Player player : players) {
             if (player.getTeamId() == teamId) {
                 player.getHero().addPerk(perk);

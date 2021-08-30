@@ -62,9 +62,9 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     List<PerkOnBoard> pickPerk(Point pt);
 
-    void addPerk(Player player, Perk perk);
+    void pickPerkBy(Player player, Perk perk);
 
-    void addPerk(int teamId, Perk perk);
+    void pickPerkBy(int teamId, Perk perk);
 
     Dice dice();
 

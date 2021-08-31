@@ -177,11 +177,11 @@ public abstract class AbstractGameTest {
     // other stuff
 
     protected void assertHeroDie() {
-        assertEquals("Expected game over", true, game().isGameOver());
+        assertEquals(true, game().isGameOver());
     }
 
     protected void assertHeroAlive() {
-        assertFalse(game().isGameOver());
+        assertEquals(false, game().isGameOver());
     }
 
     protected void gotoBoardCenter() {

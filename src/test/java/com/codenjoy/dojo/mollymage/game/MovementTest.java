@@ -599,7 +599,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
         Assert.assertTrue(game().isGameOver());
-        verify(listener()).event(Events.DIED);
+        events.verifyAllEvents("[DIED]");
     }
 
     // если я двинулся за пределы стены и тут же поставил зелье,
@@ -691,6 +691,8 @@ public class MovementTest extends AbstractGameTest {
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
+
+        events.verifyAllEvents("[KILL_GHOST]");
 
         // на неразрушаемой стене нельзя
         // попытка поселиться на герое
@@ -894,6 +896,10 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 " ҉   \n" +
                 "♣҉Ѡ  \n", 1);
+
+        events.verifyAllEvents(
+                "listener(0) => [DIED]\n" +
+                "listener(1) => [DIED, KILL_OTHER_HERO]\n");
     }
 
     @Test

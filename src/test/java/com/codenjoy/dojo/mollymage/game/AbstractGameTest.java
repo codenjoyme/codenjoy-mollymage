@@ -39,6 +39,7 @@ import com.codenjoy.dojo.services.multiplayer.Single;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.utils.events.EventsListenersAssert;
+import org.junit.After;
 import org.junit.Before;
 import org.mockito.Mockito;
 import org.mockito.stubbing.OngoingStubbing;
@@ -85,6 +86,11 @@ public abstract class AbstractGameTest {
         perks = settings.perksSettings();
         printer = new PrinterFactoryImpl();
         events = new EventsListenersAssert(() -> listeners, Events.class);
+    }
+
+    @After
+    public void tearDown() {
+        events.verifyNoEvents();
     }
 
     public void dice(int... ints) {
@@ -164,15 +170,6 @@ public abstract class AbstractGameTest {
 
     public Hero hero() {
         return hero(0);
-    }
-
-
-    protected EventListener listener() {
-        return listeners.get(0);
-    }
-
-    protected EventListener listener(int index) {
-        return listeners.get(index);
     }
 
     // other stuff

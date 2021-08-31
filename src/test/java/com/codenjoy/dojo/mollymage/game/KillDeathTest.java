@@ -97,6 +97,8 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 " Ѡ   \n" +
                 "     \n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     private void killPotioner() {
@@ -126,6 +128,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         killPotioner();
 
         hero().up();
@@ -136,6 +139,8 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 " Ѡ   \n" +
                 "     \n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     @Test
@@ -155,6 +160,8 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 " Ѡ   \n" +
                 "     \n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     @Test
@@ -174,6 +181,8 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 " Ѡ   \n" +
                 "     \n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     @Test
@@ -183,6 +192,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         killPotioner();
 
         hero().act();
@@ -193,6 +203,8 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 " Ѡ   \n" +
                 "     \n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     // если герой стоит под действием ударной волны, он умирает
@@ -498,6 +510,8 @@ public class KillDeathTest extends AbstractGameTest {
                 "#҉# #\n" +
                 "H҉҉ #\n" +
                 "#H###\n");
+
+        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
     }
 
     // привидение умирает, если попадает под взывающееся зелье
@@ -605,6 +619,8 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼҉x       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
+        events.verifyAllEvents("[KILL_GHOST]");
+
         dice(level.size() - 2, level.size() - 2, Direction.DOWN.value());
         field.tick();
 
@@ -648,6 +664,8 @@ public class KillDeathTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉☺   \n" +
                 "҉҉҉x \n");
+
+        events.verifyAllEvents("[KILL_GHOST]");
 
         dice(2, 2, Direction.DOWN.value());
         field.tick();

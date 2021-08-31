@@ -68,6 +68,11 @@ public class GameTest extends AbstractGameTest {
 
         tick();
 
+        events.verifyAllEvents(
+                "listener(0) => []\n" +
+                "listener(1) => [DIED]\n" +
+                "listener(2) => []\n");
+
         // then
         assertF("     \n" +
                 "     \n" +
@@ -200,6 +205,8 @@ public class GameTest extends AbstractGameTest {
                 "H☺#  \n" +
                 "҉H#  \n");
 
+        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+
         // all points on the board allowed for boxes regeneration except
         // [0,1][1,0] - destroyed boxes and [1,1] - hero place
         // when fill board with boxes around hero
@@ -261,6 +268,8 @@ public class GameTest extends AbstractGameTest {
                 "҉☺   \n" +
                 "҉҉҉H \n");
 
+        events.verifyAllEvents("[KILL_TREASURE_BOX]");
+
         dice(Direction.DOWN.value(), // направление движения привидения
                 3, 3); // новая коробка
         field.tick();
@@ -307,6 +316,9 @@ public class GameTest extends AbstractGameTest {
                 "☼҉☼ ☼\n" +
                 "☼҉H ☼\n" +
                 "☼☼☼☼☼\n");
+
+        events.verifyAllEvents("[KILL_TREASURE_BOX]");
+
         // when
         field.tick();
         // на неразрушаемоей стене нельзя
@@ -340,6 +352,10 @@ public class GameTest extends AbstractGameTest {
         tick();
         tick();
         tick();
+
+        events.verifyAllEvents(
+                "listener(0) => [DIED]\n" +
+                "listener(1) => []\n");
 
         assertFalse(hero(0).isAlive());
         assertTrue(hero(1).isAlive());

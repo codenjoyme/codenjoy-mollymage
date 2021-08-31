@@ -269,12 +269,16 @@ public class RoundBattleTest extends AbstractGameTest {
         assertEquals(true, player(2).wantToStay());
         assertEquals(false, player(2).shouldLeave());
 
-
         assertF("     \n" +
                 "     \n" +
                 " ҉☺  \n" +
                 "҉҉҉  \n" +
                 "♥♣   \n", 0);
+
+        events.verifyAllEvents(
+                "listener(0) => [KILL_OTHER_HERO]\n" +
+                "listener(1) => []\n" +
+                "listener(2) => [DIED]\n");
 
         tick();
 
@@ -315,6 +319,11 @@ public class RoundBattleTest extends AbstractGameTest {
 
         tick();
 
+        events.verifyAllEvents(
+                "listener(0) => [START_ROUND, [Round 1]]\n" +
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
+
         // ставлю зелье
         hero(0).act();
         tick();
@@ -329,6 +338,11 @@ public class RoundBattleTest extends AbstractGameTest {
 
         // взрыв
         tick();
+
+        events.verifyAllEvents(
+                "listener(0) => [KILL_OTHER_HERO]\n" +
+                "listener(1) => [DIED]\n" +
+                "listener(2) => []\n");
 
         // идем назад
         hero(0).down();
@@ -403,6 +417,11 @@ public class RoundBattleTest extends AbstractGameTest {
 
         tick();
 
+        events.verifyAllEvents(
+                "listener(0) => [START_ROUND, [Round 1]]\n" +
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
+
         // ставлю зелье
         hero(0).act();
         tick();
@@ -417,6 +436,11 @@ public class RoundBattleTest extends AbstractGameTest {
 
         // взрыв
         tick();
+
+        events.verifyAllEvents(
+                "listener(0) => [KILL_OTHER_HERO]\n" +
+                "listener(1) => [DIED]\n" +
+                "listener(2) => []\n");
 
         // идем назад
         hero(0).down();

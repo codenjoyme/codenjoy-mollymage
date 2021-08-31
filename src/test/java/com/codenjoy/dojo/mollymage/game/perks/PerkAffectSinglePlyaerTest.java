@@ -77,6 +77,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "H҉҉☺ #\n" +
                 "#H####\n");
 
+        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+
         field.tick();
 
         assertF("######\n" +
@@ -146,6 +148,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "#҉# ##\n" +
                 "H҉Ѡ  #\n" +
                 "#H####\n");
+
+        events.verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
         removeBoxes(2); // две коробки потрачено
@@ -217,6 +221,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "#҉# # # # ##\n" +
                 "HѠ҉        #\n" +
                 "#H##########\n");
+
+        events.verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
     }
 
     @Test
@@ -414,6 +420,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼҉☼ ☼ ☼ ☼☼\n" +
                 "☼Ѡ       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼\n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     @Test
@@ -682,6 +690,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "#҉# # # # ##\n" +
                 "HѠ҉҉҉҉҉    #\n" +
                 "#H##########\n");
+
+        events.verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
     }
 
     // Проверяем что два перка BBRI увеличивают длинну взрывной волны зелья на размер второго перка
@@ -756,6 +766,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "H҉҉҉҉҉҉    #\n" +
                 "#H##########\n");
 
+        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
         hero().act();
@@ -789,6 +800,10 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "# #҉# # ####\n" +
                 "   ҉     # #\n" +
                 "# #H########\n");
+
+        events.verifyAllEvents(
+                "[KILL_TREASURE_BOX, KILL_TREASURE_BOX, " +
+                "KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         assertEquals("[{POTION_BLAST_RADIUS_INCREASE('+') " +
                         "value=7, timeout=8, timer=2, pick=0}]" ,
@@ -831,6 +846,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "# # # # ####\n" +
                 "         # #\n" +
                 "# # ########\n");
+
+        events.verifyAllEvents("[DIED]");
 
         assertEquals("[]" ,
                 hero().getPerks().toString());
@@ -953,7 +970,6 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-//                " 3☺  \n");
                 " ☻   \n");
 
         field.tick();
@@ -965,6 +981,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 " ҉   \n" +
                 "҉Ѡ҉  \n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     // BRC - Potion remote control perk

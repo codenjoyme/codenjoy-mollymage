@@ -177,6 +177,8 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "H҉҉  #\n" +
                 "#H####\n");
 
+        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+
         // when
         removeBoxes(2); // две коробки потрачено
         field.tick();
@@ -230,6 +232,8 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "H҉҉☺ #\n" +
                 "#H####\n");
 
+        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+
         assertPerks("[]");
 
         // when
@@ -282,7 +286,6 @@ public class PerkOnGameTest extends AbstractGameTest {
     @Test
     public void shouldDropPerk_generateNewGhost() {
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
-        reset(listener());
 
         hero().right();
         field.tick();
@@ -462,7 +465,6 @@ public class PerkOnGameTest extends AbstractGameTest {
         settings.integer(POTIONS_COUNT, 2);
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
-        reset(listener());
 
         hero().right();
         field.tick();
@@ -593,7 +595,6 @@ public class PerkOnGameTest extends AbstractGameTest {
         settings.integer(POTIONS_COUNT, 2);
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
-        reset(listener());
         hero().getPerks().clear(); // удаляем любые перки
 
         // взрывная волна большая
@@ -734,7 +735,6 @@ public class PerkOnGameTest extends AbstractGameTest {
         settings.integer(POTIONS_COUNT, 2);
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
-        reset(listener());
 
         hero().right();
         field.tick();
@@ -1055,7 +1055,6 @@ public class PerkOnGameTest extends AbstractGameTest {
     @Test
     public void shouldDropPerk_generateNewGhost_thenSuicide_willKillChopperAlso() {
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
-        reset(listener());
 
         hero().right();
         field.tick();
@@ -1233,6 +1232,8 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n" +
                 "     \n");
+
+        events.verifyAllEvents("[CATCH_PERK, CATCH_PERK]");
 
         assertPerks("[]");
 

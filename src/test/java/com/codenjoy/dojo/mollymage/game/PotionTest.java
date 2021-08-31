@@ -516,6 +516,8 @@ public class PotionTest extends AbstractGameTest {
         assertTrue(potion21.isExploded());
         assertTrue(potion22.isExploded());
         assertTrue(potion23.isExploded());
+
+        events.verifyAllEvents("[DIED]");
     }
 
     @Test
@@ -537,6 +539,8 @@ public class PotionTest extends AbstractGameTest {
         field.tick();
         field.tick();
         field.tick();
+
+        events.verifyAllEvents("[DIED]");
 
         List<Potion> potions2 = field.potions().all();
         assertEquals(0, potions2.size());
@@ -628,6 +632,8 @@ public class PotionTest extends AbstractGameTest {
                 "☼ ☼Ѡ☼ ☼\n" +
                 "☼  ҉  ☼\n" +
                 "☼☼☼☼☼☼☼\n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     @Test
@@ -663,6 +669,8 @@ public class PotionTest extends AbstractGameTest {
                 "Ѡ      \n" +
                 "҉      \n" +
                 "҉҉҉H   \n");
+
+        events.verifyAllEvents("[DIED, KILL_TREASURE_BOX]");
     }
 
     @Test
@@ -699,6 +707,8 @@ public class PotionTest extends AbstractGameTest {
                 "҉      \n" +
                 "҉      \n" +
                 "҉҉҉҉x  \n");
+
+        events.verifyAllEvents("[KILL_GHOST]");
     }
 
     // на поле можно чтобы каждый поставил то количество

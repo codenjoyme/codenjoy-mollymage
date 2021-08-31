@@ -48,8 +48,6 @@ public class EventsTest extends AbstractGameTest {
         field.tick();
         field.tick();
         field.tick();
-
-        verifyNoMoreInteractions(listener());
     }
 
     @Test
@@ -82,7 +80,7 @@ public class EventsTest extends AbstractGameTest {
                 " ҉   \n" +
                 "H҉҉ ☺\n");
 
-        verify(listener()).event(Events.KILL_TREASURE_BOX);
+        events.verifyAllEvents("[KILL_TREASURE_BOX]");
     }
 
     @Test
@@ -109,7 +107,7 @@ public class EventsTest extends AbstractGameTest {
                 " ҉   \n" +
                 "x҉҉ ☺\n");
 
-        verify(listener()).event(Events.KILL_GHOST);
+        events.verifyAllEvents("[KILL_GHOST]");
     }
 
     @Test
@@ -358,6 +356,8 @@ public class EventsTest extends AbstractGameTest {
         assertF("҉  \n" +
                 "҉☺ \n" +
                 "҉҉x\n");
+
+        events.verifyAllEvents("[KILL_GHOST]");
 
         // when fill free places boxes
         settings.integer(TREASURE_BOX_COUNT, 6);

@@ -710,7 +710,7 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
@@ -724,7 +724,7 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "     \n" +
@@ -751,7 +751,7 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♡   \n" +
@@ -765,7 +765,7 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺♡   \n" +
                 "     \n" +
@@ -789,7 +789,7 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
@@ -803,7 +803,7 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "44   \n" +
@@ -817,7 +817,7 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "☺♥   \n" +
                 "     \n" +
                 "33   \n" +
@@ -838,7 +838,7 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -849,7 +849,7 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "4    \n" +
@@ -860,7 +860,7 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "☺    \n" +
                 "     \n" +
                 "3    \n" +

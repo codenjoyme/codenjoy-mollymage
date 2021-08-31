@@ -56,7 +56,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         field.perks().add(new PerkOnBoard(new PointImpl(0, 1), new PotionImmune(settings.integer(TIMEOUT_POTION_IMMUNE))));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "i    \n" +
@@ -73,7 +73,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         hero(0).up();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -114,7 +114,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         field.perks().add(new PerkOnBoard(new PointImpl(0, 1), new PotionImmune(settings.integer(TIMEOUT_POTION_IMMUNE))));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "i    \n" +
@@ -130,7 +130,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         hero(0).up();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -179,13 +179,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(0, hero2.scores());
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "T    \n" +
                 "☺ ♥  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "T    \n" +
@@ -208,13 +208,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "     \n" +
                 "  3  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥ ☺  \n" +
                 "     \n" +
@@ -228,13 +228,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺҉♣  \n" +
                 "  ҉  \n" +
                 "҉҉҉҉҉\n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥҉Ѡ  \n" +
                 "  ҉  \n" +
@@ -275,13 +275,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(0, hero2.scores());
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "  &  \n" +
                 "T    \n" +
                 "☺ ♥  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "  &  \n" +
                 "T    \n" +
@@ -298,13 +298,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺ &  \n" +
                 "   ♥ \n" +
                 "  3  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥ &  \n" +
                 "   ☺ \n" +
@@ -322,13 +322,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺҉x  \n" +
                 "  ҉♥ \n" +
                 "҉҉҉҉҉\n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥҉x  \n" +
                 "  ҉☺ \n" +
@@ -368,13 +368,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(0, hero2.scores());
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "  #  \n" +
                 "T    \n" +
                 "☺ ♥  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "  #  \n" +
                 "T    \n" +
@@ -391,13 +391,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺ #  \n" +
                 "   ♥ \n" +
                 "  3  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥ #  \n" +
                 "   ☺ \n" +
@@ -415,13 +415,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺҉H  \n" +
                 "  ҉♥ \n" +
                 "҉҉҉҉҉\n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥҉H  \n" +
                 "  ҉☺ \n" +
@@ -459,13 +459,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         Hero hero2 = hero(1);
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "T    \n" +
                 "☺ ♥  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "T    \n" +
@@ -478,13 +478,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "  4  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥ ☺  \n" +
@@ -506,13 +506,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         newPerk(2, 2, new PotionCountIncrease(1, 10));
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺ c ♥\n" +
                 "     \n" +
                 "  1  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥ c ☺\n" +
                 "     \n" +
@@ -525,13 +525,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         field.tick();
 
         // then two GhostHunters should born on the one Point
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺҉x ♥\n" +
                 "  ҉  \n" +
                 "҉҉҉҉҉\n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥҉x ☺\n" +
                 "  ҉  \n" +
@@ -547,13 +547,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         field.tick();
 
         // then both hunters are visible and haunting heroes
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺x x♥\n" +
                 "     \n" +
                 "     \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥x x☺\n" +
                 "     \n" +
@@ -585,7 +585,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "҉    \n" +
@@ -597,7 +597,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         ghostsCount(0); // больше не будет привидений
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "     \n" +
@@ -627,13 +627,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "44   \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
@@ -652,13 +652,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "҉҉   \n" +
                 "҉҉҉  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
@@ -695,13 +695,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "55   \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
@@ -720,13 +720,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "҉҉   \n" +
                 "҉҉҉  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
@@ -763,13 +763,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "45&  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
@@ -790,13 +790,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then both heroes kill ghost
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "҉҉   \n" +
                 "҉҉x  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
@@ -832,13 +832,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "44&  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
@@ -858,13 +858,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then both heroes kill ghost
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "҉҉   \n" +
                 "҉҉x  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
@@ -902,13 +902,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "     \n" +
                 "33&  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "     \n" +
@@ -923,13 +923,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "     \n" +
                 "11&  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "     \n" +
@@ -942,7 +942,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "҉҉   \n" +
@@ -980,13 +980,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "     \n" +
                 "33&  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "     \n" +
@@ -1001,13 +1001,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "     \n" +
                 "11&  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "     \n" +
@@ -1019,13 +1019,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "҉҉   \n" +
                 "҉҉x  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
@@ -1066,13 +1066,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         newPerk(2, 2, new PotionRemoteControl(10, PERK_TIMEOUT_FOR_TEST));
 
         // then
-        asrtBrd("  ☺  \n" +
+        assertF("  ☺  \n" +
                 "     \n" +
                 " 5r  \n" +
                 "     \n" +
                 "  ♥  \n", game(0));
 
-        asrtBrd("  ♥  \n" +
+        assertF("  ♥  \n" +
                 "     \n" +
                 " 5r  \n" +
                 "     \n" +
@@ -1088,13 +1088,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(0) => [DROP_PERK]\n" +
                 "listener(1) => [DROP_PERK]\n");
 
-        asrtBrd("  ☺  \n" +
+        assertF("  ☺  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
                 "  ♥  \n", game(0));
 
-        asrtBrd("  ♥  \n" +
+        assertF("  ♥  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
@@ -1106,13 +1106,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("  ☺  \n" +
+        assertF("  ☺  \n" +
                 "  x  \n" +
                 "     \n" +
                 "  x  \n" +
                 "  ♥  \n", game(0));
 
-        asrtBrd("  ♥  \n" +
+        assertF("  ♥  \n" +
                 "  x  \n" +
                 "     \n" +
                 "  x  \n" +
@@ -1148,13 +1148,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         newPerk(2, 2, new PotionRemoteControl(10, PERK_TIMEOUT_FOR_TEST));
 
         // then
-        asrtBrd("  ☺  \n" +
+        assertF("  ☺  \n" +
                 "     \n" +
                 " 1r  \n" +
                 "     \n" +
                 "  ♥  \n", game(0));
 
-        asrtBrd("  ♥  \n" +
+        assertF("  ♥  \n" +
                 "     \n" +
                 " 1r  \n" +
                 "     \n" +
@@ -1169,13 +1169,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(0) => [DROP_PERK]\n" +
                 "listener(1) => [DROP_PERK]\n");
 
-        asrtBrd("  ☺  \n" +
+        assertF("  ☺  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
                 "  ♥  \n", game(0));
 
-        asrtBrd("  ♥  \n" +
+        assertF("  ♥  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
@@ -1187,13 +1187,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("  ☺  \n" +
+        assertF("  ☺  \n" +
                 "  x  \n" +
                 "     \n" +
                 "  x  \n" +
                 "  ♥  \n", game(0));
 
-        asrtBrd("  ♥  \n" +
+        assertF("  ♥  \n" +
                 "  x  \n" +
                 "     \n" +
                 "  x  \n" +
@@ -1229,13 +1229,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         newPerk(2, 2, new PotionRemoteControl(10, PERK_TIMEOUT_FOR_TEST));
 
         // then
-        asrtBrd("  ☺  \n" +
+        assertF("  ☺  \n" +
                 "     \n" +
                 " 1r  \n" +
                 "     \n" +
                 "  ♥  \n", game(0));
 
-        asrtBrd("  ♥  \n" +
+        assertF("  ♥  \n" +
                 "     \n" +
                 " 1r  \n" +
                 "     \n" +
@@ -1250,13 +1250,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(0) => []\n" +
                 "listener(1) => [DROP_PERK]\n");
 
-        asrtBrd("  ☺  \n" +
+        assertF("  ☺  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
                 "  ♥  \n", game(0));
 
-        asrtBrd("  ♥  \n" +
+        assertF("  ♥  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
@@ -1268,13 +1268,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("  ☺  \n" +
+        assertF("  ☺  \n" +
                 "     \n" +
                 "     \n" +
                 "  x  \n" +
                 "  ♥  \n", game(0));
 
-        asrtBrd("  ♥  \n" +
+        assertF("  ♥  \n" +
                 "     \n" +
                 "     \n" +
                 "  x  \n" +

@@ -833,7 +833,7 @@ public class MovementTest extends AbstractGameTest {
         hero(0).right();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -857,7 +857,7 @@ public class MovementTest extends AbstractGameTest {
         hero(0).right();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -869,7 +869,7 @@ public class MovementTest extends AbstractGameTest {
         hero(1).left();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -882,13 +882,13 @@ public class MovementTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
                 "Ѡ҉♣  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
@@ -899,13 +899,13 @@ public class MovementTest extends AbstractGameTest {
     public void shouldNewGamesWhenKillAll() {
         shouldPotionKillAllHero();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
                 "Ѡ҉♣  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
@@ -917,13 +917,13 @@ public class MovementTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +

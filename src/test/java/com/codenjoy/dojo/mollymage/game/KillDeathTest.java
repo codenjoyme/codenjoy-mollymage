@@ -674,7 +674,7 @@ public class KillDeathTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "҉    \n" +
@@ -694,7 +694,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "☺☺&  \n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -703,14 +703,14 @@ public class KillDeathTest extends AbstractGameTest {
         hero(1).right();
         tick();
         // от имени наблюдателя вижу опасность - привидение
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺ &  \n", game(0));
 
         // от имени жертвы вижу свой трупик
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -733,7 +733,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         Ghost ghost = ghost(2, 0);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -744,14 +744,14 @@ public class KillDeathTest extends AbstractGameTest {
         tick();
 
         // от имени наблюдателя я там вижу опасность - привидение, мне не интересны останки игроков
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺&   \n", game(0));
 
         // от имени жертвы я вижу свой трупик, мне пофиг уже что на карте происходит, главное где поставить памятник герою
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -774,7 +774,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         Ghost ghost = ghost(2, 0);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -784,13 +784,13 @@ public class KillDeathTest extends AbstractGameTest {
         hero(1).right();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺&♣  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +

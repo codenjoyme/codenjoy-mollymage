@@ -87,7 +87,6 @@ public abstract class AbstractGameTest {
         events = new EventsListenersAssert(() -> listeners, Events.class);
     }
 
-
     protected void givenFl(String map) {
         settings.string(LEVEL_MAP, map);
         level = (LevelImpl) settings.level();
@@ -122,6 +121,12 @@ public abstract class AbstractGameTest {
                 .integer(GHOSTS_COUNT, 0);
     }
 
+    protected void tick() {
+        field.tick();
+    }
+
+    // getters & asserts
+
     protected EventListener listener() {
         return listeners.get(0);
     }
@@ -152,10 +157,6 @@ public abstract class AbstractGameTest {
 
     protected Hero hero(int index) {
         return heroes.get(index);
-    }
-
-    protected void tick() {
-        field.tick();
     }
 
     protected void gotoMaxUp() {
@@ -206,7 +207,7 @@ public abstract class AbstractGameTest {
                 field.reader(), player()).print());
     }
 
-    protected void asrtBrd(String board, Game game) {
+    protected void assertF(String board, Game game) {
         assertEquals(board, game.getBoardAsString());
     }
 

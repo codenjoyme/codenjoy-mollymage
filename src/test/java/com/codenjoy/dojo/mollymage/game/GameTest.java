@@ -56,7 +56,7 @@ public class GameTest extends AbstractGameTest {
                 " ☺   \n" +
                 "☺    \n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "  ☺  \n" +
                 " ♥   \n" +
@@ -68,7 +68,7 @@ public class GameTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "  ☺  \n" +
                 "     \n" +
@@ -84,7 +84,7 @@ public class GameTest extends AbstractGameTest {
                 " ☺   \n" +
                 "☺    \n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "  ☺  \n" +
                 " ♥   \n" +
@@ -97,7 +97,7 @@ public class GameTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "  ☺  \n" +
                 "     \n" +
@@ -371,13 +371,13 @@ public class GameTest extends AbstractGameTest {
         assertSame(hero(0), game(0).getJoystick());
         assertSame(hero(1), game(1).getJoystick());
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -395,13 +395,13 @@ public class GameTest extends AbstractGameTest {
         hero(0).act();
         hero(0).up();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☻♥   \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -416,7 +416,7 @@ public class GameTest extends AbstractGameTest {
                 " ☺☺  \n" +
                 "#&&  \n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺♥  \n" +
@@ -436,7 +436,7 @@ public class GameTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺҉҉♥ \n" +
                 "҉҉҉҉ \n" +
@@ -449,7 +449,7 @@ public class GameTest extends AbstractGameTest {
         ghostsCount(0); // больше не надо привидений
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺  ♥ \n" +
                 "     \n" +

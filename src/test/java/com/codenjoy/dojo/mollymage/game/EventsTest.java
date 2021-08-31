@@ -404,7 +404,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd(" ☺   \n" +
+        assertF(" ☺   \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
@@ -418,7 +418,7 @@ public class EventsTest extends AbstractGameTest {
         dice(4, 4);
         tick();
 
-        asrtBrd(" ☺  #\n" +
+        assertF(" ☺  #\n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -446,7 +446,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd(" ☺   \n" +
+        assertF(" ☺   \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
@@ -458,7 +458,7 @@ public class EventsTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd(" ☺   \n" +
+        assertF(" ☺   \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -483,7 +483,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ ♣  \n" +
@@ -497,7 +497,7 @@ public class EventsTest extends AbstractGameTest {
         dice(4, 4);
         tick();
 
-        asrtBrd("    #\n" +
+        assertF("    #\n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ ♣  \n" +
@@ -512,7 +512,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "☺#☺  \n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -528,7 +528,7 @@ public class EventsTest extends AbstractGameTest {
         hero(1).up();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "     \n" +
@@ -538,7 +538,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "҉ ҉  \n" +
@@ -552,7 +552,7 @@ public class EventsTest extends AbstractGameTest {
         dice(4, 4);
         tick();
 
-        asrtBrd("    #\n" +
+        assertF("    #\n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "     \n" +
@@ -579,7 +579,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ  ♣ \n" +
@@ -594,7 +594,7 @@ public class EventsTest extends AbstractGameTest {
         dice(4, 4, 4, 3);
         tick();
 
-        asrtBrd("    #\n" +
+        assertF("    #\n" +
                 "    #\n" +
                 "     \n" +
                 "Ѡ  ♣ \n" +
@@ -620,7 +620,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("  ҉  \n" +
+        assertF("  ҉  \n" +
                 " ҉Ѡ҉ \n" +
                 "҉♣H♣҉\n" +
                 " ҉♣҉ \n" +
@@ -636,7 +636,7 @@ public class EventsTest extends AbstractGameTest {
         dice(4, 4);
         tick();
 
-        asrtBrd("    #\n" +
+        assertF("    #\n" +
                 "  Ѡ  \n" +
                 " ♣ ♣ \n" +
                 "  ♣  \n" +
@@ -662,7 +662,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("  ҉  \n" +
+        assertF("  ҉  \n" +
                 " ҉Ѡ҉ \n" +
                 "H♣H♣҉\n" +  // первую стенку подбил монополист, центральную все
                 " H♣҉ \n" +  // эту стенку подбили только двое
@@ -678,7 +678,7 @@ public class EventsTest extends AbstractGameTest {
         dice(4, 4, 4, 3, 4, 2);
         tick();
 
-        asrtBrd("    #\n" +
+        assertF("    #\n" +
                 "  Ѡ #\n" +
                 " ♣ ♣#\n" +
                 "  ♣  \n" +
@@ -694,7 +694,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "☺##☺ \n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -717,7 +717,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "☺  ♥ \n" +
                 "҉  ҉ \n" +
                 "҉  ҉ \n" +
@@ -733,7 +733,7 @@ public class EventsTest extends AbstractGameTest {
         dice(4, 4, 4, 3);
         tick();
 
-        asrtBrd("    #\n" +
+        assertF("    #\n" +
                 "☺  ♥#\n" +
                 "     \n" +
                 "     \n" +
@@ -758,7 +758,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ ♣  \n" +
@@ -771,7 +771,7 @@ public class EventsTest extends AbstractGameTest {
         ghostsCount(0); // больще не надо привидений
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ ♣  \n" +
@@ -800,7 +800,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "҉ ҉  \n" +
@@ -813,7 +813,7 @@ public class EventsTest extends AbstractGameTest {
         ghostsCount(0); // чтобы новый не появлялся
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "     \n" +
@@ -839,7 +839,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("  ҉  \n" +
+        assertF("  ҉  \n" +
                 " ҉Ѡ҉ \n" +
                 "҉♣x♣҉\n" +
                 " ҉♣҉ \n" +
@@ -854,7 +854,7 @@ public class EventsTest extends AbstractGameTest {
         ghostsCount(0); // чтобы новый не появлялся
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "  Ѡ  \n" +
                 " ♣ ♣ \n" +
                 "  ♣  \n" +
@@ -904,7 +904,7 @@ public class EventsTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "&244&\n" +
                 " 1#3 \n" +
                 "&223&\n" +
@@ -916,7 +916,7 @@ public class EventsTest extends AbstractGameTest {
         hero(2).move(3, 1);
         hero(3).move(3, 3);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "&24♠&\n" +
                 " 1#3 \n" +
                 "&♠2♠&\n" +
@@ -937,7 +937,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
                 "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
-        asrtBrd(" ҉҉҉ \n" +
+        assertF(" ҉҉҉ \n" +
                 "x҉҉♣x\n" +
                 "҉҉H҉҉\n" +
                 "x♣҉♣x\n" +
@@ -952,7 +952,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "   ♣ \n" +
                 "     \n" +
                 " ♣ ♣ \n" +
@@ -1007,7 +1007,7 @@ public class EventsTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "&244&\n" +
                 " 1#3 \n" +
                 "&223&\n" +
@@ -1019,7 +1019,7 @@ public class EventsTest extends AbstractGameTest {
         hero(2).move(3, 1);
         hero(3).move(3, 3);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "&24♤&\n" +
                 " 1#3 \n" +
                 "&♠2♤&\n" +
@@ -1040,7 +1040,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
                 "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
-        asrtBrd(" ҉҉҉ \n" +
+        assertF(" ҉҉҉ \n" +
                 "x҉҉♧x\n" +
                 "҉҉H҉҉\n" +
                 "x♣҉♧x\n" +
@@ -1055,7 +1055,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "   ♧ \n" +
                 "     \n" +
                 " ♣ ♧ \n" +
@@ -1105,7 +1105,7 @@ public class EventsTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "&244&\n" +
                 " 1#3 \n" +
                 "&223&\n" +
@@ -1117,7 +1117,7 @@ public class EventsTest extends AbstractGameTest {
         hero(2).move(3, 1);
         hero(3).move(3, 3);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "&☻4♠&\n" +
                 " 1#3 \n" +
                 "&♠2♠&\n" +
@@ -1138,7 +1138,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
                 "listener(3) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
-        asrtBrd(" ҉҉҉ \n" +
+        assertF(" ҉҉҉ \n" +
                 "xѠ҉♣x\n" +
                 "҉҉H҉҉\n" +
                 "x♣҉♣x\n" +
@@ -1154,7 +1154,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
-        asrtBrd("    #\n" +
+        assertF("    #\n" +
                 " Ѡ ♣ \n" +
                 "     \n" +
                 " ♣ ♣ \n" +
@@ -1204,7 +1204,7 @@ public class EventsTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "&244&\n" +
                 " 1#3 \n" +
                 "&223&\n" +
@@ -1216,7 +1216,7 @@ public class EventsTest extends AbstractGameTest {
         hero(2).move(3, 1);
         hero(3).move(3, 3);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "&☻4♠&\n" +
                 " 1#3 \n" +
                 "&♠2♠&\n" +
@@ -1237,7 +1237,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "&Ѡ3♠&\n" +
                 "҉҉H2 \n" +
                 "&11♠&\n" +
@@ -1253,7 +1253,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [DIED]\n" +
                 "listener(3) => []\n");
 
-        asrtBrd(" ҉  #\n" +
+        assertF(" ҉  #\n" +
                 "xѠ2♠&\n" +
                 " ҉҉1 \n" +
                 "x♣҉1&\n" +
@@ -1267,7 +1267,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
                 "listener(3) => [DIED]\n");
 
-        asrtBrd("    #\n" +
+        assertF("    #\n" +
                 " Ѡ11&\n" +
                 "  ҉҉҉\n" +
                 " ♣҉♣x\n" +
@@ -1281,7 +1281,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => [KILL_GHOST]\n");
 
-        asrtBrd("  ҉҉#\n" +
+        assertF("  ҉҉#\n" +
                 " Ѡ҉♣x\n" +
                 "  ҉҉ \n" +
                 " ♣ ♣ \n" +
@@ -1295,7 +1295,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
-        asrtBrd("    #\n" +
+        assertF("    #\n" +
                 " Ѡ ♣ \n" +
                 "     \n" +
                 " ♣ ♣ \n" +

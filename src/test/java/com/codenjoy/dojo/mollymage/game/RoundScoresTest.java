@@ -63,19 +63,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 " ♥   \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 " ♥   \n", game(1));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥♥   \n" +
@@ -93,7 +93,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "  ☺  \n" +
                 "♥1   \n" +
@@ -101,19 +101,19 @@ public class RoundScoresTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " ҉♥  \n" +
                 "Ѡ҉҉  \n" +
                 " ♣   \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " ҉☺  \n" +
                 "♣҉҉  \n" +
                 " ♣   \n", game(1));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " ҉♥  \n" +
                 "♣҉҉  \n" +
@@ -147,19 +147,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 " ♡   \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 " ♡   \n", game(1));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♡♡   \n" +
@@ -177,7 +177,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "  ☺  \n" +
                 "♥1   \n" +
@@ -185,19 +185,19 @@ public class RoundScoresTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " ҉♥  \n" +
                 "Ѡ҉҉  \n" +
                 " ♧   \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " ҉☺  \n" +
                 "♣҉҉  \n" +
                 " ♧   \n", game(1));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " ҉♡  \n" +
                 "♧҉҉  \n" +
@@ -230,19 +230,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(2) => [START_ROUND, [Round 1]]\n");
 
 
-        asrtBrd("    ☺\n" +
+        assertF("    ☺\n" +
                 "     \n" +
                 "     \n" +
                 "♥♥   \n" +
                 "     \n", game(0));
 
-        asrtBrd("    ♥\n" +
+        assertF("    ♥\n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "     \n", game(1));
 
-        asrtBrd("    ♥\n" +
+        assertF("    ♥\n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
@@ -260,7 +260,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("    ♥\n" +
+        assertF("    ♥\n" +
                 "     \n" +
                 "  ☺  \n" +
                 "♥1   \n" +
@@ -268,19 +268,19 @@ public class RoundScoresTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("    ☺\n" +
+        assertF("    ☺\n" +
                 "     \n" +
                 " ҉♥  \n" +
                 "♣҉҉  \n" +
                 " ҉   \n", game(0));
 
-        asrtBrd("    ♥\n" +
+        assertF("    ♥\n" +
                 "     \n" +
                 " ҉♥  \n" +
                 "Ѡ҉҉  \n" +
                 " ҉   \n", game(1));
 
-        asrtBrd("    ♥\n" +
+        assertF("    ♥\n" +
                 "     \n" +
                 " ҉☺  \n" +
                 "♣҉҉  \n" +
@@ -294,19 +294,19 @@ public class RoundScoresTest extends AbstractGameTest {
         // а теперь самое интересное - выходим из комнаты оставшимся игроком
         field.remove(player(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " ҉♥  \n" +
                 "♣҉҉  \n" +
                 " ҉   \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " ҉♥  \n" +
                 "Ѡ҉҉  \n" +
                 " ҉   \n", game(1));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " ҉☺  \n" +
                 "♣҉҉  \n" +
@@ -315,19 +315,19 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
 
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "  ♥  \n" +
                 "♣    \n" +
                 "     \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "  ♥  \n" +
                 "Ѡ    \n" +
                 "     \n", game(1));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "  ☺  \n" +
                 "♣    \n" +
@@ -381,19 +381,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 " ♥   \n" +
                 " ♥   \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥    \n" +
                 " ☺   \n" +
                 " ♥   \n", game(1));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥    \n" +
                 " ♥   \n" +
@@ -411,7 +411,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥ ☺  \n" +
                 " 1   \n" +
@@ -419,19 +419,19 @@ public class RoundScoresTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺҉♥  \n" +
                 "҉҉҉  \n" +
                 " ♣   \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥҉☺  \n" +
                 "҉҉҉  \n" +
                 " ♣   \n", game(1));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥҉♥  \n" +
                 "҉҉҉  \n" +
@@ -448,7 +448,7 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥ ☺  \n" +
                 "     \n" +
@@ -463,7 +463,7 @@ public class RoundScoresTest extends AbstractGameTest {
         dice(0, 0, 1, 0, 1, 1);
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ♣   \n" +
@@ -550,7 +550,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("   ♥ \n" +
+        assertF("   ♥ \n" +
                 " ♥ 1 \n" +
                 "     \n" +
                 "♥1 ☺ \n" +
@@ -608,7 +608,7 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("   ♣ \n" +
+        assertF("   ♣ \n" +
                 " ♥   \n" +
                 "     \n" +
                 "♣  ☺ \n" +
@@ -627,7 +627,7 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
         newGameForAllDied(); // это сделает сервер (вообще он это сделал намного раньше, но для наглядности тут)
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♣♣Ѡ♣♣\n" +
                 "     \n" +
@@ -734,7 +734,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("   ♥ \n" +
+        assertF("   ♥ \n" +
                 " ♥ 1♥\n" +
                 "   # \n" +
                 "♥1 ☺ \n" +
@@ -801,7 +801,7 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("   ♣ \n" +
+        assertF("   ♣ \n" +
                 " ♥  ♣\n" +
                 "     \n" +
                 "♣  ☺ \n" +
@@ -823,7 +823,7 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
         newGameForAllDied(); // это сделает сервер (вообще он это сделал намного раньше, но для наглядности тут)
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♣♣Ѡ♣♣\n" +
                 "    ♣\n" +
@@ -863,19 +863,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
 
-        asrtBrd("   ☺♥\n" +
+        assertF("   ☺♥\n" +
                 "    ♥\n" +
                 "     \n" +
                 "     \n" +
                 "     \n", game(0));
 
-        asrtBrd("   ♥☺\n" +
+        assertF("   ♥☺\n" +
                 "    ♥\n" +
                 "     \n" +
                 "     \n" +
                 "     \n", game(1));
 
-        asrtBrd("   ♥♥\n" +
+        assertF("   ♥♥\n" +
                 "    ☺\n" +
                 "     \n" +
                 "     \n" +
@@ -924,19 +924,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥    \n" +
                 "☺♥   \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
                 "♥♥   \n", game(1));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥    \n" +
@@ -978,19 +978,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
 
-        asrtBrd("   ☺♡\n" +
+        assertF("   ☺♡\n" +
                 "    ♥\n" +
                 "     \n" +
                 "     \n" +
                 "     \n", game(0));
 
-        asrtBrd("   ♡☺\n" +
+        assertF("   ♡☺\n" +
                 "    ♡\n" +
                 "     \n" +
                 "     \n" +
                 "     \n", game(1));
 
-        asrtBrd("   ♥♡\n" +
+        assertF("   ♥♡\n" +
                 "    ☺\n" +
                 "     \n" +
                 "     \n" +
@@ -1060,7 +1060,7 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
@@ -1069,19 +1069,19 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
 
         // второй не погибает - его экранирует обычный герой
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉☺   \n" +
                 "҉♣♥  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉♥   \n" +
                 "҉Ѡ♥  \n", game(1));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉♥   \n" +
@@ -1098,7 +1098,7 @@ public class RoundScoresTest extends AbstractGameTest {
         hero(0).down();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -1116,7 +1116,7 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
@@ -1125,19 +1125,19 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
 
         // второй так же падет
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉☺   \n" +
                 "҉♣♣  \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉♥   \n" +
                 "҉Ѡ♣  \n", game(1));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉♥   \n" +
@@ -1155,7 +1155,7 @@ public class RoundScoresTest extends AbstractGameTest {
         hero(0).down();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -1173,7 +1173,7 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
@@ -1182,19 +1182,19 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
 
         // второй так же падет
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉☺   \n" +
                 "҉♣♣҉ \n", game(0));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉♥   \n" +
                 "҉Ѡ♣҉ \n", game(1));
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉♥   \n" +

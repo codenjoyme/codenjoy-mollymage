@@ -408,7 +408,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "H҉҉ ♥\n", game(0));
+                "H҉҉ ♥\n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -422,7 +422,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "    ♥\n", game(0));
+                "    ♥\n", 0);
     }
 
     @Test
@@ -450,7 +450,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "x҉҉ ♥\n", game(0));
+                "x҉҉ ♥\n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -462,7 +462,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "    ♥\n", game(0));
+                "    ♥\n", 0);
     }
 
     @Test
@@ -487,7 +487,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "Ѡ ♣  \n" +
-                "҉H҉҉ \n", game(0));
+                "҉H҉҉ \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
@@ -501,7 +501,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "Ѡ ♣  \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
@@ -516,7 +516,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺#♥  \n", game(0));
+                "☺#♥  \n", 0);
 
         hero(0).act();
         hero(0).up();
@@ -532,7 +532,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "☺ ♥  \n" +
                 "     \n" +
-                "3#3  \n", game(0));
+                "3#3  \n", 0);
 
         tick();
         tick();
@@ -542,7 +542,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "☺ ♥  \n" +
                 "҉ ҉  \n" +
-                "҉H҉҉ \n", game(0));
+                "҉H҉҉ \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_TREASURE_BOX]\n" +
@@ -556,7 +556,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "☺ ♥  \n" +
                 "     \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
@@ -583,7 +583,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "Ѡ  ♣ \n" +
-                "҉HH҉҉\n", game(0));
+                "҉HH҉҉\n", 0);
 
         // по 1 ачивке за стенку, потому что взрывная волна не проходит через стенку
         events.verifyAllEvents(
@@ -598,7 +598,7 @@ public class EventsTest extends AbstractGameTest {
                 "    #\n" +
                 "     \n" +
                 "Ѡ  ♣ \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
@@ -624,7 +624,7 @@ public class EventsTest extends AbstractGameTest {
                 " ҉Ѡ҉ \n" +
                 "҉♣H♣҉\n" +
                 " ҉♣҉ \n" +
-                "  ҉  \n", game(0));
+                "  ҉  \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
@@ -640,7 +640,7 @@ public class EventsTest extends AbstractGameTest {
                 "  Ѡ  \n" +
                 " ♣ ♣ \n" +
                 "  ♣  \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
@@ -666,7 +666,7 @@ public class EventsTest extends AbstractGameTest {
                 " ҉Ѡ҉ \n" +
                 "H♣H♣҉\n" +  // первую стенку подбил монополист, центральную все
                 " H♣҉ \n" +  // эту стенку подбили только двое
-                "  ҉  \n", game(0));
+                "  ҉  \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
@@ -682,7 +682,7 @@ public class EventsTest extends AbstractGameTest {
                 "  Ѡ #\n" +
                 " ♣ ♣#\n" +
                 "  ♣  \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
@@ -698,7 +698,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺##♥ \n", game(0));
+                "☺##♥ \n", 0);
 
         hero(0).act();
         hero(0).up();
@@ -721,7 +721,7 @@ public class EventsTest extends AbstractGameTest {
                 "☺  ♥ \n" +
                 "҉  ҉ \n" +
                 "҉  ҉ \n" +
-                "҉HH҉҉\n", game(0));
+                "҉HH҉҉\n", 0);
 
         // по 1 ачивке за стенку, потому что взрывная волна не проходит через стенку
         events.verifyAllEvents(
@@ -737,7 +737,7 @@ public class EventsTest extends AbstractGameTest {
                 "☺  ♥#\n" +
                 "     \n" +
                 "     \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
@@ -762,7 +762,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "Ѡ ♣  \n" +
-                "҉x҉҉ \n", game(0));
+                "҉x҉҉ \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_GHOST]\n" +
@@ -775,7 +775,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "Ѡ ♣  \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
@@ -804,7 +804,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "☺ ♥  \n" +
                 "҉ ҉  \n" +
-                "҉x҉҉ \n", game(0));
+                "҉x҉҉ \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
@@ -817,7 +817,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "☺ ♥  \n" +
                 "     \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
@@ -843,7 +843,7 @@ public class EventsTest extends AbstractGameTest {
                 " ҉Ѡ҉ \n" +
                 "҉♣x♣҉\n" +
                 " ҉♣҉ \n" +
-                "  ҉  \n", game(0));
+                "  ҉  \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_GHOST]\n" +
@@ -858,7 +858,7 @@ public class EventsTest extends AbstractGameTest {
                 "  Ѡ  \n" +
                 " ♣ ♣ \n" +
                 "  ♣  \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
@@ -909,7 +909,7 @@ public class EventsTest extends AbstractGameTest {
                 " 1#3 \n" +
                 "&223&\n" +
                 "☺♥♥♥ \n",
-                game(0));
+                0);
 
         hero(0).move(0, 0);
         hero(1).move(1, 1);
@@ -921,7 +921,7 @@ public class EventsTest extends AbstractGameTest {
                 " 1#3 \n" +
                 "&♠2♠&\n" +
                 "☺    \n",
-                game(0));
+                0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -941,7 +941,7 @@ public class EventsTest extends AbstractGameTest {
                 "x҉҉♣x\n" +
                 "҉҉H҉҉\n" +
                 "x♣҉♣x\n" +
-                "☺҉҉҉ \n", game(0));
+                "☺҉҉҉ \n", 0);
 
         boxesCount(0); // больше не надо коробок
         tick();
@@ -956,7 +956,7 @@ public class EventsTest extends AbstractGameTest {
                 "   ♣ \n" +
                 "     \n" +
                 " ♣ ♣ \n" +
-                "☺    \n", game(0));
+                "☺    \n", 0);
     }
 
     @Test
@@ -1012,7 +1012,7 @@ public class EventsTest extends AbstractGameTest {
                 " 1#3 \n" +
                 "&223&\n" +
                 "☺♥♡♡ \n",
-                game(0));
+                0);
 
         hero(0).move(0, 0);
         hero(1).move(1, 1);
@@ -1024,7 +1024,7 @@ public class EventsTest extends AbstractGameTest {
                 " 1#3 \n" +
                 "&♠2♤&\n" +
                 "☺    \n",
-                game(0));
+                0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -1044,7 +1044,7 @@ public class EventsTest extends AbstractGameTest {
                 "x҉҉♧x\n" +
                 "҉҉H҉҉\n" +
                 "x♣҉♧x\n" +
-                "☺҉҉҉ \n", game(0));
+                "☺҉҉҉ \n", 0);
 
         boxesCount(0); // больше не надо коробок
         tick();
@@ -1059,7 +1059,7 @@ public class EventsTest extends AbstractGameTest {
                 "   ♧ \n" +
                 "     \n" +
                 " ♣ ♧ \n" +
-                "☺    \n", game(0));
+                "☺    \n", 0);
     }
 
     @Test
@@ -1110,7 +1110,7 @@ public class EventsTest extends AbstractGameTest {
                 " 1#3 \n" +
                 "&223&\n" +
                 "☺♥♥♥ \n",
-                game(0));
+                0);
 
         hero(0).move(1, 3);
         hero(1).move(1, 1);
@@ -1122,7 +1122,7 @@ public class EventsTest extends AbstractGameTest {
                 " 1#3 \n" +
                 "&♠2♠&\n" +
                 "     \n",
-                game(0));
+                0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -1142,7 +1142,7 @@ public class EventsTest extends AbstractGameTest {
                 "xѠ҉♣x\n" +
                 "҉҉H҉҉\n" +
                 "x♣҉♣x\n" +
-                " ҉҉҉ \n", game(0));
+                " ҉҉҉ \n", 0);
 
         // новые коробки
         dice(4, 4);
@@ -1158,7 +1158,7 @@ public class EventsTest extends AbstractGameTest {
                 " Ѡ ♣ \n" +
                 "     \n" +
                 " ♣ ♣ \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
@@ -1209,7 +1209,7 @@ public class EventsTest extends AbstractGameTest {
                 " 1#3 \n" +
                 "&223&\n" +
                 "☺♥♥♥ \n",
-                game(0));
+                0);
 
         hero(0).move(1, 3);
         hero(1).move(1, 1);
@@ -1221,7 +1221,7 @@ public class EventsTest extends AbstractGameTest {
                 " 1#3 \n" +
                 "&♠2♠&\n" +
                 "     \n",
-                game(0));
+                0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -1241,7 +1241,7 @@ public class EventsTest extends AbstractGameTest {
                 "&Ѡ3♠&\n" +
                 "҉҉H2 \n" +
                 "&11♠&\n" +
-                "     \n", game(0));
+                "     \n", 0);
 
         // новые коробки
         dice(4, 4);
@@ -1257,7 +1257,7 @@ public class EventsTest extends AbstractGameTest {
                 "xѠ2♠&\n" +
                 " ҉҉1 \n" +
                 "x♣҉1&\n" +
-                " ҉҉  \n", game(0));
+                " ҉҉  \n", 0);
 
         tick();
 
@@ -1271,7 +1271,7 @@ public class EventsTest extends AbstractGameTest {
                 " Ѡ11&\n" +
                 "  ҉҉҉\n" +
                 " ♣҉♣x\n" +
-                "   ҉ \n", game(0));
+                "   ҉ \n", 0);
 
         tick();
 
@@ -1285,7 +1285,7 @@ public class EventsTest extends AbstractGameTest {
                 " Ѡ҉♣x\n" +
                 "  ҉҉ \n" +
                 " ♣ ♣ \n" +
-                "     \n", game(0));
+                "     \n", 0);
 
         tick();
 
@@ -1299,6 +1299,6 @@ public class EventsTest extends AbstractGameTest {
                 " Ѡ ♣ \n" +
                 "     \n" +
                 " ♣ ♣ \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 }

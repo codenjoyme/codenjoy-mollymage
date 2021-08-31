@@ -60,7 +60,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n" +
                 " ♥   \n" +
-                "♥    \n", game(0));
+                "♥    \n", 0);
 
         // when
         game(1).close();
@@ -72,7 +72,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n" +
                 "     \n" +
-                "♥    \n", game(0));
+                "♥    \n", 0);
     }
 
     @Test
@@ -88,7 +88,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n" +
                 " ♥   \n" +
-                "♥    \n", game(0));
+                "♥    \n", 0);
 
         // when
         dice(4, 0);
@@ -101,7 +101,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n" +
                 "     \n" +
-                "♥   ♥\n", game(0));
+                "♥   ♥\n", 0);
     }
 
     @Test
@@ -375,13 +375,13 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥   \n", game(0));
+                "☺♥   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥☺   \n", game(1));
+                "♥☺   \n", 1);
     }
 
     @Test
@@ -399,13 +399,13 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☻♥   \n", game(0));
+                "☻♥   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♠☺   \n", game(1));
+                "♠☺   \n", 1);
     }
 
     @Test
@@ -420,7 +420,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " ☺♥  \n" +
-                "#&&  \n", game(0));
+                "#&&  \n", 0);
 
         hero(0).act();
         hero(0).up();
@@ -440,7 +440,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "☺҉҉♥ \n" +
                 "҉҉҉҉ \n" +
-                "#xx  \n", game(0));
+                "#xx  \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
@@ -453,6 +453,6 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "☺  ♥ \n" +
                 "     \n" +
-                "#    \n", game(0));
+                "#    \n", 0);
     }
 }

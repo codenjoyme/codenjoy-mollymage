@@ -678,7 +678,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n" +
                 "҉    \n" +
-                "҉♣   \n", game(0));
+                "҉♣   \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
@@ -698,7 +698,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥&  \n", game(0));
+                "☺♥&  \n", 0);
 
         hero(1).right();
         tick();
@@ -707,14 +707,14 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺ &  \n", game(0));
+                "☺ &  \n", 0);
 
         // от имени жертвы вижу свой трупик
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥ Ѡ  \n", game(1));
+                "♥ Ѡ  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -737,7 +737,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥&  \n", game(0));
+                "☺♥&  \n", 0);
 
         ghost.start();
         ghost.setDirection(Direction.LEFT);
@@ -748,14 +748,14 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺&   \n", game(0));
+                "☺&   \n", 0);
 
         // от имени жертвы я вижу свой трупик, мне пофиг уже что на карте происходит, главное где поставить памятник герою
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥Ѡ   \n", game(1));
+                "♥Ѡ   \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -778,7 +778,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥&  \n", game(0));
+                "☺♥&  \n", 0);
 
         ghost.setDirection(Direction.LEFT);
         hero(1).right();
@@ -788,13 +788,13 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺&♣  \n", game(0));
+                "☺&♣  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥&Ѡ  \n", game(1));
+                "♥&Ѡ  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +

@@ -837,7 +837,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥   \n", game(0));
+                "☺♥   \n", 0);
     }
 
     // герои не могут ходить по зелью ни по своему ни по чужому
@@ -861,7 +861,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺3 ♥ \n", game(0));
+                "☺3 ♥ \n", 0);
 
         hero(1).left();
         tick();
@@ -873,7 +873,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺1♥  \n", game(0));
+                "☺1♥  \n", 0);
     }
 
     @Test
@@ -886,13 +886,13 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "Ѡ҉♣  \n", game(0));
+                "Ѡ҉♣  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "♣҉Ѡ  \n", game(1));
+                "♣҉Ѡ  \n", 1);
     }
 
     @Test
@@ -903,13 +903,13 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "Ѡ҉♣  \n", game(0));
+                "Ѡ҉♣  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "♣҉Ѡ  \n", game(1));
+                "♣҉Ѡ  \n", 1);
 
         dice(0, 0, 1, 0);
         game(0).newGame();
@@ -921,12 +921,12 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥   \n", game(0));
+                "☺♥   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥☺   \n", game(1));
+                "♥☺   \n", 1);
     }
 }

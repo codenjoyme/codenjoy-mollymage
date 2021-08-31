@@ -60,7 +60,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "i    \n" +
-                "☺♥♡  \n", game(0));
+                "☺♥♡  \n", 0);
 
         //heroes should not have any perks
         assertEquals(0, hero(0).getPerks().size());
@@ -77,7 +77,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
-                " ♥♡  \n", game(0));
+                " ♥♡  \n", 0);
 
         //teammate should not get perk
         assertEquals(1, hero(0).getPerks().size());
@@ -118,7 +118,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "i    \n" +
-                "☺♥♡  \n", game(0));
+                "☺♥♡  \n", 0);
 
 
         // heroes should not have any perks
@@ -134,7 +134,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
-                " ♥♡  \n", game(0));
+                " ♥♡  \n", 0);
 
         //teammate should get perk to
         events.verifyAllEvents(
@@ -183,13 +183,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "T    \n" +
-                "☺ ♥  \n", game(0));
+                "☺ ♥  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "T    \n" +
-                "♥ ☺  \n", game(1));
+                "♥ ☺  \n", 1);
 
         // when hero2 set potion, hero1 get perk
         hero1.up();
@@ -212,13 +212,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺ ♥  \n" +
                 "     \n" +
-                "  3  \n", game(0));
+                "  3  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥ ☺  \n" +
                 "     \n" +
-                "  3  \n", game(1));
+                "  3  \n", 1);
 
         // when potion boom, hero1 should shoot by poison thrower
         field.tick();
@@ -232,13 +232,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺҉♣  \n" +
                 "  ҉  \n" +
-                "҉҉҉҉҉\n", game(0));
+                "҉҉҉҉҉\n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥҉Ѡ  \n" +
                 "  ҉  \n" +
-                "҉҉҉҉҉\n", game(1));
+                "҉҉҉҉҉\n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
@@ -279,13 +279,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "  &  \n" +
                 "T    \n" +
-                "☺ ♥  \n", game(0));
+                "☺ ♥  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "  &  \n" +
                 "T    \n" +
-                "♥ ☺  \n", game(1));
+                "♥ ☺  \n", 1);
 
         // when hero2 set potion, hero1 get perk
         hero1.up();
@@ -302,13 +302,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺ &  \n" +
                 "   ♥ \n" +
-                "  3  \n", game(0));
+                "  3  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥ &  \n" +
                 "   ☺ \n" +
-                "  3  \n", game(1));
+                "  3  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [CATCH_PERK]\n" +
@@ -326,13 +326,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺҉x  \n" +
                 "  ҉♥ \n" +
-                "҉҉҉҉҉\n", game(0));
+                "҉҉҉҉҉\n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥҉x  \n" +
                 "  ҉☺ \n" +
-                "҉҉҉҉҉\n", game(1));
+                "҉҉҉҉҉\n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
@@ -372,13 +372,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "  #  \n" +
                 "T    \n" +
-                "☺ ♥  \n", game(0));
+                "☺ ♥  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "  #  \n" +
                 "T    \n" +
-                "♥ ☺  \n", game(1));
+                "♥ ☺  \n", 1);
 
         // when hero2 set potion, hero1 get perk
         hero1.up();
@@ -395,13 +395,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺ #  \n" +
                 "   ♥ \n" +
-                "  3  \n", game(0));
+                "  3  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥ #  \n" +
                 "   ☺ \n" +
-                "  3  \n", game(1));
+                "  3  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [CATCH_PERK]\n" +
@@ -419,13 +419,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺҉H  \n" +
                 "  ҉♥ \n" +
-                "҉҉҉҉҉\n", game(0));
+                "҉҉҉҉҉\n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥҉H  \n" +
                 "  ҉☺ \n" +
-                "҉҉҉҉҉\n", game(1));
+                "҉҉҉҉҉\n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_TREASURE_BOX]\n" +
@@ -463,13 +463,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "T    \n" +
-                "☺ ♥  \n", game(0));
+                "☺ ♥  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "T    \n" +
-                "♥ ☺  \n", game(1));
+                "♥ ☺  \n", 1);
 
         // when hero2 set potion, hero1 get perk
         hero1.up();
@@ -482,13 +482,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
-                "  4  \n", game(0));
+                "  4  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥ ☺  \n" +
-                "  4  \n", game(1));
+                "  4  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [CATCH_PERK]\n" +
@@ -510,13 +510,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺ c ♥\n" +
                 "     \n" +
-                "  1  \n", game(0));
+                "  1  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥ c ☺\n" +
                 "     \n" +
-                "  1  \n", game(1));
+                "  1  \n", 1);
 
 
         // when both heroes kill one perk
@@ -529,13 +529,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺҉x ♥\n" +
                 "  ҉  \n" +
-                "҉҉҉҉҉\n", game(0));
+                "҉҉҉҉҉\n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥҉x ☺\n" +
                 "  ҉  \n" +
-                "҉҉҉҉҉\n", game(1));
+                "҉҉҉҉҉\n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [DROP_PERK]\n" +
@@ -551,13 +551,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺x x♥\n" +
                 "     \n" +
-                "     \n", game(0));
+                "     \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥x x☺\n" +
                 "     \n" +
-                "     \n", game(1));
+                "     \n", 1);
     }
 
     @Test
@@ -589,7 +589,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n" +
                 "҉    \n" +
-                "҉x   \n", game(0));
+                "҉x   \n", 0);
 
         events.verifyAllEvents(
                 "[KILL_GHOST]");
@@ -601,7 +601,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n" +
                 "     \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
@@ -631,13 +631,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
-                "44   \n", game(0));
+                "44   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
-                "44   \n", game(1));
+                "44   \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [CATCH_PERK]\n" +
@@ -656,13 +656,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "҉҉   \n" +
-                "҉҉҉  \n", game(0));
+                "҉҉҉  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
-                "҉҉҉  \n", game(1));
+                "҉҉҉  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -699,13 +699,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
-                "55   \n", game(0));
+                "55   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
-                "55   \n", game(1));
+                "55   \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [CATCH_PERK]\n" +
@@ -724,13 +724,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "҉҉   \n" +
-                "҉҉҉  \n", game(0));
+                "҉҉҉  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
-                "҉҉҉  \n", game(1));
+                "҉҉҉  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -767,13 +767,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
-                "45&  \n", game(0));
+                "45&  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
-                "45&  \n", game(1));
+                "45&  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [CATCH_PERK]\n" +
@@ -794,13 +794,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "҉҉   \n" +
-                "҉҉x  \n", game(0));
+                "҉҉x  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
-                "҉҉x  \n", game(1));
+                "҉҉x  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
@@ -836,13 +836,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
-                "44&  \n", game(0));
+                "44&  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
-                "44&  \n", game(1));
+                "44&  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [CATCH_PERK]\n" +
@@ -862,13 +862,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "҉҉   \n" +
-                "҉҉x  \n", game(0));
+                "҉҉x  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
-                "҉҉x  \n", game(1));
+                "҉҉x  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
@@ -906,13 +906,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "     \n" +
-                "33&  \n", game(0));
+                "33&  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "     \n" +
-                "33&  \n", game(1));
+                "33&  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [CATCH_PERK]\n" +
@@ -927,13 +927,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "     \n" +
-                "11&  \n", game(0));
+                "11&  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "     \n" +
-                "11&  \n", game(1));
+                "11&  \n", 1);
 
 
         // when hero0 explode all, both heroes should earn scores
@@ -946,7 +946,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "҉҉   \n" +
-                "҉҉x  \n", game(0));
+                "҉҉x  \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
@@ -984,13 +984,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "     \n" +
-                "33&  \n", game(0));
+                "33&  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "     \n" +
-                "33&  \n", game(1));
+                "33&  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [CATCH_PERK]\n" +
@@ -1005,13 +1005,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "     \n" +
-                "11&  \n", game(0));
+                "11&  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "     \n" +
-                "11&  \n", game(1));
+                "11&  \n", 1);
 
         // when hero0 explode all, only hero0 should kill ghost
         hero(0).act(2);
@@ -1023,13 +1023,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "҉҉   \n" +
-                "҉҉x  \n", game(0));
+                "҉҉x  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥☺   \n" +
                 "҉҉   \n" +
-                "҉҉x  \n", game(1));
+                "҉҉x  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
@@ -1070,13 +1070,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 " 5r  \n" +
                 "     \n" +
-                "  ♥  \n", game(0));
+                "  ♥  \n", 0);
 
         assertF("  ♥  \n" +
                 "     \n" +
                 " 5r  \n" +
                 "     \n" +
-                "  ☺  \n", game(1));
+                "  ☺  \n", 1);
 
         // when heroes explode potion and kill perk
         hero(0).act(2);
@@ -1092,13 +1092,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
-                "  ♥  \n", game(0));
+                "  ♥  \n", 0);
 
         assertF("  ♥  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
-                "  ☺  \n", game(1));
+                "  ☺  \n", 1);
 
         assertEquals(2, field.hunters().size());
 
@@ -1110,13 +1110,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "  x  \n" +
                 "     \n" +
                 "  x  \n" +
-                "  ♥  \n", game(0));
+                "  ♥  \n", 0);
 
         assertF("  ♥  \n" +
                 "  x  \n" +
                 "     \n" +
                 "  x  \n" +
-                "  ☺  \n", game(1));
+                "  ☺  \n", 1);
     }
 
     @Test
@@ -1152,13 +1152,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 " 1r  \n" +
                 "     \n" +
-                "  ♥  \n", game(0));
+                "  ♥  \n", 0);
 
         assertF("  ♥  \n" +
                 "     \n" +
                 " 1r  \n" +
                 "     \n" +
-                "  ☺  \n", game(1));
+                "  ☺  \n", 1);
 
         // when hero1 explode potion, hero0 get events after the potion timer end
         hero(1).act(2);
@@ -1173,13 +1173,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
-                "  ♥  \n", game(0));
+                "  ♥  \n", 0);
 
         assertF("  ♥  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
-                "  ☺  \n", game(1));
+                "  ☺  \n", 1);
 
         assertEquals(2, field.hunters().size());
 
@@ -1191,13 +1191,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "  x  \n" +
                 "     \n" +
                 "  x  \n" +
-                "  ♥  \n", game(0));
+                "  ♥  \n", 0);
 
         assertF("  ♥  \n" +
                 "  x  \n" +
                 "     \n" +
                 "  x  \n" +
-                "  ☺  \n", game(1));
+                "  ☺  \n", 1);
     }
 
     @Test
@@ -1233,13 +1233,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 " 1r  \n" +
                 "     \n" +
-                "  ♥  \n", game(0));
+                "  ♥  \n", 0);
 
         assertF("  ♥  \n" +
                 "     \n" +
                 " 1r  \n" +
                 "     \n" +
-                "  ☺  \n", game(1));
+                "  ☺  \n", 1);
 
         // when hero1 explode potion, hero0 does not get events after the potion timer end
         hero(1).act(2);
@@ -1254,13 +1254,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
-                "  ♥  \n", game(0));
+                "  ♥  \n", 0);
 
         assertF("  ♥  \n" +
                 " ҉   \n" +
                 "҉҉x  \n" +
                 " ҉   \n" +
-                "  ☺  \n", game(1));
+                "  ☺  \n", 1);
 
         assertEquals(1, field.hunters().size());
 
@@ -1272,12 +1272,12 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "  x  \n" +
-                "  ♥  \n", game(0));
+                "  ♥  \n", 0);
 
         assertF("  ♥  \n" +
                 "     \n" +
                 "     \n" +
                 "  x  \n" +
-                "  ☺  \n", game(1));
+                "  ☺  \n", 1);
     }
 }

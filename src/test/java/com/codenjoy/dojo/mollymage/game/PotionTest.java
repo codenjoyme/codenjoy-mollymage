@@ -714,7 +714,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
-                "44   \n", game(0));
+                "44   \n", 0);
 
         hero(0).act();
         hero(0).up();
@@ -728,7 +728,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "     \n" +
-                "33   \n", game(0));
+                "33   \n", 0);
     }
 
     @Test
@@ -755,7 +755,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺♡   \n" +
-                "44   \n", game(0));
+                "44   \n", 0);
 
         hero(0).act();
         hero(0).up();
@@ -769,7 +769,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "☺♡   \n" +
                 "     \n" +
-                "33   \n", game(0));
+                "33   \n", 0);
     }
 
     @Test
@@ -793,7 +793,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
-                "44   \n", game(0));
+                "44   \n", 0);
 
         hero(0).act();
         hero(0).up();
@@ -807,7 +807,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "☺♥   \n" +
                 "44   \n" +
-                "33   \n", game(0));
+                "33   \n", 0);
 
         hero(0).act();
         hero(0).up();
@@ -821,7 +821,7 @@ public class PotionTest extends AbstractGameTest {
                 "☺♥   \n" +
                 "     \n" +
                 "33   \n" +
-                "22   \n", game(0));
+                "22   \n", 0);
     }
 
     @Test
@@ -842,7 +842,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
-                "4♥   \n", game(0));
+                "4♥   \n", 0);
 
         hero(0).act();
         hero(0).up();
@@ -853,7 +853,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n" +
                 "4    \n" +
-                "3♥   \n", game(0));
+                "3♥   \n", 0);
 
         hero(0).act();
         hero(0).up();
@@ -864,6 +864,6 @@ public class PotionTest extends AbstractGameTest {
                 "☺    \n" +
                 "     \n" +
                 "3    \n" +
-                "2♥   \n", game(0));
+                "2♥   \n", 0);
     }
 }

@@ -67,19 +67,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
-                " ♥   \n", game(0));
+                " ♥   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
-                " ♥   \n", game(1));
+                " ♥   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥♥   \n" +
-                " ☺   \n", game(2));
+                " ☺   \n", 2);
 
         // когда я выношу одного игрока
         hero(1).act();
@@ -97,7 +97,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n" +
                 "♥1   \n" +
-                " ♥   \n", game(1));
+                " ♥   \n", 1);
 
         tick();
 
@@ -105,19 +105,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 " ҉♥  \n" +
                 "Ѡ҉҉  \n" +
-                " ♣   \n", game(0));
+                " ♣   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 " ҉☺  \n" +
                 "♣҉҉  \n" +
-                " ♣   \n", game(1));
+                " ♣   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 " ҉♥  \n" +
                 "♣҉҉  \n" +
-                " Ѡ   \n", game(2));
+                " Ѡ   \n", 2);
 
         events.verifyAllEvents(
                 "listener(0) => [DIED]\n" +
@@ -151,19 +151,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
-                " ♡   \n", game(0));
+                " ♡   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
-                " ♡   \n", game(1));
+                " ♡   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♡♡   \n" +
-                " ☺   \n", game(2));
+                " ☺   \n", 2);
 
         // когда я выношу одного игрока
         hero(1).act();
@@ -181,7 +181,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n" +
                 "♥1   \n" +
-                " ♡   \n", game(1));
+                " ♡   \n", 1);
 
         tick();
 
@@ -189,19 +189,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 " ҉♥  \n" +
                 "Ѡ҉҉  \n" +
-                " ♧   \n", game(0));
+                " ♧   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 " ҉☺  \n" +
                 "♣҉҉  \n" +
-                " ♧   \n", game(1));
+                " ♧   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 " ҉♡  \n" +
                 "♧҉҉  \n" +
-                " Ѡ   \n", game(2));
+                " Ѡ   \n", 2);
 
         events.verifyAllEvents(
                 "listener(0) => [DIED]\n" +
@@ -234,19 +234,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "♥♥   \n" +
-                "     \n", game(0));
+                "     \n", 0);
 
         assertF("    ♥\n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
-                "     \n", game(1));
+                "     \n", 1);
 
         assertF("    ♥\n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
-                "     \n", game(2));
+                "     \n", 2);
 
         // когда я выношу одного игрока
         hero(2).act();
@@ -264,7 +264,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n" +
                 "♥1   \n" +
-                "     \n", game(2));
+                "     \n", 2);
 
         tick();
 
@@ -272,19 +272,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 " ҉♥  \n" +
                 "♣҉҉  \n" +
-                " ҉   \n", game(0));
+                " ҉   \n", 0);
 
         assertF("    ♥\n" +
                 "     \n" +
                 " ҉♥  \n" +
                 "Ѡ҉҉  \n" +
-                " ҉   \n", game(1));
+                " ҉   \n", 1);
 
         assertF("    ♥\n" +
                 "     \n" +
                 " ҉☺  \n" +
                 "♣҉҉  \n" +
-                " ҉   \n", game(2));
+                " ҉   \n", 2);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -298,19 +298,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 " ҉♥  \n" +
                 "♣҉҉  \n" +
-                " ҉   \n", game(0));
+                " ҉   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 " ҉♥  \n" +
                 "Ѡ҉҉  \n" +
-                " ҉   \n", game(1));
+                " ҉   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 " ҉☺  \n" +
                 "♣҉҉  \n" +
-                " ҉   \n", game(2));
+                " ҉   \n", 2);
 
         tick();
 
@@ -319,19 +319,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "  ♥  \n" +
                 "♣    \n" +
-                "     \n", game(0));
+                "     \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "  ♥  \n" +
                 "Ѡ    \n" +
-                "     \n", game(1));
+                "     \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "  ☺  \n" +
                 "♣    \n" +
-                "     \n", game(2));
+                "     \n", 2);
 
 
         events.verifyAllEvents(
@@ -385,19 +385,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n" +
                 " ♥   \n" +
-                " ♥   \n", game(0));
+                " ♥   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥    \n" +
                 " ☺   \n" +
-                " ♥   \n", game(1));
+                " ♥   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "♥    \n" +
                 " ♥   \n" +
-                " ☺   \n", game(2));
+                " ☺   \n", 2);
 
         // когда я выношу одного игрока
         hero(1).act();
@@ -415,7 +415,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "♥ ☺  \n" +
                 " 1   \n" +
-                " ♥   \n", game(1));
+                " ♥   \n", 1);
 
         tick();
 
@@ -423,19 +423,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "☺҉♥  \n" +
                 "҉҉҉  \n" +
-                " ♣   \n", game(0));
+                " ♣   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥҉☺  \n" +
                 "҉҉҉  \n" +
-                " ♣   \n", game(1));
+                " ♣   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "♥҉♥  \n" +
                 "҉҉҉  \n" +
-                " Ѡ   \n", game(2));
+                " Ѡ   \n", 2);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -452,7 +452,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "♥ ☺  \n" +
                 "     \n" +
-                " ♣   \n", game(1));
+                " ♣   \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -467,7 +467,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " ♣   \n" +
-                "Ѡ♣   \n", game(0));
+                "Ѡ♣   \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [[Time is over]]\n" +
@@ -554,7 +554,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 " ♥ 1 \n" +
                 "     \n" +
                 "♥1 ☺ \n" +
-                " ♥   \n", game(3));
+                " ♥   \n", 3);
 
         tick();
 
@@ -612,7 +612,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 " ♥   \n" +
                 "     \n" +
                 "♣  ☺ \n" +
-                " ♣   \n", game(3));
+                " ♣   \n", 3);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -631,7 +631,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "♣♣Ѡ♣♣\n" +
                 "     \n" +
-                "     \n", game(0));
+                "     \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -738,7 +738,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 " ♥ 1♥\n" +
                 "   # \n" +
                 "♥1 ☺ \n" +
-                " ♥   \n", game(4));
+                " ♥   \n", 4);
 
         tick();
 
@@ -805,7 +805,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 " ♥  ♣\n" +
                 "     \n" +
                 "♣  ☺ \n" +
-                " ♣   \n", game(4));
+                " ♣   \n", 4);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -827,7 +827,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "♣♣Ѡ♣♣\n" +
                 "    ♣\n" +
-                "     \n", game(0));
+                "     \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -867,19 +867,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "    ♥\n" +
                 "     \n" +
                 "     \n" +
-                "     \n", game(0));
+                "     \n", 0);
 
         assertF("   ♥☺\n" +
                 "    ♥\n" +
                 "     \n" +
                 "     \n" +
-                "     \n", game(1));
+                "     \n", 1);
 
         assertF("   ♥♥\n" +
                 "    ☺\n" +
                 "     \n" +
                 "     \n" +
-                "     \n", game(2));
+                "     \n", 2);
 
         // бахнем зелье
         hero(2).act();
@@ -928,19 +928,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "♥    \n" +
-                "☺♥   \n", game(0));
+                "☺♥   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
-                "♥♥   \n", game(1));
+                "♥♥   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥    \n" +
-                "♥☺   \n", game(2));
+                "♥☺   \n", 2);
 
         // и очки обнулятся
         assertEquals(0, hero(0).scores());
@@ -982,19 +982,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "    ♥\n" +
                 "     \n" +
                 "     \n" +
-                "     \n", game(0));
+                "     \n", 0);
 
         assertF("   ♡☺\n" +
                 "    ♡\n" +
                 "     \n" +
                 "     \n" +
-                "     \n", game(1));
+                "     \n", 1);
 
         assertF("   ♥♡\n" +
                 "    ☺\n" +
                 "     \n" +
                 "     \n" +
-                "     \n", game(2));
+                "     \n", 2);
 
         // бахнем зелье
         hero(2).act();
@@ -1064,7 +1064,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
-                "1♥♥  \n", game(0));
+                "1♥♥  \n", 0);
 
         tick();
 
@@ -1073,19 +1073,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉    \n" +
                 "҉☺   \n" +
-                "҉♣♥  \n", game(0));
+                "҉♣♥  \n", 0);
 
         assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉♥   \n" +
-                "҉Ѡ♥  \n", game(1));
+                "҉Ѡ♥  \n", 1);
 
         assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉♥   \n" +
-                "҉♣☺  \n", game(2));
+                "҉♣☺  \n", 2);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
@@ -1102,7 +1102,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♣♥  \n", game(0));
+                "☺♣♥  \n", 0);
 
         // а теперь пробую то же, но через останки только что
         // поверженного соперника - они не должны мешать взрывной волне
@@ -1120,7 +1120,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
-                "1♣♥  \n", game(0));
+                "1♣♥  \n", 0);
 
         tick();
 
@@ -1129,19 +1129,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉    \n" +
                 "҉☺   \n" +
-                "҉♣♣  \n", game(0));
+                "҉♣♣  \n", 0);
 
         assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉♥   \n" +
-                "҉Ѡ♣  \n", game(1));
+                "҉Ѡ♣  \n", 1);
 
         assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉♥   \n" +
-                "҉♣Ѡ  \n", game(2));
+                "҉♣Ѡ  \n", 2);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, WIN_ROUND]\n" +
@@ -1159,7 +1159,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♣♣  \n", game(0));
+                "☺♣♣  \n", 0);
 
         // а теперь посмотрим как взорвется зелье на двух трупиках
         // они должны быть полностью прозрачна для взрывной волны
@@ -1177,7 +1177,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
-                "1♣♣  \n", game(0));
+                "1♣♣  \n", 0);
 
         tick();
 
@@ -1186,19 +1186,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉    \n" +
                 "҉☺   \n" +
-                "҉♣♣҉ \n", game(0));
+                "҉♣♣҉ \n", 0);
 
         assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉♥   \n" +
-                "҉Ѡ♣҉ \n", game(1));
+                "҉Ѡ♣҉ \n", 1);
 
         assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉♥   \n" +
-                "҉♣Ѡ҉ \n", game(2));
+                "҉♣Ѡ҉ \n", 2);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +

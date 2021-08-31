@@ -61,19 +61,19 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
-                "♣♣   \n", game(0));
+                "♣♣   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ♣   \n" +
-                "Ѡ♣   \n", game(1));
+                "Ѡ♣   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ♣   \n" +
-                "♣Ѡ   \n", game(2));
+                "♣Ѡ   \n", 2);
     }
 
     // после старта идет отсчет обратного времени
@@ -126,19 +126,19 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
-                "♣♣   \n", game(0));
+                "♣♣   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ♣   \n" +
-                "Ѡ♣   \n", game(1));
+                "Ѡ♣   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ♣   \n" +
-                "♣Ѡ   \n", game(2));
+                "♣Ѡ   \n", 2);
 
         // и я не могу ничего поделать с ними
         hero(0).up();
@@ -158,19 +158,19 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
-                "♥♥   \n", game(0));
+                "♥♥   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ♥   \n" +
-                "☺♥   \n", game(1));
+                "☺♥   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ♥   \n" +
-                "♥☺   \n", game(2));
+                "♥☺   \n", 2);
 
         // ... и когда я муваю героев, они откликаются
         hero(0).up();
@@ -183,19 +183,19 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 " ☺   \n" +
                 "♥    \n" +
-                "  ♥  \n", game(0));
+                "  ♥  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 " ♥   \n" +
                 "☺    \n" +
-                "  ♥  \n", game(1));
+                "  ♥  \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 " ♥   \n" +
                 "♥    \n" +
-                "  ☺  \n", game(2));
+                "  ☺  \n", 2);
     }
 
     // если один игрок вынесет другого но на поле есть едще игроки,
@@ -222,19 +222,19 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
-                "♥♥   \n", game(0));
+                "♥♥   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ♥   \n" +
-                "☺♥   \n", game(1));
+                "☺♥   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ♥   \n" +
-                "♥☺   \n", game(2));
+                "♥☺   \n", 2);
 
         // когда я выношу одного игрока
         hero(0).act();
@@ -252,7 +252,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n" +
                 " 1   \n" +
-                "♥♥   \n", game(0));
+                "♥♥   \n", 0);
 
         // игрок активный и живой
         assertEquals(true, hero(2).isActive());
@@ -274,7 +274,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 " ҉☺  \n" +
                 "҉҉҉  \n" +
-                "♥♣   \n", game(0));
+                "♥♣   \n", 0);
 
         tick();
 
@@ -294,7 +294,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n" +
                 "     \n" +
-                "♥    \n", game(0));
+                "♥    \n", 0);
     }
 
     // проверил как отрисуется привидение если под ним будет трупик героя:
@@ -342,19 +342,19 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " &   \n" +
-                "☺♣♥  \n", game(0));
+                "☺♣♥  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " &   \n" +
-                "♥Ѡ♥  \n", game(1));
+                "♥Ѡ♥  \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " &   \n" +
-                "♥♣☺  \n", game(2));
+                "♥♣☺  \n", 2);
 
         // попробуем привидением сходить на место падшего героя
         ghost.move(DOWN.change(ghost));
@@ -364,21 +364,21 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺&♥  \n", game(0));
+                "☺&♥  \n", 0);
 
         // от имени пострадавшего в клеточке я вижу свои останки, привидение хоть и есть там, я его не вижу
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥Ѡ♥  \n", game(1));
+                "♥Ѡ♥  \n", 1);
 
         // от имени наблюдателя в клеточке с останками я вижу живое привидение
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥&☺  \n", game(2));
+                "♥&☺  \n", 2);
     }
 
     // проверил как отрисуется привидение если под ним будет не только трупик героя но и зелье:
@@ -437,19 +437,19 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " &   \n" +
-                "☺3♥  \n", game(0));
+                "☺3♥  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " &   \n" +
-                "♥Ѡ♥  \n", game(1));
+                "♥Ѡ♥  \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " &   \n" +
-                "♥3☺  \n", game(2));
+                "♥3☺  \n", 2);
 
         // попробуем привидением сходить на место падшего героя
         ghost.move(DOWN.change(ghost));
@@ -460,7 +460,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺&♥  \n", game(0));
+                "☺&♥  \n", 0);
 
         // от имени пострадавшего в клеточке я вижу свои
         // останки, привиедние хоть и есть там, я его не вижу
@@ -468,7 +468,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥Ѡ♥  \n", game(1));
+                "♥Ѡ♥  \n", 1);
 
         // от имени наблюдателя в клеточке с останками
         // я вижу живое привидение, он по моему опаснее чем зелье
@@ -476,7 +476,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥&☺  \n", game(2));
+                "♥&☺  \n", 2);
     }
 
     // останки другого героя не являются препятствием для прохождения любым героем
@@ -492,7 +492,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♣♥  \n", game(0));
+                "☺♣♥  \n", 0);
 
         // а вот и попытка пойти на место трупика
         hero(0).right();
@@ -503,21 +503,21 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " ☺♥  \n", game(0));
+                " ☺♥  \n", 0);
 
         // от имени того кого вынесли он видит свой трупик
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " Ѡ♥  \n", game(1));
+                " Ѡ♥  \n", 1);
 
         // от имени стороннего наблюдателя - он видит живую угрозу
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " ♥☺  \n", game(2));
+                " ♥☺  \n", 2);
     }
 
     private void givenCaseWhenPlaceOfDeathOnMyWay() {
@@ -542,19 +542,19 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥♥  \n", game(0));
+                "☺♥♥  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥☺♥  \n", game(1));
+                "♥☺♥  \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥♥☺  \n", game(2));
+                "♥♥☺  \n", 2);
 
         // когда я выношу одного игрока
         hero(0).act();
@@ -571,7 +571,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n" +
                 "     \n" +
-                "1♥♥  \n", game(0));
+                "1♥♥  \n", 0);
 
         tick();
 
@@ -579,19 +579,19 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n" +
                 "҉    \n" +
-                "҉♣♥  \n", game(0));
+                "҉♣♥  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "♥    \n" +
                 "҉    \n" +
-                "҉Ѡ♥  \n", game(1));
+                "҉Ѡ♥  \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "♥    \n" +
                 "҉    \n" +
-                "҉♣☺  \n", game(2));
+                "҉♣☺  \n", 2);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
@@ -608,7 +608,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♣♥  \n", game(0));
+                "☺♣♥  \n", 0);
     }
 
     // я не могу подрывать уже убитого героя
@@ -622,7 +622,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♣♥  \n", game(0));
+                "☺♣♥  \n", 0);
 
         hero(0).act();
         tick();
@@ -647,14 +647,14 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n" +
                 "҉    \n" +
-                "҉♣♥  \n", game(0));
+                "҉♣♥  \n", 0);
 
         // я как тот которого вынесли, на месте взрыва вижу себя
         assertF("     \n" +
                 "     \n" +
                 "♥    \n" +
                 "҉    \n" +
-                "҉Ѡ♥  \n", game(1));
+                "҉Ѡ♥  \n", 1);
 
         // на месте героя которого вынесли я как сторонний наблюдатель
         // вижу его останки, а не взрывную волну
@@ -662,7 +662,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "♥    \n" +
                 "҉    \n" +
-                "҉♣☺  \n", game(2));
+                "҉♣☺  \n", 2);
     }
 
     // люой герой может зайти на место трупика и там его можно прибить, так что
@@ -676,21 +676,21 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " ☺♥  \n", game(0));
+                " ☺♥  \n", 0);
 
         // вижу свой трупик, раз меня вынесли
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " Ѡ♥  \n", game(1));
+                " Ѡ♥  \n", 1);
 
         // вижу своего соперника в клетке, где трупик
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " ♥☺  \n", game(2));
+                " ♥☺  \n", 2);
 
         // ставим зелье и убегаем
         hero(2).act();
@@ -712,21 +712,21 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "  ҉♥ \n" +
-                " Ѡ҉҉ \n", game(0));
+                " Ѡ҉҉ \n", 0);
 
         // я вижу свой трупик в клетке, где есть еще один такой же
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "  ҉♥ \n" +
-                " Ѡ҉҉ \n", game(1));
+                " Ѡ҉҉ \n", 1);
 
         // я вижу трупик одного из убитых там героев (их там двое)
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "  ҉☺ \n" +
-                " ♣҉҉ \n", game(2));
+                " ♣҉҉ \n", 2);
 
         events.verifyAllEvents(
                 "listener(0) => [DIED]\n" +
@@ -749,19 +749,19 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "Ѡx♣  \n", game(0));
+                "Ѡx♣  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "♣Ѡ♣  \n", game(1));
+                "♣Ѡ♣  \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "♣xѠ  \n", game(2));
+                "♣xѠ  \n", 2);
 
         // победителей нет
         events.verifyAllEvents(

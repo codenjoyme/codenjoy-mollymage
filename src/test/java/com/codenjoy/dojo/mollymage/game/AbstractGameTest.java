@@ -203,12 +203,11 @@ public abstract class AbstractGameTest {
     }
 
     protected void assertF(String expected) {
-        assertEquals(expected, printer.getPrinter(
-                field.reader(), player()).print());
+        assertF(expected, 0);
     }
 
-    protected void assertF(String board, Game game) {
-        assertEquals(board, game.getBoardAsString());
+    protected void assertF(String board, int index) {
+        assertEquals(board, games.get(index).getBoardAsString());
     }
 
     protected void assertBoards(String expected, Integer... indexes) {

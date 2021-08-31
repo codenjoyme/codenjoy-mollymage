@@ -620,16 +620,10 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(4) => []\n");
 
         // вот он последний тик раунда, тут все и случится
-        // размещаем всех в свободные места
-        dice(0, 2, 1, 2, 2, 2, 3, 2, 4, 2);
+        // размещаем всех победивших в свободные места
+        dice(0, 2,
+            1, 2);
         tick();
-        newGameForAllDied(); // это сделает сервер (вообще он это сделал намного раньше, но для наглядности тут)
-
-        assertF("     \n" +
-                "     \n" +
-                "♣♣Ѡ♣♣\n" +
-                "     \n" +
-                "     \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -637,6 +631,22 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => [WIN_ROUND]\n" +
                 "listener(4) => []\n");
+
+        // а это уже сделает сам фреймворк для всех проигравших
+        dice(2, 2);
+        game(0).newGame();
+
+        dice(3, 2);
+        game(2).newGame();
+
+        dice(4, 2);
+        game(4).newGame();
+
+        assertF("     \n" +
+                "     \n" +
+                "♣♣Ѡ♣♣\n" +
+                "     \n" +
+                "     \n", 0);
     }
 
     // если на поле группа игроков, два из них активны и расставляют зелье
@@ -813,18 +823,12 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(5) => []\n");
 
         // вот он последний тик раунда, тут все и случится
-        // на трупики нельзя!
-        // на трупики нельзя!
-        // теперь размещаем всех в свободные места
-        dice(0, 1, 1, 0, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 4, 1);
+        // размещаем всех победивших в свободные места
+        dice(0, 1, // место занято другим игроком
+            1, 0,  // место занято другим игроком
+            0, 2,
+            1, 2);
         tick();
-        newGameForAllDied(); // это сделает сервер (вообще он это сделал намного раньше, но для наглядности тут)
-
-        assertF("     \n" +
-                "     \n" +
-                "♣♣Ѡ♣♣\n" +
-                "    ♣\n" +
-                "     \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -833,6 +837,24 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(3) => []\n" +
                 "listener(4) => [[Time is over]]\n" +
                 "listener(5) => []\n");
+
+        dice(2, 2);
+        game(0).newGame();
+
+        dice(3, 2);
+        game(2).newGame();
+
+        dice(4, 2);
+        game(3).newGame();
+
+        dice(4, 1);
+        game(5).newGame();
+
+        assertF("     \n" +
+                "     \n" +
+                "♣♣Ѡ♣♣\n" +
+                "    ♣\n" +
+                "     \n", 0);
     }
 
     // проверяем, что при clearScore обнуляется:

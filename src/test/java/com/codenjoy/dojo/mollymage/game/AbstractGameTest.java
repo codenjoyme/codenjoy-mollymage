@@ -201,14 +201,6 @@ public abstract class AbstractGameTest {
 
     // other stuff
 
-    protected void newGameForAllDied() {
-        players.forEach(player -> {
-            if (!player.isAlive()) {
-                field.newGame(player(players.indexOf(player)));
-            }
-        });
-    }
-
     protected void assertPotionPower(int power, String expected) {
         settings.integer(POTION_POWER, power);
 

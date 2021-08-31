@@ -47,7 +47,7 @@ public class RoundScoresTest extends AbstractGameTest {
     // если один игрок вынесет обоих, то должен получить за это очки
     @Test
     public void shouldGetWinRoundScores_whenKillAllOtherHeroes() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
 
         givenFl("     \n" +
@@ -127,7 +127,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
     @Test
     public void shouldGetWinRoundScores_whenKillAllEnemyHeroAndOtherHero() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
 
         givenFl("     \n" +
@@ -213,7 +213,7 @@ public class RoundScoresTest extends AbstractGameTest {
     // - очки победителю положено вручить
     @Test
     public void shouldGetWinRoundScores_whenKillOneAndAnotherLeaveTheGame() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1);
 
         givenFl("    ☺\n" + // тот кто покинет комнату
@@ -1048,7 +1048,7 @@ public class RoundScoresTest extends AbstractGameTest {
     @Test
     public void shouldPlaceOfDeath_isNotABarrierForBlast() {
 
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(POTION_POWER, 3) // зелье с большим радиусом, чем обычно
                 .integer(ROUNDS_TIME, 60)

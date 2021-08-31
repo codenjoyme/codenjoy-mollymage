@@ -40,7 +40,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     public void shouldNotTeammateGetPerk_AfterFirstPlayerPickUp_withEnemy() {
         // given
         settings.integer(POTIONS_COUNT, 1)
-                .integer(CATCH_PERK_SCORE, CATCH_PERK_SCORE_FOR_TEST)
+                .integer(CATCH_PERK_SCORE, 11)
                 .bool(PERK_WHOLE_TEAM_GET,false)
                 .integer(ROUNDS_TEAMS_PER_ROOM, 2);
 
@@ -90,7 +90,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(1) => []\n" +
                 "listener(2) => []\n");
 
-        assertEquals(CATCH_PERK_SCORE_FOR_TEST, hero(0).scores());
+        assertEquals(11, hero(0).scores());
         assertEquals(0, hero(1).scores());
         assertEquals(0, hero(2).scores());
     }
@@ -99,7 +99,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     public void shouldTeammateGetPerk_AfterFirstPlayerPickUp_withEnemy() {
         // given
         settings.integer(POTIONS_COUNT, 1)
-                .integer(CATCH_PERK_SCORE, CATCH_PERK_SCORE_FOR_TEST)
+                .integer(CATCH_PERK_SCORE, 11)
                 .bool(PERK_WHOLE_TEAM_GET, true)
                 .integer(ROUNDS_TEAMS_PER_ROOM, 2);
 
@@ -144,12 +144,12 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(1) => []\n" +
                 "listener(2) => []\n");
 
-        assertEquals(1,player(0).getHero().getPerks().size());
-        assertEquals(1,player(1).getHero().getPerks().size());
+        assertEquals(1, player(0).getHero().getPerks().size());
+        assertEquals(1, player(1).getHero().getPerks().size());
         assertEquals(0, player(2).getHero().getPerks().size());
 
         //scores for perk earned only one hero, who picked up perk
-        assertEquals(CATCH_PERK_SCORE_FOR_TEST,player(0).getHero().scores());
+        assertEquals(11, player(0).getHero().scores());
         assertEquals(0, player(1).getHero().scores());
         assertEquals(0, player(2).getHero().scores());
     }
@@ -615,7 +615,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺☺   \n");
 
         // when hero0 catch perk and both heroes act and move
-        newPerk(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+        newPerk(0, 1, new PotionExploder(1, 10));
 
         hero(0).act();
         hero(0).up();
@@ -680,7 +680,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "☺☺   \n");
 
         // when both heroes set Remote_Control potions. Hero0 get PE perk
-        newPerk(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+        newPerk(0, 1, new PotionExploder(1, 10));
 
         hero(0).addPerk(new PotionRemoteControl(1, 10));
         hero(1).addPerk(new PotionRemoteControl(1, 10));
@@ -748,7 +748,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺☺&  \n");
 
-        newPerk(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+        newPerk(0, 1, new PotionExploder(1, 10));
 
         // when hero0 sets usually potion. Hero1 sets RC potion.
         hero(1).addPerk(new PotionRemoteControl(1, 10));
@@ -818,8 +818,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺☺&  \n");
 
-        newPerk(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
-        newPerk(1, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+        newPerk(0, 1, new PotionExploder(1, 10));
+        newPerk(1, 1, new PotionExploder(1, 10));
 
         // when heroes plant potions and catch perk
         hero(0).act();
@@ -886,7 +886,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺☺&  \n");
 
-        newPerk(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+        newPerk(0, 1, new PotionExploder(1, 10));
 
         // when both heroes set simple potions
         hero(0).act();
@@ -964,7 +964,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺☺&  \n");
 
-        newPerk(0, 1, new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+        newPerk(0, 1, new PotionExploder(1, 10));
 
         // when both heroes set simple potions
         hero(0).act();
@@ -1045,9 +1045,9 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "  ☺  \n");
 
         // when hero0 plant Remote_Control potions. and go to position
-        hero(0).addPerk(new PotionRemoteControl(1, PERK_TIMEOUT_FOR_TEST));
-        hero(0).addPerk(new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
-        hero(1).addPerk(new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+        hero(0).addPerk(new PotionRemoteControl(1, 10));
+        hero(0).addPerk(new PotionExploder(1, 10));
+        hero(1).addPerk(new PotionExploder(1, 10));
 
 
         hero(0).act();
@@ -1062,7 +1062,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         hero(0).right();
         tick();
-        newPerk(2, 2, new PotionRemoteControl(10, PERK_TIMEOUT_FOR_TEST));
+        newPerk(2, 2, new PotionRemoteControl(10, 10));
 
         // then
         assertF("  ☺  \n" +
@@ -1130,7 +1130,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "  ☺  \n");
 
         //when hero0 plant potion and go to position
-        hero(1).addPerk(new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+        hero(1).addPerk(new PotionExploder(1, 10));
 
         hero(0).act();
         hero(0).up();
@@ -1144,7 +1144,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         hero(0).right();
         tick();
-        newPerk(2, 2, new PotionRemoteControl(10, PERK_TIMEOUT_FOR_TEST));
+        newPerk(2, 2, new PotionRemoteControl(10, 10));
 
         // then
         assertF("  ☺  \n" +
@@ -1211,7 +1211,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "  ☺  \n");
 
         //when hero0 plant potion and go to position
-        hero(1).addPerk(new PotionExploder(1, PERK_TIMEOUT_FOR_TEST));
+        hero(1).addPerk(new PotionExploder(1, 10));
 
         hero(0).act();
         hero(0).up();
@@ -1225,7 +1225,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         hero(0).right();
         tick();
-        newPerk(2, 2, new PotionRemoteControl(10, PERK_TIMEOUT_FOR_TEST));
+        newPerk(2, 2, new PotionRemoteControl(10, 10));
 
         // then
         assertF("  ☺  \n" +

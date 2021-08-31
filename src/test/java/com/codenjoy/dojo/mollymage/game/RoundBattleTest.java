@@ -49,7 +49,7 @@ public class RoundBattleTest extends AbstractGameTest {
     // все игроки неактивны (видно их трупики)
     @Test
     public void shouldAllPlayersOnBoardIsInactive_whenStart() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT);
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3);
 
         givenFl("     \n" +
                 "     \n" +
@@ -202,7 +202,7 @@ public class RoundBattleTest extends AbstractGameTest {
     // то тот, которого вынесли появится в новом месте в виде трупика
     @Test
     public void shouldMoveToInactive_whenKillSomeone() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1); // TODO а что будет если тут 0 игра хоть начнется?
 
         givenFl("     \n" +
@@ -305,7 +305,7 @@ public class RoundBattleTest extends AbstractGameTest {
     // - от имени жертвы я вижу свой трупик, мне пофиг уже что на карте происходит, главное где поставить памятник герою
     @Test
     public void shouldDrawGhost_onPlaceOfDeath() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
 
@@ -403,7 +403,7 @@ public class RoundBattleTest extends AbstractGameTest {
     // приоритет прорисовки такой: 1) привидение 2) зелье 3) останки
     @Test
     public void shouldDrawGhost_onPlaceOfDeath_withBomb() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
 
@@ -544,7 +544,7 @@ public class RoundBattleTest extends AbstractGameTest {
     }
 
     private void givenCaseWhenPlaceOfDeathOnMyWay() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
 

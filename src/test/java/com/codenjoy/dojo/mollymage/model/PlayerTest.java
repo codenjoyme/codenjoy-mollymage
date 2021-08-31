@@ -68,23 +68,29 @@ public class PlayerTest {
 
     @Test
     public void shouldProcessEventWhenListenerIsNotNull() {
+        // given
         Player player = new Player(listener, settings);
         dice(0, 0);
         player.newHero(field);
 
+        // when
         player.event(Events.KILL_TREASURE_BOX);
 
+        // then
         verify(listener).event(Events.KILL_TREASURE_BOX);
     }
 
     @Test
     public void shouldNotProcessEventWhenListenerNotNull() {
+        // given
         Player player = new Player(null, settings);
         dice(0, 0);
         player.newHero(field);
 
+        // when
         player.event(Events.KILL_TREASURE_BOX);
 
+        // then
         verify(listener, never()).event(Events.KILL_TREASURE_BOX);
     }
 }

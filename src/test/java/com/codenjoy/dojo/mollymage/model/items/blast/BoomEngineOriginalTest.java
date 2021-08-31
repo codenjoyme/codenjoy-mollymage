@@ -10,12 +10,12 @@ package com.codenjoy.dojo.mollymage.model.items.blast;
  * it under the terms of the GNU General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
@@ -52,19 +52,20 @@ public class BoomEngineOriginalTest {
     private BoomEngine engine;
     private Poison poison;
     private Level level;
-    private PrinterFactory printerFactory;
+    private PrinterFactory printer;
     private Field field;
 
-    private void givenBr(String board) {
+    private void givenFl(String board) {
         level = new LevelImpl(board);
         field = new MollyMage(level, mock(Dice.class), new TestGameSettings());
         engine = new BoomEngineOriginal(field, null);
-        printerFactory = new PrinterFactoryImpl();
+        printer = new PrinterFactoryImpl();
     }
 
     @Test
     public void testOneBarrier() {
-        givenBr("           \n" +
+        // given
+        givenFl("           \n" +
                 "           \n" +
                 "           \n" +
                 "           \n" +
@@ -75,11 +76,12 @@ public class BoomEngineOriginalTest {
                 "  ☼☼       \n" +
                 "           \n" +
                 "   ☻       \n");
-        
+
         Point source = pt(3, 0);
         int radius = 7;
         int countBlasts = radius + 1 + 1 + 3;
 
+        // when then
         assertBoom(source, radius, countBlasts,
                 "           \n" +
                 "           \n" +
@@ -96,7 +98,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testOneBarrierAtCenter() {
-        givenBr("            \n" +
+        // given
+        givenFl("            \n" +
                 "            \n" +
                 "            \n" +
                 "            \n" +
@@ -108,11 +111,12 @@ public class BoomEngineOriginalTest {
                 "            \n" +
                 "      ☼☼    \n" +
                 "      ☼☼    \n");
-        
+
         Point source = pt(7, 4);
         int radius = 7;
-        int countBlasts = 2*radius + 2 + 2 + 1;
+        int countBlasts = 2 * radius + 2 + 2 + 1;
 
+        // when then
         assertBoom(source, radius, countBlasts,
                 "       ҉    \n" +
                 "       ҉    \n" +
@@ -130,7 +134,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testOneBarrier2() {
-        givenBr("          \n" +
+        // given
+        givenFl("          \n" +
                 "          \n" +
                 "          \n" +
                 "          \n" +
@@ -140,11 +145,12 @@ public class BoomEngineOriginalTest {
                 "          \n" +
                 "          \n" +
                 "          \n");
-        
+
         Point source = pt(5, 4);
         int radius = 4;
-        int countBlasts = 3*radius + 1 + 3;
+        int countBlasts = 3 * radius + 1 + 3;
 
+        // when then
         assertBoom(source, radius, countBlasts,
                 "          \n" +
                 "     ҉    \n" +
@@ -160,7 +166,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testBigBoomAtClassicWalls() {
-        givenBr("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "           \n" +
@@ -171,11 +178,12 @@ public class BoomEngineOriginalTest {
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
-        
+
         Point source = pt(5, 5);
         int radius = 3;
-        int countBlasts = 4*radius + 1;
+        int countBlasts = 4 * radius + 1;
 
+        // when then
         assertBoom(source, radius, countBlasts,
                 "☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
@@ -192,7 +200,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testBigBoomAtClassicWalls2() {
-        givenBr("☼☼☼☼☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼   ☻   ☼\n" +
@@ -201,11 +210,12 @@ public class BoomEngineOriginalTest {
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n");
-        
+
         Point source = pt(4, 5);
         int radius = 3;
-        int countBlasts = 2*radius + 1;
+        int countBlasts = 2 * radius + 1;
 
+        // when then
         assertBoom(source, radius, countBlasts,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
@@ -220,7 +230,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testBigBoomAtClassicWalls3() {
-        givenBr("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
@@ -231,11 +242,12 @@ public class BoomEngineOriginalTest {
                 "☼         ☼\n" +
                 "☼         ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
-        
+
         Point source = pt(5, 5);
         int radius = 3;
-        int countBlasts = 2*radius + 1;
+        int countBlasts = 2 * radius + 1;
 
+        // when then
         assertBoom(source, radius, countBlasts,
                 "☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
@@ -252,7 +264,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testBigBoomAtClassicWalls4() {
-        givenBr("☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼                 ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼                 ☼\n" +
@@ -274,8 +287,9 @@ public class BoomEngineOriginalTest {
 
         Point source = pt(1, 1);
         int radius = 15;
-        int countBlasts = 2*radius + 1;
+        int countBlasts = 2 * radius + 1;
 
+        // when then
         assertBoom(source, radius, countBlasts,
                 "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼                 ☼\n" +
@@ -300,7 +314,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testBigBoomAtClassicWalls5() {
-        givenBr("☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼                   ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼                   ☼\n" +
@@ -326,6 +341,7 @@ public class BoomEngineOriginalTest {
         int radius = 15;
         int countBlasts = 2 * (level.size() - 2) - 1;
 
+        // when then
         assertBoom(source, radius, countBlasts,
                 "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼          ҉        ☼\n" +
@@ -352,7 +368,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testBigBoomAtClassicWalls6() {
-        givenBr("☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼                   ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼                   ☼\n" +
@@ -378,6 +395,7 @@ public class BoomEngineOriginalTest {
         int radius = 15;
         int countBlasts = level.size() - 2;
 
+        // when then
         assertBoom(source, radius, countBlasts,
                 "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼                   ☼\n" +
@@ -404,7 +422,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testBigBoomAtClassicWalls7() {
-        givenBr("☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼                   ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼                   ☼\n" +
@@ -430,6 +449,7 @@ public class BoomEngineOriginalTest {
         int radius = 15;
         int countBlasts = level.size() - 2;
 
+        // when then
         assertBoom(source, radius, countBlasts,
                 "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼          ҉        ☼\n" +
@@ -456,7 +476,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testPoisonBoom_1() {
-        givenBr("☼      ☼\n" +
+        // given
+        givenFl("☼      ☼\n" +
                 "        \n" +
                 "        \n" +
                 "        \n" +
@@ -469,8 +490,9 @@ public class BoomEngineOriginalTest {
         int range = 4;
         int countBlasts = 4;
 
-        prepareDateForPoisonTests(source, LEFT, range);
+        givenPoison(source, LEFT, range);
 
+        // when then
         assertPoisonBoom(source, countBlasts, poison,
                 "☼      ☼\n" +
                 "        \n" +
@@ -484,7 +506,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testPoisonBoom_2() {
-        givenBr("☼     ☼\n" +
+        // given
+        givenFl("☼     ☼\n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
@@ -496,8 +519,9 @@ public class BoomEngineOriginalTest {
         int range = 4;
         int countBlasts = 4;
 
-        prepareDateForPoisonTests(source, UP, range);
+        givenPoison(source, UP, range);
 
+        // when then
         assertPoisonBoom(source, countBlasts, poison,
                 "☼     ☼\n" +
                 "    ҉  \n" +
@@ -510,7 +534,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testPoisonBoom_3() {
-        givenBr("☼           ☼\n" +
+        // given
+        givenFl("☼           ☼\n" +
                 "             \n" +
                 "             \n" +
                 "             \n" +
@@ -528,8 +553,9 @@ public class BoomEngineOriginalTest {
         int range = 4;
         int countBlasts = 4;
 
-        prepareDateForPoisonTests(source, RIGHT, range);
+        givenPoison(source, RIGHT, range);
 
+        // when then
         assertPoisonBoom(source, countBlasts, poison,
                 "☼           ☼\n" +
                 "             \n" +
@@ -548,7 +574,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testPoisonBoom_4() {
-        givenBr("☼     ☼\n" +
+        // given
+        givenFl("☼     ☼\n" +
                 " ☼ ☻   \n" +
                 "   ҉   \n" +
                 "   ҉   \n" +
@@ -560,8 +587,9 @@ public class BoomEngineOriginalTest {
         int range = 4;
         int countBlasts = 4;
 
-        prepareDateForPoisonTests(source, DOWN, range);
+        givenPoison(source, DOWN, range);
 
+        // when then
         assertPoisonBoom(source, countBlasts, poison,
                 "☼     ☼\n" +
                 " ☼ ☻   \n" +
@@ -574,7 +602,8 @@ public class BoomEngineOriginalTest {
 
     @Test
     public void testPoisonBoomAtWalls_WallShouldStopBlast() {
-        givenBr("☼       ☼\n" +
+        // given
+        givenFl("☼       ☼\n" +
                 "         \n" +
                 "         \n" +
                 "         \n" +
@@ -588,8 +617,9 @@ public class BoomEngineOriginalTest {
         int range = 8;
         int countBlasts = 6;
 
-        prepareDateForPoisonTests(source, LEFT, range);
+        givenPoison(source, LEFT, range);
 
+        // when then
         assertPoisonBoom(source, countBlasts, poison,
                 "☼       ☼\n" +
                 "         \n" +
@@ -602,36 +632,32 @@ public class BoomEngineOriginalTest {
                 "☼       ☼\n");
     }
 
-    private void prepareDateForPoisonTests(Point source, Direction direction, int range) {
+    private void givenPoison(Point pt, Direction direction, int range) {
         Hero hero = new Hero();
         engine = new BoomEngineOriginal(field, hero);
-        hero.setX(source.getX());
-        hero.setY(source.getY());
+
+        hero.move(pt);
         poison = new Poison(hero, direction, range);
     }
 
     private void assertBoom(Point source, int radius, int countBlasts, String expected) {
         List<Blast> blasts = engine.boom(source, radius);
-
         assertEquals(countBlasts, blasts.size());
 
         String actual = print(blasts, source);
-
         assertEquals(expected, actual);
     }
 
     private void assertPoisonBoom(Point source, int countBlasts, Poison poison, String expected) {
         List<Blast> blasts = engine.boom(poison);
-
         assertEquals(countBlasts, blasts.size());
 
         String actual = print(blasts, source);
-
         assertEquals(expected, actual);
     }
 
     public String print(List<Blast> blast, Point source) {
-        Printer<String> printer = printerFactory.getPrinter(new BoardReader<Player>() {
+        Printer<String> printer = this.printer.getPrinter(new BoardReader<Player>() {
             @Override
             public int size() {
                 return level.size();

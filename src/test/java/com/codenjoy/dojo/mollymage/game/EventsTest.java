@@ -22,36 +22,37 @@ package com.codenjoy.dojo.mollymage.game;
  * #L%
  */
 
-import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
-import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.services.Direction;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTIONS_COUNT;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldNoEventsWhenHeroNotMove() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
 
+        // when
         tick();
         tick();
         tick();
         tick();
+
+        // then
+        events.verifyNoEvents();
     }
 
     @Test
     public void shouldFireEventWhenKillWall() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -64,16 +65,21 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "#☺   \n");
 
+        // when
         hero().act();
         hero().right();
         tick();
+
         hero().right();
         tick();
+
         hero().right();
         tick();
+
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -85,22 +91,28 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillGhost() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "&☺   \n");
 
+        // when
         hero().act();
         hero().right();
         tick();
+
         hero().right();
         tick();
+
         hero().right();
         tick();
+
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -122,13 +134,13 @@ public class EventsTest extends AbstractGameTest {
                 "#    \n" +
                 "&☺   \n");
 
-
         assertF("     \n" +
                 "#    \n" +
                 "&    \n" +
                 "#    \n" +
                 "&☺   \n");
 
+        // when
         hero().act();
         hero().up();
         tick();
@@ -145,15 +157,18 @@ public class EventsTest extends AbstractGameTest {
         hero().up();
         tick();
 
+        // then
         assertF(" ☺   \n" +
                 "#4   \n" +
                 "&3   \n" +
                 "#2   \n" +
                 "&1   \n");
 
+        // when
         hero().right();
         tick();
 
+        // then
         assertF("  ☺  \n" +
                 "#3   \n" +
                 "&2   \n" +
@@ -162,11 +177,13 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_GHOST]");
 
+        // when
         // новое привидение, стоит не двигается
         dice(3, 4, Direction.ACT.value());
         tick();
         stopGhosts();
 
+        // then
         assertF("  ☺& \n" +
                 "#2   \n" +
                 "&1   \n" +
@@ -175,10 +192,12 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
+        // when
         // новые коробки
         dice(4, 4);
         tick();
 
+        // then
         assertF("  ☺&#\n" +
                 "#1   \n" +
                 "x҉҉  \n" +
@@ -187,11 +206,13 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_GHOST]");
 
+        // when
         // новое привидение, стоит не двигается
         dice(3, 3, Direction.ACT.value());
         tick();
         stopGhosts();
 
+        // then
         assertF(" ҉☺&#\n" +
                 "H҉҉& \n" +
                 " ҉   \n" +
@@ -200,6 +221,7 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
+        // when
         // новые коробки
         dice(4, 3);
         hero().left();
@@ -209,17 +231,20 @@ public class EventsTest extends AbstractGameTest {
         hero().act();
         tick();
 
+        // then
         assertF("   &#\n" +
                 " ☻ &#\n" +
                 "     \n" +
                 "     \n" +
                 "     \n");
 
+        // when
         tick();
         tick();
         tick();
         tick();
 
+        // then
         assertF(" ҉ &#\n" +
                 "҉Ѡ҉&#\n" +
                 " ҉   \n" +
@@ -229,24 +254,29 @@ public class EventsTest extends AbstractGameTest {
         events.verifyAllEvents("[DIED]");
         assertHeroDie();
 
+        // when
         dice(1, 1);
         tick();
         game().newGame();
 
+        // then
         assertF("   &#\n" +
                 "   &#\n" +
                 "     \n" +
                 " ☺   \n" +
                 "     \n");
 
+        // when
         hero().move(pt(1, 0));
 
+        // then
         assertF("   &#\n" +
                 "   &#\n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n");
 
+        // when
         hero().act();
         hero().right();
         tick();
@@ -258,6 +288,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("   &#\n" +
                 "   &#\n" +
                 "     \n" +
@@ -278,13 +309,13 @@ public class EventsTest extends AbstractGameTest {
                 "#    \n" +
                 "&☺   \n");
 
-
         assertF("     \n" +
                 "#    \n" +
                 "&    \n" +
                 "#    \n" +
                 "&☺   \n");
 
+        // when
         hero().act();
         hero().up();
         tick();
@@ -301,6 +332,7 @@ public class EventsTest extends AbstractGameTest {
         hero().up();
         tick();
 
+        // then
         assertF(" ☺   \n" +
                 "#4   \n" +
                 "&3   \n" +
@@ -309,20 +341,24 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[]");
 
+        // when
         hero().right();
         tick();
 
+        // then
         assertF(" ҉☺  \n" +
                 "H҉҉  \n" +
                 "x҉҉  \n" +
                 "H҉҉  \n" +
                 "x҉҉  \n");
 
+        // when
         // новые коробки
         dice(2, 2,
             3, 3);
         tick();
 
+        // then
         assertF("  ☺  \n" +
                 "   # \n" +
                 "  #  \n" +
@@ -341,7 +377,8 @@ public class EventsTest extends AbstractGameTest {
                 "   \n" +
                 "☺ &\n");
 
-        // when portion explode
+        // when
+        // portion explode
         hero().act();
         hero().up();
         tick();
@@ -353,31 +390,35 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        // then ghost die
+        // then
+        // ghost die
         assertF("҉  \n" +
                 "҉☺ \n" +
                 "҉҉x\n");
 
         events.verifyAllEvents("[KILL_GHOST]");
 
-        // when fill free places boxes
+        // when
+        // fill free places boxes
         settings.integer(TREASURE_BOX_COUNT, 6);
         dice(preparedCoordinatesForBoxesAndGhosts());
         tick();
 
-        // then boxes fill whole field except 2 free points([2,2] and [0,2]).
+        // then
+        // boxes fill whole field except 2 free points([2,2] and [0,2]).
         // ghost tried to generate on both free places, but appeared only on [2,2]
         // [0,2] denied as previous place of death
         assertF("##&\n" +
                 "#☺#\n" +
                 "## \n");
+
         assertEquals(1, field.ghosts().size());
     }
 
     private int[] preparedCoordinatesForBoxesAndGhosts() {
         int[] result = new int[]
                 {
-                        0, 0, 0, 1,         // boxes, first line
+                        0, 0, 0, 1,        // boxes, first line
                         1, 0, 1, 1, 1, 2,  // boxes second line
                         2, 0, 2, 1,        // boxes third line
                         0, 2,              // first point for ghost
@@ -388,25 +429,31 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillWallOnlyForOneHero() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
                 "#☺   \n");
 
+        // when
         hero(1).act();
         hero(1).right();
         hero(0).up();
         tick();
+
         hero(1).right();
         hero(0).up();
         tick();
+
         hero(1).right();
         hero(0).up();
         tick();
+
         tick();
         tick();
 
+        // then
         assertF(" ☺   \n" +
                 "     \n" +
                 "     \n" +
@@ -417,10 +464,12 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => []\n" +
                 "listener(1) => [KILL_TREASURE_BOX]\n");
 
+        // when
         // новые коробки
         dice(4, 4);
         tick();
 
+        // then
         assertF(" ☺  #\n" +
                 "     \n" +
                 "     \n" +
@@ -430,25 +479,31 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillGhostMultiplayer() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
                 "&☺   \n");
 
+        // when
         hero(1).act();
         hero(1).right();
         hero(0).up();
         tick();
+
         hero(1).right();
         hero(0).up();
         tick();
+
         hero(1).right();
         hero(0).up();
         tick();
+
         tick();
         tick();
 
+        // then
         assertF(" ☺   \n" +
                 "     \n" +
                 "     \n" +
@@ -459,8 +514,10 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => []\n" +
                 "listener(1) => [KILL_GHOST]\n");
 
+        // when
         tick();
 
+        // then
         assertF(" ☺   \n" +
                 "     \n" +
                 "     \n" +
@@ -470,22 +527,26 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseDied() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺#☺  \n");
 
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
         hero(1).up();
         tick();
+
         tick();
         tick();
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -496,10 +557,12 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
 
+        // when
         // новые коробки
         dice(4, 4);
         tick();
 
+        // then
         assertF("    #\n" +
                 "     \n" +
                 "     \n" +
@@ -509,6 +572,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseAlive() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -521,6 +585,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "☺#♥  \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
@@ -531,16 +596,19 @@ public class EventsTest extends AbstractGameTest {
         hero(1).up();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "     \n" +
                 "3#3  \n", 0);
 
+        // when
         tick();
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
@@ -551,10 +619,12 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => [KILL_TREASURE_BOX]\n" +
                 "listener(1) => [KILL_TREASURE_BOX]\n");
 
+        // when
         // новые коробки
         dice(4, 4);
         tick();
 
+        // then
         assertF("    #\n" +
                 "     \n" +
                 "☺ ♥  \n" +
@@ -564,13 +634,16 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseDied() {
+        // given
         settings.integer(POTION_POWER, 2);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺##☺ \n");
 
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
@@ -582,6 +655,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -593,11 +667,13 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
 
+        // when
         // новые коробки
         dice(4, 4,
             4, 3);
         tick();
 
+        // then
         assertF("    #\n" +
                 "    #\n" +
                 "     \n" +
@@ -607,12 +683,14 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied() {
+        // given
         givenFl("     \n" +
                 "  ☺  \n" +
                 " ☺#☺ \n" +
                 "  ☺  \n" +
                 "     \n");
 
+        // when
         hero(0).act();
         hero(1).act();
         hero(2).act();
@@ -624,6 +702,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("  ҉  \n" +
                 " ҉Ѡ҉ \n" +
                 "҉♣H♣҉\n" +
@@ -636,10 +715,12 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(3) => [DIED, KILL_TREASURE_BOX]\n");
 
+        // when
         // новые коробки
         dice(4, 4);
         tick();
 
+        // then
         assertF("    #\n" +
                 "  Ѡ  \n" +
                 " ♣ ♣ \n" +
@@ -649,12 +730,14 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied_caseNotEqualPosition() {
+        // given
         givenFl("     \n" +
                 "  ☺  \n" +
                 "#☺#☺ \n" +
                 " #☺  \n" +
                 "     \n");
 
+        // when
         hero(0).act();
         hero(1).act();
         hero(2).act();
@@ -666,6 +749,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("  ҉  \n" +
                 " ҉Ѡ҉ \n" +
                 "H♣H♣҉\n" +  // первую стенку подбил монополист, центральную все
@@ -678,12 +762,14 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n");
 
+        // when
         // новые коробки
         dice(4, 4,
             4, 3,
             4, 2);
         tick();
 
+        // then
         assertF("    #\n" +
                 "  Ѡ #\n" +
                 " ♣ ♣#\n" +
@@ -693,7 +779,9 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseAlive() {
+        // given
         settings.integer(POTION_POWER, 2);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -706,6 +794,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "☺##♥ \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
@@ -723,6 +812,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "☺  ♥ \n" +
                 "҉  ҉ \n" +
@@ -735,11 +825,13 @@ public class EventsTest extends AbstractGameTest {
                 "listener(1) => [KILL_TREASURE_BOX]\n");
 
 
+        // when
         // новые коробки
         dice(4, 4,
             4, 3);
         tick();
 
+        // then
         assertF("    #\n" +
                 "☺  ♥#\n" +
                 "     \n" +
@@ -749,22 +841,26 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenGhost_caseDied() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺&☺  \n");
 
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
         hero(1).up();
         tick();
+
         tick();
         tick();
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -775,9 +871,11 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => [DIED, KILL_GHOST]\n" +
                 "listener(1) => [DIED, KILL_GHOST]\n");
 
+        // when
         removeGhosts(1); // больше не надо привидений
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -787,12 +885,14 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenGhost_caseAlive() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺&☺  \n");
 
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
@@ -807,6 +907,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
@@ -817,9 +918,11 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_GHOST]\n");
 
+        // when
         removeGhosts(1); // больше не надо привидений
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
@@ -829,12 +932,14 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourGhosts_caseDied() {
+        // given
         givenFl("     \n" +
                 "  ☺  \n" +
                 " ☺&☺ \n" +
                 "  ☺  \n" +
                 "     \n");
 
+        // when
         hero(0).act();
         hero(1).act();
         hero(2).act();
@@ -846,6 +951,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("  ҉  \n" +
                 " ҉Ѡ҉ \n" +
                 "҉♣x♣҉\n" +
@@ -858,9 +964,11 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [DIED, KILL_GHOST]\n" +
                 "listener(3) => [DIED, KILL_GHOST]\n");
 
+        // when
         removeGhosts(1); // больше не надо привидений
         tick();
 
+        // then
         assertF("     \n" +
                 "  Ѡ  \n" +
                 " ♣ ♣ \n" +
@@ -881,6 +989,7 @@ public class EventsTest extends AbstractGameTest {
                 "&   &\n" +
                 "☺☺☺☺ \n");
 
+        // when
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
         hero(0).act();
@@ -912,6 +1021,7 @@ public class EventsTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "&244&\n" +
                 " 1#3 \n" +
@@ -919,11 +1029,13 @@ public class EventsTest extends AbstractGameTest {
                 "☺♥♥♥ \n",
                 0);
 
+        // when
         hero(0).move(0, 0);
         hero(1).move(1, 1);
         hero(2).move(3, 1);
         hero(3).move(3, 3);
 
+        // then
         assertF("     \n" +
                 "&24♠&\n" +
                 " 1#3 \n" +
@@ -937,8 +1049,10 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
                 "listener(1) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
@@ -951,9 +1065,11 @@ public class EventsTest extends AbstractGameTest {
                 "x♣҉♣x\n" +
                 "☺҉҉҉ \n", 0);
 
+        // when
         removeBoxes(1); // больше не надо коробок
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +
@@ -969,6 +1085,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenBigBadaboom_withEnemies() {
+        // given
         settings.integer(POTIONS_COUNT, 2)
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
@@ -979,6 +1096,7 @@ public class EventsTest extends AbstractGameTest {
                 "&   &\n" +
                 "☺☺☺☺ \n");
 
+        // when
         player(0).inTeam(0);
         player(1).inTeam(0);
         player(2).inTeam(1);
@@ -1015,24 +1133,25 @@ public class EventsTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "&244&\n" +
                 " 1#3 \n" +
                 "&223&\n" +
-                "☺♥♡♡ \n",
-                0);
+                "☺♥♡♡ \n", 0);
 
+        // when
         hero(0).move(0, 0);
         hero(1).move(1, 1);
         hero(2).move(3, 1);
         hero(3).move(3, 3);
 
+        // then
         assertF("     \n" +
                 "&24♤&\n" +
                 " 1#3 \n" +
                 "&♠2♤&\n" +
-                "☺    \n",
-                0);
+                "☺    \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -1040,8 +1159,10 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
                 "listener(1) => [DIED, KILL_ENEMY_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
@@ -1054,9 +1175,11 @@ public class EventsTest extends AbstractGameTest {
                 "x♣҉♧x\n" +
                 "☺҉҉҉ \n", 0);
 
+        // when
         removeBoxes(1); // больше не надо коробок
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +
@@ -1072,6 +1195,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenBigBadaboom_caseKillAll() {
+        // given
         settings.integer(POTIONS_COUNT, 2)
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
@@ -1082,6 +1206,7 @@ public class EventsTest extends AbstractGameTest {
                 "&   &\n" +
                 "☺☺☺☺ \n");
 
+        // when
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
         hero(0).act();
@@ -1113,6 +1238,7 @@ public class EventsTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "&244&\n" +
                 " 1#3 \n" +
@@ -1120,11 +1246,13 @@ public class EventsTest extends AbstractGameTest {
                 "☺♥♥♥ \n",
                 0);
 
+        // when
         hero(0).move(1, 3);
         hero(1).move(1, 1);
         hero(2).move(3, 1);
         hero(3).move(3, 3);
 
+        // then
         assertF("     \n" +
                 "&☻4♠&\n" +
                 " 1#3 \n" +
@@ -1138,8 +1266,10 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
                 "listener(1) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
@@ -1152,10 +1282,12 @@ public class EventsTest extends AbstractGameTest {
                 "x♣҉♣x\n" +
                 " ҉҉҉ \n", 0);
 
+        // when
         // новые коробки
         dice(4, 4);
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +
@@ -1171,6 +1303,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenNotBigBadaboom_caseKillAll() {
+        // given
         settings.integer(POTIONS_COUNT, 2)
                 .bool(BIG_BADABOOM, false)
                 .perksSettings().dropRatio(0);
@@ -1181,6 +1314,7 @@ public class EventsTest extends AbstractGameTest {
                 "&   &\n" +
                 "☺☺☺☺ \n");
 
+        // when
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
         hero(0).act();
@@ -1212,24 +1346,25 @@ public class EventsTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "&244&\n" +
                 " 1#3 \n" +
                 "&223&\n" +
-                "☺♥♥♥ \n",
-                0);
+                "☺♥♥♥ \n", 0);
 
+        // when
         hero(0).move(1, 3);
         hero(1).move(1, 1);
         hero(2).move(3, 1);
         hero(3).move(3, 3);
 
+        // then
         assertF("     \n" +
                 "&☻4♠&\n" +
                 " 1#3 \n" +
                 "&♠2♠&\n" +
-                "     \n",
-                0);
+                "     \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -1237,8 +1372,10 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX]\n" +
                 "listener(1) => [DIED]\n" +
@@ -1251,10 +1388,12 @@ public class EventsTest extends AbstractGameTest {
                 "&11♠&\n" +
                 "     \n", 0);
 
+        // when
         // новые коробки
         dice(4, 4);
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
@@ -1267,8 +1406,10 @@ public class EventsTest extends AbstractGameTest {
                 "x♣҉1&\n" +
                 " ҉҉  \n", 0);
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +
@@ -1281,8 +1422,10 @@ public class EventsTest extends AbstractGameTest {
                 " ♣҉♣x\n" +
                 "   ҉ \n", 0);
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +
@@ -1295,8 +1438,10 @@ public class EventsTest extends AbstractGameTest {
                 " ♣ ♣ \n" +
                 "     \n", 0);
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +

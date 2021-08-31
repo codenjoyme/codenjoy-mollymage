@@ -68,8 +68,10 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         tick();
 
+        // when
         tick();
 
+        // then
         assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
@@ -79,8 +81,10 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
+        // when
         tick();
 
+        // then
         assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
@@ -88,10 +92,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "+  ☺ #\n" +
                 "#+####\n");
 
+        // when
         tick();
         tick();
         tick();
 
+        // then
         assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
@@ -279,7 +285,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         int timeout = 10;
         player().getHero().addPerk(new PoisonThrower(timeout));
 
-        // when just ACT(1) without sending direction
+        // when
+        // just ACT(1) without sending direction
         hero().act(1);
         tick();
 
@@ -316,15 +323,18 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         int timeout = 30;
         player().getHero().addPerk(new PoisonThrower(timeout));
 
-        // when hero set the potion and shoot through it
+        // when
+        // hero set the potion and shoot through it
         hero().up();
         tick();
+
         hero().up();
         tick();
 
         hero().act();
         hero().down();
         tick();
+
         hero().down();
         tick();
 
@@ -340,7 +350,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼☺       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼\n");
 
-        // when hero throwpoison
+        // when hero throw poison
         hero().up();
         hero().act(1);
         tick();
@@ -379,15 +389,18 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         int timeout = 30;
         player().getHero().addPerk(new PoisonThrower(timeout));
 
-        // when hero set the potion and shoot through it
+        // when
+        // hero set the potion and shoot through it
         hero().up();
         tick();
+
         hero().up();
         tick();
 
         hero().act();
         hero().down();
         tick();
+
         hero().down();
         tick();
 
@@ -403,7 +416,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼☺       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼\n");
 
-        // when hero throwpoison
+        // when
+        // hero throw poison
         hero().up();
         hero().act(1);
         tick();
@@ -435,17 +449,17 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        final int timeout = 10;
+        int timeout = 10;
         newPerk(1, 2, new PoisonThrower(timeout));
 
-        // then
         assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼T☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        // when hero get perk
+        // when
+        // hero get perk
         hero().up();
         tick();
 
@@ -457,7 +471,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
         events.verifyAllEvents("[CATCH_PERK]");
 
-        // when hero used perk
+        // when
+        // hero used perk
         hero().down();
         hero().act(1);
         tick();
@@ -470,12 +485,14 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
         assertEquals(timeout - 2, hero().getPerk(Element.POISON_THROWER).getTimer());
 
-        // when hero picked one more perk
+        // when
+        // hero picked one more perk
         newPerk(1, 3, new PoisonThrower(timeout));
         hero().up();
         tick();
 
-        // then perk timer should be doubled minus few steps
+        // then
+        // perk timer should be doubled minus few steps
         assertF("☼☼☼☼☼\n" +
                 "☼☺  ☼\n" +
                 "☼ ☼ ☼\n" +
@@ -484,7 +501,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         events.verifyAllEvents("[CATCH_PERK]");
         assertEquals(timeout * 2 - 3, hero().getPerk(Element.POISON_THROWER).getTimer());
 
-        // when hero use PT
+        // when
+        // hero use PT
         hero().down();
         hero().act(1);
         tick();
@@ -496,7 +514,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼҉  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        assertEquals(timeout * 2 - 4, hero().getPerk(Element.POISON_THROWER).getTimer());
+        assertEquals(timeout * 2 - 4,
+                hero().getPerk(Element.POISON_THROWER).getTimer());
     }
 
     @Test
@@ -535,7 +554,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "#☺       #\n" +
                 "##########\n");
 
-        // when recharge hero should not throw poison
+        // when
+        // recharge hero should not throw poison
         hero().up();
         hero().act(1);
         tick();
@@ -552,7 +572,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "#☺       #\n" +
                 "##########\n");
 
-        // when recharge hero should not throw poison
+        // when
+        // recharge hero should not throw poison
         hero().up();
         hero().act(1);
         tick();
@@ -569,7 +590,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "#☺       #\n" +
                 "##########\n");
 
-        // when recharge done should throw again
+        // when
+        // recharge done should throw again
         hero().up();
         hero().act(1);
         tick();
@@ -586,7 +608,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "#☺       #\n" +
                 "##########\n");
 
-        // when and going to recharge again
+        // when
+        // and going to recharge again
         hero().up();
         hero().act(1);
         tick();
@@ -721,6 +744,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=4, timeout=5, timer=5, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // when
         hero().act();
         hero().up();
         tick();
@@ -734,10 +758,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         tick();
 
+        // then
         assertEquals("[{POTION_BLAST_RADIUS_INCREASE('+') " +
                         "value=4, timeout=5, timer=1, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // given
         // второй перк взятый в самый последний момент перед взрывом
         // зелья повлияет не на нее, а на следующее зелье
         int newValue = 3; // проверим, что эти значения суммируются
@@ -859,6 +885,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     // BCI - Potion Count Increase perk
     @Test
     public void shouldPotionCountIncrease_whenBCIPerk() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -875,11 +902,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☻    \n");
 
         hero().right();
-
         tick();
 
+        // when
         hero().act();
 
+        // then
         // no more potions :(
         assertF("     \n" +
                 "     \n" +
@@ -887,63 +915,75 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "4☺   \n");
 
+        // when
         // add perk that gives 1+3 = 4 player's potions in total on the board
         player().getHero().addPerk(new PotionCountIncrease(3, 3));
+
         hero().act();
         hero().right();
-
         tick();
 
         hero().act();
+
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "34☻  \n");
 
+        // when
         hero().right();
-
         tick();
 
         hero().act();
+
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "234☻ \n");
 
+        // when
         hero().right();
         tick();
+
         hero().act();
 
+        // then
         // 4 potions and no more
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "1234☺\n");
-
     }
 
     // BI - Potion Immune perk
     @Test
     public void shouldHeroKeepAlive_whenBIperk() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
+        // when
         hero().act();
         hero().right();
 
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "4☺   \n");
 
+        // when
         player().getHero().addPerk(new PotionImmune(6));
 
         tick();
@@ -951,34 +991,40 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "҉    \n" +
                 "҉☺   \n");
 
+        // when
         hero().act();
-
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 " ☻   \n");
 
+        // when
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 " ☻   \n");
 
+        // when
         tick();
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1006,11 +1052,13 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=2, timeout=1, timer=1, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // when
         // поставили первое радиоуправляемое зелье
         hero().act();
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1021,10 +1069,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=2, timeout=1, timer=1, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // when
         // видим, что она стоит и ждет
         hero().up();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1035,10 +1085,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=2, timeout=1, timer=1, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // when
         // взорвали ее
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1049,10 +1101,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=1, timeout=1, timer=1, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // when
         // ставим еще одну
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1063,16 +1117,19 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=1, timeout=1, timer=1, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // when
         // отошли, смотрим
         hero().up();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 " ☺   \n" +
                 " 5   \n" +
                 "     \n");
 
+        // when
         hero().left();
         tick();
 
@@ -1089,6 +1146,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -1099,10 +1157,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=1, timeout=1, timer=1, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // when
         // взорвали ее
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺҉   \n" +
@@ -1112,10 +1172,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero().getPerks().toString());
 
+        // when
         // ставим новую
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☻    \n" +
@@ -1125,10 +1187,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero().getPerks().toString());
 
+        // when
         // если отойдем, то увидим, что это обычная
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "3☺   \n" +
@@ -1138,11 +1202,13 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero().getPerks().toString());
 
+        // when
         // еще одну, у нас ведь их две
         hero().act();
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "24☺  \n" +
@@ -1152,11 +1218,13 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero().getPerks().toString());
 
+        // when
         // больше не могу
         hero().act();
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "13 ☺ \n" +
@@ -1166,11 +1234,13 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero().getPerks().toString());
 
+        // when
         // еще не могу
         hero().right();
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "҉    \n" +
                 "҉2  ☺\n" +  // взрывная волна кстати не перекрывает зелье
@@ -1180,10 +1250,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero().getPerks().toString());
 
+        // when
         // и только когда ударная волна уйдет, тогда смогу
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 " 1  ☻\n" +  // взрывная волна кстати не перекрывает зелье
@@ -1211,11 +1283,13 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=2, timeout=1, timer=1, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // when
         // поставили первое радиоуправляемое зелье
         hero().act();
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1226,10 +1300,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=2, timeout=1, timer=1, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // when
         // видим, что она стоит и ждет
         hero().up();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1240,10 +1316,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=2, timeout=1, timer=1, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // when
         // взорвали ее
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1254,10 +1332,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=1, timeout=1, timer=1, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // when
         // ставим еще одну
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1268,16 +1348,19 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=1, timeout=1, timer=1, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // when
         // отошли, смотрим
         hero().up();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 " ☺   \n" +
                 " 5   \n" +
                 "     \n");
 
+        // when
         hero().left();
         tick();
 
@@ -1294,6 +1377,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -1304,10 +1388,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=1, timeout=1, timer=1, pick=0}]" ,
                 hero().getPerks().toString());
 
+        // when
         // взорвали ее
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺҉   \n" +
@@ -1317,10 +1403,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero().getPerks().toString());
 
+        // when
         // ставим новую
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☻    \n" +
@@ -1330,10 +1418,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero().getPerks().toString());
 
+        // when
         // если отойдем, то увидим, что это обычная
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "3☺   \n" +
@@ -1343,11 +1433,13 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero().getPerks().toString());
 
+        // when
         // больше не могу - у меня одна
         hero().act();
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "2 ☺  \n" +
@@ -1357,11 +1449,13 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero().getPerks().toString());
 
+        // when
         // больше не могу
         hero().act();
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "1  ☺ \n" +
@@ -1371,11 +1465,13 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero().getPerks().toString());
 
+        // when
         // и теперь не могу - есть еще взрывная волна
         hero().act();
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "҉    \n" +
                 "҉҉  ☺\n" +
@@ -1385,10 +1481,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero().getPerks().toString());
 
+        // when
         // а теперь пожалуйста
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "    ☻\n" +
@@ -1417,11 +1515,13 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=1, timeout=1, timer=1, pick=0}]",
                 hero().getPerks().toString());
 
+        // when
         // поставили радиоуправляемое зелье
         hero().act();
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1432,10 +1532,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=1, timeout=1, timer=1, pick=0}]",
                 hero().getPerks().toString());
 
+        // when
         // идем к привидению на верную смерть
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1446,10 +1548,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                         "value=1, timeout=1, timer=1, pick=0}]",
                 hero().getPerks().toString());
 
+        // when
         // самоубился и всех выпилил )
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1462,10 +1566,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals("[]",
                 hero().getPerks().toString());
 
+        // when
         // новая коробка
         dice(4, 4);
         tick();
 
+        // then
         assertF("    #\n" +
                 "     \n" +
                 "     \n" +
@@ -1481,39 +1587,40 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldDestroyAllPotion_WithPerkPE() {
         // given
-        givenFl("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "☺     \n");
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
+
         newPerk(0, 1, getPotionExploderPerk());
         hero().addPerk(new PotionCountIncrease(3, 30));
 
-        // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "A     \n" +
-                "☺     \n");
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "A    \n" +
+                "☺    \n");
+
         assertEquals(1, hero().getPerks().size());
 
-        // when hero get perk PE
+        // when
+        // hero get perk PE
         hero().up();
         tick();
 
         // then
         events.verifyAllEvents("[CATCH_PERK]");
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "☺     \n" +
-                "      \n");
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n" +
+                "     \n");
+
         assertEquals(2, hero().getPerks().size());
 
-        // when hero plant different potions
+        // when
+        // hero plant different potions
         hero().act();
         hero().up();
         tick();
@@ -1522,16 +1629,17 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         hero().up();
         tick();
+
         hero().right();
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                " ☺    \n" +
-                "5     \n" +
-                "2     \n" +
-                "      \n");
+        assertF("     \n" +
+                " ☺   \n" +
+                "5    \n" +
+                "2    \n" +
+                "     \n");
+
         assertEquals(3, hero().getPerks().size());
 
         // when hero explode all potions
@@ -1539,35 +1647,32 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                "҉☺    \n" +
-                "҉҉    \n" +
-                "҉҉    \n" +
-                "҉     \n");
+        assertF("     \n" +
+                "҉☺   \n" +
+                "҉҉   \n" +
+                "҉҉   \n" +
+                "҉    \n");
     }
 
     // PE - Potion Explored
     @Test
     public void shouldNotDestroyAllPotion_WithoutPerkPE() {
         // given
-        givenFl("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "☺     \n");
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
         hero().addPerk(new PotionCountIncrease(3, 30));
 
-        // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "☺     \n");
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
 
-        // when hero plant different potions
+        // when
+        // hero plant different potions
         hero().act();
         hero().up();
         tick();
@@ -1576,50 +1681,49 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         hero().up();
         tick();
+
         hero().right();
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                " ☺    \n" +
-                "5     \n" +
-                "2     \n");
+        assertF("     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "5    \n" +
+                "2    \n");
 
-        // when hero tried explode all potions but can't without PE perk
+        // when
+        // hero tried explode all potions but can't without PE perk
         hero().act(2);
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                " ☺    \n" +
-                "5     \n" +
-                "1     \n");
+        assertF("     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "5    \n" +
+                "1    \n");
     }
 
     @Test
     public void shouldMoveWhileUsingPerk_WithPerkPE() {
         // given
-        givenFl("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "☺     \n");
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
+
         newPerk(0, 1, getPotionExploderPerk());
 
-        // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "A     \n" +
-                "☺     \n");
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "A    \n" +
+                "☺    \n");
 
-        // when hero catch perk and plant potion
+        // when
+        // hero catch perk and plant potion
         hero().act();
         hero().up();
         tick();
@@ -1628,47 +1732,39 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                " ☺    \n" +
-                "3     \n");
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "3    \n");
+
         events.verifyAllEvents("[CATCH_PERK]");
 
-        // when hero explode potions and move right
+        // when
+        // hero explode potions and move right
         hero().act(2);
         hero().right();
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "҉ ☺   \n" +
-                "҉҉    \n");
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "҉ ☺  \n" +
+                "҉҉   \n");
     }
 
     @Test
     public void shouldMoveWhileUsingPerk_WithoutPerkPE() {
         // given
-        givenFl("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "☺     \n");
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
 
-        // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "☺     \n");
-
-        // when hero plant potion
+        // when
+        // hero plant potion
         hero().act();
         hero().up();
         tick();
@@ -1677,47 +1773,45 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                " ☺    \n" +
-                "3     \n");
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "3    \n");
 
-        // when hero tried explode potions(but cant) and move right
+        // when
+        // hero tried explode potions(but cant) and move right
         hero().act(2);
         hero().right();
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "  ☺   \n" +
-                "2     \n");
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "  ☺  \n" +
+                "2    \n");
     }
 
     @Test
     public void shouldWorkOnlyOneTime_WithPerkPE() {
         // given
-        givenFl("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "☺     \n");
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
+
         newPerk(0, 1, getPotionExploderPerk());
 
-        // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "A     \n" +
-                "☺     \n");
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "A    \n" +
+                "☺    \n");
 
-        // when hero catch perk and plant potion
+        // when
+        // hero catch perk and plant potion
         hero().act();
         hero().up();
         tick();
@@ -1726,52 +1820,52 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                " ☺    \n" +
-                "3     \n");
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "3    \n");
+
         events.verifyAllEvents("[CATCH_PERK]");
 
-        // when hero explode potions and move right
+        // when
+        // hero explode potions and move right
         hero().act(2);
         hero().right();
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "҉ ☺   \n" +
-                "҉҉    \n");
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "҉ ☺  \n" +
+                "҉҉   \n");
 
-        // when hero plant again
+        // when
+        // hero plant again
         hero().act();
         hero().up();
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "  ☺   \n" +
-                "  4   \n" +
-                "      \n");
+        assertF("     \n" +
+                "     \n" +
+                "  ☺  \n" +
+                "  4  \n" +
+                "     \n");
 
-        // when hero act(2) potion shouldn't boom
+        // when
+        // hero act(2) potion shouldn't boom
         hero().act(2);
         hero().right();
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "   ☺  \n" +
-                "  3   \n" +
-                "      \n");
+        assertF("     \n" +
+                "     \n" +
+                "   ☺ \n" +
+                "  3  \n" +
+                "     \n");
 
     }
 
@@ -1779,92 +1873,90 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldCombinePerk_WithPerkPE() {
         // given
-        givenFl("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "☺     \n");
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n");
+
         newPerk(0, 1, getPotionExploderPerk());
 
-        // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "A     \n" +
-                "☺     \n");
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "A    \n" +
+                "☺    \n");
 
-        // when hero catch perk and plant potion
+        // when
+        // hero catch perk and plant potion
         hero().act();
         hero().up();
         tick();
 
         // then
         events.verifyAllEvents("[CATCH_PERK]");
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "      \n" +
-                "☺     \n" +
-                "4     \n");
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "☺    \n" +
+                "4    \n");
 
 
+        // when
         // one more perk
         newPerk(0, 2, getPotionExploderPerk());
 
-        // when hero catch one more perk
+        // hero catch it
         hero().up();
         tick();
 
         // then
         events.verifyAllEvents("[CATCH_PERK]");
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                "☺     \n" +
-                "      \n" +
-                "3     \n");
+        assertF("     \n" +
+                "     \n" +
+                "☺    \n" +
+                "     \n" +
+                "3    \n");
 
 
-        // when hero explode potion and move right
+        // when
+        // hero explode potion and move right
         hero().act(2);
         hero().right();
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                "      \n" +
-                " ☺    \n" +
-                "҉     \n" +
-                "҉҉    \n");
+        assertF("     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "҉    \n" +
+                "҉҉   \n");
 
-        // when hero plant again
+        // when
+        // hero plant again
         hero().act();
         hero().up();
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                " ☺    \n" +
-                " 4    \n" +
-                "      \n" +
-                "      \n");
+        assertF("     \n" +
+                " ☺   \n" +
+                " 4   \n" +
+                "     \n" +
+                "     \n");
 
-        // when hero act(2) potion should boom
+        // when
+        // hero act(2) potion should boom
         hero().act(2);
         hero().right();
         tick();
 
         // then
-        assertF("      \n" +
-                "      \n" +
-                " ҉☺   \n" +
-                "҉҉҉   \n" +
-                " ҉    \n" +
-                "      \n");
+        assertF("     \n" +
+                " ҉☺  \n" +
+                "҉҉҉  \n" +
+                " ҉   \n" +
+                "     \n");
     }
 
     // привидения тоже могут ставить зелье

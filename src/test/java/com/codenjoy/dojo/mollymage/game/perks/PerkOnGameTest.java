@@ -62,18 +62,25 @@ public class PerkOnGameTest extends AbstractGameTest {
         dice(10);
 
         hero().act();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
+
+        assertF("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "#1 ☺ #\n" +
+                "######\n");
 
         // when
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -89,7 +96,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // when
         removeBoxes(2); // на две взорвавшиеся коробки меньше
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -103,7 +110,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [1,0]}]");
 
         // when
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -113,19 +120,27 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "+  ☺ #\n" +
                 "#+####\n");
 
+        // when
         hero().left();
-        field.tick();
+        tick();
 
         hero().left();
-        field.tick();
+        tick();
 
         int before = hero().scores();
         assertEquals(2 * settings.integer(KILL_WALL_SCORE), before);
 
+        assertF("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "+☺   #\n" +
+                "#+####\n");
+
         // when
         // go for perk
         hero().left();
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -149,25 +164,34 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "# # ##\n" +
                 "#☺   #\n" +
                 "######\n");
+
         perks.put(Element.POTION_BLAST_RADIUS_INCREASE, 5, 3);
         perks.dropRatio(20); // 20%
         // must drop 1 perk
         dice(10, 30);
 
         hero().act();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
+
+        // then
+        assertF("######\n" +
+                "# # ##\n" +
+                "# ☺  #\n" +
+                "# # ##\n" +
+                "#1   #\n" +
+                "######\n");
 
         // when
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -181,7 +205,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // when
         removeBoxes(2); // две коробки потрачено
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -211,18 +235,25 @@ public class PerkOnGameTest extends AbstractGameTest {
         dice(10);
 
         hero().act();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
+
+        assertF("######\n" +
+                "# # ##\n" +
+                "#    #\n" +
+                "# # ##\n" +
+                "#1 ☺ #\n" +
+                "######\n");
 
         // when
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -238,7 +269,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // when
         removeBoxes(2); // две коробки потрачено
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -252,9 +283,9 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=4} at [1,0]}]");
 
         // when
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -268,7 +299,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=1} at [1,0]}]");
 
         // when
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -279,7 +310,6 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "# ####\n");
 
         assertPerks("[]");
-
     }
 
     // проверяем, что уничтожение перка порождает злого-анти-привидение :)
@@ -288,7 +318,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
 
         hero().right();
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -299,16 +329,16 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         hero().act();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         // перед взрывом
         assertF("######\n" +
@@ -322,8 +352,9 @@ public class PerkOnGameTest extends AbstractGameTest {
         events.verifyAllEvents("[]");
 
         // when
-        field.tick();
+        tick();
 
+        // then
         // перк разрушен
         // а вместо него злое привидение
         assertF("#H####\n" +
@@ -336,6 +367,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // пошел сигнал об этом
         events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
+        // given
         // такой себе хак, мы в домике
         hero().move(3, 4);
         newBox(1, 2); // две коробки подорвали, две добавили
@@ -343,8 +375,9 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.walls().add(new Wall(1, 4));
 
         // when
-        field.tick();
+        tick();
 
+        // then
         // привидение начало свое движение
         assertF("#+####\n" +
                 "#☼#☺##\n" +
@@ -353,8 +386,10 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " x   +\n" +
                 "# ####\n");
 
-        field.tick();
+        // when
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "#☼#☺##\n" +
                 "##   #\n" +
@@ -362,8 +397,10 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        field.tick();
+        // when
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "#☼#☺##\n" +
                 "##   #\n" +
@@ -371,9 +408,11 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
+        // when
         removeBoxes(1); // минус коробка
-        field.tick();
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "#☼#☺##\n" +
                 "##x  #\n" +
@@ -381,9 +420,11 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
+        // when
         removeBoxes(1); // минус коробка
-        field.tick();
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "#☼#☺##\n" +
                 "## x #\n" +
@@ -394,8 +435,10 @@ public class PerkOnGameTest extends AbstractGameTest {
         assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=45} at [1,5]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=45} at [5,1]}]");
 
-        field.tick();
+        // when
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "#☼#Ѡ##\n" +
                 "##   #\n" +
@@ -408,8 +451,10 @@ public class PerkOnGameTest extends AbstractGameTest {
         assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=44} at [1,5]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=44} at [5,1]}]");
 
-        field.tick();
+        // when
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "#☼#Ѡ##\n" +
                 "##   #\n" +
@@ -421,17 +466,21 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=39} at [3,4]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=43} at [5,1]}]");
 
+        // when
         dice(1, 1);
-        field.tick();
+        tick();
         // это сделает сервер
         game().newGame(); // это сделает сервер
 
+        // then
         assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=42} at [1,5]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=38} at [3,4]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=42} at [5,1]}]");
 
-        field.tick();
+        // when
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "#☼#+##\n" +
                 "##   #\n" +
@@ -443,9 +492,10 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=37} at [3,4]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=41} at [5,1]}]");
 
+        // when
+        tick();
 
-        field.tick();
-
+        // then
         assertF("#+####\n" +
                 "#☼#+##\n" +
                 "##   #\n" +
@@ -467,7 +517,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
 
         hero().right();
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -477,19 +527,21 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " ☺   #\n" +
                 "#+####\n");
 
+        // when
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
+        // then
         // перед взрывом
         assertF("######\n" +
                 "# # ##\n" +
@@ -502,8 +554,9 @@ public class PerkOnGameTest extends AbstractGameTest {
         events.verifyAllEvents("[]");
 
         // when
-        field.tick();
+        tick();
 
+        // then
         // перк разрушен
         // а вместо него злое привидение
         assertF("#H####\n" +
@@ -518,9 +571,10 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // when
         removeBoxes(2); // на две взорвавшиеся коробки меньше
-        field.tick();
+        tick();
 
-        // пивидение начало свое движение
+        // then
+        // привидение начало свое движение
         assertF("#+####\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
@@ -532,8 +586,9 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [5,1]}]");
 
         // when
-        field.tick();
+        tick();
 
+        // then
         // приведение нарвалось на зелье
         assertF("#+####\n" +
                 "# # ##\n" +
@@ -551,8 +606,9 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // when
         removeBoxes(2); // на две взорвавшиеся коробки меньше
-        field.tick();
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
@@ -570,8 +626,9 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=47} at [5,1]}]");
 
         // when
-        field.tick();
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
@@ -600,8 +657,9 @@ public class PerkOnGameTest extends AbstractGameTest {
         // взрывная волна большая
         settings.integer(POTION_POWER, 5);
 
+        // when
         hero().right();
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -611,19 +669,21 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " ☺   #\n" +
                 "#+####\n");
 
+        // when
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
+        // then
         // перед взрывом
         assertF("######\n" +
                 "# # ##\n" +
@@ -636,8 +696,9 @@ public class PerkOnGameTest extends AbstractGameTest {
         events.verifyAllEvents("[]");
 
         // when
-        field.tick();
+        tick();
 
+        // then
         // перк разрушен
         // а вместо него злое привидение
         assertF("#H####\n" +
@@ -653,8 +714,9 @@ public class PerkOnGameTest extends AbstractGameTest {
         // when
         removeBoxes(2); // на две взорвавшиеся коробки меньше
         hero().left();
-        field.tick();
+        tick();
 
+        // then
         // привидение начало свое движение
         assertF("#+####\n" +
                 "# # ##\n" +
@@ -667,8 +729,9 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=49} at [5,1]}]");
 
         // when
-        field.tick();
+        tick();
 
+        // then
         // приведение нарвалось на зелье
         // но и мы подорвались с ним
         assertF("#+####\n" +
@@ -692,8 +755,9 @@ public class PerkOnGameTest extends AbstractGameTest {
         // это сделает сервер
         game().newGame(); // это сделает сервер
 
-        field.tick();
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "# # ##\n" +
                 "#    #\n" +
@@ -710,8 +774,9 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=47} at [5,1]}]");
 
         // when
-        field.tick();
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "# # ##\n" +
                 "#    #\n" +
@@ -736,8 +801,9 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
 
+        // when
         hero().right();
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -747,18 +813,20 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " ☺   #\n" +
                 "#+####\n");
 
+        // when
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
+        // then
         // перед взрывом
         assertF("######\n" +
                 "# # ##\n" +
@@ -772,8 +840,9 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // when
         hero().act();
-        field.tick();
+        tick();
 
+        // then
         // перк разрушен
         // а вместо него злое привидение
         assertF("#H####\n" +
@@ -789,9 +858,10 @@ public class PerkOnGameTest extends AbstractGameTest {
         // when
         removeBoxes(2); // на две взорвавшиеся коробки меньше
         hero().left();
-        field.tick();
+        tick();
 
-        // пивидение начало свое движение
+        // then
+        // привидение начало свое движение
         assertF("#+####\n" +
                 "# # ##\n" +
                 "#☺3  #\n" +
@@ -800,8 +870,9 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "# ####\n");
 
         // when
-        field.tick();
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "# # ##\n" +
                 "#☺2  #\n" +
@@ -813,8 +884,9 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [5,1]}]");
 
         // when
-        field.tick();
+        tick();
 
+        // then
         // приведение скушало героя
         assertF("#+####\n" +
                 "# # ##\n" +
@@ -834,8 +906,9 @@ public class PerkOnGameTest extends AbstractGameTest {
         // это сделает сервер
         game().newGame(); // это сделает сервер
 
-        field.tick();
+        tick();
 
+        // then
         // умирающий охотник подорвался на оставшейся после героя бомбе
         assertF("#+####\n" +
                 "# H ##\n" +
@@ -852,8 +925,9 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=46} at [5,1]}]");
 
         // when
-        field.tick();
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "# + ##\n" +
                 "#+   #\n" +
@@ -874,6 +948,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     // генерим три привидение и смотрим как они бегут за мной
     @Test
     public void shouldDropPerk_generateThreeGhosts() {
+        // given
         shouldDropPerk_generateNewGhost_thenKillIt();
 
         assertF("#+####\n" +
@@ -883,10 +958,12 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
+        // when
         // бамбанули между двух перков, хак (перк при этом не взяли)
         hero().move(1, 2);
         hero().act();
 
+        // given
         // строим оборону
         field.boxes().remove(pt(5, 5));
         field.boxes().remove(pt(5, 4));
@@ -898,8 +975,11 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         hero().move(5, 5); // убегаем в укрытие
 
+        // when
         removeBoxes(4); // на 4 коробки меньше
-        field.tick();
+        tick();
+
+        // then
         assertEquals(0, hero().getPerks().size()); // перк не взяли
 
         assertF("#+##☼☺\n" +
@@ -909,10 +989,12 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        field.tick();
-        field.tick();
-        field.tick();
+        // when
+        tick();
+        tick();
+        tick();
 
+        // then
         assertF("#+##☼☺\n" +
                 "# # ☼ \n" +
                 "#    #\n" +
@@ -922,9 +1004,11 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         events.verifyAllEvents("[]");
 
+        // when
         // породили три чудовища
-        field.tick();
+        tick();
 
+        // then
         assertF("#+##☼☺\n" +
                 "# # ☼ \n" +
                 "#҉   #\n" +
@@ -934,9 +1018,11 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         events.verifyAllEvents("[DROP_PERK, DROP_PERK, DROP_PERK]");
 
+        // when
         // и они пошли за нами
-        field.tick();
+        tick();
 
+        // then
         assertF("#+##☼☺\n" +
                 "# # ☼ \n" +
                 "#    #\n" +
@@ -944,8 +1030,11 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        field.tick();
 
+        // when
+        tick();
+
+        // then
         assertF("#+##☼☺\n" +
                 "# # ☼ \n" +
                 "#  x #\n" +
@@ -953,8 +1042,10 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        field.tick();
+        // when
+        tick();
 
+        // then
         assertF("#+##☼☺\n" +
                 "# # ☼ \n" +
                 "#  xx#\n" +
@@ -969,6 +1060,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     // вместо них будут перки
     @Test
     public void shouldDropPerk_generateTwoGhosts_noWayNoPain() {
+        // given
         shouldDropPerk_generateThreeGhosts();
 
         assertF("#+##☼☺\n" +
@@ -981,11 +1073,12 @@ public class PerkOnGameTest extends AbstractGameTest {
         assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=38} at [1,5]},\n " +
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=38} at [5,1]}]");
 
-
+        // when
         // но стоит забарикадироваться
         field.walls().add(new Wall(5, 4));
-        field.tick();
+        tick();
 
+        // then
         // как привидения нормальнеют
         assertF("#+##☼☺\n" +
                 "# # ☼☼\n" +
@@ -1000,9 +1093,11 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=43} at [4,3]},\n " +
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=37} at [5,1]}]");
 
+        // when
         // и после выпиливаются
-        field.tick();
+        tick();
 
+        // then
         assertF("#+##☼☺\n" +
                 "# # ☼☼\n" +
                 "#  ++#\n" +
@@ -1012,16 +1107,17 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         events.verifyAllEvents("[]");
 
-
         assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=36} at [1,5]},\n " +
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=42} at [3,2]},\n " +
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=31} at [3,3]},\n " +
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=42} at [4,3]},\n " +
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=36} at [5,1]}]");
 
+        // when
         // перки дальше тикаются нормально
-        field.tick();
+        tick();
 
+        // then
         assertF("#+##☼☺\n" +
                 "# # ☼☼\n" +
                 "#  ++#\n" +
@@ -1054,10 +1150,12 @@ public class PerkOnGameTest extends AbstractGameTest {
     // если мы вызвали потустороннюю нечисть, то наш суицид ее успокоит, отправив обратно
     @Test
     public void shouldDropPerk_generateNewGhost_thenSuicide_willKillChopperAlso() {
+        // given
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
 
+        // when
         hero().right();
-        field.tick();
+        tick();
 
         // then
         assertF("######\n" +
@@ -1067,18 +1165,20 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " ☺   #\n" +
                 "#+####\n");
 
+        // when
         hero().act();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
+        // then
         // перед взрывом
         assertF("######\n" +
                 "# # ##\n" +
@@ -1091,8 +1191,9 @@ public class PerkOnGameTest extends AbstractGameTest {
         events.verifyAllEvents("[]");
 
         // when
-        field.tick();
+        tick();
 
+        // then
         // перк разрушен
         // а вместо него злое привидение
         assertF("#H####\n" +
@@ -1105,11 +1206,13 @@ public class PerkOnGameTest extends AbstractGameTest {
         // пошел сигнал об этом
         events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
+        // when
         // охотник идет
         removeBoxes(2); // две коробки потрачено взрывом
-        field.tick();
-        field.tick();
+        tick();
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "# # ##\n" +
                 "#    #\n" +
@@ -1120,11 +1223,13 @@ public class PerkOnGameTest extends AbstractGameTest {
         assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [1,5]},\n " +
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [5,1]}]");
 
+        // when
         // мувнули героя и кикнули его
         hero().die();
         removeBoxes(1); // одна коробка потречена злым привидением
-        field.tick();
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "# # ##\n" +
                 "#    #\n" +
@@ -1138,9 +1243,11 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         events.verifyAllEvents("[DIED]");
 
+        // when
         // превратился в перк обратно
-        field.tick();
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "# # ##\n" +
                 "#    #\n" +
@@ -1152,9 +1259,11 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=38} at [2,1]},\n " +
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=46} at [5,1]}]");
 
+        // when
         // и тикается каждую секунду как и тот, что не трогали на поле
-        field.tick();
+        tick();
 
+        // then
         assertF("#+####\n" +
                 "# # ##\n" +
                 "#    #\n" +
@@ -1165,7 +1274,6 @@ public class PerkOnGameTest extends AbstractGameTest {
         assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=45} at [1,5]},\n " +
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=37} at [2,1]},\n " +
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=45} at [5,1]}]");
-
     }
 
     // проверяем, что перк пропадает после таймаута
@@ -1188,9 +1296,9 @@ public class PerkOnGameTest extends AbstractGameTest {
                 1, player().getHero().getPerks().size());
 
         // when
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
 
         // then
         assertEquals("Hero had to lose perk",
@@ -1288,6 +1396,5 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         assertEquals("[]" ,
                 hero().getPerks().toString());
-
     }
 }

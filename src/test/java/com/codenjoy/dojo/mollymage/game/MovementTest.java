@@ -22,14 +22,12 @@ package com.codenjoy.dojo.mollymage.game;
  * #L%
  */
 
-import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.services.Direction;
 import org.junit.Assert;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static org.mockito.Mockito.verify;
 
 public class MovementTest extends AbstractGameTest {
 

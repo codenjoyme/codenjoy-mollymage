@@ -63,24 +63,26 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "i    \n" +
                 "☺♥♡  \n", 0);
 
-        //heroes should not have any perks
+        // heroes should not have any perks
         assertEquals(0, hero(0).getPerks().size());
 
         assertEquals(0, hero(1).getPerks().size());
 
         assertEquals(0, hero(2).getPerks().size());
 
-        //when first hero get perk
+        // when
+        // first hero get perk
         hero(0).up();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
                 " ♥♡  \n", 0);
 
-        //teammate should not get perk
+        // teammate should not get perk
         assertEquals(1, hero(0).getPerks().size());
         assertEquals(0, hero(1).getPerks().size());
         assertEquals(0, hero(2).getPerks().size());
@@ -128,17 +130,19 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(0, player(1).getHero().getPerks().size());
         assertEquals(0, player(2).getHero().getPerks().size());
 
-        //when first hero get perk
+        // when
+        // first hero get perk
         hero(0).up();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
                 " ♥♡  \n", 0);
 
-        //teammate should get perk to
+        // teammate should get perk to
         events.verifyAllEvents(
                 "listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n" +
@@ -148,14 +152,16 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(1, player(1).getHero().getPerks().size());
         assertEquals(0, player(2).getHero().getPerks().size());
 
-        //scores for perk earned only one hero, who picked up perk
+        // scores for perk earned only one hero, who picked up perk
         assertEquals(11, player(0).getHero().scores());
         assertEquals(0, player(1).getHero().scores());
         assertEquals(0, player(2).getHero().scores());
     }
 
-    /**  hero1 should get score for killing hero2 when then different blasts crossed
-     *   PT - Poison Thrower
+    /**
+     * hero1 should get score for killing hero2
+     * when then different blasts crossed
+     * PT - Poison Thrower
      */
     @Test
     public void shouldKillEnemyByPTAndScorePoints_whenCrossBlast() {
@@ -179,7 +185,6 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(0, hero1.scores());
         assertEquals(0, hero2.scores());
 
-        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -192,7 +197,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "T    \n" +
                 "♥ ☺  \n", 1);
 
-        // when hero2 set potion, hero1 get perk
+        // when
+        // hero2 set potion, hero1 get perk
         hero1.up();
         hero2.act();
         hero2.up();
@@ -203,7 +209,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
-        // when heroes are going on the position
+        // when
+        // heroes are going on the position
         hero1.up();
         hero2.up();
         tick();
@@ -221,7 +228,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "  3  \n", 1);
 
-        // when potion boom, hero1 should shoot by poison thrower
+        // when
+        // potion boom, hero1 should shoot by poison thrower
         tick();
         tick();
         hero1.right();
@@ -249,8 +257,10 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(0, hero2.scores());
     }
 
-    /**  both heroes should get score for killing ghost when then different blasts crossed
-     *   PT - Poison Thrower
+    /**
+     * both heroes should get score for killing
+     * ghost when then different blasts crossed
+     * PT - Poison Thrower
      */
     @Test
     public void shouldKillGhostByPTAndScorePoints_whenCrossBlast() {
@@ -274,7 +284,6 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(0, hero1.scores());
         assertEquals(0, hero2.scores());
 
-        // then
         assertF("     \n" +
                 "     \n" +
                 "  &  \n" +
@@ -287,7 +296,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "T    \n" +
                 "♥ ☺  \n", 1);
 
-        // when hero2 set potion, hero1 get perk
+        // when
+        // hero2 set potion, hero1 get perk
         hero1.up();
         hero2.act();
         hero2.up();
@@ -314,7 +324,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
-        // when potion boom, hero1 should shoot by poison thrower
+        // when
+        // potion boom, hero1 should shoot by poison thrower
         tick();
         tick();
         hero1.right();
@@ -342,8 +353,10 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(killScore, hero2.scores());
     }
 
-    /**  both heroes should get score for killing box when then different blasts crossed
-     *   PT - Poison Thrower
+    /**
+     * both heroes should get score for killing
+     * box when then different blasts crossed
+     * PT - Poison Thrower
      */
     @Test
     public void shouldKillBoxByPTAndScorePoints_whenCrossBlast() {
@@ -366,7 +379,6 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(0, hero1.scores());
         assertEquals(0, hero2.scores());
 
-        // then
         assertF("     \n" +
                 "     \n" +
                 "  #  \n" +
@@ -379,7 +391,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "T    \n" +
                 "♥ ☺  \n", 1);
 
-        // when hero2 set potion, hero1 get perk
+        // when
+        // hero2 set potion, hero1 get perk
         hero1.up();
         hero2.act();
         hero2.up();
@@ -406,7 +419,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
-        // when potion boom - hero1 should shoot by poison thrower
+        // when
+        // potion boom - hero1 should shoot by poison thrower
         tick();
         tick();
         hero1.right();
@@ -434,9 +448,10 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(killScore, hero2.scores());
     }
 
-    /**  both heroes should kill perk when then different blasts crossed
-     *   and get personal hunter perks. GhostHunters should double.
-     *   PT - Poison Thrower
+    /**
+     * both heroes should kill perk when then different blasts crossed
+     * and get personal hunter perks. GhostHunters should double.
+     * PT - Poison Thrower
      */
     @Test
     public void shouldKillOnePerkAndGetTwoHuntedGhost_CrossBlastPortionAndPoisonThrow() {
@@ -456,7 +471,6 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         Hero hero1 = hero(0);
         Hero hero2 = hero(1);
 
-        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -469,7 +483,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "T    \n" +
                 "♥ ☺  \n", 1);
 
-        // when hero2 set potion, hero1 get perk
+        // when
+        // hero2 set potion, hero1 get perk
         hero1.up();
         hero2.act();
         hero2.up();
@@ -493,14 +508,18 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(1) => []\n");
 
 
-        // when move heroes on position and set perk for destroy
+        // when
+        // move heroes on position and set perk for destroy
         hero1.up();
         hero2.right();
         tick();
+
         hero2.right();
         tick();
+
         hero2.up();
         tick();
+
         newPerk(2, 2, new PotionCountIncrease(1, 10));
 
         // then
@@ -517,12 +536,14 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "  1  \n", 1);
 
 
-        // when both heroes kill one perk
+        // when
+        // both heroes kill one perk
         hero1.right();
         hero1.act(1);
         tick();
 
-        // then two GhostHunters should born on the one Point
+        // then
+        // two GhostHunters should born on the one Point
         assertF("     \n" +
                 "     \n" +
                 "☺҉x ♥\n" +
@@ -541,10 +562,12 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         assertEquals(2, field.hunters().size());
 
-        // when field tick
+        // when
+        // field tick
         tick();
 
-        // then both hunters are visible and haunting heroes
+        // then
+        // both hunters are visible and haunting heroes
         assertF("     \n" +
                 "     \n" +
                 "☺x x♥\n" +
@@ -560,6 +583,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
     @Test
     public void shouldPerkCantSpawnFromGhost() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -570,6 +594,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         perks.dropRatio(20); // 20%
         perks.pickTimeout(50);
 
+        // when
         hero(0).act();
         tick();
 
@@ -583,6 +608,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -614,7 +640,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺☺   \n");
 
-        // when hero0 catch perk and both heroes act and move
+        // when
+        // hero0 catch perk and both heroes act and move
         newPerk(0, 1, new PotionExploder(1, 10));
 
         hero(0).act();
@@ -642,7 +669,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
-        //when hero0 with PE perk explode own potion and hero1's simple potion
+        // when
+        // hero0 with PE perk explode own potion and hero1's simple potion
         hero(0).act(2);
         hero(0).up();
 
@@ -679,7 +707,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "☺☺   \n");
 
-        // when both heroes set Remote_Control potions. Hero0 get PE perk
+        // when
+        // both heroes set Remote_Control potions. Hero0 get PE perk
         newPerk(0, 1, new PotionExploder(1, 10));
 
         hero(0).addPerk(new PotionRemoteControl(1, 10));
@@ -710,7 +739,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
-        // when hero0 uses PE perk and explode both potions
+        // when
+        // hero0 uses PE perk and explode both potions
         hero(0).act(2);
         hero(0).up();
 
@@ -750,7 +780,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         newPerk(0, 1, new PotionExploder(1, 10));
 
-        // when hero0 sets usually potion. Hero1 sets RC potion.
+        // when
+        // hero0 sets usually potion. Hero1 sets RC potion.
         hero(1).addPerk(new PotionRemoteControl(1, 10));
 
         hero(0).act();
@@ -779,7 +810,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(1) => []\n");
 
 
-        // when hero0 explode all, hero1 explode own remote control perk
+        // when
+        // hero0 explode all, hero1 explode own remote control perk
         hero(0).act(2);
         hero(0).up();
 
@@ -788,7 +820,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         tick();
 
-        // then both heroes kill ghost
+        // then
+        // both heroes kill ghost
         assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
@@ -821,7 +854,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         newPerk(0, 1, new PotionExploder(1, 10));
         newPerk(1, 1, new PotionExploder(1, 10));
 
-        // when heroes plant potions and catch perk
+        // when
+        // heroes plant potions and catch perk
         hero(0).act();
         hero(0).up();
 
@@ -847,7 +881,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => [CATCH_PERK]\n");
 
-        // when hero0 and hero1 explode all, both should kill ghost
+        // when
+        // hero0 and hero1 explode all, both should kill ghost
         hero(0).act(2);
         hero(0).up();
 
@@ -856,7 +891,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         tick();
 
-        // then both heroes kill ghost
+        // then
+        // both heroes kill ghost
         assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
@@ -888,7 +924,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         newPerk(0, 1, new PotionExploder(1, 10));
 
-        // when both heroes set simple potions
+        // when
+        // both heroes set simple potions
         hero(0).act();
         hero(0).up();
 
@@ -917,7 +954,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
-        // when potions timers almost end
+        // when
+        // potions timers almost end
         tick();
         tick();
 
@@ -935,7 +973,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "11&  \n", 1);
 
 
-        // when hero0 explode all, both heroes should earn scores
+        // when
+        // hero0 explode all, both heroes should earn scores
         hero(0).act(2);
 
         tick();
@@ -966,7 +1005,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         newPerk(0, 1, new PotionExploder(1, 10));
 
-        // when both heroes set simple potions
+        // when
+        // both heroes set simple potions
         hero(0).act();
         hero(0).up();
 
@@ -995,7 +1035,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(0) => [CATCH_PERK]\n" +
                 "listener(1) => []\n");
 
-        // when potions timers almost end
+        // when
+        // potions timers almost end
         tick();
         tick();
 
@@ -1012,7 +1053,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "11&  \n", 1);
 
-        // when hero0 explode all, only hero0 should kill ghost
+        // when
+        // hero0 explode all, only hero0 should kill ghost
         hero(0).act(2);
 
         tick();
@@ -1044,7 +1086,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n");
 
-        // when hero0 plant Remote_Control potions. and go to position
+        // when
+        // hero0 plant Remote_Control potions. and go to position
         hero(0).addPerk(new PotionRemoteControl(1, 10));
         hero(0).addPerk(new PotionExploder(1, 10));
         hero(1).addPerk(new PotionExploder(1, 10));
@@ -1077,7 +1120,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n", 1);
 
-        // when heroes explode potion and kill perk
+        // when
+        // heroes explode potion and kill perk
         hero(0).act(2);
         hero(1).act(2);
         tick();
@@ -1101,7 +1145,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         assertEquals(2, field.hunters().size());
 
-        // when next tick two ghostHunters should been visible
+        // when
+        // next tick two ghostHunters should been visible
         tick();
 
         // then
@@ -1129,7 +1174,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n");
 
-        //when hero0 plant potion and go to position
+        // when
+        // hero0 plant potion and go to position
         hero(1).addPerk(new PotionExploder(1, 10));
 
         hero(0).act();
@@ -1159,11 +1205,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n", 1);
 
-        // when hero1 explode potion, hero0 get events after the potion timer end
+        // when
+        // hero1 explode potion, hero0 get events after the potion timer end
         hero(1).act(2);
         tick();
 
-        // then both heroes kill perk
+        // then
+        // both heroes kill perk
         events.verifyAllEvents(
                 "listener(0) => [DROP_PERK]\n" +
                 "listener(1) => [DROP_PERK]\n");
@@ -1182,7 +1230,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         assertEquals(2, field.hunters().size());
 
-        // when next tick two ghostHunters should been visible
+        // when
+        // next tick two ghostHunters should been visible
         tick();
 
         // then
@@ -1210,7 +1259,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n");
 
-        //when hero0 plant potion and go to position
+        // when
+        // hero0 plant potion and go to position
         hero(1).addPerk(new PotionExploder(1, 10));
 
         hero(0).act();
@@ -1240,11 +1290,13 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n", 1);
 
-        // when hero1 explode potion, hero0 does not get events after the potion timer end
+        // when
+        // hero1 explode potion, hero0 does not get events after the potion timer end
         hero(1).act(2);
         tick();
 
-        // then both heroes kill perk
+        // then
+        // both heroes kill perk
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => [DROP_PERK]\n");
@@ -1263,7 +1315,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         assertEquals(1, field.hunters().size());
 
-        // when next tick only one ghostHunter should been visible
+        // when
+        // next tick only one ghostHunter should been visible
         tick();
 
         // then

@@ -45,11 +45,14 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldBoard_whenStartGame() {
+        // given
         Level level = mock(Level.class);
         when(level.field()).thenReturn(new PointField(10));
 
+        // when
         MollyMage board = new MollyMage(level, mock(Dice.class), settings);
 
+        // then
         assertEquals(10, board.size());
     }
 
@@ -117,23 +120,27 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldBoard_whenStartGame2() {
+        // given when
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
 
+        // then
         assertEquals(5, field.size());
     }
 
     @Test
     public void shouldHeroOnBoardAtInitPos_whenGameStart() {
+        // given when
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -143,12 +150,14 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldSameHero_whenNetFromBoard() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
 
+        // when then
         assertSame(hero(), game().getJoystick());
     }
 
@@ -181,10 +190,12 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
-        // when hero set bomb and goes away
+        // when
+        // hero set bomb and goes away
         hero().act();
         hero().up();
         tick();
+
         hero().right();
         tick();
 
@@ -195,7 +206,8 @@ public class GameTest extends AbstractGameTest {
                 " ☺   \n" +
                 "3    \n");
 
-        // when we allow to create more boxes
+        // when
+        // we allow to create more boxes
         // boxes should fill square around hero in coordinates from [0,0] to [2,2]
         // we allow to create 9 boxes and only 7 should be created
         settings.integer(TREASURE_BOX_COUNT, 9);
@@ -211,11 +223,13 @@ public class GameTest extends AbstractGameTest {
 
         assertEquals(7, field.boxes().size());
 
-        // when field tick 2 times
+        // when
+        // field tick 2 times
         tick();
         tick();
 
-        //  then two boxes should been destroyed
+        // then
+        // two boxes should been destroyed
         assertF("     \n" +
                 "     \n" +
                 "###  \n" +
@@ -224,13 +238,15 @@ public class GameTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
+        // when
         // all points on the board allowed for boxes regeneration except
         // [0,1][1,0] - destroyed boxes and [1,1] - hero place
         // when fill board with boxes around hero
         dice(inSquare(pt(0, 0), 3));
         tick();
 
-        // then only 6 boxes should been exist
+        // then
+        // only 6 boxes should been exist
         assertF("     \n" +
                 "     \n" +
                 "###  \n" +
@@ -239,11 +255,13 @@ public class GameTest extends AbstractGameTest {
 
         assertEquals(6, field.boxes().size());
 
-        // when next tick - empty spaces should been filled by boxes
+        // when
+        // next tick - empty spaces should been filled by boxes
         dice(inSquare(pt(0, 0), 3));
         tick();
 
-        // then boxes should been generated on [0,1] and [1,0] to
+        // then
+        // boxes should been generated on [0,1] and [1,0] to
         assertF("     \n" +
                 "     \n" +
                 "###  \n" +
@@ -268,6 +286,7 @@ public class GameTest extends AbstractGameTest {
         dice(4, 4, // координаты привидения
             Direction.RIGHT.value()); // направление движения
 
+        // when
         hero().act();
         hero().up();
         tick();
@@ -279,6 +298,7 @@ public class GameTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("    &\n" +
                 "҉    \n" +
                 "҉    \n" +
@@ -287,10 +307,12 @@ public class GameTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
+        // when
         dice(Direction.DOWN.value(), // направление движения привидения
             3, 3); // новая коробка
         tick();
 
+        // then
         assertF("     \n" +
                 "   #&\n" +
                 "     \n" +
@@ -300,20 +322,24 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldWallNotAppearOnHero() {
+        // given
         givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺# ☼\n" +
                 "☼☼☼☼☼\n");
 
+        // when
         tick();
 
+        // then
         assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺# ☼\n" +
                 "☼☼☼☼☼\n");
 
+        // when
         hero().act();
         tick();
 
@@ -328,6 +354,7 @@ public class GameTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("☼☼☼☼☼\n" +
                 "☼ ☺ ☼\n" +
                 "☼҉☼ ☼\n" +
@@ -353,12 +380,14 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldGameReturnsRealJoystick() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺☺   \n");
 
+        // when
         hero(0).act();
         hero(1).up();
         tick();
@@ -370,6 +399,7 @@ public class GameTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [DIED]\n" +
                 "listener(1) => []\n");
@@ -393,12 +423,14 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldGetTwoHeroesOnBoard() {
+        // given when
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺☺   \n");
 
+        // then
         assertSame(hero(0), game(0).getJoystick());
         assertSame(hero(1), game(1).getJoystick());
 
@@ -417,15 +449,18 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldPrintOtherPotionHero() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺☺   \n");
 
+        // when
         hero(0).act();
         hero(0).up();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -441,6 +476,7 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void bug() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -453,6 +489,7 @@ public class GameTest extends AbstractGameTest {
                 " ☺♥  \n" +
                 "#&&  \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
@@ -467,6 +504,7 @@ public class GameTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺҉҉♥ \n" +
@@ -477,9 +515,11 @@ public class GameTest extends AbstractGameTest {
                 "listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_GHOST]\n");
 
+        // when
         removeGhosts(2); // больше не надо привидений
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺  ♥ \n" +

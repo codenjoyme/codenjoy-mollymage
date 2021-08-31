@@ -319,7 +319,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         tick();
         hero1.right();
         hero1.act(1);
-        field.tick();
+        tick();
 
         // then
         assertF("     \n" +
@@ -383,11 +383,11 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         hero1.up();
         hero2.act();
         hero2.up();
-        field.tick();
+        tick();
 
         hero1.up();
         hero2.right();
-        field.tick();
+        tick();
 
         // then
         assertF("     \n" +
@@ -407,11 +407,11 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(1) => []\n");
 
         // when potion boom - hero1 should shoot by poison thrower
-        field.tick();
-        field.tick();
+        tick();
+        tick();
         hero1.right();
         hero1.act(1);
-        field.tick();
+        tick();
 
         // then
         assertF("     \n" +
@@ -473,7 +473,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         hero1.up();
         hero2.act();
         hero2.up();
-        field.tick();
+        tick();
 
         // then
         assertF("     \n" +
@@ -496,11 +496,11 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         // when move heroes on position and set perk for destroy
         hero1.up();
         hero2.right();
-        field.tick();
+        tick();
         hero2.right();
-        field.tick();
+        tick();
         hero2.up();
-        field.tick();
+        tick();
         newPerk(2, 2, new PotionCountIncrease(1, 10));
 
         // then
@@ -520,7 +520,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         // when both heroes kill one perk
         hero1.right();
         hero1.act(1);
-        field.tick();
+        tick();
 
         // then two GhostHunters should born on the one Point
         assertF("     \n" +
@@ -542,7 +542,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(2, field.hunters().size());
 
         // when field tick
-        field.tick();
+        tick();
 
         // then both hunters are visible and haunting heroes
         assertF("     \n" +

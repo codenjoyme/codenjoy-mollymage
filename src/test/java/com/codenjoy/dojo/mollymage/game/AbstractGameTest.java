@@ -61,25 +61,22 @@ public abstract class AbstractGameTest {
     public static final int CATCH_PERK_SCORE_FOR_TEST = 10;
     public static final int PERK_TIMEOUT_FOR_TEST = 10;
 
-    protected List<EventListener> listeners;
-    protected List<Player> players;
-    protected List<Game> games;
-    protected List<Hero> heroes;
+    private List<EventListener> listeners;
+    private List<Player> players;
+    private List<Game> games;
 
-    protected GameSettings settings;
-    protected Dice dice = mock(Dice.class);
-    protected MollyMage field;
+    private Dice dice;
     private PrinterFactory printer;
+    protected MollyMage field;
+    protected GameSettings settings;
     protected PerksSettingsWrapper perks;
     protected EventsListenersAssert events;
-    protected LevelImpl level;
 
     @Before
     public void setup() {
         listeners = new LinkedList<>();
         players = new LinkedList<>();
         games = new LinkedList<>();
-        heroes = new ArrayList<>();
 
         dice = mock(Dice.class);
         settings = settings();
@@ -100,9 +97,9 @@ public abstract class AbstractGameTest {
         }
     }
 
-    protected void givenFl(String map) {
+    public void givenFl(String map) {
         settings.string(LEVEL_MAP, map);
-        level = (LevelImpl) settings.level();
+        LevelImpl level = (LevelImpl) settings.level();
 
         field = new MollyMage(level, dice, settings);
         level.heroes().forEach(hero -> givenPlayer(hero));
@@ -154,7 +151,7 @@ public abstract class AbstractGameTest {
      * @param expected ожидаемое значение
      * @param indexes список индексов, для которых проводим проверку (так же влияет на порядок)
      */
-    protected void assertA(String expected, Integer... indexes) {
+    public void assertA(String expected, Integer... indexes) {
         events.assertAll(expected, games.size(), indexes, index -> {
             Object actual = game(index).getBoardAsString();
             return String.format("game(%s)\n%s\n", index, actual);
@@ -201,27 +198,27 @@ public abstract class AbstractGameTest {
 
     // other stuff
 
-    protected void newBox(int x, int y) {
+    public void newBox(int x, int y) {
         field.boxes().add(new TreasureBox(x, y));
     }
 
-    protected void newPerk(int x, int y, Perk perk) {
+    public void newPerk(int x, int y, Perk perk) {
         field.perks().add(new PerkOnBoard(new PointImpl(x, y), perk));
     }
 
-    protected void removeBoxes(int count) {
+    public void removeBoxes(int count) {
         settings.integer(TREASURE_BOX_COUNT, settings.integer(TREASURE_BOX_COUNT) - count);
     }
 
-    protected void removeGhosts(int count) {
+    public void removeGhosts(int count) {
         settings.integer(GHOSTS_COUNT, settings.integer(GHOSTS_COUNT) - count);
     }
 
-    protected Ghost ghost(int x, int y) {
+    public Ghost ghost(int x, int y) {
         return field.ghosts().getAt(pt(x, y)).get(0);
     }
 
-    protected int[] getCoordinatesForPointsInSquare(int size) {
+    public int[] getCoordinatesForPointsInSquare(int size) {
         List<Integer> result = new ArrayList<>();
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
@@ -232,7 +229,7 @@ public abstract class AbstractGameTest {
         return result.stream().mapToInt(i -> i).toArray();
     }
 
-    protected void stopGhosts() {
+    public void stopGhosts() {
         field.ghosts().forEach(Ghost::stop);
     }
 }

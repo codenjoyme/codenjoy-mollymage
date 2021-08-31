@@ -143,7 +143,7 @@ public class EventsTest extends AbstractGameTest {
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         assertF(" ☺   \n" +
                 "#4   \n" +
@@ -152,7 +152,7 @@ public class EventsTest extends AbstractGameTest {
                 "&1   \n");
 
         hero().right();
-        field.tick();
+        tick();
 
         assertF("  ☺  \n" +
                 "#3   \n" +
@@ -164,8 +164,8 @@ public class EventsTest extends AbstractGameTest {
 
         // новое привидение, стоит не двигается
         dice(3, 4, Direction.ACT.value());
-        field.tick();
-        field.ghosts().stream().forEach(Ghost::stop); // и не будет больше двигаться
+        tick();
+        stopGhosts();
 
         assertF("  ☺& \n" +
                 "#2   \n" +
@@ -177,7 +177,7 @@ public class EventsTest extends AbstractGameTest {
 
         // новые коробки
         dice(4, 4);
-        field.tick();
+        tick();
 
         assertF("  ☺&#\n" +
                 "#1   \n" +
@@ -189,8 +189,8 @@ public class EventsTest extends AbstractGameTest {
 
         // новое привидение, стоит не двигается
         dice(3, 3, Direction.ACT.value());
-        field.tick();
-        field.ghosts().stream().forEach(Ghost::stop); // и не будет больше двигаться
+        tick();
+        stopGhosts();
 
         assertF(" ҉☺&#\n" +
                 "H҉҉& \n" +
@@ -203,11 +203,11 @@ public class EventsTest extends AbstractGameTest {
         // новые коробки
         dice(4, 3);
         hero().left();
-        field.tick();
+        tick();
 
         hero().down();
         hero().act();
-        field.tick();
+        tick();
 
         assertF("   &#\n" +
                 " ☻ &#\n" +
@@ -215,10 +215,10 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n");
 
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
+        tick();
 
         assertF(" ҉ &#\n" +
                 "҉Ѡ҉&#\n" +
@@ -230,7 +230,7 @@ public class EventsTest extends AbstractGameTest {
         assertHeroDie();
 
         dice(1, 1);
-        field.tick();
+        tick();
         game().newGame();
 
         assertF("   &#\n" +
@@ -249,14 +249,14 @@ public class EventsTest extends AbstractGameTest {
 
         hero().act();
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
 
         assertF("   &#\n" +
                 "   &#\n" +
@@ -287,19 +287,19 @@ public class EventsTest extends AbstractGameTest {
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         assertF(" ☺   \n" +
                 "#4   \n" +
@@ -310,7 +310,7 @@ public class EventsTest extends AbstractGameTest {
         events.verifyAllEvents("[]");
 
         hero().right();
-        field.tick();
+        tick();
 
         assertF(" ҉☺  \n" +
                 "H҉҉  \n" +
@@ -321,7 +321,7 @@ public class EventsTest extends AbstractGameTest {
         // новые коробки
         dice(2, 2,
             3, 3);
-        field.tick();
+        tick();
 
         assertF("  ☺  \n" +
                 "   # \n" +
@@ -344,14 +344,14 @@ public class EventsTest extends AbstractGameTest {
         // when portion explode
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
 
         // then ghost die
         assertF("҉  \n" +
@@ -363,7 +363,7 @@ public class EventsTest extends AbstractGameTest {
         // when fill free places boxes
         settings.integer(TREASURE_BOX_COUNT, 6);
         dice(preparedCoordinatesForBoxesAndGhosts());
-        field.tick();
+        tick();
 
         // then boxes fill whole field except 2 free points([2,2] and [0,2]).
         // ghost tried to generate on both free places, but appeared only on [2,2]

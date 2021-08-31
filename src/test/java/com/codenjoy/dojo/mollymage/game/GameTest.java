@@ -25,6 +25,7 @@ package com.codenjoy.dojo.mollymage.game;
 
 import com.codenjoy.dojo.mollymage.model.MollyMage;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
+import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Joystick;
 import com.codenjoy.dojo.services.field.PointField;
@@ -32,7 +33,6 @@ import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -43,7 +43,7 @@ public class GameTest extends AbstractGameTest {
         Level level = mock(Level.class);
         when(level.field()).thenReturn(new PointField(10));
 
-        MollyMage board = new MollyMage(level, dice, settings);
+        MollyMage board = new MollyMage(level, mock(Dice.class), settings);
 
         assertEquals(10, board.size());
     }
@@ -117,7 +117,8 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        assertEquals(level.size(), field.size());
+
+        assertEquals(5, field.size());
     }
 
     @Test
@@ -253,14 +254,14 @@ public class GameTest extends AbstractGameTest {
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
 
         assertF("    &\n" +
                 "҉    \n" +
@@ -272,7 +273,7 @@ public class GameTest extends AbstractGameTest {
 
         dice(Direction.DOWN.value(), // направление движения привидения
             3, 3); // новая коробка
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "   #&\n" +
@@ -289,7 +290,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☺# ☼\n" +
                 "☼☼☼☼☼\n");
 
-        field.tick();
+        tick();
 
         assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
@@ -298,18 +299,18 @@ public class GameTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
 
         hero().act();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
 
         assertF("☼☼☼☼☼\n" +
                 "☼ ☺ ☼\n" +
@@ -320,7 +321,7 @@ public class GameTest extends AbstractGameTest {
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
         // when
-        field.tick();
+        tick();
 
         dice(0, 0,  // на неразрушаемоей стене нельзя
             hero().getX(), hero().getY(),  // на месте героя не должен появиться

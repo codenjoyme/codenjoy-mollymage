@@ -31,22 +31,23 @@ import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.when;
 
 public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionDropped_whenHeroDropPotion() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
 
+        // when
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -56,12 +57,14 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionDropped_whenHeroDropPotionAtAnotherPlace() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
 
+        // when
         hero().up();
         tick();
 
@@ -71,6 +74,7 @@ public class PotionTest extends AbstractGameTest {
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -89,6 +93,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
+        // when
         hero().up();
         tick();
 
@@ -101,6 +106,7 @@ public class PotionTest extends AbstractGameTest {
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -121,30 +127,36 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
+        // when
         hero().up();
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☻    \n" +
                 "     \n");
 
+        // when
         hero().up();
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☻    \n" +
                 "3    \n" +
                 "     \n");
 
+        // when
         hero().up();
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "☺    \n" +
                 "3    \n" +
@@ -164,12 +176,14 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
+        // when
         hero().act();
         tick();
 
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -178,34 +192,42 @@ public class PotionTest extends AbstractGameTest {
 
         assertEquals(1, field.potions().size());
 
+        // when
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "2☺   \n");
 
+        // when
         hero().right();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "1 ☺  \n");
 
+        // when
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "҉    \n" +
                 "҉҉☺  \n");
 
+        // when
         tick();   // зелья больше нет, иначе тут был бы взрыв второй
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -215,12 +237,14 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldBoom_whenDroppedPotionHas5Ticks() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
 
+        // when
         hero().act();
         tick();
 
@@ -232,14 +256,17 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "1 ☺  \n");
 
+        // when
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -250,6 +277,7 @@ public class PotionTest extends AbstractGameTest {
     // проверить, что я могу поставить еще одно зелье, когда другое рвануло
     @Test
     public void shouldCanDropNewPotion_whenOtherBoom() {
+        // given
         shouldBoom_whenDroppedPotionHas5Ticks();
 
         assertF("     \n" +
@@ -258,9 +286,11 @@ public class PotionTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉҉☺  \n");
 
+        // when
         hero().act();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -270,12 +300,14 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldBlastAfter_whenPotionExposed() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
 
+        // when
         hero().act();
         tick();
 
@@ -288,6 +320,7 @@ public class PotionTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -297,12 +330,14 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldBlastAfter_whenPotionExposed_inOtherCorner() {
+        // given
         givenFl("    ☺\n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n");
 
+        // when
         hero().act();
         tick();
 
@@ -315,6 +350,7 @@ public class PotionTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("  ☺҉҉\n" +
                 "    ҉\n" +
                 "     \n" +
@@ -324,23 +360,28 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldWallProtectsHero() {
+        // given
         givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
+        // when
         hero().act();
         goOut();
 
+        // then
         assertF("☼☼☼☼☼\n" +
                 "☼  ☺☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼1  ☼\n" +
                 "☼☼☼☼☼\n");
 
+        // when
         tick();
 
+        // then
         assertF("☼☼☼☼☼\n" +
                 "☼  ☺☼\n" +
                 "☼҉☼ ☼\n" +
@@ -352,6 +393,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldWallProtectsHero2() {
+        // given
         givenFl("☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
                 "☼ ☼ ☼ ☼ ☼\n" +
@@ -362,6 +404,7 @@ public class PotionTest extends AbstractGameTest {
                 "☼☺      ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n");
 
+        // when then
         assertPotionPower(5,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
@@ -377,22 +420,28 @@ public class PotionTest extends AbstractGameTest {
     }
 
     private void assertPotionPower(int power, String expected) {
+        // given
         settings.integer(POTION_POWER, power);
 
+        // when
         hero().act();
         goOut();
         tick();
 
+        // then
         assertF(expected);
     }
 
     private void goOut() {
         hero().right();
         tick();
+
         hero().right();
         tick();
+
         hero().up();
         tick();
+
         hero().up();
         tick();
     }
@@ -400,6 +449,7 @@ public class PotionTest extends AbstractGameTest {
     // разрыв зелья длинной указанной в settings
     @Test
     public void shouldChangePotionPower_to2() {
+        // given
         givenFl("☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
                 "☼ ☼ ☼ ☼ ☼\n" +
@@ -410,6 +460,7 @@ public class PotionTest extends AbstractGameTest {
                 "☼☺      ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n");
 
+        // when then
         assertPotionPower(2,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
@@ -424,6 +475,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldChangePotionPower_to3() {
+        // given
         givenFl("☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
                 "☼ ☼ ☼ ☼ ☼\n" +
@@ -434,6 +486,7 @@ public class PotionTest extends AbstractGameTest {
                 "☼☺      ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n");
 
+        // when then
         assertPotionPower(3,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
@@ -448,6 +501,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldChangePotionPower_to6() {
+        // given
         givenFl("☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
                 "☼ ☼ ☼ ☼ ☼\n" +
@@ -458,6 +512,7 @@ public class PotionTest extends AbstractGameTest {
                 "☼☺      ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n");
 
+        // when then
         assertPotionPower(6,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼҉      ☼\n" +
@@ -484,13 +539,16 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
-        hero().act();
-        hero().right();
-        tick();
+        // when
         hero().act();
         hero().right();
         tick();
 
+        hero().act();
+        hero().right();
+        tick();
+
+        // then
         List<Potion> potions1 = field.potions().all();
         List<Potion> potions2 = field.potions().all();
         List<Potion> potions3 = field.potions().all();
@@ -512,15 +570,19 @@ public class PotionTest extends AbstractGameTest {
         assertEquals(potion22.toString(), potion23.toString());
         assertEquals(potion23.toString(), potion21.toString());
 
+        // when
         tick();
         tick();
 
+        // then
         assertEquals(false, potion11.isExploded());
         assertEquals(false, potion12.isExploded());
         assertEquals(false, potion13.isExploded());
 
+        // when
         tick();
 
+        // then
         assertEquals(true, potion11.isExploded());
         assertEquals(true, potion12.isExploded());
         assertEquals(true, potion13.isExploded());
@@ -529,8 +591,10 @@ public class PotionTest extends AbstractGameTest {
         assertEquals(false, potion22.isExploded());
         assertEquals(false, potion23.isExploded());
 
+        // when
         tick();
 
+        // then
         assertEquals(true, potion21.isExploded());
         assertEquals(true, potion22.isExploded());
         assertEquals(true, potion23.isExploded());
@@ -540,24 +604,29 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldReturnShouldNotSynchronizedPotionsList_whenUseBoardApi() {
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
 
+        // when
         hero().act();
         hero().right();
         tick();
 
+        // then
         List<Potion> potions1 = field.potions().all();
         assertEquals(1, potions1.size());
 
+        // when
         tick();
         tick();
         tick();
         tick();
 
+        // then
         events.verifyAllEvents("[DIED]");
 
         List<Potion> potions2 = field.potions().all();
@@ -568,12 +637,14 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldChangeBlast_whenUseBoardApi() {  // TODO а нода вообще такое? стреляет по перформансу перекладывать объекты и усложняет код
+        // given
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
 
+        // when
         hero().act();
         hero().right();
         tick();
@@ -583,6 +654,7 @@ public class PotionTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         List<Blast> blasts1 = field.blasts().all();
         List<Blast> blasts2 = field.blasts().all();
         List<Blast> blasts3 = field.blasts().all();
@@ -627,6 +699,7 @@ public class PotionTest extends AbstractGameTest {
                 "☼☺    ☼\n" +
                 "☼☼☼☼☼☼☼\n");
 
+        // when
         hero().right();
         tick();
 
@@ -643,6 +716,7 @@ public class PotionTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("☼☼☼☼☼☼☼\n" +
                 "☼  ҉  ☼\n" +
                 "☼ ☼҉☼ ☼\n" +
@@ -667,6 +741,7 @@ public class PotionTest extends AbstractGameTest {
                 "       \n" +
                 "☺  #   \n");
 
+        // when
         dice(101); // don't drop perk by accident
 
         hero().act();
@@ -680,6 +755,7 @@ public class PotionTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("       \n" +
                 "       \n" +
                 "       \n" +
@@ -704,6 +780,7 @@ public class PotionTest extends AbstractGameTest {
                 "       \n" +
                 "☺   &  \n");
 
+        // when
         hero().act();
         hero().up();
         tick();
@@ -718,6 +795,7 @@ public class PotionTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("       \n" +
                 "҉      \n" +
                 "҉      \n" +
@@ -742,6 +820,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "☺☺   \n");
 
+        // when
         hero(0).act();
         hero(0).up();
 
@@ -750,12 +829,14 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "44   \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
 
@@ -764,6 +845,7 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
@@ -782,6 +864,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "☺☺   \n");
 
+        // when
         player(0).inTeam(0);
         player(1).inTeam(1);
 
@@ -793,12 +876,14 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♡   \n" +
                 "44   \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
 
@@ -807,6 +892,7 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺♡   \n" +
@@ -825,6 +911,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "☺☺   \n");
 
+        // when
         hero(0).act();
         hero(0).up();
 
@@ -833,12 +920,14 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "44   \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
 
@@ -847,12 +936,14 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "44   \n" +
                 "33   \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
 
@@ -861,6 +952,7 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "☺♥   \n" +
                 "     \n" +
@@ -879,33 +971,39 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "☺☺   \n");
 
+        // when
         hero(0).act();
         hero(0).up();
 
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
                 "4♥   \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
 
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "4    \n" +
                 "3♥   \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
 
         tick();
 
+        // then
         assertF("     \n" +
                 "☺    \n" +
                 "     \n" +

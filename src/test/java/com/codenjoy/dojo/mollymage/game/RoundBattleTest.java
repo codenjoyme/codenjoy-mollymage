@@ -49,6 +49,7 @@ public class RoundBattleTest extends AbstractGameTest {
     // все игроки неактивны (видно их трупики)
     @Test
     public void shouldAllPlayersOnBoardIsInactive_whenStart() {
+        // given
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3);
 
         givenFl("     \n" +
@@ -57,6 +58,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 " ☺   \n" +
                 "☺☺   \n");
 
+        // when then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -79,6 +81,7 @@ public class RoundBattleTest extends AbstractGameTest {
     // после старта идет отсчет обратного времени
     @Test
     public void shouldCountdownBeforeRound_whenTicksOnStart() {
+        // given
         shouldAllPlayersOnBoardIsInactive_whenStart();
 
         events.verifyAllEvents(
@@ -86,29 +89,37 @@ public class RoundBattleTest extends AbstractGameTest {
                 "listener(1) => []\n" +
                 "listener(2) => []\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [[....4....]]\n" +
                 "listener(1) => [[....4....]]\n" +
                 "listener(2) => [[....4....]]\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [[...3...]]\n" +
                 "listener(1) => [[...3...]]\n" +
                 "listener(2) => [[...3...]]\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [[..2..]]\n" +
                 "listener(1) => [[..2..]]\n" +
                 "listener(2) => [[..2..]]\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [[.1.]]\n" +
                 "listener(1) => [[.1.]]\n" +
@@ -119,6 +130,7 @@ public class RoundBattleTest extends AbstractGameTest {
     // но после объявления раунда я могу начать играть
     @Test
     public void shouldActiveAndCanMove_afterCountdown() {
+        // given
         shouldCountdownBeforeRound_whenTicksOnStart();
 
         // пока еще не активны
@@ -140,6 +152,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 " ♣   \n" +
                 "♣Ѡ   \n", 2);
 
+        // when
         // и я не могу ничего поделать с ними
         hero(0).up();
         hero(1).right();
@@ -147,6 +160,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         tick();
 
+        // then
         // после сообщения что раунд начался
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
@@ -172,6 +186,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 " ♥   \n" +
                 "♥☺   \n", 2);
 
+        // when
         // ... и когда я муваю героев, они откликаются
         hero(0).up();
         hero(1).up();
@@ -179,6 +194,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 " ☺   \n" +
@@ -202,6 +218,7 @@ public class RoundBattleTest extends AbstractGameTest {
     // то тот, которого вынесли появится в новом месте в виде трупика
     @Test
     public void shouldMoveToInactive_whenKillSomeone() {
+        // given
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1); // TODO а что будет если тут 0 игра хоть начнется?
 
@@ -211,8 +228,10 @@ public class RoundBattleTest extends AbstractGameTest {
                 " ☺   \n" +
                 "☺☺   \n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
@@ -236,6 +255,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 " ♥   \n" +
                 "♥☺   \n", 2);
 
+        // when
         // когда я выношу одного игрока
         hero(0).act();
         tick();
@@ -248,6 +268,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "  ☺  \n" +
@@ -260,8 +281,10 @@ public class RoundBattleTest extends AbstractGameTest {
         assertEquals(true, player(2).wantToStay());
         assertEquals(false, player(2).shouldLeave());
 
+        // when
         tick();
 
+        // then
         // игрок активный но неживой (cервер ему сделает newGame)
         assertEquals(true, hero(2).isActive());
         assertEquals(false, hero(2).isAlive());
@@ -280,12 +303,14 @@ public class RoundBattleTest extends AbstractGameTest {
                 "listener(1) => []\n" +
                 "listener(2) => [DIED]\n");
 
+        // when
         tick();
 
         // новые координаты для героя
         dice(3, 4);
         field.newGame(player(2)); // это сделоает сервер в ответ на isAlive = false
 
+        // then
         // игрок уже живой но неактивный до начала следующего раунда
         assertEquals(false, hero(2).isActive());
         assertEquals(true, hero(2).isAlive());
@@ -305,6 +330,7 @@ public class RoundBattleTest extends AbstractGameTest {
     // - от имени жертвы я вижу свой трупик, мне пофиг уже что на карте происходит, главное где поставить памятник герою
     @Test
     public void shouldDrawGhost_onPlaceOfDeath() {
+        // given
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
@@ -317,6 +343,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         Ghost ghost = ghost(1, 1);
 
+        // when
         tick();
 
         events.verifyAllEvents(
@@ -324,6 +351,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
 
+        // then
         // ставлю зелье
         hero(0).act();
         tick();
@@ -336,14 +364,17 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
         tick();
 
+        // when
         // взрыв
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
                 "listener(1) => [DIED]\n" +
                 "listener(2) => []\n");
 
+        // when
         // идем назад
         hero(0).down();
         tick();
@@ -351,6 +382,7 @@ public class RoundBattleTest extends AbstractGameTest {
         hero(0).down();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -369,9 +401,11 @@ public class RoundBattleTest extends AbstractGameTest {
                 " &   \n" +
                 "♥♣☺  \n", 2);
 
+        // when
         // попробуем привидением сходить на место падшего героя
         ghost.move(DOWN.change(ghost));
 
+        // then
         // от имени наблюдателя в клеточке с останками я вижу живого привидения
         assertF("     \n" +
                 "     \n" +
@@ -403,6 +437,7 @@ public class RoundBattleTest extends AbstractGameTest {
     // приоритет прорисовки такой: 1) привидение 2) зелье 3) останки
     @Test
     public void shouldDrawGhost_onPlaceOfDeath_withBomb() {
+        // given
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
@@ -415,13 +450,17 @@ public class RoundBattleTest extends AbstractGameTest {
 
         Ghost ghost = ghost(1, 1);
 
+        // when
         tick();
 
+
+        // then
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
 
+        // when
         // ставлю зелье
         hero(0).act();
         tick();
@@ -437,11 +476,13 @@ public class RoundBattleTest extends AbstractGameTest {
         // взрыв
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
                 "listener(1) => [DIED]\n" +
                 "listener(2) => []\n");
 
+        // when
         // идем назад
         hero(0).down();
         tick();
@@ -456,6 +497,7 @@ public class RoundBattleTest extends AbstractGameTest {
         hero(0).left();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -474,9 +516,11 @@ public class RoundBattleTest extends AbstractGameTest {
                 " &   \n" +
                 "♥3☺  \n", 2);
 
+        // when
         // попробуем привидением сходить на место падшего героя
         ghost.move(DOWN.change(ghost));
 
+        // then
         // от имени наблюдателя в клеточке с останками
         // я вижу живое привидение, он по моему опаснее чем зелье
         assertF("     \n" +
@@ -509,6 +553,7 @@ public class RoundBattleTest extends AbstractGameTest {
     // 3) сторонний наблюдатель видит живого соперника
     @Test
     public void shouldPlaceOfDeath_isNotABarrierForOtherHero() {
+        // given
         givenCaseWhenPlaceOfDeathOnMyWay();
 
         assertF("     \n" +
@@ -517,10 +562,12 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "☺♣♥  \n", 0);
 
+        // when
         // а вот и попытка пойти на место трупика
         hero(0).right();
         tick();
 
+        // then
         // от имени того кто стоит на месте смерти другого героя он видет себя
         assertF("     \n" +
                 "     \n" +
@@ -544,6 +591,7 @@ public class RoundBattleTest extends AbstractGameTest {
     }
 
     private void givenCaseWhenPlaceOfDeathOnMyWay() {
+        // given
         settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
@@ -554,8 +602,10 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "☺☺☺  \n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
@@ -579,6 +629,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "♥♥☺  \n", 2);
 
+        // when
         // когда я выношу одного игрока
         hero(0).act();
         tick();
@@ -590,14 +641,17 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "     \n" +
                 "1♥♥  \n", 0);
 
+        // when
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -621,12 +675,14 @@ public class RoundBattleTest extends AbstractGameTest {
                 "listener(1) => [DIED]\n" +
                 "listener(2) => []\n");
 
+        // when
         hero(0).down();
         tick();
 
         hero(0).down();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -639,6 +695,7 @@ public class RoundBattleTest extends AbstractGameTest {
     // взрывной волны, там всегда будет трупик
     @Test
     public void shouldCantDestroyHeroPlaceOfDeath() {
+        // given
         givenCaseWhenPlaceOfDeathOnMyWay();
 
         assertF("     \n" +
@@ -647,6 +704,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "☺♣♥  \n", 0);
 
+        // when
         hero(0).act();
         tick();
 
@@ -659,6 +717,7 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +
@@ -692,6 +751,7 @@ public class RoundBattleTest extends AbstractGameTest {
     // будет у нас двап трупика в одной клетке
     @Test
     public void shouldDestroySecondHero_whenItOnDeathPlace() {
+        // given
         shouldPlaceOfDeath_isNotABarrierForOtherHero();
 
         // вижу себя в клетке где еще трупик
@@ -715,6 +775,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 " ♥☺  \n", 2);
 
+        // when
         // ставим зелье и убегаем
         hero(2).act();
         tick();
@@ -728,8 +789,9 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
         tick();
 
-        // что в результате
 
+        // then
+        // что в результате
         // я вижу свой трупик в клетке, где есть еще один такой же
         assertF("     \n" +
                 "     \n" +
@@ -760,12 +822,15 @@ public class RoundBattleTest extends AbstractGameTest {
     // просто любопытно как рванут два героя, вместе с привидение и трупом под зельем
     @Test
     public void shouldDestroyGhost_withOtherHeroes_onDeathPlace() {
+        // given
         shouldDrawGhost_onPlaceOfDeath_withBomb();
 
+        // when
         tick();
         tick();
         tick();
 
+        // then
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -790,8 +855,10 @@ public class RoundBattleTest extends AbstractGameTest {
                 "listener(1) => []\n" +
                 "listener(2) => [DIED]\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +

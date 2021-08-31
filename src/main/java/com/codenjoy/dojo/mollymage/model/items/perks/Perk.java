@@ -108,7 +108,7 @@ public abstract class Perk extends PointImpl implements Tickable, State<Element,
 
     @Override
     public String toString() {
-        return String.format("{%s('%s') value=%s, timeout=%s, timer=%s, pick=%s}",
+        return String.format("{%s('%s')\n  value=%s, timeout=%s, timer=%s, pick=%s}",
                 name, element, value, timeout, timer, pick);
     }
 

@@ -35,6 +35,7 @@ import com.codenjoy.dojo.mollymage.model.levels.LevelImpl;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.services.multiplayer.Single;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
@@ -44,12 +45,12 @@ import org.junit.Before;
 import org.mockito.Mockito;
 import org.mockito.stubbing.OngoingStubbing;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
@@ -184,7 +185,7 @@ public abstract class AbstractGameTest {
     }
 
     public void assertHeroDie() {
-        assertEquals(true, game().isGameOver());
+        assertEquals(false, game().isGameOver());
     }
 
     public void assertHeroAlive() {
@@ -216,4 +217,21 @@ public abstract class AbstractGameTest {
     public void stopGhosts() {
         field.ghosts().forEach(Ghost::stop);
     }
+
+    public void assertHeroPerks(String expected) {
+        assertEquals(expected,
+                hero().getPerks().stream()
+                        .sorted(Comparator.comparing(PointImpl::copy))
+                        .map(Objects::toString)
+                        .collect(joining("\n")));
+    }
+
+    protected void assertFieldPerks(String expected) {
+        assertEquals(expected,
+                field.perks().stream()
+                        .sorted(Comparator.comparing(PerkOnBoard::copy))
+                        .map(Objects::toString)
+                        .collect(joining("\n")));
+    }
+
 }

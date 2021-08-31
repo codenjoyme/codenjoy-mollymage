@@ -740,9 +740,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         player().getHero().addPerk(new PotionBlastRadiusIncrease(value, timeout));
 
-        assertEquals("[{POTION_BLAST_RADIUS_INCREASE('+') " +
-                        "value=4, timeout=5, timer=5, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_BLAST_RADIUS_INCREASE('+')\n" +
+                "  value=4, timeout=5, timer=5, pick=0}");
 
         // when
         hero().act();
@@ -759,9 +759,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         tick();
 
         // then
-        assertEquals("[{POTION_BLAST_RADIUS_INCREASE('+') " +
-                        "value=4, timeout=5, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_BLAST_RADIUS_INCREASE('+')\n" +
+                "  value=4, timeout=5, timer=1, pick=0}");
 
         // given
         // второй перк взятый в самый последний момент перед взрывом
@@ -770,9 +770,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         int newTimeout = 7;
         player().getHero().addPerk(new PotionBlastRadiusIncrease(newValue, newTimeout));
 
-        assertEquals("[{POTION_BLAST_RADIUS_INCREASE('+') " +
-                        "value=7, timeout=8, timer=8, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_BLAST_RADIUS_INCREASE('+')\n" +
+                "  value=7, timeout=8, timer=8, pick=0}");
 
         // when
         tick();
@@ -831,9 +831,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "[KILL_TREASURE_BOX, KILL_TREASURE_BOX, " +
                 "KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
-        assertEquals("[{POTION_BLAST_RADIUS_INCREASE('+') " +
-                        "value=7, timeout=8, timer=2, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_BLAST_RADIUS_INCREASE('+')\n" +
+                "  value=7, timeout=8, timer=2, pick=0}");
 
         // when
         // новые коробки
@@ -844,14 +844,13 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         tick();
 
         // последний шанс воспользоваться, но мы не будем
-        assertEquals("[{POTION_BLAST_RADIUS_INCREASE('+') " +
-                        "value=7, timeout=8, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_BLAST_RADIUS_INCREASE('+')\n" +
+                "  value=7, timeout=8, timer=1, pick=0}");
 
         tick();
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // ставим новое зелье, чтобы убедиться, что больше перк не сработает
         hero().act();
@@ -878,8 +877,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         events.verifyAllEvents("[DIED]");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
     }
 
     // BCI - Potion Count Increase perk
@@ -1048,9 +1046,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         player().getHero().addPerk(new PotionRemoteControl(2, 1));
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=2, timeout=1, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=2, timeout=1, timer=1, pick=0}");
 
         // when
         // поставили первое радиоуправляемое зелье
@@ -1065,9 +1063,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "5☺   \n");
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=2, timeout=1, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=2, timeout=1, timer=1, pick=0}");
 
         // when
         // видим, что она стоит и ждет
@@ -1081,9 +1079,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 " ☺   \n" +
                 "5    \n");
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=2, timeout=1, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=2, timeout=1, timer=1, pick=0}");
 
         // when
         // взорвали ее
@@ -1097,9 +1095,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "҉☺   \n" +
                 "҉҉   \n");
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=1, timeout=1, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=1, timeout=1, timer=1, pick=0}");
 
         // when
         // ставим еще одну
@@ -1113,9 +1111,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 " ☻   \n" +
                 "     \n");
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=1, timeout=1, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=1, timeout=1, timer=1, pick=0}");
 
         // when
         // отошли, смотрим
@@ -1153,9 +1151,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 " 5   \n" +
                 "     \n");
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=1, timeout=1, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=1, timeout=1, timer=1, pick=0}");
 
         // when
         // взорвали ее
@@ -1169,8 +1167,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "҉҉҉  \n" +
                 " ҉   \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // when
         // ставим новую
@@ -1184,8 +1181,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // when
         // если отойдем, то увидим, что это обычная
@@ -1199,8 +1195,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // when
         // еще одну, у нас ведь их две
@@ -1215,8 +1210,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // when
         // больше не могу
@@ -1231,8 +1225,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // when
         // еще не могу
@@ -1247,8 +1240,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "҉    \n" +
                 "     \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // when
         // и только когда ударная волна уйдет, тогда смогу
@@ -1262,8 +1254,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
     }
 
     @Test
@@ -1279,9 +1270,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         player().getHero().addPerk(new PotionRemoteControl(2, 1));
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=2, timeout=1, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=2, timeout=1, timer=1, pick=0}");
 
         // when
         // поставили первое радиоуправляемое зелье
@@ -1296,9 +1287,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "5☺   \n");
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=2, timeout=1, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=2, timeout=1, timer=1, pick=0}");
 
         // when
         // видим, что она стоит и ждет
@@ -1312,9 +1303,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 " ☺   \n" +
                 "5    \n");
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=2, timeout=1, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=2, timeout=1, timer=1, pick=0}");
 
         // when
         // взорвали ее
@@ -1328,9 +1319,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "҉☺   \n" +
                 "҉҉   \n");
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=1, timeout=1, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=1, timeout=1, timer=1, pick=0}");
 
         // when
         // ставим еще одну
@@ -1344,9 +1335,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 " ☻   \n" +
                 "     \n");
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=1, timeout=1, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=1, timeout=1, timer=1, pick=0}");
 
         // when
         // отошли, смотрим
@@ -1384,9 +1375,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 " 5   \n" +
                 "     \n");
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=1, timeout=1, timer=1, pick=0}]" ,
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=1, timeout=1, timer=1, pick=0}");
 
         // when
         // взорвали ее
@@ -1400,8 +1391,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "҉҉҉  \n" +
                 " ҉   \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // when
         // ставим новую
@@ -1415,8 +1405,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // when
         // если отойдем, то увидим, что это обычная
@@ -1430,8 +1419,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // when
         // больше не могу - у меня одна
@@ -1446,8 +1434,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // when
         // больше не могу
@@ -1462,8 +1449,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // when
         // и теперь не могу - есть еще взрывная волна
@@ -1478,8 +1464,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "҉    \n" +
                 "     \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // when
         // а теперь пожалуйста
@@ -1493,8 +1478,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n");
 
-        assertEquals("[]" ,
-                hero().getPerks().toString());
+        assertHeroPerks("");
     }
 
     @Test
@@ -1511,9 +1495,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         player().getHero().addPerk(new PotionRemoteControl(1, 1));
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=1, timeout=1, timer=1, pick=0}]",
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=1, timeout=1, timer=1, pick=0}");
 
         // when
         // поставили радиоуправляемое зелье
@@ -1528,9 +1512,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "#    \n" +
                 "5☺ & \n");
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=1, timeout=1, timer=1, pick=0}]",
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=1, timeout=1, timer=1, pick=0}");
 
         // when
         // идем к привидению на верную смерть
@@ -1544,9 +1528,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "#    \n" +
                 "5 ☺& \n");
 
-        assertEquals("[{POTION_REMOTE_CONTROL('r') " +
-                        "value=1, timeout=1, timer=1, pick=0}]",
-                hero().getPerks().toString());
+        assertHeroPerks(
+                "{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=1, timeout=1, timer=1, pick=0}");
 
         // when
         // самоубился и всех выпилил )
@@ -1563,8 +1547,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         events.verifyAllEvents("[DIED, KILL_GHOST, KILL_TREASURE_BOX]");
 
         // только сейчас перк забрался
-        assertEquals("[]",
-                hero().getPerks().toString());
+        assertHeroPerks("");
 
         // when
         // новая коробка
@@ -1580,8 +1563,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         events.verifyAllEvents("[]");
 
-        assertEquals("[]",
-                hero().getPerks().toString());
+        assertHeroPerks("");
     }
 
     @Test

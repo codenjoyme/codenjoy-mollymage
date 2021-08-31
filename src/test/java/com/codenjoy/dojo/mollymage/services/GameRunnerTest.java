@@ -95,7 +95,7 @@ public class GameRunnerTest {
                 game.getField().tick();
             }
 
-            assertTrue(game.isGameOver());
+            assertEquals(true, game.isGameOver());
         }
     }
 

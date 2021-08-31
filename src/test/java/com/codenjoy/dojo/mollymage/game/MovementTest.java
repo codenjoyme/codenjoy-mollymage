@@ -663,7 +663,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼Ѡ        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        Assert.assertTrue(game().isGameOver());
+        Assert.assertEquals(true, game().isGameOver());
         events.verifyAllEvents("[DIED]");
     }
 

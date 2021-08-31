@@ -357,8 +357,8 @@ public class GameTest extends AbstractGameTest {
                 "listener(0) => [DIED]\n" +
                 "listener(1) => []\n");
 
-        assertFalse(hero(0).isAlive());
-        assertTrue(hero(1).isAlive());
+        assertEquals(false, hero(0).isAlive());
+        assertEquals(true, hero(1).isAlive());
 
         Joystick joystick1 = game(0).getJoystick();
         Joystick joystick2 = game(0).getJoystick();

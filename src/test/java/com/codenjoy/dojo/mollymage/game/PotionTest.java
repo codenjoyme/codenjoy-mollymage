@@ -494,25 +494,25 @@ public class PotionTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        assertFalse(potion11.isExploded());
-        assertFalse(potion12.isExploded());
-        assertFalse(potion13.isExploded());
+        assertEquals(false, potion11.isExploded());
+        assertEquals(false, potion12.isExploded());
+        assertEquals(false, potion13.isExploded());
 
         field.tick();
 
-        assertTrue(potion11.isExploded());
-        assertTrue(potion12.isExploded());
-        assertTrue(potion13.isExploded());
+        assertEquals(true, potion11.isExploded());
+        assertEquals(true, potion12.isExploded());
+        assertEquals(true, potion13.isExploded());
 
-        assertFalse(potion21.isExploded());
-        assertFalse(potion22.isExploded());
-        assertFalse(potion23.isExploded());
+        assertEquals(false, potion21.isExploded());
+        assertEquals(false, potion22.isExploded());
+        assertEquals(false, potion23.isExploded());
 
         field.tick();
 
-        assertTrue(potion21.isExploded());
-        assertTrue(potion22.isExploded());
-        assertTrue(potion23.isExploded());
+        assertEquals(true, potion21.isExploded());
+        assertEquals(true, potion22.isExploded());
+        assertEquals(true, potion23.isExploded());
 
         events.verifyAllEvents("[DIED]");
     }

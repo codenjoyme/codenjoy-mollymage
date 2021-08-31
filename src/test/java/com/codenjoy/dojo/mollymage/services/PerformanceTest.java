@@ -25,7 +25,10 @@ package com.codenjoy.dojo.mollymage.services;
 
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.profile.Profiler;
-import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.EventListener;
+import com.codenjoy.dojo.services.Game;
+import com.codenjoy.dojo.services.Joystick;
+import com.codenjoy.dojo.services.RandomDice;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
@@ -37,8 +40,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
-import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
-import static org.junit.Assert.assertTrue;
+import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_ENABLED;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class PerformanceTest {
@@ -163,6 +166,7 @@ public class PerformanceTest {
 
     private void assertLess(String phase, double expected) {
         double actual = profiler.info(phase).getTime();
-        assertTrue(actual + " > " + expected, actual < expected);
+        assertEquals(actual + " > " + expected,
+                true, actual < expected);
     }
 }

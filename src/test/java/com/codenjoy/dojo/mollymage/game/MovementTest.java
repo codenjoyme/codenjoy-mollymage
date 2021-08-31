@@ -42,7 +42,7 @@ public class MovementTest extends AbstractGameTest {
                 "☺    \n");
 
         hero().right();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -60,10 +60,10 @@ public class MovementTest extends AbstractGameTest {
                 "☺    \n");
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -81,7 +81,7 @@ public class MovementTest extends AbstractGameTest {
                 "☺    \n");
 
         hero().up();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -99,13 +99,13 @@ public class MovementTest extends AbstractGameTest {
                 "☺    \n");
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().down();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -123,7 +123,7 @@ public class MovementTest extends AbstractGameTest {
                 "☺    \n");
 
         hero().down();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -141,13 +141,13 @@ public class MovementTest extends AbstractGameTest {
                 "☺    \n");
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().left();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -165,7 +165,7 @@ public class MovementTest extends AbstractGameTest {
                 "☺    \n");
 
         hero().left();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -201,7 +201,7 @@ public class MovementTest extends AbstractGameTest {
                 "    ☺\n");
 
         hero().right();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -237,7 +237,7 @@ public class MovementTest extends AbstractGameTest {
                 "     \n");
 
         hero().up();
-        field.tick();
+        tick();
 
         assertF("☺    \n" +
                 "     \n" +

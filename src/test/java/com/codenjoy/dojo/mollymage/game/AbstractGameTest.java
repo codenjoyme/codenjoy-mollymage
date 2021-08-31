@@ -134,7 +134,7 @@ public abstract class AbstractGameTest {
                 .integer(GHOSTS_COUNT, 0);
     }
 
-    protected void tick() {
+    public void tick() {
         field.tick();
     }
 
@@ -174,22 +174,22 @@ public abstract class AbstractGameTest {
         return hero(0);
     }
 
-    // other stuff
-
-    protected void assertHeroDie() {
+    public void assertHeroDie() {
         assertEquals(true, game().isGameOver());
     }
 
-    protected void assertHeroAlive() {
+    public void assertHeroAlive() {
         assertEquals(false, game().isGameOver());
     }
+
+    // other stuff
 
     protected void gotoBoardCenter() {
         for (int y = 0; y < level.size() / 2; y++) {
             hero().up();
-            field.tick();
+            tick();
             hero().right();
-            field.tick();
+            tick();
         }
     }
 
@@ -213,20 +213,20 @@ public abstract class AbstractGameTest {
 
         hero().act();
         goOut();
-        field.tick();
+        tick();
 
         assertF(expected);
     }
 
     protected void goOut() {
         hero().right();
-        field.tick();
+        tick();
         hero().right();
-        field.tick();
+        tick();
         hero().up();
-        field.tick();
+        tick();
         hero().up();
-        field.tick();
+        tick();
     }
 
     protected void newBox(int x, int y) {

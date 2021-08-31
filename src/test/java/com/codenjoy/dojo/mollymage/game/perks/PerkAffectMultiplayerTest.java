@@ -196,7 +196,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         hero1.up();
         hero2.act();
         hero2.up();
-        field.tick();
+        tick();
 
         // then
         events.verifyAllEvents(
@@ -206,7 +206,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         // when heroes are going on the position
         hero1.up();
         hero2.up();
-        field.tick();
+        tick();
 
         // then
         assertF("     \n" +
@@ -222,11 +222,11 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "  3  \n", 1);
 
         // when potion boom, hero1 should shoot by poison thrower
-        field.tick();
-        field.tick();
+        tick();
+        tick();
         hero1.right();
         hero1.act(1);
-        field.tick();
+        tick();
 
         // then
         assertF("     \n" +
@@ -291,11 +291,11 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         hero1.up();
         hero2.act();
         hero2.up();
-        field.tick();
+        tick();
 
         hero1.up();
         hero2.right();
-        field.tick();
+        tick();
 
         // then
         assertF("     \n" +
@@ -315,8 +315,8 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(1) => []\n");
 
         // when potion boom, hero1 should shoot by poison thrower
-        field.tick();
-        field.tick();
+        tick();
+        tick();
         hero1.right();
         hero1.act(1);
         field.tick();

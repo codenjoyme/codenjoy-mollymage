@@ -44,10 +44,10 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
+        tick();
     }
 
     @Test
@@ -66,13 +66,13 @@ public class EventsTest extends AbstractGameTest {
 
         hero().act();
         hero().right();
-        field.tick();
+        tick();
         hero().right();
-        field.tick();
+        tick();
         hero().right();
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -93,13 +93,13 @@ public class EventsTest extends AbstractGameTest {
 
         hero().act();
         hero().right();
-        field.tick();
+        tick();
         hero().right();
-        field.tick();
+        tick();
         hero().right();
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -131,15 +131,15 @@ public class EventsTest extends AbstractGameTest {
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();

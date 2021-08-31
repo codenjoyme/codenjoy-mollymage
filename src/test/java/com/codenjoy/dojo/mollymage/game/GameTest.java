@@ -166,9 +166,9 @@ public class GameTest extends AbstractGameTest {
         // when hero set bomb and goes away
         hero().act();
         hero().up();
-        field.tick();
+        tick();
         hero().right();
-        field.tick();
+        tick();
 
         // then
         assertF("     \n" +
@@ -183,7 +183,7 @@ public class GameTest extends AbstractGameTest {
         settings.integer(TREASURE_BOX_COUNT, 9);
         final int[] square3x3Coordinates = getCoordinatesForPointsInSquare(3);
         dice(square3x3Coordinates);
-        field.tick();
+        tick();
 
         // then
         assertF("     \n" +
@@ -195,8 +195,8 @@ public class GameTest extends AbstractGameTest {
         assertEquals(7, field.boxes().size());
 
         // when field tick 2 times
-        field.tick();
-        field.tick();
+        tick();
+        tick();
 
         //  then two boxes should been destroyed
         assertF("     \n" +
@@ -211,7 +211,7 @@ public class GameTest extends AbstractGameTest {
         // [0,1][1,0] - destroyed boxes and [1,1] - hero place
         // when fill board with boxes around hero
         dice(square3x3Coordinates);
-        field.tick();
+        tick();
 
         // then only 6 boxes should been exist
         assertF("     \n" +
@@ -224,7 +224,7 @@ public class GameTest extends AbstractGameTest {
 
         // when next tick - empty spaces should been filled by boxes
         dice(square3x3Coordinates);
-        field.tick();
+        tick();
 
         // then boxes should been generated on [0,1] and [1,0] to
         assertF("     \n" +

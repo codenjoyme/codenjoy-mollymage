@@ -45,7 +45,7 @@ public class PotionTest extends AbstractGameTest {
                 "☺    \n");
 
         hero().act();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -63,13 +63,13 @@ public class PotionTest extends AbstractGameTest {
                 "☺    \n");
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().act();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -90,16 +90,16 @@ public class PotionTest extends AbstractGameTest {
                 "☺    \n");
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().act();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -123,7 +123,7 @@ public class PotionTest extends AbstractGameTest {
 
         hero().up();
         hero().act();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -133,7 +133,7 @@ public class PotionTest extends AbstractGameTest {
 
         hero().up();
         hero().act();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -143,7 +143,7 @@ public class PotionTest extends AbstractGameTest {
 
         hero().up();
         hero().act();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "☺    \n" +
@@ -165,10 +165,10 @@ public class PotionTest extends AbstractGameTest {
                 "☺    \n");
 
         hero().act();
-        field.tick();
+        tick();
 
         hero().act();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -179,7 +179,7 @@ public class PotionTest extends AbstractGameTest {
         assertEquals(1, field.potions().size());
 
         hero().right();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -188,7 +188,7 @@ public class PotionTest extends AbstractGameTest {
                 "2☺   \n");
 
         hero().right();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -196,7 +196,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "1 ☺  \n");
 
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -204,7 +204,7 @@ public class PotionTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉҉☺  \n");
 
-        field.tick();   // зелья больше нет, иначе тут был бы взрыв второй
+        tick();   // зелья больше нет, иначе тут был бы взрыв второй
 
         assertF("     \n" +
                 "     \n" +
@@ -222,15 +222,15 @@ public class PotionTest extends AbstractGameTest {
                 "☺    \n");
 
         hero().act();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -238,7 +238,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "1 ☺  \n");
 
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +

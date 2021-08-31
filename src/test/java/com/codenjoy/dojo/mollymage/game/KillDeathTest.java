@@ -42,12 +42,12 @@ public class KillDeathTest extends AbstractGameTest {
 
         hero().act();
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
+        tick();
+        tick();
 
-        field.tick();
+        tick();
 
         assertHeroAlive();
         assertF("     \n" +
@@ -56,7 +56,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "1☺   \n");
 
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -67,7 +67,7 @@ public class KillDeathTest extends AbstractGameTest {
         events.verifyAllEvents("[DIED]");
         assertHeroDie();
 
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -90,7 +90,7 @@ public class KillDeathTest extends AbstractGameTest {
         killPotioner();
 
         hero().left();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -103,16 +103,16 @@ public class KillDeathTest extends AbstractGameTest {
 
     private void killPotioner() {
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
         hero().act();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -132,7 +132,7 @@ public class KillDeathTest extends AbstractGameTest {
         killPotioner();
 
         hero().up();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -153,7 +153,7 @@ public class KillDeathTest extends AbstractGameTest {
         killPotioner();
 
         hero().down();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -174,7 +174,7 @@ public class KillDeathTest extends AbstractGameTest {
         killPotioner();
 
         hero().right();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -196,7 +196,7 @@ public class KillDeathTest extends AbstractGameTest {
         killPotioner();
 
         hero().act();
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -217,14 +217,14 @@ public class KillDeathTest extends AbstractGameTest {
                 "☺    \n");
 
         hero().act();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -233,7 +233,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "1☺   \n");
         assertHeroAlive();
 
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -244,7 +244,7 @@ public class KillDeathTest extends AbstractGameTest {
         events.verifyAllEvents("[DIED]");
         assertHeroDie();
 
-        field.tick();
+        tick();
 
         assertF("     \n" +
                 "     \n" +

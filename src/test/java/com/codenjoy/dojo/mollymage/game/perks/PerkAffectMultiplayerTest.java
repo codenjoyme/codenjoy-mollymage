@@ -38,7 +38,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
     @Test
     public void shouldNotTeammateGetPerk_AfterFirstPlayerPickUp_withEnemy() {
-        canDropPotions(1);
+        potionsCount(1);
         settings.integer(CATCH_PERK_SCORE, CATCH_PERK_SCORE_FOR_TEST);
         settings.bool(PERK_WHOLE_TEAM_GET,false);
         settings.integer(ROUNDS_TEAMS_PER_ROOM, 2);
@@ -96,7 +96,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
     @Test
     public void shouldTeammateGetPerk_AfterFirstPlayerPickUp_withEnemy() {
-        canDropPotions(1);
+        potionsCount(1);
         settings.integer(CATCH_PERK_SCORE, CATCH_PERK_SCORE_FOR_TEST);
         settings.bool(PERK_WHOLE_TEAM_GET, true);
         settings.integer(ROUNDS_TEAMS_PER_ROOM, 2);
@@ -607,7 +607,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldExplodeBothPotionsOnBoard_WithPE_Test1() {
         // given
-        canDropPotions(1);
+        potionsCount(1);
 
         givenFl("     \n" +
                 "     \n" +
@@ -672,7 +672,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldExplodeBothPotionsOnBoard_WithPE_Test2() {
         // given
-        canDropPotions(1);
+        potionsCount(1);
 
         givenFl("     \n" +
                 "     \n" +
@@ -741,7 +741,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldExplodeBothPotionsOnBoard_WithPE_Test3() {
         // given
-        canDropPotions(1);
+        potionsCount(1);
 
         givenFl("     \n" +
                 "     \n" +
@@ -811,7 +811,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldExplodeBothPotionsOnBoardAndKillGhost_WithPE() {
         // given
-        canDropPotions(1);
+        potionsCount(1);
 
         givenFl("     \n" +
                 "     \n" +
@@ -878,7 +878,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldPotionOwnerGetScoresTo_WithPE() {
         // given
-        canDropPotions(1);
+        potionsCount(1);
         settings.bool(STEAL_POINTS, false);
 
         givenFl("     \n" +
@@ -956,7 +956,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldNotPotionOwnerGetScores_WithPE() {
         // given
-        canDropPotions(1);
+        potionsCount(1);
         settings.bool(STEAL_POINTS, true);
 
         givenFl("     \n" +

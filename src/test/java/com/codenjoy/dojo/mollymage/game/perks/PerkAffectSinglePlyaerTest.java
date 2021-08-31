@@ -970,7 +970,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     // BRC - Potion remote control perk
     @Test
     public void shouldPotionBlastOnAction_whenBRCperk_caseTwoPotions() {
-        canDropPotions(2);
+        potionsCount(2);
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1173,7 +1173,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionBlastOnAction_whenBRCperk_caseOnePotion() {
-        canDropPotions(1);
+        potionsCount(1);
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1376,7 +1376,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
     @Test
     public void shouldSuicide_whenBRCPerk_shouldRemoveAfterDeath_andCollectScores() {
-        canDropPotions(1);
+        potionsCount(1);
         potionsPower(3);
         givenFl("     \n" +
                 "     \n" +

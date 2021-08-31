@@ -190,7 +190,7 @@ public abstract class AbstractGameTest {
         }
     }
 
-    protected GameSettings canDropPotions(int count) {
+    protected GameSettings potionsCount(int count) {
         return settings.integer(POTIONS_COUNT, count);
     }
 

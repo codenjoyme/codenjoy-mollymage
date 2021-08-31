@@ -459,7 +459,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     // а теперь пробуем убить анти-привидение
     @Test
     public void shouldDropPerk_generateNewGhost_thenKillIt() {
-        canDropPotions(2);
+        potionsCount(2);
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
         reset(listener());
@@ -589,7 +589,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     // а теперь пробуем убить анти-привидение и одновременно с этим выпиливаемся на той же бомбе
     @Test
     public void shouldKillGhostWithSuicide() {
-        canDropPotions(2);
+        potionsCount(2);
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
         reset(listener());
@@ -727,7 +727,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     // а теперь пробуем убить анти-привидение сразу после того как оно меня скушает
     @Test
     public void shouldKillGhostAfterEatMe() {
-        canDropPotions(2);
+        potionsCount(2);
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
         reset(listener());

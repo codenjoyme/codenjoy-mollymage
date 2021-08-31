@@ -22,7 +22,6 @@ package com.codenjoy.dojo.mollymage.game;
  * #L%
  */
 
-import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.services.Direction;
@@ -121,7 +120,7 @@ public class EventsTest extends AbstractGameTest {
                 "#    \n" +
                 "&☺   \n");
 
-        canDropPotions(4);
+        potionsCount(4);
         potionsPower(1);
 
         assertF("     \n" +
@@ -276,7 +275,7 @@ public class EventsTest extends AbstractGameTest {
                 "#    \n" +
                 "&☺   \n");
 
-        canDropPotions(4);
+        potionsCount(4);
         potionsPower(1);
 
         assertF("     \n" +
@@ -862,7 +861,7 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenBigBadaboom() {
-        canDropPotions(2)
+        potionsCount(2)
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 

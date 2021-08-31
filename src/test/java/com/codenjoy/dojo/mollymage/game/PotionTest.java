@@ -80,7 +80,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionsDropped_whenHeroDropThreePotion() {
-        canDropPotions(3);
+        potionsCount(3);
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -110,7 +110,7 @@ public class PotionTest extends AbstractGameTest {
     // чем у него в settings прописано
     @Test
     public void shouldOnlyTwoPotions_whenLevelApproveIt() {
-        canDropPotions(2);
+        potionsCount(2);
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -151,7 +151,7 @@ public class PotionTest extends AbstractGameTest {
     // герой не может класть два зелья на одно место
     @Test
     public void shouldOnlyOnePotionPerPlace() {
-        canDropPotions(2);
+        potionsCount(2);
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -451,7 +451,7 @@ public class PotionTest extends AbstractGameTest {
     // с теми, что на поле
     @Test
     public void shouldNoChangeOriginalPotionsWhenUseBoardApiButTimersSynchronized() {
-        canDropPotions(2);
+        potionsCount(2);
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -695,7 +695,7 @@ public class PotionTest extends AbstractGameTest {
     // зелья которое ему позволено и не более того
     @Test
     public void shouldTwoPotionsOnBoard() {
-        canDropPotions(1);
+        potionsCount(1);
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -733,7 +733,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldTwoPotionsOnBoard_withEnemy() {
-        canDropPotions(1);
+        potionsCount(1);
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -774,7 +774,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldFourPotionsOnBoard() {
-        canDropPotions(2);
+        potionsCount(2);
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -826,7 +826,7 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldFourPotionsOnBoard_checkTwoPotionsPerHero() {
-        canDropPotions(2);
+        potionsCount(2);
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +

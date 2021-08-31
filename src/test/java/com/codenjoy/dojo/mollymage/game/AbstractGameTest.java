@@ -184,7 +184,7 @@ public abstract class AbstractGameTest {
         }
     }
 
-    protected void asrtBrd(String expected) {
+    protected void assertF(String expected) {
         assertEquals(expected, printer.getPrinter(
                 field.reader(), player()).print());
     }
@@ -220,7 +220,7 @@ public abstract class AbstractGameTest {
         goOut();
         field.tick();
 
-        asrtBrd(expected);
+        assertF(expected);
     }
 
     protected void goOut() {

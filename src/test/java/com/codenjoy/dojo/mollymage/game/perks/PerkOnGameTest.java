@@ -77,7 +77,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "#҉# ##\n" +
@@ -93,7 +93,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -107,7 +107,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -129,7 +129,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -171,7 +171,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
                 "#҉# ##\n" +
@@ -183,7 +183,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
                 "# # ##\n" +
@@ -224,7 +224,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "#҉# ##\n" +
@@ -238,7 +238,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -254,7 +254,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -268,7 +268,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -289,7 +289,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -309,7 +309,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // перед взрывом
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# #☺##\n" +
@@ -324,7 +324,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // перк разрушен
         // а вместо него злое привидение
-        asrtBrd("#H####\n" +
+        assertF("#H####\n" +
                 "#҉# ##\n" +
                 "#҉   #\n" +
                 "#҉#☺##\n" +
@@ -344,7 +344,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // привидение начало свое движение
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "#☼#☺##\n" +
                 "##   #\n" +
                 "### ##\n" +
@@ -353,7 +353,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "#☼#☺##\n" +
                 "##   #\n" +
                 "#H# ##\n" +
@@ -362,7 +362,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "#☼#☺##\n" +
                 "##   #\n" +
                 "# H ##\n" +
@@ -372,7 +372,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         boxesCount(boxesCount() - 1); // минус коробка
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "#☼#☺##\n" +
                 "##x  #\n" +
                 "#   ##\n" +
@@ -382,7 +382,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         boxesCount(boxesCount() - 1); // минус коробка
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "#☼#☺##\n" +
                 "## x #\n" +
                 "#   ##\n" +
@@ -394,7 +394,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "#☼#Ѡ##\n" +
                 "##   #\n" +
                 "#   ##\n" +
@@ -408,7 +408,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "#☼#Ѡ##\n" +
                 "##   #\n" +
                 "#   ##\n" +
@@ -429,7 +429,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "#☼#+##\n" +
                 "##   #\n" +
                 "#   ##\n" +
@@ -443,7 +443,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "#☼#+##\n" +
                 "##   #\n" +
                 "#   ##\n" +
@@ -467,7 +467,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -488,7 +488,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // перед взрывом
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
                 "#3# ##\n" +
@@ -503,7 +503,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // перк разрушен
         // а вместо него злое привидение
-        asrtBrd("#H####\n" +
+        assertF("#H####\n" +
                 "#҉# ##\n" +
                 "#҉☺  #\n" +
                 "#2# ##\n" +
@@ -518,7 +518,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // пивидение начало свое движение
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
                 "#1# ##\n" +
@@ -532,7 +532,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // приведение нарвалось на зелье
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "#҉☺  #\n" +
                 "H&H ##\n" +
@@ -550,7 +550,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
                 "+++ ##\n" +
@@ -569,7 +569,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // when
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
                 "+++ ##\n" +
@@ -599,7 +599,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -620,7 +620,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // перед взрывом
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
                 "#3# ##\n" +
@@ -635,7 +635,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // перк разрушен
         // а вместо него злое привидение
-        asrtBrd("#H####\n" +
+        assertF("#H####\n" +
                 "#҉# ##\n" +
                 "#҉☺  #\n" +
                 "#2# ##\n" +
@@ -651,7 +651,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // привидение начало свое движение
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "#☺   #\n" +
                 "#1# ##\n" +
@@ -666,7 +666,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // приведение нарвалось на зелье
         // но и мы подорвались с ним
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "#Ѡ   #\n" +
                 "H&H ##\n" +
@@ -688,7 +688,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "+++ ##\n" +
@@ -706,7 +706,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // when
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "+++ ##\n" +
@@ -734,7 +734,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -754,7 +754,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // перед взрывом
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
                 "# # ##\n" +
@@ -770,7 +770,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // перк разрушен
         // а вместо него злое привидение
-        asrtBrd("#H####\n" +
+        assertF("#H####\n" +
                 "#҉# ##\n" +
                 "#҉☻  #\n" +
                 "#҉# ##\n" +
@@ -786,7 +786,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // пивидение начало свое движение
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "#☺3  #\n" +
                 "# # ##\n" +
@@ -796,7 +796,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // when
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "#☺2  #\n" +
                 "#x# ##\n" +
@@ -810,7 +810,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // приведение скушало героя
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "#Ѡ1  #\n" +
                 "# # ##\n" +
@@ -830,7 +830,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // умирающий охотник подорвался на оставшейся после героя бомбе
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# H ##\n" +
                 "#&҉҉ #\n" +
                 "# H ##\n" +
@@ -847,7 +847,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // when
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# + ##\n" +
                 "#+   #\n" +
                 "# + ##\n" +
@@ -869,7 +869,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     public void shouldDropPerk_generateThreeGhosts() {
         shouldDropPerk_generateNewGhost_thenKillIt();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "# ☺  #\n" +
                 "+++ ##\n" +
@@ -895,7 +895,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
         assertEquals(0, hero().getPerks().size()); // перк не взяли
 
-        asrtBrd("#+##☼☺\n" +
+        assertF("#+##☼☺\n" +
                 "# # ☼ \n" +
                 "#    #\n" +
                 "+4+ ##\n" +
@@ -906,7 +906,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("#+##☼☺\n" +
+        assertF("#+##☼☺\n" +
                 "# # ☼ \n" +
                 "#    #\n" +
                 "+1+ ##\n" +
@@ -918,7 +918,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // породили три чудовища
         field.tick();
 
-        asrtBrd("#+##☼☺\n" +
+        assertF("#+##☼☺\n" +
                 "# # ☼ \n" +
                 "#҉   #\n" +
                 "xxx ##\n" +
@@ -930,7 +930,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // и они пошли за нами
         field.tick();
 
-        asrtBrd("#+##☼☺\n" +
+        assertF("#+##☼☺\n" +
                 "# # ☼ \n" +
                 "#    #\n" +
                 " xxx##\n" +
@@ -939,7 +939,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("#+##☼☺\n" +
+        assertF("#+##☼☺\n" +
                 "# # ☼ \n" +
                 "#  x #\n" +
                 "  xx##\n" +
@@ -948,7 +948,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("#+##☼☺\n" +
+        assertF("#+##☼☺\n" +
                 "# # ☼ \n" +
                 "#  xx#\n" +
                 "   x##\n" +
@@ -964,7 +964,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     public void shouldDropPerk_generateTwoGhosts_noWayNoPain() {
         shouldDropPerk_generateThreeGhosts();
 
-        asrtBrd("#+##☼☺\n" +
+        assertF("#+##☼☺\n" +
                 "# # ☼ \n" +
                 "#  xx#\n" +
                 "   x##\n" +
@@ -980,7 +980,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // как привидения нормальнеют
-        asrtBrd("#+##☼☺\n" +
+        assertF("#+##☼☺\n" +
                 "# # ☼☼\n" +
                 "#  &&#\n" +
                 "   &##\n" +
@@ -996,7 +996,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // и после выпиливаются
         field.tick();
 
-        asrtBrd("#+##☼☺\n" +
+        assertF("#+##☼☺\n" +
                 "# # ☼☼\n" +
                 "#  ++#\n" +
                 "   +##\n" +
@@ -1015,7 +1015,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // перки дальше тикаются нормально
         field.tick();
 
-        asrtBrd("#+##☼☺\n" +
+        assertF("#+##☼☺\n" +
                 "# # ☼☼\n" +
                 "#  ++#\n" +
                 "   +##\n" +
@@ -1054,7 +1054,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -1074,7 +1074,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
 
         // перед взрывом
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# #☺##\n" +
@@ -1089,7 +1089,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // перк разрушен
         // а вместо него злое привидение
-        asrtBrd("#H####\n" +
+        assertF("#H####\n" +
                 "#҉# ##\n" +
                 "#҉   #\n" +
                 "#҉#☺##\n" +
@@ -1104,7 +1104,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# #☺##\n" +
@@ -1119,7 +1119,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         boxesCount(boxesCount() - 1); // одна коробка потречена злым привидением
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# #Ѡ##\n" +
@@ -1135,7 +1135,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // превратился в перк обратно
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# #Ѡ##\n" +
@@ -1149,7 +1149,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // и тикается каждую секунду как и тот, что не трогали на поле
         field.tick();
 
-        asrtBrd("#+####\n" +
+        assertF("#+####\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# #Ѡ##\n" +
@@ -1210,7 +1210,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         assertEquals("[]" ,
                 hero().getPerks().toString());
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "c    \n" +
@@ -1221,7 +1221,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -1238,7 +1238,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "     \n" +
@@ -1254,7 +1254,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "     \n" +
@@ -1270,7 +1270,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "     \n" +

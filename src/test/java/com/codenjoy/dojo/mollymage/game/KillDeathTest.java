@@ -47,7 +47,7 @@ public class KillDeathTest extends AbstractGameTest {
         field.tick();
 
         assertHeroAlive();
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -55,7 +55,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "҉    \n" +
@@ -66,7 +66,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -89,7 +89,7 @@ public class KillDeathTest extends AbstractGameTest {
         hero().left();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
@@ -109,7 +109,7 @@ public class KillDeathTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " ҉   \n" +
                 "҉Ѡ҉  \n" +
@@ -128,7 +128,7 @@ public class KillDeathTest extends AbstractGameTest {
         hero().up();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
@@ -147,7 +147,7 @@ public class KillDeathTest extends AbstractGameTest {
         hero().down();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
@@ -166,7 +166,7 @@ public class KillDeathTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
@@ -185,7 +185,7 @@ public class KillDeathTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
@@ -211,7 +211,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -220,7 +220,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "҉    \n" +
@@ -231,7 +231,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -261,7 +261,7 @@ public class KillDeathTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -270,7 +270,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
@@ -281,7 +281,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -309,7 +309,7 @@ public class KillDeathTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "1    \n" +
@@ -318,7 +318,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "҉    \n" +
                 "҉҉   \n" +
@@ -329,7 +329,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -359,7 +359,7 @@ public class KillDeathTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -368,7 +368,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ    \n" +
@@ -379,7 +379,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ    \n" +
@@ -415,7 +415,7 @@ public class KillDeathTest extends AbstractGameTest {
         field.tick();
 
         assertHeroAlive();
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -424,7 +424,7 @@ public class KillDeathTest extends AbstractGameTest {
         field.tick();
 
         assertHeroAlive();
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺҉   \n" +
@@ -450,7 +450,7 @@ public class KillDeathTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "  ҉  \n" +
                 " ҉҉҉ \n" +
                 "  Ѡ  \n" +
@@ -460,7 +460,7 @@ public class KillDeathTest extends AbstractGameTest {
         assertHeroDie();
 
         field.tick();
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "  Ѡ  \n" +
@@ -482,7 +482,7 @@ public class KillDeathTest extends AbstractGameTest {
         hero().act();
         goOut();
 
-        asrtBrd("#####\n" +
+        assertF("#####\n" +
                 "#  ☺#\n" +
                 "# # #\n" +
                 "#1  #\n" +
@@ -490,7 +490,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("#####\n" +
+        assertF("#####\n" +
                 "#  ☺#\n" +
                 "#҉# #\n" +
                 "H҉҉ #\n" +
@@ -516,7 +516,7 @@ public class KillDeathTest extends AbstractGameTest {
         dice(9, 9, 1, Direction.DOWN.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼&☼\n" +
                 "☼         ☼\n" +
@@ -530,7 +530,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼        &☼\n" +
@@ -552,7 +552,7 @@ public class KillDeathTest extends AbstractGameTest {
         dice(1, Direction.LEFT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -576,7 +576,7 @@ public class KillDeathTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -590,7 +590,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -605,7 +605,7 @@ public class KillDeathTest extends AbstractGameTest {
         dice(level.size() - 2, level.size() - 2, Direction.DOWN.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼&☼\n" +
                 "☼         ☼\n" +
@@ -639,7 +639,7 @@ public class KillDeathTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉☺   \n" +
@@ -648,7 +648,7 @@ public class KillDeathTest extends AbstractGameTest {
         dice(2, 2, Direction.DOWN.value());
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺&  \n" +

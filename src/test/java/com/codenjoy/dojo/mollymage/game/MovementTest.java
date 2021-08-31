@@ -43,7 +43,7 @@ public class MovementTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -64,7 +64,7 @@ public class MovementTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -82,7 +82,7 @@ public class MovementTest extends AbstractGameTest {
         hero().up();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -106,7 +106,7 @@ public class MovementTest extends AbstractGameTest {
         hero().down();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -124,7 +124,7 @@ public class MovementTest extends AbstractGameTest {
         hero().down();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -148,7 +148,7 @@ public class MovementTest extends AbstractGameTest {
         hero().left();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -166,7 +166,7 @@ public class MovementTest extends AbstractGameTest {
         hero().left();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -183,7 +183,7 @@ public class MovementTest extends AbstractGameTest {
 
         gotoMaxRight();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -200,7 +200,7 @@ public class MovementTest extends AbstractGameTest {
 
         gotoMaxUp();
 
-        asrtBrd("☺    \n" +
+        assertF("☺    \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -221,7 +221,7 @@ public class MovementTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -233,7 +233,7 @@ public class MovementTest extends AbstractGameTest {
         hero().up();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
@@ -252,7 +252,7 @@ public class MovementTest extends AbstractGameTest {
         hero().down();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -270,7 +270,7 @@ public class MovementTest extends AbstractGameTest {
         hero().left();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -287,7 +287,7 @@ public class MovementTest extends AbstractGameTest {
 
         gotoMaxRight();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼  ☺☼\n" +
@@ -304,7 +304,7 @@ public class MovementTest extends AbstractGameTest {
 
         gotoMaxUp();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼☺  ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼   ☼\n" +
@@ -323,7 +323,7 @@ public class MovementTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -332,7 +332,7 @@ public class MovementTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -341,7 +341,7 @@ public class MovementTest extends AbstractGameTest {
         hero().left();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -361,7 +361,7 @@ public class MovementTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -380,7 +380,7 @@ public class MovementTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -389,7 +389,7 @@ public class MovementTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -410,7 +410,7 @@ public class MovementTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -431,7 +431,7 @@ public class MovementTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -440,7 +440,7 @@ public class MovementTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -468,7 +468,7 @@ public class MovementTest extends AbstractGameTest {
         dice(9, 9, 1, Direction.DOWN.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼&☼\n" +
                 "☼         ☼\n" +
@@ -487,7 +487,7 @@ public class MovementTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -502,7 +502,7 @@ public class MovementTest extends AbstractGameTest {
         dice(0, Direction.LEFT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -522,7 +522,7 @@ public class MovementTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -537,7 +537,7 @@ public class MovementTest extends AbstractGameTest {
         dice(1, Direction.RIGHT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -556,7 +556,7 @@ public class MovementTest extends AbstractGameTest {
         dice(Direction.LEFT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -571,7 +571,7 @@ public class MovementTest extends AbstractGameTest {
         dice(Direction.DOWN.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -585,7 +585,7 @@ public class MovementTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -621,7 +621,7 @@ public class MovementTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼☻  ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼   ☼\n" +
@@ -639,7 +639,7 @@ public class MovementTest extends AbstractGameTest {
 
         ghost(3, 3).start();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -661,7 +661,7 @@ public class MovementTest extends AbstractGameTest {
         hero().down();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼ 2&☼\n" +
                 "☼☺☼ ☼\n" +
                 "☼   ☼\n" +
@@ -670,7 +670,7 @@ public class MovementTest extends AbstractGameTest {
         dice(Direction.LEFT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼ & ☼\n" +
                 "☼☺☼ ☼\n" +
                 "☼   ☼\n" +
@@ -685,7 +685,7 @@ public class MovementTest extends AbstractGameTest {
         hero().down();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼x҉҉☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -700,7 +700,7 @@ public class MovementTest extends AbstractGameTest {
         // when пришла пора регенериться чоперу
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼&☼\n" +
                 "☼☺  ☼\n" +
@@ -718,7 +718,7 @@ public class MovementTest extends AbstractGameTest {
 
         ghost(3, 3).start();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -727,7 +727,7 @@ public class MovementTest extends AbstractGameTest {
         dice(Direction.RIGHT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -745,7 +745,7 @@ public class MovementTest extends AbstractGameTest {
 
         ghost(3, 3).start();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼ #&☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
@@ -754,7 +754,7 @@ public class MovementTest extends AbstractGameTest {
         dice(Direction.RIGHT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼ #&☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
@@ -763,7 +763,7 @@ public class MovementTest extends AbstractGameTest {
         dice(Direction.UP.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼ #&☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
@@ -772,7 +772,7 @@ public class MovementTest extends AbstractGameTest {
         dice(Direction.LEFT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼ #&☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
@@ -781,7 +781,7 @@ public class MovementTest extends AbstractGameTest {
         dice(Direction.DOWN.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼ #&☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
@@ -797,7 +797,7 @@ public class MovementTest extends AbstractGameTest {
         field.boxes().remove(pt(2, 3));
         boxesCount(boxesCount() - 1);
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
@@ -806,7 +806,7 @@ public class MovementTest extends AbstractGameTest {
         dice(Direction.LEFT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼ & ☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
@@ -815,7 +815,7 @@ public class MovementTest extends AbstractGameTest {
         dice(Direction.LEFT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼&  ☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +

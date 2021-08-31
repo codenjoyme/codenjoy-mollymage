@@ -122,7 +122,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -149,7 +149,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -163,7 +163,7 @@ public class GameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
@@ -178,7 +178,7 @@ public class GameTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "###  \n" +
                 "#☺#  \n" +
@@ -191,7 +191,7 @@ public class GameTest extends AbstractGameTest {
         field.tick();
 
         //  then two boxes should been destroyed
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "###  \n" +
                 "H☺#  \n" +
@@ -204,7 +204,7 @@ public class GameTest extends AbstractGameTest {
         field.tick();
 
         // then only 6 boxes should been exist
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "###  \n" +
                 " ☺#  \n" +
@@ -217,7 +217,7 @@ public class GameTest extends AbstractGameTest {
         field.tick();
 
         // then boxes should been generated on [0,1] and [1,0] to
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "###  \n" +
                 "#☺#  \n" +
@@ -253,7 +253,7 @@ public class GameTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("    &\n" +
+        assertF("    &\n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉☺   \n" +
@@ -264,7 +264,7 @@ public class GameTest extends AbstractGameTest {
         dice(Direction.DOWN.value(), 3, 3);
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "   #&\n" +
                 "     \n" +
                 " ☺   \n" +
@@ -285,7 +285,7 @@ public class GameTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺# ☼\n" +
@@ -305,7 +305,7 @@ public class GameTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼ ☺ ☼\n" +
                 "☼҉☼ ☼\n" +
                 "☼҉H ☼\n" +
@@ -318,7 +318,7 @@ public class GameTest extends AbstractGameTest {
         dice(0, 0, hero().getX(), hero().getY(), 1, 1);
 
         // then
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼ ☺ ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼#  ☼\n" +

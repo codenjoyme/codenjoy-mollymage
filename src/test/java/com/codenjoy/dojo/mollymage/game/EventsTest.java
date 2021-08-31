@@ -61,7 +61,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "#☺   \n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -77,7 +77,7 @@ public class EventsTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
@@ -104,7 +104,7 @@ public class EventsTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
@@ -124,7 +124,7 @@ public class EventsTest extends AbstractGameTest {
         canDropPotions(4);
         potionsPower(1);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "#    \n" +
                 "&    \n" +
                 "#    \n" +
@@ -146,7 +146,7 @@ public class EventsTest extends AbstractGameTest {
         hero().up();
         field.tick();
 
-        asrtBrd(" ☺   \n" +
+        assertF(" ☺   \n" +
                 "#4   \n" +
                 "&3   \n" +
                 "#2   \n" +
@@ -155,7 +155,7 @@ public class EventsTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("  ☺  \n" +
+        assertF("  ☺  \n" +
                 "#3   \n" +
                 "&2   \n" +
                 "#1   \n" +
@@ -168,7 +168,7 @@ public class EventsTest extends AbstractGameTest {
         field.tick();
         field.ghosts().stream().forEach(Ghost::stop); // и не будет больше двигаться
 
-        asrtBrd("  ☺& \n" +
+        assertF("  ☺& \n" +
                 "#2   \n" +
                 "&1   \n" +
                 "H҉҉  \n" +
@@ -180,7 +180,7 @@ public class EventsTest extends AbstractGameTest {
         dice(4, 4);
         field.tick();
 
-        asrtBrd("  ☺&#\n" +
+        assertF("  ☺&#\n" +
                 "#1   \n" +
                 "x҉҉  \n" +
                 " ҉   \n" +
@@ -193,7 +193,7 @@ public class EventsTest extends AbstractGameTest {
         field.tick();
         field.ghosts().stream().forEach(Ghost::stop); // и не будет больше двигаться
 
-        asrtBrd(" ҉☺&#\n" +
+        assertF(" ҉☺&#\n" +
                 "H҉҉& \n" +
                 " ҉   \n" +
                 "     \n" +
@@ -210,7 +210,7 @@ public class EventsTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("   &#\n" +
+        assertF("   &#\n" +
                 " ☻ &#\n" +
                 "     \n" +
                 "     \n" +
@@ -221,7 +221,7 @@ public class EventsTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd(" ҉ &#\n" +
+        assertF(" ҉ &#\n" +
                 "҉Ѡ҉&#\n" +
                 " ҉   \n" +
                 "     \n" +
@@ -234,7 +234,7 @@ public class EventsTest extends AbstractGameTest {
         field.tick();
         game().newGame();
 
-        asrtBrd("   &#\n" +
+        assertF("   &#\n" +
                 "   &#\n" +
                 "     \n" +
                 " ☺   \n" +
@@ -243,7 +243,7 @@ public class EventsTest extends AbstractGameTest {
         heroes.set(0, (Hero) game().getJoystick());
         hero().move(pt(1, 0));
 
-        asrtBrd("   &#\n" +
+        assertF("   &#\n" +
                 "   &#\n" +
                 "     \n" +
                 "     \n" +
@@ -260,7 +260,7 @@ public class EventsTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("   &#\n" +
+        assertF("   &#\n" +
                 "   &#\n" +
                 "     \n" +
                 " ҉   \n" +
@@ -280,7 +280,7 @@ public class EventsTest extends AbstractGameTest {
         canDropPotions(4);
         potionsPower(1);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "#    \n" +
                 "&    \n" +
                 "#    \n" +
@@ -302,7 +302,7 @@ public class EventsTest extends AbstractGameTest {
         hero().up();
         field.tick();
 
-        asrtBrd(" ☺   \n" +
+        assertF(" ☺   \n" +
                 "#4   \n" +
                 "&3   \n" +
                 "#2   \n" +
@@ -313,7 +313,7 @@ public class EventsTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd(" ҉☺  \n" +
+        assertF(" ҉☺  \n" +
                 "H҉҉  \n" +
                 "x҉҉  \n" +
                 "H҉҉  \n" +
@@ -323,7 +323,7 @@ public class EventsTest extends AbstractGameTest {
         dice(2, 2, 3, 3);
         field.tick();
 
-        asrtBrd("  ☺  \n" +
+        assertF("  ☺  \n" +
                 "   # \n" +
                 "  #  \n" +
                 "     \n" +
@@ -353,7 +353,7 @@ public class EventsTest extends AbstractGameTest {
         field.tick();
 
         // then ghost die
-        asrtBrd("҉  \n" +
+        assertF("҉  \n" +
                 "҉☺ \n" +
                 "҉҉x\n");
 
@@ -365,7 +365,7 @@ public class EventsTest extends AbstractGameTest {
         // then boxes fill whole field except 2 free points([2,2] and [0,2]).
         // ghost tried to generate on both free places, but appeared only on [2,2]
         // [0,2] denied as previous place of death
-        asrtBrd("##&\n" +
+        assertF("##&\n" +
                 "#☺#\n" +
                 "## \n");
         assertEquals(1, field.ghosts().size());

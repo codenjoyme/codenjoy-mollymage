@@ -70,7 +70,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "#҉# ##\n" +
@@ -79,7 +79,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -90,7 +90,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -101,7 +101,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -140,7 +140,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "#҉# ##\n" +
@@ -152,7 +152,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#    #\n" +
                 "# # ##\n" +
@@ -169,7 +169,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         newGameForDied(); // это сделает сервер
 
         // then
-        asrtBrd("######\n" +
+        assertF("######\n" +
                 "# # ##\n" +
                 "#  ☺ #\n" +
                 "# # ##\n" +
@@ -205,7 +205,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("############\n" +
+        assertF("############\n" +
                 "# # # # # ##\n" +
                 "#          #\n" +
                 "# # # # # ##\n" +
@@ -242,7 +242,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("##########\n" +
+        assertF("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
@@ -279,7 +279,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("##########\n" +
+        assertF("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
@@ -324,7 +324,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼        ☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
@@ -341,7 +341,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼        ☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
@@ -387,7 +387,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼        ☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
@@ -404,7 +404,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
                 "☼҉       ☼\n" +
                 "☼҉☼ ☼ ☼ ☼☼\n" +
@@ -432,7 +432,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         newPerk(1, 2, new PoisonThrower(timeout));
 
         // then
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼T☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -443,7 +443,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼☺☼ ☼\n" +
                 "☼   ☼\n" +
@@ -456,7 +456,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼☺☼ ☼\n" +
                 "☼҉  ☼\n" +
@@ -469,7 +469,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then perk timer should be doubled minus few steps
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼☺  ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼   ☼\n" +
@@ -483,7 +483,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼☺  ☼\n" +
                 "☼҉☼ ☼\n" +
                 "☼҉  ☼\n" +
@@ -517,7 +517,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("##########\n" +
+        assertF("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
@@ -534,7 +534,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("##########\n" +
+        assertF("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
@@ -551,7 +551,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("##########\n" +
+        assertF("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
@@ -568,7 +568,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("##########\n" +
+        assertF("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
@@ -585,7 +585,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("##########\n" +
+        assertF("##########\n" +
                 "# # # # ##\n" +
                 "#        #\n" +
                 "# # # # ##\n" +
@@ -625,7 +625,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("##########\n" +
+        assertF("##########\n" +
                 "# # # # ##\n" +
                 "#҉       #\n" +
                 "#҉# # # ##\n" +
@@ -670,7 +670,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("############\n" +
+        assertF("############\n" +
                 "# # # # # ##\n" +
                 "#          #\n" +
                 "# # # # # ##\n" +
@@ -743,7 +743,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("############\n" +
+        assertF("############\n" +
                 "# # # # # ##\n" +
                 "#          #\n" +
                 "# # # # # ##\n" +
@@ -777,7 +777,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("###H########\n" +
+        assertF("###H########\n" +
                 "# #҉# # # ##\n" +
                 "#  ҉       #\n" +
                 "# #҉# # # ##\n" +
@@ -819,7 +819,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("### ########\n" +
+        assertF("### ########\n" +
                 "# # # # ####\n" +
                 "#        # #\n" +
                 "# # # # ####\n" +
@@ -848,7 +848,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
 
         // obe potion by default on lel 1
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -861,7 +861,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
 
         // no more potions :(
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -875,7 +875,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         hero().act();
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -886,7 +886,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         hero().act();
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -897,7 +897,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
 
         // 4 potions and no more
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -918,7 +918,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -931,7 +931,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "҉    \n" +
@@ -941,7 +941,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -949,7 +949,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -960,7 +960,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
@@ -988,7 +988,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -1002,7 +1002,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().up();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
@@ -1016,7 +1016,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "҉☺   \n" +
@@ -1030,7 +1030,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☻   \n" +
@@ -1044,7 +1044,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().up();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " ☺   \n" +
                 " 5   \n" +
@@ -1066,7 +1066,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 " 5   \n" +
@@ -1080,7 +1080,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺҉   \n" +
                 "҉҉҉  \n" +
@@ -1093,7 +1093,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☻    \n" +
                 "     \n" +
@@ -1106,7 +1106,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "3☺   \n" +
                 "     \n" +
@@ -1120,7 +1120,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "24☺  \n" +
                 "     \n" +
@@ -1134,7 +1134,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "13 ☺ \n" +
                 "     \n" +
@@ -1148,7 +1148,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "҉    \n" +
                 "҉2  ☺\n" +  // взрывная волна кстати не перекрывает зелье
                 "҉    \n" +
@@ -1161,7 +1161,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " 1  ☻\n" +  // взрывная волна кстати не перекрывает зелье
                 "     \n" +
@@ -1191,7 +1191,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -1205,7 +1205,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().up();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
@@ -1219,7 +1219,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "҉☺   \n" +
@@ -1233,7 +1233,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☻   \n" +
@@ -1247,7 +1247,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().up();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " ☺   \n" +
                 " 5   \n" +
@@ -1269,7 +1269,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 " 5   \n" +
@@ -1283,7 +1283,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺҉   \n" +
                 "҉҉҉  \n" +
@@ -1296,7 +1296,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☻    \n" +
                 "     \n" +
@@ -1309,7 +1309,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "3☺   \n" +
                 "     \n" +
@@ -1323,7 +1323,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "2 ☺  \n" +
                 "     \n" +
@@ -1337,7 +1337,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "1  ☺ \n" +
                 "     \n" +
@@ -1351,7 +1351,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "҉    \n" +
                 "҉҉  ☺\n" +
                 "҉    \n" +
@@ -1364,7 +1364,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "    ☻\n" +
                 "     \n" +
@@ -1395,7 +1395,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "#    \n" +
@@ -1409,7 +1409,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "#    \n" +
@@ -1423,7 +1423,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "H    \n" +
@@ -1439,7 +1439,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         dice(4, 4);
         field.tick();
 
-        asrtBrd("    #\n" +
+        assertF("    #\n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -1464,7 +1464,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().addPerk(new PotionCountIncrease(3, 30));
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1478,7 +1478,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // then
         events.verifyAllEvents("[CATCH_PERK]");
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1499,7 +1499,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 " ☺    \n" +
                 "5     \n" +
@@ -1512,7 +1512,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "҉☺    \n" +
                 "҉҉    \n" +
@@ -1533,7 +1533,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().addPerk(new PotionCountIncrease(3, 30));
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1553,7 +1553,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 " ☺    \n" +
@@ -1565,7 +1565,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 " ☺    \n" +
@@ -1585,7 +1585,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         newPerk(0, 1, getPotionExploderPerk());
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1601,7 +1601,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1615,7 +1615,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1634,7 +1634,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☺     \n");
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1650,7 +1650,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1663,7 +1663,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1683,7 +1683,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         newPerk(0, 1, getPotionExploderPerk());
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1699,7 +1699,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1713,7 +1713,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1726,7 +1726,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "  ☺   \n" +
@@ -1739,7 +1739,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "   ☺  \n" +
@@ -1761,7 +1761,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         newPerk(0, 1, getPotionExploderPerk());
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1775,7 +1775,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // then
         events.verifyAllEvents("[CATCH_PERK]");
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "      \n" +
@@ -1792,7 +1792,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // then
         events.verifyAllEvents("[CATCH_PERK]");
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 "☺     \n" +
@@ -1806,7 +1806,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 "      \n" +
                 " ☺    \n" +
@@ -1819,7 +1819,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 " ☺    \n" +
                 " 4    \n" +
@@ -1832,7 +1832,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         field.tick();
 
         // then
-        asrtBrd("      \n" +
+        assertF("      \n" +
                 "      \n" +
                 " ҉☺   \n" +
                 "҉҉҉   \n" +

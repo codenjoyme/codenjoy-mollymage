@@ -39,10 +39,12 @@ import com.codenjoy.dojo.services.multiplayer.Single;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.utils.events.EventsListenersAssert;
+import org.junit.Before;
 import org.mockito.Mockito;
 import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
@@ -58,18 +60,33 @@ public abstract class AbstractGameTest {
     public static final int CATCH_PERK_SCORE_FOR_TEST = 10;
     public static final int PERK_TIMEOUT_FOR_TEST = 10;
 
-    protected List<EventListener> listeners = new ArrayList<>();
-    protected List<Player> players = new ArrayList<>();
-    protected List<Game> games = new ArrayList<>();
-    protected List<Hero> heroes = new ArrayList<>();
+    protected List<EventListener> listeners;
+    protected List<Player> players;
+    protected List<Game> games;
+    protected List<Hero> heroes;
 
-    protected GameSettings settings = settings();
+    protected GameSettings settings;
     protected Dice dice = mock(Dice.class);
     protected MollyMage field;
-    private PrinterFactory printer = new PrinterFactoryImpl();
-    protected PerksSettingsWrapper perks = settings.perksSettings();
-    protected EventsListenersAssert events = new EventsListenersAssert(() -> listeners, Events.class);
+    private PrinterFactory printer;
+    protected PerksSettingsWrapper perks;
+    protected EventsListenersAssert events;
     protected LevelImpl level;
+
+    @Before
+    public void setup() {
+        listeners = new LinkedList<>();
+        players = new LinkedList<>();
+        games = new LinkedList<>();
+        heroes = new ArrayList<>();
+
+        dice = mock(Dice.class);
+        settings = settings();
+        perks = settings.perksSettings();
+        printer = new PrinterFactoryImpl();
+        events = new EventsListenersAssert(() -> listeners, Events.class);
+    }
+
 
     protected void givenFl(String map) {
         settings.string(LEVEL_MAP, map);

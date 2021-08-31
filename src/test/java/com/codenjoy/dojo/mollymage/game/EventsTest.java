@@ -240,7 +240,6 @@ public class EventsTest extends AbstractGameTest {
                 " ☺   \n" +
                 "     \n");
 
-        heroes.set(0, (Hero) game().getJoystick());
         hero().move(pt(1, 0));
 
         assertF("   &#\n" +

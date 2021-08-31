@@ -914,7 +914,6 @@ public class RoundScoresTest extends AbstractGameTest {
         // третий
         dice(0, 0, 0, 1, 1, 0);
         field.clearScore();
-        resetHeroes();
 
         // после этого тика будет сразу же новый раунд
         tick();

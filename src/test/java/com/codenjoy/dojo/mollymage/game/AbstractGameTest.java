@@ -87,13 +87,19 @@ public abstract class AbstractGameTest {
         events = new EventsListenersAssert(() -> listeners, Events.class);
     }
 
+    public void dice(int... ints) {
+        OngoingStubbing<Integer> when = when(dice.next(anyInt()));
+        for (int i : ints) {
+            when = when.thenReturn(i);
+        }
+    }
+
     protected void givenFl(String map) {
         settings.string(LEVEL_MAP, map);
         level = (LevelImpl) settings.level();
 
         field = new MollyMage(level, dice, settings);
         level.heroes().forEach(hero -> givenPlayer(hero));
-        resetHeroes();
 
         boxesCount(field.boxes().size());
         ghostsCount(field.ghosts().size());
@@ -125,7 +131,40 @@ public abstract class AbstractGameTest {
         field.tick();
     }
 
-    // getters & asserts
+    public void assertF(String expected, int index) {
+        assertEquals(expected, game(index).getBoardAsString());
+    }
+
+    public Game game(int index) {
+        return games.get(index);
+    }
+
+    public Player player(int index) {
+        return players.get(index);
+    }
+
+    public Hero hero(int index) {
+        return (Hero) game(index).getPlayer().getHero();
+    }
+
+    // getters, if only one player
+
+    public void assertF(String expected) {
+        assertF(expected, 0);
+    }
+
+    public Game game() {
+        return game(0);
+    }
+
+    public Player player() {
+        return player(0);
+    }
+
+    public Hero hero() {
+        return hero(0);
+    }
+
 
     protected EventListener listener() {
         return listeners.get(0);
@@ -135,29 +174,7 @@ public abstract class AbstractGameTest {
         return listeners.get(index);
     }
 
-    protected Player player() {
-        return players.get(0);
-    }
-
-    protected Player player(int index) {
-        return players.get(index);
-    }
-
-    protected Game game() {
-        return games.get(0);
-    }
-
-    protected Game game(int index) {
-        return games.get(index);
-    }
-
-    protected Hero hero() {
-        return heroes.get(0);
-    }
-
-    protected Hero hero(int index) {
-        return heroes.get(index);
-    }
+    // other stuff
 
     protected void gotoMaxUp() {
         for (int y = 0; y <= level.size() + 1; y++) {
@@ -171,14 +188,6 @@ public abstract class AbstractGameTest {
             hero().right();
             field.tick();
         }
-    }
-
-    protected void newGameForDied() {
-        if (!player().isAlive()) {
-            field.newGame(player());
-        }
-        heroes.set(0, player().getHero());
-        hero().setAlive(true);
     }
 
     protected GameSettings canDropPotions(int count) {
@@ -202,14 +211,6 @@ public abstract class AbstractGameTest {
         }
     }
 
-    protected void assertF(String expected) {
-        assertF(expected, 0);
-    }
-
-    protected void assertF(String board, int index) {
-        assertEquals(board, games.get(index).getBoardAsString());
-    }
-
     protected void assertBoards(String expected, Integer... indexes) {
         events.assertAll(expected, games.size(), indexes, index -> {
             Object actual = game(index).getBoardAsString();
@@ -223,7 +224,6 @@ public abstract class AbstractGameTest {
                 field.newGame(player(players.indexOf(player)));
             }
         });
-        resetHeroes();
     }
 
     protected GameSettings potionsPower(int power) {
@@ -249,13 +249,6 @@ public abstract class AbstractGameTest {
         field.tick();
         hero().up();
         field.tick();
-    }
-
-    public void dice(int... ints) {
-        OngoingStubbing<Integer> when = when(dice.next(anyInt()));
-        for (int i : ints) {
-            when = when.thenReturn(i);
-        }
     }
 
     protected void newBox(int x, int y) {
@@ -302,11 +295,6 @@ public abstract class AbstractGameTest {
             }
         }
         return result.stream().mapToInt(i -> i).toArray();
-    }
-
-    protected void resetHeroes() {
-        heroes.clear();
-        players.forEach(player -> heroes.add(player.getHero()));
     }
 
     protected void resetListeners() {

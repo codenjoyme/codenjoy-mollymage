@@ -421,7 +421,8 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         dice(1, 1);
         field.tick();
-        newGameForDied(); // это сделает сервер
+        // это сделает сервер
+        game().newGame(); // это сделает сервер
 
         assertPerks("[{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=42} at [1,5]},\n" +
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=38} at [3,4]},\n" +
@@ -684,7 +685,8 @@ public class PerkOnGameTest extends AbstractGameTest {
         boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
 
         dice(0, 1);
-        newGameForDied(); // это сделает сервер
+        // это сделает сервер
+        game().newGame(); // это сделает сервер
 
         field.tick();
 
@@ -825,7 +827,8 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // when
         dice(0, 1);
-        newGameForDied(); // это сделает сервер
+        // это сделает сервер
+        game().newGame(); // это сделает сервер
 
         field.tick();
 

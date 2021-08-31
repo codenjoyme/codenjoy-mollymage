@@ -166,7 +166,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         // а потом в свободное место
         dice(0, 1, 1, 0, 3, 3);
         field.tick();
-        newGameForDied(); // это сделает сервер
+        game().newGame(); // это сделает сервер
 
         // then
         assertF("######\n" +

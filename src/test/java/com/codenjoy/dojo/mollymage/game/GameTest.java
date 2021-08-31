@@ -30,6 +30,7 @@ import com.codenjoy.dojo.services.Joystick;
 import com.codenjoy.dojo.services.field.PointField;
 import org.junit.Test;
 
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotSame;
 import static org.mockito.Mockito.mock;
@@ -142,7 +143,9 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldNotAppearBoxesOnDestroyedPlaces() {
-        potionsPower(1);
+        // given
+        settings.integer(POTION_POWER, 1);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -172,7 +175,7 @@ public class GameTest extends AbstractGameTest {
         // when we allow to create more boxes
         // boxes should fill square around hero in coordinates from [0,0] to [2,2]
         // we allow to create 9 boxes and only 7 should be created
-        boxesCount(9);
+        settings.integer(TREASURE_BOX_COUNT, 9);
         final int[] square3x3Coordinates = getCoordinatesForPointsInSquare(3);
         dice(square3x3Coordinates);
         field.tick();
@@ -228,19 +231,18 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldGhostNotAppearWhenDestroyWall() {
-        potionsPower(3);
+        // given
+        settings.integer(POTION_POWER, 3);
 
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺    \n");
+                "☺  # \n");
 
-        dice(4, 4, Direction.RIGHT.value());
-        ghostsCount(1);
-
-        newBox(3, 0);
-        boxesCount(1);
+        settings.integer(GHOSTS_COUNT, 1);
+        dice(4, 4, // координаты привидения
+                Direction.RIGHT.value()); // направление движения
 
         hero().act();
         hero().up();
@@ -259,9 +261,8 @@ public class GameTest extends AbstractGameTest {
                 "҉☺   \n" +
                 "҉҉҉H \n");
 
-        // направление движения привидения
-        // новая коробка
-        dice(Direction.DOWN.value(), 3, 3);
+        dice(Direction.DOWN.value(), // направление движения привидения
+                3, 3); // новая коробка
         field.tick();
 
         assertF("     \n" +
@@ -276,12 +277,8 @@ public class GameTest extends AbstractGameTest {
         givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
-                "☼☺  ☼\n" +
+                "☼☺# ☼\n" +
                 "☼☼☼☼☼\n");
-
-        boxesCount(1);
-        // коробка
-        dice(2, 1);
 
         field.tick();
 
@@ -446,7 +443,7 @@ public class GameTest extends AbstractGameTest {
                 "listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_GHOST]\n");
 
-        ghostsCount(0); // больше не надо привидений
+        removeGhosts(2); // больше не надо привидений
         tick();
 
         assertF("     \n" +

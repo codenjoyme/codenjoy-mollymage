@@ -101,8 +101,9 @@ public abstract class AbstractGameTest {
         field = new MollyMage(level, dice, settings);
         level.heroes().forEach(hero -> givenPlayer(hero));
 
-        boxesCount(field.boxes().size());
-        ghostsCount(field.ghosts().size());
+        settings.integer(TREASURE_BOX_COUNT, field.boxes().size())
+                .integer(GHOSTS_COUNT, field.ghosts().size());
+
         stopGhosts(); // по умолчанию все привидения стоят на месте
     }
 
@@ -190,10 +191,6 @@ public abstract class AbstractGameTest {
         }
     }
 
-    protected GameSettings potionsCount(int count) {
-        return settings.integer(POTIONS_COUNT, count);
-    }
-
     protected void assertHeroDie() {
         assertEquals("Expected game over", true, game().isGameOver());
     }
@@ -226,12 +223,8 @@ public abstract class AbstractGameTest {
         });
     }
 
-    protected GameSettings potionsPower(int power) {
-        return settings.integer(POTION_POWER, power);
-    }
-
     protected void assertPotionPower(int power, String expected) {
-        potionsPower(power);
+        settings.integer(POTION_POWER, power);
 
         hero().act();
         goOut();
@@ -255,27 +248,12 @@ public abstract class AbstractGameTest {
         field.boxes().add(new TreasureBox(x, y));
     }
 
-    protected void newGhost(int x, int y) {
-        Ghost ghost = new Ghost(pt(x, y));
-        ghost.init(field);
-        ghostsCount(ghostsCount() + 1);
-        field.ghosts().add(ghost);
+    protected void removeBoxes(int count) {
+        settings.integer(TREASURE_BOX_COUNT, settings.integer(TREASURE_BOX_COUNT) - count);
     }
 
-    protected int boxesCount() {
-        return settings.integer(TREASURE_BOX_COUNT);
-    }
-
-    protected void boxesCount(int count) {
-        settings.integer(TREASURE_BOX_COUNT, count);
-    }
-
-    protected int ghostsCount() {
-        return settings.integer(GHOSTS_COUNT);
-    }
-
-    protected void ghostsCount(int count) {
-        settings.integer(GHOSTS_COUNT, count);
+    protected void removeGhosts(int count) {
+        settings.integer(GHOSTS_COUNT, settings.integer(GHOSTS_COUNT) - count);
     }
 
     protected Ghost ghost(int x, int y) {

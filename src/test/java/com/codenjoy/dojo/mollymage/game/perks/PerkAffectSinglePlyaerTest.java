@@ -148,7 +148,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "#H####\n");
 
         // when
-        boxesCount(boxesCount() - 2); // две коробки потрачено
+        removeBoxes(2); // две коробки потрачено
         field.tick();
 
         // then
@@ -222,8 +222,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldNotThrowPoison_withoutPTperk() {
         // given
-        potionsPower(4);
-        settings.integer(POISON_THROWER_RECHARGE, 3);
+        settings.integer(POTION_POWER, 4)
+                .integer(POISON_THROWER_RECHARGE, 3);
 
         givenFl("##########\n" +
                 "# # # # ##\n" +
@@ -257,8 +257,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldNotDoAnythingWhenACTWithoutMove_withPTperk() {
         // given
-        potionsPower(4);
-        settings.integer(POISON_THROWER_RECHARGE, 3);
+        settings.integer(POTION_POWER, 4)
+                .integer(POISON_THROWER_RECHARGE, 3);
 
         givenFl("##########\n" +
                 "# # # # ##\n" +
@@ -294,8 +294,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoisonThroughThePotion_withPTperk() {
         // given
-        potionsPower(4);
-        settings.integer(POISON_THROWER_RECHARGE, 3);
+        settings.integer(POTION_POWER, 4)
+                .integer(POISON_THROWER_RECHARGE, 3);
 
         givenFl("☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
@@ -356,9 +356,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldDetonatePotionWhenThrowPoison_withPTperk_withBadaBoom() {
         // given
-        potionsPower(4);
-        settings.integer(POISON_THROWER_RECHARGE, 3);
-        settings.bool(BIG_BADABOOM, true);
+        settings.integer(POTION_POWER, 4)
+                .integer(POISON_THROWER_RECHARGE, 3)
+                .bool(BIG_BADABOOM, true);
 
         givenFl("☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼ ☼ ☼ ☼ ☼☼\n" +
@@ -419,8 +419,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldPerkWorksAfterCombine_WithPTPerk() {
         // given
-        potionsPower(4);
-        settings.integer(POISON_THROWER_RECHARGE, 1);
+        settings.integer(POTION_POWER, 4)
+                .integer(POISON_THROWER_RECHARGE, 1);
 
         givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
@@ -495,8 +495,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoison_whenPTperk() {
         // given
-        potionsPower(4);
-        settings.integer(POISON_THROWER_RECHARGE, 3);
+        settings.integer(POTION_POWER, 4)
+                .integer(POISON_THROWER_RECHARGE, 3);
 
         givenFl("##########\n" +
                 "# # # # ##\n" +
@@ -600,8 +600,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoisonWithIncreasedPower_withPT_withPBRI_perks() {
         // given
-        potionsPower(4);
-        settings.integer(POISON_THROWER_RECHARGE, 3);
+        settings.integer(POTION_POWER, 4)
+                .integer(POISON_THROWER_RECHARGE, 3);
 
         givenFl("##########\n" +
                 "# # # # ##\n" +
@@ -970,7 +970,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     // BRC - Potion remote control perk
     @Test
     public void shouldPotionBlastOnAction_whenBRCperk_caseTwoPotions() {
-        potionsCount(2);
+        // given
+        settings.integer(POTIONS_COUNT, 2);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1173,7 +1175,9 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionBlastOnAction_whenBRCperk_caseOnePotion() {
-        potionsCount(1);
+        // given
+        settings.integer(POTIONS_COUNT, 1);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1376,8 +1380,10 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
     @Test
     public void shouldSuicide_whenBRCPerk_shouldRemoveAfterDeath_andCollectScores() {
-        potionsCount(1);
-        potionsPower(3);
+        // given
+        settings.integer(POTIONS_COUNT, 1)
+                .integer(POTION_POWER, 3);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +

@@ -795,7 +795,8 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(5) => [DIED]\n");
 
         // затем пройдет еще некоторое количество тиков, до общего числа = timePerRound
-        boxesCount(0); // больше коробок нам не надо
+        // больше коробок нам не надо
+        removeBoxes(1);
         tick();
         tick();
         tick();

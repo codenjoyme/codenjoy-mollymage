@@ -26,6 +26,9 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.services.Direction;
 import org.junit.Test;
 
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
+
 public class KillDeathTest extends AbstractGameTest {
 
     // если герой стоит на зелье то он умирает после его взрыва
@@ -512,7 +515,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        ghostsCount(1);
+        settings.integer(GHOSTS_COUNT, 1);
         dice(9, 9, 1, Direction.DOWN.value());
         field.tick();
 
@@ -620,7 +623,8 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldGhostAppearAfterKill() {
-        potionsPower(3);
+        // given
+        settings.integer(POTION_POWER, 3);
 
         givenFl("     \n" +
                 "     \n" +

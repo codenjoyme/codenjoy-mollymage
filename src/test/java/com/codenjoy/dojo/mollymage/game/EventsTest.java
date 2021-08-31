@@ -114,14 +114,16 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCalculateGhostsAndWallKills() {
+        // given
+        settings.integer(POTIONS_COUNT, 4)
+                .integer(POTION_POWER, 1);
+
         givenFl("     \n" +
                 "#    \n" +
                 "&    \n" +
                 "#    \n" +
                 "&☺   \n");
 
-        potionsCount(4);
-        potionsPower(1);
 
         assertF("     \n" +
                 "#    \n" +
@@ -267,7 +269,10 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCalculateGhostsAndWallKills_caseBigBadaboom() {
-        settings.bool(BIG_BADABOOM, true);
+        // given
+        settings.bool(BIG_BADABOOM, true)
+                .integer(POTIONS_COUNT, 4)
+                .integer(POTION_POWER, 1);
 
         givenFl("     \n" +
                 "#    \n" +
@@ -275,8 +280,6 @@ public class EventsTest extends AbstractGameTest {
                 "#    \n" +
                 "&☺   \n");
 
-        potionsCount(4);
-        potionsPower(1);
 
         assertF("     \n" +
                 "#    \n" +
@@ -332,7 +335,8 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldGhostNotAppearOnThePlaceWhereItDie_AfterKill() {
-        potionsPower(3);
+        // given
+        settings.integer(POTION_POWER, 3);
 
         givenFl("   \n" +
                 "   \n" +
@@ -356,7 +360,7 @@ public class EventsTest extends AbstractGameTest {
                 "҉҉x\n");
 
         // when fill free places boxes
-        boxesCount(6);
+        settings.integer(TREASURE_BOX_COUNT, 6);
         dice(preparedCoordinatesForBoxesAndGhosts());
         field.tick();
 
@@ -766,7 +770,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => [DIED, KILL_GHOST]\n" +
                 "listener(1) => [DIED, KILL_GHOST]\n");
 
-        ghostsCount(0); // больще не надо привидений
+        removeGhosts(1); // больше не надо привидений
         tick();
 
         assertF("     \n" +
@@ -807,8 +811,8 @@ public class EventsTest extends AbstractGameTest {
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_GHOST]\n");
-        
-        ghostsCount(0); // чтобы новый не появлялся
+
+        removeGhosts(1); // больше не надо привидений
         tick();
 
         assertF("     \n" +
@@ -849,7 +853,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [DIED, KILL_GHOST]\n" +
                 "listener(3) => [DIED, KILL_GHOST]\n");
 
-        ghostsCount(0); // чтобы новый не появлялся
+        removeGhosts(1); // больше не надо привидений
         tick();
 
         assertF("     \n" +
@@ -861,7 +865,8 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenBigBadaboom() {
-        potionsCount(2)
+        // given
+        settings.integer(POTIONS_COUNT, 2)
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
@@ -941,7 +946,7 @@ public class EventsTest extends AbstractGameTest {
                 "x♣҉♣x\n" +
                 "☺҉҉҉ \n", 0);
 
-        boxesCount(0); // больше не надо коробок
+        removeBoxes(1); // больше не надо коробок
         tick();
 
         events.verifyAllEvents(
@@ -1044,7 +1049,7 @@ public class EventsTest extends AbstractGameTest {
                 "x♣҉♧x\n" +
                 "☺҉҉҉ \n", 0);
 
-        boxesCount(0); // больше не надо коробок
+        removeBoxes(1); // больше не надо коробок
         tick();
 
         events.verifyAllEvents(

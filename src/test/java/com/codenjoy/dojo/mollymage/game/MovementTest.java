@@ -27,6 +27,7 @@ import com.codenjoy.dojo.services.Direction;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.mockito.Mockito.verify;
 
@@ -464,7 +465,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        ghostsCount(1);
+        settings.integer(GHOSTS_COUNT, 1);
         dice(9, 9, 1, Direction.DOWN.value());
         field.tick();
 
@@ -795,7 +796,7 @@ public class MovementTest extends AbstractGameTest {
 
         // минус одна коробка
         field.boxes().remove(pt(2, 3));
-        boxesCount(boxesCount() - 1);
+        removeBoxes(1);
 
         assertF("☼☼☼☼☼\n" +
                 "☼  &☼\n" +

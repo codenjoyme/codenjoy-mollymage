@@ -29,8 +29,8 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertSame;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -80,7 +80,9 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionsDropped_whenHeroDropThreePotion() {
-        potionsCount(3);
+        // given
+        settings.integer(POTIONS_COUNT, 3);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -110,7 +112,9 @@ public class PotionTest extends AbstractGameTest {
     // чем у него в settings прописано
     @Test
     public void shouldOnlyTwoPotions_whenLevelApproveIt() {
-        potionsCount(2);
+        // given
+        settings.integer(POTIONS_COUNT, 2);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -151,7 +155,9 @@ public class PotionTest extends AbstractGameTest {
     // герой не может класть два зелья на одно место
     @Test
     public void shouldOnlyOnePotionPerPlace() {
-        potionsCount(2);
+        // given
+        settings.integer(POTIONS_COUNT, 2);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -451,7 +457,9 @@ public class PotionTest extends AbstractGameTest {
     // с теми, что на поле
     @Test
     public void shouldNoChangeOriginalPotionsWhenUseBoardApiButTimersSynchronized() {
-        potionsCount(2);
+        // given
+        settings.integer(POTIONS_COUNT, 2);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -578,7 +586,9 @@ public class PotionTest extends AbstractGameTest {
     // взрывная волна не проходит через непробиваемую стенку
     @Test
     public void shouldBlastWaveDoesNotPassThroughWall() {
-        potionsPower(3);
+        // given
+        settings.integer(POTION_POWER, 3);
+
         givenFl("☼☼☼☼☼☼☼\n" +
                 "☼     ☼\n" +
                 "☼ ☼ ☼ ☼\n" +
@@ -622,18 +632,16 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldStopBlastWhenHeroOrDestroyWalls() {
-        potionsPower(5);
+        // given
+        settings.integer(POTION_POWER, 5);
+
         givenFl("       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
-                "☺      \n");
-
-        int count = 1;
-        boxesCount(count);
-        newBox(3, 0);
+                "☺  #   \n");
 
         when(dice.next(anyInt())).thenReturn(101); // don't drop perk by accident
 
@@ -659,7 +667,9 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldStopBlastWhenGhost() {
-        potionsPower(5);
+        // given
+        settings.integer(POTION_POWER, 5);
+
         givenFl("       \n" +
                 "       \n" +
                 "       \n" +
@@ -695,7 +705,9 @@ public class PotionTest extends AbstractGameTest {
     // зелья которое ему позволено и не более того
     @Test
     public void shouldTwoPotionsOnBoard() {
-        potionsCount(1);
+        // given
+        settings.integer(POTIONS_COUNT, 1);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -733,7 +745,9 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldTwoPotionsOnBoard_withEnemy() {
-        potionsCount(1);
+        // given
+        settings.integer(POTIONS_COUNT, 1);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -774,7 +788,9 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldFourPotionsOnBoard() {
-        potionsCount(2);
+        // given
+        settings.integer(POTIONS_COUNT, 2);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +
@@ -826,7 +842,9 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldFourPotionsOnBoard_checkTwoPotionsPerHero() {
-        potionsCount(2);
+        // given
+        settings.integer(POTIONS_COUNT, 2);
+
         givenFl("     \n" +
                 "     \n" +
                 "     \n" +

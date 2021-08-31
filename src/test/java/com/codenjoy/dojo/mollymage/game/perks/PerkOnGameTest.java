@@ -32,8 +32,7 @@ import org.junit.Test;
 
 import java.util.Comparator;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.CATCH_PERK_SCORE;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.KILL_WALL_SCORE;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
@@ -89,7 +88,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
-        boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
+        removeBoxes(2); // на две взорвавшиеся коробки меньше
         field.tick();
 
         // then
@@ -179,7 +178,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#H####\n");
 
         // when
-        boxesCount(boxesCount() - 2); // две коробки потрачено
+        removeBoxes(2); // две коробки потрачено
         field.tick();
 
         // then
@@ -234,7 +233,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         assertPerks("[]");
 
         // when
-        boxesCount(boxesCount() - 2); // две коробки потрачено
+        removeBoxes(2); // две коробки потрачено
         field.tick();
 
         // then
@@ -369,7 +368,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        boxesCount(boxesCount() - 1); // минус коробка
+        removeBoxes(1); // минус коробка
         field.tick();
 
         assertF("#+####\n" +
@@ -379,7 +378,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        boxesCount(boxesCount() - 1); // минус коробка
+        removeBoxes(1); // минус коробка
         field.tick();
 
         assertF("#+####\n" +
@@ -459,7 +458,8 @@ public class PerkOnGameTest extends AbstractGameTest {
     // а теперь пробуем убить анти-привидение
     @Test
     public void shouldDropPerk_generateNewGhost_thenKillIt() {
-        potionsCount(2);
+        // given
+        settings.integer(POTIONS_COUNT, 2);
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
         reset(listener());
@@ -515,7 +515,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
-        boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
+        removeBoxes(2); // на две взорвавшиеся коробки меньше
         field.tick();
 
         // пивидение начало свое движение
@@ -548,7 +548,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [5,1]}]");
 
         // when
-        boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
+        removeBoxes(2); // на две взорвавшиеся коробки меньше
         field.tick();
 
         assertF("#+####\n" +
@@ -589,12 +589,15 @@ public class PerkOnGameTest extends AbstractGameTest {
     // а теперь пробуем убить анти-привидение и одновременно с этим выпиливаемся на той же бомбе
     @Test
     public void shouldKillGhostWithSuicide() {
-        potionsCount(2);
+        // given
+        settings.integer(POTIONS_COUNT, 2);
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
         reset(listener());
         hero().getPerks().clear(); // удаляем любые перки
-        potionsPower(5); // взрывная волна большая
+
+        // взрывная волна большая
+        settings.integer(POTION_POWER, 5);
 
         hero().right();
         field.tick();
@@ -647,7 +650,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
-        boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
+        removeBoxes(2); // на две взорвавшиеся коробки меньше
         hero().left();
         field.tick();
 
@@ -682,7 +685,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " {PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+') value=4, timeout=3, timer=3, pick=48} at [5,1]}]");
 
         // when
-        boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
+        removeBoxes(2); // на две взорвавшиеся коробки меньше
 
         dice(0, 1);
         // это сделает сервер
@@ -727,7 +730,8 @@ public class PerkOnGameTest extends AbstractGameTest {
     // а теперь пробуем убить анти-привидение сразу после того как оно меня скушает
     @Test
     public void shouldKillGhostAfterEatMe() {
-        potionsCount(2);
+        // given
+        settings.integer(POTIONS_COUNT, 2);
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
         reset(listener());
@@ -783,7 +787,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
-        boxesCount(boxesCount() - 2); // на две взорвавшиеся коробки меньше
+        removeBoxes(2); // на две взорвавшиеся коробки меньше
         hero().left();
         field.tick();
 
@@ -894,7 +898,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         hero().move(5, 5); // убегаем в укрытие
 
-        boxesCount(boxesCount() - 4); // на 4 коробки меньше
+        removeBoxes(4); // на 4 коробки меньше
         field.tick();
         assertEquals(0, hero().getPerks().size()); // перк не взяли
 
@@ -1103,7 +1107,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // охотник идет
-        boxesCount(boxesCount() - 2); // две коробки потрачено взрывом
+        removeBoxes(2); // две коробки потрачено взрывом
         field.tick();
         field.tick();
 
@@ -1119,7 +1123,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // мувнули героя и кикнули его
         hero().die();
-        boxesCount(boxesCount() - 1); // одна коробка потречена злым привидением
+        removeBoxes(1); // одна коробка потречена злым привидением
         field.tick();
 
         assertF("#+####\n" +

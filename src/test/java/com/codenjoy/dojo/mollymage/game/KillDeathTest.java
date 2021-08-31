@@ -450,10 +450,9 @@ public class KillDeathTest extends AbstractGameTest {
     public void shouldBlastAfter_whenPotionExposed_HeroDie() {
         givenFl("     \n" +
                 "     \n" +
+                "  ☺  \n" +
                 "     \n" +
-                "     \n" +
-                "☺    \n");
-        gotoBoardCenter();
+                "     \n");
 
         hero().act();
         field.tick();

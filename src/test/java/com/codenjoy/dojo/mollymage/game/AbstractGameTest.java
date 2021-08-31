@@ -184,15 +184,6 @@ public abstract class AbstractGameTest {
 
     // other stuff
 
-    protected void gotoBoardCenter() {
-        for (int y = 0; y < level.size() / 2; y++) {
-            hero().up();
-            tick();
-            hero().right();
-            tick();
-        }
-    }
-
     protected void assertBoards(String expected, Integer... indexes) {
         events.assertAll(expected, games.size(), indexes, index -> {
             Object actual = game(index).getBoardAsString();

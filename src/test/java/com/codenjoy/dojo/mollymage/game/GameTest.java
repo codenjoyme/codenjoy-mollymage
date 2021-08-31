@@ -249,7 +249,7 @@ public class GameTest extends AbstractGameTest {
 
         settings.integer(GHOSTS_COUNT, 1);
         dice(4, 4, // координаты привидения
-                Direction.RIGHT.value()); // направление движения
+            Direction.RIGHT.value()); // направление движения
 
         hero().act();
         hero().up();
@@ -271,7 +271,7 @@ public class GameTest extends AbstractGameTest {
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
         dice(Direction.DOWN.value(), // направление движения привидения
-                3, 3); // новая коробка
+            3, 3); // новая коробка
         field.tick();
 
         assertF("     \n" +
@@ -321,10 +321,10 @@ public class GameTest extends AbstractGameTest {
 
         // when
         field.tick();
-        // на неразрушаемоей стене нельзя
-        // на месте героя не должен появиться
-        // а вот тут свободно
-        dice(0, 0, hero().getX(), hero().getY(), 1, 1);
+
+        dice(0, 0,  // на неразрушаемоей стене нельзя
+            hero().getX(), hero().getY(),  // на месте героя не должен появиться
+            1, 1); // а вот тут свободно
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -364,7 +364,8 @@ public class GameTest extends AbstractGameTest {
         Joystick joystick2 = game(0).getJoystick();
 
         // when
-        dice(0, 0, 1, 0);
+        dice(0, 0,
+            1, 0);
         game(0).newGame();
         game(1).newGame();
 

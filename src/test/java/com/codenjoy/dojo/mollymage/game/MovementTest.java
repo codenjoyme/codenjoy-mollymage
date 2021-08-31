@@ -530,7 +530,8 @@ public class MovementTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
         settings.integer(GHOSTS_COUNT, 1);
-        dice(9, 9, 1, Direction.DOWN.value());
+        dice(9, 9, // координата
+            1, Direction.DOWN.value()); // направление движения
         field.tick();
 
         assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +

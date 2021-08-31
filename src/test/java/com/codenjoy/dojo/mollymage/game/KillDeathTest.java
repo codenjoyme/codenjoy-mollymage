@@ -529,7 +529,9 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
         settings.integer(GHOSTS_COUNT, 1);
-        dice(9, 9, 1, Direction.DOWN.value());
+        // координата и направление движения привидения
+        dice(9, 9,
+            1, Direction.DOWN.value());
         field.tick();
 
         assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -565,6 +567,7 @@ public class KillDeathTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
+        // направление движения привидения
         dice(1, Direction.LEFT.value());
         field.tick();
 
@@ -620,7 +623,9 @@ public class KillDeathTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_GHOST]");
 
-        dice(level.size() - 2, level.size() - 2, Direction.DOWN.value());
+        // координата и направление движения привидения
+        dice(level.size() - 2, level.size() - 2,
+                Direction.DOWN.value());
         field.tick();
 
         assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -666,6 +671,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_GHOST]");
 
+        // координата и направление движения привидения
         dice(2, 2, Direction.DOWN.value());
         field.tick();
 

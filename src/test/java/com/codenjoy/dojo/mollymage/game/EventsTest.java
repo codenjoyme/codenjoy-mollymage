@@ -175,7 +175,7 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
-        // новая коробка
+        // новые коробки
         dice(4, 4);
         field.tick();
 
@@ -200,7 +200,7 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
-        // новая коробка
+        // новые коробки
         dice(4, 3);
         hero().left();
         field.tick();
@@ -318,8 +318,9 @@ public class EventsTest extends AbstractGameTest {
                 "H҉҉  \n" +
                 "x҉҉  \n");
 
-        // новые координаты коробок
-        dice(2, 2, 3, 3);
+        // новые коробки
+        dice(2, 2,
+            3, 3);
         field.tick();
 
         assertF("  ☺  \n" +
@@ -550,7 +551,7 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => [KILL_TREASURE_BOX]\n" +
                 "listener(1) => [KILL_TREASURE_BOX]\n");
 
-        // новая коробка
+        // новые коробки
         dice(4, 4);
         tick();
 
@@ -593,7 +594,8 @@ public class EventsTest extends AbstractGameTest {
                 "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
 
         // новые коробки
-        dice(4, 4, 4, 3);
+        dice(4, 4,
+            4, 3);
         tick();
 
         assertF("    #\n" +
@@ -677,7 +679,9 @@ public class EventsTest extends AbstractGameTest {
                 "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n");
 
         // новые коробки
-        dice(4, 4, 4, 3, 4, 2);
+        dice(4, 4,
+            4, 3,
+            4, 2);
         tick();
 
         assertF("    #\n" +
@@ -732,7 +736,8 @@ public class EventsTest extends AbstractGameTest {
 
 
         // новые коробки
-        dice(4, 4, 4, 3);
+        dice(4, 4,
+            4, 3);
         tick();
 
         assertF("    #\n" +

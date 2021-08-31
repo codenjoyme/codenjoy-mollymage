@@ -460,7 +460,9 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(2) => []\n");
 
         // вот он последний тик раунда, тут все и случится
-        dice(0, 0, 1, 0, 1, 1);
+        dice(0, 0,
+            1, 0,
+            1, 1);
         tick();
 
         assertF("     \n" +
@@ -928,10 +930,9 @@ public class RoundScoresTest extends AbstractGameTest {
         assertEquals(true, hero(2).isActiveAndAlive());
 
         // делаем очистку очков
-        // первый игрок
-        // второй
-        // третий
-        dice(0, 0, 0, 1, 1, 0);
+        dice(0, 0, // первый игрок
+            0, 1,  // второй
+            1, 0); // третий
         field.clearScore();
 
         // после этого тика будет сразу же новый раунд

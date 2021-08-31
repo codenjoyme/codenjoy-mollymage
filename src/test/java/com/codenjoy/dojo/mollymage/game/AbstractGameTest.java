@@ -138,6 +138,8 @@ public abstract class AbstractGameTest {
         field.tick();
     }
 
+    // getters & asserts
+
     public void assertF(String expected, int index) {
         assertEquals(expected, game(index).getBoardAsString());
     }
@@ -245,6 +247,10 @@ public abstract class AbstractGameTest {
         field.boxes().add(new TreasureBox(x, y));
     }
 
+    protected void newPerk(int x, int y, Perk perk) {
+        field.perks().add(new PerkOnBoard(new PointImpl(x, y), perk));
+    }
+
     protected void removeBoxes(int count) {
         settings.integer(TREASURE_BOX_COUNT, settings.integer(TREASURE_BOX_COUNT) - count);
     }
@@ -257,10 +263,6 @@ public abstract class AbstractGameTest {
         return field.ghosts().getAt(pt(x, y)).get(0);
     }
 
-    protected void newPerk(int x, int y, Perk perk) {
-        field.perks().add(new PerkOnBoard(new PointImpl(x, y), perk));
-    }
-
     protected int[] getCoordinatesForPointsInSquare(int size) {
         List<Integer> result = new ArrayList<>();
         for (int y = 0; y < size; y++) {
@@ -270,10 +272,6 @@ public abstract class AbstractGameTest {
             }
         }
         return result.stream().mapToInt(i -> i).toArray();
-    }
-
-    protected void resetListeners() {
-        listeners.forEach(Mockito::reset);
     }
 
     protected void stopGhosts() {

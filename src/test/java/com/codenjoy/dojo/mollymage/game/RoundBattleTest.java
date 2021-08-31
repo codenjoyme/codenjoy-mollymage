@@ -762,8 +762,6 @@ public class RoundBattleTest extends AbstractGameTest {
     public void shouldDestroyGhost_withOtherHeroes_onDeathPlace() {
         shouldDrawGhost_onPlaceOfDeath_withBomb();
 
-        resetListeners();
-
         tick();
         tick();
         tick();

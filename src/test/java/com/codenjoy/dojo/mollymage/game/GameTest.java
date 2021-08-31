@@ -28,10 +28,15 @@ import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Joystick;
+import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.field.PointField;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -147,6 +152,18 @@ public class GameTest extends AbstractGameTest {
         assertSame(hero(), game().getJoystick());
     }
 
+    private int[] inSquare(Point pt, int size) {
+        List<Integer> result = new ArrayList<>();
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                result.add(x + pt.getX());
+                result.add(y + pt.getY());
+            }
+        }
+        return result.stream()
+                .mapToInt(i -> i).toArray();
+    }
+
     @Test
     public void shouldNotAppearBoxesOnDestroyedPlaces() {
         // given
@@ -182,8 +199,7 @@ public class GameTest extends AbstractGameTest {
         // boxes should fill square around hero in coordinates from [0,0] to [2,2]
         // we allow to create 9 boxes and only 7 should be created
         settings.integer(TREASURE_BOX_COUNT, 9);
-        final int[] square3x3Coordinates = getCoordinatesForPointsInSquare(3);
-        dice(square3x3Coordinates);
+        dice(inSquare(pt(0, 0), 3));
         tick();
 
         // then
@@ -211,7 +227,7 @@ public class GameTest extends AbstractGameTest {
         // all points on the board allowed for boxes regeneration except
         // [0,1][1,0] - destroyed boxes and [1,1] - hero place
         // when fill board with boxes around hero
-        dice(square3x3Coordinates);
+        dice(inSquare(pt(0, 0), 3));
         tick();
 
         // then only 6 boxes should been exist
@@ -224,7 +240,7 @@ public class GameTest extends AbstractGameTest {
         assertEquals(6, field.boxes().size());
 
         // when next tick - empty spaces should been filled by boxes
-        dice(square3x3Coordinates);
+        dice(inSquare(pt(0, 0), 3));
         tick();
 
         // then boxes should been generated on [0,1] and [1,0] to

@@ -218,17 +218,6 @@ public abstract class AbstractGameTest {
         return field.ghosts().getAt(pt(x, y)).get(0);
     }
 
-    public int[] getCoordinatesForPointsInSquare(int size) {
-        List<Integer> result = new ArrayList<>();
-        for (int y = 0; y < size; y++) {
-            for (int x = 0; x < size; x++) {
-                result.add(y);
-                result.add(x);
-            }
-        }
-        return result.stream().mapToInt(i -> i).toArray();
-    }
-
     public void stopGhosts() {
         field.ghosts().forEach(Ghost::stop);
     }

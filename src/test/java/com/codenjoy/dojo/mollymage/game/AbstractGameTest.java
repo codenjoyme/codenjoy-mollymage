@@ -184,7 +184,7 @@ public abstract class AbstractGameTest {
 
     // other stuff
 
-    protected void assertBoards(String expected, Integer... indexes) {
+    protected void assertA(String expected, Integer... indexes) {
         events.assertAll(expected, games.size(), indexes, index -> {
             Object actual = game(index).getBoardAsString();
             return String.format("game(%s)\n%s\n", index, actual);

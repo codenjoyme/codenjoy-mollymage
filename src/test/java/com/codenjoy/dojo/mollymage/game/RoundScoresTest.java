@@ -498,8 +498,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(3) => [START_ROUND, [Round 1]]\n" +
                 "listener(4) => [START_ROUND, [Round 1]]\n");
 
-        assertBoards(
-                "game(0)\n" +
+        assertA("game(0)\n" +
                 "   ☺ \n" +
                 "   ♥ \n" +
                 "     \n" +
@@ -558,8 +557,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         tick();
 
-        assertBoards(
-                "game(0)\n" +
+        assertA("game(0)\n" +
                 "   Ѡ \n" +
                 " ♥҉҉҉\n" +
                 " ҉ ҉ \n" +
@@ -593,7 +591,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 " ҉ ҉ \n" +
                 "♣҉҉♥ \n" +
                 " Ѡ   \n" +
-            "\n");
+                "\n");
 
         events.verifyAllEvents(
                 "listener(0) => [DIED]\n" +
@@ -675,8 +673,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(4) => [START_ROUND, [Round 1]]\n" +
                 "listener(5) => [START_ROUND, [Round 1]]\n");
 
-        assertBoards(
-                "game(0)\n" +
+        assertA("game(0)\n" +
                 "   ☺ \n" +
                 "   ♥♥\n" +
                 "   # \n" +
@@ -742,8 +739,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         tick();
 
-        assertBoards(
-                "game(0)\n" +
+        assertA("game(0)\n" +
                 "   Ѡ \n" +
                 " ♥҉҉♣\n" +
                 " ҉ H \n" +

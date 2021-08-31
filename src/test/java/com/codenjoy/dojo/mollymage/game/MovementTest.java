@@ -182,7 +182,26 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
-        gotoMaxRight();
+        hero().right();
+        tick();
+
+        hero().right();
+        tick();
+
+        hero().right();
+        tick();
+
+        hero().right();
+        tick();
+
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "    ☺\n");
+
+        hero().right();
+        field.tick();
 
         assertF("     \n" +
                 "     \n" +
@@ -199,7 +218,26 @@ public class MovementTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
-        gotoMaxUp();
+        hero().up();
+        tick();
+
+        hero().up();
+        tick();
+
+        hero().up();
+        tick();
+
+        hero().up();
+        tick();
+
+        assertF("☺    \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n");
+
+        hero().up();
+        field.tick();
 
         assertF("☺    \n" +
                 "     \n" +
@@ -286,7 +324,20 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        gotoMaxRight();
+        hero().right();
+        tick();
+
+        hero().right();
+        tick();
+
+        assertF("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼  ☺☼\n" +
+                "☼☼☼☼☼\n");
+
+        hero().right();
+        tick();
 
         assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
@@ -303,7 +354,20 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        gotoMaxUp();
+        hero().up();
+        field.tick();
+
+        hero().up();
+        field.tick();
+
+        assertF("☼☼☼☼☼\n" +
+                "☼☺  ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼   ☼\n" +
+                "☼☼☼☼☼\n");
+
+        hero().up();
+        field.tick();
 
         assertF("☼☼☼☼☼\n" +
                 "☼☺  ☼\n" +

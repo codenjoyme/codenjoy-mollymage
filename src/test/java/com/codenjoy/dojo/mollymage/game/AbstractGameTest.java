@@ -176,20 +176,6 @@ public abstract class AbstractGameTest {
 
     // other stuff
 
-    protected void gotoMaxUp() {
-        for (int y = 0; y <= level.size() + 1; y++) {
-            hero().up();
-            field.tick();
-        }
-    }
-
-    protected void gotoMaxRight() {
-        for (int x = 0; x <= level.size() + 1; x++) {
-            hero().right();
-            field.tick();
-        }
-    }
-
     protected void assertHeroDie() {
         assertEquals("Expected game over", true, game().isGameOver());
     }

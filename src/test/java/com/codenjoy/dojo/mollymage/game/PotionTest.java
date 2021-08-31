@@ -297,14 +297,11 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldBlastAfter_whenPotionExposed_inOtherCorner() {
-        givenFl("     \n" +
+        givenFl("    ☺\n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺    \n");
-
-        gotoMaxUp();
-        gotoMaxRight();
+                "     \n");
 
         hero().act();
         field.tick();

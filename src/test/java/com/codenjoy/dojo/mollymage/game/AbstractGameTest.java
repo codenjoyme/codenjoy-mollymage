@@ -185,7 +185,7 @@ public abstract class AbstractGameTest {
     }
 
     public void assertHeroDie() {
-        assertEquals(false, game().isGameOver());
+        assertEquals(true, game().isGameOver());
     }
 
     public void assertHeroAlive() {

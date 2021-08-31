@@ -494,7 +494,17 @@ public class KillDeathTest extends AbstractGameTest {
                 "#####\n");
 
         hero().act();
-        goOut();
+        hero().up();
+        tick();
+
+        hero().up();
+        tick();
+
+        hero().right();
+        tick();
+
+        hero().right();
+        tick();
 
         assertF("#####\n" +
                 "#  ☺#\n" +

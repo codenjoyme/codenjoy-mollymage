@@ -376,6 +376,27 @@ public class PotionTest extends AbstractGameTest {
         assertHeroAlive();
     }
 
+    private void assertPotionPower(int power, String expected) {
+        settings.integer(POTION_POWER, power);
+
+        hero().act();
+        goOut();
+        tick();
+
+        assertF(expected);
+    }
+
+    private void goOut() {
+        hero().right();
+        tick();
+        hero().right();
+        tick();
+        hero().up();
+        tick();
+        hero().up();
+        tick();
+    }
+
     // разрыв зелья длинной указанной в settings
     @Test
     public void shouldChangePotionPower_to2() {

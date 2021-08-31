@@ -201,27 +201,6 @@ public abstract class AbstractGameTest {
 
     // other stuff
 
-    protected void assertPotionPower(int power, String expected) {
-        settings.integer(POTION_POWER, power);
-
-        hero().act();
-        goOut();
-        tick();
-
-        assertF(expected);
-    }
-
-    protected void goOut() {
-        hero().right();
-        tick();
-        hero().right();
-        tick();
-        hero().up();
-        tick();
-        hero().up();
-        tick();
-    }
-
     protected void newBox(int x, int y) {
         field.boxes().add(new TreasureBox(x, y));
     }

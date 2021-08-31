@@ -49,6 +49,7 @@ import com.google.common.collect.Multimap;
 import java.util.*;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.services.field.Generator.generate;
 import static java.util.stream.Collectors.toList;
 
 public class MollyMage extends RoundField<Player> implements Field {
@@ -104,76 +105,20 @@ public class MollyMage extends RoundField<Player> implements Field {
         return players;
     }
 
-    public void regenerateGhosts() {     // TODO потестить
-        if (settings.integer(GHOSTS_COUNT) < 0) {
-            settings.integer(GHOSTS_COUNT, 0);
-        }
-
-        int actual = ghosts().size();
-        int expected = settings.integer(GHOSTS_COUNT);
-
-        int iteration = 0;
-        Set<Point> checked = new HashSet<>();
-        while (actual < expected && iteration++ < MAX) {
-            Point pt = PointImpl.random(dice, field.size());
-
-            if (checked.contains(pt) || isBarrier(pt, !FOR_HERO)) {
-                checked.add(pt);
-                continue;
-            }
-
-            Ghost ghost = new Ghost(pt);
-            ghost.init(this);
-            ghosts().add(ghost);
-            actual++;
-        }
-
-        if (iteration >= MAX) {
-            System.out.println("Dead loop at Ghosts.regenerate!");
-        }
-    }
-
-    private int freeSpaces() {
-        return (field.size()* field.size() - 1) // TODO -1 это один герой, а если их несколько?
-                - walls().size();
+    public void regenerateGhosts() {
+        generate(ghosts(), settings, GHOSTS_COUNT,
+                player -> freeRandom((Player) player),
+                pt -> {
+                    Ghost ghost = new Ghost(pt);
+                    ghost.init(this);
+                    return ghost;
+                });
     }
 
     public void regenerateBoxes() {
-        if (settings.integer(TREASURE_BOX_COUNT) < 0) {
-            settings.integer(TREASURE_BOX_COUNT, 0);
-        }
-
-        int expected = settings.integer(TREASURE_BOX_COUNT);
-        int actual = boxes().size();
-        int delta = expected - actual;
-        if (delta > freeSpaces()) {  // TODO и это потестить
-            settings.integer(TREASURE_BOX_COUNT, expected - (delta - freeSpaces()) - 50); // 50 это место под героев
-        }
-
-        if (actual > expected) { // TODO и удаление лишних
-            for (int i = 0; i < (actual - expected); i++) {
-                boxes().removeAny();
-            }
-            return;
-        }
-
-        int iteration = 0;
-        Set<Point> checked = new HashSet<>();
-        while (actual < expected && iteration++ < MAX) {  // TODO и это
-            Point pt = PointImpl.random(dice, field.size());
-
-            if (checked.contains(pt) || isBarrier(pt, !FOR_HERO)) {
-                continue;
-            }
-
-            boxes().add(new TreasureBox(pt));
-            checked.add(pt);
-            actual++;
-        }
-
-        if (iteration >= MAX) {
-            System.out.println("Dead loop at TreasureBoxes.generate!");
-        }
+        generate(boxes(), settings, TREASURE_BOX_COUNT,
+                player -> freeRandom((Player) player),
+                pt -> new TreasureBox(pt));
     }
 
     public List<PerkOnBoard> pickPerk(Point pt) {

@@ -140,8 +140,25 @@ public abstract class AbstractGameTest {
 
     // getters & asserts
 
+    /**
+     * Проверяет одну борду с заданным индексом
+     * @param expected ожидаемое значение
+     * @param index индекс
+     */
     public void assertF(String expected, int index) {
         assertEquals(expected, game(index).getBoardAsString());
+    }
+
+    /**
+     * Проверяет все борды сразу
+     * @param expected ожидаемое значение
+     * @param indexes список индексов, для которых проводим проверку (так же влияет на порядок)
+     */
+    protected void assertA(String expected, Integer... indexes) {
+        events.assertAll(expected, games.size(), indexes, index -> {
+            Object actual = game(index).getBoardAsString();
+            return String.format("game(%s)\n%s\n", index, actual);
+        });
     }
 
     public Game game(int index) {
@@ -183,13 +200,6 @@ public abstract class AbstractGameTest {
     }
 
     // other stuff
-
-    protected void assertA(String expected, Integer... indexes) {
-        events.assertAll(expected, games.size(), indexes, index -> {
-            Object actual = game(index).getBoardAsString();
-            return String.format("game(%s)\n%s\n", index, actual);
-        });
-    }
 
     protected void newGameForAllDied() {
         players.forEach(player -> {

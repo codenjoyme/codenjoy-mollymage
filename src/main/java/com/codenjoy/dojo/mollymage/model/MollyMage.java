@@ -124,7 +124,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     public List<PerkOnBoard> pickPerk(Point pt) {
         List<PerkOnBoard> result = perks().getAt(pt);
         if (!result.isEmpty()) {
-            perks().remove(pt);
+            perks().removeAt(pt);
         }
         return result;
     }
@@ -231,12 +231,12 @@ public class MollyMage extends RoundField<Player> implements Field {
 
         for (Point pt : destroyedObjects) {
             if (pt instanceof TreasureBox) {
-                boxes().remove(pt);
+                boxes().removeAt(pt);
                 dropPerk(pt, dice);
             } else if (pt instanceof GhostHunter) {
-                hunters().remove(pt);
+                hunters().removeAt(pt);
             } else if (pt instanceof Ghost) {
-                ghosts().remove(pt);
+                ghosts().removeAt(pt);
             }
         }
 
@@ -292,7 +292,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     private void makeBlastsFromDestroyedPotions() {
         // все взрываем, чтобы было пекло
         for (Potion potion : destroyedPotions) {
-            potions().remove(potion);
+            potions().removeAt(potion);
 
             List<Blast> blast = makeBlast(potion);
             blasts().addAll(blast);
@@ -427,7 +427,7 @@ public class MollyMage extends RoundField<Player> implements Field {
                 hunter.event(Events.DROP_PERK);
 
                 // TODO может это делать на этапе, когда blasts развиднеется в removeBlasts
-                blasts().remove(perk);
+                blasts().removeAt(perk);
                 hunters().add(new GhostHunter(perk, this, hunter));
             });
         });

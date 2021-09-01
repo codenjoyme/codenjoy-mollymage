@@ -25,16 +25,12 @@ package com.codenjoy.dojo.mollymage.game.perks;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.game.AbstractGameTest;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
-import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.PotionBlastRadiusIncrease;
 import com.codenjoy.dojo.mollymage.model.items.perks.PotionCountIncrease;
 import org.junit.Test;
 
-import java.util.Comparator;
-
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 
 public class PerkOnGameTest extends AbstractGameTest {
@@ -1050,10 +1046,10 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // given
         // строим оборону
-        field.boxes().remove(pt(5, 5));
-        field.boxes().remove(pt(5, 4));
-        field.boxes().remove(pt(4, 4));
-        field.boxes().remove(pt(4, 5));
+        field.boxes().removeAt(pt(5, 5));
+        field.boxes().removeAt(pt(5, 4));
+        field.boxes().removeAt(pt(4, 4));
+        field.boxes().removeAt(pt(4, 5));
 
         field.walls().add(new Wall(4, 4));
         field.walls().add(new Wall(4, 5));
@@ -1460,7 +1456,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "{POTION_COUNT_INCREASE('c')\n" +
                 "  value=1, timeout=4, timer=3, pick=0}\n" +
                 "{POTION_BLAST_RADIUS_INCREASE('+')\n" +
-                "  value=2, timeout=4, timer=3, pick=-1}");
+                "  value=2, timeout=4, timer=3, pick=0}");
 
         // when
         hero().up();
@@ -1479,7 +1475,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "{POTION_COUNT_INCREASE('c')\n" +
                 "  value=1, timeout=4, timer=2, pick=0}\n" +
                 "{POTION_BLAST_RADIUS_INCREASE('+')\n" +
-                "  value=2, timeout=4, timer=2, pick=-1}");
+                "  value=2, timeout=4, timer=2, pick=0}");
 
         // when
         tick();
@@ -1497,7 +1493,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "{POTION_COUNT_INCREASE('c')\n" + 
                 "  value=1, timeout=4, timer=1, pick=0}\n" +
                 "{POTION_BLAST_RADIUS_INCREASE('+')\n" + 
-                "  value=2, timeout=4, timer=1, pick=-1}");
+                "  value=2, timeout=4, timer=1, pick=0}");
 
         // when
         tick();

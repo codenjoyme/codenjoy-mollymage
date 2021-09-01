@@ -23,7 +23,6 @@ package com.codenjoy.dojo.mollymage.game;
  */
 
 import com.codenjoy.dojo.services.Direction;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
@@ -984,7 +983,7 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         // минус одна коробка
-        field.boxes().remove(pt(2, 3));
+        field.boxes().removeAt(pt(2, 3));
         removeBoxes(1);
 
         // then

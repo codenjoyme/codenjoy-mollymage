@@ -91,7 +91,7 @@ public class GhostHunter extends Ghost {
             this.move(direction.change(from));
 
             // попутно сносим стенки на пути прожженные (если есть)
-            field.boxes().remove(from);
+            field.boxes().removeAt(from);
         }
     }
 

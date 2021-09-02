@@ -26,7 +26,6 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import org.junit.Test;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
 import static com.codenjoy.dojo.services.Direction.DOWN;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
@@ -50,37 +49,39 @@ public class RoundBattleTest extends AbstractGameTest {
     // все игроки неактивны (видно их трупики)
     @Test
     public void shouldAllPlayersOnBoardIsInactive_whenStart() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT);
-        
+        // given
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3);
 
-        dice(dice,
-                0, 0,
-                1, 0,
-                1, 1);
-        givenBr(DEFAULT_COUNT);
-
-        asrtBrd("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
-                " ♣   \n" +
-                "Ѡ♣   \n", game(0));
+                " ☺   \n" +
+                "☺☺   \n");
 
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ♣   \n" +
-                "♣Ѡ   \n", game(1));
-
-        asrtBrd("     \n" +
+        // when then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
-                "♣♣   \n", game(2));
+                "♣♣   \n", 0);
+
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♣   \n" +
+                "Ѡ♣   \n", 1);
+
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♣   \n" +
+                "♣Ѡ   \n", 2);
     }
 
     // после старта идет отсчет обратного времени
     @Test
     public void shouldCountdownBeforeRound_whenTicksOnStart() {
+        // given
         shouldAllPlayersOnBoardIsInactive_whenStart();
 
         events.verifyAllEvents(
@@ -88,29 +89,37 @@ public class RoundBattleTest extends AbstractGameTest {
                 "listener(1) => []\n" +
                 "listener(2) => []\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [[....4....]]\n" +
                 "listener(1) => [[....4....]]\n" +
                 "listener(2) => [[....4....]]\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [[...3...]]\n" +
                 "listener(1) => [[...3...]]\n" +
                 "listener(2) => [[...3...]]\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [[..2..]]\n" +
                 "listener(1) => [[..2..]]\n" +
                 "listener(2) => [[..2..]]\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [[.1.]]\n" +
                 "listener(1) => [[.1.]]\n" +
@@ -121,27 +130,29 @@ public class RoundBattleTest extends AbstractGameTest {
     // но после объявления раунда я могу начать играть
     @Test
     public void shouldActiveAndCanMove_afterCountdown() {
+        // given
         shouldCountdownBeforeRound_whenTicksOnStart();
 
         // пока еще не активны
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ♣   \n" +
-                "Ѡ♣   \n", game(0));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ♣   \n" +
-                "♣Ѡ   \n", game(1));
-
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
-                "♣♣   \n", game(2));
+                "♣♣   \n", 0);
 
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♣   \n" +
+                "Ѡ♣   \n", 1);
+
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♣   \n" +
+                "♣Ѡ   \n", 2);
+
+        // when
         // и я не могу ничего поделать с ними
         hero(0).up();
         hero(1).right();
@@ -149,6 +160,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         tick();
 
+        // then
         // после сообщения что раунд начался
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
@@ -156,148 +168,161 @@ public class RoundBattleTest extends AbstractGameTest {
                 "listener(2) => [START_ROUND, [Round 1]]\n");
 
         // можно играть - игроки видны как активные
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ♥   \n" +
-                "☺♥   \n", game(0));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ♥   \n" +
-                "♥☺   \n", game(1));
-
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
-                "♥♥   \n", game(2));
+                "♥♥   \n", 0);
 
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♥   \n" +
+                "☺♥   \n", 1);
+
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♥   \n" +
+                "♥☺   \n", 2);
+
+        // when
         // ... и когда я муваю героев, они откликаются
         hero(0).up();
-        hero(1).right();
-        hero(2).up();
+        hero(1).up();
+        hero(2).right();
 
         tick();
 
-        asrtBrd("     \n" +
-                "     \n" +
-                " ♥   \n" +
-                "☺    \n" +
-                "  ♥  \n", game(0));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                " ♥   \n" +
-                "♥    \n" +
-                "  ☺  \n", game(1));
-
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 " ☺   \n" +
                 "♥    \n" +
-                "  ♥  \n", game(2));
+                "  ♥  \n", 0);
+
+        assertF("     \n" +
+                "     \n" +
+                " ♥   \n" +
+                "☺    \n" +
+                "  ♥  \n", 1);
+
+        assertF("     \n" +
+                "     \n" +
+                " ♥   \n" +
+                "♥    \n" +
+                "  ☺  \n", 2);
     }
 
     // если один игрок вынесет другого но на поле есть едще игроки,
     // то тот, которого вынесли появится в новом месте в виде трупика
     @Test
     public void shouldMoveToInactive_whenKillSomeone() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+        // given
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1); // TODO а что будет если тут 0 игра хоть начнется?
 
-        
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "☺☺   \n");
 
-        dice(dice,
-                0, 0,
-                1, 0,
-                1, 1);
-        givenBr(DEFAULT_COUNT);
-
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
 
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ♥   \n" +
-                "☺♥   \n", game(0));
-
-        asrtBrd("     \n" +
-                "     \n" +
-                "     \n" +
-                " ♥   \n" +
-                "♥☺   \n", game(1));
-
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
-                "♥♥   \n", game(2));
+                "♥♥   \n", 0);
 
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♥   \n" +
+                "☺♥   \n", 1);
+
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                " ♥   \n" +
+                "♥☺   \n", 2);
+
+        // when
         // когда я выношу одного игрока
-        hero(2).act();
+        hero(0).act();
         tick();
 
-        hero(2).right();
+        hero(0).right();
         tick();
 
-        hero(2).up();
+        hero(0).up();
         tick();
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "  ☺  \n" +
                 " 1   \n" +
-                "♥♥   \n", game(2));
+                "♥♥   \n", 0);
 
         // игрок активный и живой
-        assertEquals(true, hero(1).isActive());
-        assertEquals(true, hero(1).isAlive());
-        assertEquals(true, player(1).wantToStay());
-        assertEquals(false, player(1).shouldLeave());
+        assertEquals(true, hero(2).isActive());
+        assertEquals(true, hero(2).isAlive());
+        assertEquals(true, player(2).wantToStay());
+        assertEquals(false, player(2).shouldLeave());
 
+        // when
         tick();
 
+        // then
         // игрок активный но неживой (cервер ему сделает newGame)
-        assertEquals(true, hero(1).isActive());
-        assertEquals(false, hero(1).isAlive());
+        assertEquals(true, hero(2).isActive());
+        assertEquals(false, hero(2).isAlive());
         // тут без изменений
-        assertEquals(true, player(1).wantToStay());
-        assertEquals(false, player(1).shouldLeave());
+        assertEquals(true, player(2).wantToStay());
+        assertEquals(false, player(2).shouldLeave());
 
-
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 " ҉☺  \n" +
                 "҉҉҉  \n" +
-                "♥♣   \n", game(2));
+                "♥♣   \n", 0);
 
+        events.verifyAllEvents(
+                "listener(0) => [KILL_OTHER_HERO]\n" +
+                "listener(1) => []\n" +
+                "listener(2) => [DIED]\n");
+
+        // when
         tick();
 
-        dice(dice, 3, 4); // новые координаты для героя
-        field.newGame(player(1)); // это сделоает сервер в ответ на isAlive = false
-        resetHeroes();
+        // новые координаты для героя
+        dice(3, 4);
+        field.newGame(player(2)); // это сделоает сервер в ответ на isAlive = false
 
+        // then
         // игрок уже живой но неактивный до начала следующего раунда
-        assertEquals(false, hero(1).isActive());
-        assertEquals(true, hero(1).isAlive());
+        assertEquals(false, hero(2).isActive());
+        assertEquals(true, hero(2).isAlive());
         // тут без изменений
-        assertEquals(true, player(1).wantToStay());
-        assertEquals(false, player(1).shouldLeave());
+        assertEquals(true, player(2).wantToStay());
+        assertEquals(false, player(2).shouldLeave());
 
-        asrtBrd("   ♣ \n" +
+        assertF("   ♣ \n" +
                 "     \n" +
                 "  ☺  \n" +
                 "     \n" +
-                "♥    \n", game(2));
+                "♥    \n", 0);
     }
 
     // проверил как отрисуется привидение если под ним будет трупик героя:
@@ -305,20 +330,28 @@ public class RoundBattleTest extends AbstractGameTest {
     // - от имени жертвы я вижу свой трупик, мне пофиг уже что на карте происходит, главное где поставить памятник герою
     @Test
     public void shouldDrawGhost_onPlaceOfDeath() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+        // given
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
 
-        dice(dice,
-                0, 0, // первый игрок
-                1, 0, // второй
-                2, 0); // третий
-        givenBr(DEFAULT_COUNT);
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                " &   \n" +
+                "☺☺☺  \n");
 
-        Ghost ghost = ghostAt(1, 1);
+        Ghost ghost = ghost(1, 1);
 
+        // when
         tick();
 
+        events.verifyAllEvents(
+                "listener(0) => [START_ROUND, [Round 1]]\n" +
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
+
+        // then
         // ставлю зелье
         hero(0).act();
         tick();
@@ -331,9 +364,17 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
         tick();
 
+        // when
         // взрыв
         tick();
 
+        // then
+        events.verifyAllEvents(
+                "listener(0) => [KILL_OTHER_HERO]\n" +
+                "listener(1) => [DIED]\n" +
+                "listener(2) => []\n");
+
+        // when
         // идем назад
         hero(0).down();
         tick();
@@ -341,47 +382,50 @@ public class RoundBattleTest extends AbstractGameTest {
         hero(0).down();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " &   \n" +
-                "☺♣♥  \n", game(0));
+                "☺♣♥  \n", 0);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " &   \n" +
-                "♥Ѡ♥  \n", game(1));
+                "♥Ѡ♥  \n", 1);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " &   \n" +
-                "♥♣☺  \n", game(2));
+                "♥♣☺  \n", 2);
 
+        // when
         // попробуем привидением сходить на место падшего героя
         ghost.move(DOWN.change(ghost));
 
+        // then
         // от имени наблюдателя в клеточке с останками я вижу живого привидения
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺&♥  \n", game(0));
+                "☺&♥  \n", 0);
 
         // от имени пострадавшего в клеточке я вижу свои останки, привидение хоть и есть там, я его не вижу
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥Ѡ♥  \n", game(1));
+                "♥Ѡ♥  \n", 1);
 
         // от имени наблюдателя в клеточке с останками я вижу живое привидение
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥&☺  \n", game(2));
+                "♥&☺  \n", 2);
     }
 
     // проверил как отрисуется привидение если под ним будет не только трупик героя но и зелье:
@@ -393,20 +437,30 @@ public class RoundBattleTest extends AbstractGameTest {
     // приоритет прорисовки такой: 1) привидение 2) зелье 3) останки
     @Test
     public void shouldDrawGhost_onPlaceOfDeath_withBomb() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+        // given
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
 
-        dice(dice,
-                0, 0, // первый игрок
-                1, 0, // второй
-                2, 0); // третий
-        givenBr(DEFAULT_COUNT);
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                " &   \n" +
+                "☺☺☺  \n");
 
-        Ghost ghost = ghostAt(1, 1);
+        Ghost ghost = ghost(1, 1);
 
+        // when
         tick();
 
+
+        // then
+        events.verifyAllEvents(
+                "listener(0) => [START_ROUND, [Round 1]]\n" +
+                "listener(1) => [START_ROUND, [Round 1]]\n" +
+                "listener(2) => [START_ROUND, [Round 1]]\n");
+
+        // when
         // ставлю зелье
         hero(0).act();
         tick();
@@ -422,6 +476,13 @@ public class RoundBattleTest extends AbstractGameTest {
         // взрыв
         tick();
 
+        // then
+        events.verifyAllEvents(
+                "listener(0) => [KILL_OTHER_HERO]\n" +
+                "listener(1) => [DIED]\n" +
+                "listener(2) => []\n");
+
+        // when
         // идем назад
         hero(0).down();
         tick();
@@ -436,50 +497,53 @@ public class RoundBattleTest extends AbstractGameTest {
         hero(0).left();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " &   \n" +
-                "☺3♥  \n", game(0));
+                "☺3♥  \n", 0);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " &   \n" +
-                "♥Ѡ♥  \n", game(1));
+                "♥Ѡ♥  \n", 1);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " &   \n" +
-                "♥3☺  \n", game(2));
+                "♥3☺  \n", 2);
 
+        // when
         // попробуем привидением сходить на место падшего героя
         ghost.move(DOWN.change(ghost));
 
+        // then
         // от имени наблюдателя в клеточке с останками
         // я вижу живое привидение, он по моему опаснее чем зелье
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺&♥  \n", game(0));
+                "☺&♥  \n", 0);
 
         // от имени пострадавшего в клеточке я вижу свои
         // останки, привиедние хоть и есть там, я его не вижу
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥Ѡ♥  \n", game(1));
+                "♥Ѡ♥  \n", 1);
 
         // от имени наблюдателя в клеточке с останками
         // я вижу живое привидение, он по моему опаснее чем зелье
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥&☺  \n", game(2));
+                "♥&☺  \n", 2);
     }
 
     // останки другого героя не являются препятствием для прохождения любым героем
@@ -489,78 +553,83 @@ public class RoundBattleTest extends AbstractGameTest {
     // 3) сторонний наблюдатель видит живого соперника
     @Test
     public void shouldPlaceOfDeath_isNotABarrierForOtherHero() {
+        // given
         givenCaseWhenPlaceOfDeathOnMyWay();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♣♥  \n", game(0));
+                "☺♣♥  \n", 0);
 
+        // when
         // а вот и попытка пойти на место трупика
         hero(0).right();
         tick();
 
+        // then
         // от имени того кто стоит на месте смерти другого героя он видет себя
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " ☺♥  \n", game(0));
+                " ☺♥  \n", 0);
 
         // от имени того кого вынесли он видит свой трупик
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " Ѡ♥  \n", game(1));
+                " Ѡ♥  \n", 1);
 
         // от имени стороннего наблюдателя - он видит живую угрозу
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " ♥☺  \n", game(2));
+                " ♥☺  \n", 2);
     }
 
     private void givenCaseWhenPlaceOfDeathOnMyWay() {
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, DEFAULT_COUNT)
+        // given
+        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
-        
 
-        dice(dice,
-                0, 0, // первый игрок
-                1, 0, // второй
-                2, 0); // третий
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺☺  \n");
 
-        givenBr(DEFAULT_COUNT);
-
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥♥  \n", game(0));
+                "☺♥♥  \n", 0);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥☺♥  \n", game(1));
+                "♥☺♥  \n", 1);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥♥☺  \n", game(2));
+                "♥♥☺  \n", 2);
 
+        // when
         // когда я выношу одного игрока
         hero(0).act();
         tick();
@@ -572,48 +641,53 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "     \n" +
-                "1♥♥  \n", game(0));
+                "1♥♥  \n", 0);
 
+        // when
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "҉    \n" +
-                "҉♣♥  \n", game(0));
+                "҉♣♥  \n", 0);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥    \n" +
                 "҉    \n" +
-                "҉Ѡ♥  \n", game(1));
+                "҉Ѡ♥  \n", 1);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥    \n" +
                 "҉    \n" +
-                "҉♣☺  \n", game(2));
+                "҉♣☺  \n", 2);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
                 "listener(1) => [DIED]\n" +
                 "listener(2) => []\n");
 
+        // when
         hero(0).down();
         tick();
 
         hero(0).down();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♣♥  \n", game(0));
+                "☺♣♥  \n", 0);
     }
 
     // я не могу подрывать уже убитого героя
@@ -621,14 +695,16 @@ public class RoundBattleTest extends AbstractGameTest {
     // взрывной волны, там всегда будет трупик
     @Test
     public void shouldCantDestroyHeroPlaceOfDeath() {
+        // given
         givenCaseWhenPlaceOfDeathOnMyWay();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♣♥  \n", game(0));
+                "☺♣♥  \n", 0);
 
+        // when
         hero(0).act();
         tick();
 
@@ -641,6 +717,7 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +
@@ -648,55 +725,57 @@ public class RoundBattleTest extends AbstractGameTest {
 
         // на месте героя которого вынесли я как сторонний наблюдатель
         // вижу его останки, а не взрывную волну
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "҉    \n" +
-                "҉♣♥  \n", game(0));
+                "҉♣♥  \n", 0);
 
         // я как тот которого вынесли, на месте взрыва вижу себя
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥    \n" +
                 "҉    \n" +
-                "҉Ѡ♥  \n", game(1));
+                "҉Ѡ♥  \n", 1);
 
         // на месте героя которого вынесли я как сторонний наблюдатель
         // вижу его останки, а не взрывную волну
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "♥    \n" +
                 "҉    \n" +
-                "҉♣☺  \n", game(2));
+                "҉♣☺  \n", 2);
     }
 
     // люой герой может зайти на место трупика и там его можно прибить, так что
     // будет у нас двап трупика в одной клетке
     @Test
     public void shouldDestroySecondHero_whenItOnDeathPlace() {
+        // given
         shouldPlaceOfDeath_isNotABarrierForOtherHero();
 
         // вижу себя в клетке где еще трупик
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " ☺♥  \n", game(0));
+                " ☺♥  \n", 0);
 
         // вижу свой трупик, раз меня вынесли
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " Ѡ♥  \n", game(1));
+                " Ѡ♥  \n", 1);
 
         // вижу своего соперника в клетке, где трупик
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " ♥☺  \n", game(2));
+                " ♥☺  \n", 2);
 
+        // when
         // ставим зелье и убегаем
         hero(2).act();
         tick();
@@ -710,28 +789,29 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
         tick();
 
+
+        // then
         // что в результате
-
         // я вижу свой трупик в клетке, где есть еще один такой же
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "  ҉♥ \n" +
-                " Ѡ҉҉ \n", game(0));
+                " Ѡ҉҉ \n", 0);
 
         // я вижу свой трупик в клетке, где есть еще один такой же
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "  ҉♥ \n" +
-                " Ѡ҉҉ \n", game(1));
+                " Ѡ҉҉ \n", 1);
 
         // я вижу трупик одного из убитых там героев (их там двое)
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "  ҉☺ \n" +
-                " ♣҉҉ \n", game(2));
+                " ♣҉҉ \n", 2);
 
         events.verifyAllEvents(
                 "listener(0) => [DIED]\n" +
@@ -742,31 +822,32 @@ public class RoundBattleTest extends AbstractGameTest {
     // просто любопытно как рванут два героя, вместе с привидение и трупом под зельем
     @Test
     public void shouldDestroyGhost_withOtherHeroes_onDeathPlace() {
+        // given
         shouldDrawGhost_onPlaceOfDeath_withBomb();
 
-        resetListeners();
-
+        // when
         tick();
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "Ѡx♣  \n", game(0));
+                "Ѡx♣  \n", 0);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "♣Ѡ♣  \n", game(1));
+                "♣Ѡ♣  \n", 1);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "♣xѠ  \n", game(2));
+                "♣xѠ  \n", 2);
 
         // победителей нет
         events.verifyAllEvents(
@@ -774,8 +855,10 @@ public class RoundBattleTest extends AbstractGameTest {
                 "listener(1) => []\n" +
                 "listener(2) => [DIED]\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +

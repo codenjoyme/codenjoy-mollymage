@@ -22,156 +22,154 @@ package com.codenjoy.dojo.mollymage.game;
  * #L%
  */
 
-import com.codenjoy.dojo.mollymage.model.Hero;
-import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
-import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.services.Direction;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTIONS_COUNT;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldNoEventsWhenHeroNotMove() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
 
-        verifyNoMoreInteractions(listener());
+        // when
+        tick();
+        tick();
+        tick();
+        tick();
+
+        // then
+        events.verifyNoEvents();
     }
 
     @Test
     public void shouldFireEventWhenKillWall() {
-        dice(dice, 1, 0);
-        givenBr("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                " ☺   \n");
-
-        boxesCount(1);
-        boxAt(0, 0);
-
-        asrtBrd("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "#☺   \n");
 
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "#☺   \n");
+
+        // when
         hero().act();
         hero().right();
-        field.tick();
-        hero().right();
-        field.tick();
-        hero().right();
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        hero().right();
+        tick();
+
+        hero().right();
+        tick();
+
+        tick();
+        tick();
+
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
                 "H҉҉ ☺\n");
 
-        verify(listener()).event(Events.KILL_TREASURE_BOX);
+        events.verifyAllEvents("[KILL_TREASURE_BOX]");
     }
 
     @Test
     public void shouldFireEventWhenKillGhost() {
-        dice(dice, 1, 0);
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " ☺   \n");
+                "&☺   \n");
 
-        ghostsCount(1);
-        ghostAt(0, 0);
-
+        // when
         hero().act();
         hero().right();
-        field.tick();
-        hero().right();
-        field.tick();
-        hero().right();
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        hero().right();
+        tick();
+
+        hero().right();
+        tick();
+
+        tick();
+        tick();
+
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
                 "x҉҉ ☺\n");
 
-        verify(listener()).event(Events.KILL_GHOST);
+        events.verifyAllEvents("[KILL_GHOST]");
     }
 
     @Test
     public void shouldCalculateGhostsAndWallKills() {
-        dice(dice, 1, 0);
-        givenBr("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                " ☺   \n");
+        // given
+        settings.integer(POTIONS_COUNT, 4)
+                .integer(POTION_POWER, 1);
 
-        boxesCount(2);
-        boxAt(0, 1);
-        boxAt(0, 3);
-
-        ghostsCount(2);
-        ghostAt(0, 0);
-        ghostAt(0, 2);
-
-        canDropPotions(4);
-        potionsPower(1);
-
-        asrtBrd("     \n" +
+        givenFl("     \n" +
                 "#    \n" +
                 "&    \n" +
                 "#    \n" +
                 "&☺   \n");
 
+        assertF("     \n" +
+                "#    \n" +
+                "&    \n" +
+                "#    \n" +
+                "&☺   \n");
+
+        // when
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
-        asrtBrd(" ☺   \n" +
+        // then
+        assertF(" ☺   \n" +
                 "#4   \n" +
                 "&3   \n" +
                 "#2   \n" +
                 "&1   \n");
 
+        // when
         hero().right();
-        field.tick();
+        tick();
 
-        asrtBrd("  ☺  \n" +
+        // then
+        assertF("  ☺  \n" +
                 "#3   \n" +
                 "&2   \n" +
                 "#1   \n" +
@@ -179,11 +177,14 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_GHOST]");
 
-        dice(dice, 3, 4, Direction.ACT.value()); // новое привидение, стоит не двигается
-        field.tick();
-        field.ghosts().all().forEach(Ghost::stop); // и не будет больше двигаться
+        // when
+        // новое привидение, стоит не двигается
+        dice(3, 4, Direction.ACT.value());
+        tick();
+        stopGhosts();
 
-        asrtBrd("  ☺& \n" +
+        // then
+        assertF("  ☺& \n" +
                 "#2   \n" +
                 "&1   \n" +
                 "H҉҉  \n" +
@@ -191,10 +192,13 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
-        dice(dice, 4, 4); // новая коробка
-        field.tick();
+        // when
+        // новые коробки
+        dice(4, 4);
+        tick();
 
-        asrtBrd("  ☺&#\n" +
+        // then
+        assertF("  ☺&#\n" +
                 "#1   \n" +
                 "x҉҉  \n" +
                 " ҉   \n" +
@@ -202,11 +206,14 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_GHOST]");
 
-        dice(dice, 3, 3, Direction.ACT.value()); // новое привидение, стоит не двигается
-        field.tick();
-        field.ghosts().all().forEach(Ghost::stop); // и не будет больше двигаться
+        // when
+        // новое привидение, стоит не двигается
+        dice(3, 3, Direction.ACT.value());
+        tick();
+        stopGhosts();
 
-        asrtBrd(" ҉☺&#\n" +
+        // then
+        assertF(" ҉☺&#\n" +
                 "H҉҉& \n" +
                 " ҉   \n" +
                 "     \n" +
@@ -214,26 +221,31 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
-        dice(dice, 4, 3); // новая коробка
+        // when
+        // новые коробки
+        dice(4, 3);
         hero().left();
-        field.tick();
+        tick();
 
         hero().down();
         hero().act();
-        field.tick();
+        tick();
 
-        asrtBrd("   &#\n" +
+        // then
+        assertF("   &#\n" +
                 " ☻ &#\n" +
                 "     \n" +
                 "     \n" +
                 "     \n");
 
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
+        // when
+        tick();
+        tick();
+        tick();
+        tick();
 
-        asrtBrd(" ҉ &#\n" +
+        // then
+        assertF(" ҉ &#\n" +
                 "҉Ѡ҉&#\n" +
                 " ҉   \n" +
                 "     \n" +
@@ -242,37 +254,42 @@ public class EventsTest extends AbstractGameTest {
         events.verifyAllEvents("[DIED]");
         assertHeroDie();
 
-        dice(dice, 1, 1);
-        field.tick();
+        // when
+        dice(1, 1);
+        tick();
         game().newGame();
 
-        asrtBrd("   &#\n" +
+        // then
+        assertF("   &#\n" +
                 "   &#\n" +
                 "     \n" +
                 " ☺   \n" +
                 "     \n");
 
-        heroes.set(0, (Hero) game().getJoystick());
+        // when
         hero().move(pt(1, 0));
 
-        asrtBrd("   &#\n" +
+        // then
+        assertF("   &#\n" +
                 "   &#\n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n");
 
+        // when
         hero().act();
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
 
-        asrtBrd("   &#\n" +
+        // then
+        assertF("   &#\n" +
                 "   &#\n" +
                 "     \n" +
                 " ҉   \n" +
@@ -281,49 +298,42 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldCalculateGhostsAndWallKills_caseBigBadaboom() {
-        settings.bool(BIG_BADABOOM, true);
+        // given
+        settings.bool(BIG_BADABOOM, true)
+                .integer(POTIONS_COUNT, 4)
+                .integer(POTION_POWER, 1);
 
-        dice(dice, 1, 0);
-        givenBr("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                " ☺   \n");
-
-        boxesCount(2);
-        boxAt(0, 1);
-        boxAt(0, 3);
-
-        ghostsCount(2);
-        ghostAt(0, 0);
-        ghostAt(0, 2);
-
-        canDropPotions(4);
-        potionsPower(1);
-
-        asrtBrd("     \n" +
+        givenFl("     \n" +
                 "#    \n" +
                 "&    \n" +
                 "#    \n" +
                 "&☺   \n");
 
+        assertF("     \n" +
+                "#    \n" +
+                "&    \n" +
+                "#    \n" +
+                "&☺   \n");
+
+        // when
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
-        asrtBrd(" ☺   \n" +
+        // then
+        assertF(" ☺   \n" +
                 "#4   \n" +
                 "&3   \n" +
                 "#2   \n" +
@@ -331,21 +341,25 @@ public class EventsTest extends AbstractGameTest {
 
         events.verifyAllEvents("[]");
 
+        // when
         hero().right();
-        field.tick();
+        tick();
 
-        asrtBrd(" ҉☺  \n" +
+        // then
+        assertF(" ҉☺  \n" +
                 "H҉҉  \n" +
                 "x҉҉  \n" +
                 "H҉҉  \n" +
                 "x҉҉  \n");
 
-        dice(dice,
-                2, 2, // новые координаты коробок
-                3, 3);
-        field.tick();
+        // when
+        // новые коробки
+        dice(2, 2,
+            3, 3);
+        tick();
 
-        asrtBrd("  ☺  \n" +
+        // then
+        assertF("  ☺  \n" +
                 "   # \n" +
                 "  #  \n" +
                 "     \n" +
@@ -356,50 +370,55 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldGhostNotAppearOnThePlaceWhereItDie_AfterKill() {
-        potionsPower(3);
+        // given
+        settings.integer(POTION_POWER, 3);
 
-        givenBr("   \n" +
+        givenFl("   \n" +
                 "   \n" +
-                "☺  \n");
+                "☺ &\n");
 
-        dice(dice, 2, 0, Direction.DOWN.value());
-        ghostsCount(1);
-
-        // when portion explode
+        // when
+        // portion explode
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
 
-        // then ghost die
-        asrtBrd("҉  \n" +
+        // then
+        // ghost die
+        assertF("҉  \n" +
                 "҉☺ \n" +
                 "҉҉x\n");
 
-        // when fill free places boxes
-        boxesCount(6);
-        dice(dice, preparedCoordinatesForBoxesAndGhosts());
-        field.tick();
+        events.verifyAllEvents("[KILL_GHOST]");
 
-        // then boxes fill whole field except 2 free points([2,2] and [0,2]).
+        // when
+        // fill free places boxes
+        settings.integer(TREASURE_BOX_COUNT, 6);
+        dice(preparedCoordinatesForBoxesAndGhosts());
+        tick();
+
+        // then
+        // boxes fill whole field except 2 free points([2,2] and [0,2]).
         // ghost tried to generate on both free places, but appeared only on [2,2]
         // [0,2] denied as previous place of death
-        asrtBrd("##&\n" +
+        assertF("##&\n" +
                 "#☺#\n" +
                 "## \n");
-        assertEquals(1, field.ghosts().all().size());
+
+        assertEquals(1, field.ghosts().size());
     }
 
     private int[] preparedCoordinatesForBoxesAndGhosts() {
         int[] result = new int[]
                 {
-                        0, 0, 0, 1,         // boxes, first line
+                        0, 0, 0, 1,        // boxes, first line
                         1, 0, 1, 1, 1, 2,  // boxes second line
                         2, 0, 2, 1,        // boxes third line
                         0, 2,              // first point for ghost
@@ -410,148 +429,163 @@ public class EventsTest extends AbstractGameTest {
 
     @Test
     public void shouldFireEventWhenKillWallOnlyForOneHero() {
+        // given
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "#☺   \n");
 
-        dice(dice,
-                1, 0,
-                1, 1);
-        givenBr(2);
-
-        boxesCount(1);
-        boxAt(0, 0);
-
-        hero(0).act();
-        hero(0).right();
-        hero(1).up();
-        tick();
-        hero(0).right();
-        hero(1).up();
-        tick();
-        hero(0).right();
-        hero(1).up();
-        tick();
-        tick();
+        // when
+        hero(1).act();
+        hero(1).right();
+        hero(0).up();
         tick();
 
-        asrtBrd(" ♥   \n" +
+        hero(1).right();
+        hero(0).up();
+        tick();
+
+        hero(1).right();
+        hero(0).up();
+        tick();
+
+        tick();
+        tick();
+
+        // then
+        assertF(" ☺   \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "H҉҉ ☺\n", game(0));
+                "H҉҉ ♥\n", 0);
 
         events.verifyAllEvents(
-                "listener(0) => [KILL_TREASURE_BOX]\n" +
-                        "listener(1) => []\n");
+                "listener(0) => []\n" +
+                "listener(1) => [KILL_TREASURE_BOX]\n");
 
-        dice(dice, // новые коробки
-                4, 4);
+        // when
+        // новые коробки
+        dice(4, 4);
         tick();
 
-        asrtBrd(" ♥  #\n" +
+        // then
+        assertF(" ☺  #\n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "    ☺\n", game(0));
+                "    ♥\n", 0);
     }
 
     @Test
     public void shouldFireEventWhenKillGhostMultiplayer() {
-        dice(dice,
-                1, 0,
-                1, 1);
-        givenBr(2);
+        // given
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺   \n" +
+                "&☺   \n");
 
-        ghostAt(0, 0);
-
-        hero(0).act();
-        hero(0).right();
-        hero(1).up();
-        tick();
-        hero(0).right();
-        hero(1).up();
-        tick();
-        hero(0).right();
-        hero(1).up();
-        tick();
-        tick();
+        // when
+        hero(1).act();
+        hero(1).right();
+        hero(0).up();
         tick();
 
-        asrtBrd(" ♥   \n" +
+        hero(1).right();
+        hero(0).up();
+        tick();
+
+        hero(1).right();
+        hero(0).up();
+        tick();
+
+        tick();
+        tick();
+
+        // then
+        assertF(" ☺   \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "x҉҉ ☺\n", game(0));
+                "x҉҉ ♥\n", 0);
 
         events.verifyAllEvents(
-                "listener(0) => [KILL_GHOST]\n" +
-                        "listener(1) => []\n");
+                "listener(0) => []\n" +
+                "listener(1) => [KILL_GHOST]\n");
 
+        // when
         tick();
 
-        asrtBrd(" ♥   \n" +
+        // then
+        assertF(" ☺   \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "    ☺\n", game(0));
+                "    ♥\n", 0);
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseDied() {
-        dice(dice,
-                0, 0,
-                2, 0);
-        givenBr(2);
+        // given
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺#☺  \n");
 
-        boxesCount(1);
-        boxAt(1, 0);
-
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
         hero(1).up();
         tick();
+
         tick();
         tick();
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ ♣  \n" +
-                "҉H҉҉ \n", game(0));
+                "҉H҉҉ \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
 
-        dice(dice, // новые коробки
-                4, 4);
+        // when
+        // новые коробки
+        dice(4, 4);
         tick();
 
-        asrtBrd("    #\n" +
+        // then
+        assertF("    #\n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ ♣  \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseAlive() {
-        dice(dice,
-                0, 0,
-                2, 0);
-
-        givenBr(2);
-
-        boxesCount(1);
-        boxAt(1, 0);
-
-        asrtBrd("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺#♥  \n", game(0));
+                "☺#☺  \n");
 
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺#♥  \n", 0);
+
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
@@ -562,49 +596,54 @@ public class EventsTest extends AbstractGameTest {
         hero(1).up();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "     \n" +
-                "3#3  \n", game(0));
+                "3#3  \n", 0);
 
+        // when
         tick();
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "҉ ҉  \n" +
-                "҉H҉҉ \n", game(0));
+                "҉H҉҉ \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_TREASURE_BOX]\n" +
                 "listener(1) => [KILL_TREASURE_BOX]\n");
 
-        dice(dice, 4, 4); // новая коробка
+        // when
+        // новые коробки
+        dice(4, 4);
         tick();
 
-        asrtBrd("    #\n" +
+        // then
+        assertF("    #\n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "     \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseDied() {
+        // given
         settings.integer(POTION_POWER, 2);
 
-        dice(dice,
-                0, 0,
-                3, 0);
-        givenBr(2);
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺##☺ \n");
 
-        boxesCount(2);
-        boxAt(2, 0);
-        boxAt(1, 0);
-
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
@@ -616,41 +655,42 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ  ♣ \n" +
-                "҉HH҉҉\n", game(0));
+                "҉HH҉҉\n", 0);
 
         // по 1 ачивке за стенку, потому что взрывная волна не проходит через стенку
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
 
-        dice(dice, // новые коробки
-                4, 4,
-                4, 3);
+        // when
+        // новые коробки
+        dice(4, 4,
+            4, 3);
         tick();
 
-        asrtBrd("    #\n" +
+        // then
+        assertF("    #\n" +
                 "    #\n" +
                 "     \n" +
                 "Ѡ  ♣ \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied() {
-        dice(dice,
-                1, 2,
-                2, 1,
-                3, 2,
-                2, 3);
-        givenBr(4);
+        // given
+        givenFl("     \n" +
+                "  ☺  \n" +
+                " ☺#☺ \n" +
+                "  ☺  \n" +
+                "     \n");
 
-        boxesCount(1);
-        boxAt(2, 2);
-
+        // when
         hero(0).act();
         hero(1).act();
         hero(2).act();
@@ -662,11 +702,12 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("  ҉  \n" +
+        // then
+        assertF("  ҉  \n" +
+                " ҉Ѡ҉ \n" +
+                "҉♣H♣҉\n" +
                 " ҉♣҉ \n" +
-                "҉ѠH♣҉\n" +
-                " ҉♣҉ \n" +
-                "  ҉  \n", game(0));
+                "  ҉  \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
@@ -674,31 +715,29 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
                 "listener(3) => [DIED, KILL_TREASURE_BOX]\n");
 
-        dice(dice, // новые коробки
-                4, 4);
+        // when
+        // новые коробки
+        dice(4, 4);
         tick();
 
-        asrtBrd("    #\n" +
+        // then
+        assertF("    #\n" +
+                "  Ѡ  \n" +
+                " ♣ ♣ \n" +
                 "  ♣  \n" +
-                " Ѡ ♣ \n" +
-                "  ♣  \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied_caseNotEqualPosition() {
-        dice(dice,
-                1, 2,
-                2, 1,
-                3, 2,
-                2, 3);
-        givenBr(4);
+        // given
+        givenFl("     \n" +
+                "  ☺  \n" +
+                "#☺#☺ \n" +
+                " #☺  \n" +
+                "     \n");
 
-        boxesCount(3);
-        boxAt(1, 1);
-        boxAt(2, 2);
-        boxAt(0, 2);
-
+        // when
         hero(0).act();
         hero(1).act();
         hero(2).act();
@@ -710,45 +749,52 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("  ҉  \n" +
-                " ҉♣҉ \n" +
-                "HѠH♣҉\n" +  // первую стенку подбил монополист, центральную все
-                " H♣҉ \n" +  // эту стенку подбили только лвое
-                "  ҉  \n", game(0));
+        // then
+        assertF("  ҉  \n" +
+                " ҉Ѡ҉ \n" +
+                "H♣H♣҉\n" +  // первую стенку подбил монополист, центральную все
+                " H♣҉ \n" +  // эту стенку подбили только двое
+                "  ҉  \n", 0);
 
         events.verifyAllEvents(
-                "listener(0) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n" +
-                "listener(1) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n" +
+                "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
+                "listener(1) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n" +
                 "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
-                "listener(3) => [DIED, KILL_TREASURE_BOX]\n");
+                "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n");
 
-        dice(dice, // новые коробки
-                4, 4,
-                4, 3,
-                4, 2);
+        // when
+        // новые коробки
+        dice(4, 4,
+            4, 3,
+            4, 2);
         tick();
 
-        asrtBrd("    #\n" +
-                "  ♣ #\n" +
-                " Ѡ ♣#\n" +
+        // then
+        assertF("    #\n" +
+                "  Ѡ #\n" +
+                " ♣ ♣#\n" +
                 "  ♣  \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseAlive() {
-
+        // given
         settings.integer(POTION_POWER, 2);
 
-        dice(dice,
-                0, 0,
-                3, 0);
-        givenBr(2);
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺##☺ \n");
 
-        boxesCount(2);
-        boxAt(2, 0);
-        boxAt(1, 0);
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺##♥ \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
@@ -766,11 +812,12 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "☺  ♥ \n" +
                 "҉  ҉ \n" +
                 "҉  ҉ \n" +
-                "҉HH҉҉\n", game(0));
+                "҉HH҉҉\n", 0);
 
         // по 1 ачивке за стенку, потому что взрывная волна не проходит через стенку
         events.verifyAllEvents(
@@ -778,65 +825,74 @@ public class EventsTest extends AbstractGameTest {
                 "listener(1) => [KILL_TREASURE_BOX]\n");
 
 
-        dice(dice, // новые коробки
-                4, 4,
-                4, 3);
+        // when
+        // новые коробки
+        dice(4, 4,
+            4, 3);
         tick();
 
-        asrtBrd("    #\n" +
+        // then
+        assertF("    #\n" +
                 "☺  ♥#\n" +
                 "     \n" +
                 "     \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenGhost_caseDied() {
-        dice(dice,
-                0, 0,
-                2, 0);
-        givenBr(2);
+        // given
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺&☺  \n");
 
-        ghostAt(1, 0);
-
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
         hero(1).up();
         tick();
+
         tick();
         tick();
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ ♣  \n" +
-                "҉x҉҉ \n", game(0));
+                "҉x҉҉ \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_GHOST]\n" +
                 "listener(1) => [DIED, KILL_GHOST]\n");
 
+        // when
+        removeGhosts(1); // больше не надо привидений
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ ♣  \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenGhost_caseAlive() {
-        dice(dice,
-                0, 0,
-                2, 0);
-        givenBr(2);
+        // given
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺&☺  \n");
 
-        ghostAt(1, 0);
-
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
@@ -851,36 +907,39 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "҉ ҉  \n" +
-                "҉x҉҉ \n", game(0));
+                "҉x҉҉ \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_GHOST]\n");
 
+        // when
+        removeGhosts(1); // больше не надо привидений
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☺ ♥  \n" +
                 "     \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenFourGhosts_caseDied() {
-        dice(dice,
-                1, 2,
-                2, 1,
-                3, 2,
-                2, 3);
-        givenBr(4);
+        // given
+        givenFl("     \n" +
+                "  ☺  \n" +
+                " ☺&☺ \n" +
+                "  ☺  \n" +
+                "     \n");
 
-        ghostAt(2, 2);
-
+        // when
         hero(0).act();
         hero(1).act();
         hero(2).act();
@@ -892,11 +951,12 @@ public class EventsTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("  ҉  \n" +
+        // then
+        assertF("  ҉  \n" +
+                " ҉Ѡ҉ \n" +
+                "҉♣x♣҉\n" +
                 " ҉♣҉ \n" +
-                "҉Ѡx♣҉\n" +
-                " ҉♣҉ \n" +
-                "  ҉  \n", game(0));
+                "  ҉  \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_GHOST]\n" +
@@ -904,36 +964,32 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => [DIED, KILL_GHOST]\n" +
                 "listener(3) => [DIED, KILL_GHOST]\n");
 
+        // when
+        removeGhosts(1); // больше не надо привидений
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
+                "  Ѡ  \n" +
+                " ♣ ♣ \n" +
                 "  ♣  \n" +
-                " Ѡ ♣ \n" +
-                "  ♣  \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenBigBadaboom() {
+        // given
         settings.integer(POTIONS_COUNT, 2)
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        dice(dice,
-                0, 0,
-                1, 0,
-                2, 0,
-                3, 0);
-        givenBr(4);
+        givenFl("     \n" +
+                "&   &\n" +
+                "  #  \n" +
+                "&   &\n" +
+                "☺☺☺☺ \n");
 
-        ghostAt(0, 1);
-        ghostAt(0, 3);
-        ghostAt(4, 1);
-        ghostAt(4, 3);
-
-        boxesCount(1);
-        boxAt(2, 2);
-
+        // when
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
         hero(0).act();
@@ -965,24 +1021,27 @@ public class EventsTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "&244&\n" +
                 " 1#3 \n" +
                 "&223&\n" +
                 "☺♥♥♥ \n",
-                game(0));
+                0);
 
+        // when
         hero(0).move(0, 0);
         hero(1).move(1, 1);
         hero(2).move(3, 1);
         hero(3).move(3, 3);
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "&24♠&\n" +
                 " 1#3 \n" +
                 "&♠2♠&\n" +
                 "☺    \n",
-                game(0));
+                0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -990,58 +1049,54 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
                 "listener(1) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
                 "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
                 "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
-        asrtBrd(" ҉҉҉ \n" +
+        assertF(" ҉҉҉ \n" +
                 "x҉҉♣x\n" +
                 "҉҉H҉҉\n" +
                 "x♣҉♣x\n" +
-                "☺҉҉҉ \n", game(0));
+                "☺҉҉҉ \n", 0);
 
-        boxesCount(0); // больше не надо коробок
+        // when
+        removeBoxes(1); // больше не надо коробок
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "   ♣ \n" +
                 "     \n" +
                 " ♣ ♣ \n" +
-                "☺    \n", game(0));
+                "☺    \n", 0);
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenBigBadaboom_withEnemies() {
+        // given
         settings.integer(POTIONS_COUNT, 2)
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        dice(dice,
-                0, 0,
-                1, 0,
-                2, 0,
-                3, 0);
-        givenBr(4);
+        givenFl("     \n" +
+                "&   &\n" +
+                "  #  \n" +
+                "&   &\n" +
+                "☺☺☺☺ \n");
 
-        ghostsCount(4);
-        ghostAt(0, 1);
-        ghostAt(0, 3);
-        ghostAt(4, 1);
-        ghostAt(4, 3);
-
-        boxesCount(1);
-        boxAt(2, 2);
-
+        // when
         player(0).inTeam(0);
         player(1).inTeam(0);
         player(2).inTeam(1);
@@ -1078,24 +1133,25 @@ public class EventsTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "&244&\n" +
                 " 1#3 \n" +
                 "&223&\n" +
-                "☺♥♡♡ \n",
-                game(0));
+                "☺♥♡♡ \n", 0);
 
+        // when
         hero(0).move(0, 0);
         hero(1).move(1, 1);
         hero(2).move(3, 1);
         hero(3).move(3, 3);
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "&24♤&\n" +
                 " 1#3 \n" +
                 "&♠2♤&\n" +
-                "☺    \n",
-                game(0));
+                "☺    \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -1103,57 +1159,54 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
                 "listener(1) => [DIED, KILL_ENEMY_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
                 "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
                 "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
-        asrtBrd(" ҉҉҉ \n" +
+        assertF(" ҉҉҉ \n" +
                 "x҉҉♧x\n" +
                 "҉҉H҉҉\n" +
                 "x♣҉♧x\n" +
-                "☺҉҉҉ \n", game(0));
+                "☺҉҉҉ \n", 0);
 
-        boxesCount(0); // больше не надо коробок
+        // when
+        removeBoxes(1); // больше не надо коробок
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "   ♧ \n" +
                 "     \n" +
                 " ♣ ♧ \n" +
-                "☺    \n", game(0));
+                "☺    \n", 0);
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenBigBadaboom_caseKillAll() {
+        // given
         settings.integer(POTIONS_COUNT, 2)
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
-        dice(dice,
-                0, 0,
-                1, 0,
-                2, 0,
-                3, 0);
-        givenBr(4);
+        givenFl("     \n" +
+                "&   &\n" +
+                "  #  \n" +
+                "&   &\n" +
+                "☺☺☺☺ \n");
 
-        ghostAt(0, 1);
-        ghostAt(0, 3);
-        ghostAt(4, 1);
-        ghostAt(4, 3);
-
-        boxesCount(1);
-        boxAt(2, 2);
-
+        // when
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
         hero(0).act();
@@ -1185,24 +1238,27 @@ public class EventsTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "&244&\n" +
                 " 1#3 \n" +
                 "&223&\n" +
                 "☺♥♥♥ \n",
-                game(0));
+                0);
 
+        // when
         hero(0).move(1, 3);
         hero(1).move(1, 1);
         hero(2).move(3, 1);
         hero(3).move(3, 3);
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "&☻4♠&\n" +
                 " 1#3 \n" +
                 "&♠2♠&\n" +
                 "     \n",
-                game(0));
+                0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -1210,58 +1266,55 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
                 "listener(1) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
                 "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
                 "listener(3) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
-        asrtBrd(" ҉҉҉ \n" +
+        assertF(" ҉҉҉ \n" +
                 "xѠ҉♣x\n" +
                 "҉҉H҉҉\n" +
                 "x♣҉♣x\n" +
-                " ҉҉҉ \n", game(0));
+                " ҉҉҉ \n", 0);
 
-        dice(dice, // новые коробки
-                4, 4);
+        // when
+        // новые коробки
+        dice(4, 4);
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
-        asrtBrd("    #\n" +
+        assertF("    #\n" +
                 " Ѡ ♣ \n" +
                 "     \n" +
                 " ♣ ♣ \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 
     @Test
     public void shouldCrossBlasts_checkingScores_whenNotBigBadaboom_caseKillAll() {
+        // given
         settings.integer(POTIONS_COUNT, 2)
                 .bool(BIG_BADABOOM, false)
                 .perksSettings().dropRatio(0);
 
-        dice(dice,
-                0, 0,
-                1, 0,
-                2, 0,
-                3, 0);
-        givenBr(4);
+        givenFl("     \n" +
+                "&   &\n" +
+                "  #  \n" +
+                "&   &\n" +
+                "☺☺☺☺ \n");
 
-        ghostAt(0, 1);
-        ghostAt(0, 3);
-        ghostAt(4, 1);
-        ghostAt(4, 3);
-
-        boxesCount(1);
-        boxAt(2, 2);
-
+        // when
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
         hero(0).act();
@@ -1293,24 +1346,25 @@ public class EventsTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "&244&\n" +
                 " 1#3 \n" +
                 "&223&\n" +
-                "☺♥♥♥ \n",
-                game(0));
+                "☺♥♥♥ \n", 0);
 
+        // when
         hero(0).move(1, 3);
         hero(1).move(1, 1);
         hero(2).move(3, 1);
         hero(3).move(3, 3);
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "&☻4♠&\n" +
                 " 1#3 \n" +
                 "&♠2♠&\n" +
-                "     \n",
-                game(0));
+                "     \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -1318,76 +1372,86 @@ public class EventsTest extends AbstractGameTest {
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX]\n" +
                 "listener(1) => [DIED]\n" +
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "&Ѡ3♠&\n" +
                 "҉҉H2 \n" +
                 "&11♠&\n" +
-                "     \n", game(0));
+                "     \n", 0);
 
-        dice(dice, // новые коробки
-                4, 4);
+        // when
+        // новые коробки
+        dice(4, 4);
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
                 "listener(2) => [DIED]\n" +
                 "listener(3) => []\n");
 
-        asrtBrd(" ҉  #\n" +
+        assertF(" ҉  #\n" +
                 "xѠ2♠&\n" +
                 " ҉҉1 \n" +
                 "x♣҉1&\n" +
-                " ҉҉  \n", game(0));
+                " ҉҉  \n", 0);
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +
                 "listener(2) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
                 "listener(3) => [DIED]\n");
 
-        asrtBrd("    #\n" +
+        assertF("    #\n" +
                 " Ѡ11&\n" +
                 "  ҉҉҉\n" +
                 " ♣҉♣x\n" +
-                "   ҉ \n", game(0));
+                "   ҉ \n", 0);
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +
                 "listener(2) => []\n" +
                 "listener(3) => [KILL_GHOST]\n");
 
-        asrtBrd("  ҉҉#\n" +
+        assertF("  ҉҉#\n" +
                 " Ѡ҉♣x\n" +
                 "  ҉҉ \n" +
                 " ♣ ♣ \n" +
-                "     \n", game(0));
+                "     \n", 0);
 
+        // when
         tick();
 
+        // then
         events.verifyAllEvents(
                 "listener(0) => []\n" +
                 "listener(1) => []\n" +
                 "listener(2) => []\n" +
                 "listener(3) => []\n");
 
-        asrtBrd("    #\n" +
+        assertF("    #\n" +
                 " Ѡ ♣ \n" +
                 "     \n" +
                 " ♣ ♣ \n" +
-                "     \n", game(0));
+                "     \n", 0);
     }
 }

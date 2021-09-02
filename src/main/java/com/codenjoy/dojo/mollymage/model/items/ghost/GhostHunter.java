@@ -32,6 +32,7 @@ import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.algs.DeikstraFindWay;
+import com.codenjoy.dojo.services.field.Accessor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -47,14 +48,15 @@ public class GhostHunter extends Ghost {
     private boolean alive = true;
 
     public GhostHunter(PerkOnBoard perk, Field field, Hero prey) {
-        super(perk.copy(), field, field.dice());
+        super(perk.copy());
+        super.init(field);
         this.prey = prey;
         this.perk = perk;
         this.way = new DeikstraFindWay();
     }
 
     public DeikstraFindWay.Possible possible(Field field) {
-        List<Wall> walls = field.walls();
+        Accessor<Wall> walls = field.walls();
 
         return new DeikstraFindWay.Possible() {
             @Override
@@ -89,7 +91,7 @@ public class GhostHunter extends Ghost {
             this.move(direction.change(from));
 
             // попутно сносим стенки на пути прожженные (если есть)
-            field.boxes().remove(from);
+            field.boxes().removeAt(from);
         }
     }
 
@@ -98,8 +100,8 @@ public class GhostHunter extends Ghost {
         alive = false;
         // ларчик просто открывался, перки надо не убивать
         // а собирать, иначе они за тобой будут гнаться
-        perk.move(this);
         field.perks().add(perk);
+        perk.move(this);
     }
 
     @Override

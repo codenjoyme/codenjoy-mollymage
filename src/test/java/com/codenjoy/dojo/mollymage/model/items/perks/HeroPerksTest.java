@@ -33,50 +33,67 @@ public class HeroPerksTest {
 
     @Test
     public void shouldIncreaseTimer_whenAddPotionBlastIncreaseTwice() {
-        HeroPerks hp = new HeroPerks();
+        // given
+        HeroPerks perk = new HeroPerks();
         PotionBlastRadiusIncrease bip = new PotionBlastRadiusIncrease(2, 5);
-        Element e = Element.POTION_BLAST_RADIUS_INCREASE;
 
-        hp.add(bip);
-        hp.tick();
-        hp.tick();
+        // when
+        perk.add(bip);
+        perk.tick();
+        perk.tick();
 
-        Perk oldBip = hp.getPerk(e);
-        assertEquals("Perk timer is expected to be countdown", 3, oldBip.getTimer());
+        // then
+        assertEquals("Perk timer is expected to be countdown",
+                3, perk.getPerk(Element.POTION_BLAST_RADIUS_INCREASE).getTimer());
 
-        hp.add(bip);
-        Perk newBip = hp.getPerk(e);
-        assertEquals("Perk timer is expected to be increased", 6, newBip.getTimer());
+        // when
+        perk.add(bip);
+
+        // then
+        assertEquals("Perk timer is expected to be increased",
+                6, perk.getPerk(Element.POTION_BLAST_RADIUS_INCREASE).getTimer());
     }
 
     @Test
     public void shouldRemovePerk_whenExpiration() {
-        HeroPerks hp = new HeroPerks();
+        // given
+        HeroPerks perk = new HeroPerks();
         PotionBlastRadiusIncrease bip = new PotionBlastRadiusIncrease(2, 2);
-        hp.add(bip);
 
-        hp.tick();
-        int perksCount = hp.getPerksList().size();
-        assertEquals("Perks list must not be empty", 1, perksCount);
+        // when
+        perk.add(bip);
+        perk.tick();
 
-        hp.tick();
-        perksCount = hp.getPerksList().size();
-        assertEquals("Perks list must be empty", 0, perksCount);
+        // then
+        assertEquals("Perks list must not be empty",
+                1, perk.getPerksList().size());
+
+        // when
+        perk.tick();
+
+        // then
+        assertEquals("Perks list must be empty",
+                0, perk.getPerksList().size());
     }
 
     @Test
     public void shouldNotModifyPerks_afterClone() {
-        HeroPerks hp = new HeroPerks();
+        // given
+        HeroPerks perk = new HeroPerks();
         PotionBlastRadiusIncrease bip = new PotionBlastRadiusIncrease(2, 2);
-        hp.add(bip);
+        perk.add(bip);
 
-        List<Perk> list = hp.getPerksList();
+        // when
+        List<Perk> list = perk.getPerksList();
 
-        assertEquals( 1, list.size());
+        // then
+        assertEquals(1, list.size());
 
+        // when
         list.clear();
 
-        assertEquals("Must not be mutated", 1, hp.getPerksList().size());
+        // then
+        assertEquals("Must not be mutated", 1, perk.getPerksList().size());
     }
 
 }

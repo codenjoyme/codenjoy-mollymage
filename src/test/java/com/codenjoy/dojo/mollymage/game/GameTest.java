@@ -25,12 +25,19 @@ package com.codenjoy.dojo.mollymage.game;
 
 import com.codenjoy.dojo.mollymage.model.MollyMage;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
+import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Joystick;
+import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.field.PointField;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -38,32 +45,103 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldBoard_whenStartGame() {
+        // given
         Level level = mock(Level.class);
-        when(level.size()).thenReturn(10);
+        when(level.field()).thenReturn(new PointField(10));
 
-        MollyMage board = new MollyMage(level, dice, settings);
+        // when
+        MollyMage board = new MollyMage(level, mock(Dice.class), settings);
 
+        // then
         assertEquals(10, board.size());
     }
 
     @Test
+    public void heroesCanBeRemovedFromTheGame() {
+        // given
+        givenFl("     \n" +
+                "     \n" +
+                "  ☺  \n" +
+                " ☺   \n" +
+                "☺    \n");
+
+        assertF("     \n" +
+                "     \n" +
+                "  ☺  \n" +
+                " ♥   \n" +
+                "♥    \n", 0);
+
+        // when
+        game(1).close();
+
+        tick();
+
+        events.verifyAllEvents(
+                "listener(0) => []\n" +
+                "listener(1) => [DIED]\n" +
+                "listener(2) => []\n");
+
+        // then
+        assertF("     \n" +
+                "     \n" +
+                "  ☺  \n" +
+                "     \n" +
+                "♥    \n", 0);
+    }
+
+    @Test
+    public void heroesCanBeRestartedInTheGame() {
+        // given
+        givenFl("     \n" +
+                "     \n" +
+                "  ☺  \n" +
+                " ☺   \n" +
+                "☺    \n");
+
+        assertF("     \n" +
+                "     \n" +
+                "  ☺  \n" +
+                " ♥   \n" +
+                "♥    \n", 0);
+
+        // when
+        dice(4, 0);
+        game(1).newGame();
+
+        tick();
+
+        // then
+        assertF("     \n" +
+                "     \n" +
+                "  ☺  \n" +
+                "     \n" +
+                "♥   ♥\n", 0);
+    }
+
+    @Test
     public void shouldBoard_whenStartGame2() {
-        givenBr("     \n" +
+        // given when
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        assertEquals(level.size(), field.size());
+
+        // then
+        assertEquals(5, field.size());
     }
 
     @Test
     public void shouldHeroOnBoardAtInitPos_whenGameStart() {
-        givenBr("     \n" +
+        // given when
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        asrtBrd("     \n" +
+
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -72,134 +150,170 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldSameHero_whenNetFromBoard() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
+        // when then
         assertSame(hero(), game().getJoystick());
+    }
+
+    private int[] inSquare(Point pt, int size) {
+        List<Integer> result = new ArrayList<>();
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                result.add(x + pt.getX());
+                result.add(y + pt.getY());
+            }
+        }
+        return result.stream()
+                .mapToInt(i -> i).toArray();
     }
 
     @Test
     public void shouldNotAppearBoxesOnDestroyedPlaces() {
-        potionsPower(1);
-        givenBr("     \n" +
+        // given
+        settings.integer(POTION_POWER, 1);
+
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        asrtBrd("     \n" +
+
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        // when hero set bomb and goes away
+
+        // when
+        // hero set bomb and goes away
         hero().act();
         hero().up();
-        field.tick();
+        tick();
+
         hero().right();
-        field.tick();
+        tick();
 
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
                 "3    \n");
 
-        // when we allow to create more boxes
+        // when
+        // we allow to create more boxes
         // boxes should fill square around hero in coordinates from [0,0] to [2,2]
         // we allow to create 9 boxes and only 7 should be created
-        boxesCount(9);
-        final int[] square3x3Coordinates = getCoordinatesForPointsInSquare(3);
-        dice(dice, square3x3Coordinates);
-        field.tick();
+        settings.integer(TREASURE_BOX_COUNT, 9);
+        dice(inSquare(pt(0, 0), 3));
+        tick();
+
         // then
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "###  \n" +
                 "#☺#  \n" +
                 "2##  \n");
-        assertEquals(7, field.boxes().all().size());
 
-        // when field tick 2 times
-        field.tick();
-        field.tick();
+        assertEquals(7, field.boxes().size());
 
-        //  then two boxes should been destroyed
-        asrtBrd("     \n" +
+        // when
+        // field tick 2 times
+        tick();
+        tick();
+
+        // then
+        // two boxes should been destroyed
+        assertF("     \n" +
                 "     \n" +
                 "###  \n" +
                 "H☺#  \n" +
                 "҉H#  \n");
 
+        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+
+        // when
         // all points on the board allowed for boxes regeneration except
         // [0,1][1,0] - destroyed boxes and [1,1] - hero place
         // when fill board with boxes around hero
-        dice(dice, square3x3Coordinates);
-        field.tick();
+        dice(inSquare(pt(0, 0), 3));
+        tick();
 
-        // then only 6 boxes should been exist
-        asrtBrd("     \n" +
+        // then
+        // only 6 boxes should been exist
+        assertF("     \n" +
                 "     \n" +
                 "###  \n" +
                 " ☺#  \n" +
                 "# #  \n");
-        assertEquals(6, field.boxes().all().size());
 
+        assertEquals(6, field.boxes().size());
 
-        // when next tick - empty spaces should been filled by boxes
-        dice(dice, square3x3Coordinates);
-        field.tick();
+        // when
+        // next tick - empty spaces should been filled by boxes
+        dice(inSquare(pt(0, 0), 3));
+        tick();
 
-        // then boxes should been generated on [0,1] and [1,0] to
-        asrtBrd("     \n" +
+        // then
+        // boxes should been generated on [0,1] and [1,0] to
+        assertF("     \n" +
                 "     \n" +
                 "###  \n" +
                 "#☺#  \n" +
                 "###  \n");
-        assertEquals(8, field.boxes().all().size());
+
+        assertEquals(8, field.boxes().size());
     }
 
     @Test
     public void shouldGhostNotAppearWhenDestroyWall() {
-        potionsPower(3);
+        // given
+        settings.integer(POTION_POWER, 3);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺    \n");
+                "☺  # \n");
 
-        dice(dice, 4, 4, Direction.RIGHT.value());
-        ghostsCount(1);
+        settings.integer(GHOSTS_COUNT, 1);
+        dice(4, 4, // координаты привидения
+            Direction.RIGHT.value()); // направление движения
 
-        boxAt(3, 0);
-        boxesCount(1);
-
+        // when
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
 
-        asrtBrd("    &\n" +
+        // then
+        assertF("    &\n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉☺   \n" +
                 "҉҉҉H \n");
 
-        dice(dice,
-                Direction.DOWN.value(), // направление движения привидения
-                3, 3); // новая коробка
-        field.tick();
+        events.verifyAllEvents("[KILL_TREASURE_BOX]");
 
-        asrtBrd("     \n" +
+        // when
+        dice(Direction.DOWN.value(), // направление движения привидения
+            3, 3); // новая коробка
+        tick();
+
+        // then
+        assertF("     \n" +
                 "   #&\n" +
                 "     \n" +
                 " ☺   \n" +
@@ -208,51 +322,56 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldWallNotAppearOnHero() {
-        givenBr("☼☼☼☼☼\n" +
-                "☼   ☼\n" +
-                "☼ ☼ ☼\n" +
-                "☼☺  ☼\n" +
-                "☼☼☼☼☼\n");
-
-        boxesCount(1);
-        dice(dice, 2, 1); // коробка
-
-        field.tick();
-
-        asrtBrd("☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺# ☼\n" +
                 "☼☼☼☼☼\n");
 
+        // when
+        tick();
+
+        // then
+        assertF("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺# ☼\n" +
+                "☼☼☼☼☼\n");
+
+        // when
         hero().act();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼ ☺ ☼\n" +
                 "☼҉☼ ☼\n" +
                 "☼҉H ☼\n" +
                 "☼☼☼☼☼\n");
+
+        events.verifyAllEvents("[KILL_TREASURE_BOX]");
+
         // when
-        field.tick();
-        dice(dice,
-                0, 0,                     // на неразрушаемоей стене нельзя
-                hero().getX(), hero().getY(), // на месте героя не должен появиться
-                1, 1);                    // а вот тут свободно
+        tick();
+
+        dice(0, 0,  // на неразрушаемоей стене нельзя
+            hero().getX(), hero().getY(),  // на месте героя не должен появиться
+            1, 1); // а вот тут свободно
 
         // then
-        asrtBrd("☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼\n" +
                 "☼ ☺ ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼#  ☼\n" +
@@ -261,11 +380,14 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldGameReturnsRealJoystick() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        // given
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
+        // when
         hero(0).act();
         hero(1).up();
         tick();
@@ -277,16 +399,20 @@ public class GameTest extends AbstractGameTest {
         tick();
         tick();
 
-        assertFalse(hero(0).isAlive());
-        assertTrue(hero(1).isAlive());
+        // then
+        events.verifyAllEvents(
+                "listener(0) => [DIED]\n" +
+                "listener(1) => []\n");
+
+        assertEquals(false, hero(0).isAlive());
+        assertEquals(true, hero(1).isAlive());
 
         Joystick joystick1 = game(0).getJoystick();
         Joystick joystick2 = game(0).getJoystick();
 
         // when
-        dice(dice,
-                0, 0,
-                1, 0);
+        dice(0, 0,
+            1, 0);
         game(0).newGame();
         game(1).newGame();
 
@@ -297,69 +423,73 @@ public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldGetTwoHeroesOnBoard() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        // given when
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
+        // then
         assertSame(hero(0), game(0).getJoystick());
         assertSame(hero(1), game(1).getJoystick());
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥   \n", game(0));
+                "☺♥   \n", 0);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥☺   \n", game(1));
+                "♥☺   \n", 1);
     }
 
     @Test
     public void shouldPrintOtherPotionHero() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        // given
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
+        // when
         hero(0).act();
         hero(0).up();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☻♥   \n", game(0));
+                "☻♥   \n", 0);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♠☺   \n", game(1));
+                "♠☺   \n", 1);
     }
 
     @Test
     public void bug() {
-        dice(dice,
-                1, 1,
-                2, 1);
-        givenBr(2);
+        // given
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                " ☺☺  \n" +
+                "#&&  \n");
 
-        ghostAt(1, 0);
-        ghostAt(2, 0);
-
-        boxesCount(1);
-        boxAt(0, 0);
-
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺♥  \n" +
-                "#&&  \n", game(0));
+                "#&&  \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
         hero(1).act();
@@ -374,22 +504,26 @@ public class GameTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☺҉҉♥ \n" +
                 "҉҉҉҉ \n" +
-                "#xx  \n", game(0));
+                "#xx  \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_GHOST]\n");
 
+        // when
+        removeGhosts(2); // больше не надо привидений
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☺  ♥ \n" +
                 "     \n" +
-                "#    \n", game(0));
+                "#    \n", 0);
     }
 }

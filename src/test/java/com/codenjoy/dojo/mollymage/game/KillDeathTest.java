@@ -26,35 +26,45 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.services.Direction;
 import org.junit.Test;
 
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
+
 public class KillDeathTest extends AbstractGameTest {
 
     // если герой стоит на зелье то он умирает после его взрыва
     @Test
     public void shouldKillHero_whenPotionExploded() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
+        // when
         hero().act();
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
+        tick();
+        tick();
 
-        field.tick();
+        tick();
 
+        // then
         assertHeroAlive();
-        asrtBrd("     \n" +
+
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "1☺   \n");
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "҉    \n" +
@@ -63,9 +73,11 @@ public class KillDeathTest extends AbstractGameTest {
         events.verifyAllEvents("[DIED]");
         assertHeroDie();
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -78,37 +90,45 @@ public class KillDeathTest extends AbstractGameTest {
     // после смерти ходить больше нельзя
     @Test
     public void shouldException_whenTryToMoveIfDead_goLeft() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         killPotioner();
 
+        // when
         hero().left();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
                 "     \n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     private void killPotioner() {
+        // when
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
         hero().act();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 " ҉   \n" +
                 "҉Ѡ҉  \n" +
@@ -117,108 +137,138 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldException_whenTryToMoveIfDead_goUp() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         killPotioner();
 
+        // when
         hero().up();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
                 "     \n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     @Test
     public void shouldException_whenTryToMoveIfDead_goDown() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         killPotioner();
 
+        // when
         hero().down();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
                 "     \n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     @Test
     public void shouldException_whenTryToMoveIfDead_goRight() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         killPotioner();
 
+        // when
         hero().right();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
                 "     \n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     @Test
     public void shouldException_whenTryToMoveIfDead_dropPotion() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
         killPotioner();
 
+        // when
         hero().act();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " Ѡ   \n" +
                 "     \n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     // если герой стоит под действием ударной волны, он умирает
     @Test
     public void shouldKillHero_whenPotionExploded_blastWaveAffect_fromLeft() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
+        // when
         hero().act();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "1☺   \n");
         assertHeroAlive();
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "҉    \n" +
@@ -227,9 +277,11 @@ public class KillDeathTest extends AbstractGameTest {
         events.verifyAllEvents("[DIED]");
         assertHeroDie();
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -241,33 +293,39 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldKillHero_whenPotionExploded_blastWaveAffect_fromRight() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
+        // when
         hero().right();
-        field.tick();
+        tick();
 
         hero().act();
-        field.tick();
+        tick();
 
         hero().left();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
+        tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺1   \n");
         assertHeroAlive();
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
@@ -276,9 +334,11 @@ public class KillDeathTest extends AbstractGameTest {
         events.verifyAllEvents("[DIED]");
         assertHeroDie();
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -290,31 +350,37 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldKillHero_whenPotionExploded_blastWaveAffect_fromUp() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
+        // when
         hero().up();
         hero().act();
-        field.tick();
+        tick();
 
         hero().down();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
+        tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "1    \n" +
                 "☺    \n");
         assertHeroAlive();
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "҉    \n" +
                 "҉҉   \n" +
@@ -323,9 +389,11 @@ public class KillDeathTest extends AbstractGameTest {
         events.verifyAllEvents("[DIED]");
         assertHeroDie();
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -337,33 +405,39 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldKillHero_whenPotionExploded_blastWaveAffect_fromDown() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
+        // when
         hero().down();
-        field.tick();
+        tick();
 
         hero().act();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
+        tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
                 "1    \n");
         assertHeroAlive();
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ    \n" +
@@ -372,9 +446,11 @@ public class KillDeathTest extends AbstractGameTest {
         events.verifyAllEvents("[DIED]");
         assertHeroDie();
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "Ѡ    \n" +
@@ -386,40 +462,45 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldNoKillHero_whenPotionExploded_blastWaveAffect_fromDownRight() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
 
+        // when
         hero().down();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().act();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().left();
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
 
+        // then
         assertHeroAlive();
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
                 " 1   \n");
 
-        field.tick();
+        // when
+        tick();
 
+        // then
         assertHeroAlive();
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺҉   \n" +
@@ -428,24 +509,26 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldBlastAfter_whenPotionExposed_HeroDie() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
+                "  ☺  \n" +
                 "     \n" +
-                "     \n" +
-                "☺    \n");
-        gotoBoardCenter();
+                "     \n");
 
+        // when
         hero().act();
-        field.tick();
+        tick();
 
         hero().down();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "  ҉  \n" +
                 " ҉҉҉ \n" +
                 "  Ѡ  \n" +
@@ -454,8 +537,11 @@ public class KillDeathTest extends AbstractGameTest {
         events.verifyAllEvents("[DIED]");
         assertHeroDie();
 
-        field.tick();
-        asrtBrd("     \n" +
+        // when
+        tick();
+
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "  Ѡ  \n" +
@@ -468,34 +554,52 @@ public class KillDeathTest extends AbstractGameTest {
     // они взрываются от ударной волны
     @Test
     public void shouldDestroyWallsDestroyed_whenPotionExploded() {
-        givenBr("#####\n" +
+        // given
+        givenFl("#####\n" +
                 "#   #\n" +
                 "# # #\n" +
                 "#☺  #\n" +
                 "#####\n");
 
+        // when
         hero().act();
-        goOut();
+        hero().up();
+        tick();
 
-        asrtBrd("#####\n" +
+        hero().up();
+        tick();
+
+        hero().right();
+        tick();
+
+        hero().right();
+        tick();
+
+        // then
+        assertF("#####\n" +
                 "#  ☺#\n" +
                 "# # #\n" +
                 "#1  #\n" +
                 "#####\n");
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("#####\n" +
+        // then
+        assertF("#####\n" +
                 "#  ☺#\n" +
                 "#҉# #\n" +
                 "H҉҉ #\n" +
                 "#H###\n");
+
+        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
     }
 
     // привидение умирает, если попадает под взывающееся зелье
     @Test
     public void shouldDieMonster_whenPotionExploded() {
-        givenBr("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -507,24 +611,15 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        ghostsCount(1);
-        ghostAt(9, 9).start();
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
-                "☼        &☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼         ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼         ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼         ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼☺        ☼\n" +
-                "☼☼☼☼☼☼☼☼☼☼☼\n");
+        // when
+        settings.integer(GHOSTS_COUNT, 1);
+        // координата и направление движения привидения
+        dice(9, 9,
+            1, Direction.DOWN.value());
+        tick();
 
-        dice(dice, 1, Direction.DOWN.value());
-        field.tick();
-
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼&☼\n" +
                 "☼         ☼\n" +
@@ -536,18 +631,36 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
+        // when
+        tick();
 
-        dice(dice, 1, Direction.LEFT.value());
-        field.tick();
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼        &☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼         ☼\n" +
+                "☼ ☼ ☼ ☼ ☼ ☼\n" +
+                "☼☺        ☼\n" +
+                "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // when
+        tick();
+        tick();
+        tick();
+        tick();
+        tick();
+        tick();
+
+        // направление движения привидения
+        dice(1, Direction.LEFT.value());
+        tick();
+
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -559,19 +672,21 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼☺      & ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        field.tick();
+        // when
+        tick();
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
+        tick();
+        tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -583,9 +698,11 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼1 &      ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -597,10 +714,16 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼҉x       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(dice, level.size() - 2, level.size() - 2, Direction.DOWN.value());
-        field.tick();
+        events.verifyAllEvents("[KILL_GHOST]");
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // when
+        // координата и направление движения привидения
+        dice(9, 9,
+                Direction.DOWN.value());
+        tick();
+
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼&☼\n" +
                 "☼         ☼\n" +
@@ -615,38 +738,43 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldGhostAppearAfterKill() {
-        potionsPower(3);
+        // given
+        settings.integer(POTION_POWER, 3);
 
-        givenBr("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺    \n");
+                "☺  & \n");
 
-        dice(dice, 3, 0, Direction.DOWN.value());
-        ghostsCount(1);
-
+        // when
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "҉    \n" +
                 "҉    \n" +
                 "҉☺   \n" +
                 "҉҉҉x \n");
 
-        dice(dice, 2, 2, Direction.DOWN.value());
-        field.tick();
+        events.verifyAllEvents("[KILL_GHOST]");
 
-        asrtBrd("     \n" +
+        // when
+        // координата и направление движения привидения
+        dice(2, 2, Direction.DOWN.value());
+        tick();
+
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺&  \n" +
@@ -655,11 +783,14 @@ public class KillDeathTest extends AbstractGameTest {
 
     @Test
     public void shouldOnlyOneListenerWorksWhenOneHeroKillAnother() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        // given
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
+        // when
         hero(0).act();
         hero(0).up();
         tick();
@@ -671,49 +802,51 @@ public class KillDeathTest extends AbstractGameTest {
         tick();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "҉    \n" +
-                "҉♣   \n", game(0));
+                "҉♣   \n", 0);
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                        "listener(1) => [DIED]\n");
+                "listener(1) => [DIED]\n");
     }
 
     // герой может идти на привидение, при этом он умирает
     @Test
     public void shouldKllOtherHeroWhenHeroGoToGhost() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
-
-        ghostAt(2, 0);
-
-        asrtBrd("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥&  \n", game(0));
+                "☺☺&  \n");
 
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♥&  \n", 0);
+
+        // when
         hero(1).right();
         tick();
         // от имени наблюдателя вижу опасность - привидение
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
+                "☺ &  \n", 0);
 
-                "☺ &  \n", game(0));
-
+        // then
         // от имени жертвы вижу свой трупик
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥ Ѡ  \n", game(1));
+                "♥ Ѡ  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -724,35 +857,40 @@ public class KillDeathTest extends AbstractGameTest {
     // как это на моей доске отобразится? Хочу видеть трупик
     @Test
     public void shouldKllOtherHeroWhenGhostGoToIt() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
-
-        Ghost ghost = ghostAt(2, 0);
-
-        asrtBrd("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥&  \n", game(0));
+                "☺☺&  \n");
 
+        Ghost ghost = ghost(2, 0);
+
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♥&  \n", 0);
+
+        // when
+        ghost.start();
         ghost.setDirection(Direction.LEFT);
         tick();
 
+        // then
         // от имени наблюдателя я там вижу опасность - привидение, мне не интересны останки игроков
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺&   \n", game(0));
+                "☺&   \n", 0);
 
         // от имени жертвы я вижу свой трупик, мне пофиг уже что на карте происходит, главное где поставить памятник герою
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥Ѡ   \n", game(1));
+                "♥Ѡ   \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +
@@ -763,34 +901,38 @@ public class KillDeathTest extends AbstractGameTest {
     // встречу к нему - герой проскочит или умрет? должен умереть!
     @Test
     public void shouldKllOtherHeroWhenGhostAndHeroMoves() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
-
-        Ghost ghost = ghostAt(2, 0);
-
-        asrtBrd("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥&  \n", game(0));
+                "☺☺&  \n");
 
+        Ghost ghost = ghost(2, 0);
+
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺♥&  \n", 0);
+
+        // when
         ghost.setDirection(Direction.LEFT);
         hero(1).right();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺&♣  \n", game(0));
+                "☺&♣  \n", 0);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥&Ѡ  \n", game(1));
+                "♥&Ѡ  \n", 1);
 
         events.verifyAllEvents(
                 "listener(0) => []\n" +

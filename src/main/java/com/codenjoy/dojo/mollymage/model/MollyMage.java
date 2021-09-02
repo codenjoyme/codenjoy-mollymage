@@ -30,67 +30,74 @@ import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.blast.BoomEngineOriginal;
 import com.codenjoy.dojo.mollymage.model.items.blast.Poison;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
-import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
-import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
 import com.codenjoy.dojo.mollymage.model.items.perks.*;
 import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.services.BoardUtils;
-import com.codenjoy.dojo.services.Dice;
-import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.field.Accessor;
+import com.codenjoy.dojo.services.field.PointField;
+import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.round.RoundField;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
 import java.util.*;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.BIG_BADABOOM;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.PERK_WHOLE_TEAM_GET;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.services.field.Generator.generate;
 import static java.util.stream.Collectors.toList;
 
 public class MollyMage extends RoundField<Player> implements Field {
 
-    public static final boolean ACTIVE_ALIVE = true;
-    public static final boolean ALL = !ACTIVE_ALIVE;
+    public static final int MAX = 1000;
 
-    private List<Player> players = new LinkedList<>();
-
-    private int size;
-    private TreasureBoxes boxes;
-    private Ghosts ghosts;
-
-    private List<Wall> walls = new LinkedList<>();
-    private List<Potion> potions = new LinkedList<>();
-    private List<Poison> toxins = new LinkedList<>();
-    private List<Blast> blasts = new LinkedList<>();
-    private List<Point> destroyedObjects = new LinkedList<>();
-    private List<Point> previousTickDestroyedObjects = new LinkedList<>();
-    private List<Potion> destroyedPotions = new LinkedList<>();
+    private PointField field;
+    private List<Player> players;
     private Dice dice;
-    private List<PerkOnBoard> perks = new LinkedList<>();
-
     private GameSettings settings;
+
+    private List<Point> destroyedObjects;
+    private List<Point> previousTickDestroyedObjects;
+    private List<Potion> destroyedPotions;
 
     public MollyMage(Level level, Dice dice, GameSettings settings) {
         super(Events.START_ROUND, Events.WIN_ROUND, Events.DIED, settings);
-        this.settings = settings;
+
         this.dice = dice;
-        init(level);
+        this.settings = settings;
+        players = new LinkedList<>();
+        field = level.field();
+        field.init(this);
 
-        ghosts = new Ghosts(settings, dice);
-        ghosts.init(this);
-
-        boxes = new TreasureBoxes(settings, dice);
-        boxes.init(this);
+        destroyedObjects = new LinkedList<>();
+        previousTickDestroyedObjects = new LinkedList<>();
+        destroyedPotions = new LinkedList<>();
     }
 
-    private void init(Level level) {
-        this.size = level.size();
-        this.walls = level.getWalls();
+    @Override
+    public void remove(Player player) {
+        super.remove(player);
+        removeAloneHeroes();
+    }
+
+    public void newGame(Player player) {
+        if (!players.contains(player)) {
+            players.add(player);
+        }
+        player.newHero(this);
+        removeAloneHeroes();
+    }
+
+    // TODO DF3D попробовать избавиться от этого метода
+    private void removeAloneHeroes() {
+        heroes().removeNotSame(players.stream().
+                map(GamePlayer::getHero)
+                .collect(toList()));
     }
 
     @Override
@@ -98,30 +105,41 @@ public class MollyMage extends RoundField<Player> implements Field {
         return players;
     }
 
-    @Override
-    public List<PerkOnBoard> perks() {
-        return perks;
+    public void regenerateGhosts() {
+        generate(ghosts(), settings, GHOSTS_COUNT,
+                player -> freeRandom((Player) player),
+                pt -> {
+                    Ghost ghost = new Ghost(pt);
+                    ghost.init(this);
+                    return ghost;
+                });
     }
 
-    public PerkOnBoard pickPerk(Point pt) {
-        int index = perks.indexOf(pt);
-        if (index == -1) {
-            return null;
+    public void regenerateBoxes() {
+        generate(boxes(), settings, TREASURE_BOX_COUNT,
+                player -> freeRandom((Player) player),
+                pt -> new TreasureBox(pt));
+    }
+
+    public List<PerkOnBoard> pickPerk(Point pt) {
+        List<PerkOnBoard> result = perks().getAt(pt);
+        if (!result.isEmpty()) {
+            perks().removeAt(pt);
         }
-        return perks.remove(index);
+        return result;
     }
 
     @Override
-    public void addPerk(Player player, Perk perk) {
+    public void pickPerkBy(Player player, Perk perk) {
         if (isWholeTeamShouldGetPerk()) {
-            addPerk(player.getTeamId(), perk);
+            pickPerkBy(player.getTeamId(), perk);
         } else {
             player.getHero().addPerk(perk);
         }
     }
 
     @Override
-    public void addPerk(int teamId, Perk perk) {
+    public void pickPerkBy(int teamId, Perk perk) {
         for (Player player : players) {
             if (player.getTeamId() == teamId) {
                 player.getHero().addPerk(perk);
@@ -151,7 +169,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     @Override
     public int size() {
-        return size;
+        return field.size();
     }
 
     @Override
@@ -168,18 +186,20 @@ public class MollyMage extends RoundField<Player> implements Field {
     public void tickField() {
         applyAllHeroes();       // герои ходят
         ghostEatHeroes();       // омномном
-        boxes.tick();           // сундуки появляются
-        ghosts.tick();          // привидения водят свой хоровод
+        regenerateBoxes();      // сундуки появляются
+        regenerateGhosts();     // приведения появляются
+        ghosts().tick();        // привидения водят свой хоровод
+        hunters().tick();       // охотники охотятся
         ghostEatHeroes();       // омномном
         disablePotionRemote();  // если остались remote зелья без хозяев, взрываем
         makeBlastsFromPoisonThrower();  //  heroes throws poison
-        tactAllPotions();       // все что касается зелья и взрывов
-        tactAllPerks();         // тикаем перки на поле
-        tactAllHeroes();        // в том числе и перки героев
+        tickAllPotions();       // все что касается зелья и взрывов
+        tickAllPerks();         // тикаем перки на поле
+        heroes().tick();        // в том числе и героев (их перки и все что у них там может быть)
     }
 
     private void disablePotionRemote() {
-        for (Potion potion : potions) {
+        for (Potion potion : potions()) {
             Hero owner = potion.getOwner();
             if (!owner.isActiveAndAlive()) {
                 if (potion.isOnRemote()) {
@@ -190,18 +210,14 @@ public class MollyMage extends RoundField<Player> implements Field {
         }
     }
 
-    private void tactAllPerks() {
+    private void tickAllPerks() {
         // тикаем счетчик перка на поле и если просрочка, удаляем
-        perks.forEach(perk -> perk.tick());
-        perks = perks.stream()
-                .filter(perk -> perk.getPerk().getPickTimeout() > 0)
+        perks().forEach(PerkOnBoard::tick);
+        List<PerkOnBoard> alive = perks().stream()
+                .filter(perk -> perk.getPerk().getPick() > 0)
                 .collect(toList());
-    }
-
-    private void tactAllHeroes() {
-        for (Player p : players) {
-            p.getHero().tick();
-        }
+        perks().clear();
+        perks().addAll(alive);
     }
 
     private void applyAllHeroes() {
@@ -211,14 +227,16 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void removeBlasts() {
-        blasts.clear();
+        blasts().clear();
 
         for (Point pt : destroyedObjects) {
             if (pt instanceof TreasureBox) {
-                boxes.remove(pt);
+                boxes().removeAt(pt);
                 dropPerk(pt, dice);
-            } else if (pt instanceof Ghost || pt instanceof GhostHunter) {
-                ghosts.remove(pt);
+            } else if (pt instanceof GhostHunter) {
+                hunters().removeAt(pt);
+            } else if (pt instanceof Ghost) {
+                ghosts().removeAt(pt);
             }
         }
 
@@ -229,32 +247,33 @@ public class MollyMage extends RoundField<Player> implements Field {
         previousTickDestroyedObjects.clear();
         previousTickDestroyedObjects.addAll(destroyedObjects);
         destroyedObjects.clear();
-        toxins.clear();
+        toxins().clear();
     }
 
     private void ghostEatHeroes() {
-        for (Ghost ghost : ghosts.all()) {
-            for (Player player : players) {
-                Hero hero = player.getHero();
-                if (hero.isAlive() && ghost.itsMe(hero)) {
-                    player.getHero().die();
-                }
+        ghosts().forEach(ghost -> eatBy(ghost));
+        hunters().forEach(hunter -> eatBy(hunter));
+    }
+
+    private void eatBy(Ghost ghost) {
+        for (Player player : players) {
+            Hero hero = player.getHero();
+            if (hero.isAlive() && ghost.itsMe(hero)) {
+                player.getHero().die();
             }
         }
     }
 
-    private void tactAllPotions() {
-        for (Potion potion : potions) {
-            potion.tick();
-        }
+    private void tickAllPotions() {
+        potions().tick();
 
         do {
-            makeBlastsFromDestoryedPotions();
+            makeBlastsFromDestroyedPotions();
 
             if (settings.bool(BIG_BADABOOM)) {
                 // если зелье зацепила взрывная волна и его тоже подрываем
-                for (Potion potion : potions) {
-                    if (blasts.contains(potion)) {
+                for (Potion potion : potions()) {
+                    if (blasts().contains(potion)) {
                         potion.boom();
                     }
                 }
@@ -264,62 +283,42 @@ public class MollyMage extends RoundField<Player> implements Field {
         } while (!destroyedPotions.isEmpty());
 
         // потому уже считаем скоры за разрушения
-        killAllNear(blasts);
+        blastKillAllNear();
 
         // убираем взрывную волну над обнаженными перками, тут взрыв сделал свое дело
-        List<Blast> blastsOnPerks = blasts.stream()
-                .filter(blast -> perks.contains(blast))
-                .collect(toList());
-        blasts.removeAll(blastsOnPerks);
-
+        blasts().removeIn(perks().all());
     }
 
-    private void makeBlastsFromDestoryedPotions() {
+    private void makeBlastsFromDestroyedPotions() {
         // все взрываем, чтобы было пекло
         for (Potion potion : destroyedPotions) {
-            potions.remove(potion);
+            potions().removeAt(potion);
 
             List<Blast> blast = makeBlast(potion);
-            blasts.addAll(blast);
+            blasts().addAll(blast);
         }
         destroyedPotions.clear();
     }
 
     private void makeBlastsFromPoisonThrower() {
-        for (Poison poison : toxins) {
+        for (Poison poison : toxins()) {
             List<Blast> blast = makeBlast(poison);
-            blasts.addAll(blast);
+            blasts().addAll(blast);
         }
-        
-        toxins.clear();
-    }
-
-    @Override
-    public List<Potion> potions() {
-        return potions;
+        toxins().clear();
     }
 
     @Override
     public List<Potion> potions(Hero hero) {
-        return potions.stream()
+        return potions().stream()
                 .filter(potion -> potion.itsMine(hero))
                 .collect(toList());
     }
 
     @Override
-    public List<Blast> blasts() {
-        return blasts;
-    }
-
-    @Override
-    public List<Wall> walls() {
-        return walls;
-    }
-
-    @Override
     public void drop(Potion potion) {
         if (!existAtPlace(potion.getX(), potion.getY())) {
-            potions.add(potion);
+            potions().add(potion);
         }
     }
 
@@ -333,57 +332,41 @@ public class MollyMage extends RoundField<Player> implements Field {
         destroyedObjects.add(pt);
     }
 
-
-
     private List<Blast> makeBlast(Poison poison) {
-        List barriers = getBarriesForBlast();
-
-        return new BoomEngineOriginal(poison.getOwner())
-                .boom(barriers, size(), poison);
-    }
-
-    private List getBarriesForBlast() {
-        List barriers = new LinkedList();
-        barriers.addAll(this.walls);
-        barriers.addAll(this.ghosts.all());
-        barriers.addAll(this.boxes.all());
-        barriers.addAll(heroes(ACTIVE_ALIVE));
-        return barriers;
+        return new BoomEngineOriginal(this, poison.getOwner())
+                .boom(poison);
     }
 
     private List<Blast> makeBlast(Potion potion) {
-        List barriers = getBarriesForBlast();
-
         // TODO move potion inside BoomEngine
         List<Blast> result = new ArrayList<>();
         for (Hero owner : potion.getOwners()) {
-            result.addAll(new BoomEngineOriginal(owner)
-                    .boom(barriers, size(), potion, potion.getPower()));
+            result.addAll(new BoomEngineOriginal(this, owner)
+                    .boom(potion, potion.getPower()));
         }
         return result;
     }
 
-    private void killAllNear(List<Blast> blasts) {
-        killHeroes(blasts);
-        killPerks(blasts);
-        killBoxesAndGhosts(blasts);
+    private void blastKillAllNear() {
+        blastKillHeroes();
+        blastKillPerks();
+        blastKillBoxesAndGhosts();
     }
 
-    private void killBoxesAndGhosts(List<Blast> blasts) {
-        // собираем все разрушаемые стенки которые уже есть в радиусе
-        // надо определить кто кого чем кикнул (ызрывные волны могут пересекаться)
+    private void blastKillBoxesAndGhosts() {
+        // собираем все ящики и привидения которые уже есть в радиусе
+        // надо определить кто кого чем кикнул (взрывные волны могут пересекаться)
         List<Point> all = new LinkedList<>();
-        all.addAll(boxes.all());
-        all.addAll(ghosts.all());
+        all.addAll(boxes().all());
+        all.addAll(ghosts().all());
+        all.addAll(hunters().all());
 
-        Multimap<Hero, Point> deathMatch = HashMultimap.create();
-        for (Blast blast : blasts) {
+        Multimap<Hero, Point> deathMatch = LinkedHashMultimap.create();
+        for (Blast blast : blasts()) {
             Hero hunter = blast.owner();
-            int index = all.indexOf(blast);
-            if (index != -1) {
-                Point object = all.get(index);
-                deathMatch.put(hunter, object);
-            }
+            all.stream()
+                    .filter(object -> object.itsMe(blast))
+                    .forEach(object -> deathMatch.put(hunter, object));
         }
 
         // у нас есть два списка, прибитые стенки
@@ -416,17 +399,14 @@ public class MollyMage extends RoundField<Player> implements Field {
         });
     }
 
-    private void killPerks(List<Blast> blasts) {
+    private void blastKillPerks() {
         // собираем все перки которые уже есть в радиусе
         // надо определить кто кого чем кикнул (ызрывные волны могут пересекаться)
         Multimap<Hero, PerkOnBoard> deathMatch = HashMultimap.create();
-        for (Blast blast : blasts) {
+        for (Blast blast : blasts()) {
             Hero hunter = blast.owner();
-            int index = perks.indexOf(blast);
-            if (index != -1) {
-                PerkOnBoard perk = perks.get(index);
-                deathMatch.put(hunter, perk);
-            }
+            perks().getAt(blast)
+                    .forEach(perk -> deathMatch.put(hunter, perk));
         }
 
         // у нас есть два списка, прибитые перки
@@ -446,28 +426,24 @@ public class MollyMage extends RoundField<Player> implements Field {
             deathMatch.get(hunter).forEach(perk -> {
                 hunter.event(Events.DROP_PERK);
 
-                // TODO может это делать на этапе, когда balsts развиднеется в removeBlasts
-                blasts.remove(perk);
-                ghosts.add(new GhostHunter(perk, this, hunter));
+                // TODO может это делать на этапе, когда blasts развиднеется в removeBlasts
+                blasts().removeAt(perk);
+                hunters().add(new GhostHunter(perk, this, hunter));
             });
         });
     }
 
-    private void killHeroes(List<Blast> blasts) {
+    private void blastKillHeroes() {
         // беремся за героев, если у них только нет иммунитета
         // надо определить кто кого чем кикнул (ызрывные волны могут пересекаться)
         Multimap<Hero, Hero> deathMatch = HashMultimap.create();
-        for (Blast blast : blasts) {
+        for (Blast blast : blasts()) {
             Hero hunter = blast.owner();
-            for (Player player : aliveActive()) {
-                Hero prey = player.getHero();
-                if (prey.itsMe(blast)) {
-                    Perk immune = prey.getPerk(Element.POTION_IMMUNE);
-                    if (immune == null) {
-                        deathMatch.put(hunter, prey);
-                    }
-                }
-            }
+            aliveActive().stream()
+                    .map(Player::getHero)
+                    .filter(hero -> hero.itsMe(blast))
+                    .filter(prey -> prey.getPerk(Element.POTION_IMMUNE) == null)
+                    .forEach(prey -> deathMatch.put(hunter, prey));
         }
 
         // у нас есть два списка, те кого прибили
@@ -537,12 +513,12 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void setup(Point pt, Perk perk) {
-        perk.setPickTimeout(settings.perksSettings().pickTimeout());
-        perks.add(new PerkOnBoard(pt, perk));
+        perk.setPick(settings.perksSettings().pickTimeout());
+        perks().add(new PerkOnBoard(pt, perk));
     }
 
     private boolean existAtPlace(int x, int y) {
-        for (Potion potion : potions) {
+        for (Potion potion : potions()) {
             if (potion.getX() == x && potion.getY() == y) {
                 return true;
             }
@@ -567,31 +543,34 @@ public class MollyMage extends RoundField<Player> implements Field {
             }
         }
 
-        if (potions.contains(pt)) {
+        if (potions().contains(pt)) {
             return true;
         }
 
         // TODO test me привидение или стена не могут появиться на перке
         if (!isForHero) {
-            if (perks.contains(pt)) {
+            if (perks().contains(pt)) {
                 return true;
             }
         }
 
         // TODO: test me
-        if (walls.contains(pt)) {
+        if (walls().contains(pt)) {
             return true;
         }
 
         // TODO: test me
-        if (boxes.all().contains(pt)) {
+        if (boxes().contains(pt)) {
             return true;
         }
 
         // TODO test me стенка или другой чопер не могут появиться на чопере
         // TODO но герой может пойти к нему на встречу
         if (!isForHero) {
-            if (ghosts.all().contains(pt)) {
+            if (ghosts().contains(pt)) {
+                return true;
+            }
+            if (hunters().contains(pt)) {
                 return true;
             }
         }
@@ -606,7 +585,6 @@ public class MollyMage extends RoundField<Player> implements Field {
         return pt.isOutOf(size());
     }
 
-    @Override
     public List<Hero> heroes(boolean activeAliveOnly) {
         return players.stream()
                 .map(Player::getHero)
@@ -614,37 +592,16 @@ public class MollyMage extends RoundField<Player> implements Field {
                 .collect(toList());
     }
 
-    public void newGame(Player player) {
-        if (!players.contains(player)) {
-            players.add(player);
-        }
-        player.newHero(this);
-    }
-
     public BoardReader reader() {
-        return new BoardReader<Player>() {
-            private final int size = MollyMage.this.size();
-
-            @Override
-            public int size() {
-                return size;
-            }
-
-            @Override
-            public Iterable<? extends Point> elements(Player player) {
-                List<Point> elements = new LinkedList<>();
-
-                elements.addAll(MollyMage.this.heroes(ALL));
-                elements.addAll(MollyMage.this.boxes.all());
-                elements.addAll(MollyMage.this.ghosts.all());
-                elements.addAll(MollyMage.this.walls);
-                elements.addAll(MollyMage.this.potions());
-                elements.addAll(MollyMage.this.blasts());
-                elements.addAll(MollyMage.this.perks());
-
-                return elements;
-            }
-        };
+        return field.reader(
+                Hero.class,
+                TreasureBox.class,
+                Ghost.class,
+                GhostHunter.class,
+                Wall.class,
+                Potion.class,
+                Blast.class,
+                PerkOnBoard.class);
     }
 
     @Override
@@ -653,25 +610,61 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
-    public TreasureBoxes boxes() {
-        return boxes;
-    }
-
-    @Override
-    public Ghosts ghosts() {
-        return ghosts;
-    }
-
-    @Override
     public void addPoison(Poison poison) {
-        toxins.add(poison);
+        toxins().add(poison);
     }
 
     @Override
     public void explodeAllPotions(Hero hero) {
-        for (Potion potion : potions) {
+        for (Potion potion : potions()) {
             potion.intercept(hero);
             potion.activateRemote(hero);
         }
     }
+
+    @Override
+    public Accessor<Blast> blasts() {
+        return field.of(Blast.class);
+    }
+
+    @Override
+    public Accessor<Wall> walls() {
+        return field.of(Wall.class);
+    }
+
+    @Override
+    public Accessor<Poison> toxins() {
+        return field.of(Poison.class);
+    }
+
+    @Override
+    public Accessor<Potion> potions() {
+        return field.of(Potion.class);
+    }
+
+    @Override
+    public Accessor<Ghost> ghosts() {
+        return field.of(Ghost.class);
+    }
+
+    @Override
+    public Accessor<GhostHunter> hunters() {
+        return field.of(GhostHunter.class);
+    }
+
+    @Override
+    public Accessor<PerkOnBoard> perks() {
+        return field.of(PerkOnBoard.class);
+    }
+
+    @Override
+    public Accessor<TreasureBox> boxes() {
+        return field.of(TreasureBox.class);
+    }
+
+    @Override
+    public Accessor<Hero> heroes() {
+        return field.of(Hero.class);
+    }
+
 }

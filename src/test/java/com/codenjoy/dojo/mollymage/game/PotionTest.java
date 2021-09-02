@@ -29,26 +29,26 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTIONS_COUNT;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertSame;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.when;
 
 public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionDropped_whenHeroDropPotion() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        hero().act();
-        field.tick();
 
-        asrtBrd("     \n" +
+        // when
+        hero().act();
+        tick();
+
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -57,21 +57,25 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionDropped_whenHeroDropPotionAtAnotherPlace() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
+        // when
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().act();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☻   \n" +
@@ -80,26 +84,30 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldPotionsDropped_whenHeroDropThreePotion() {
-        givenBr("     \n" +
+        // given
+        settings.integer(POTIONS_COUNT, 3);
+
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        canDropPotions(3);
 
+        // when
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().act();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "2☻   \n" +
@@ -110,44 +118,46 @@ public class PotionTest extends AbstractGameTest {
     // чем у него в settings прописано
     @Test
     public void shouldOnlyTwoPotions_whenLevelApproveIt() {
-        givenBr("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "☺    \n");
-        canDropPotions(2);
+        // given
+        settings.integer(POTIONS_COUNT, 2);
 
-        asrtBrd("     \n" +
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
 
+        // when
         hero().up();
         hero().act();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☻    \n" +
                 "     \n");
 
+        // when
         hero().up();
         hero().act();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☻    \n" +
                 "3    \n" +
                 "     \n");
 
+        // when
         hero().up();
         hero().act();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "☺    \n" +
                 "3    \n" +
                 "2    \n" +
@@ -157,20 +167,24 @@ public class PotionTest extends AbstractGameTest {
     // герой не может класть два зелья на одно место
     @Test
     public void shouldOnlyOnePotionPerPlace() {
-        givenBr("     \n" +
+        // given
+        settings.integer(POTIONS_COUNT, 2);
+
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        canDropPotions(2);
+
+        // when
+        hero().act();
+        tick();
 
         hero().act();
-        field.tick();
+        tick();
 
-        hero().act();
-        field.tick();
-
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -178,35 +192,43 @@ public class PotionTest extends AbstractGameTest {
 
         assertEquals(1, field.potions().size());
 
+        // when
         hero().right();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "2☺   \n");
 
+        // when
         hero().right();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "1 ☺  \n");
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "҉    \n" +
                 "҉҉☺  \n");
 
-        field.tick();   // зелья больше нет, иначе тут был бы взрыв второй
+        // when
+        tick();   // зелья больше нет, иначе тут был бы взрыв второй
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -215,31 +237,37 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldBoom_whenDroppedPotionHas5Ticks() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
+        // when
         hero().act();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "1 ☺  \n");
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "҉    \n" +
@@ -249,23 +277,21 @@ public class PotionTest extends AbstractGameTest {
     // проверить, что я могу поставить еще одно зелье, когда другое рвануло
     @Test
     public void shouldCanDropNewPotion_whenOtherBoom() {
-        givenBr("     \n" +
-                "     \n" +
-                "     \n" +
-                "     \n" +
-                "☺    \n");
+        // given
         shouldBoom_whenDroppedPotionHas5Ticks();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "҉    \n" +
                 "҉҉☺  \n");
 
+        // when
         hero().act();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -274,24 +300,28 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldBlastAfter_whenPotionExposed() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
+        // when
         hero().act();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
+        tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "҉    \n" +
@@ -300,27 +330,28 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldBlastAfter_whenPotionExposed_inOtherCorner() {
-        givenBr("     \n" +
+        // given
+        givenFl("    ☺\n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺    \n");
-        gotoMaxUp();
-        gotoMaxRight();
+                "     \n");
 
+        // when
         hero().act();
-        field.tick();
+        tick();
 
         hero().left();
-        field.tick();
+        tick();
 
         hero().left();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
+        tick();
+        tick();
 
-        asrtBrd("  ☺҉҉\n" +
+        // then
+        assertF("  ☺҉҉\n" +
                 "    ҉\n" +
                 "     \n" +
                 "     \n" +
@@ -329,24 +360,29 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldWallProtectsHero() {
-        givenBr("☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
+        // when
         hero().act();
         goOut();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼  ☺☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼1  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        field.tick();
+        // when
+        tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼  ☺☼\n" +
                 "☼҉☼ ☼\n" +
                 "☼҉҉ ☼\n" +
@@ -357,7 +393,8 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldWallProtectsHero2() {
-        givenBr("☼☼☼☼☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼       ☼\n" +
@@ -366,6 +403,8 @@ public class PotionTest extends AbstractGameTest {
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼☺      ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n");
+
+        // when then
         assertPotionPower(5,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
@@ -380,10 +419,38 @@ public class PotionTest extends AbstractGameTest {
         assertHeroAlive();
     }
 
+    private void assertPotionPower(int power, String expected) {
+        // given
+        settings.integer(POTION_POWER, power);
+
+        // when
+        hero().act();
+        goOut();
+        tick();
+
+        // then
+        assertF(expected);
+    }
+
+    private void goOut() {
+        hero().right();
+        tick();
+
+        hero().right();
+        tick();
+
+        hero().up();
+        tick();
+
+        hero().up();
+        tick();
+    }
+
     // разрыв зелья длинной указанной в settings
     @Test
     public void shouldChangePotionPower_to2() {
-        givenBr("☼☼☼☼☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼       ☼\n" +
@@ -392,6 +459,8 @@ public class PotionTest extends AbstractGameTest {
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼☺      ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n");
+
+        // when then
         assertPotionPower(2,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
@@ -406,7 +475,8 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldChangePotionPower_to3() {
-        givenBr("☼☼☼☼☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼       ☼\n" +
@@ -415,6 +485,8 @@ public class PotionTest extends AbstractGameTest {
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼☺      ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n");
+
+        // when then
         assertPotionPower(3,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
@@ -429,7 +501,8 @@ public class PotionTest extends AbstractGameTest {
 
     @Test
     public void shouldChangePotionPower_to6() {
-        givenBr("☼☼☼☼☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼☼☼☼☼\n" +
                 "☼       ☼\n" +
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼       ☼\n" +
@@ -438,6 +511,8 @@ public class PotionTest extends AbstractGameTest {
                 "☼ ☼ ☼ ☼ ☼\n" +
                 "☼☺      ☼\n" +
                 "☼☼☼☼☼☼☼☼☼\n");
+
+        // when then
         assertPotionPower(6,
                 "☼☼☼☼☼☼☼☼☼\n" +
                 "☼҉      ☼\n" +
@@ -455,132 +530,160 @@ public class PotionTest extends AbstractGameTest {
     // с теми, что на поле
     @Test
     public void shouldNoChangeOriginalPotionsWhenUseBoardApiButTimersSynchronized() {
-        givenBr("     \n" +
+        // given
+        settings.integer(POTIONS_COUNT, 2);
+
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        canDropPotions(2);
-        hero().act();
-        hero().right();
-        field.tick();
-        hero().act();
-        hero().right();
-        field.tick();
 
-        List<Potion> potions1 = field.potions();
-        List<Potion> potions2 = field.potions();
-        List<Potion> potions3 = field.potions();
-        assertSame(potions1, potions2);
-        assertSame(potions2, potions3);
-        assertSame(potions3, potions1);
+        // when
+        hero().act();
+        hero().right();
+        tick();
+
+        hero().act();
+        hero().right();
+        tick();
+
+        // then
+        List<Potion> potions1 = field.potions().all();
+        List<Potion> potions2 = field.potions().all();
+        List<Potion> potions3 = field.potions().all();
+        assertEquals(potions1.toString(), potions2.toString());
+        assertEquals(potions2.toString(), potions3.toString());
+        assertEquals(potions3.toString(), potions1.toString());
 
         Potion potion11 = potions1.get(0);
         Potion potion12 = potions2.get(0);
         Potion potion13 = potions3.get(0);
-        assertSame(potion11, potion12);
-        assertSame(potion12, potion13);
-        assertSame(potion13, potion11);
+        assertEquals(potion11.toString(), potion12.toString());
+        assertEquals(potion12.toString(), potion13.toString());
+        assertEquals(potion13.toString(), potion11.toString());
 
         Potion potion21 = potions1.get(1);
         Potion potion22 = potions2.get(1);
         Potion potion23 = potions3.get(1);
-        assertSame(potion21, potion22);
-        assertSame(potion22, potion23);
-        assertSame(potion23, potion21);
+        assertEquals(potion21.toString(), potion22.toString());
+        assertEquals(potion22.toString(), potion23.toString());
+        assertEquals(potion23.toString(), potion21.toString());
 
-        field.tick();
-        field.tick();
+        // when
+        tick();
+        tick();
 
-        assertFalse(potion11.isExploded());
-        assertFalse(potion12.isExploded());
-        assertFalse(potion13.isExploded());
+        // then
+        assertEquals(false, potion11.isExploded());
+        assertEquals(false, potion12.isExploded());
+        assertEquals(false, potion13.isExploded());
 
-        field.tick();
+        // when
+        tick();
 
-        assertTrue(potion11.isExploded());
-        assertTrue(potion12.isExploded());
-        assertTrue(potion13.isExploded());
+        // then
+        assertEquals(true, potion11.isExploded());
+        assertEquals(true, potion12.isExploded());
+        assertEquals(true, potion13.isExploded());
 
-        assertFalse(potion21.isExploded());
-        assertFalse(potion22.isExploded());
-        assertFalse(potion23.isExploded());
+        assertEquals(false, potion21.isExploded());
+        assertEquals(false, potion22.isExploded());
+        assertEquals(false, potion23.isExploded());
 
-        field.tick();
+        // when
+        tick();
 
-        assertTrue(potion21.isExploded());
-        assertTrue(potion22.isExploded());
-        assertTrue(potion23.isExploded());
+        // then
+        assertEquals(true, potion21.isExploded());
+        assertEquals(true, potion22.isExploded());
+        assertEquals(true, potion23.isExploded());
+
+        events.verifyAllEvents("[DIED]");
     }
 
     @Test
     public void shouldReturnShouldNotSynchronizedPotionsList_whenUseBoardApi() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
+        // when
         hero().act();
         hero().right();
-        field.tick();
+        tick();
 
-        List<Potion> potions1 = field.potions();
+        // then
+        List<Potion> potions1 = field.potions().all();
         assertEquals(1, potions1.size());
 
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
+        // when
+        tick();
+        tick();
+        tick();
+        tick();
 
-        List<Potion> potions2 = field.potions();
+        // then
+        events.verifyAllEvents("[DIED]");
+
+        List<Potion> potions2 = field.potions().all();
         assertEquals(0, potions2.size());
         assertEquals(0, potions1.size());
-        assertSame(potions1, potions2);
+        assertEquals(potions1.toString(), potions2.toString());
     }
 
     @Test
     public void shouldChangeBlast_whenUseBoardApi() {  // TODO а нода вообще такое? стреляет по перформансу перекладывать объекты и усложняет код
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+
+        // when
         hero().act();
         hero().right();
-        field.tick();
+        tick();
         hero().right();
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
+        tick();
 
-        List<Blast> blasts1 = field.blasts();
-        List<Blast> blasts2 = field.blasts();
-        List<Blast> blasts3 = field.blasts();
-        assertSame(blasts1, blasts2);
-        assertSame(blasts2, blasts3);
-        assertSame(blasts3, blasts1);
+        // then
+        List<Blast> blasts1 = field.blasts().all();
+        List<Blast> blasts2 = field.blasts().all();
+        List<Blast> blasts3 = field.blasts().all();
+        assertEquals(blasts1.toString(), blasts2.toString());
+        assertEquals(blasts2.toString(), blasts3.toString());
+        assertEquals(blasts3.toString(), blasts1.toString());
 
         Point blast11 = blasts1.get(0);
         Point blast12 = blasts2.get(0);
         Point blast13 = blasts3.get(0);
-        assertSame(blast11, blast12);
-        assertSame(blast12, blast13);
-        assertSame(blast13, blast11);
+        assertEquals(blast11.toString(), blast12.toString());
+        assertEquals(blast12.toString(), blast13.toString());
+        assertEquals(blast13.toString(), blast11.toString());
 
         Point blast21 = blasts1.get(1);
         Point blast22 = blasts2.get(1);
         Point blast23 = blasts3.get(1);
-        assertSame(blast21, blast22);
-        assertSame(blast22, blast23);
-        assertSame(blast23, blast21);
+        assertEquals(blast21.toString(), blast22.toString());
+        assertEquals(blast22.toString(), blast23.toString());
+        assertEquals(blast23.toString(), blast21.toString());
     }
 
     // взрывная волна не проходит через непробиваемую стенку
     @Test
     public void shouldBlastWaveDoesNotPassThroughWall() {
+        // given
         settings.integer(POTION_POWER, 3);
-        givenBr("☼☼☼☼☼☼☼\n" +
+
+        givenFl("☼☼☼☼☼☼☼\n" +
                 "☼     ☼\n" +
                 "☼ ☼ ☼ ☼\n" +
                 "☼     ☼\n" +
@@ -588,7 +691,7 @@ public class PotionTest extends AbstractGameTest {
                 "☼☺    ☼\n" +
                 "☼☼☼☼☼☼☼\n");
 
-        asrtBrd("☼☼☼☼☼☼☼\n" +
+        assertF("☼☼☼☼☼☼☼\n" +
                 "☼     ☼\n" +
                 "☼ ☼ ☼ ☼\n" +
                 "☼     ☼\n" +
@@ -596,118 +699,128 @@ public class PotionTest extends AbstractGameTest {
                 "☼☺    ☼\n" +
                 "☼☼☼☼☼☼☼\n");
 
+        // when
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().act();
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
+        tick();
+        tick();
 
-        asrtBrd("☼☼☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼☼☼\n" +
                 "☼  ҉  ☼\n" +
                 "☼ ☼҉☼ ☼\n" +
                 "☼  ҉  ☼\n" +
                 "☼ ☼Ѡ☼ ☼\n" +
                 "☼  ҉  ☼\n" +
                 "☼☼☼☼☼☼☼\n");
+
+        events.verifyAllEvents("[DIED]");
     }
 
     @Test
     public void shouldStopBlastWhenHeroOrDestroyWalls() {
-        potionsPower(5);
+        // given
+        settings.integer(POTION_POWER, 5);
 
-        givenBr("       \n" +
+        givenFl("       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
-                "☺      \n");
+                "☺  #   \n");
 
-        int count = 1;
-        boxesCount(count);
-        boxAt(3, 0);
-
-        when(dice.next(anyInt())).thenReturn(101); // don't drop perk by accident
+        // when
+        dice(101); // don't drop perk by accident
 
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
-        field.tick();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
+        tick();
 
-        asrtBrd("       \n" +
+        // then
+        assertF("       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
                 "Ѡ      \n" +
                 "҉      \n" +
                 "҉҉҉H   \n");
+
+        events.verifyAllEvents("[DIED, KILL_TREASURE_BOX]");
     }
 
     @Test
     public void shouldStopBlastWhenGhost() {
-        potionsPower(5);
+        // given
+        settings.integer(POTION_POWER, 5);
 
-        givenBr("       \n" +
+        givenFl("       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
                 "       \n" +
-                "☺      \n");
+                "☺   &  \n");
 
-        ghostsCount(1);
-        ghostAt(4, 0).stop();
-
+        // when
         hero().act();
         hero().up();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
-        field.tick();
+        tick();
+        tick();
 
-        asrtBrd("       \n" +
+        // then
+        assertF("       \n" +
                 "҉      \n" +
                 "҉      \n" +
                 "҉☺     \n" +
                 "҉      \n" +
                 "҉      \n" +
                 "҉҉҉҉x  \n");
+
+        events.verifyAllEvents("[KILL_GHOST]");
     }
 
     // на поле можно чтобы каждый поставил то количество
     // зелья которое ему позволено и не более того
     @Test
     public void shouldTwoPotionsOnBoard() {
+        // given
         settings.integer(POTIONS_COUNT, 1);
 
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
+        // when
         hero(0).act();
         hero(0).up();
 
@@ -716,12 +829,14 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
-                "44   \n", game(0));
+                "44   \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
 
@@ -730,22 +845,26 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "     \n" +
-                "33   \n", game(0));
-
+                "33   \n", 0);
     }
 
     @Test
     public void shouldTwoPotionsOnBoard_withEnemy() {
+        // given
         settings.integer(POTIONS_COUNT, 1);
 
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
+
+        // when
         player(0).inTeam(0);
         player(1).inTeam(1);
 
@@ -757,12 +876,14 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♡   \n" +
-                "44   \n", game(0));
+                "44   \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
 
@@ -771,23 +892,26 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☺♡   \n" +
                 "     \n" +
-                "33   \n", game(0));
-
+                "33   \n", 0);
     }
 
     @Test
     public void shouldFourPotionsOnBoard() {
+        // given
         settings.integer(POTIONS_COUNT, 2);
 
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
+        // when
         hero(0).act();
         hero(0).up();
 
@@ -796,12 +920,14 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
-                "44   \n", game(0));
+                "44   \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
 
@@ -810,12 +936,14 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☺♥   \n" +
                 "44   \n" +
-                "33   \n", game(0));
+                "33   \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
 
@@ -824,53 +952,62 @@ public class PotionTest extends AbstractGameTest {
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "☺♥   \n" +
                 "     \n" +
                 "33   \n" +
-                "22   \n", game(0));
+                "22   \n", 0);
     }
 
     @Test
     public void shouldFourPotionsOnBoard_checkTwoPotionsPerHero() {
+        // given
         settings.integer(POTIONS_COUNT, 2);
 
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
 
+        // when
         hero(0).act();
         hero(0).up();
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
-                "4♥   \n", game(0));
+                "4♥   \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "☺    \n" +
                 "4    \n" +
-                "3♥   \n", game(0));
+                "3♥   \n", 0);
 
+        // when
         hero(0).act();
         hero(0).up();
 
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "☺    \n" +
                 "     \n" +
                 "3    \n" +
-                "2♥   \n", game(0));
+                "2♥   \n", 0);
     }
 }

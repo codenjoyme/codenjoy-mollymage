@@ -22,14 +22,15 @@ package com.codenjoy.dojo.mollymage.model.levels;
  * #L%
  */
 
+import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.services.LengthToXY;
-import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.field.PointField;
 import com.codenjoy.dojo.utils.LevelUtils;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static com.codenjoy.dojo.games.mollymage.Element.*;
 
@@ -50,18 +51,32 @@ public class LevelImpl implements Level {
         return size;
     }
 
-    @Override
-    public Point getHeroPosition() {
-        return LevelUtils.getObjects(xy, map, (point, element) -> point, HERO).get(0);
+    public List<Hero> heroes() {
+        return LevelUtils.getObjects(xy, map,
+                (point, element) -> new Hero(point), HERO);
+    }
+
+    public List<Wall> walls() {
+        return LevelUtils.getObjects(xy, map,
+                (point, element) -> new Wall(point), WALL);
+    }
+
+    public List<TreasureBox> boxes() {
+        return LevelUtils.getObjects(xy, map,
+                (point, element) -> new TreasureBox(point), TREASURE_BOX);
+    }
+
+    public List<Ghost> ghosts() {
+        return LevelUtils.getObjects(xy, map,
+                (point, element) -> new Ghost(point), GHOST);
     }
 
     @Override
-    public List<Wall> getWalls() {
-        return LevelUtils.getObjects(xy, map, (point, element) -> new Wall(point), WALL);
-    }
-
-    @Override
-    public List<TreasureBox> getBoxes() {
-        return LevelUtils.getObjects(xy, map, (point, element) -> new TreasureBox(point), TREASURE_BOX);
+    public PointField field() {
+        PointField result = new PointField(size());
+        result.addAll(walls());
+        result.addAll(boxes());
+        result.addAll(ghosts());
+        return result;
     }
 }

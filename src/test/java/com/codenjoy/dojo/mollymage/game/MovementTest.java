@@ -22,27 +22,30 @@ package com.codenjoy.dojo.mollymage.game;
  * #L%
  */
 
-import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.services.Direction;
-import org.junit.Assert;
 import org.junit.Test;
 
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertEquals;
 
 public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroOnBoardOneRightStep_whenCallRightCommand() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+        
+        // when
         hero().right();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -51,18 +54,22 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroOnBoardTwoRightSteps_whenCallRightCommandTwice() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+        
+        // when
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -71,15 +78,19 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroOnBoardOneUpStep_whenCallDownCommand() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+        
+        // when
         hero().up();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -88,21 +99,25 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkUp() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+        
+        // when
         hero().up();
-        field.tick();
+        tick();
 
         hero().up();
-        field.tick();
+        tick();
 
         hero().down();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
@@ -111,15 +126,19 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenGoToWallDown() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+        
+        // when
         hero().down();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -128,21 +147,25 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkLeft() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+        
+        // when
         hero().right();
-        field.tick();
+        tick();
 
         hero().right();
-        field.tick();
+        tick();
 
         hero().left();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -151,15 +174,19 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenGoToWallLeft() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+        
+        // when
         hero().left();
-        field.tick();
+        tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -168,14 +195,39 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenGoToWallRight() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        gotoMaxRight();
+        
+        // when
+        hero().right();
+        tick();
 
-        asrtBrd("     \n" +
+        hero().right();
+        tick();
+
+        hero().right();
+        tick();
+
+        hero().right();
+        tick();
+
+        // then
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "    ☺\n");
+        
+        // when
+        hero().right();
+        tick();
+
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -184,14 +236,39 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenGoToWallUp() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
-        gotoMaxUp();
+        
+        // when
+        hero().up();
+        tick();
 
-        asrtBrd("☺    \n" +
+        hero().up();
+        tick();
+
+        hero().up();
+        tick();
+
+        hero().up();
+        tick();
+
+        // then
+        assertF("☺    \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n");
+        
+        // when
+        hero().up();
+        tick();
+
+        // then
+        assertF("☺    \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -200,30 +277,36 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroMovedOncePerTact() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+        
+        // when
         hero().down();
         hero().up();
         hero().left();
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n");
-
+        
+        // when
         hero().right();
         hero().left();
         hero().down();
         hero().up();
         field.tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ☺   \n" +
@@ -233,16 +316,19 @@ public class MovementTest extends AbstractGameTest {
     // герой не может пойти вперед на стенку
     @Test
     public void shouldHeroStop_whenUpWall() {
-        givenBr("☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
-
+        
+        // when
         hero().down();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -251,16 +337,19 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenLeftWall() {
-        givenBr("☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
-
+        
+        // when
         hero().left();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -269,15 +358,33 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenRightWall() {
-        givenBr("☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
+        
+        // when
+        hero().right();
+        tick();
 
-        gotoMaxRight();
+        hero().right();
+        tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
+                "☼   ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼  ☺☼\n" +
+                "☼☼☼☼☼\n");
+        
+        // when
+        hero().right();
+        tick();
+
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼  ☺☼\n" +
@@ -286,15 +393,33 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroStop_whenDownWall() {
-        givenBr("☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
+        
+        // when
+        hero().up();
+        field.tick();
 
-        gotoMaxUp();
+        hero().up();
+        field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
+                "☼☺  ☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼   ☼\n" +
+                "☼☼☼☼☼\n");
+        
+        // when
+        hero().up();
+        field.tick();
+
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼☺  ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼   ☼\n" +
@@ -304,21 +429,41 @@ public class MovementTest extends AbstractGameTest {
     // герой не может вернуться на место зелья, она его не пускает как стена
     @Test
     public void shouldHeroStop_whenGotoPotion() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+        
+        // when
         hero().act();
         field.tick();
 
+        // then
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☻    \n");
+        
+        // when
         hero().right();
         field.tick();
 
+        // then
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "3☺   \n");
+        
+        // when
         hero().left();
         field.tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -328,16 +473,20 @@ public class MovementTest extends AbstractGameTest {
     // герой может одноверменно перемещаться по полю и класть зелья
     @Test
     public void shouldHeroWalkAndDropPotionsTogetherInOneTact_potionFirstly() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+        
+        // when
         hero().act();
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -346,25 +495,31 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkAndDropPotionsTogetherInOneTact_moveFirstly() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+        
+        // when
         hero().right();
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 " ☻   \n");
-
+        
+        // when
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -373,18 +528,22 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkAndDropPotionsTogetherInOneTact_potionThanMove() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+        
+        // when
         hero().act();
         field.tick();
 
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -393,27 +552,33 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroWalkAndDropPotionsTogetherInOneTact_moveThanPotion() {
-        givenBr("     \n" +
+        // given
+        givenFl("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 "☺    \n");
+        
+        // when
         hero().right();
         field.tick();
 
         hero().act();
         field.tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
                 " ☻   \n");
-
+        
+        // when
         hero().right();
         field.tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
@@ -425,7 +590,8 @@ public class MovementTest extends AbstractGameTest {
     // если герой и привидение попали в одну клетку - герой умирает
     @Test
     public void shouldRandomMoveMonster() {
-        givenBr("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -437,24 +603,14 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        ghostsCount(1);
-        ghostAt(9, 9).start();
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
-                "☼        &☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼         ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼         ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼         ☼\n" +
-                "☼ ☼ ☼ ☼ ☼ ☼\n" +
-                "☼☺        ☼\n" +
-                "☼☼☼☼☼☼☼☼☼☼☼\n");
-
-        dice(dice, 1, Direction.DOWN.value());
+        // when
+        settings.integer(GHOSTS_COUNT, 1);
+        dice(9, 9, // координата
+            1, Direction.DOWN.value()); // направление движения
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼&☼\n" +
                 "☼         ☼\n" +
@@ -466,14 +622,16 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(dice, 1);
+        // when
+        dice(1);
         field.tick();
         field.tick();
         field.tick();
         field.tick();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -485,10 +643,12 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(dice, 0, Direction.LEFT.value());
+        // when
+        dice(0, Direction.LEFT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -500,6 +660,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
+        // when
         field.tick();
         field.tick();
         field.tick();
@@ -508,7 +669,8 @@ public class MovementTest extends AbstractGameTest {
         field.tick();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -520,10 +682,12 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(dice, 1, Direction.RIGHT.value());
+        // when
+        dice(1, Direction.RIGHT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -535,14 +699,16 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(dice, 0, Direction.LEFT.value());
+        // when
+        dice(0, Direction.LEFT.value());
         field.tick();
         field.tick();
 
-        dice(dice, Direction.LEFT.value());
+        dice(Direction.LEFT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -554,10 +720,12 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        dice(dice, Direction.DOWN.value());
+        // when
+        dice(Direction.DOWN.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -569,9 +737,11 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
+        // when
         field.tick();
 
-        asrtBrd("☼☼☼☼☼☼☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
                 "☼         ☼\n" +
                 "☼ ☼ ☼ ☼ ☼ ☼\n" +
                 "☼         ☼\n" +
@@ -583,19 +753,22 @@ public class MovementTest extends AbstractGameTest {
                 "☼Ѡ        ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        Assert.assertTrue(game().isGameOver());
-        verify(listener()).event(Events.DIED);
+        assertEquals(true, game().isGameOver());
+        events.verifyAllEvents("[DIED]");
     }
 
     // если я двинулся за пределы стены и тут же поставил зелье,
     // то зелье упадет на моем текущем месте
     @Test
     public void shouldMoveOnBoardAndDropPotionTogether() {
-        givenBr("☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
+        
+        // when
         hero().up();
         field.tick();
 
@@ -606,7 +779,8 @@ public class MovementTest extends AbstractGameTest {
         hero().act();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼☻  ☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼   ☼\n" +
@@ -616,20 +790,23 @@ public class MovementTest extends AbstractGameTest {
     // привидение может ходить по зелью
     @Test
     public void shouldMonsterCanMoveOnPotion() {
-        givenBr("☼☼☼☼☼\n" +
-                "☼   ☼\n" +
-                "☼ ☼ ☼\n" +
-                "☼☺  ☼\n" +
-                "☼☼☼☼☼\n");
-
-        ghostsCount(1);
-        ghostAt(3, 3).start();
-        asrtBrd("☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
+        ghost(3, 3).start();
+
+        // then
+        assertF("☼☼☼☼☼\n" +
+                "☼  &☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+        
+        // when
         hero().up();
         field.tick();
 
@@ -646,16 +823,18 @@ public class MovementTest extends AbstractGameTest {
         hero().down();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼ 2&☼\n" +
                 "☼☺☼ ☼\n" +
                 "☼   ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.LEFT.value());
+        dice(Direction.LEFT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼ & ☼\n" +
                 "☼☺☼ ☼\n" +
                 "☼   ☼\n" +
@@ -665,27 +844,34 @@ public class MovementTest extends AbstractGameTest {
     // приведение не может появится на герое!
     @Test
     public void shouldGhostNotAppearOnHero() {
+        // given
         shouldMonsterCanMoveOnPotion();
 
+        // when
         hero().down();
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼x҉҉☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice,
-                0, 0, // на неразрушаемой стене нельзя
-                hero().getX(), hero().getY(), // попытка поселиться на герое
-                3, 3, // попытка - клетка свободна
-                Direction.DOWN.value()); // а это куда он сразу же отправится
+        events.verifyAllEvents("[KILL_GHOST]");
+
+        // when
+        // на неразрушаемой стене нельзя
+        // попытка поселиться на герое
+        // попытка - клетка свободна
+        // а это куда он сразу же отправится
+        dice(0, 0, hero().getX(), hero().getY(), 3, 3, Direction.DOWN.value());
 
         // when пришла пора регенериться чоперу
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼   ☼\n" +
                 "☼ ☼&☼\n" +
                 "☼☺  ☼\n" +
@@ -695,23 +881,29 @@ public class MovementTest extends AbstractGameTest {
     // привидение не может пойти на стенку
     @Test
     public void shouldGhostCantMoveOnWall() {
-        givenBr("☼☼☼☼☼\n" +
-                "☼   ☼\n" +
-                "☼ ☼ ☼\n" +
-                "☼☺  ☼\n" +
-                "☼☼☼☼☼\n");
-
-        ghostAt(3, 3);
-        asrtBrd("☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.RIGHT.value());
+        // when
+        ghost(3, 3).start();
+
+        // then
+        assertF("☼☼☼☼☼\n" +
+                "☼  &☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+
+        // when
+        dice(Direction.RIGHT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼ ☼\n" +
                 "☼☺  ☼\n" +
@@ -721,56 +913,62 @@ public class MovementTest extends AbstractGameTest {
     // привидение не будет ходить, если ему некуда
     @Test
     public void shouldGhostCantMoveWhenNoSpaceAround() {
-        givenBr("☼☼☼☼☼\n" +
-                "☼   ☼\n" +
-                "☼ ☼ ☼\n" +
-                "☼☺  ☼\n" +
-                "☼☼☼☼☼\n");
-
-        ghostsCount(1);
-        ghostAt(3, 3).start();
-
-        boxesCount(2);
-        boxAt(2, 3);
-        boxAt(3, 2);
-
-        asrtBrd("☼☼☼☼☼\n" +
+        // given
+        givenFl("☼☼☼☼☼\n" +
                 "☼ #&☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.RIGHT.value());
-        field.tick();
+        // when
+        ghost(3, 3).start();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼ #&☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.UP.value());
+        // when
+        dice(Direction.RIGHT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼ #&☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.LEFT.value());
+        // when
+        dice(Direction.UP.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼ #&☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.DOWN.value());
+        // when
+        dice(Direction.LEFT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
+                "☼ #&☼\n" +
+                "☼ ☼#☼\n" +
+                "☼☺  ☼\n" +
+                "☼☼☼☼☼\n");
+
+        // when
+        dice(Direction.DOWN.value());
+        field.tick();
+
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼ #&☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
@@ -780,31 +978,38 @@ public class MovementTest extends AbstractGameTest {
     // привидение вновь сможет ходить когда его разбарикадируют
     @Test
     public void shouldGhostCanMoveWhenSpaceAppear() {
+        // given
         shouldGhostCantMoveWhenNoSpaceAround();
 
+        // when
         // минус одна коробка
-        field.boxes().remove(pt(2, 3));
-        boxesCount(boxesCount() - 1);
+        field.boxes().removeAt(pt(2, 3));
+        removeBoxes(1);
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼  &☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.LEFT.value());
+        // when
+        dice(Direction.LEFT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼ & ☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
-        dice(dice, Direction.LEFT.value());
+        // when
+        dice(Direction.LEFT.value());
         field.tick();
 
-        asrtBrd("☼☼☼☼☼\n" +
+        // then
+        assertF("☼☼☼☼☼\n" +
                 "☼&  ☼\n" +
                 "☼ ☼#☼\n" +
                 "☼☺  ☼\n" +
@@ -813,29 +1018,36 @@ public class MovementTest extends AbstractGameTest {
 
     @Test
     public void shouldHeroCantGoToAnotherHero() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
-
+        // given
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
+        
+        // when
         hero(0).right();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥   \n", game(0));
+                "☺♥   \n", 0);
     }
 
     // герои не могут ходить по зелью ни по своему ни по чужому
     @Test
     public void shouldHeroCantGoToPotionFromAnotherHero() {
-        dice(dice,
-                0, 0,
-                1, 0);
-        givenBr(2);
-
+        // given
+        givenFl("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "☺☺   \n");
+        
+        // when
         hero(1).act();
         hero(1).right();
         tick();
@@ -844,78 +1056,89 @@ public class MovementTest extends AbstractGameTest {
         hero(0).right();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺3 ♥ \n", game(0));
+                "☺3 ♥ \n", 0);
 
+        // when
         hero(1).left();
         tick();
 
         hero(1).left();
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺1♥  \n", game(0));
+                "☺1♥  \n", 0);
     }
 
     @Test
     public void shouldPotionKillAllHero() {
+        // given
         shouldHeroCantGoToPotionFromAnotherHero();
 
+        // when
         tick();
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "Ѡ҉♣  \n", game(0));
+                "Ѡ҉♣  \n", 0);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "♣҉Ѡ  \n", game(1));
+                "♣҉Ѡ  \n", 1);
+
+        events.verifyAllEvents(
+                "listener(0) => [DIED]\n" +
+                "listener(1) => [DIED, KILL_OTHER_HERO]\n");
     }
 
     @Test
     public void shouldNewGamesWhenKillAll() {
+        // given
         shouldPotionKillAllHero();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "Ѡ҉♣  \n", game(0));
+                "Ѡ҉♣  \n", 0);
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 " ҉   \n" +
-                "♣҉Ѡ  \n", game(1));
+                "♣҉Ѡ  \n", 1);
 
-        dice(dice,
-                0, 0,
-                1, 0);
+        // when
+        dice(0, 0, 1, 0);
         game(0).newGame();
         game(1).newGame();
 
         tick();
 
-        asrtBrd("     \n" +
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♥   \n", game(0));
+                "☺♥   \n", 0);
 
-        asrtBrd("     \n" +
+        // then
+        assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "♥☺   \n", game(1));
+                "♥☺   \n", 1);
     }
 }

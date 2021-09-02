@@ -42,52 +42,61 @@ public class GameRunnerTest {
 
     @Test
     public void shouldWork() {
-        int size = 23;
-        int boxes = 5;
-        int ghosts = 15;
+        for (int i = 0; i < 100; i++) {
+            int size = 23;
+            int boxes = 5;
+            int ghosts = 15;
 
-        EventListener listener = mock(EventListener.class);
-        GameRunner gameType = new GameRunner(){
-            @Override
-            public GameSettings getSettings() {
-                return super.getSettings()
+            EventListener listener = mock(EventListener.class);
+            GameRunner gameType = new GameRunner() {
+                @Override
+                public GameSettings getSettings() {
+                    return super.getSettings()
                             .bool(ROUNDS_ENABLED, false)
                             .integer(TREASURE_BOX_COUNT, boxes)
                             .integer(GHOSTS_COUNT, ghosts);
-            }
-        };
+                }
+            };
 
-        GameSettings settings = gameType.getSettings();
+            GameSettings settings = gameType.getSettings();
 
-        Game game = TestUtils.buildGame(gameType, listener, printerFactory);
-        game.getField().tick();
-
-        PlayerScores scores = gameType.getPlayerScores(10, settings);
-        assertEquals(10, scores.getScore());
-        scores.event(Events.KILL_GHOST);
-        assertEquals(20, scores.getScore());
-
-        assertEquals(size, gameType.getBoardSize(settings).getValue().intValue());
-
-        Joystick joystick = game.getJoystick();
-
-        int walls = (size - 1) * 4 + (size / 2 - 1) * (size / 2 - 1);
-
-        String actual = (String)game.getBoardAsString();
-        assertCharCount(actual, "☼", walls);
-        assertCharCount(actual, "#", boxes);
-        assertCharCount(actual, "☺", 1);
-        assertCharCount(actual, "&", ghosts);
-        assertCharCount(actual, " ", size * size - walls - boxes - ghosts - 1);
-
-        assertFalse(game.isGameOver());
-
-        joystick.act();
-        for (int index = 0; index < 100; index ++) {
+            Game game = TestUtils.buildGame(gameType, listener, printerFactory);
             game.getField().tick();
-        }
 
-        assertTrue(game.isGameOver());
+            PlayerScores scores = gameType.getPlayerScores(10, settings);
+            assertEquals(10, scores.getScore());
+            scores.event(Events.KILL_GHOST);
+            assertEquals(20, scores.getScore());
+
+            assertEquals(size, gameType.getBoardSize(settings).getValue().intValue());
+
+            Joystick joystick = game.getJoystick();
+
+            int walls = (size - 1) * 4 + (size / 2 - 1) * (size / 2 - 1);
+
+            String actual = (String) game.getBoardAsString();
+            assertCharCount(actual, "☼", walls);
+            assertCharCount(actual, "#", boxes);
+            int gameOver = 0;
+            try {
+                assertCharCount(actual, "☺", 1);
+                assertCharCount(actual, "&", ghosts);
+                assertEquals(false, game.isGameOver());
+            } catch (AssertionError e) {
+                assertCharCount(actual, "Ѡ", 1);
+                gameOver = 1;
+                assertCharCount(actual, "&", ghosts - gameOver);
+                assertEquals(true, game.isGameOver());
+            }
+            assertCharCount(actual, " ", size * size - walls - boxes - ghosts - 1 + gameOver);
+
+            joystick.act();
+            for (int index = 0; index < 100; index++) {
+                game.getField().tick();
+            }
+
+            assertEquals(true, game.isGameOver());
+        }
     }
 
     private void assertCharCount(String actual, String ch, int count) {

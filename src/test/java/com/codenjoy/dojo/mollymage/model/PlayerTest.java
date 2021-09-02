@@ -28,6 +28,7 @@ import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.EventListener;
+import com.codenjoy.dojo.services.field.Accessor;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.stubbing.OngoingStubbing;
@@ -52,6 +53,8 @@ public class PlayerTest {
         field = mock(Field.class);
         when(field.settings()).thenReturn(settings);
         when(field.freeRandom(any())).thenReturn(Optional.of(pt(0, 0)));
+        when(field.heroes()).thenReturn(mock(Accessor.class));
+        when(field.heroes()).thenReturn(mock(Accessor.class));
 
         listener = mock(EventListener.class);
     }
@@ -65,23 +68,29 @@ public class PlayerTest {
 
     @Test
     public void shouldProcessEventWhenListenerIsNotNull() {
+        // given
         Player player = new Player(listener, settings);
         dice(0, 0);
         player.newHero(field);
 
+        // when
         player.event(Events.KILL_TREASURE_BOX);
 
+        // then
         verify(listener).event(Events.KILL_TREASURE_BOX);
     }
 
     @Test
     public void shouldNotProcessEventWhenListenerNotNull() {
+        // given
         Player player = new Player(null, settings);
         dice(0, 0);
         player.newHero(field);
 
+        // when
         player.event(Events.KILL_TREASURE_BOX);
 
+        // then
         verify(listener, never()).event(Events.KILL_TREASURE_BOX);
     }
 }

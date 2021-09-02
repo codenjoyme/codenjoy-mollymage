@@ -27,26 +27,21 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class ActTest {
-    private Act act;
 
     @Test
     public void shouldTrue_whenACT_WithoutArguments() {
-        act = new Act(null);
-        assertEquals(true, act.act());
-        act = new Act(new int[0]);
-        assertEquals(true, act.act());
+        assertEquals(true, new Act(null).act());
+        assertEquals(true, new Act(new int[0]).act());
     }
 
     @Test
     public void shouldFalse_whenACT_WithArguments() {
-        act = new Act(new int[]{1});
-        assertEquals(false, act.act());
+        assertEquals(false, new Act(new int[]{1}).act());
     }
 
     @Test
     public void shouldCorrectlyDetectArguments_WithArguments() {
-        act = new Act(new int[]{1});
-        assertEquals(true, act.act(1));
-        assertEquals(false, act.act(2));
+        assertEquals(true, new Act(new int[]{1}).act(1));
+        assertEquals(false, new Act(new int[]{1}).act(2));
     }
 }

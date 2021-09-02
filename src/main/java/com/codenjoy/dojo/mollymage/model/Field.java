@@ -27,12 +27,14 @@ import com.codenjoy.dojo.mollymage.model.items.Potion;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.blast.Poison;
-import com.codenjoy.dojo.mollymage.model.items.box.TreasureBoxes;
-import com.codenjoy.dojo.mollymage.model.items.ghost.Ghosts;
+import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
+import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
+import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.field.Accessor;
 import com.codenjoy.dojo.services.round.RoundGameField;
 
 import java.util.List;
@@ -46,19 +48,11 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     int size();
 
-    List<Hero> heroes(boolean activeAliveOnly);
-
-    List<Potion> potions();
-
     List<Potion> potions(Hero hero);
-
-    List<Wall> walls();
 
     boolean isBarrier(Point pt, boolean isForHero);
 
     void remove(Player player);
-
-    List<Blast> blasts();
 
     void drop(Potion potion);
 
@@ -66,23 +60,35 @@ public interface Field extends RoundGameField<Player> {  // TODO примени�
 
     void remove(Point pt);
 
-    List<PerkOnBoard> perks();
+    List<PerkOnBoard> pickPerk(Point pt);
 
-    PerkOnBoard pickPerk(Point pt);
+    void pickPerkBy(Player player, Perk perk);
 
-    void addPerk(Player player, Perk perk);
-
-    void addPerk(int teamId, Perk perk);
+    void pickPerkBy(int teamId, Perk perk);
 
     Dice dice();
 
     Optional<Point> freeRandom(Player player);
 
-    TreasureBoxes boxes();
-
-    Ghosts ghosts();
-
     void addPoison(Poison poison);
 
     void explodeAllPotions(Hero hero);
+
+    Accessor<Poison> toxins();
+
+    Accessor<Wall> walls();
+
+    Accessor<Potion> potions();
+
+    Accessor<Blast> blasts();
+
+    Accessor<GhostHunter> hunters();
+
+    Accessor<PerkOnBoard> perks();
+
+    Accessor<Ghost> ghosts();
+
+    Accessor<TreasureBox> boxes();
+
+    Accessor<Hero> heroes();
 }

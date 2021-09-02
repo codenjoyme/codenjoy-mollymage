@@ -28,7 +28,6 @@ import com.codenjoy.dojo.mollymage.model.items.blast.Poison;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.perks.HeroPerks;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
-import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.*;
@@ -57,6 +56,18 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         score = 0;
         direction = null;
         recharge = 0;
+    }
+
+    public Hero(Point pt) {
+        this();
+        move(pt);
+    }
+
+    @Override
+    public void init(Field field) {
+        super.init(field);
+
+        field.heroes().add(this);
     }
 
     @Override
@@ -135,11 +146,10 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
 
         if (!field.isBarrier(pt, FOR_HERO)) {
             move(pt);
-            PerkOnBoard perk = field.pickPerk(pt);
-            if (perk != null) {
-                field.addPerk((Player) this.getPlayer(), perk.getPerk());
+            field.pickPerk(pt).forEach(perk -> {
+                field.pickPerkBy((Player) this.getPlayer(), perk.getPerk());
                 event(Events.CATCH_PERK);
-            }
+            });
         }
         direction = null;
 

@@ -95,10 +95,9 @@ public abstract class AbstractGameTest {
 
     public void givenFl(String map) {
         settings.string(LEVEL_MAP, map);
-        LevelImpl level = (LevelImpl) settings.level();
 
-        field = new MollyMage(level, dice, settings);
-        level.heroes().forEach(hero -> givenPlayer(hero));
+        field = new MollyMage(dice, settings);
+        settings.level().heroes().forEach(hero -> givenPlayer(hero));
 
         settings.integer(TREASURE_BOX_COUNT, field.boxes().size())
                 .integer(GHOSTS_COUNT, field.ghosts().size());

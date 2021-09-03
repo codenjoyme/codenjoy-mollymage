@@ -153,7 +153,7 @@ public class GameSettings extends SettingsImpl
                 "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼");
     }
 
-    public Level level() {
+    public LevelImpl level() {
         return new LevelImpl(string(LEVEL_MAP));
     }
 

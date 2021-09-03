@@ -28,5 +28,5 @@ public interface Level {
 
     int size();
 
-    PointField field();
+    void saveTo(PointField field);
 }

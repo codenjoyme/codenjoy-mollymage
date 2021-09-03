@@ -46,14 +46,14 @@ public class GameTest extends AbstractGameTest {
     @Test
     public void shouldBoard_whenStartGame() {
         // given
-        Level level = mock(Level.class);
-        when(level.field()).thenReturn(new PointField(10));
-
-        // when
-        MollyMage board = new MollyMage(level, mock(Dice.class), settings);
+        givenFl("     \n" +
+                "     \n" +
+                "  ☺  \n" +
+                " ☺   \n" +
+                "☺    \n");
 
         // then
-        assertEquals(10, board.size());
+        assertEquals(5, field.size());
     }
 
     @Test

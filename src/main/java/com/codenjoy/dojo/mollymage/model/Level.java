@@ -39,19 +39,19 @@ public class Level extends AbstractLevel {
     }
 
     public List<Hero> heroes() {
-        return find((point, element) -> new Hero(point), HERO);
+        return find(Hero::new, HERO);
     }
 
     public List<Wall> walls() {
-        return find((point, element) -> new Wall(point), WALL);
+        return find(Wall::new, WALL);
     }
 
     public List<TreasureBox> boxes() {
-        return find((point, element) -> new TreasureBox(point), TREASURE_BOX);
+        return find(TreasureBox::new, TREASURE_BOX);
     }
 
     public List<Ghost> ghosts() {
-        return find((point, element) -> new Ghost(point), GHOST);
+        return find(Ghost::new, GHOST);
     }
 
     @Override

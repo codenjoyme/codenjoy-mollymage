@@ -37,10 +37,6 @@ import static com.codenjoy.dojo.services.StateUtils.filterOne;
 
 public class TreasureBox extends PointImpl implements State<Element, Player> {
 
-    public TreasureBox(int x, int y) {
-        super(x, y);
-    }
-
     public TreasureBox(Point pt) {
         super(pt);
     }

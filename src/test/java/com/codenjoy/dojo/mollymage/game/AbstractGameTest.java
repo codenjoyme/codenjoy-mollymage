@@ -191,7 +191,7 @@ public abstract class AbstractGameTest {
     // other stuff
 
     public void newBox(int x, int y) {
-        field.boxes().add(new TreasureBox(x, y));
+        field.boxes().add(new TreasureBox(pt(x, y)));
     }
 
     public void newPerk(int x, int y, Perk perk) {

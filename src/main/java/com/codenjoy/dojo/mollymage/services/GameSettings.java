@@ -25,8 +25,7 @@ package com.codenjoy.dojo.mollymage.services;
 
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
-import com.codenjoy.dojo.mollymage.model.levels.Level;
-import com.codenjoy.dojo.mollymage.model.levels.LevelImpl;
+import com.codenjoy.dojo.mollymage.model.Level;
 import com.codenjoy.dojo.services.round.RoundSettings;
 import com.codenjoy.dojo.services.semifinal.SemifinalSettings;
 import com.codenjoy.dojo.services.settings.SettingsImpl;
@@ -153,8 +152,8 @@ public class GameSettings extends SettingsImpl
                 "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼");
     }
 
-    public LevelImpl level() {
-        return new LevelImpl(string(LEVEL_MAP));
+    public Level level() {
+        return new Level(string(LEVEL_MAP));
     }
 
     public PerksSettingsWrapper perksSettings() {

@@ -23,13 +23,9 @@ package com.codenjoy.dojo.mollymage.game;
  */
 
 
-import com.codenjoy.dojo.mollymage.model.MollyMage;
-import com.codenjoy.dojo.mollymage.model.levels.Level;
-import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Joystick;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.field.PointField;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -39,21 +35,20 @@ import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class GameTest extends AbstractGameTest {
 
     @Test
     public void shouldBoard_whenStartGame() {
         // given
-        Level level = mock(Level.class);
-        when(level.field()).thenReturn(new PointField(10));
-
-        // when
-        MollyMage board = new MollyMage(level, mock(Dice.class), settings);
+        givenFl("     \n" +
+                "     \n" +
+                "  ☺  \n" +
+                " ☺   \n" +
+                "☺    \n");
 
         // then
-        assertEquals(10, board.size());
+        assertEquals(5, field.size());
     }
 
     @Test

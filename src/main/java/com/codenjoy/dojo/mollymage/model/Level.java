@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.model.levels;
+package com.codenjoy.dojo.mollymage.model;
 
 /*-
  * #%L
@@ -22,61 +22,42 @@ package com.codenjoy.dojo.mollymage.model.levels;
  * #L%
  */
 
-import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
-import com.codenjoy.dojo.services.LengthToXY;
+import com.codenjoy.dojo.services.field.AbstractLevel;
 import com.codenjoy.dojo.services.field.PointField;
-import com.codenjoy.dojo.utils.LevelUtils;
 
 import java.util.List;
 
 import static com.codenjoy.dojo.games.mollymage.Element.*;
 
-public class LevelImpl implements Level {
+public class Level extends AbstractLevel {
 
-    private final String map;
-    private final int size;
-    private final LengthToXY xy;
-
-    public LevelImpl(String map) {
-        this.map = LevelUtils.clear(map);
-        this.size = (int) Math.sqrt(map.length());
-        this.xy = new LengthToXY(size);
-    }
-
-    @Override
-    public int size() {
-        return size;
+    public Level(String map) {
+        super(map);
     }
 
     public List<Hero> heroes() {
-        return LevelUtils.getObjects(xy, map,
-                (point, element) -> new Hero(point), HERO);
+        return find(Hero::new, HERO);
     }
 
     public List<Wall> walls() {
-        return LevelUtils.getObjects(xy, map,
-                (point, element) -> new Wall(point), WALL);
+        return find(Wall::new, WALL);
     }
 
     public List<TreasureBox> boxes() {
-        return LevelUtils.getObjects(xy, map,
-                (point, element) -> new TreasureBox(point), TREASURE_BOX);
+        return find(TreasureBox::new, TREASURE_BOX);
     }
 
     public List<Ghost> ghosts() {
-        return LevelUtils.getObjects(xy, map,
-                (point, element) -> new Ghost(point), GHOST);
+        return find(Ghost::new, GHOST);
     }
 
     @Override
-    public PointField field() {
-        PointField result = new PointField(size());
-        result.addAll(walls());
-        result.addAll(boxes());
-        result.addAll(ghosts());
-        return result;
+    public void fill(PointField field) {
+        field.addAll(walls());
+        field.addAll(boxes());
+        field.addAll(ghosts());
     }
 }

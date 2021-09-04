@@ -34,10 +34,6 @@ import static com.codenjoy.dojo.games.mollymage.Element.WALL;
 
 public class Wall extends PointImpl implements State<Element, Player>, Tickable {
 
-    public Wall(int x, int y) {
-        super(x, y);
-    }
-
     public Wall(Point pt) {
         super(pt);
     }

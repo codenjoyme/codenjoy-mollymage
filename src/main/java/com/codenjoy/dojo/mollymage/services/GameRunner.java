@@ -59,7 +59,7 @@ public class GameRunner extends AbstractGameType<GameSettings> {
 
     @Override
     public GameField createGame(int levelNumber, GameSettings settings) {
-        return new MollyMage(settings.level(), getDice(), settings);
+        return new MollyMage(getDice(), settings);
     }
 
     @Override

@@ -29,8 +29,7 @@ import com.codenjoy.dojo.mollymage.model.Field;
 import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.MollyMage;
 import com.codenjoy.dojo.mollymage.model.Player;
-import com.codenjoy.dojo.mollymage.model.levels.Level;
-import com.codenjoy.dojo.mollymage.model.levels.LevelImpl;
+import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.Printer;
@@ -42,6 +41,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.LEVEL_MAP;
 import static com.codenjoy.dojo.services.Direction.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
@@ -51,15 +51,20 @@ public class BoomEngineOriginalTest {
 
     private BoomEngine engine;
     private Poison poison;
-    private Level level;
     private PrinterFactory printer;
     private Field field;
+    private GameSettings settings;
 
     private void givenFl(String board) {
-        level = new LevelImpl(board);
-        field = new MollyMage(level, mock(Dice.class), new TestGameSettings());
+        settings = settings();
+        settings.string(LEVEL_MAP, board);
+        field = new MollyMage(mock(Dice.class), settings);
         engine = new BoomEngineOriginal(field, null);
         printer = new PrinterFactoryImpl();
+    }
+
+    private TestGameSettings settings() {
+        return new TestGameSettings();
     }
 
     @Test
@@ -339,7 +344,7 @@ public class BoomEngineOriginalTest {
 
         Point source = pt(11, 11);
         int radius = 15;
-        int countBlasts = 2 * (level.size() - 2) - 1;
+        int countBlasts = 2 * (field.size() - 2) - 1;
 
         // when then
         assertBoom(source, radius, countBlasts,
@@ -393,7 +398,7 @@ public class BoomEngineOriginalTest {
 
         Point source = pt(12, 11);
         int radius = 15;
-        int countBlasts = level.size() - 2;
+        int countBlasts = field.size() - 2;
 
         // when then
         assertBoom(source, radius, countBlasts,
@@ -447,7 +452,7 @@ public class BoomEngineOriginalTest {
 
         Point source = pt(11, 12);
         int radius = 15;
-        int countBlasts = level.size() - 2;
+        int countBlasts = field.size() - 2;
 
         // when then
         assertBoom(source, radius, countBlasts,
@@ -660,7 +665,7 @@ public class BoomEngineOriginalTest {
         Printer<String> printer = this.printer.getPrinter(new BoardReader<Player>() {
             @Override
             public int size() {
-                return level.size();
+                return field.size();
             }
 
             class B extends PointImpl implements State<Element, Object> {

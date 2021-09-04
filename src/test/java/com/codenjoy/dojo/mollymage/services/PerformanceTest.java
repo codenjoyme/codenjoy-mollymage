@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_ENABLED;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -143,14 +144,14 @@ public class PerformanceTest {
     private List<Wall> generate(int size) {
         List<Wall> result = new LinkedList<>();
         for (int x = 0; x < size; x++) {
-            result.add(new Wall(x, 0));
-            result.add(new Wall(x, size - 1));
+            result.add(new Wall(pt(x, 0)));
+            result.add(new Wall(pt(x, size - 1)));
         }
 
         final int D = 1;
         for (int y = D; y < size - D; y++) {
-            result.add(new Wall(0, y));
-            result.add(new Wall(size - 1, y));
+            result.add(new Wall(pt(0, y)));
+            result.add(new Wall(pt(size - 1, y)));
         }
 
         for (int x = 2; x <= size - 2; x++) {
@@ -158,7 +159,7 @@ public class PerformanceTest {
                 if (y % 2 != 0 || x % 2 != 0) {
                     continue;
                 }
-                result.add(new Wall(x, y));
+                result.add(new Wall(pt(x, y)));
             }
         }
         return result;

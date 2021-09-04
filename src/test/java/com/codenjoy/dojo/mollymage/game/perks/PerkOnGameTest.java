@@ -377,7 +377,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         hero().move(3, 4);
         newBox(1, 2); // две коробки подорвали, две добавили
         newBox(1, 3);
-        field.walls().add(new Wall(1, 4));
+        field.walls().add(new Wall(pt(1, 4)));
 
         // when
         tick();
@@ -1051,8 +1051,8 @@ public class PerkOnGameTest extends AbstractGameTest {
         field.boxes().removeAt(pt(4, 4));
         field.boxes().removeAt(pt(4, 5));
 
-        field.walls().add(new Wall(4, 4));
-        field.walls().add(new Wall(4, 5));
+        field.walls().add(new Wall(pt(4, 4)));
+        field.walls().add(new Wall(pt(4, 5)));
 
         hero().move(5, 5); // убегаем в укрытие
 
@@ -1159,7 +1159,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // when
         // но стоит забарикадироваться
-        field.walls().add(new Wall(5, 4));
+        field.walls().add(new Wall(pt(5, 4)));
         tick();
 
         // then

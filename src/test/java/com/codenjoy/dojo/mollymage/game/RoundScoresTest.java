@@ -996,12 +996,24 @@ public class RoundScoresTest extends AbstractGameTest {
         assertEquals(false, hero(1).isAlive()); // убит
         assertEquals(true, hero(2).isActiveAndAlive());
 
+        assertF("   ☺♣\n" +
+                "  ♥҉҉\n" +
+                "    ҉\n" +
+                "     \n" +
+                "     \n", 0);
+
         // when
         // делаем очистку очков
         dice(0, 0, // первый игрок
             0, 1,  // второй
             1, 0); // третий
         field.clearScore();
+
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "♣    \n" +
+                "Ѡ♣   \n", 0);
 
         // после этого тика будет сразу же новый раунд
         tick();

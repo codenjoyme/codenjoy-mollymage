@@ -33,7 +33,6 @@ import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.items.perks.*;
-import com.codenjoy.dojo.mollymage.model.levels.Level;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;
@@ -54,8 +53,6 @@ import static java.util.stream.Collectors.toList;
 
 public class MollyMage extends RoundField<Player> implements Field {
 
-    public static final int MAX = 1000;
-
     private PointField field;
     private List<Player> players;
     private Dice dice;
@@ -65,18 +62,27 @@ public class MollyMage extends RoundField<Player> implements Field {
     private List<Point> previousTickDestroyedObjects;
     private List<Potion> destroyedPotions;
 
-    public MollyMage(Level level, Dice dice, GameSettings settings) {
+    public MollyMage(Dice dice, GameSettings settings) {
         super(Events.START_ROUND, Events.WIN_ROUND, Events.DIED, settings);
 
         this.dice = dice;
         this.settings = settings;
-        players = new LinkedList<>();
-        field = level.field();
+        this.field = new PointField();
+        this.players = new LinkedList<>();
+
+        clearScore();
+    }
+
+    @Override
+    public void clearScore() {
+        settings.level().saveTo(field);
         field.init(this);
 
         destroyedObjects = new LinkedList<>();
         previousTickDestroyedObjects = new LinkedList<>();
         destroyedPotions = new LinkedList<>();
+
+        super.clearScore();
     }
 
     @Override

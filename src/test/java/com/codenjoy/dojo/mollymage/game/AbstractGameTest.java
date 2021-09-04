@@ -31,7 +31,6 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
-import com.codenjoy.dojo.mollymage.model.levels.LevelImpl;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;
@@ -42,7 +41,6 @@ import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.utils.events.EventsListenersAssert;
 import org.junit.After;
 import org.junit.Before;
-import org.mockito.Mockito;
 import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.*;
@@ -50,7 +48,6 @@ import java.util.*;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
@@ -95,10 +92,9 @@ public abstract class AbstractGameTest {
 
     public void givenFl(String map) {
         settings.string(LEVEL_MAP, map);
-        LevelImpl level = (LevelImpl) settings.level();
 
-        field = new MollyMage(level, dice, settings);
-        level.heroes().forEach(hero -> givenPlayer(hero));
+        field = new MollyMage(dice, settings);
+        settings.level().heroes().forEach(hero -> givenPlayer(hero));
 
         settings.integer(TREASURE_BOX_COUNT, field.boxes().size())
                 .integer(GHOSTS_COUNT, field.ghosts().size());
@@ -195,7 +191,7 @@ public abstract class AbstractGameTest {
     // other stuff
 
     public void newBox(int x, int y) {
-        field.boxes().add(new TreasureBox(x, y));
+        field.boxes().add(new TreasureBox(pt(x, y)));
     }
 
     public void newPerk(int x, int y, Perk perk) {

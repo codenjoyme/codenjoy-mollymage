@@ -1,4 +1,4 @@
 target
 *.iml
-
 /**/*-servers.zip
+/**/pitest/**

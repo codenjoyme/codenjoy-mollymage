@@ -1009,6 +1009,11 @@ public class RoundScoresTest extends AbstractGameTest {
             1, 0); // третий
         field.clearScore();
 
+        events.verifyAllEvents(
+                "listener(0) => []\n" +
+                "listener(1) => []\n" +
+                "listener(2) => []\n");
+
         assertF("     \n" +
                 "     \n" +
                 "     \n" +

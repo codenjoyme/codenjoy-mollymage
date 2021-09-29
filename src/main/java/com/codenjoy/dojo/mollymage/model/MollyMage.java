@@ -35,10 +35,11 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.items.perks.*;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.BoardUtils;
+import com.codenjoy.dojo.services.Dice;
+import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.field.Accessor;
 import com.codenjoy.dojo.services.field.PointField;
-import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.round.RoundField;
 import com.google.common.collect.HashMultimap;
@@ -86,24 +87,13 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
-    public void remove(Player player) {
-        super.remove(player);
-        removeAloneHeroes();
-    }
-
-    public void newGame(Player player) {
-        if (!players.contains(player)) {
-            players.add(player);
-        }
+    public void onAdd(Player player) {
         player.newHero(this);
-        removeAloneHeroes();
     }
 
-    // TODO DF3D попробовать избавиться от этого метода
-    private void removeAloneHeroes() {
-        heroes().removeNotSame(players.stream().
-                map(GamePlayer::getHero)
-                .collect(toList()));
+    @Override
+    public void onRemove(Player player) {
+        heroes().removeExact(player.getHero());
     }
 
     @Override

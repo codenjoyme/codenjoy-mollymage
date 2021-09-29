@@ -34,7 +34,6 @@ import java.util.List;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
 
 public class GameTest extends AbstractGameTest {
 
@@ -102,6 +101,11 @@ public class GameTest extends AbstractGameTest {
         // when
         dice(4, 0);
         game(1).newGame();
+
+        events.verifyAllEvents(
+                "listener(0) => []\n" +
+                "listener(1) => []\n" +
+                "listener(2) => []\n");
 
         tick();
 
@@ -410,6 +414,10 @@ public class GameTest extends AbstractGameTest {
             1, 0);
         game(0).newGame();
         game(1).newGame();
+
+        events.verifyAllEvents(
+                "listener(0) => []\n" +
+                "listener(1) => []\n");
 
         // then
         assertNotSame(joystick1, game(0).getJoystick());

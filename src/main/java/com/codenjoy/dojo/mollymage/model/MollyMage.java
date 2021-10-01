@@ -581,13 +581,6 @@ public class MollyMage extends RoundField<Player> implements Field {
         return pt.isOutOf(size());
     }
 
-    public List<Hero> heroes(boolean activeAliveOnly) {
-        return players.stream()
-                .map(Player::getHero)
-                .filter(hero -> !activeAliveOnly || hero.isActiveAndAlive())
-                .collect(toList());
-    }
-
     public BoardReader reader() {
         return field.reader(
                 Hero.class,

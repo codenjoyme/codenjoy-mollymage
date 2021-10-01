@@ -66,6 +66,8 @@ public class GameSettingsTest {
                 "  'DEFAULT_PERKS':'r+icTA',\n" +
                 "  'DIE_PENALTY':30,\n" +
                 "  'GHOSTS_COUNT':5,\n" +
+                "  'INACTIVITY_ENABLED':false,\n" +
+                "  'INACTIVITY_TIMEOUT':300,\n" +
                 "  'KILL_ENEMY_HERO_SCORE':100,\n" +
                 "  'KILL_GHOST_SCORE':10,\n" +
                 "  'KILL_OTHER_HERO_SCORE':20,\n" +
@@ -125,6 +127,8 @@ public class GameSettingsTest {
                 "  'DEFAULT_PERKS':'r+icTA',\n" +
                 "  'DIE_PENALTY':12,\n" +
                 "  'GHOSTS_COUNT':5,\n" +
+                "  'INACTIVITY_ENABLED':false,\n" +
+                "  'INACTIVITY_TIMEOUT':300,\n" +
                 "  'KILL_ENEMY_HERO_SCORE':100,\n" +
                 "  'KILL_GHOST_SCORE':10,\n" +
                 "  'KILL_OTHER_HERO_SCORE':20,\n" +
@@ -175,6 +179,8 @@ public class GameSettingsTest {
                 "  'DEFAULT_PERKS':'r+icTA',\n" +
                 "  'DIE_PENALTY':12,\n" +
                 "  'GHOSTS_COUNT':5,\n" +
+                "  'INACTIVITY_ENABLED':false,\n" +
+                "  'INACTIVITY_TIMEOUT':300,\n" +
                 "  'KILL_ENEMY_HERO_SCORE':100,\n" +
                 "  'KILL_GHOST_SCORE':10,\n" +
                 "  'KILL_OTHER_HERO_SCORE':20,\n" +

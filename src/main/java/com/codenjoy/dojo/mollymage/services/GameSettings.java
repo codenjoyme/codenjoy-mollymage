@@ -26,6 +26,7 @@ package com.codenjoy.dojo.mollymage.services;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.model.Level;
+import com.codenjoy.dojo.services.incativity.InactivitySettings;
 import com.codenjoy.dojo.services.round.RoundSettings;
 import com.codenjoy.dojo.services.semifinal.SemifinalSettings;
 import com.codenjoy.dojo.services.settings.SettingsImpl;
@@ -40,8 +41,9 @@ import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_TEAMS_P
 
 public class GameSettings extends SettingsImpl
         implements SettingsReader<GameSettings>,
-        RoundSettings<GameSettings>,
-                    SemifinalSettings<GameSettings> {
+                   InactivitySettings<GameSettings>,
+                   RoundSettings<GameSettings>,
+                   SemifinalSettings<GameSettings> {
 
     public enum Keys implements Key {
 
@@ -92,6 +94,7 @@ public class GameSettings extends SettingsImpl
     }
 
     public GameSettings() {
+        initInactivity();
         initRound();
         initSemifinal();
 

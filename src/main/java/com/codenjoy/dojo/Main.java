@@ -22,10 +22,10 @@ package com.codenjoy.dojo;
  * #L%
  */
 
+import com.codenjoy.dojo.client.local.DiceGenerator;
+import com.codenjoy.dojo.client.local.ws.LocalWSGameServer;
 import com.codenjoy.dojo.mollymage.services.GameRunner;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.client.local.LocalGameRunner;
-import com.codenjoy.dojo.client.local.ws.LocalWSGameServer;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.RandomDice;
 import com.codenjoy.dojo.services.round.RoundSettings;
@@ -38,8 +38,12 @@ import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_ENABLED
 
 public class Main {
 
+    private static LocalWSGameServer server;
+
     public static void main(String[] args) {
-        LocalGameRunner.out.accept("Please run this stuff with VM options:\n" +
+        server = new LocalWSGameServer();
+
+        server.print("Please run this stuff with VM options:\n" +
                 "\t\t-Dsettings={'ROUNDS_ENABLED':false, ...}\n" +
                 "\t\t-Drandom=SEED_STRING\n");
 
@@ -58,11 +62,11 @@ public class Main {
             String json = "{\n" +
                     "  'ROUNDS_ENABLED':false\n" +
                     "}\n";
-            LocalGameRunner.out.accept("Simple mode! Hardcoded: \n" + json);
+            server.print("Simple mode! Hardcoded: \n" + json);
             gameSettings.update(new JSONObject(json));
         }
 
-        LocalGameRunner.out.accept("Current settings:\n" +
+        server.print("Current settings:\n" +
                 JsonUtils.prettyPrint(gameSettings.asJson()));
 
         GameRunner gameType = new GameRunner() {
@@ -77,7 +81,7 @@ public class Main {
             }
         };
 
-        LocalWSGameServer.startGame(game, gameType);
+        server.run(game, gameType);
     }
 
     private static boolean contains(JSONObject settings, SettingsReader.Key key) {
@@ -88,9 +92,10 @@ public class Main {
         if (StringUtils.isEmpty(randomSeed)) {
             return new RandomDice();
         } else {
-            LocalGameRunner.printDice = false;
-            LocalGameRunner.printConversions = false;
-            return LocalGameRunner.getDice(randomSeed, 100, 10000);
+            DiceGenerator dice = new DiceGenerator(server.settings().out());
+            dice.printDice(false);
+            dice.printConversions(false);
+            return dice.getDice(randomSeed, 100, 10000);
         }
     }
 

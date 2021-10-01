@@ -72,7 +72,7 @@ public class GameRunnerTest {
 
             Joystick joystick = game.getJoystick();
 
-            int walls = (size - 1) * 4 + (size / 2 - 1) * (size / 2 - 1);
+            int walls = 240;
 
             String actual = (String) game.getBoardAsString();
             assertCharCount(actual, "☼", walls);

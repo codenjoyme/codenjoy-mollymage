@@ -174,11 +174,6 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
-    protected void setNewObjects() {
-        // do nothing
-    }
-
-    @Override
     public void tickField() {
         applyAllHeroes();       // герои ходят
         ghostEatHeroes();       // омномном

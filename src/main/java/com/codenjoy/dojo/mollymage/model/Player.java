@@ -40,7 +40,7 @@ public class Player extends RoundGamePlayer<Hero, Field> {
     @Override
     public void start(int round, Object startEvent) {
         super.start(round, startEvent);
-        // hero.clearScores(); TODO test me
+        // hero.clearScores(); // TODO test me
     }
 
     @Override

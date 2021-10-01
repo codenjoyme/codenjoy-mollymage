@@ -45,9 +45,7 @@ public class Player extends RoundGamePlayer<Hero, Field> {
 
     @Override
     public Hero createHero(Point pt) {
-        Hero hero = new Hero();
-        hero.move(pt);
-        return hero;
+        return new Hero(pt);
     }
 
     @Override

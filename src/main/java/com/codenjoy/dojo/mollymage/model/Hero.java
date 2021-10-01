@@ -316,6 +316,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         return perks.getPerk(element);
     }
 
+    @Override
     public int scores() {
         return score;
     }

@@ -76,8 +76,7 @@ public class GameSettings extends SettingsImpl
         REMOTE_CONTROL_COUNT("[Perks] Number of Potion remote controls (how many times player can use it)"),
         POTION_EXPLODER_COUNT("[Perks] Number of Potion Exploder (how many times player can use it)"),
         STEAL_POINTS("[Perks] Steal points from potion owner (works with Potion Exploder perk)"),
-        DEFAULT_PERKS("[Perks] Perks available in this game"),
-        LEVEL_MAP("[Level] map");
+        DEFAULT_PERKS("[Perks] Perks available in this game");
 
         private String key;
 

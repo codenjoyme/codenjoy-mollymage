@@ -106,7 +106,7 @@ public abstract class AbstractGameTest {
         stopGhosts(); // по умолчанию все привидения стоят на месте
     }
 
-    public void givenPlayer(Point pt) {
+    private void givenPlayer(Hero hero) {
         EventListener listener = mock(EventListener.class);
         listeners.add(listener);
 
@@ -116,7 +116,7 @@ public abstract class AbstractGameTest {
         Game game = new Single(player, printer);
         games.add(game);
 
-        dice(pt.getX(), pt.getY());
+        dice(hero.getX(), hero.getY());
         game.on(field);
         game.newGame();
     }
@@ -227,7 +227,7 @@ public abstract class AbstractGameTest {
                         .collect(joining("\n")));
     }
 
-    protected void assertFieldPerks(String expected) {
+    public void assertFieldPerks(String expected) {
         assertEquals(expected,
                 field.perks().stream()
                         .sorted(Comparator.comparing(PerkOnBoard::copy))

@@ -25,10 +25,7 @@ package com.codenjoy.dojo.mollymage.model.items.blast;
 
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.TestGameSettings;
-import com.codenjoy.dojo.mollymage.model.Field;
-import com.codenjoy.dojo.mollymage.model.Hero;
-import com.codenjoy.dojo.mollymage.model.MollyMage;
-import com.codenjoy.dojo.mollymage.model.Player;
+import com.codenjoy.dojo.mollymage.model.*;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.printer.BoardReader;
@@ -51,7 +48,7 @@ public class BoomEngineOriginalTest {
 
     private BoomEngine engine;
     private Poison poison;
-    private PrinterFactory printer;
+    private PrinterFactory<Element, Player> printer;
     private Field field;
     private GameSettings settings;
 
@@ -662,7 +659,7 @@ public class BoomEngineOriginalTest {
     }
 
     public String print(List<Blast> blast, Point source) {
-        Printer<String> printer = this.printer.getPrinter(new BoardReader<Player>() {
+        Printer<?> printer = this.printer.getPrinter(new BoardReader<Player>() {
             @Override
             public int size() {
                 return field.size();
@@ -690,7 +687,8 @@ public class BoomEngineOriginalTest {
             }
 
         }, null);
-        return printer.print();
+
+        return printer.print().toString();
     }
 
 }

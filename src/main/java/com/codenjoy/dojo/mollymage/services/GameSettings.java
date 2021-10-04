@@ -26,7 +26,9 @@ package com.codenjoy.dojo.mollymage.services;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.model.Level;
+import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.incativity.InactivitySettings;
+import com.codenjoy.dojo.services.level.LevelsSettings;
 import com.codenjoy.dojo.services.round.RoundSettings;
 import com.codenjoy.dojo.services.semifinal.SemifinalSettings;
 import com.codenjoy.dojo.services.settings.SettingsImpl;
@@ -43,6 +45,7 @@ public class GameSettings extends SettingsImpl
         implements SettingsReader<GameSettings>,
                    InactivitySettings<GameSettings>,
                    RoundSettings<GameSettings>,
+                   LevelsSettings<GameSettings>,
                    SemifinalSettings<GameSettings> {
 
     public enum Keys implements Key {
@@ -128,34 +131,11 @@ public class GameSettings extends SettingsImpl
         perks.put(Element.POISON_THROWER, 0, timeout);
         perks.put(Element.POTION_EXPLODER, 1, timeout);
 
-        multiline(LEVEL_MAP,
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n" +
-                "☼                     ☼\n" +
-                "☼ ☼☼ ☼☼☼☼ ☼  ☼☼ ☼☼  ☼ ☼\n" +
-                "☼ ☼☼      ☼☼ ☼☼ ☼☼ ☼☼ ☼\n" +
-                "☼     ☼☼☼  ☼        ☼ ☼\n" +
-                "☼ ☼☼☼   ☼    ☼☼☼☼ ☼   ☼\n" +
-                "☼  ☼  ☼   ☼☼      ☼☼☼ ☼\n" +
-                "☼     ☼☼☼  ☼☼   ☼     ☼\n" +
-                "☼ ☼☼☼          ☼☼☼  ☼ ☼\n" +
-                "☼  ☼  ☼☼☼☼ ☼☼☼     ☼☼ ☼\n" +
-                "☼           ☼   ☼   ☼ ☼\n" +
-                "☼ ☼☼☼☼ ☼☼ ☼   ☼☼☼ ☼   ☼\n" +
-                "☼      ☼☼ ☼☼☼     ☼☼☼ ☼\n" +
-                "☼ ☼☼☼         ☼☼☼     ☼\n" +
-                "☼  ☼  ☼☼ ☼☼☼   ☼  ☼☼☼ ☼\n" +
-                "☼    ☼☼    ☼ ☼      ☼ ☼\n" +
-                "☼ ☼      ☼   ☼☼☼ ☼☼   ☼\n" +
-                "☼ ☼  ☼☼  ☼☼      ☼☼ ☼ ☼\n" +
-                "☼ ☼☼ ☼☼   ☼ ☼☼☼☼    ☼ ☼\n" +
-                "☼       ☼        ☼☼ ☼ ☼\n" +
-                "☼ ☼☼☼☼ ☼☼☼ ☼☼☼☼ ☼☼  ☼ ☼\n" +
-                "☼                     ☼\n" +
-                "☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\n");
+        Levels.setup(this);
     }
 
-    public Level level() {
-        return new Level(string(LEVEL_MAP));
+    public Level level(int level, Dice dice) {
+        return new Level(getRandomLevelMap(level, dice));
     }
 
     public PerksSettingsWrapper perksSettings() {

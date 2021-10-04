@@ -54,6 +54,7 @@ import static java.util.stream.Collectors.toList;
 
 public class MollyMage extends RoundField<Player> implements Field {
 
+    private Level level;
     private PointField field;
     private List<Player> players;
     private Dice dice;
@@ -63,9 +64,10 @@ public class MollyMage extends RoundField<Player> implements Field {
     private List<Point> previousTickDestroyedObjects;
     private List<Potion> destroyedPotions;
 
-    public MollyMage(Dice dice, GameSettings settings) {
+    public MollyMage(Dice dice, Level level, GameSettings settings) {
         super(Events.START_ROUND, Events.WIN_ROUND, Events.DIED, settings);
 
+        this.level = level;
         this.dice = dice;
         this.settings = settings;
         this.field = new PointField();
@@ -76,7 +78,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     @Override
     public void clearScore() {
-        settings.level().saveTo(field);
+        level.saveTo(field);
         field.init(this);
 
         destroyedObjects = new LinkedList<>();

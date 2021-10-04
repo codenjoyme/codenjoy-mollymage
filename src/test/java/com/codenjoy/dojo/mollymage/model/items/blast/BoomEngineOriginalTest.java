@@ -28,6 +28,7 @@ import com.codenjoy.dojo.mollymage.TestGameSettings;
 import com.codenjoy.dojo.mollymage.model.*;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
@@ -38,7 +39,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.LEVEL_MAP;
 import static com.codenjoy.dojo.services.Direction.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
@@ -50,14 +50,18 @@ public class BoomEngineOriginalTest {
     private Poison poison;
     private PrinterFactory<Element, Player> printer;
     private Field field;
-    private GameSettings settings;
 
-    private void givenFl(String board) {
-        settings = settings();
-        settings.string(LEVEL_MAP, board);
-        field = new MollyMage(mock(Dice.class), settings);
+    private void givenFl(String map) {
+        GameSettings settings = settings();
+        Dice dice = mock(Dice.class);
+
+        int levelNumber = LevelProgress.levelsStartsFrom1;
+        settings.setLevelMaps(levelNumber, map);
+        Level level = settings.level(levelNumber, dice);
+
+        field = new MollyMage(dice, level, settings);
         engine = new BoomEngineOriginal(field, null);
-        printer = new PrinterFactoryImpl();
+        printer = new PrinterFactoryImpl<>();
     }
 
     private TestGameSettings settings() {

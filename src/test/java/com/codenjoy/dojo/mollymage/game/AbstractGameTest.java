@@ -25,6 +25,7 @@ package com.codenjoy.dojo.mollymage.game;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.TestGameSettings;
 import com.codenjoy.dojo.mollymage.model.Hero;
+import com.codenjoy.dojo.mollymage.model.Level;
 import com.codenjoy.dojo.mollymage.model.MollyMage;
 import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
@@ -36,6 +37,7 @@ import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.EventListener;
+import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.multiplayer.Single;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
@@ -50,7 +52,6 @@ import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static java.util.stream.Collectors.joining;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
 
 public abstract class AbstractGameTest {
@@ -91,11 +92,13 @@ public abstract class AbstractGameTest {
         }
     }
 
-    public void givenFl(String map) {
-        settings.string(LEVEL_MAP, map);
+    public void givenFl(String... maps) {
+        int levelNumber = LevelProgress.levelsStartsFrom1;
+        settings.setLevelMaps(levelNumber, maps);
+        Level level = settings.level(levelNumber, dice);
 
-        field = new MollyMage(dice, settings);
-        settings.level().heroes().forEach(hero -> givenPlayer(hero));
+        field = new MollyMage(dice, level, settings);
+        level.heroes().forEach(this::givenPlayer);
 
         settings.integer(TREASURE_BOX_COUNT, field.boxes().size())
                 .integer(GHOSTS_COUNT, field.ghosts().size());
@@ -103,18 +106,19 @@ public abstract class AbstractGameTest {
         stopGhosts(); // по умолчанию все привидения стоят на месте
     }
 
-    public Player givenPlayer(Point pt) {
+    public void givenPlayer(Point pt) {
         EventListener listener = mock(EventListener.class);
         listeners.add(listener);
+
         Player player = new Player(listener, settings);
         players.add(player);
+
         Game game = new Single(player, printer);
         games.add(game);
 
         dice(pt.getX(), pt.getY());
         game.on(field);
         game.newGame();
-        return player;
     }
 
     protected GameSettings settings() {

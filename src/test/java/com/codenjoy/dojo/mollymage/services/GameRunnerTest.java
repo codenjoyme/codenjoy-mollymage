@@ -22,6 +22,7 @@ package com.codenjoy.dojo.mollymage.services;
  * #L%
  */
 
+import com.codenjoy.dojo.client.local.DiceGenerator;
 
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Player;
@@ -29,13 +30,16 @@ import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.utils.TestUtils;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_ENABLED;
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class GameRunnerTest {
@@ -44,13 +48,20 @@ public class GameRunnerTest {
 
     @Test
     public void shouldWork() {
+        int size = 23;
+        int boxes = 5;
+        int ghosts = 15;
+
+        Dice dice = new DiceGenerator().getDice();
         for (int i = 0; i < 100; i++) {
-            int size = 23;
-            int boxes = 5;
-            int ghosts = 15;
 
             EventListener listener = mock(EventListener.class);
             GameRunner gameType = new GameRunner() {
+                @Override
+                public Dice getDice() {
+                    return dice;
+                }
+
                 @Override
                 public GameSettings getSettings() {
                     return super.getSettings()
@@ -74,10 +85,23 @@ public class GameRunnerTest {
 
             Joystick joystick = game.getJoystick();
 
-            int walls = 240;
-
             String actual = (String) game.getBoardAsString();
-            assertCharCount(actual, "☼", walls);
+
+            // there are 3 different maps
+            List<Integer> wallsList = new LinkedList<>(Arrays.asList(88, 169, 240));
+            int walls;
+            while (true) {
+                walls = wallsList.remove(0);
+                try {
+                    assertCharCount(actual, "☼", walls);
+                    break;
+                } catch (AssertionError e) {
+                    if (wallsList.isEmpty()) {
+                        throw e;
+                    }
+                }
+            }
+
             assertCharCount(actual, "#", boxes);
             int gameOver = 0;
             try {

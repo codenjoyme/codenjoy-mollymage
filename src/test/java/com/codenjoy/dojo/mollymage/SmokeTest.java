@@ -30,6 +30,7 @@ import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.mollymage.services.ai.AIPerksHunterSolver;
 import com.codenjoy.dojo.mollymage.services.ai.AISolver;
 import com.codenjoy.dojo.services.Dice;
+import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.utils.Smoke;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,7 +68,7 @@ public class SmokeTest {
                         GameSettings settings = new TestGameSettings()
                                         .integer(TREASURE_BOX_COUNT, 14)
                                 .integer(GHOSTS_COUNT, 3)
-                                .string(LEVEL_MAP,
+                                .setLevelMaps(LevelProgress.levelsStartsFrom1,
                                         "☼☼☼☼☼☼☼☼☼☼☼\n" +
                                         "☼         ☼\n" +
                                         "☼ ☼ ☼ ☼ ☼ ☼\n" +

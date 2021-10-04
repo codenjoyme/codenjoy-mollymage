@@ -57,6 +57,7 @@ public class PerformanceTest {
         int ghosts = 200;
         int players = 100;
         int ticks = 100;
+        boolean printBoard = false;
 
         profiler = new Profiler(){{
             PRINT_SOUT = true;
@@ -107,10 +108,12 @@ public class PerformanceTest {
             profiler.done("tick");
 
             Object board = null;
-            for (int j = 0; j < games.size(); j++) {
-                board = games.get(j).getBoardAsString();
+            for (Game game : games) {
+                board = game.getBoardAsString();
             }
-//            System.out.println(board);
+            if (printBoard) {
+                System.out.println(board);
+            }
             profiler.done("print");
         }
 

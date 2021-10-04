@@ -23,6 +23,8 @@ package com.codenjoy.dojo.mollymage.services;
  */
 
 
+import com.codenjoy.dojo.games.mollymage.Element;
+import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.utils.TestUtils;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
@@ -38,7 +40,7 @@ import static org.mockito.Mockito.mock;
 
 public class GameRunnerTest {
 
-    private PrinterFactory printerFactory = new PrinterFactoryImpl();
+    private final PrinterFactory<Element, Player> printer = new PrinterFactoryImpl<>();
 
     @Test
     public void shouldWork() {
@@ -60,7 +62,7 @@ public class GameRunnerTest {
 
             GameSettings settings = gameType.getSettings();
 
-            Game game = TestUtils.buildGame(gameType, listener, printerFactory);
+            Game game = TestUtils.buildGame(gameType, listener, printer);
             game.getField().tick();
 
             PlayerScores scores = gameType.getPlayerScores(10, settings);

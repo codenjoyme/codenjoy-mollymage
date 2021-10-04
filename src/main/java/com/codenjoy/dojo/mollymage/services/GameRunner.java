@@ -41,8 +41,6 @@ import com.codenjoy.dojo.services.multiplayer.MultiplayerType;
 import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.settings.Parameter;
 
-import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_ENABLED;
-import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_PLAYERS_PER_ROOM;
 import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 
 public class GameRunner extends AbstractGameType<GameSettings> {
@@ -92,13 +90,7 @@ public class GameRunner extends AbstractGameType<GameSettings> {
 
     @Override
     public MultiplayerType getMultiplayerType(GameSettings settings) {
-        if (settings.bool(ROUNDS_ENABLED)) {
-            return MultiplayerType.TEAM.apply(
-                    settings.integer(ROUNDS_PLAYERS_PER_ROOM),
-                    MultiplayerType.DISPOSABLE);
-        } else {
-            return MultiplayerType.MULTIPLE;
-        }
+        return settings.getRoundsMultiplayerType();
     }
 
     @Override

@@ -22,6 +22,7 @@ package com.codenjoy.dojo.mollymage.game;
  * #L%
  */
 
+import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.TestGameSettings;
 import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.MollyMage;
@@ -59,7 +60,7 @@ public abstract class AbstractGameTest {
     private List<Game> games;
 
     private Dice dice;
-    private PrinterFactory printer;
+    private PrinterFactory<Element, Player> printer;
     protected MollyMage field;
     protected GameSettings settings;
     protected PerksSettingsWrapper perks;
@@ -74,7 +75,7 @@ public abstract class AbstractGameTest {
         dice = mock(Dice.class);
         settings = settings();
         perks = settings.perksSettings();
-        printer = new PrinterFactoryImpl();
+        printer = new PrinterFactoryImpl<>();
         events = new EventsListenersAssert(() -> listeners, Events.class);
     }
 

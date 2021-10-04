@@ -23,12 +23,11 @@ package com.codenjoy.dojo.mollymage.services;
  */
 
 
+import com.codenjoy.dojo.games.mollymage.Element;
+import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.profile.Profiler;
-import com.codenjoy.dojo.services.EventListener;
-import com.codenjoy.dojo.services.Game;
-import com.codenjoy.dojo.services.Joystick;
-import com.codenjoy.dojo.services.RandomDice;
+import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
@@ -64,7 +63,7 @@ public class PerformanceTest {
         }};
         profiler.start();
 
-        PrinterFactory factory = new PrinterFactoryImpl();
+        PrinterFactory<Element, Player> factory = new PrinterFactoryImpl<>();
 
         String level = toString(boardSize, factory);
         GameRunner runner = new GameRunner(){
@@ -126,19 +125,18 @@ public class PerformanceTest {
 
     }
 
-    private String toString(int boardSize, PrinterFactory factory) {
-        String level = (String) factory.getPrinter(new BoardReader() {
+    private String toString(int boardSize, PrinterFactory<Element, Player> factory) {
+        return (String) factory.getPrinter(new BoardReader<Player>() {
             @Override
             public int size() {
                 return boardSize;
             }
 
             @Override
-            public void addAll(Object player, Consumer processor) {
+            public void addAll(Player player, Consumer<Iterable<? extends Point>> processor) {
                 processor.accept(generate(boardSize));
             }
         }, null).print();
-        return level;
     }
 
     private List<Wall> generate(int size) {

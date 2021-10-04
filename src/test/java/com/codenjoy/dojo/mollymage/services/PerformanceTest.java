@@ -28,6 +28,7 @@ import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.profile.Profiler;
 import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
@@ -72,7 +73,7 @@ public class PerformanceTest {
             public GameSettings getSettings() {
                 return super.getSettings()
                         .bool(ROUNDS_ENABLED, false)
-                        .string(LEVEL_MAP, level)
+                        .setLevelMaps(LevelProgress.levelsStartsFrom1, level)
                         .integer(POTION_POWER, 10)
                         .integer(TREASURE_BOX_COUNT, walls)
                         .integer(GHOSTS_COUNT, ghosts);

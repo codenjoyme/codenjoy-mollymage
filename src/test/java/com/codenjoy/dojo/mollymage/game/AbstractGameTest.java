@@ -151,13 +151,13 @@ public abstract class AbstractGameTest {
     /**
      * Проверяет все борды сразу
      * @param expected ожидаемое значение
-     * @param indexes список индексов, для которых проводим проверку (так же влияет на порядок)
      */
-    public void assertA(String expected, Integer... indexes) {
-        events.assertAll(expected, games.size(), indexes, index -> {
-            Object actual = game(index).getBoardAsString();
-            return String.format("game(%s)\n%s\n", index, actual);
-        });
+    public void assertA(String expected) {
+        assertEquals(expected,
+                EventsListenersAssert.collectAll(games, index -> {
+                    Object actual = game(index).getBoardAsString();
+                    return String.format("game(%s)\n%s\n", index, actual);
+                }));
     }
 
     public Game game(int index) {

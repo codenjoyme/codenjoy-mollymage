@@ -35,8 +35,10 @@ import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.services.Events;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.EventListener;
+import com.codenjoy.dojo.services.Game;
+import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.multiplayer.Single;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
@@ -46,7 +48,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.mockito.stubbing.OngoingStubbing;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
@@ -82,7 +87,7 @@ public abstract class AbstractGameTest {
 
     @After
     public void tearDown() {
-        events.verifyNoEvents();
+        events.verifyAllEvents("");
     }
 
     public void dice(int... ints) {

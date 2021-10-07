@@ -47,7 +47,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyNoEvents();
+        events.verifyAllEvents("");
     }
 
     @Test

@@ -71,9 +71,7 @@ public class GameTest extends AbstractGameTest {
         tick();
 
         events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => [DIED]\n" +
-                "listener(2) => []\n");
+                "listener(1) => [DIED]\n");
 
         // then
         assertF("     \n" +
@@ -102,10 +100,7 @@ public class GameTest extends AbstractGameTest {
         dice(4, 0);
         game(1).newGame();
 
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n");
+        events.verifyAllEvents("");
 
         tick();
 
@@ -400,8 +395,7 @@ public class GameTest extends AbstractGameTest {
 
         // then
         events.verifyAllEvents(
-                "listener(0) => [DIED]\n" +
-                "listener(1) => []\n");
+                "listener(0) => [DIED]\n");
 
         assertEquals(false, hero(0).isAlive());
         assertEquals(true, hero(1).isAlive());
@@ -415,9 +409,7 @@ public class GameTest extends AbstractGameTest {
         game(0).newGame();
         game(1).newGame();
 
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n");
+        events.verifyAllEvents("");
 
         // then
         assertNotSame(joystick1, game(0).getJoystick());

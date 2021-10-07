@@ -30,7 +30,6 @@ import com.codenjoy.dojo.services.PointImpl;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.STEAL_POINTS;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_TEAMS_PER_ROOM;
 import static org.junit.Assert.assertEquals;
 
@@ -88,9 +87,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         assertEquals(0, hero(2).getPerks().size());
 
         events.verifyAllEvents(
-                "listener(0) => [CATCH_PERK]\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n");
+                "listener(0) => [CATCH_PERK]\n");
 
         assertEquals(11, hero(0).scores());
         assertEquals(0, hero(1).scores());
@@ -144,9 +141,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         // teammate should get perk to
         events.verifyAllEvents(
-                "listener(0) => [CATCH_PERK]\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n");
+                "listener(0) => [CATCH_PERK]\n");
 
         assertEquals(1, player(0).getHero().getPerks().size());
         assertEquals(1, player(1).getHero().getPerks().size());
@@ -206,8 +201,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         // then
         events.verifyAllEvents(
-                "listener(0) => [CATCH_PERK]\n" +
-                "listener(1) => []\n");
+                "listener(0) => [CATCH_PERK]\n");
 
         // when
         // heroes are going on the position
@@ -321,8 +315,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "  3  \n", 1);
 
         events.verifyAllEvents(
-                "listener(0) => [CATCH_PERK]\n" +
-                "listener(1) => []\n");
+                "listener(0) => [CATCH_PERK]\n");
 
         // when
         // potion boom, hero1 should shoot by poison thrower
@@ -416,8 +409,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "  3  \n", 1);
 
         events.verifyAllEvents(
-                "listener(0) => [CATCH_PERK]\n" +
-                "listener(1) => []\n");
+                "listener(0) => [CATCH_PERK]\n");
 
         // when
         // potion boom - hero1 should shoot by poison thrower
@@ -504,8 +496,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "  4  \n", 1);
 
         events.verifyAllEvents(
-                "listener(0) => [CATCH_PERK]\n" +
-                "listener(1) => []\n");
+                "listener(0) => [CATCH_PERK]\n");
 
 
         // when
@@ -666,8 +657,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "44   \n", 1);
 
         events.verifyAllEvents(
-                "listener(0) => [CATCH_PERK]\n" +
-                "listener(1) => []\n");
+                "listener(0) => [CATCH_PERK]\n");
 
         // when
         // hero0 with PE perk explode own potion and hero1's simple potion
@@ -691,9 +681,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "҉҉   \n" +
                 "҉҉҉  \n", 1);
 
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n");
+        events.verifyAllEvents("");
     }
 
     @Test
@@ -736,8 +724,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "55   \n", 1);
 
         events.verifyAllEvents(
-                "listener(0) => [CATCH_PERK]\n" +
-                "listener(1) => []\n");
+                "listener(0) => [CATCH_PERK]\n");
 
         // when
         // hero0 uses PE perk and explode both potions
@@ -761,9 +748,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "҉҉   \n" +
                 "҉҉҉  \n", 1);
 
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n");
+        events.verifyAllEvents("");
     }
 
     // Remote Control and Perk Exploder should works together.
@@ -806,8 +791,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "45&  \n", 1);
 
         events.verifyAllEvents(
-                "listener(0) => [CATCH_PERK]\n" +
-                "listener(1) => []\n");
+                "listener(0) => [CATCH_PERK]\n");
 
 
         // when
@@ -951,8 +935,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "33&  \n", 1);
 
         events.verifyAllEvents(
-                "listener(0) => [CATCH_PERK]\n" +
-                "listener(1) => []\n");
+                "listener(0) => [CATCH_PERK]\n");
 
         // when
         // potions timers almost end
@@ -1032,8 +1015,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "33&  \n", 1);
 
         events.verifyAllEvents(
-                "listener(0) => [CATCH_PERK]\n" +
-                "listener(1) => []\n");
+                "listener(0) => [CATCH_PERK]\n");
 
         // when
         // potions timers almost end
@@ -1073,8 +1055,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "҉҉x  \n", 1);
 
         events.verifyAllEvents(
-                "listener(0) => [KILL_GHOST]\n" +
-                "listener(1) => []\n");
+                "listener(0) => [KILL_GHOST]\n");
     }
 
     @Test
@@ -1298,7 +1279,6 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         // then
         // both heroes kill perk
         events.verifyAllEvents(
-                "listener(0) => []\n" +
                 "listener(1) => [DROP_PERK]\n");
 
         assertF("  ☺  \n" +

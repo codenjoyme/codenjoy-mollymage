@@ -308,7 +308,6 @@ public class RoundScoresTest extends AbstractGameTest {
                 " ҉   \n", 2);
 
         events.verifyAllEvents(
-                "listener(0) => []\n" +
                 "listener(1) => [DIED]\n" +
                 "listener(2) => [KILL_OTHER_HERO]\n");
 
@@ -359,7 +358,6 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [DIED]\n" +   // за то что он трус )
-                "listener(1) => []\n" +
                 "listener(2) => [WIN_ROUND]\n"); // заслуженная победа
 
     }
@@ -380,10 +378,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // then
         // никто больше не должен ничего получить
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n");
+        events.verifyAllEvents("");
     }
 
     // если на поле трое, и один игрок имеет преимущество по очкам за вынос другого игрока
@@ -470,7 +465,6 @@ public class RoundScoresTest extends AbstractGameTest {
                 " Ѡ   \n", 2);
 
         events.verifyAllEvents(
-                "listener(0) => []\n" +
                 "listener(1) => [KILL_OTHER_HERO]\n" +
                 "listener(2) => [DIED]\n");
 
@@ -488,10 +482,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 " ♣   \n", 1);
 
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n");
+        events.verifyAllEvents("");
 
         // when
         // вот он последний тик раунда, тут все и случится
@@ -509,8 +500,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [[Time is over]]\n" +
-                "listener(1) => [WIN_ROUND]\n" +
-                "listener(2) => []\n");
+                "listener(1) => [WIN_ROUND]\n");
     }
 
     // если на поле группа игроков, два из них активны и расставляют зелье
@@ -659,12 +649,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "♣  ☺ \n" +
                 " ♣   \n", 3);
 
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n" +
-                "listener(3) => []\n" +
-                "listener(4) => []\n");
+        events.verifyAllEvents("");
 
         // when
         // вот он последний тик раунда, тут все и случится
@@ -675,11 +660,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // then
         events.verifyAllEvents(
-                "listener(0) => []\n" +
                 "listener(1) => [[Time is over]]\n" +
-                "listener(2) => []\n" +
-                "listener(3) => [WIN_ROUND]\n" +
-                "listener(4) => []\n");
+                "listener(3) => [WIN_ROUND]\n");
 
         // when
         // а это уже сделает сам фреймворк для всех проигравших
@@ -874,13 +856,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "♣  ☺ \n" +
                 " ♣   \n", 4);
 
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n" +
-                "listener(3) => []\n" +
-                "listener(4) => []\n" +
-                "listener(5) => []\n");
+        events.verifyAllEvents("");
 
         // when
         // вот он последний тик раунда, тут все и случится
@@ -893,12 +869,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // then
         events.verifyAllEvents(
-                "listener(0) => []\n" +
                 "listener(1) => [WIN_ROUND]\n" +
-                "listener(2) => []\n" +
-                "listener(3) => []\n" +
-                "listener(4) => [[Time is over]]\n" +
-                "listener(5) => []\n");
+                "listener(4) => [[Time is over]]\n");
 
         // when
         dice(2, 2);
@@ -983,7 +955,6 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // then
         events.verifyAllEvents(
-                "listener(0) => []\n" +
                 "listener(1) => [DIED]\n" +
                 "listener(2) => [KILL_OTHER_HERO]\n");
 
@@ -1009,10 +980,7 @@ public class RoundScoresTest extends AbstractGameTest {
             1, 0); // третий
         field.clearScore();
 
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n");
+        events.verifyAllEvents("");
 
         assertF("     \n" +
                 "     \n" +
@@ -1120,7 +1088,6 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // then
         events.verifyAllEvents(
-                "listener(0) => []\n" +
                 "listener(1) => [DIED]\n" +
                 "listener(2) => [KILL_ENEMY_HERO]\n");
 
@@ -1204,8 +1171,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                "listener(1) => [DIED]\n" +
-                "listener(2) => []\n");
+                "listener(1) => [DIED]\n");
 
         // when
         hero(0).left();
@@ -1266,7 +1232,6 @@ public class RoundScoresTest extends AbstractGameTest {
 
         events.verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, WIN_ROUND]\n" +
-                "listener(1) => []\n" +
                 "listener(2) => [DIED]\n");
 
         // when
@@ -1326,10 +1291,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "҉♥   \n" +
                 "҉♣Ѡ҉ \n", 2);
 
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n");
+        events.verifyAllEvents("");
     }
 
     // в этом тесте я проверяю, что после победы героя на уровне
@@ -1356,10 +1318,7 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n");
+        events.verifyAllEvents("");
 
         // when
         // и начнется новый раунд
@@ -1376,9 +1335,6 @@ public class RoundScoresTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n");
+        events.verifyAllEvents("");
     }
 }

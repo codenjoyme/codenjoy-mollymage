@@ -354,7 +354,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // все тихо
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         // when
         tick();
@@ -578,7 +578,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // все тихо
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         // when
         tick();
@@ -650,7 +650,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
 
         assertFieldPerks(
@@ -676,7 +676,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -739,7 +739,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // все тихо
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         // when
         tick();
@@ -818,7 +818,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "☺    +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -843,7 +843,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "☺    +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -901,7 +901,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // все тихо
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         // when
         hero().act();
@@ -988,7 +988,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "☺    +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         // появился перк
         assertFieldPerks(
@@ -1010,7 +1010,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "☺#   +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         // и еще два после рахрушенных стен
         assertFieldPerks(
@@ -1083,7 +1083,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         // when
         // породили три чудовища
@@ -1134,7 +1134,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
     }
 
     // если анти-привидения не могут найти к тебе короткий путь - они выпиливаются
@@ -1195,7 +1195,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -1221,7 +1221,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" +
@@ -1277,7 +1277,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // все тихо
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         // when
         tick();

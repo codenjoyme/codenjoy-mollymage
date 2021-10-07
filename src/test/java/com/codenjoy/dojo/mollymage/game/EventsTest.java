@@ -339,7 +339,7 @@ public class EventsTest extends AbstractGameTest {
                 "#2   \n" +
                 "&1   \n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         // when
         hero().right();
@@ -461,7 +461,6 @@ public class EventsTest extends AbstractGameTest {
                 "H҉҉ ♥\n", 0);
 
         events.verifyAllEvents(
-                "listener(0) => []\n" +
                 "listener(1) => [KILL_TREASURE_BOX]\n");
 
         // when
@@ -511,7 +510,6 @@ public class EventsTest extends AbstractGameTest {
                 "x҉҉ ♥\n", 0);
 
         events.verifyAllEvents(
-                "listener(0) => []\n" +
                 "listener(1) => [KILL_GHOST]\n");
 
         // when
@@ -1043,11 +1041,7 @@ public class EventsTest extends AbstractGameTest {
                 "☺    \n",
                 0);
 
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n" +
-                "listener(3) => []\n");
+        events.verifyAllEvents("");
 
         // when
         tick();
@@ -1070,11 +1064,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n" +
-                "listener(3) => []\n");
+        events.verifyAllEvents("");
 
         assertF("     \n" +
                 "   ♣ \n" +
@@ -1153,11 +1143,7 @@ public class EventsTest extends AbstractGameTest {
                 "&♠2♤&\n" +
                 "☺    \n", 0);
 
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n" +
-                "listener(3) => []\n");
+        events.verifyAllEvents("");
 
         // when
         tick();
@@ -1180,11 +1166,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n" +
-                "listener(3) => []\n");
+        events.verifyAllEvents("");
 
         assertF("     \n" +
                 "   ♧ \n" +
@@ -1260,11 +1242,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n",
                 0);
 
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n" +
-                "listener(3) => []\n");
+        events.verifyAllEvents("");
 
         // when
         tick();
@@ -1288,11 +1266,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n" +
-                "listener(3) => []\n");
+        events.verifyAllEvents("");
 
         assertF("    #\n" +
                 " Ѡ ♣ \n" +
@@ -1366,11 +1340,7 @@ public class EventsTest extends AbstractGameTest {
                 "&♠2♠&\n" +
                 "     \n", 0);
 
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n" +
-                "listener(3) => []\n");
+        events.verifyAllEvents("");
 
         // when
         tick();
@@ -1378,9 +1348,7 @@ public class EventsTest extends AbstractGameTest {
         // then
         events.verifyAllEvents(
                 "listener(0) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX]\n" +
-                "listener(1) => [DIED]\n" +
-                "listener(2) => []\n" +
-                "listener(3) => []\n");
+                "listener(1) => [DIED]\n");
 
         assertF("     \n" +
                 "&Ѡ3♠&\n" +
@@ -1397,8 +1365,7 @@ public class EventsTest extends AbstractGameTest {
         events.verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
-                "listener(2) => [DIED]\n" +
-                "listener(3) => []\n");
+                "listener(2) => [DIED]\n");
 
         assertF(" ҉  #\n" +
                 "xѠ2♠&\n" +
@@ -1411,8 +1378,6 @@ public class EventsTest extends AbstractGameTest {
 
         // then
         events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
                 "listener(2) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
                 "listener(3) => [DIED]\n");
 
@@ -1427,9 +1392,6 @@ public class EventsTest extends AbstractGameTest {
 
         // then
         events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n" +
                 "listener(3) => [KILL_GHOST]\n");
 
         assertF("  ҉҉#\n" +
@@ -1442,11 +1404,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
-                "listener(0) => []\n" +
-                "listener(1) => []\n" +
-                "listener(2) => []\n" +
-                "listener(3) => []\n");
+        events.verifyAllEvents("");
 
         assertF("    #\n" +
                 " Ѡ ♣ \n" +

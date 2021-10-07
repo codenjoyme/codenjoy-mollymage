@@ -1561,7 +1561,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "   Ѡ \n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
 
         assertHeroPerks("");
     }

@@ -83,7 +83,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 " Ѡ   \n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
         assertHeroDie();
     }
 
@@ -287,7 +287,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 " Ѡ   \n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
         assertHeroDie();
     }
 
@@ -344,7 +344,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "Ѡ    \n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
         assertHeroDie();
     }
 
@@ -399,7 +399,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "Ѡ    \n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
         assertHeroDie();
     }
 
@@ -456,7 +456,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "Ѡ    \n" +
                 "     \n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
         assertHeroDie();
     }
 
@@ -547,7 +547,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "  Ѡ  \n" +
                 "     \n");
 
-        events.verifyAllEvents("[]");
+        events.verifyAllEvents("");
         assertHeroDie();
     }
 
@@ -849,7 +849,6 @@ public class KillDeathTest extends AbstractGameTest {
                 "♥ Ѡ  \n", 1);
 
         events.verifyAllEvents(
-                "listener(0) => []\n" +
                 "listener(1) => [DIED]\n");
     }
 
@@ -893,7 +892,6 @@ public class KillDeathTest extends AbstractGameTest {
                 "♥Ѡ   \n", 1);
 
         events.verifyAllEvents(
-                "listener(0) => []\n" +
                 "listener(1) => [DIED]\n");
     }
 
@@ -935,7 +933,6 @@ public class KillDeathTest extends AbstractGameTest {
                 "♥&Ѡ  \n", 1);
 
         events.verifyAllEvents(
-                "listener(0) => []\n" +
                 "listener(1) => [DIED]\n");
     }
 }

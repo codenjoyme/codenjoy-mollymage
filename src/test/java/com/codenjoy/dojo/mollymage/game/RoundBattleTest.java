@@ -84,13 +84,13 @@ public class RoundBattleTest extends AbstractGameTest {
         // given
         shouldAllPlayersOnBoardIsInactive_whenStart();
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         // when
         tick();
 
         // then
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [[....4....]]\n" +
                 "listener(1) => [[....4....]]\n" +
                 "listener(2) => [[....4....]]\n");
@@ -99,7 +99,7 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [[...3...]]\n" +
                 "listener(1) => [[...3...]]\n" +
                 "listener(2) => [[...3...]]\n");
@@ -108,7 +108,7 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [[..2..]]\n" +
                 "listener(1) => [[..2..]]\n" +
                 "listener(2) => [[..2..]]\n");
@@ -117,7 +117,7 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [[.1.]]\n" +
                 "listener(1) => [[.1.]]\n" +
                 "listener(2) => [[.1.]]\n");
@@ -159,7 +159,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         // then
         // после сообщения что раунд начался
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
@@ -229,7 +229,7 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
@@ -295,7 +295,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "҉҉҉  \n" +
                 "♥♣   \n", 0);
 
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
                 "listener(2) => [DIED]\n");
 
@@ -342,7 +342,7 @@ public class RoundBattleTest extends AbstractGameTest {
         // when
         tick();
 
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
@@ -365,7 +365,7 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
                 "listener(1) => [DIED]\n");
 
@@ -450,7 +450,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
 
         // then
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
@@ -472,7 +472,7 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
                 "listener(1) => [DIED]\n");
 
@@ -600,7 +600,7 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
@@ -664,7 +664,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉♣☺  \n", 2);
 
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
                 "listener(1) => [DIED]\n");
 
@@ -711,7 +711,7 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         // на месте героя которого вынесли я как сторонний наблюдатель
         // вижу его останки, а не взрывную волну
@@ -803,7 +803,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "  ҉☺ \n" +
                 " ♣҉҉ \n", 2);
 
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [DIED]\n" +
                 "listener(2) => [KILL_OTHER_HERO, WIN_ROUND]\n");
     }
@@ -839,7 +839,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "♣xѠ  \n", 2);
 
         // победителей нет
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [DIED, KILL_OTHER_HERO, KILL_GHOST]\n" +
                 "listener(2) => [DIED]\n");
 
@@ -847,6 +847,6 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents("");
+        verifyAllEvents("");
     }
 }

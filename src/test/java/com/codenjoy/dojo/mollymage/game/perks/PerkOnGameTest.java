@@ -87,7 +87,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         assertFieldPerks("");
 
-        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
         removeBoxes(2); // на две взорвавшиеся коробки меньше
@@ -148,7 +148,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "☺    #\n" +
                 "#+####\n");
 
-        events.verifyAllEvents("[CATCH_PERK]");
+        verifyAllEvents("[CATCH_PERK]");
         assertEquals(before + settings.integer(CATCH_PERK_SCORE), hero().scores());
         assertEquals("Hero had to acquire new perk",
                 1, player().getHero().getPerks().size());
@@ -200,7 +200,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "H҉҉  #\n" +
                 "#H####\n");
 
-        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
         removeBoxes(2); // две коробки потрачено
@@ -262,7 +262,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "H҉҉☺ #\n" +
                 "#H####\n");
 
-        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         assertFieldPerks("");
 
@@ -354,7 +354,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // все тихо
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         // when
         tick();
@@ -370,7 +370,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#x####\n");
 
         // пошел сигнал об этом
-        events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // given
         // такой себе хак, мы в домике
@@ -454,7 +454,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -578,7 +578,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // все тихо
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         // when
         tick();
@@ -594,7 +594,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#x####\n");
 
         // пошел сигнал об этом
-        events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
         removeBoxes(2); // на две взорвавшиеся коробки меньше
@@ -628,7 +628,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "# ####\n");
 
         // пошел сигнал об этом
-        events.verifyAllEvents("[KILL_GHOST, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[KILL_GHOST, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -650,7 +650,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
 
         assertFieldPerks(
@@ -676,7 +676,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -739,7 +739,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // все тихо
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         // when
         tick();
@@ -755,7 +755,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#x####\n");
 
         // пошел сигнал об этом
-        events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
         removeBoxes(2); // на две взорвавшиеся коробки меньше
@@ -791,7 +791,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#҉####\n");
 
         // пошел сигнал об этом
-        events.verifyAllEvents("[DIED, KILL_GHOST, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[DIED, KILL_GHOST, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -818,7 +818,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "☺    +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -843,7 +843,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "☺    +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -901,7 +901,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // все тихо
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         // when
         hero().act();
@@ -918,7 +918,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#x####\n");
 
         // пошел сигнал об этом
-        events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
         removeBoxes(2); // на две взорвавшиеся коробки меньше
@@ -964,7 +964,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "# ####\n");
 
         // пошел сигнал об этом
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -988,7 +988,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "☺    +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         // появился перк
         assertFieldPerks(
@@ -1010,7 +1010,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "☺#   +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         // и еще два после рахрушенных стен
         assertFieldPerks(
@@ -1083,7 +1083,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         // when
         // породили три чудовища
@@ -1097,7 +1097,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " ҉   +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("[DROP_PERK, DROP_PERK, DROP_PERK]");
+        verifyAllEvents("[DROP_PERK, DROP_PERK, DROP_PERK]");
 
         // when
         // и они пошли за нами
@@ -1134,7 +1134,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
     }
 
     // если анти-привидения не могут найти к тебе короткий путь - они выпиливаются
@@ -1195,7 +1195,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -1221,7 +1221,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" +
@@ -1277,7 +1277,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // все тихо
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         // when
         tick();
@@ -1293,7 +1293,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#x####\n");
 
         // пошел сигнал об этом
-        events.verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[DROP_PERK, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
         // охотник идет
@@ -1337,7 +1337,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
                 "  value=4, timeout=3, timer=3, pick=47} at [5,1]}");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
 
         // when
         // превратился в перк обратно
@@ -1448,7 +1448,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "☺    \n" +
                 "     \n");
 
-        events.verifyAllEvents("[CATCH_PERK, CATCH_PERK]");
+        verifyAllEvents("[CATCH_PERK, CATCH_PERK]");
 
         assertFieldPerks("");
 

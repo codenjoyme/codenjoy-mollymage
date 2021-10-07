@@ -79,7 +79,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "H҉҉☺ #\n" +
                 "#H####\n");
 
-        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
         tick();
@@ -155,7 +155,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "H҉Ѡ  #\n" +
                 "#H####\n");
 
-        events.verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
         removeBoxes(2); // две коробки потрачено
@@ -227,7 +227,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "HѠ҉        #\n" +
                 "#H##########\n");
 
-        events.verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
     }
 
     @Test
@@ -434,7 +434,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼Ѡ       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼\n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
     }
 
     @Test
@@ -469,7 +469,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼☺☼ ☼\n" +
                 "☼   ☼\n" +
                 "☼☼☼☼☼\n");
-        events.verifyAllEvents("[CATCH_PERK]");
+        verifyAllEvents("[CATCH_PERK]");
 
         // when
         // hero used perk
@@ -498,7 +498,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼ ☼ ☼\n" +
                 "☼   ☼\n" +
                 "☼☼☼☼☼\n");
-        events.verifyAllEvents("[CATCH_PERK]");
+        verifyAllEvents("[CATCH_PERK]");
         assertEquals(timeout * 2 - 3, hero().getPerk(Element.POISON_THROWER).getTimer());
 
         // when
@@ -713,7 +713,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "HѠ҉҉҉҉҉    #\n" +
                 "#H##########\n");
 
-        events.verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
     }
 
     // Проверяем что два перка BBRI увеличивают длинну взрывной волны зелья на размер второго перка
@@ -791,7 +791,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "H҉҉҉҉҉҉    #\n" +
                 "#H##########\n");
 
-        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
         hero().act();
@@ -827,7 +827,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "   ҉     # #\n" +
                 "# #H########\n");
 
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "[KILL_TREASURE_BOX, KILL_TREASURE_BOX, " +
                 "KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
@@ -875,7 +875,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "         # #\n" +
                 "# # ########\n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
 
         assertHeroPerks("");
     }
@@ -1029,7 +1029,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 " ҉   \n" +
                 "҉Ѡ҉  \n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
     }
 
     // BRC - Potion remote control perk
@@ -1544,7 +1544,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "H    \n" +
                 "҉҉҉Ѡ \n");
 
-        events.verifyAllEvents("[DIED, KILL_GHOST, KILL_TREASURE_BOX]");
+        verifyAllEvents("[DIED, KILL_GHOST, KILL_TREASURE_BOX]");
 
         // только сейчас перк забрался
         assertHeroPerks("");
@@ -1561,7 +1561,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "   Ѡ \n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         assertHeroPerks("");
     }
@@ -1592,7 +1592,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents("[CATCH_PERK]");
+        verifyAllEvents("[CATCH_PERK]");
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1720,7 +1720,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 " ☺   \n" +
                 "3    \n");
 
-        events.verifyAllEvents("[CATCH_PERK]");
+        verifyAllEvents("[CATCH_PERK]");
 
         // when
         // hero explode potions and move right
@@ -1808,7 +1808,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 " ☺   \n" +
                 "3    \n");
 
-        events.verifyAllEvents("[CATCH_PERK]");
+        verifyAllEvents("[CATCH_PERK]");
 
         // when
         // hero explode potions and move right
@@ -1876,7 +1876,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents("[CATCH_PERK]");
+        verifyAllEvents("[CATCH_PERK]");
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -1893,7 +1893,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents("[CATCH_PERK]");
+        verifyAllEvents("[CATCH_PERK]");
         assertF("     \n" +
                 "     \n" +
                 "☺    \n" +

@@ -70,7 +70,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉Ѡ   \n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
         assertHeroDie();
 
         // when
@@ -83,7 +83,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 " Ѡ   \n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
         assertHeroDie();
     }
 
@@ -110,7 +110,7 @@ public class KillDeathTest extends AbstractGameTest {
                 " Ѡ   \n" +
                 "     \n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
     }
 
     private void killPotioner() {
@@ -157,7 +157,7 @@ public class KillDeathTest extends AbstractGameTest {
                 " Ѡ   \n" +
                 "     \n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
     }
 
     @Test
@@ -182,7 +182,7 @@ public class KillDeathTest extends AbstractGameTest {
                 " Ѡ   \n" +
                 "     \n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
     }
 
     @Test
@@ -207,7 +207,7 @@ public class KillDeathTest extends AbstractGameTest {
                 " Ѡ   \n" +
                 "     \n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
     }
 
     @Test
@@ -232,7 +232,7 @@ public class KillDeathTest extends AbstractGameTest {
                 " Ѡ   \n" +
                 "     \n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
     }
 
     // если герой стоит под действием ударной волны, он умирает
@@ -274,7 +274,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉Ѡ   \n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
         assertHeroDie();
 
         // when
@@ -287,7 +287,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 " Ѡ   \n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
         assertHeroDie();
     }
 
@@ -331,7 +331,7 @@ public class KillDeathTest extends AbstractGameTest {
                 " ҉   \n" +
                 "Ѡ҉҉  \n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
         assertHeroDie();
 
         // when
@@ -344,7 +344,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "Ѡ    \n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
         assertHeroDie();
     }
 
@@ -386,7 +386,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "҉҉   \n" +
                 "Ѡ    \n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
         assertHeroDie();
 
         // when
@@ -399,7 +399,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "Ѡ    \n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
         assertHeroDie();
     }
 
@@ -443,7 +443,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "Ѡ    \n" +
                 "҉҉   \n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
         assertHeroDie();
 
         // when
@@ -456,7 +456,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "Ѡ    \n" +
                 "     \n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
         assertHeroDie();
     }
 
@@ -534,7 +534,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "  Ѡ  \n" +
                 "     \n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
         assertHeroDie();
 
         // when
@@ -547,7 +547,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "  Ѡ  \n" +
                 "     \n");
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
         assertHeroDie();
     }
 
@@ -592,7 +592,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "H҉҉ #\n" +
                 "#H###\n");
 
-        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
     }
 
     // привидение умирает, если попадает под взывающееся зелье
@@ -714,7 +714,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼҉x       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
-        events.verifyAllEvents("[KILL_GHOST]");
+        verifyAllEvents("[KILL_GHOST]");
 
         // when
         // координата и направление движения привидения
@@ -766,7 +766,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "҉☺   \n" +
                 "҉҉҉x \n");
 
-        events.verifyAllEvents("[KILL_GHOST]");
+        verifyAllEvents("[KILL_GHOST]");
 
         // when
         // координата и направление движения привидения
@@ -809,7 +809,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉♣   \n", 0);
 
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
                 "listener(1) => [DIED]\n");
     }
@@ -848,7 +848,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "♥ Ѡ  \n", 1);
 
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(1) => [DIED]\n");
     }
 
@@ -891,7 +891,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "♥Ѡ   \n", 1);
 
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(1) => [DIED]\n");
     }
 
@@ -932,7 +932,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n" +
                 "♥&Ѡ  \n", 1);
 
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(1) => [DIED]\n");
     }
 }

@@ -70,7 +70,7 @@ public abstract class AbstractGameTest {
     protected MollyMage field;
     protected GameSettings settings;
     protected PerksSettingsWrapper perks;
-    protected EventsListenersAssert events;
+    private EventsListenersAssert events;
 
     @Before
     public void setup() {
@@ -87,7 +87,7 @@ public abstract class AbstractGameTest {
 
     @After
     public void tearDown() {
-        events.verifyAllEvents("");
+        verifyAllEvents("");
     }
 
     public void dice(int... ints) {
@@ -139,6 +139,10 @@ public abstract class AbstractGameTest {
 
     // getters & asserts
 
+    public void verifyAllEvents(String expected) {
+        assertEquals(expected, events.getEvents());
+    }
+    
     /**
      * Проверяет одну борду с заданным индексом
      * @param expected ожидаемое значение

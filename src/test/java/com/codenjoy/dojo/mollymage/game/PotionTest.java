@@ -29,8 +29,9 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
-import static org.junit.Assert.*;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTIONS_COUNT;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
+import static org.junit.Assert.assertEquals;
 
 public class PotionTest extends AbstractGameTest {
 
@@ -599,7 +600,7 @@ public class PotionTest extends AbstractGameTest {
         assertEquals(true, potion22.isExploded());
         assertEquals(true, potion23.isExploded());
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
     }
 
     @Test
@@ -627,7 +628,7 @@ public class PotionTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
 
         List<Potion> potions2 = field.potions().all();
         assertEquals(0, potions2.size());
@@ -725,7 +726,7 @@ public class PotionTest extends AbstractGameTest {
                 "☼  ҉  ☼\n" +
                 "☼☼☼☼☼☼☼\n");
 
-        events.verifyAllEvents("[DIED]");
+        verifyAllEvents("[DIED]");
     }
 
     @Test
@@ -764,7 +765,7 @@ public class PotionTest extends AbstractGameTest {
                 "҉      \n" +
                 "҉҉҉H   \n");
 
-        events.verifyAllEvents("[DIED, KILL_TREASURE_BOX]");
+        verifyAllEvents("[DIED, KILL_TREASURE_BOX]");
     }
 
     @Test
@@ -804,7 +805,7 @@ public class PotionTest extends AbstractGameTest {
                 "҉      \n" +
                 "҉҉҉҉x  \n");
 
-        events.verifyAllEvents("[KILL_GHOST]");
+        verifyAllEvents("[KILL_GHOST]");
     }
 
     // на поле можно чтобы каждый поставил то количество

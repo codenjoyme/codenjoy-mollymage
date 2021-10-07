@@ -70,7 +70,7 @@ public class GameTest extends AbstractGameTest {
 
         tick();
 
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(1) => [DIED]\n");
 
         // then
@@ -100,7 +100,7 @@ public class GameTest extends AbstractGameTest {
         dice(4, 0);
         game(1).newGame();
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         tick();
 
@@ -230,7 +230,7 @@ public class GameTest extends AbstractGameTest {
                 "H☺#  \n" +
                 "҉H#  \n");
 
-        events.verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
         // all points on the board allowed for boxes regeneration except
@@ -299,7 +299,7 @@ public class GameTest extends AbstractGameTest {
                 "҉☺   \n" +
                 "҉҉҉H \n");
 
-        events.verifyAllEvents("[KILL_TREASURE_BOX]");
+        verifyAllEvents("[KILL_TREASURE_BOX]");
 
         // when
         dice(Direction.DOWN.value(), // направление движения привидения
@@ -355,7 +355,7 @@ public class GameTest extends AbstractGameTest {
                 "☼҉H ☼\n" +
                 "☼☼☼☼☼\n");
 
-        events.verifyAllEvents("[KILL_TREASURE_BOX]");
+        verifyAllEvents("[KILL_TREASURE_BOX]");
 
         // when
         tick();
@@ -394,7 +394,7 @@ public class GameTest extends AbstractGameTest {
         tick();
 
         // then
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [DIED]\n");
 
         assertEquals(false, hero(0).isAlive());
@@ -409,7 +409,7 @@ public class GameTest extends AbstractGameTest {
         game(0).newGame();
         game(1).newGame();
 
-        events.verifyAllEvents("");
+        verifyAllEvents("");
 
         // then
         assertNotSame(joystick1, game(0).getJoystick());
@@ -506,7 +506,7 @@ public class GameTest extends AbstractGameTest {
                 "҉҉҉҉ \n" +
                 "#xx  \n", 0);
 
-        events.verifyAllEvents(
+        verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_GHOST]\n");
 

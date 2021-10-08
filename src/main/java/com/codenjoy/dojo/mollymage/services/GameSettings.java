@@ -24,8 +24,8 @@ package com.codenjoy.dojo.mollymage.services;
 
 
 import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.model.Level;
+import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.incativity.InactivitySettings;
 import com.codenjoy.dojo.services.level.LevelsSettings;
@@ -57,11 +57,11 @@ public class GameSettings extends SettingsImpl
         CATCH_PERK_SCORE("[Score] Catch perk score"),
         DIE_PENALTY("[Score] Your hero's death penalty"),
         WIN_ROUND_SCORE("[Score][Rounds] Win round score"),
-        BIG_BADABOOM("[Level] Blast activate potion"),
-        POTIONS_COUNT("[Level] Potions count"),
-        POTION_POWER("[Level] Potion power"),
-        TREASURE_BOX_COUNT("[Level] Treasure boxes count"),
-        GHOSTS_COUNT("[Level] Ghosts count"),
+        BIG_BADABOOM("[Map] Blast activate potion"),
+        POTIONS_COUNT("[Map] Potions count"),
+        POTION_POWER("[Map] Potion power"),
+        TREASURE_BOX_COUNT("[Map] Treasure boxes count"),
+        GHOSTS_COUNT("[Map] Ghosts count"),
         PERK_WHOLE_TEAM_GET("[Perks] All teammates get perk"),
         PERK_DROP_RATIO("[Perks] Perks drop ratio in %"),
         PERK_PICK_TIMEOUT("[Perks] Perks pick timeout"),

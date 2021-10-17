@@ -881,7 +881,7 @@ public class PotionTest extends AbstractGameTest {
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
-                "☺♡   \n" +
+                "☺ö   \n" +
                 "44   \n", 0);
 
         // when
@@ -896,7 +896,7 @@ public class PotionTest extends AbstractGameTest {
         // then
         assertF("     \n" +
                 "     \n" +
-                "☺♡   \n" +
+                "☺ö   \n" +
                 "     \n" +
                 "33   \n", 0);
     }

@@ -60,7 +60,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "i    \n" +
-                "☺♥♡  \n", 0);
+                "☺♥ö  \n", 0);
 
         // heroes should not have any perks
         assertEquals(0, hero(0).getPerks().size());
@@ -79,7 +79,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
-                " ♥♡  \n", 0);
+                " ♥ö  \n", 0);
 
         // teammate should not get perk
         assertEquals(1, hero(0).getPerks().size());
@@ -119,7 +119,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "i    \n" +
-                "☺♥♡  \n", 0);
+                "☺♥ö  \n", 0);
 
 
         // heroes should not have any perks
@@ -137,7 +137,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺    \n" +
-                " ♥♡  \n", 0);
+                " ♥ö  \n", 0);
 
         // teammate should get perk to
         verifyAllEvents(

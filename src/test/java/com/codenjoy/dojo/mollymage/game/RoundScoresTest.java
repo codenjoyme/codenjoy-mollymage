@@ -161,18 +161,18 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "☺♥   \n" +
-                " ♡   \n", 0);
+                " ö   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
                 "♥☺   \n" +
-                " ♡   \n", 1);
+                " ö   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
-                "♡♡   \n" +
+                "öö   \n" +
                 " ☺   \n", 2);
 
         // when
@@ -193,7 +193,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 "  ☺  \n" +
                 "♥1   \n" +
-                " ♡   \n", 1);
+                " ö   \n", 1);
 
         // when
         tick();
@@ -203,18 +203,18 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n" +
                 " ҉♥  \n" +
                 "Ѡ҉҉  \n" +
-                " ♧   \n", 0);
+                " ø   \n", 0);
 
         assertF("     \n" +
                 "     \n" +
                 " ҉☺  \n" +
                 "♣҉҉  \n" +
-                " ♧   \n", 1);
+                " ø   \n", 1);
 
         assertF("     \n" +
                 "     \n" +
-                " ҉♡  \n" +
-                "♧҉҉  \n" +
+                " ҉ö  \n" +
+                "ø҉҉  \n" +
                 " Ѡ   \n", 2);
 
         verifyAllEvents(
@@ -1054,19 +1054,19 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(1) => [START_ROUND, [Round 1]]\n" +
                 "listener(2) => [START_ROUND, [Round 1]]\n");
 
-        assertF("   ☺♡\n" +
+        assertF("   ☺ö\n" +
                 "    ♥\n" +
                 "     \n" +
                 "     \n" +
                 "     \n", 0);
 
-        assertF("   ♡☺\n" +
-                "    ♡\n" +
+        assertF("   ö☺\n" +
+                "    ö\n" +
                 "     \n" +
                 "     \n" +
                 "     \n", 1);
 
-        assertF("   ♥♡\n" +
+        assertF("   ♥ö\n" +
                 "    ☺\n" +
                 "     \n" +
                 "     \n" +

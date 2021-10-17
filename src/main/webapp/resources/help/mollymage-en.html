@@ -159,34 +159,34 @@
 
                         <pre>public enum Element {
 
-    /// This is your Hero
-    HERO('☺'),             // this is what he usually looks like
-    POTION_HERO('☻'),      // this is if he is sitting on own potion
-    DEAD_HERO('Ѡ'),        // oops, your Hero is dead (don't worry, he will appear
-                           // somewhere in next move)
-                           // you're getting penalty points for each death
+    /// your Hero
+    HERO('☺'),              // this is what he usually looks like
+    POTION_HERO('☻'),       // this is if he is sitting on own potion
+    DEAD_HERO('Ѡ'),         // oops, your Hero is dead (don't worry, he will appear
+                            // somewhere in next move)
+                            // you're getting penalty points for each death
 
-    /// this is other players Heroes
+    /// other players Heroes
     OTHER_HERO('♥'),        // this is what other Heroes looks like
     OTHER_POTION_HERO('♠'), // this is if player just set the potion
     OTHER_DEAD_HERO('♣'),   // enemy corpse (it will disappear shortly, right on the next move)
                             // if you've done it you'll get score points
 
     /// enemy players heroes
-    ENEMY_HERO('♡'),        // This is what enemy heroes looks like.
-    ENEMY_POTION_HERO('♤'), // This is if enemy hero is sitting on own potion.
-    ENEMY_DEAD_HERO('♧');   // Enemy hero corpse (it will disappear shortly,
+    ENEMY_HERO('ö'),        // This is what enemy heroes looks like.
+    ENEMY_POTION_HERO('Ö'), // This is if enemy hero is sitting on own potion.
+    ENEMY_DEAD_HERO('ø');   // Enemy hero corpse (it will disappear shortly,
                             // right on the next move).
                             // If you've done it you'll get score points.
 
-    /// the potions
-    POTION_TIMER_5('5'),       // after hero set the potion, the timer starts (5 tacts)
-    POTION_TIMER_4('4'),       // this will blow up after 4 tacts
-    POTION_TIMER_3('3'),       // this after 3
-    POTION_TIMER_2('2'),       // two
-    POTION_TIMER_1('1'),       // one
-    BOOM('҉'),                 // Boom! this is what is potion does, everything that is destroyable
-                               // got destroyed
+    /// potions
+    POTION_TIMER_5('5'),    // after hero set the potion, the timer starts (5 tacts)
+    POTION_TIMER_4('4'),    // this will blow up after 4 tacts
+    POTION_TIMER_3('3'),    // this after 3
+    POTION_TIMER_2('2'),    // two
+    POTION_TIMER_1('1'),    // one
+    BOOM('҉'),              // Boom! this is what is potion does, everything that is destroyable
+                            // got destroyed
 
     /// walls
     WALL('☼'),                 // Indestructible wall - it will not fall from potion.
@@ -197,34 +197,34 @@
                                // points. Perhaps a prize will appear.
 
     /// ghosts
-    GHOST('&'),          // these guys run over the board randomly and get in the way all the time
-                         // if it will touch hero - it will die
-                         // you'd better kill this piece of ... soul, you'll get score points for it
-    DEAD_GHOST('x'),     // this is defeated ghost
+    GHOST('&'),             // these guys run over the board randomly and get in the way all the time
+                            // if it will touch hero - it will die
+                            // you'd better kill this piece of ... soul, you'll get score points for it
+    DEAD_GHOST('x'),        // this is defeated ghost
 
     /// perks
     /// Values, time-outs, drop rate of perks can be adjusted by game administrator.
     /// Here we provide default values.
     /// If not stated explicitly in a description, Perk is deactivated on time-out (10 ticks).
 
-    POTION_BLAST_RADIUS_INCREASE('+'), // Increase potion blast radius (power  +2 to current one).
-                                     // Applicable only to newly created potions.
+    POTION_BLAST_RADIUS_INCREASE('+'),  // Increase potion blast radius (power  +2 to current one).
+                                        // Applicable only to newly created potions.
 
-    POTION_COUNT_INCREASE('c'), // Increase available potions number (+3 to current level by default).
+    POTION_COUNT_INCREASE('c'),         // Increase available potions number (+3 to current level by default).
 
-    POTION_IMMUNE('i'), // Gives an immunity to potion blasts.
+    POTION_IMMUNE('i'),                 // Gives an immunity to potion blasts.
 
-    POTION_REMOTE_CONTROL('r'), // Bomb blast not by timer but by second act. Number of RC triggers is limited to 3 by default.
+    POTION_REMOTE_CONTROL('r'),         // Bomb blast not by timer but by second act. Number of RC triggers is limited to 3 by default.
 
-    POISON_THROWER('T'),       // Poison Thrower. Allows the hero to throw poisonous liquid. Shot range is the same as at the potions.
-                            // Activated by the command АСТ(1) + Direction(example: RIGHT,ACT(1) ), works parallel with potions.
-                            // After using you need to "recharge"(3 ticks by default).
+    POISON_THROWER('T'),                // Poison Thrower. Allows the hero to throw poisonous liquid. Shot range is the same as at the potions.
+                                        // Activated by the command АСТ(1) + Direction(example: RIGHT,ACT(1) ), works parallel with potions.
+                                        // After using you need to "recharge"(3 ticks by default).
 
-    POTION_EXPLODER('A'),   // Explode all potions on the field. Allow hero to explode all potions on the field despite the owner and potion type
-                            // Activated by the command АСТ(2).
+    POTION_EXPLODER('A'),               // Explode all potions on the field. Allow hero to explode all potions on the field despite the owner and potion type
+                                        // Activated by the command АСТ(2).
 
     /// a void
-    NONE(' ');                 // this is the only place where you can move your Hero</pre>
+    NONE(' ');                         // this is the only place where you can move your Hero</pre>
                         <p>The game is turn-based, every second the server sends to your client
                             (bot) the state of the updated field at the moment and expects a
                             response of the team to the hero. Within the next second, the player

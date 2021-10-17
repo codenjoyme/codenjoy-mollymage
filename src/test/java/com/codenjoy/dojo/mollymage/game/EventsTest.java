@@ -1128,7 +1128,7 @@ public class EventsTest extends AbstractGameTest {
                 "&244&\n" +
                 " 1#3 \n" +
                 "&223&\n" +
-                "☺♥♡♡ \n", 0);
+                "☺♥öö \n", 0);
 
         // when
         hero(0).move(0, 0);
@@ -1138,9 +1138,9 @@ public class EventsTest extends AbstractGameTest {
 
         // then
         assertF("     \n" +
-                "&24♤&\n" +
+                "&24Ö&\n" +
                 " 1#3 \n" +
-                "&♠2♤&\n" +
+                "&♠2Ö&\n" +
                 "☺    \n", 0);
 
         verifyAllEvents("");
@@ -1156,9 +1156,9 @@ public class EventsTest extends AbstractGameTest {
                 "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
         assertF(" ҉҉҉ \n" +
-                "x҉҉♧x\n" +
+                "x҉҉øx\n" +
                 "҉҉H҉҉\n" +
-                "x♣҉♧x\n" +
+                "x♣҉øx\n" +
                 "☺҉҉҉ \n", 0);
 
         // when
@@ -1169,9 +1169,9 @@ public class EventsTest extends AbstractGameTest {
         verifyAllEvents("");
 
         assertF("     \n" +
-                "   ♧ \n" +
+                "   ø \n" +
                 "     \n" +
-                " ♣ ♧ \n" +
+                " ♣ ø \n" +
                 "☺    \n", 0);
     }
 

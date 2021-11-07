@@ -177,12 +177,12 @@ getHero
 
 #позиции всех остальных бомберов (противников) на доске
 #Collection<Point> getOtherHeroes()
-#boolean isMyHeroDead()
+#boolean isGameOver()
 getOtherHeroes
 
 #жив ли мой бомбер
 #boolean isAt(int x, int y, Element element)
-isMyHeroDead
+isGameOver
 
 #находится ли в позиции  x, y заданный элемент?
 #находится ли в позиции  x, y что-нибудь из заданного набора

@@ -229,9 +229,9 @@ getOtherHeroes
 ```
 
 * жив ли мой бомбер
-`boolean isMyHeroDead()`
+`boolean isGameOver()`
 ```powershell
-isMyHeroDead
+isGameOver
 ```
 * находится ли в позиции  x, y заданный элемент? находится ли в позиции  x, y что-нибудь из заданного набора  
 `boolean isAt(int x, int y, Element element)`

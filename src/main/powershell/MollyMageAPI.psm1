@@ -865,7 +865,7 @@ function getOtherHeroes {
     }
 }
 
-function isMyHeroDead {
+function isGameOver {
     [CmdletBinding()]
     [Alias()]
     

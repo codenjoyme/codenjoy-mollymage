@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 
-# Game details
+# Game details <a target="_self" href="index-ru.html">[RU]</a>
 
 ## What is the game about
 You should write your bot for the hero who will beat the other bots 
@@ -109,7 +109,7 @@ algorithm must earn points as much as possible. The ultimate goal is
 winning the game.
 
 ## Symbol breakdown
-Please [check it here](mollymage-elements.md).
+Please [check it here](elements.md).
 
 ## Commands
 * `UP`, `DOWN`, `LEFT`, `RIGHT` - move your hero in the specified direction.

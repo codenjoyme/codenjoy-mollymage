@@ -1,60 +1,82 @@
-<meta charset="UTF-8">
+﻿<meta charset="UTF-8">
 
-# Game details <a target="_self" href="index-ru.html">[RU]</a>
+## Вступление
 
-## What is the game about
-You should write your bot for the hero who will beat the other bots 
-by the score it gets. All bots play on the same field of play. The 
-hero can move by idle cells to all four directions.
+Игровой demo-сервер доступен так же в интернете 24/7 в целях
+ознакомления [http://codenjoy.com/codenjoy-contest](http://codenjoy.com/codenjoy-contest).
 
-The hero can plant a potion. The potion will explode in 5 ticks (seconds). 
-The blast wave can affect inhabitants of the field. All affected by 
-the blast wave disappear. You can decline by both your and someone 
-else's potion.
+Игра с открытым исходным кодом. Для реализации своей игры, исправления
+ошибок в текущей и внесения других правок необходимо для начала
+[форкнуть проект](https://github.com/codenjoyme/codenjoy).
+В корне репозитория есть описание в файле Readme.md - там описано, что делать дальше.
 
-On her/his way, the hero can meet a ghost that destroys all heroes on 
-its way.
+По возникающим вопросам, пиши в [skype alexander.baglay](skype:alexander.baglay)
+или на почту [apofig@gmail.com](mailto:apofig@gmail.com).
 
-Each destroyed object on the field (hero, ghost, destroyed walls) is 
-restored in an instant in the other place. If the hero is damaged, 
-the penalty points[*](#ask-sensei) are allocated to him.
+## В чем суть игры?
 
-The hero whose potion destroyed something on the map receives bonus 
-points[*](#ask-sensei) as follows: for the destroyed walls, 
-for the ghost, for the enemy hero.
+Надо написать своего бота для героя, который обыграет других
+ботов по очкам. Все играют на одном поле. Герой может передвигаться
+по свободным ячейкам во все четыре стороны.
 
-All points are summed up. The player with the largest number of points 
-is considered to be a winner (prior to the due date).
+Герой может также поставить зелье. Зелье взорвется через 5 тиков
+(секунд). Ядовитые газы от зелья могут зацепить обитателей поля.
+Все, кто был задет - исчезает. С помощью зелья можно открывать сундуки.
+Пострадать можно и на своем, и на чужом зелье. 
 
-## How to play
-So, the player registers on the server and joining the game. Then you 
-should connect from client code to the server via Web Sockets.
+На своем пути герой может повстречать призрака - призрачная субстанция, уничтожающая на своем пути всех героев. 
 
-Address to connect the game on the server looks like this (you can 
-copy it from your game room):
+Каждый разрушенный объект на поле (герой, призрак, сундуки)
+тут же восстанавливается в другом месте. Если пострадал герой,
+ему зачисляются штрафные очки -50*. 
 
-`http://codenjoy.com/codenjoy-contest/board/player/your-player?code=123456789012345678`
+Герой, от зелья которого были открыты сундуки или уничтожены другие участники на карте получит
+бонусные очки: за открытый сундук  +10*, за призрака +100*, за
+другого героя +1000*. 
 
-Here 'your-player' is your player id and 'code' is your security token. 
-Make sure you keep the code safe from prying eyes. Any participant, 
-knowing your code, can play on your behalf.
+*Tочную сумму очков уточни у ведущего.
 
-## Board parsing
-After connection, the client will regularly (every second) receive 
-a line of characters with the encoded state of the field. The format:
+Очки суммируются. Побеждает игрок с большим числом очков (до условленного
+времени).
+
+## Подключение к серверу
+
+Итак, игрок [регистрируется на сервере](../../../register?gameName=mollymage),
+указывая свой email.
+
+Далее необходимо подключиться [из кода](../../../resources/mollymage/user/clients.zip)
+к серверу через websocket. Это Maven проект и подойдет он для игры на JVM языках.
+Так же в архиве ты найдешь и сырцы для других языков.
+Как его запустить смотри в корне проекта в файле README.txt
+
+Если ты не можешь найти свой язык - придется написать свой клиент
+(а после пошарить с нами на почту: [apofig@gmail.com](mailto:apofig@gmail.com))
+
+Адрес для подключения к игре на сервере http://codenjoy.com:
+
+`ws://codenjoy.com:80/codenjoy-contest/ws?user=[user]&code=[code]`
+
+Адрес для подключения к игре на сервере, развернутом в локальной сети:
+
+`ws://[server]:8080/codenjoy-contest/ws?user=[user]&code=[code]`
+
+Тут `[server]` - ip-адрес сервера, `[user]` - id игрока, a `[code]` -
+твой security token, его ты можешь получить из адресной
+строки браузера после регистрации/логина.
+
+После подключения клиент будет регулярно (каждую секунду) получать строку
+символов — с закодированным состоянием поля. Формат таков:
 
 `^board=(.*)$`
 
-With the help of regexp you can obtain a board line. Example of the 
-line from the server:
+с помощью этого regexp можно выкусить строку доски.
+Вот пример строки от сервера:
 
 <pre>board=☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼ #   # #  #♥#  #  #  &        #☼☼♥☼♥☼♥☼#☼ ☼ ☼ ☼ ☼♥☼ ☼ ☼#☼#☼♥☼#☼#☼☼#♥♥  ♥#   # #♥   # ♥#          ☼☼ ☼ ☼#☼ ☼♥☼ ☼ ☼#☼ ☼ ☼ ☼ ☼&☼ ☼ ☼ ☼☼     ♥          # #            ☼☼ ☼ ☼ ☼ ☼♥☼ ☼ ☼♥☼#☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼☼#       # #       ☺& 2  #  #  #☼☼#☼♥☼ ☼#☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼#☼ ☼ ☼ ☼☼#  # ♥#               # ♥   #  ☼☼ ☼ ☼#☼#☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼#☼ ☼☼   #♥ #      #                 ☼☼ ☼ ☼ ☼ ☼♥☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼#☼☼     ## #     #   # #   ♥      ☼☼ ☼ ☼♥☼ ☼ ☼#☼ ☼#☼ ☼ ☼♥☼ ☼ ☼ ☼ ☼ ☼☼       #♥       #      ## # ###☼☼ ☼ ☼ ☼#☼ ☼ ☼#☼ ☼ ☼#☼#☼&☼ ☼ ☼ ☼ ☼☼       #       #    ♣# #     ♥ ☼☼ ☼ ☼ ☼♥☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼#☼ ☼☼        ## ## ♥             # #☼☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼☼                   &    ###  ##☼☼ ☼ ☼ ☼ ☼ ☼ ☼#☼ ☼#☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼☼                   ♥ ##        ☼☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼♥☼#☼ ☼ ☼ ☼☼     ##         &#         #   ☼☼ ☼ ☼ ☼#☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼#☼ ☼ ☼ ☼ ☼☼   #   #         #     # &     ☼☼♥☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼#☼#☼ ☼☼  #                    ##   &  ☼☼ ☼ ☼ ☼ ☼ ☼#☼ ☼ ☼ ☼ ☼ ☼ ☼#☼ ☼#☼ ☼☼ #    # &        #       #     ☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼</pre>
 
-The line length is equal to the field square. If to insert a wrapping 
-character (carriage return) every sqrt(length(string)) characters, 
-you obtain the readable image of the field.
-
-Field example:
+Длинна строки равна площади поля. Если вставить символ переноса строки
+каждые `sqrt(length(string))` символов, то получится читабельное
+изображение поля.
 
 <pre>☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼
 ☼ #   # #  #♥#  #  #  &        #☼
@@ -90,153 +112,167 @@ Field example:
 ☼ #    # &        #       #     ☼
 ☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼</pre>
 
-Sprite UI
+Первый символ строки соответствует ячейке расположенной в левом
+верхнем углу и имеет координату [0, 32]. В этом примере — позиция
+бомбермена (символ ☺) — [19, 25]. Левый нижний угол имеет координату [0, 0].
 
-![](board.png)
+Расшифровка символов на рисунке ниже
 
-The first character of the line corresponds to a cell located on the 
-left-top corner and has the `[0, 32]` coordinate. The following example 
-shows the position of the hero (the `☺` character) – `[19,25]`. left-bottom 
-corner has the `[0, 0]` coordinate.
+<pre>public enum Element {
 
-The game is turn-based: Each second, the server sends the updated state 
-of the field to the client and waits for response. Within the next 
-second the player must give the molly a command. If no command is 
-given, the molly will stand still.
+/// Твой герой
+HERO('☺'),               // герой
+POTION_HERO('☻'),        // герой под которым варится зелье
+DEAD_HERO('Ѡ'),          // ойкс! твой герой умер. Не волнуйся, он появится
+// через секунду где-нибудь на поле, но вполне
+// вероятно за это ты получишь штрафные очки.
 
-Your goal is to make the molly move according to your algorithm. The 
-algorithm must earn points as much as possible. The ultimate goal is 
-winning the game.
+/// Игроки противники (из другой команды)
+ENEMY_HERO('ö'),         // герой-противник
+ENEMY_POTION_HERO('Ö'),  // герой-противник под которым варится зелье
+ENEMY_DEAD_HERO('ø'),    // так, если герой-противник уничтожен.
+// если это твоя заслуга - ты получишь бонусные очки.
 
-## Symbol breakdown
-Please [check it here](elements.md).
+/// Игроки из твоей команды (или игроки противники, если игра не командная)
+OTHER_HERO('♥'),         // другой герой
+OTHER_POTION_HERO('♠'),  // другой герой под которым варится зелье
+OTHER_DEAD_HERO('♣'),    // другой герой уничтожен.
+// если это твоя заслуга - ты получишь бонусные очки.
+// но только если это не командная игра - тогда штрафные.
+
+/// зелье
+POTION_TIMER_5('5'),     // после того как герой поставит зелье таймер вкючится (всего 5 тиков)
+POTION_TIMER_4('4'),     // это зелье закипит через 4 тика
+POTION_TIMER_3('3'),     // это - через 3
+POTION_TIMER_2('2'),     // два
+POTION_TIMER_1('1'),     // один
+BOOM('҉'),               // Пуф! Это то, как зелье взрывается. При этом всех, кого можно уничтожить - будут уничтожены,
+// закрытые сундуки - откроются.
+
+/// стены
+WALL('☼'),                 // неразрушаемые стены - им пары зелья не страшны
+
+/// сундуки
+TREASURE_BOX('#'),         // а это сундук с сокровищами, может быть открыт
+OPENING_TREASURE_BOX('H'), // это как открытый сундук выглядит, она пропадет в следующую секунду
+// если это ты сделал - ты получишь бонусные очки
+
+/// ghosts
+GHOST('&'),              // этот малый бегает по полю в произвольном порядке
+// если он дотронется до героя - тот умрет
+// его можно уничтожить с помощью зелья и заработать бонусные очки
+DEAD_GHOST('x'),         // это уничтоженный призрак
+
+/// perks
+/// Значения, таймауты, вероятность выпадения перков могут быть изменены администратором игры.
+/// Указаны значения по умолчанию.
+/// Действие перка истекает по таймауту (10 тиков) если не указано иначе в описании перка.
+
+POTION_BLAST_RADIUS_INCREASE('+'), // увеличивает радиус распространения ядовитых паров (радиус +2 к текущему).
+// Действует только для вновь установленных зелий.
+
+POTION_COUNT_INCREASE('c'),        // Увеличивает количество доступных игроку зелий (+3 к текущему уровню по-умолчанию).
+
+POTION_IMMUNE('i'),                // Дает иммунитет от ядовитых паров.
+
+POTION_REMOTE_CONTROL('r'),        // Дистанционный детонатор. Срабатывает при повторном действии. 3 детонатора по умолчанию.
+
+POISON_THROWER('T'),               // Ядомет. Позволяет герою стрелять ядом. Радиус действия такой же как и у зелья.
+// Активируется командой АСТ(1)+Направление(например: RIGHT,ACT(1) ), работает паралельно с установкой зелий.
+// После применения необходима "перезарядка". (по-умолчанию 3 тика)
+
+POTION_EXPLODER('A'),              // Детонатор всех зелий на поле. Позволяет игроку взорвать все существующие зелья на поле независимо от их владельца и типа.
+// Активируется командой АСТ(2).
+
+/// a void
+NONE(' ');                         // свободная ячейка, куда ты можешь направить героя</pre>
+
+Игра пошаговая, каждую секунду сервер посылает твоему клиенту (боту) состояние
+обновленного поля на текущий момент и ожидает ответа команды герою.
+За следующую секунду игрок должен успеть дать команду герою.
+Если не успел — герой стоит на месте.
 
 ## Commands
-* `UP`, `DOWN`, `LEFT`, `RIGHT` - move your hero in the specified direction.
-* `ACT` - set a potion.  Also, if you have perk `POTION_REMOTE_CONTROL` - 
-  you explode yours RC-potions by second command `ACT`. Movement and `ACT` 
-  commands can be combined, separating them by comma. During one game cycle 
-  the Molly will set a potion and move. Combinations `LEFT,ACT` or `ACT,LEFT` 
-  are different: either we move to the left and plant a potion there, or 
-  we plant a potion and run away to the left.
-* `ACT(1),<DIRECTION>` - works only with perk `POISON_THROWER`. 
-  Molly throws a blast of poison in the specified direction. Order 
-  `LEFT,ACT(1)` or `ACT(1),LEFT` - does not matter. 
-  Without direction, just command `ACT(1)` nothing will happen - hero just 
-  will stay on place.
-* `ACT(2)` -  works only with perk `POTION_EXPLODER`. All points on 
-  the field are exploding in the next tick. Works on all potions (own, 
-  team, enemy, RC). Can be used as a single command and can be combined 
-  with Direction. Example: `RIGHT,ACT(2)` - in this case Molly will try 
-  to move right and all potions on the field explode. 
 
-## Perks
-* `POTION_BLAST_RADIUS_INCREASE` - Increase potion radius blast. 
-  `{value: +2, timeout: 30}`[*](#ask-sensei)
-* `POTION_COUNT_INCREASE` - Temporarily increase count of settable potions.
-  `{count: +4, timeout: 30}`[*](#ask-sensei)
-* `POTION_REMOTE_CONTROL` - Next several potions would be with 
-  remote control. Activating by command `ACT`. `{value:  3}`[*](#ask-sensei)
-* `POTION_IMMUNE` - Temporarily gives you immunity from potion blasts.
-  `{timeout: 30}`[*](#ask-sensei)
-* `POISON_THROWER`  Hero can shoot by poison cloud. 
-  Using: `ACT(1),<DIRECTION>`. `{timeout: 30}`[*](#ask-sensei)
-* `POTION_EXPLODER`  Hero can explode all potions on the field. 
-  Using: `ACT(2)`. `{number of  use: +1, timeout: 30}`[*](#ask-sensei)
- 
-## Points
-* open chests by explode: `1`[*](#ask-sensei)
-* kills ghosts: `10`[*](#ask-sensei)
-* kill other heroes: `20`[*](#ask-sensei)
-* kill enemy heroes: `100`[*](#ask-sensei)
-* catch perk: `5`[*](#ask-sensei)
-* win round: `30`[*](#ask-sensei)
-* death penalty: `-30`[*](#ask-sensei)
-  
-## Cases
-* you can combine perks
-* who earn points after using `POTION_EXPLODER` - decides Sensei[*](#ask-sensei).
-* please be careful with perks on the field. 
+Команд несколько: 
+* `UP`, `DOWN`, `LEFT`, `RIGHT` – приводят к движению героя в
+  заданном направлении на 1 клетку.
+* `ACT` - оставить зелье на месте героя. Также, если у героя есть перк 
+  `POTION_REMOTE_CONTROL` - он может взорвать свое зелье дистанционно 
+  по второй команде `ACT` тогда, когда ему это потребуется.
+* `АСТ,<DIRECTION>`,`<DIRECTION>,АСТ` - команды движения можно
+  комбинировать с командой `ACT`, разделяя их через запятую. Порядок 
+  `LEFT,ACT` или `ACT,LEFT` - имеет значение, либо двигаемся 
+  влево и там ставим зелье, либо ставим зелье, а затем ходим
+  влево. Если игрок будет использовать только одну команду `ACT`, то зелье
+  установится под героем без его перемещения на поле. 
+* `АСТ(1),<DIRECTION>` - Используется только при наличии перка 
+  `POISON_THROWER`. Позволяет бросить в сторону противника 
+  пары яда. Используется в паре с командой смены направления 
+  движения, разделенные через запятую. Порядок
+  `LEFT,ACT(1)` или `ACT(1),LEFT` - значения не имеет. Без указания 
+  направления ничего не произойдет, герой останется стоять на месте.
+* `ACT(2)` - работает только с перком `POTION_EXPLODER`. После вызова 
+  команды все зелья на поле взрываются одновременно. Действует на все 
+  зелья (собственные, командные, вражеские, дистанционные).
+  Может использоваться как одна команда и может сочетаться с направлением.
+  Пример: `RIGHT,ACT(2)` - в этом случае Молли попытается двигаться 
+  вправо, после чего все зелья на поле взорвутся.
 
-## <a id="ask-sensei"></a> Ask Sensei
-Please ask Sensei about current game settings. You can find Sensei in 
-the chat that the organizers have provided to discuss issues.
+Первостепенная задача – написать websocket клиента, который подключится к серверу.
+Затем заставить героя слушаться команды. Таким образом, игрок подготовится
+к основной игре. Основная цель – вести осмысленную игру и победить.
 
-## Hints
-The first task is to run a client’s WebSocket which will connect to 
-the server. Then you should “force” the hero to listen to the commands. 
-This is the way prepare yourself to the game. The main goal is to 
-play meaningfully and win. 
+Сейчас реализованы клиенты для игры для некоторых языков программирования. 
+Другие языки в процессе написания (спасибо игрокам-активистам!).
 
-If you are not sure what to do try to implement the following algorithms:
+Слишком много форы клиентский код не дает играющим, поскольку в этом коде
+еще надо разобраться, но там реализована логика общения с сервером +
+некоторое высокоуровневое API для работы с доской (что уже приятно).
 
-* Move to a random empty adjacent cell.
-* Move to a free cell in the direction of the nearest chest.
-* Try to hide from future blasts.
-* Avoid ghost and other heroes.
-* Try to set the bomb so that it explode the box, ghosts or another heroes.
+Все языки так или иначе имеют похожий набор методов:
 
-## Clients and API
-The client code does not give a considerable handicap to gamers because 
-you should spend time to puzzle out the code. However, it is pleasant 
-to note that the logic of communication with the server plus some high 
-level API for working with the board are implemented already:
+* `Point` 
+  Координаты `x`, `y`.
+* `Collection` 
+  Набор нескольких объектов.
+* `Element` 
+  Тип элемента на доске.
+* `int boardSize();` 
+  Размер доски.
+* `boolean isAt(Point point, Element element);` 
+  Находится ли в позиции point заданный элемент?
+* `boolean isAt(Point point, Collection<Element> elements);` 
+  Находится ли в позиции point что-нибудь из заданного набора?
+* `boolean isNear(Point point, Element element);` 
+  Есть ли вокруг клеточки с координатой point заданный элемент?
+* `boolean isBarrierAt(Point point);` 
+  Есть ли препятствие в клеточке point?
+* `int countNear(Point point, Element element);` 
+  Сколько элементов заданного типа есть вокруг клетки с point?
+* `Element getAt(Point point);` 
+  Элемент в текущей клетке.
+* `Point getHero();` 
+  Позиция моего героя на доске.
+* `boolean isGameOver();` 
+  Жив ли мой герой?
+* `Collection<Point> getOtherHeroes();` 
+  Позиции всех остальных героев (из твоей команды) на доске.
+* `Collection<Point> getEnemyHeroes();` 
+  Позиции героев противника на доске.
+* `Collection<Point> getBarriers();` 
+  Позиции всех объектов препятствующих движению.
+* `Collection<Point> getGhosts();` 
+  Позиции всех призраков.
+* `Collection<Point> getWalls();` 
+  Позиции всех бетонных стен.
+* `Collection<Point> getTreasureBoxes();` 
+  Позиции всех сундуков с сокровищами (их можно открывать).
+* `Collection<Point> getBombs();` 
+  Позиции всех зелий.
+* `Collection<Point> getFutureBlasts();` 
+  Позиции потенциально опасных мест, где зелье может взорваться. 
+  (зелье распространяется на N {решим перед началом игры} клеточек 
+  в стороны: вверх, вниз, вправо, влево).
 
-```
-// Here:
-//     Point - x, y coordinate
-//     Collection - a set of several objects
-//     Element - type of the element on the board
-
-// position of my hero on the board
-Point getHero();
-
-// positions of all other heroes (enemies) on the board
-Collection<Point> getOtherHeroes();
-
-// whether my hero is alive
-boolean isGameOver();
-
-// whether the given element has given coordinate?
-boolean isAt(Point point, Element element);
-
-// whether any object from the given set is located in given coordinate
-boolean isAt(Point point, Collection<Element>elements);
-
-// whether the given element is located near the cell with the given coordinate
-boolean isNear(Point point, Element element);
-
-// whether any obstacle in the cell with given coordinate exists
-boolean isBarrierAt(Point point);
-
-// how many elements of the given type exist around the cell with given coordinate
-int countNear(Point point, Element element);
-
-// returns the element in the current cell
-Element getAt(Point point);
-
-// returns the size of the board
-int boardSize();
-
-// the coordinates of all objects that hinder the movements
-Collection<Point> getBarriers();
-
-// coordinates of all dangers that can destroy the hero
-Collection<Point> getGhosts();
-
-// coordinates of all concrete walls
-Collection<Point> getWalls();
-
-// coordinates of all treasure boxes (they can be opened)
-Collection<Point> getTreasureBoxes();
-
-// coordinates of all potions
-Collection<Point> getPotions();
-
-// coordinates of all potential hazardous places where the potion 
-// can explode (the potion explodes on N {N will be arranged 
-// before the game starts} cell to the directions: up, down, right, left)
-Collection<Point> getFutureBlasts();
-```
-
-Good luck and may the best win!
+Удачи и пусть победит сильнейший! 

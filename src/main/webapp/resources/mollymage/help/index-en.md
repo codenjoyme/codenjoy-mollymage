@@ -15,7 +15,7 @@ If any questions, please write in [skype:alexander.baglay](skype:alexander.bagla
 or Email [apofig@gmail.com](mailto:apofig@gmail.com).
 
 Game project (for writing your bot) can be 
-found [here](../../../resources/snakebattle/user/clients.zip)
+found [here](https://github.com/codenjoyme/codenjoy-clients.git)
 
 ## What is the game about
 
@@ -45,35 +45,49 @@ for the ghost, for the enemy hero.
 All points are summed up. The player with the largest number of points 
 is considered to be a winner (prior to the due date).
 
-## How to play
-So, the player registers on the server and joining the game. Then you 
-should connect from client code to the server via Web Sockets.
+## Connect to the server
 
-Address to connect the game on the server looks like this (you can 
+So, the player [registers on the server](../../../register?gameName=mollymage)
+and joining the game.
+
+Then you should connect from client code to the server via websockets.
+This [collection of clients](https://github.com/codenjoyme/codenjoy-clients.git)
+for different programming languages will help you. How to start a
+client please check at the root of the project in the README.md file.
+
+If you can't find your programming language, you're gonna
+have to write your client (and then send us to the mail:
+[apofig@gmail.com](mailto:apofig@gmail.com))
+
+Address to connect the game on the server looks like this (you can
 copy it from your game room):
 
-`http://codenjoy.com/codenjoy-contest/board/player/your-player?code=123456789012345678`
+`https://[server]/codenjoy-contest/board/player/[user]?code=[code]`
 
-Here 'your-player' is your player id and 'code' is your security token. 
-Make sure you keep the code safe from prying eyes. Any participant, 
-knowing your code, can play on your behalf.
+Here `[server]` - domain/id of server, `[user]` is your player id
+and `[code]` is your security token. Make sure you keep the code
+safe from prying eyes. Any participant, knowing your code, can
+play on your behalf.
 
-## Board parsing
+## Message format
+
 After connection, the client will regularly (every second) receive 
 a line of characters with the encoded state of the field. The format:
 
 `^board=(.*)$`
 
-With the help of regexp you can obtain a board line. Example of the 
-line from the server:
+You can use this regular expression to extract a board from
+the resulting string.
+
+## Field example
+
+Here is an example of a string from the server.
 
 <pre>board=☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼ #   # #  #♥#  #  #  &        #☼☼♥☼♥☼♥☼#☼ ☼ ☼ ☼ ☼♥☼ ☼ ☼#☼#☼♥☼#☼#☼☼#♥♥  ♥#   # #♥   # ♥#          ☼☼ ☼ ☼#☼ ☼♥☼ ☼ ☼#☼ ☼ ☼ ☼ ☼&☼ ☼ ☼ ☼☼     ♥          # #            ☼☼ ☼ ☼ ☼ ☼♥☼ ☼ ☼♥☼#☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼☼#       # #       ☺& 2  #  #  #☼☼#☼♥☼ ☼#☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼#☼ ☼ ☼ ☼☼#  # ♥#               # ♥   #  ☼☼ ☼ ☼#☼#☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼#☼ ☼☼   #♥ #      #                 ☼☼ ☼ ☼ ☼ ☼♥☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼#☼☼     ## #     #   # #   ♥      ☼☼ ☼ ☼♥☼ ☼ ☼#☼ ☼#☼ ☼ ☼♥☼ ☼ ☼ ☼ ☼ ☼☼       #♥       #      ## # ###☼☼ ☼ ☼ ☼#☼ ☼ ☼#☼ ☼ ☼#☼#☼&☼ ☼ ☼ ☼ ☼☼       #       #    ♣# #     ♥ ☼☼ ☼ ☼ ☼♥☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼#☼ ☼☼        ## ## ♥             # #☼☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼☼                   &    ###  ##☼☼ ☼ ☼ ☼ ☼ ☼ ☼#☼ ☼#☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼☼                   ♥ ##        ☼☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼♥☼#☼ ☼ ☼ ☼☼     ##         &#         #   ☼☼ ☼ ☼ ☼#☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼#☼ ☼ ☼ ☼ ☼☼   #   #         #     # &     ☼☼♥☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼ ☼#☼#☼ ☼☼  #                    ##   &  ☼☼ ☼ ☼ ☼ ☼ ☼#☼ ☼ ☼ ☼ ☼ ☼ ☼#☼ ☼#☼ ☼☼ #    # &        #       #     ☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼</pre>
 
 The line length is equal to the field square. If to insert a wrapping 
 character (carriage return) every `sqrt(length(string))` characters, 
 you obtain the readable image of the field.
-
-Field example:
 
 <pre>☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼
 ☼ #   # #  #♥#  #  #  &        #☼
@@ -109,7 +123,7 @@ Field example:
 ☼ #    # &        #       #     ☼
 ☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼</pre>
 
-Sprite UI
+This is what you see on UI:
 
 ![](board.png)
 
@@ -117,6 +131,12 @@ The first character of the line corresponds to a cell located on the
 left-top corner and has the `[0, 32]` coordinate. The following example 
 shows the position of the hero (the `☺` character) – `[19,25]`. left-bottom 
 corner has the `[0, 0]` coordinate.
+
+## Symbol breakdown
+
+Please [check it here](elements.md).
+
+## What to do
 
 The game is turn-based: Each second, the server sends the updated state 
 of the field to the client and waits for response. Within the next 
@@ -127,10 +147,8 @@ Your goal is to make the molly move according to your algorithm. The
 algorithm must earn points as much as possible. The ultimate goal is 
 winning the game.
 
-## Symbol breakdown
-Please [check it here](elements.md).
-
 ## Commands
+
 * `UP`, `DOWN`, `LEFT`, `RIGHT` - move your hero in the specified direction.
 * `ACT` - set a potion.  Also, if you have perk `POTION_REMOTE_CONTROL` - 
   you explode yours RC-potions by second command `ACT` when she needs it. 
@@ -151,6 +169,7 @@ Please [check it here](elements.md).
   to move right and all potions on the field explode. 
 
 ## Perks
+
 * `POTION_BLAST_RADIUS_INCREASE` - Increase potion radius blast. 
   `{value: +2, timeout: 30}`[*](index-en.md#ask)
 * `POTION_COUNT_INCREASE` - Temporarily increase count of settable potions.
@@ -165,6 +184,7 @@ Please [check it here](elements.md).
   Using: `ACT(2)`. `{number of  use: +1, timeout: 30}`[*](index-en.md#ask)
  
 ## Points
+
 * open chests by explode: `1`[*](index-en.md#ask)
 * kills ghosts: `10`[*](index-en.md#ask)
 * kill other heroes: `20`[*](index-en.md#ask)
@@ -174,15 +194,18 @@ Please [check it here](elements.md).
 * death penalty: `-30`[*](index-en.md#ask)
   
 ## Cases
+
 * you can combine perks
 * who earn points after using `POTION_EXPLODER` - decides Sensei[*](index-en.md#ask).
 * please be careful with perks on the field. 
 
 ## <a id="ask"></a> Ask Sensei
+
 Please ask Sensei about current game settings. You can find Sensei in 
 the chat that the organizers have provided to discuss issues.
 
 ## Hints
+
 The first task is to run a client’s WebSocket which will connect to 
 the server. Then you should “force” the hero to listen to the commands. 
 This is the way prepare yourself to the game. The main goal is to 
@@ -197,17 +220,22 @@ If you are not sure what to do try to implement the following algorithms:
 * Try to set the bomb so that it explode the box, ghosts or another heroes.
 
 ## Clients and API
-The client code does not give a considerable handicap to gamers because 
-you should spend time to puzzle out the code. However, it is pleasant 
-to note that the logic of communication with the server plus some high 
-level API for working with the board are implemented already:
 
+The client code does not give a considerable handicap to gamers because
+you should spend time to puzzle out the code. However, it is pleasant
+to note that the logic of communication with the server plus some high
+level API for working with the board are implemented already.
+
+* `Solver`
+  An empty class with one method — you'll have to fill it with smart logic.
+* `Direcion`
+  Possible commands for this game.
 * `Point`
-  `x`, `y` coordinate.
-* `Collection` 
-  A set of several objects.
-* `Element` 
+  `x`, `y` coordinates.
+* `Element`
   Type of the element on the board.
+* `Board` - encapsulating the line with useful methods for searching
+  elements on the board. The following methods can be found in the board:
 * `int boardSize();`
   Size of the board
 * `boolean isAt(Point point, Element element);`
@@ -242,5 +270,15 @@ level API for working with the board are implemented already:
   Positions of all potential hazardous places where the potion 
   can explode (the potion explodes on N {N will be arranged 
   before the game starts} cell to the directions: up, down, right, left).
+
+## Want to host an event?
+
+It's an open source game. To implement your version of it,
+to fix bugs and to add any other logic simply
+[fork it](https://github.com/codenjoyme/codenjoy).
+All instructions are in Readme.md file, you'll know what to do next once you read it.
+
+If you have any questions reach me in [skype alexander.baglay](skype:alexander.baglay)
+or email [apofig@gmail.com](mailto:apofig@gmail.com).
 
 Good luck and may the best win!

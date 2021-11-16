@@ -134,7 +134,7 @@ left-top corner and has the `[0, 32]` coordinate. The following example
 shows the position of the hero (the `☺` character) – `[19,25]`. left-bottom 
 corner has the `[0, 0]` coordinate.
 
-This is what you see on UI
+This is what you see on UI:
 
 ![](board.png)
 

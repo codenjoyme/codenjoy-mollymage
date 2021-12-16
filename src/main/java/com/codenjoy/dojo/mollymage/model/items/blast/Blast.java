@@ -29,7 +29,7 @@ import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.State;
 
-import static com.codenjoy.dojo.games.mollymage.Element.BOOM;
+import static com.codenjoy.dojo.games.mollymage.Element.BLAST;
 
 public class Blast extends PointImpl implements State<Element, Player> {
 
@@ -46,6 +46,6 @@ public class Blast extends PointImpl implements State<Element, Player> {
 
     @Override
     public Element state(Player player, Object... alsoAtPoint) {
-        return BOOM;
+        return BLAST;
     }
 }

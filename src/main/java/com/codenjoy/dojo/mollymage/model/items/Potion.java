@@ -138,7 +138,7 @@ public class Potion extends PointImpl implements Tickable, State<Element, Player
             case 5:
                 return Element.POTION_TIMER_5;
             default:
-                return Element.BOOM;
+                return Element.BLAST;
         }
     }
 }

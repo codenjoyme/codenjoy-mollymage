@@ -23,15 +23,17 @@ package com.codenjoy.dojo.mollymage.services.ai;
  */
 
 
-import com.codenjoy.dojo.games.mollymage.Board;
-import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.client.Solver;
 import com.codenjoy.dojo.client.WebSocketRunner;
-import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.games.mollymage.Board;
+import com.codenjoy.dojo.games.mollymage.Element;
+import com.codenjoy.dojo.services.Dice;
+import com.codenjoy.dojo.services.Direction;
+import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.RandomDice;
 import com.codenjoy.dojo.services.algs.DeikstraFindWay;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class AIPerksHunterSolver implements Solver<Board> {
@@ -48,9 +50,9 @@ public class AIPerksHunterSolver implements Solver<Board> {
     }
 
     public static DeikstraFindWay.Possible possible(Board board) {
-        Collection<Point> futureBlasts = board.getFutureBlasts();
-        Collection<Point> ghosts = board.getGhosts();
-        Collection<Point> barriers = board.getBarriers();
+        List<Point> futureBlasts = board.getFutureBlasts();
+        List<Point> ghosts = board.get(Element.GHOST);
+        List<Point> barriers = board.getBarriers();
 
         return new DeikstraFindWay.Possible() {
             @Override

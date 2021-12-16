@@ -29,6 +29,7 @@ import com.codenjoy.dojo.utils.JsonUtils;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 import static org.junit.Assert.assertEquals;
@@ -51,7 +52,8 @@ public class GameSettingsTest {
 
     public LinkedHashMap<String, PerkSettings> allPerkSettings(PerksSettingsWrapper perksSettings) {
         return new LinkedHashMap<>() {{
-            Element.perks().forEach(it -> put(it.name(), perksSettings.get(it)));
+            Arrays.stream(Element.perks())
+                    .forEach(it -> put(it.name(), perksSettings.get(it)));
         }};
     }
 

@@ -83,7 +83,7 @@ ELEMENTS = Hash.new
 
     # Boom! this is what is potion does,
     # everything that is destroyable got destroyed.
-    ELEMENTS[:BOOM] = '҉'
+    ELEMENTS[:BLAST] = '҉'
 
 ## walls
 

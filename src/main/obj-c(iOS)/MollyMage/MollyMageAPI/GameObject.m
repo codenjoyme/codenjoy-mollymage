@@ -68,7 +68,7 @@
 														type = OTHER_DEAD_HERO;
 													} else
 														if ([symbol isEqualToString:@"҉"]) {
-															type = BOOM;
+															type = BLAST;
 														} else
 															if ([symbol isEqualToString:@"1"]) {
 																type = POTION_TIMER_1;

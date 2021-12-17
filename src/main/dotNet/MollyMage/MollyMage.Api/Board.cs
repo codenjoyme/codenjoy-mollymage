@@ -199,7 +199,7 @@ namespace Hero.Api
 
         public List<Point> GetBlasts()
         {
-            return Get(Element.BOOM);
+            return Get(Element.BLAST);
         }
 
         public List<Point> GetFutureBlasts()

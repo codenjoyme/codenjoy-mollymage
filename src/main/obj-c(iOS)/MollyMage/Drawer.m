@@ -153,8 +153,8 @@
 				break;
 			case NONE:
 				return;
-			case BOOM:
-				sprite = [CCSprite spriteWithFile:@"BOOM.png"];
+			case BLAST:
+				sprite = [CCSprite spriteWithFile:@"BLAST.png"];
 				break;
 			case OPENING_TREASURE_BOX:
 				sprite = [CCSprite spriteWithFile:@"OPENING_TREASURE_BOX.png"];

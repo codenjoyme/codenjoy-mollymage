@@ -144,7 +144,7 @@
 		126F7F8117DFB79200CF9539 /* libSocketRocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 126F7F7F17DFB79200CF9539 /* libSocketRocket.a */; };
 		1274A14D17ECE1EA00F681E3 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1274A14C17ECE1EA00F681E3 /* circle.png */; };
 		12F5A88517E065B000FA9684 /* NONE.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F5A88417E065B000FA9684 /* NONE.png */; };
-		12F5A88A17E0671C00FA9684 /* BOOM.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F5A88917E0671C00FA9684 /* BOOM.png */; };
+		12F5A88A17E0671C00FA9684 /* BLAST.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F5A88917E0671C00FA9684 /* BOOM.png */; };
 		12F5A88C17E0683C00FA9684 /* OPENING_TREASURE_BOX.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F5A88B17E0683C00FA9684 /* OPENING_TREASURE_BOX.png */; };
 		12F5A88E17E06ABA00FA9684 /* DEAD_HERO.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F5A88D17E06ABA00FA9684 /* DEAD_HERO.png */; };
 		12F5A89017E06BB100FA9684 /* DEAD_GHOST.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F5A88F17E06BB100FA9684 /* DEAD_GHOST.png */; };
@@ -444,7 +444,7 @@
 		126F7F7F17DFB79200CF9539 /* libSocketRocket.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSocketRocket.a; path = "SocketRocket/build/Release-iphoneos/libSocketRocket.a"; sourceTree = "<group>"; };
 		1274A14C17ECE1EA00F681E3 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = circle.png; path = Resources/circle.png; sourceTree = "<group>"; };
 		12F5A88417E065B000FA9684 /* NONE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NONE.png; path = Resources/NONE.png; sourceTree = "<group>"; };
-		12F5A88917E0671C00FA9684 /* BOOM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BOOM.png; path = Resources/BOOM.png; sourceTree = "<group>"; };
+		12F5A88917E0671C00FA9684 /* BLAST.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BOOM.png; path = Resources/BOOM.png; sourceTree = "<group>"; };
 		12F5A88B17E0683C00FA9684 /* OPENING_TREASURE_BOX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OPENING_TREASURE_BOX.png; path = Resources/OPENING_TREASURE_BOX.png; sourceTree = "<group>"; };
 		12F5A88D17E06ABA00FA9684 /* DEAD_HERO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DEAD_HERO.png; path = Resources/DEAD_HERO.png; sourceTree = "<group>"; };
 		12F5A88F17E06BB100FA9684 /* DEAD_GHOST.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DEAD_GHOST.png; path = Resources/DEAD_GHOST.png; sourceTree = "<group>"; };
@@ -555,7 +555,7 @@
 				12F5A88F17E06BB100FA9684 /* DEAD_GHOST.png */,
 				12F5A88D17E06ABA00FA9684 /* DEAD_HERO.png */,
 				12F5A88B17E0683C00FA9684 /* OPENING_TREASURE_BOX.png */,
-				12F5A88917E0671C00FA9684 /* BOOM.png */,
+				12F5A88917E0671C00FA9684 /* BLAST.png */,
 				12F5A88417E065B000FA9684 /* NONE.png */,
 				124F1A5817DFF78C00B4F488 /* HERO.png */,
 				124F1A5917DFF78C00B4F488 /* POTION_TIMER.png */,
@@ -1005,7 +1005,7 @@
 				1274A14D17ECE1EA00F681E3 /* circle.png in Resources */,
 				124F1A5F17DFF78C00B4F488 /* TREASURE_BOX.png in Resources */,
 				12F5A88517E065B000FA9684 /* NONE.png in Resources */,
-				12F5A88A17E0671C00FA9684 /* BOOM.png in Resources */,
+				12F5A88A17E0671C00FA9684 /* BLAST.png in Resources */,
 				12F5A88C17E0683C00FA9684 /* OPENING_TREASURE_BOX.png in Resources */,
 				12F5A88E17E06ABA00FA9684 /* DEAD_HERO.png in Resources */,
 				12F5A89017E06BB100FA9684 /* DEAD_GHOST.png in Resources */,

@@ -27,6 +27,7 @@ import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Field;
 import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.Player;
+import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.Tickable;
@@ -47,8 +48,8 @@ public class Potion extends PointImpl implements Tickable, State<Element, Player
     private final Field field;
     private boolean onRemote = false;
 
-    public Potion(Hero owner, int x, int y, int power, Field field) {
-        super(x, y);
+    public Potion(Hero owner, Point pt, int power, Field field) {
+        super(pt);
         this.power = power;
         this.owner = owner;
         this.field = field;

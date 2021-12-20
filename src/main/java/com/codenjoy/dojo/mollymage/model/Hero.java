@@ -118,7 +118,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         if (direction != null) {
             potion = true;
         } else {
-            setPotion(x, y);
+            setPotion(this);
         }
     }
 
@@ -154,7 +154,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         direction = null;
 
         if (potion) {
-            setPotion(x, y);
+            setPotion(this);
             potion = false;
         }
     }
@@ -180,7 +180,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         recharge += settings().integer(POISON_THROWER_RECHARGE);
     }
 
-    private void setPotion(int x, int y) {
+    private void setPotion(Point pt) {
         List<Potion> potions = field.potions(this);
 
         Perk remotePerk = perks.getPerk(POTION_REMOTE_CONTROL);
@@ -198,7 +198,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         }
 
         final int blastPower = getBlastPower();
-        Potion potion = new Potion(this, x, y, blastPower, field);
+        Potion potion = new Potion(this, pt, blastPower, field);
 
         if (remotePerk != null) {
             potion.putOnRemoteControl();

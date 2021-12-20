@@ -27,26 +27,26 @@ import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.PointImpl;
 
 public class Poison extends PointImpl {
-    final private Hero hero;
+    final private Hero owner;
     final private Direction direction;
     final private int power;
 
-    public Poison(Hero hero, Direction direction, int power) {
-        super(hero.getX(), hero.getY());
+    public Poison(Hero owner, Direction direction, int power) {
+        super(owner.getX(), owner.getY());
         this.direction = direction;
-        this.hero = hero;
+        this.owner = owner;
         this.power = power;
     }
 
-    public Hero getOwner() {
-        return hero;
+    public Hero owner() {
+        return owner;
     }
 
-    public int getPower() {
+    public int power() {
         return power;
     }
 
-    public Direction getDirection() {
+    public Direction direction() {
         return direction;
     }
 }

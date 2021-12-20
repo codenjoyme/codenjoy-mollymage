@@ -33,15 +33,15 @@ import static com.codenjoy.dojo.games.mollymage.Element.BLAST;
 
 public class Blast extends PointImpl implements State<Element, Player> {
 
-    private Hero hero;
+    private Hero owner;
 
-    public Blast(int x, int y, Hero hero) {
+    public Blast(int x, int y, Hero owner) {
         super(x, y);
-        this.hero = hero;
+        this.owner = owner;
     }
 
     public Hero owner() {
-        return hero;
+        return owner;
     }
 
     @Override

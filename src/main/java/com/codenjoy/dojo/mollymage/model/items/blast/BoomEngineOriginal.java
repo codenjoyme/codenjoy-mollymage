@@ -35,10 +35,10 @@ import java.util.List;
 public class BoomEngineOriginal implements BoomEngine {
 
     private Field field;
-    private Hero hero;
+    private Hero owner;
 
-    public BoomEngineOriginal(Field field, Hero hero) {
-        this.hero = hero;
+    public BoomEngineOriginal(Field field, Hero owner) {
+        this.owner = owner;
         this.field = field;
     }
 
@@ -59,7 +59,7 @@ public class BoomEngineOriginal implements BoomEngine {
     public List<Blast> boom(Poison poison) {
         List<Blast> blasts = new LinkedList<>();
 
-        addBlast(blasts, poison.getPower(), poison.getDirection(), hero);
+        addBlast(blasts, poison.power(), poison.direction(), owner);
 
         return blasts;
     }
@@ -97,11 +97,11 @@ public class BoomEngineOriginal implements BoomEngine {
         }
 
         if (barriersAt(pt)) {
-            blasts.add(new Blast(pt.getX(), pt.getY(), hero));
+            blasts.add(new Blast(pt.getX(), pt.getY(), owner));
             return false;
         }
 
-        blasts.add(new Blast(pt.getX(), pt.getY(), hero));
+        blasts.add(new Blast(pt.getX(), pt.getY(), owner));
         return true;
     }
 

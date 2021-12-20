@@ -326,7 +326,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private List<Blast> makeBlast(Poison poison) {
-        return new BoomEngineOriginal(this, poison.getOwner())
+        return new BoomEngineOriginal(this, poison.owner())
                 .boom(poison);
     }
 

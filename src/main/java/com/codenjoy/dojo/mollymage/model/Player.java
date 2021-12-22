@@ -27,6 +27,7 @@ import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.mollymage.services.Scores;
 import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.event.ScoresImpl;
 import com.codenjoy.dojo.services.round.RoundGamePlayer;
 
 import java.util.Optional;
@@ -50,7 +51,7 @@ public class Player extends RoundGamePlayer<Hero, Field> {
 
     @Override
     public void event(Object event) {
-        getHero().addScore(Scores.scoreFor(Scores.map(settings()), event));
+        getHero().addScore(ScoresImpl.scoreFor(new Scores(settings()), event));
         super.event(event);
     }
 

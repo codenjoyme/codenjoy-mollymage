@@ -23,48 +23,32 @@ package com.codenjoy.dojo.mollymage.services;
  */
 
 
-import com.codenjoy.dojo.services.event.AbstractScores;
-import com.codenjoy.dojo.services.settings.SettingsReader;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
+import com.codenjoy.dojo.services.event.ScoresMap;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 
-public class Scores extends AbstractScores<Void> {
+public class Scores extends ScoresMap<Integer> {
 
-    public Scores(int score, SettingsReader settings) {
-        super(score, settings);
-    }
+    public Scores(GameSettings settings) {
+        put(Event.DIED,
+                value -> settings.integer(DIE_PENALTY));
 
-    @Override
-    protected Map<Object, Function<Void, Integer>> eventToScore() {
-        return map(settings);
-    }
+        put(Event.KILL_OTHER_HERO,
+                value -> settings.integer(KILL_OTHER_HERO_SCORE));
 
-    public static HashMap<Object, Function<Void, Integer>> map(SettingsReader settings) {
-        return new HashMap<>(){{
-            put(Event.DIED,
-                    value -> settings.integer(DIE_PENALTY));
+        put(Event.KILL_ENEMY_HERO,
+                value -> settings.integer(KILL_ENEMY_HERO_SCORE));
 
-            put(Event.KILL_OTHER_HERO,
-                    value -> settings.integer(KILL_OTHER_HERO_SCORE));
+        put(Event.KILL_GHOST,
+                value -> settings.integer(KILL_GHOST_SCORE));
 
-            put(Event.KILL_ENEMY_HERO,
-                    value -> settings.integer(KILL_ENEMY_HERO_SCORE));
+        put(Event.KILL_TREASURE_BOX,
+                value -> settings.integer(KILL_WALL_SCORE));
 
-            put(Event.KILL_GHOST,
-                    value -> settings.integer(KILL_GHOST_SCORE));
+        put(Event.CATCH_PERK,
+                value -> settings.integer(CATCH_PERK_SCORE));
 
-            put(Event.KILL_TREASURE_BOX,
-                    value -> settings.integer(KILL_WALL_SCORE));
-
-            put(Event.CATCH_PERK,
-                    value -> settings.integer(CATCH_PERK_SCORE));
-
-            put(Event.WIN_ROUND,
-                    value -> settings.integer(WIN_ROUND_SCORE));
-        }};
+        put(Event.WIN_ROUND,
+                value -> settings.integer(WIN_ROUND_SCORE));
     }
 }

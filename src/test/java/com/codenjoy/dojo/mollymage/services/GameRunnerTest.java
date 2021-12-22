@@ -78,7 +78,7 @@ public class GameRunnerTest {
 
             PlayerScores scores = gameType.getPlayerScores(10, settings);
             assertEquals(10, scores.getScore());
-            scores.event(Events.KILL_GHOST);
+            scores.event(Event.KILL_GHOST);
             assertEquals(20, scores.getScore());
 
             assertEquals(size, gameType.getBoardSize(settings).getValue().intValue());

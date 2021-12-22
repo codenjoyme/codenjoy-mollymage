@@ -22,7 +22,7 @@ package com.codenjoy.dojo.mollymage.services;
  * #L%
  */
 
-public enum Events {
+public enum Event {
 
     KILL_TREASURE_BOX,
     KILL_GHOST,

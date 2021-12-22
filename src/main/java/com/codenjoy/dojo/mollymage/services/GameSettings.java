@@ -105,7 +105,7 @@ public class GameSettings extends SettingsImpl
         integer(KILL_OTHER_HERO_SCORE, 20);
         integer(KILL_ENEMY_HERO_SCORE, 100);
         integer(CATCH_PERK_SCORE, 5);
-        integer(DIE_PENALTY, 30);
+        integer(DIE_PENALTY, -30);
         integer(WIN_ROUND_SCORE, 30);
 
         bool(BIG_BADABOOM, false);

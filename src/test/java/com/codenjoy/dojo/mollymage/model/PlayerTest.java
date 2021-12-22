@@ -24,7 +24,7 @@ package com.codenjoy.dojo.mollymage.model;
 
 
 import com.codenjoy.dojo.mollymage.TestGameSettings;
-import com.codenjoy.dojo.mollymage.services.Events;
+import com.codenjoy.dojo.mollymage.services.Event;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.EventListener;
@@ -74,10 +74,10 @@ public class PlayerTest {
         player.newHero(field);
 
         // when
-        player.event(Events.KILL_TREASURE_BOX);
+        player.event(Event.KILL_TREASURE_BOX);
 
         // then
-        verify(listener).event(Events.KILL_TREASURE_BOX);
+        verify(listener).event(Event.KILL_TREASURE_BOX);
     }
 
     @Test
@@ -88,9 +88,9 @@ public class PlayerTest {
         player.newHero(field);
 
         // when
-        player.event(Events.KILL_TREASURE_BOX);
+        player.event(Event.KILL_TREASURE_BOX);
 
         // then
-        verify(listener, never()).event(Events.KILL_TREASURE_BOX);
+        verify(listener, never()).event(Event.KILL_TREASURE_BOX);
     }
 }

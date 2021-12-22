@@ -23,71 +23,48 @@ package com.codenjoy.dojo.mollymage.services;
  */
 
 
-import com.codenjoy.dojo.services.PlayerScores;
+import com.codenjoy.dojo.services.event.AbstractScores;
+import com.codenjoy.dojo.services.settings.SettingsReader;
 
-import static com.codenjoy.dojo.mollymage.services.Events.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 
-public class Scores implements PlayerScores {
+public class Scores extends AbstractScores<Void> {
 
-    private volatile int score;
-    private final GameSettings settings;
-
-    public Scores(int startScore, GameSettings settings) {
-        this.score = startScore;
-        this.settings = settings;
+    public Scores(int score, SettingsReader settings) {
+        super(score, settings);
     }
 
     @Override
-    public int clear() {
-        return score = 0;
+    protected Map<Object, Function<Void, Integer>> eventToScore() {
+        return map(settings);
     }
 
-    @Override
-    public Integer getScore() {
-        return score;
-    }
+    public static HashMap<Object, Function<Void, Integer>> map(SettingsReader settings) {
+        return new HashMap<>(){{
+            put(Event.DIED,
+                    value -> settings.integer(DIE_PENALTY));
 
-    @Override
-    public void event(Object event) {
-        score += scoreFor(settings, event);
-        score = Math.max(0, score);
-    }
+            put(Event.KILL_OTHER_HERO,
+                    value -> settings.integer(KILL_OTHER_HERO_SCORE));
 
-    public static int scoreFor(GameSettings settings, Object event) {
-        if (DIED.equals(event)) {
-            return - settings.integer(DIE_PENALTY);
-        }
+            put(Event.KILL_ENEMY_HERO,
+                    value -> settings.integer(KILL_ENEMY_HERO_SCORE));
 
-        if (KILL_OTHER_HERO.equals(event)) {
-            return settings.integer(KILL_OTHER_HERO_SCORE);
-        }
+            put(Event.KILL_GHOST,
+                    value -> settings.integer(KILL_GHOST_SCORE));
 
-        if (KILL_ENEMY_HERO.equals(event)) {
-            return settings.integer(KILL_ENEMY_HERO_SCORE);
-        }
+            put(Event.KILL_TREASURE_BOX,
+                    value -> settings.integer(KILL_WALL_SCORE));
 
-        if (KILL_GHOST.equals(event)) {
-            return settings.integer(KILL_GHOST_SCORE);
-        }
+            put(Event.CATCH_PERK,
+                    value -> settings.integer(CATCH_PERK_SCORE));
 
-        if (KILL_TREASURE_BOX.equals(event)) {
-            return settings.integer(KILL_WALL_SCORE);
-        }
-
-        if (CATCH_PERK.equals(event)) {
-            return settings.integer(CATCH_PERK_SCORE);
-        }
-
-        if (WIN_ROUND.equals(event)) {
-            return settings.integer(WIN_ROUND_SCORE);
-        }
-
-        return 0;
-    }
-
-    @Override
-    public void update(Object score) {
-        this.score = Integer.parseInt(score.toString());
+            put(Event.WIN_ROUND,
+                    value -> settings.integer(WIN_ROUND_SCORE));
+        }};
     }
 }

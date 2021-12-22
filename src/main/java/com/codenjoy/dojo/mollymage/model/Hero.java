@@ -28,7 +28,7 @@ import com.codenjoy.dojo.mollymage.model.items.blast.Poison;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.perks.HeroPerks;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
-import com.codenjoy.dojo.mollymage.services.Events;
+import com.codenjoy.dojo.mollymage.services.Event;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.round.RoundPlayerHero;
@@ -148,7 +148,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
             move(pt);
             field.pickPerk(pt).forEach(perk -> {
                 field.pickPerkBy((Player) this.getPlayer(), perk.getPerk());
-                event(Events.CATCH_PERK);
+                event(Event.CATCH_PERK);
             });
         }
         direction = null;

@@ -35,7 +35,7 @@ public class TestGameSettings extends GameSettings {
         bool(ROUNDS_ENABLED, false);
 
         integer(WIN_ROUND_SCORE, 1000);
-        integer(DIE_PENALTY, 50);
+        integer(DIE_PENALTY, -50);
 
         integer(KILL_OTHER_HERO_SCORE, 200);
         integer(KILL_ENEMY_HERO_SCORE, 500);

@@ -33,7 +33,7 @@ import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.items.perks.*;
-import com.codenjoy.dojo.mollymage.services.Events;
+import com.codenjoy.dojo.mollymage.services.Event;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.BoardUtils;
 import com.codenjoy.dojo.services.Dice;
@@ -65,7 +65,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     private List<Potion> destroyedPotions;
 
     public MollyMage(Dice dice, Level level, GameSettings settings) {
-        super(Events.START_ROUND, Events.WIN_ROUND, Events.DIED, settings);
+        super(Event.START_ROUND, Event.WIN_ROUND, Event.DIED, settings);
 
         this.level = level;
         this.dice = dice;
@@ -384,9 +384,9 @@ public class MollyMage extends RoundField<Player> implements Field {
 
             deathMatch.get(hunter).forEach(object -> {
                 if (object instanceof Ghost) {
-                    hunter.event(Events.KILL_GHOST);
+                    hunter.event(Event.KILL_GHOST);
                 } else if (object instanceof TreasureBox) {
-                    hunter.event(Events.KILL_TREASURE_BOX);
+                    hunter.event(Event.KILL_TREASURE_BOX);
                 }
             });
         });
@@ -417,7 +417,7 @@ public class MollyMage extends RoundField<Player> implements Field {
             }
 
             deathMatch.get(hunter).forEach(perk -> {
-                hunter.event(Events.DROP_PERK);
+                hunter.event(Event.DROP_PERK);
 
                 // TODO может это делать на этапе, когда blasts развиднеется в removeBlasts
                 blasts().removeAt(perk);
@@ -462,9 +462,9 @@ public class MollyMage extends RoundField<Player> implements Field {
             for (Hero prey : deathMatch.get(hunter)) {
                 if (hunter != prey) {
                     if (hunter.getPlayer().getTeamId() != prey.getPlayer().getTeamId()) {
-                        hunter.event(Events.KILL_ENEMY_HERO);
+                        hunter.event(Event.KILL_ENEMY_HERO);
                     } else {
-                        hunter.event(Events.KILL_OTHER_HERO);
+                        hunter.event(Event.KILL_OTHER_HERO);
                     }
                 }
             }

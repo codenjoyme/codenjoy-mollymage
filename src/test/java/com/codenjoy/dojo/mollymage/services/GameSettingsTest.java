@@ -66,7 +66,7 @@ public class GameSettingsTest {
                 "  'BIG_BADABOOM':false,\n" +
                 "  'CATCH_PERK_SCORE':5,\n" +
                 "  'DEFAULT_PERKS':'r+icTA',\n" +
-                "  'DIE_PENALTY':30,\n" +
+                "  'DIE_PENALTY':-30,\n" +
                 "  'GHOSTS_COUNT':5,\n" +
                 "  'INACTIVITY_ENABLED':false,\n" +
                 "  'INACTIVITY_TIMEOUT':300,\n" +

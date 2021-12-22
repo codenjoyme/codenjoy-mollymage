@@ -37,31 +37,31 @@ public class ScoresTest {
     private GameSettings settings;
 
     public void killWall() {
-        scores.event(Events.KILL_TREASURE_BOX);
+        scores.event(Event.KILL_TREASURE_BOX);
     }
 
     public void killYourself() {
-        scores.event(Events.DIED);
+        scores.event(Event.DIED);
     }
 
     public void killGhost() {
-        scores.event(Events.KILL_GHOST);
+        scores.event(Event.KILL_GHOST);
     }
 
     public void killOtherHero() {
-        scores.event(Events.KILL_OTHER_HERO);
+        scores.event(Event.KILL_OTHER_HERO);
     }
 
     public void killEnemyHero() {
-        scores.event(Events.KILL_ENEMY_HERO);
+        scores.event(Event.KILL_ENEMY_HERO);
     }
 
     public void dropPerk() {
-        scores.event(Events.CATCH_PERK);
+        scores.event(Event.CATCH_PERK);
     }
 
     public void winRound() {
-        scores.event(Events.WIN_ROUND);
+        scores.event(Event.WIN_ROUND);
     }
 
     @Before
@@ -92,7 +92,7 @@ public class ScoresTest {
 
         assertEquals(140
                 + 4*settings.integer(KILL_WALL_SCORE)
-                - settings.integer(DIE_PENALTY)
+                + settings.integer(DIE_PENALTY)
                 + settings.integer(CATCH_PERK_SCORE)
                 + settings.integer(KILL_OTHER_HERO_SCORE)
                 + settings.integer(KILL_ENEMY_HERO_SCORE)

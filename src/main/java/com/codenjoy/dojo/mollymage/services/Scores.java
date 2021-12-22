@@ -24,12 +24,15 @@ package com.codenjoy.dojo.mollymage.services;
 
 
 import com.codenjoy.dojo.services.event.ScoresMap;
+import com.codenjoy.dojo.services.settings.SettingsReader;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 
 public class Scores extends ScoresMap<Integer> {
 
-    public Scores(GameSettings settings) {
+    public Scores(SettingsReader settings) {
+        super(settings);
+
         put(Event.DIED,
                 value -> settings.integer(DIE_PENALTY));
 

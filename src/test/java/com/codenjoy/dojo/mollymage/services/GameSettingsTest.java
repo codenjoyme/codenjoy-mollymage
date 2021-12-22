@@ -22,6 +22,7 @@ package com.codenjoy.dojo.mollymage.services;
  * #L%
  */
 
+import com.codenjoy.dojo.client.Utils;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkSettings;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
@@ -41,13 +42,13 @@ public class GameSettingsTest {
         GameSettings settings = new GameSettings();
         PerksSettingsWrapper perksSettings = settings.perksSettings();
 
-        assertEquals("{POTION_BLAST_RADIUS_INCREASE=PerkSettings{value=2, timeout=30}, " +
-                        "POTION_COUNT_INCREASE=PerkSettings{value=4, timeout=30}, " +
-                        "POTION_IMMUNE=PerkSettings{value=0, timeout=30}, " +
-                        "POTION_REMOTE_CONTROL=PerkSettings{value=3, timeout=1}, " +
-                        "POISON_THROWER=PerkSettings{value=0, timeout=30}, " +
+        assertEquals("{POTION_BLAST_RADIUS_INCREASE=PerkSettings{value=2, timeout=30}, \n" +
+                        "POTION_COUNT_INCREASE=PerkSettings{value=4, timeout=30}, \n" +
+                        "POTION_IMMUNE=PerkSettings{value=0, timeout=30}, \n" +
+                        "POTION_REMOTE_CONTROL=PerkSettings{value=3, timeout=1}, \n" +
+                        "POISON_THROWER=PerkSettings{value=0, timeout=30}, \n" +
                         "POTION_EXPLODER=PerkSettings{value=1, timeout=30}}",
-                allPerkSettings(perksSettings).toString());
+                Utils.split(allPerkSettings(perksSettings), "}, \n"));
     }
 
     public LinkedHashMap<String, PerkSettings> allPerkSettings(PerksSettingsWrapper perksSettings) {
@@ -228,6 +229,5 @@ public class GameSettingsTest {
                 "  'TREASURE_BOX_COUNT':52,\n" +
                 "  'WIN_ROUND_SCORE':30\n" +
                 "}", JsonUtils.prettyPrint(settings.asJson()));
-
     }
 }

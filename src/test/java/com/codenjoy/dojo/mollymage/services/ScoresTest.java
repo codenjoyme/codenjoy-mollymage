@@ -25,7 +25,6 @@ package com.codenjoy.dojo.mollymage.services;
 
 import com.codenjoy.dojo.services.PlayerScores;
 import com.codenjoy.dojo.services.event.ScoresImpl;
-import com.codenjoy.dojo.services.event.ScoresMap;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -69,12 +68,12 @@ public class ScoresTest {
     @Before
     public void setup() {
         settings = new GameSettings();
-        scores = new ScoresImpl<>(0, new Scores(settings));
+        givenScores(0);
     }
 
     @Test
     public void shouldCollectScores() {
-        scores = new ScoresImpl<>(140, new Scores(settings));
+        givenScores(140);
 
         killWall();
         killWall();
@@ -100,6 +99,10 @@ public class ScoresTest {
                 + settings.integer(KILL_ENEMY_HERO_SCORE)
                 + settings.integer(KILL_GHOST_SCORE)
                 + settings.integer(WIN_ROUND_SCORE), scores.getScore());
+    }
+
+    private void givenScores(int score) {
+        scores = new ScoresImpl<>(score, new Scores(settings));
     }
 
     @Test

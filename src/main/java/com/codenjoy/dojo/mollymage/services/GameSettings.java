@@ -27,6 +27,7 @@ import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Level;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.services.Dice;
+import com.codenjoy.dojo.services.event.Calculator;
 import com.codenjoy.dojo.services.incativity.InactivitySettings;
 import com.codenjoy.dojo.services.level.LevelsSettings;
 import com.codenjoy.dojo.services.round.RoundSettings;
@@ -143,5 +144,9 @@ public class GameSettings extends SettingsImpl
 
     public boolean isTeamDeathMatch() {
         return integer(ROUNDS_TEAMS_PER_ROOM) > 1;
+    }
+
+    public Calculator<Integer> calculator() {
+        return new Calculator<>(new Scores(this));
     }
 }

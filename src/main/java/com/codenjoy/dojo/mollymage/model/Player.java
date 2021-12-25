@@ -24,18 +24,18 @@ package com.codenjoy.dojo.mollymage.model;
 
 
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.mollymage.services.Scores;
 import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.event.ScoresImpl;
+import com.codenjoy.dojo.services.event.Calculator;
 import com.codenjoy.dojo.services.round.RoundGamePlayer;
-
-import java.util.Optional;
 
 public class Player extends RoundGamePlayer<Hero, Field> {
 
+    private Calculator<Integer> calculator;
+
     public Player(EventListener listener, GameSettings settings) {
         super(listener, settings);
+        calculator = settings.calculator();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Player extends RoundGamePlayer<Hero, Field> {
 
     @Override
     public void event(Object event) {
-        getHero().addScore(ScoresImpl.scoreFor(new Scores(settings()), event));
+        hero.addScore(calculator.score(event));
         super.event(event);
     }
 

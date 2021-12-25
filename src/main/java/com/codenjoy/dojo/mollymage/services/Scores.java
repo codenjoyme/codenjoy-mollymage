@@ -28,7 +28,7 @@ import com.codenjoy.dojo.services.settings.SettingsReader;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 
-public class Scores extends ScoresMap<Integer> {
+public class Scores extends ScoresMap<Void> {
 
     public Scores(SettingsReader settings) {
         super(settings);

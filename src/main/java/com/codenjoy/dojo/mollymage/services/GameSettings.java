@@ -146,7 +146,7 @@ public class GameSettings extends SettingsImpl
         return integer(ROUNDS_TEAMS_PER_ROOM) > 1;
     }
 
-    public Calculator<Integer> calculator() {
+    public Calculator<Void> calculator() {
         return new Calculator<>(new Scores(this));
     }
 }

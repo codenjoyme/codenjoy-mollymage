@@ -23,6 +23,7 @@ package com.codenjoy.dojo.mollymage.services;
  */
 
 
+import com.codenjoy.dojo.mollymage.TestGameSettings;
 import com.codenjoy.dojo.services.PlayerScores;
 import com.codenjoy.dojo.services.event.Calculator;
 import com.codenjoy.dojo.services.event.ScoresImpl;
@@ -32,7 +33,6 @@ import org.junit.Test;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static org.junit.Assert.assertEquals;
 
-// TODO: double check what is wrong with it
 public class ScoresTest {
 
     private PlayerScores scores;
@@ -68,14 +68,16 @@ public class ScoresTest {
 
     @Before
     public void setup() {
-        settings = new GameSettings();
+        settings = new TestGameSettings();
         givenScores(0);
     }
 
     @Test
     public void shouldCollectScores() {
+        // given
         givenScores(140);
 
+        // when
         killWall();
         killWall();
         killWall();
@@ -92,14 +94,16 @@ public class ScoresTest {
 
         winRound();
 
+        // then
         assertEquals(140
-                + 4*settings.integer(KILL_WALL_SCORE)
-                + settings.integer(DIE_PENALTY)
-                + settings.integer(CATCH_PERK_SCORE)
-                + settings.integer(KILL_OTHER_HERO_SCORE)
-                + settings.integer(KILL_ENEMY_HERO_SCORE)
-                + settings.integer(KILL_GHOST_SCORE)
-                + settings.integer(WIN_ROUND_SCORE), scores.getScore());
+                    + 4 * settings.integer(KILL_WALL_SCORE)
+                    + settings.integer(DIE_PENALTY)
+                    + settings.integer(CATCH_PERK_SCORE)
+                    + settings.integer(KILL_OTHER_HERO_SCORE)
+                    + settings.integer(KILL_ENEMY_HERO_SCORE)
+                    + settings.integer(KILL_GHOST_SCORE)
+                    + settings.integer(WIN_ROUND_SCORE),
+                scores.getScore());
     }
 
     private void givenScores(int score) {
@@ -108,17 +112,132 @@ public class ScoresTest {
 
     @Test
     public void shouldStillZeroAfterDead() {
+        // given
+        givenScores(0);
+
+        // when
         killYourself();
 
+        // then
         assertEquals(0, scores.getScore());
     }
 
     @Test
     public void shouldClearScore() {
+        // given
+        givenScores(0);
+
         killWall();
 
+        // when
         scores.clear();
 
+        // then
         assertEquals(0, scores.getScore());
+    }
+
+    @Test
+    public void shouldCollectScores_whenKillWall() {
+        // given
+        givenScores(140);
+
+        // then
+        killWall();
+        killWall();
+
+        // then
+        assertEquals(140
+                    + 2*settings.integer(KILL_WALL_SCORE),
+                scores.getScore());
+    }
+
+    @Test
+    public void shouldCollectScores_whenKillYourself() {
+        // given
+        givenScores(140);
+
+        // when
+        killYourself();
+        killYourself();
+
+        // then
+        assertEquals(140
+                    + 2 * settings.integer(DIE_PENALTY),
+                scores.getScore());
+    }
+
+    @Test
+    public void shouldCollectScores_whenKillGhost() {
+        // given
+        givenScores(140);
+
+        // when
+        killGhost();
+        killGhost();
+
+        // then
+        assertEquals(140
+                    + 2 * settings.integer(KILL_GHOST_SCORE),
+                scores.getScore());
+    }
+
+    @Test
+    public void shouldCollectScores_whenKillOtherHero() {
+        // given
+        givenScores(140);
+
+        // when
+        killOtherHero();
+        killOtherHero();
+
+        // then
+        assertEquals(140
+                    + 2 * settings.integer(KILL_OTHER_HERO_SCORE),
+                scores.getScore());
+    }
+
+    @Test
+    public void shouldCollectScores_whenKillEnemyHero() {
+        // given
+        givenScores(140);
+
+        // when
+        killEnemyHero();
+        killEnemyHero();
+
+        // then
+        assertEquals(140
+                        + 2 * settings.integer(KILL_ENEMY_HERO_SCORE),
+                scores.getScore());
+    }
+
+    @Test
+    public void shouldCollectScores_whenDropPerk() {
+        // given
+        givenScores(140);
+
+        // when
+        dropPerk();
+        dropPerk();
+
+        // then
+        assertEquals(140
+                    + 2 * settings.integer(CATCH_PERK_SCORE),
+                scores.getScore());
+    }
+
+    @Test
+    public void shouldCollectScores_whenWinRound() {
+        // given
+        givenScores(140);
+
+        // when
+        winRound();
+        winRound();
+
+        // then
+        assertEquals(140
+                    + 2 * settings.integer(WIN_ROUND_SCORE),
+                scores.getScore());
     }
 }

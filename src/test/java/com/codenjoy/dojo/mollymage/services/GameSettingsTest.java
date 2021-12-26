@@ -68,6 +68,7 @@ public class GameSettingsTest {
                 "  'CATCH_PERK_SCORE':5,\n" +
                 "  'DEFAULT_PERKS':'r+icTA',\n" +
                 "  'DIE_PENALTY':-30,\n" +
+                "  'GAME_MODE':'[MULTIPLE] One level chosen at random. Multi player (all together or in the rooms).',\n" +
                 "  'GHOSTS_COUNT':5,\n" +
                 "  'INACTIVITY_ENABLED':false,\n" +
                 "  'INACTIVITY_TIMEOUT':300,\n" +
@@ -88,6 +89,7 @@ public class GameSettingsTest {
                 "  'POTION_EXPLODER_COUNT':1,\n" +
                 "  'POTION_POWER':3,\n" +
                 "  'REMOTE_CONTROL_COUNT':3,\n" +
+                "  'ROOM_SIZE':5,\n" +
                 "  'ROUNDS_ENABLED':false,\n" +
                 "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                 "  'ROUNDS_PER_MATCH':1,\n" +
@@ -132,6 +134,7 @@ public class GameSettingsTest {
                 "  'CATCH_PERK_SCORE':5,\n" +
                 "  'DEFAULT_PERKS':'r+icTA',\n" +
                 "  'DIE_PENALTY':12,\n" +
+                "  'GAME_MODE':'[MULTIPLE] One level chosen at random. Multi player (all together or in the rooms).',\n" +
                 "  'GHOSTS_COUNT':5,\n" +
                 "  'INACTIVITY_ENABLED':false,\n" +
                 "  'INACTIVITY_TIMEOUT':300,\n" +
@@ -152,6 +155,7 @@ public class GameSettingsTest {
                 "  'POTION_EXPLODER_COUNT':1,\n" +
                 "  'POTION_POWER':3,\n" +
                 "  'REMOTE_CONTROL_COUNT':3,\n" +
+                "  'ROOM_SIZE':5,\n" +
                 "  'ROUNDS_ENABLED':true,\n" +
                 "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                 "  'ROUNDS_PER_MATCH':1,\n" +
@@ -187,6 +191,7 @@ public class GameSettingsTest {
                 "  'CATCH_PERK_SCORE':5,\n" +
                 "  'DEFAULT_PERKS':'r+icTA',\n" +
                 "  'DIE_PENALTY':12,\n" +
+                "  'GAME_MODE':'[MULTIPLE] One level chosen at random. Multi player (all together or in the rooms).',\n" +
                 "  'GHOSTS_COUNT':5,\n" +
                 "  'INACTIVITY_ENABLED':false,\n" +
                 "  'INACTIVITY_TIMEOUT':300,\n" +
@@ -207,6 +212,7 @@ public class GameSettingsTest {
                 "  'POTION_EXPLODER_COUNT':1,\n" +
                 "  'POTION_POWER':3,\n" +
                 "  'REMOTE_CONTROL_COUNT':3,\n" +
+                "  'ROOM_SIZE':5,\n" +
                 "  'ROUNDS_ENABLED':true,\n" +
                 "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                 "  'ROUNDS_PER_MATCH':1,\n" +

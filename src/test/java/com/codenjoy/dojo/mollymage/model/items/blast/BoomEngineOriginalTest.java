@@ -57,7 +57,7 @@ public class BoomEngineOriginalTest {
 
         int levelNumber = LevelProgress.levelsStartsFrom1;
         settings.setLevelMaps(levelNumber, map);
-        Level level = settings.level(levelNumber, dice);
+        Level level = settings.level(levelNumber, dice, Level::new);
 
         field = new MollyMage(dice, level, settings);
         engine = new BoomEngineOriginal(field, null);

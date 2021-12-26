@@ -24,9 +24,7 @@ package com.codenjoy.dojo.mollymage.services;
 
 
 import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.mollymage.model.Level;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
-import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.event.Calculator;
 import com.codenjoy.dojo.services.event.ScoresImpl;
 import com.codenjoy.dojo.services.settings.AllSettings;
@@ -123,10 +121,6 @@ public class GameSettings extends SettingsImpl implements AllSettings<GameSettin
         perks.put(Element.POTION_EXPLODER, 1, timeout);
 
         Levels.setup(this);
-    }
-
-    public Level level(int level, Dice dice) {
-        return new Level(getRandomLevelMap(level, dice));
     }
 
     public PerksSettingsWrapper perksSettings() {

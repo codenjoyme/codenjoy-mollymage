@@ -60,13 +60,13 @@ public class GameRunner extends AbstractGameType<GameSettings> {
 
     @Override
     public GameField createGame(int levelNumber, GameSettings settings) {
-        Level level = settings.level(levelNumber, getDice());
+        Level level = settings.level(levelNumber, getDice(), Level::new);
         return new MollyMage(getDice(), level, settings);
     }
 
     @Override
     public Parameter<Integer> getBoardSize(GameSettings settings) {
-        return v(settings.level(LevelProgress.levelsStartsFrom1, getDice()).size());
+        return v(settings.level(LevelProgress.levelsStartsFrom1, getDice(), Level::new).size());
     }
 
     @Override

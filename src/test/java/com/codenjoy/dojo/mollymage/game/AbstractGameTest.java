@@ -100,7 +100,7 @@ public abstract class AbstractGameTest {
     public void givenFl(String... maps) {
         int levelNumber = LevelProgress.levelsStartsFrom1;
         settings.setLevelMaps(levelNumber, maps);
-        Level level = settings.level(levelNumber, dice);
+        Level level = settings.level(levelNumber, dice, Level::new);
 
         field = new MollyMage(dice, level, settings);
         level.heroes().forEach(this::givenPlayer);

@@ -28,6 +28,7 @@ import com.codenjoy.dojo.mollymage.model.Level;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.event.Calculator;
+import com.codenjoy.dojo.services.event.ScoresImpl;
 import com.codenjoy.dojo.services.incativity.InactivitySettings;
 import com.codenjoy.dojo.services.level.LevelsSettings;
 import com.codenjoy.dojo.services.round.RoundSettings;
@@ -40,6 +41,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.services.event.Mode.CUMULATIVELY;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_TEAMS_PER_ROOM;
 
 public class GameSettings extends SettingsImpl
@@ -77,7 +79,8 @@ public class GameSettings extends SettingsImpl
         REMOTE_CONTROL_COUNT("[Perks] Number of Potion remote controls (how many times player can use it)"),
         POTION_EXPLODER_COUNT("[Perks] Number of Potion Exploder (how many times player can use it)"),
         STEAL_POINTS("[Perks] Steal points from potion owner (works with Potion Exploder perk)"),
-        DEFAULT_PERKS("[Perks] Perks available in this game");
+        DEFAULT_PERKS("[Perks] Perks available in this game"),
+        SCORE_COUNTING_TYPE(ScoresImpl.SCORE_COUNTING_TYPE.key());
 
         private String key;
 
@@ -100,6 +103,7 @@ public class GameSettings extends SettingsImpl
         initInactivity();
         initRound();
         initSemifinal();
+        initScore(CUMULATIVELY);
 
         integer(KILL_WALL_SCORE, 1);
         integer(KILL_GHOST_SCORE, 10);

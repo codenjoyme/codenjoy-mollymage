@@ -96,6 +96,7 @@ public class GameSettingsTest {
                 "  'ROUNDS_TIME':200,\n" +
                 "  'ROUNDS_TIME_BEFORE_START':5,\n" +
                 "  'ROUNDS_TIME_FOR_WINNER':1,\n" +
+                "  'SCORE_COUNTING_TYPE':'Accumulate points consistently',\n" +
                 "  'SEMIFINAL_CLEAR_SCORE':false,\n" +
                 "  'SEMIFINAL_ENABLED':false,\n" +
                 "  'SEMIFINAL_LIMIT':50,\n" +
@@ -159,6 +160,7 @@ public class GameSettingsTest {
                 "  'ROUNDS_TIME':200,\n" +
                 "  'ROUNDS_TIME_BEFORE_START':10,\n" +
                 "  'ROUNDS_TIME_FOR_WINNER':1,\n" +
+                "  'SCORE_COUNTING_TYPE':'Accumulate points consistently',\n" +
                 "  'SEMIFINAL_CLEAR_SCORE':false,\n" +
                 "  'SEMIFINAL_ENABLED':false,\n" +
                 "  'SEMIFINAL_LIMIT':150,\n" +
@@ -213,6 +215,7 @@ public class GameSettingsTest {
                 "  'ROUNDS_TIME':200,\n" +
                 "  'ROUNDS_TIME_BEFORE_START':10,\n" +
                 "  'ROUNDS_TIME_FOR_WINNER':1,\n" +
+                "  'SCORE_COUNTING_TYPE':'Accumulate points consistently',\n" +
                 "  'SEMIFINAL_CLEAR_SCORE':false,\n" +
                 "  'SEMIFINAL_ENABLED':false,\n" +
                 "  'SEMIFINAL_LIMIT':150,\n" +

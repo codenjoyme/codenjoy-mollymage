@@ -34,7 +34,7 @@ public class Scores extends ScoresMap<Void> {
         super(settings);
 
         put(Event.DIED,
-                value -> settings.integer(DIE_PENALTY));
+                value -> heroDie(DIE_PENALTY));
 
         put(Event.KILL_OTHER_HERO,
                 value -> settings.integer(KILL_OTHER_HERO_SCORE));

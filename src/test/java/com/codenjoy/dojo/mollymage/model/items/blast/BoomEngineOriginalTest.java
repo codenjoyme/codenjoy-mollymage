@@ -33,6 +33,7 @@ import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -50,18 +51,23 @@ public class BoomEngineOriginalTest {
     private Poison poison;
     private PrinterFactory<Element, Player> printer;
     private Field field;
+    private TestGameSettings settings;
+    private Dice dice;
+
+    @Before
+    public void setup() {
+        settings = settings();
+        dice = mock(Dice.class);
+        printer = new PrinterFactoryImpl<>();
+    }
 
     private void givenFl(String map) {
-        GameSettings settings = settings();
-        Dice dice = mock(Dice.class);
-
         int levelNumber = LevelProgress.levelsStartsFrom1;
         settings.setLevelMaps(levelNumber, map);
         Level level = settings.level(levelNumber, dice, Level::new);
 
         field = new MollyMage(dice, level, settings);
         engine = new BoomEngineOriginal(field, null);
-        printer = new PrinterFactoryImpl<>();
     }
 
     private TestGameSettings settings() {

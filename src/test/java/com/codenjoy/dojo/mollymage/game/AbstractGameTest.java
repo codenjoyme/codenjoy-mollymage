@@ -71,6 +71,7 @@ public abstract class AbstractGameTest {
     protected GameSettings settings;
     protected PerksSettingsWrapper perks;
     private EventsListenersAssert events;
+    private Level level;
 
     @Before
     public void setup() {
@@ -100,11 +101,21 @@ public abstract class AbstractGameTest {
     public void givenFl(String... maps) {
         int levelNumber = LevelProgress.levelsStartsFrom1;
         settings.setLevelMaps(levelNumber, maps);
-        Level level = settings.level(levelNumber, dice, Level::new);
+        level = settings.level(levelNumber, dice, Level::new);
+
+        beforeCrateField();
 
         field = new MollyMage(dice, level, settings);
         level.heroes().forEach(this::givenPlayer);
 
+        afterCrateField();
+    }
+
+    private void beforeCrateField() {
+        // settings / level pre-processing
+    }
+
+    private void afterCrateField() {
         settings.integer(TREASURE_BOX_COUNT, field.boxes().size())
                 .integer(GHOSTS_COUNT, field.ghosts().size());
 

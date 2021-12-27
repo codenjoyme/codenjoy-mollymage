@@ -116,7 +116,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     public void regenerateBoxes() {
         generate(boxes(), settings, TREASURE_BOX_COUNT,
                 player -> freeRandom((Player) player),
-                pt -> new TreasureBox(pt));
+                TreasureBox::new);
     }
 
     public List<PerkOnBoard> pickPerk(Point pt) {
@@ -157,7 +157,7 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     @Override
     public Optional<Point> freeRandom(Player player) {
-        return BoardUtils.freeRandom(size(), dice, pt -> isFree(pt));
+        return BoardUtils.freeRandom(size(), dice, this::isFree);
     }
 
     @Override
@@ -244,8 +244,8 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     private void ghostEatHeroes() {
-        ghosts().forEach(ghost -> eatBy(ghost));
-        hunters().forEach(hunter -> eatBy(hunter));
+        ghosts().forEach(this::eatBy);
+        hunters().forEach(this::eatBy);
     }
 
     private void eatBy(Ghost ghost) {
@@ -408,7 +408,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         Set<Hero> hunters = new HashSet<>(deathMatch.keys());
 
         // вначале прибиваем перки
-        preys.forEach(perk -> pickPerk(perk));
+        preys.forEach(this::pickPerk);
 
         // а потом все виновники получают свои результаты )
         hunters.forEach(hunter -> {
@@ -652,5 +652,4 @@ public class MollyMage extends RoundField<Player> implements Field {
     public Accessor<Hero> heroes() {
         return field.of(Hero.class);
     }
-
 }

@@ -578,7 +578,7 @@ public class MollyMage extends RoundField<Player> implements Field {
         return pt.isOutOf(size());
     }
 
-    public BoardReader reader() {
+    public BoardReader<Player> reader() {
         return field.reader(
                 Hero.class,
                 TreasureBox.class,

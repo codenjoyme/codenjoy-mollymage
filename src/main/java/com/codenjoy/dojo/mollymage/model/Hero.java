@@ -122,6 +122,11 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         }
     }
 
+    @Override
+    public void die() {
+        super.die(Event.DIED);
+    }
+
     public void apply() {
         if (!isActiveAndAlive()) return;
 

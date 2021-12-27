@@ -65,7 +65,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     private List<Potion> destroyedPotions;
 
     public MollyMage(Dice dice, Level level, GameSettings settings) {
-        super(Event.START_ROUND, Event.WIN_ROUND, Event.DIED, settings);
+        super(Event.START_ROUND, Event.WIN_ROUND, settings);
 
         this.level = level;
         this.dice = dice;

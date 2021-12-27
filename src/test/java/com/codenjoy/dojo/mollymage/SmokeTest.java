@@ -66,7 +66,7 @@ public class SmokeTest {
                     @Override
                     public GameSettings getSettings() {
                         GameSettings settings = new TestGameSettings()
-                                        .integer(TREASURE_BOX_COUNT, 14)
+                                .integer(TREASURE_BOX_COUNT, 14)
                                 .integer(GHOSTS_COUNT, 3)
                                 .setLevelMaps(LevelProgress.levelsStartsFrom1,
                                         "☼☼☼☼☼☼☼☼☼☼☼\n" +

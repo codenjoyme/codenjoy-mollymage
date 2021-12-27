@@ -675,14 +675,14 @@ public class BoomEngineOriginalTest {
                 return field.size();
             }
 
-            class B extends PointImpl implements State<Element, Object> {
+            class B extends PointImpl implements State<Element, Player> {
 
                 public B(Point point) {
                     super(point);
                 }
 
                 @Override
-                public Element state(Object player, Object... alsoAtPoint) {
+                public Element state(Player player, Object... alsoAtPoint) {
                     return Element.POTION_HERO;
                 }
             }

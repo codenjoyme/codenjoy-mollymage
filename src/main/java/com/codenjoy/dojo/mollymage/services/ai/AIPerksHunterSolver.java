@@ -30,7 +30,7 @@ import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.RandomDice;
+import com.codenjoy.dojo.services.dice.RandomDice;
 import com.codenjoy.dojo.services.algs.DeikstraFindWay;
 
 import java.util.Arrays;

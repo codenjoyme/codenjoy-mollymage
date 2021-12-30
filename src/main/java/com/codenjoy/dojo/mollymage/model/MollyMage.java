@@ -461,11 +461,7 @@ public class MollyMage extends RoundField<Player> implements Field {
             }
             for (Hero prey : deathMatch.get(hunter)) {
                 if (hunter != prey) {
-                    if (hunter.getPlayer().getTeamId() != prey.getPlayer().getTeamId()) {
-                        hunter.event(Event.KILL_ENEMY_HERO);
-                    } else {
-                        hunter.event(Event.KILL_OTHER_HERO);
-                    }
+                    hunter.fireKillHero(prey);
                 }
             }
         }

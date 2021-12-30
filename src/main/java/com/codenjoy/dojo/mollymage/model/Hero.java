@@ -23,14 +23,16 @@ package com.codenjoy.dojo.mollymage.model;
  */
 
 
+import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.items.Potion;
 import com.codenjoy.dojo.mollymage.model.items.blast.Poison;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.perks.HeroPerks;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.mollymage.services.Event;
-import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.Direction;
+import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.round.RoundPlayerHero;
 
 import java.util.List;
@@ -332,6 +334,18 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
 
     public void addScore(int added) {
         score = Math.max(0, score + added);
+    }
+
+    public int getTeamId() {
+        return getPlayer().getTeamId();
+    }
+
+    public void fireKillHero(Hero prey) {
+        if (getTeamId() == prey.getTeamId()) {
+            event(Event.KILL_OTHER_HERO);
+        } else {
+            event(Event.KILL_ENEMY_HERO);
+        }
     }
 }
 

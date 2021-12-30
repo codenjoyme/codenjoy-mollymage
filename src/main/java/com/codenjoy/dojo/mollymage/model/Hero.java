@@ -33,7 +33,7 @@ import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.joystick.Act;
-import com.codenjoy.dojo.services.joystick.RoundsDirectionJoystick;
+import com.codenjoy.dojo.services.joystick.RoundsDirectionActJoystick;
 import com.codenjoy.dojo.services.round.RoundPlayerHero;
 
 import java.util.List;
@@ -46,7 +46,7 @@ import static com.codenjoy.dojo.services.StateUtils.filter;
 import static com.codenjoy.dojo.services.StateUtils.filterOne;
 
 public class Hero extends RoundPlayerHero<Field>
-        implements RoundsDirectionJoystick, State<Element, Player> {
+        implements RoundsDirectionActJoystick, State<Element, Player> {
 
     public static final int ACT_THROW_POISON = 1;
     public static final int ACT_EXPLODE_ALL_POTIONS = 2;
@@ -84,11 +84,7 @@ public class Hero extends RoundPlayerHero<Field>
     }
 
     @Override
-    public void act(int... p) {
-        if (!isActiveAndAlive()) return;
-
-        Act is = new Act(p);
-
+    public void act(Act is) {
         if (is.act(ACT_THROW_POISON)) {
             if (direction != null) {
                 throwPoison = true;

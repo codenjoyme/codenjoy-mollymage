@@ -33,6 +33,7 @@ import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.joystick.Act;
+import com.codenjoy.dojo.services.joystick.RoundsDirectionJoystick;
 import com.codenjoy.dojo.services.round.RoundPlayerHero;
 
 import java.util.List;
@@ -41,11 +42,11 @@ import static com.codenjoy.dojo.games.mollymage.Element.*;
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
 import static com.codenjoy.dojo.mollymage.services.Event.*;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
-import static com.codenjoy.dojo.services.Direction.*;
 import static com.codenjoy.dojo.services.StateUtils.filter;
 import static com.codenjoy.dojo.services.StateUtils.filterOne;
 
-public class Hero extends RoundPlayerHero<Field> implements State<Element, Player> {
+public class Hero extends RoundPlayerHero<Field>
+        implements RoundsDirectionJoystick, State<Element, Player> {
 
     public static final int ACT_THROW_POISON = 1;
     public static final int ACT_EXPLODE_ALL_POTIONS = 2;
@@ -78,31 +79,8 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
     }
 
     @Override
-    public void right() {
-        if (!isActiveAndAlive()) return;
-
-        direction = RIGHT;
-    }
-
-    @Override
-    public void down() {
-        if (!isActiveAndAlive()) return;
-
-        direction = DOWN;
-    }
-
-    @Override
-    public void up() {
-        if (!isActiveAndAlive()) return;
-
-        direction = UP;
-    }
-
-    @Override
-    public void left() {
-        if (!isActiveAndAlive()) return;
-
-        direction = LEFT;
+    public void change(Direction direction) {
+        this.direction = direction;
     }
 
     @Override

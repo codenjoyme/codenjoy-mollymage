@@ -118,7 +118,7 @@ public class GameSettingsTest {
 
         // when
         settings.update(new JSONObject("{\n" +
-                "  'DIE_PENALTY':12,\n" +
+                "  'HERO_DIED_PENALTY':12,\n" +
                 "  'PERK_POTION_BLAST_RADIUS_INC':4,\n" +
                 "  'PERK_DROP_RATIO':23,\n" +
                 "  'ROUNDS_ENABLED':true,\n" +
@@ -133,9 +133,9 @@ public class GameSettingsTest {
                 "  'BIG_BADABOOM':false,\n" +
                 "  'CATCH_PERK_SCORE':5,\n" +
                 "  'DEFAULT_PERKS':'r+icTA',\n" +
-                "  'DIE_PENALTY':12,\n" +
                 "  'GAME_MODE':'[MULTIPLE] One level chosen at random. Multi player (all together or in the rooms).',\n" +
                 "  'GHOSTS_COUNT':5,\n" +
+                "  'HERO_DIED_PENALTY':12,\n" +
                 "  'INACTIVITY_ENABLED':false,\n" +
                 "  'INACTIVITY_TIMEOUT':300,\n" +
                 "  'KILL_ENEMY_HERO_SCORE':100,\n" +
@@ -190,9 +190,9 @@ public class GameSettingsTest {
                 "  'BIG_BADABOOM':false,\n" +
                 "  'CATCH_PERK_SCORE':5,\n" +
                 "  'DEFAULT_PERKS':'r+icTA',\n" +
-                "  'DIE_PENALTY':12,\n" +
                 "  'GAME_MODE':'[MULTIPLE] One level chosen at random. Multi player (all together or in the rooms).',\n" +
                 "  'GHOSTS_COUNT':5,\n" +
+                "  'HERO_DIED_PENALTY':12,\n" +
                 "  'INACTIVITY_ENABLED':false,\n" +
                 "  'INACTIVITY_TIMEOUT':300,\n" +
                 "  'KILL_ENEMY_HERO_SCORE':100,\n" +

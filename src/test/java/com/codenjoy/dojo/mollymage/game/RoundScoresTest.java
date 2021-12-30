@@ -130,6 +130,8 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(0) => [DIED]\n" +
                 "listener(1) => [KILL_OTHER_HERO, KILL_OTHER_HERO, WIN_ROUND]\n" +
                 "listener(2) => [DIED]\n");
+
+        assertScores("hero(1)=1400");
     }
 
     @Test
@@ -221,6 +223,8 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(0) => [DIED]\n" +
                 "listener(1) => [KILL_ENEMY_HERO, KILL_OTHER_HERO, WIN_ROUND]\n" +
                 "listener(2) => [DIED]\n");
+
+        assertScores("hero(1)=1700");
     }
 
     // если на карте один вынес другого, а последний противник покинул игру
@@ -360,6 +364,8 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(0) => [DIED]\n" +   // за то что он трус )
                 "listener(2) => [WIN_ROUND]\n"); // заслуженная победа
 
+        assertScores("hero(2)=1200");
+
     }
 
     // если на карте один вынес другого, а последний противник покинул игру
@@ -379,6 +385,8 @@ public class RoundScoresTest extends AbstractGameTest {
         // then
         // никто больше не должен ничего получить
         verifyAllEvents("");
+
+        assertScores("hero(2)=1200");
     }
 
     // если на поле трое, и один игрок имеет преимущество по очкам за вынос другого игрока
@@ -501,6 +509,8 @@ public class RoundScoresTest extends AbstractGameTest {
         verifyAllEvents(
                 "listener(0) => [[Time is over]]\n" +
                 "listener(1) => [WIN_ROUND]\n");
+
+        assertScores("");
     }
 
     // если на поле группа игроков, два из них активны и расставляют зелье
@@ -680,6 +690,8 @@ public class RoundScoresTest extends AbstractGameTest {
                 "♣♣Ѡ♣♣\n" +
                 "     \n" +
                 "     \n", 0);
+
+        assertScores("");
     }
 
     // если на поле группа игроков, два из них активны и расставляют зелье
@@ -891,6 +903,8 @@ public class RoundScoresTest extends AbstractGameTest {
                 "♣♣Ѡ♣♣\n" +
                 "    ♣\n" +
                 "     \n", 0);
+
+        assertScores("");
     }
 
     // проверяем, что при clearScore обнуляется:
@@ -958,9 +972,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(1) => [DIED]\n" +
                 "listener(2) => [KILL_OTHER_HERO]\n");
 
-        assertEquals(0, hero(0).scores());
-        assertEquals(0, hero(1).scores());
-        assertEquals(200, hero(2).scores()); // за победу
+        assertScores("hero(2)=200"); // за победу
 
         assertEquals(true, hero(0).isActiveAndAlive());
         assertEquals(true, hero(1).isActive());
@@ -1016,9 +1028,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "♥☺   \n", 2);
 
         // и очки обнулятся
-        assertEquals(0, hero(0).scores());
-        assertEquals(0, hero(1).scores());
-        assertEquals(0, hero(2).scores());
+        assertScores("");
 
         // и все игроки активны
         assertEquals(true, hero(0).isActiveAndAlive());
@@ -1091,9 +1101,8 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(1) => [DIED]\n" +
                 "listener(2) => [KILL_ENEMY_HERO]\n");
 
-        assertEquals(0, hero(0).scores());
-        assertEquals(0, hero(1).scores());
-        assertEquals(500, hero(2).scores()); // за победу (enemy)
+        // за победу (enemy)
+        assertScores("hero(2)=500");
 
         assertEquals(true, hero(0).isActiveAndAlive());
         assertEquals(true, hero(1).isActive());
@@ -1292,6 +1301,8 @@ public class RoundScoresTest extends AbstractGameTest {
                 "҉♣Ѡ҉ \n", 2);
 
         verifyAllEvents("");
+
+        assertScores("hero(0)=1400");
     }
 
     // в этом тесте я проверяю, что после победы героя на уровне
@@ -1336,5 +1347,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // then
         verifyAllEvents("");
+
+        assertScores("");
     }
 }

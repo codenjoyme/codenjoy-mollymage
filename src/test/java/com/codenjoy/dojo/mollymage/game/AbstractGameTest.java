@@ -43,6 +43,7 @@ import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.multiplayer.Single;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
+import com.codenjoy.dojo.utils.TestUtils;
 import com.codenjoy.dojo.utils.events.EventsListenersAssert;
 import org.junit.After;
 import org.junit.Before;
@@ -153,7 +154,12 @@ public abstract class AbstractGameTest {
     public void verifyAllEvents(String expected) {
         assertEquals(expected, events.getEvents());
     }
-    
+
+    public void assertScores(String expected) {
+        assertEquals(expected,
+                TestUtils.collectHeroesData(players, "scores", true));
+    }
+
     /**
      * Проверяет одну борду с заданным индексом
      * @param expected ожидаемое значение

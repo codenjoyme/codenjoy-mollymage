@@ -297,7 +297,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                "listener(2) => [DIED]\n");
+                "listener(2) => [HERO_DIED]\n");
 
         // when
         tick();
@@ -367,7 +367,7 @@ public class RoundBattleTest extends AbstractGameTest {
         // then
         verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                "listener(1) => [DIED]\n");
+                "listener(1) => [HERO_DIED]\n");
 
         // when
         // идем назад
@@ -474,7 +474,7 @@ public class RoundBattleTest extends AbstractGameTest {
         // then
         verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                "listener(1) => [DIED]\n");
+                "listener(1) => [HERO_DIED]\n");
 
         // when
         // идем назад
@@ -666,7 +666,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                "listener(1) => [DIED]\n");
+                "listener(1) => [HERO_DIED]\n");
 
         // when
         hero(0).down();
@@ -804,7 +804,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 " ♣҉҉ \n", 2);
 
         verifyAllEvents(
-                "listener(0) => [DIED]\n" +
+                "listener(0) => [HERO_DIED]\n" +
                 "listener(2) => [KILL_OTHER_HERO, WIN_ROUND]\n");
     }
 
@@ -840,8 +840,8 @@ public class RoundBattleTest extends AbstractGameTest {
 
         // победителей нет
         verifyAllEvents(
-                "listener(0) => [DIED, KILL_OTHER_HERO, KILL_GHOST]\n" +
-                "listener(2) => [DIED]\n");
+                "listener(0) => [HERO_DIED, KILL_OTHER_HERO, KILL_GHOST]\n" +
+                "listener(2) => [HERO_DIED]\n");
 
         // when
         tick();

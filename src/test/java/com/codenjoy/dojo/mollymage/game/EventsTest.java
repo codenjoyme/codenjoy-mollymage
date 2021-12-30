@@ -251,7 +251,7 @@ public class EventsTest extends AbstractGameTest {
                 "     \n" +
                 "     \n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
         assertHeroDie();
 
         // when
@@ -524,7 +524,7 @@ public class EventsTest extends AbstractGameTest {
     }
 
     @Test
-    public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseDied() {
+    public void shouldCrossBlasts_checkingScores_whenDestroyWall_caseHERO_DIED() {
         // given
         givenFl("     \n" +
                 "     \n" +
@@ -552,8 +552,8 @@ public class EventsTest extends AbstractGameTest {
                 "҉H҉҉ \n", 0);
 
         verifyAllEvents(
-                "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
-                "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
+                "listener(0) => [HERO_DIED, KILL_TREASURE_BOX]\n" +
+                "listener(1) => [HERO_DIED, KILL_TREASURE_BOX]\n");
 
         // when
         // новые коробки
@@ -631,7 +631,7 @@ public class EventsTest extends AbstractGameTest {
     }
 
     @Test
-    public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseDied() {
+    public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseHERO_DIED() {
         // given
         settings.integer(POTION_POWER, 2);
 
@@ -662,8 +662,8 @@ public class EventsTest extends AbstractGameTest {
 
         // по 1 ачивке за стенку, потому что взрывная волна не проходит через стенку
         verifyAllEvents(
-                "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
-                "listener(1) => [DIED, KILL_TREASURE_BOX]\n");
+                "listener(0) => [HERO_DIED, KILL_TREASURE_BOX]\n" +
+                "listener(1) => [HERO_DIED, KILL_TREASURE_BOX]\n");
 
         // when
         // новые коробки
@@ -680,7 +680,7 @@ public class EventsTest extends AbstractGameTest {
     }
 
     @Test
-    public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied() {
+    public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseHERO_DIED() {
         // given
         givenFl("     \n" +
                 "  ☺  \n" +
@@ -708,10 +708,10 @@ public class EventsTest extends AbstractGameTest {
                 "  ҉  \n", 0);
 
         verifyAllEvents(
-                "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
-                "listener(1) => [DIED, KILL_TREASURE_BOX]\n" +
-                "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
-                "listener(3) => [DIED, KILL_TREASURE_BOX]\n");
+                "listener(0) => [HERO_DIED, KILL_TREASURE_BOX]\n" +
+                "listener(1) => [HERO_DIED, KILL_TREASURE_BOX]\n" +
+                "listener(2) => [HERO_DIED, KILL_TREASURE_BOX]\n" +
+                "listener(3) => [HERO_DIED, KILL_TREASURE_BOX]\n");
 
         // when
         // новые коробки
@@ -727,7 +727,7 @@ public class EventsTest extends AbstractGameTest {
     }
 
     @Test
-    public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseDied_caseNotEqualPosition() {
+    public void shouldCrossBlasts_checkingScores_whenFourDestroyWalls_caseHERO_DIED_caseNotEqualPosition() {
         // given
         givenFl("     \n" +
                 "  ☺  \n" +
@@ -755,10 +755,10 @@ public class EventsTest extends AbstractGameTest {
                 "  ҉  \n", 0);
 
         verifyAllEvents(
-                "listener(0) => [DIED, KILL_TREASURE_BOX]\n" +
-                "listener(1) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n" +
-                "listener(2) => [DIED, KILL_TREASURE_BOX]\n" +
-                "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n");
+                "listener(0) => [HERO_DIED, KILL_TREASURE_BOX]\n" +
+                "listener(1) => [HERO_DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n" +
+                "listener(2) => [HERO_DIED, KILL_TREASURE_BOX]\n" +
+                "listener(3) => [HERO_DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n");
 
         // when
         // новые коробки
@@ -838,7 +838,7 @@ public class EventsTest extends AbstractGameTest {
     }
 
     @Test
-    public void shouldCrossBlasts_checkingScores_whenGhost_caseDied() {
+    public void shouldCrossBlasts_checkingScores_whenGhost_caseHERO_DIED() {
         // given
         givenFl("     \n" +
                 "     \n" +
@@ -866,8 +866,8 @@ public class EventsTest extends AbstractGameTest {
                 "҉x҉҉ \n", 0);
 
         verifyAllEvents(
-                "listener(0) => [DIED, KILL_GHOST]\n" +
-                "listener(1) => [DIED, KILL_GHOST]\n");
+                "listener(0) => [HERO_DIED, KILL_GHOST]\n" +
+                "listener(1) => [HERO_DIED, KILL_GHOST]\n");
 
         // when
         removeGhosts(1); // больше не надо привидений
@@ -929,7 +929,7 @@ public class EventsTest extends AbstractGameTest {
     }
 
     @Test
-    public void shouldCrossBlasts_checkingScores_whenFourGhosts_caseDied() {
+    public void shouldCrossBlasts_checkingScores_whenFourGhosts_caseHERO_DIED() {
         // given
         givenFl("     \n" +
                 "  ☺  \n" +
@@ -957,10 +957,10 @@ public class EventsTest extends AbstractGameTest {
                 "  ҉  \n", 0);
 
         verifyAllEvents(
-                "listener(0) => [DIED, KILL_GHOST]\n" +
-                "listener(1) => [DIED, KILL_GHOST]\n" +
-                "listener(2) => [DIED, KILL_GHOST]\n" +
-                "listener(3) => [DIED, KILL_GHOST]\n");
+                "listener(0) => [HERO_DIED, KILL_GHOST]\n" +
+                "listener(1) => [HERO_DIED, KILL_GHOST]\n" +
+                "listener(2) => [HERO_DIED, KILL_GHOST]\n" +
+                "listener(3) => [HERO_DIED, KILL_GHOST]\n");
 
         // when
         removeGhosts(1); // больше не надо привидений
@@ -1049,9 +1049,9 @@ public class EventsTest extends AbstractGameTest {
         // then
         verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
-                "listener(1) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
+                "listener(1) => [HERO_DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(2) => [HERO_DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(3) => [HERO_DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
         assertF(" ҉҉҉ \n" +
                 "x҉҉♣x\n" +
@@ -1151,9 +1151,9 @@ public class EventsTest extends AbstractGameTest {
         // then
         verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
-                "listener(1) => [DIED, KILL_ENEMY_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                "listener(3) => [DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
+                "listener(1) => [HERO_DIED, KILL_ENEMY_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(2) => [HERO_DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(3) => [HERO_DIED, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
         assertF(" ҉҉҉ \n" +
                 "x҉҉øx\n" +
@@ -1249,10 +1249,10 @@ public class EventsTest extends AbstractGameTest {
 
         // then
         verifyAllEvents(
-                "listener(0) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
-                "listener(1) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                "listener(2) => [DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
-                "listener(3) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n");
+                "listener(0) => [HERO_DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n" +
+                "listener(1) => [HERO_DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(2) => [HERO_DIED, KILL_OTHER_HERO, KILL_GHOST, KILL_TREASURE_BOX]\n" +
+                "listener(3) => [HERO_DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX, KILL_GHOST]\n");
 
         assertF(" ҉҉҉ \n" +
                 "xѠ҉♣x\n" +
@@ -1347,8 +1347,8 @@ public class EventsTest extends AbstractGameTest {
 
         // then
         verifyAllEvents(
-                "listener(0) => [DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX]\n" +
-                "listener(1) => [DIED]\n");
+                "listener(0) => [HERO_DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX]\n" +
+                "listener(1) => [HERO_DIED]\n");
 
         assertF("     \n" +
                 "&Ѡ3♠&\n" +
@@ -1365,7 +1365,7 @@ public class EventsTest extends AbstractGameTest {
         verifyAllEvents(
                 "listener(0) => [KILL_GHOST]\n" +
                 "listener(1) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
-                "listener(2) => [DIED]\n");
+                "listener(2) => [HERO_DIED]\n");
 
         assertF(" ҉  #\n" +
                 "xѠ2♠&\n" +
@@ -1379,7 +1379,7 @@ public class EventsTest extends AbstractGameTest {
         // then
         verifyAllEvents(
                 "listener(2) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
-                "listener(3) => [DIED]\n");
+                "listener(3) => [HERO_DIED]\n");
 
         assertF("    #\n" +
                 " Ѡ11&\n" +

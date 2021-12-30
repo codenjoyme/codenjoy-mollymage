@@ -245,7 +245,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
         verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                "listener(1) => [DIED]\n");
+                "listener(1) => [HERO_DIED]\n");
 
         assertEquals(killScore, hero1.scores());
         assertEquals(0, hero2.scores());

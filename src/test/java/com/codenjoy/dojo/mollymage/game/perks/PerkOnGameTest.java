@@ -454,7 +454,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "     +\n" +
                 "# ####\n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -791,7 +791,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#҉####\n");
 
         // пошел сигнал об этом
-        verifyAllEvents("[DIED, KILL_GHOST, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[HERO_DIED, KILL_GHOST, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -964,7 +964,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "# ####\n");
 
         // пошел сигнал об этом
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
 
         assertFieldPerks(
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
@@ -1337,7 +1337,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "{PerkOnBoard {POTION_BLAST_RADIUS_INCREASE('+')\n" + 
                 "  value=4, timeout=3, timer=3, pick=47} at [5,1]}");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
 
         // when
         // превратился в перк обратно

@@ -67,9 +67,9 @@ public class GameSettingsTest {
                 "  'BIG_BADABOOM':false,\n" +
                 "  'CATCH_PERK_SCORE':5,\n" +
                 "  'DEFAULT_PERKS':'r+icTA',\n" +
-                "  'DIE_PENALTY':-30,\n" +
                 "  'GAME_MODE':'[MULTIPLE] One level chosen at random. Multi player (all together or in the rooms).',\n" +
                 "  'GHOSTS_COUNT':5,\n" +
+                "  'HERO_DIED_PENALTY':-30,\n" +
                 "  'INACTIVITY_ENABLED':false,\n" +
                 "  'INACTIVITY_TIMEOUT':300,\n" +
                 "  'KILL_ENEMY_HERO_SCORE':100,\n" +

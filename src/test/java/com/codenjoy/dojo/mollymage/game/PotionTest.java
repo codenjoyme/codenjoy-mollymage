@@ -600,7 +600,7 @@ public class PotionTest extends AbstractGameTest {
         assertEquals(true, potion22.isExploded());
         assertEquals(true, potion23.isExploded());
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
     }
 
     @Test
@@ -628,7 +628,7 @@ public class PotionTest extends AbstractGameTest {
         tick();
 
         // then
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
 
         List<Potion> potions2 = field.potions().all();
         assertEquals(0, potions2.size());
@@ -726,7 +726,7 @@ public class PotionTest extends AbstractGameTest {
                 "☼  ҉  ☼\n" +
                 "☼☼☼☼☼☼☼\n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
     }
 
     @Test
@@ -765,7 +765,7 @@ public class PotionTest extends AbstractGameTest {
                 "҉      \n" +
                 "҉҉҉H   \n");
 
-        verifyAllEvents("[DIED, KILL_TREASURE_BOX]");
+        verifyAllEvents("[HERO_DIED, KILL_TREASURE_BOX]");
     }
 
     @Test

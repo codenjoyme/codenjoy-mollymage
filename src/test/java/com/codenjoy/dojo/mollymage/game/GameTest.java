@@ -71,7 +71,7 @@ public class GameTest extends AbstractGameTest {
         tick();
 
         verifyAllEvents(
-                "listener(1) => [DIED]\n");
+                "listener(1) => [HERO_DIED]\n");
 
         // then
         assertF("     \n" +
@@ -395,7 +395,7 @@ public class GameTest extends AbstractGameTest {
 
         // then
         verifyAllEvents(
-                "listener(0) => [DIED]\n");
+                "listener(0) => [HERO_DIED]\n");
 
         assertEquals(false, hero(0).isAlive());
         assertEquals(true, hero(1).isAlive());

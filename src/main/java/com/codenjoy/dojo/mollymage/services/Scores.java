@@ -33,8 +33,8 @@ public class Scores extends ScoresMap<Void> {
     public Scores(SettingsReader settings) {
         super(settings);
 
-        put(Event.DIED,
-                value -> heroDie(DIE_PENALTY));
+        put(Event.HERO_DIED,
+                value -> heroDie(HERO_DIED_PENALTY));
 
         put(Event.KILL_OTHER_HERO,
                 value -> settings.integer(KILL_OTHER_HERO_SCORE));

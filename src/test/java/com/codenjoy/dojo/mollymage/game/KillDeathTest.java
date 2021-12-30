@@ -70,7 +70,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉Ѡ   \n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
         assertHeroDie();
 
         // when
@@ -110,7 +110,7 @@ public class KillDeathTest extends AbstractGameTest {
                 " Ѡ   \n" +
                 "     \n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
     }
 
     private void killPotioner() {
@@ -157,7 +157,7 @@ public class KillDeathTest extends AbstractGameTest {
                 " Ѡ   \n" +
                 "     \n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
     }
 
     @Test
@@ -182,7 +182,7 @@ public class KillDeathTest extends AbstractGameTest {
                 " Ѡ   \n" +
                 "     \n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
     }
 
     @Test
@@ -207,7 +207,7 @@ public class KillDeathTest extends AbstractGameTest {
                 " Ѡ   \n" +
                 "     \n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
     }
 
     @Test
@@ -232,7 +232,7 @@ public class KillDeathTest extends AbstractGameTest {
                 " Ѡ   \n" +
                 "     \n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
     }
 
     // если герой стоит под действием ударной волны, он умирает
@@ -274,7 +274,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "҉    \n" +
                 "҉Ѡ   \n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
         assertHeroDie();
 
         // when
@@ -331,7 +331,7 @@ public class KillDeathTest extends AbstractGameTest {
                 " ҉   \n" +
                 "Ѡ҉҉  \n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
         assertHeroDie();
 
         // when
@@ -386,7 +386,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "҉҉   \n" +
                 "Ѡ    \n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
         assertHeroDie();
 
         // when
@@ -443,7 +443,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "Ѡ    \n" +
                 "҉҉   \n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
         assertHeroDie();
 
         // when
@@ -534,7 +534,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "  Ѡ  \n" +
                 "     \n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
         assertHeroDie();
 
         // when
@@ -811,7 +811,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                "listener(1) => [DIED]\n");
+                "listener(1) => [HERO_DIED]\n");
     }
 
     // герой может идти на привидение, при этом он умирает
@@ -849,7 +849,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "♥ Ѡ  \n", 1);
 
         verifyAllEvents(
-                "listener(1) => [DIED]\n");
+                "listener(1) => [HERO_DIED]\n");
     }
 
     // если привидение убил другого героя,
@@ -892,7 +892,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "♥Ѡ   \n", 1);
 
         verifyAllEvents(
-                "listener(1) => [DIED]\n");
+                "listener(1) => [HERO_DIED]\n");
     }
 
     // А что если герой идет на привидение а тот идет на
@@ -933,6 +933,6 @@ public class KillDeathTest extends AbstractGameTest {
                 "♥&Ѡ  \n", 1);
 
         verifyAllEvents(
-                "listener(1) => [DIED]\n");
+                "listener(1) => [HERO_DIED]\n");
     }
 }

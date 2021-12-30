@@ -754,7 +754,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
         assertEquals(true, game().isGameOver());
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
     }
 
     // если я двинулся за пределы стены и тут же поставил зелье,
@@ -1100,8 +1100,8 @@ public class MovementTest extends AbstractGameTest {
                 "♣҉Ѡ  \n", 1);
 
         verifyAllEvents(
-                "listener(0) => [DIED]\n" +
-                "listener(1) => [DIED, KILL_OTHER_HERO]\n");
+                "listener(0) => [HERO_DIED]\n" +
+                "listener(1) => [HERO_DIED, KILL_OTHER_HERO]\n");
     }
 
     @Test

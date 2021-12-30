@@ -43,7 +43,7 @@ public class ScoresTest {
     }
 
     public void killYourself() {
-        scores.event(Event.DIED);
+        scores.event(Event.HERO_DIED);
     }
 
     public void killGhost() {
@@ -97,7 +97,7 @@ public class ScoresTest {
         // then
         assertEquals(140
                     + 4 * settings.integer(KILL_WALL_SCORE)
-                    + settings.integer(DIE_PENALTY)
+                    + settings.integer(HERO_DIED_PENALTY)
                     + settings.integer(CATCH_PERK_SCORE)
                     + settings.integer(KILL_OTHER_HERO_SCORE)
                     + settings.integer(KILL_ENEMY_HERO_SCORE)
@@ -162,7 +162,7 @@ public class ScoresTest {
 
         // then
         assertEquals(140
-                    + 2 * settings.integer(DIE_PENALTY),
+                    + 2 * settings.integer(HERO_DIED_PENALTY),
                 scores.getScore());
     }
 

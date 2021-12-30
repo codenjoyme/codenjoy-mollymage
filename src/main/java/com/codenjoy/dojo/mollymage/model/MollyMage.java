@@ -33,7 +33,6 @@ import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.items.perks.*;
-import com.codenjoy.dojo.mollymage.services.Event;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.BoardUtils;
 import com.codenjoy.dojo.services.Dice;
@@ -48,6 +47,7 @@ import com.google.common.collect.Multimap;
 
 import java.util.*;
 
+import static com.codenjoy.dojo.mollymage.services.Event.*;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.field.Generator.generate;
 import static java.util.stream.Collectors.toList;
@@ -65,7 +65,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     private List<Potion> destroyedPotions;
 
     public MollyMage(Dice dice, Level level, GameSettings settings) {
-        super(Event.START_ROUND, Event.WIN_ROUND, settings);
+        super(START_ROUND, WIN_ROUND, settings);
 
         this.level = level;
         this.dice = dice;
@@ -384,9 +384,9 @@ public class MollyMage extends RoundField<Player> implements Field {
 
             deathMatch.get(hunter).forEach(object -> {
                 if (object instanceof Ghost) {
-                    hunter.event(Event.KILL_GHOST);
+                    hunter.event(KILL_GHOST);
                 } else if (object instanceof TreasureBox) {
-                    hunter.event(Event.KILL_TREASURE_BOX);
+                    hunter.event(KILL_TREASURE_BOX);
                 }
             });
         });
@@ -417,7 +417,7 @@ public class MollyMage extends RoundField<Player> implements Field {
             }
 
             deathMatch.get(hunter).forEach(perk -> {
-                hunter.event(Event.DROP_PERK);
+                hunter.event(DROP_PERK);
 
                 // TODO может это делать на этапе, когда blasts развиднеется в removeBlasts
                 blasts().removeAt(perk);

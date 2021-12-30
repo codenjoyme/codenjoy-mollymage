@@ -46,7 +46,7 @@ public class GameSettings extends SettingsImpl implements AllSettings<GameSettin
         KILL_OTHER_HERO_SCORE("[Score] Kill other hero score"),
         KILL_ENEMY_HERO_SCORE("[Score] Kill enemy hero score"),
         CATCH_PERK_SCORE("[Score] Catch perk score"),
-        DIE_PENALTY("[Score] Your hero's death penalty"),
+        HERO_DIED_PENALTY("[Score] Your hero's death penalty"),
         WIN_ROUND_SCORE("[Score][Rounds] Win round score"),
         BIG_BADABOOM("[Map] Blast activate potion"),
         POTIONS_COUNT("[Map] Potions count"),
@@ -95,7 +95,7 @@ public class GameSettings extends SettingsImpl implements AllSettings<GameSettin
         integer(KILL_OTHER_HERO_SCORE, 20);
         integer(KILL_ENEMY_HERO_SCORE, 100);
         integer(CATCH_PERK_SCORE, 5);
-        integer(DIE_PENALTY, -30);
+        integer(HERO_DIED_PENALTY, -30);
         integer(WIN_ROUND_SCORE, 30);
 
         bool(BIG_BADABOOM, false);

@@ -24,15 +24,16 @@ package com.codenjoy.dojo.mollymage.services;
 
 public enum Event {
 
+    START_ROUND,
+    WIN_ROUND,
+
     KILL_TREASURE_BOX,
     KILL_GHOST,
     KILL_OTHER_HERO,
     KILL_ENEMY_HERO,
+    HERO_DIED,
 
     CATCH_PERK,
     DROP_PERK,
-    DIED,
 
-    START_ROUND,
-    WIN_ROUND
 }

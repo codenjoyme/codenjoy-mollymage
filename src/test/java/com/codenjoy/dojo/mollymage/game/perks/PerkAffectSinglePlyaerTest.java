@@ -155,7 +155,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "H҉Ѡ  #\n" +
                 "#H####\n");
 
-        verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[HERO_DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
         removeBoxes(2); // две коробки потрачено
@@ -227,7 +227,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "HѠ҉        #\n" +
                 "#H##########\n");
 
-        verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[HERO_DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
     }
 
     @Test
@@ -434,7 +434,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼Ѡ       ☼\n" +
                 "☼☼☼☼☼☼☼☼☼☼\n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
     }
 
     @Test
@@ -713,7 +713,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "HѠ҉҉҉҉҉    #\n" +
                 "#H##########\n");
 
-        verifyAllEvents("[DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
+        verifyAllEvents("[HERO_DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
     }
 
     // Проверяем что два перка BBRI увеличивают длинну взрывной волны зелья на размер второго перка
@@ -875,7 +875,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "         # #\n" +
                 "# # ########\n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
 
         assertHeroPerks("");
     }
@@ -1029,7 +1029,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 " ҉   \n" +
                 "҉Ѡ҉  \n");
 
-        verifyAllEvents("[DIED]");
+        verifyAllEvents("[HERO_DIED]");
     }
 
     // BRC - Potion remote control perk
@@ -1544,7 +1544,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "H    \n" +
                 "҉҉҉Ѡ \n");
 
-        verifyAllEvents("[DIED, KILL_GHOST, KILL_TREASURE_BOX]");
+        verifyAllEvents("[HERO_DIED, KILL_GHOST, KILL_TREASURE_BOX]");
 
         // только сейчас перк забрался
         assertHeroPerks("");

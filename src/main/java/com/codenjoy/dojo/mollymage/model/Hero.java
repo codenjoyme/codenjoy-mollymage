@@ -29,7 +29,6 @@ import com.codenjoy.dojo.mollymage.model.items.blast.Poison;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.perks.HeroPerks;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
-import com.codenjoy.dojo.mollymage.services.Event;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
@@ -39,6 +38,7 @@ import java.util.List;
 
 import static com.codenjoy.dojo.games.mollymage.Element.*;
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
+import static com.codenjoy.dojo.mollymage.services.Event.*;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.StateUtils.filter;
 import static com.codenjoy.dojo.services.StateUtils.filterOne;
@@ -126,7 +126,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
 
     @Override
     public void die() {
-        super.die(Event.DIED);
+        super.die(HERO_DIED);
     }
 
     public void apply() {
@@ -155,7 +155,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
             move(pt);
             field.pickPerk(pt).forEach(perk -> {
                 field.pickPerkBy((Player) this.getPlayer(), perk.getPerk());
-                event(Event.CATCH_PERK);
+                event(CATCH_PERK);
             });
         }
         direction = null;
@@ -342,9 +342,9 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
 
     public void fireKillHero(Hero prey) {
         if (getTeamId() == prey.getTeamId()) {
-            event(Event.KILL_OTHER_HERO);
+            event(KILL_OTHER_HERO);
         } else {
-            event(Event.KILL_ENEMY_HERO);
+            event(KILL_ENEMY_HERO);
         }
     }
 }

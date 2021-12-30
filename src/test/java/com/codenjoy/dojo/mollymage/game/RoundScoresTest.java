@@ -127,9 +127,9 @@ public class RoundScoresTest extends AbstractGameTest {
                 " Ѡ   \n", 2);
 
         verifyAllEvents(
-                "listener(0) => [DIED]\n" +
+                "listener(0) => [HERO_DIED]\n" +
                 "listener(1) => [KILL_OTHER_HERO, KILL_OTHER_HERO, WIN_ROUND]\n" +
-                "listener(2) => [DIED]\n");
+                "listener(2) => [HERO_DIED]\n");
 
         assertScores("hero(1)=1400");
     }
@@ -220,9 +220,9 @@ public class RoundScoresTest extends AbstractGameTest {
                 " Ѡ   \n", 2);
 
         verifyAllEvents(
-                "listener(0) => [DIED]\n" +
+                "listener(0) => [HERO_DIED]\n" +
                 "listener(1) => [KILL_ENEMY_HERO, KILL_OTHER_HERO, WIN_ROUND]\n" +
-                "listener(2) => [DIED]\n");
+                "listener(2) => [HERO_DIED]\n");
 
         assertScores("hero(1)=1700");
     }
@@ -312,7 +312,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 " ҉   \n", 2);
 
         verifyAllEvents(
-                "listener(1) => [DIED]\n" +
+                "listener(1) => [HERO_DIED]\n" +
                 "listener(2) => [KILL_OTHER_HERO]\n");
 
         // when
@@ -361,7 +361,7 @@ public class RoundScoresTest extends AbstractGameTest {
                 "     \n", 2);
 
         verifyAllEvents(
-                "listener(0) => [DIED]\n" +   // за то что он трус )
+                "listener(0) => [HERO_DIED]\n" +   // за то что он трус )
                 "listener(2) => [WIN_ROUND]\n"); // заслуженная победа
 
         assertScores("hero(2)=1200");
@@ -474,7 +474,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         verifyAllEvents(
                 "listener(1) => [KILL_OTHER_HERO]\n" +
-                "listener(2) => [DIED]\n");
+                "listener(2) => [HERO_DIED]\n");
 
         // when
         // затем пройдет еще некоторое количество тиков, до общего числа = timePerRound
@@ -639,11 +639,11 @@ public class RoundScoresTest extends AbstractGameTest {
                 "\n");
 
         verifyAllEvents(
-                "listener(0) => [DIED]\n" +
+                "listener(0) => [HERO_DIED]\n" +
                 "listener(1) => [KILL_OTHER_HERO]\n" +
-                "listener(2) => [DIED]\n" +
+                "listener(2) => [HERO_DIED]\n" +
                 "listener(3) => [KILL_OTHER_HERO, KILL_OTHER_HERO]\n" +
-                "listener(4) => [DIED]\n");
+                "listener(4) => [HERO_DIED]\n");
 
         // when
         // затем пройдет еще некоторое количество тиков, до общего числа = timePerRound
@@ -845,12 +845,12 @@ public class RoundScoresTest extends AbstractGameTest {
                 "\n");
 
         verifyAllEvents(
-                "listener(0) => [DIED]\n" +
+                "listener(0) => [HERO_DIED]\n" +
                 "listener(1) => [KILL_OTHER_HERO, KILL_OTHER_HERO, KILL_TREASURE_BOX]\n" +
-                "listener(2) => [DIED]\n" +
-                "listener(3) => [DIED]\n" +
+                "listener(2) => [HERO_DIED]\n" +
+                "listener(3) => [HERO_DIED]\n" +
                 "listener(4) => [KILL_OTHER_HERO, KILL_OTHER_HERO]\n" +
-                "listener(5) => [DIED]\n");
+                "listener(5) => [HERO_DIED]\n");
 
         // when
         // затем пройдет еще некоторое количество тиков, до общего числа = timePerRound
@@ -969,7 +969,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // then
         verifyAllEvents(
-                "listener(1) => [DIED]\n" +
+                "listener(1) => [HERO_DIED]\n" +
                 "listener(2) => [KILL_OTHER_HERO]\n");
 
         assertScores("hero(2)=200"); // за победу
@@ -1098,7 +1098,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // then
         verifyAllEvents(
-                "listener(1) => [DIED]\n" +
+                "listener(1) => [HERO_DIED]\n" +
                 "listener(2) => [KILL_ENEMY_HERO]\n");
 
         // за победу (enemy)
@@ -1180,7 +1180,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
-                "listener(1) => [DIED]\n");
+                "listener(1) => [HERO_DIED]\n");
 
         // when
         hero(0).left();
@@ -1241,7 +1241,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO, WIN_ROUND]\n" +
-                "listener(2) => [DIED]\n");
+                "listener(2) => [HERO_DIED]\n");
 
         // when
         // ну и напоследок вернемся на место

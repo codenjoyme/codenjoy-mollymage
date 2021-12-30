@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.game;
+package com.codenjoy.dojo.mollymage.model;
 
 /*-
  * #%L
@@ -24,10 +24,6 @@ package com.codenjoy.dojo.mollymage.game;
 
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.TestGameSettings;
-import com.codenjoy.dojo.mollymage.model.Hero;
-import com.codenjoy.dojo.mollymage.model.Level;
-import com.codenjoy.dojo.mollymage.model.MollyMage;
-import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;

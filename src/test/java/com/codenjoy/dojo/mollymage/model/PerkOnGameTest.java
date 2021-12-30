@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.game.perks;
+package com.codenjoy.dojo.mollymage.model;
 
 /*-
  * #%L
@@ -23,7 +23,6 @@ package com.codenjoy.dojo.mollymage.game.perks;
  */
 
 import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.mollymage.game.AbstractGameTest;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.model.items.perks.PotionBlastRadiusIncrease;
 import com.codenjoy.dojo.mollymage.model.items.perks.PotionCountIncrease;

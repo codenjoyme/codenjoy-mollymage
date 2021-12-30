@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.game;
+package com.codenjoy.dojo.mollymage.model;
 
 /*-
  * #%L

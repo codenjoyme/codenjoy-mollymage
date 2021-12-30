@@ -108,15 +108,15 @@ public class Hero extends RoundPlayerHero<Field>
         }
     }
 
-    public void dropPotion() {
+    void dropPotion() {
         act();
     }
 
-    public void throwPoison() {
+    void throwPoison() {
         act(ACT_THROW_POISON);
     }
 
-    public void throwPoison(Direction direction) {
+    void throwPoison(Direction direction) {
         switch (direction) {
             case LEFT: left(); break;
             case RIGHT: right(); break;
@@ -126,7 +126,7 @@ public class Hero extends RoundPlayerHero<Field>
         throwPoison();
     }
 
-    public void explodeAllPotions() {
+    void explodeAllPotions() {
         act(ACT_EXPLODE_ALL_POTIONS);
     }
 

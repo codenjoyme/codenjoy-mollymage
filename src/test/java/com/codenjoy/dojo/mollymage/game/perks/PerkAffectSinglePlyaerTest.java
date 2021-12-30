@@ -28,6 +28,8 @@ import com.codenjoy.dojo.mollymage.model.items.perks.*;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.services.Direction.DOWN;
+import static com.codenjoy.dojo.services.Direction.UP;
 import static org.junit.Assert.assertEquals;
 
 public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
@@ -57,7 +59,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         // must drop 2 perks
         dice(10);
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().right();
@@ -134,7 +136,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         // must drop 2 perks
         dice(10);
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().right();
@@ -203,7 +205,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "#☺         #\n" +
                 "############\n");
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         tick();
@@ -248,8 +250,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "##########\n");
 
         // when
-        hero().up();
-        hero().act(1);
+        hero().throwPoison(UP);
         tick();
 
         // then
@@ -286,8 +287,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         player().getHero().addPerk(new PoisonThrower(timeout));
 
         // when
-        // just ACT(1) without sending direction
-        hero().act(1);
+        // just throwPoison without sending direction
+        hero().throwPoison();
         tick();
 
         // then
@@ -331,7 +332,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().up();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         hero().down();
         tick();
 
@@ -351,8 +352,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼\n");
 
         // when hero throw poison
-        hero().up();
-        hero().act(1);
+        hero().throwPoison(UP);
         tick();
 
         // then
@@ -397,7 +397,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().up();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         hero().down();
         tick();
 
@@ -418,8 +418,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero throw poison
-        hero().up();
-        hero().act(1);
+        hero().throwPoison(UP);
         tick();
 
         // then
@@ -473,8 +472,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero used perk
-        hero().down();
-        hero().act(1);
+        hero().throwPoison(DOWN);
         tick();
 
         // then
@@ -503,8 +501,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero use PT
-        hero().down();
-        hero().act(1);
+        hero().throwPoison(DOWN);
         tick();
 
         // then
@@ -538,8 +535,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         player().getHero().addPerk(new PoisonThrower(10));
 
         // when
-        hero().up();
-        hero().act(1);
+        hero().throwPoison(UP);
         tick();
 
         // then
@@ -556,8 +552,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // recharge hero should not throw poison
-        hero().up();
-        hero().act(1);
+        hero().throwPoison(UP);
         tick();
 
         // then
@@ -574,8 +569,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // recharge hero should not throw poison
-        hero().up();
-        hero().act(1);
+        hero().throwPoison(UP);
         tick();
 
         // then
@@ -592,8 +586,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // recharge done should throw again
-        hero().up();
-        hero().act(1);
+        hero().throwPoison(UP);
         tick();
 
         // then
@@ -610,8 +603,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // and going to recharge again
-        hero().up();
-        hero().act(1);
+        hero().throwPoison(UP);
         tick();
 
         // then
@@ -650,8 +642,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         player().getHero().addPerk(new PotionBlastRadiusIncrease(value, timeout));
 
         // when
-        hero().up();
-        hero().act(1);
+        hero().throwPoison(UP);
         tick();
 
         // then
@@ -689,7 +680,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         player().getHero().addPerk(new PotionBlastRadiusIncrease(value, timeout));
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         tick();
@@ -745,7 +736,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "  value=4, timeout=5, timer=5, pick=0}");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -794,7 +785,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         verifyAllEvents("[KILL_TREASURE_BOX, KILL_TREASURE_BOX]");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().right();
 
         // новые коробки
@@ -853,7 +844,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertHeroPerks("");
 
         // ставим новое зелье, чтобы убедиться, что больше перк не сработает
-        hero().act();
+        hero().dropPotion();
         tick();
 
         tick();
@@ -890,7 +881,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n" +
                 "☺    \n");
 
-        hero().act();
+        hero().dropPotion();
 
         // obe potion by default on lel 1
         assertF("     \n" +
@@ -903,7 +894,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         tick();
 
         // when
-        hero().act();
+        hero().dropPotion();
 
         // then
         // no more potions :(
@@ -917,11 +908,11 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         // add perk that gives 1+3 = 4 player's potions in total on the board
         player().getHero().addPerk(new PotionCountIncrease(3, 3));
 
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
-        hero().act();
+        hero().dropPotion();
 
         // then
         assertF("     \n" +
@@ -934,7 +925,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         tick();
 
-        hero().act();
+        hero().dropPotion();
 
         // then
         assertF("     \n" +
@@ -947,7 +938,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         hero().right();
         tick();
 
-        hero().act();
+        hero().dropPotion();
 
         // then
         // 4 potions and no more
@@ -969,7 +960,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "☺    \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().right();
 
         tick();
@@ -997,7 +988,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "҉☺   \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -1052,7 +1043,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // поставили первое радиоуправляемое зелье
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -1085,7 +1076,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // взорвали ее
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -1101,7 +1092,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // ставим еще одну
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -1157,7 +1148,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // взорвали ее
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -1171,7 +1162,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // ставим новую
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -1199,7 +1190,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // еще одну, у нас ведь их две
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -1214,7 +1205,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // больше не могу
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -1230,7 +1221,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         // when
         // еще не могу
         hero().right();
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -1244,7 +1235,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // и только когда ударная волна уйдет, тогда смогу
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -1276,7 +1267,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // поставили первое радиоуправляемое зелье
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -1309,7 +1300,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // взорвали ее
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -1325,7 +1316,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // ставим еще одну
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -1381,7 +1372,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // взорвали ее
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -1395,7 +1386,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // ставим новую
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -1423,7 +1414,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // больше не могу - у меня одна
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -1438,7 +1429,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // больше не могу
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -1453,7 +1444,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // и теперь не могу - есть еще взрывная волна
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -1468,7 +1459,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // а теперь пожалуйста
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -1501,7 +1492,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // поставили радиоуправляемое зелье
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -1603,12 +1594,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero plant different potions
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
         hero().addPerk(new PotionRemoteControl(3, 30));
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -1625,7 +1616,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
         assertEquals(3, hero().getPerks().size());
 
         // when hero explode all potions
-        hero().act(2);
+        hero().explodeAllPotions();
         tick();
 
         // then
@@ -1655,12 +1646,12 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero plant different potions
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
         hero().addPerk(new PotionRemoteControl(3, 30));
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -1676,7 +1667,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero tried explode all potions but can't without PE perk
-        hero().act(2);
+        hero().explodeAllPotions();
         tick();
 
         // then
@@ -1706,7 +1697,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero catch perk and plant potion
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -1724,7 +1715,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero explode potions and move right
-        hero().act(2);
+        hero().explodeAllPotions();
         hero().right();
         tick();
 
@@ -1747,7 +1738,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero plant potion
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -1763,7 +1754,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero tried explode potions(but cant) and move right
-        hero().act(2);
+        hero().explodeAllPotions();
         hero().right();
         tick();
 
@@ -1794,7 +1785,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero catch perk and plant potion
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -1812,7 +1803,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero explode potions and move right
-        hero().act(2);
+        hero().explodeAllPotions();
         hero().right();
         tick();
 
@@ -1825,7 +1816,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero plant again
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -1837,8 +1828,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n");
 
         // when
-        // hero act(2) potion shouldn't boom
-        hero().act(2);
+        // hero explodeAllPotions() potion shouldn't boom
+        hero().explodeAllPotions();
         hero().right();
         tick();
 
@@ -1871,7 +1862,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero catch perk and plant potion
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -1903,7 +1894,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero explode potion and move right
-        hero().act(2);
+        hero().explodeAllPotions();
         hero().right();
         tick();
 
@@ -1916,7 +1907,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         // when
         // hero plant again
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -1928,8 +1919,8 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
                 "     \n");
 
         // when
-        // hero act(2) potion should boom
-        hero().act(2);
+        // all potions should boom
+        hero().explodeAllPotions();
         hero().right();
         tick();
 

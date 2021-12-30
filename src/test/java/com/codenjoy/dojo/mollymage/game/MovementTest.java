@@ -276,7 +276,7 @@ public class MovementTest extends AbstractGameTest {
     }
 
     @Test
-    public void shouldHeroMovedOncePerTact() {
+    public void shouldHeroMovedOncePerTdropPotion() {
         // given
         givenFl("     \n" +
                 "     \n" +
@@ -437,7 +437,7 @@ public class MovementTest extends AbstractGameTest {
                 "☺    \n");
         
         // when
-        hero().act();
+        hero().dropPotion();
         field.tick();
 
         // then
@@ -481,7 +481,7 @@ public class MovementTest extends AbstractGameTest {
                 "☺    \n");
         
         // when
-        hero().act();
+        hero().dropPotion();
         hero().right();
         field.tick();
 
@@ -504,7 +504,7 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().right();
-        hero().act();
+        hero().dropPotion();
         field.tick();
 
         // then
@@ -536,7 +536,7 @@ public class MovementTest extends AbstractGameTest {
                 "☺    \n");
         
         // when
-        hero().act();
+        hero().dropPotion();
         field.tick();
 
         hero().right();
@@ -563,7 +563,7 @@ public class MovementTest extends AbstractGameTest {
         hero().right();
         field.tick();
 
-        hero().act();
+        hero().dropPotion();
         field.tick();
 
         // then
@@ -776,7 +776,7 @@ public class MovementTest extends AbstractGameTest {
         field.tick();
 
         hero().left();
-        hero().act();
+        hero().dropPotion();
         field.tick();
 
         // then
@@ -814,7 +814,7 @@ public class MovementTest extends AbstractGameTest {
         field.tick();
 
         hero().right();
-        hero().act();
+        hero().dropPotion();
         field.tick();
 
         hero().left();
@@ -1048,7 +1048,7 @@ public class MovementTest extends AbstractGameTest {
                 "☺☺   \n");
         
         // when
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).right();
         tick();
 

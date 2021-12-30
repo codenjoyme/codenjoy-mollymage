@@ -56,7 +56,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // must drop 2 perks
         dice(10);
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().right();
@@ -169,7 +169,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // must drop 1 perk
         dice(10, 30);
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().up();
@@ -233,7 +233,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // must drop 2 perks
         dice(10);
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().right();
@@ -333,7 +333,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 " ☺   #\n" +
                 "#+####\n");
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().right();
@@ -555,13 +555,13 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
         tick();
 
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -716,13 +716,13 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
         tick();
 
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -879,7 +879,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -904,7 +904,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         verifyAllEvents("");
 
         // when
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -1042,7 +1042,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         // when
         // бамбанули между двух перков, хак (перк при этом не взяли)
         hero().move(1, 2);
-        hero().act();
+        hero().dropPotion();
 
         // given
         // строим оборону
@@ -1255,7 +1255,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().right();

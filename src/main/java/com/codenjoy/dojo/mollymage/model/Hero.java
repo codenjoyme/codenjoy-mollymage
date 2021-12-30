@@ -45,6 +45,9 @@ import static com.codenjoy.dojo.services.StateUtils.filterOne;
 
 public class Hero extends RoundPlayerHero<Field> implements State<Element, Player> {
 
+    public static final int ACT_THROW_POISON = 1;
+    public static final int ACT_EXPLODE_ALL_POTIONS = 2;
+
     private boolean potion;
     private Direction direction;
     private int score;
@@ -105,14 +108,14 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         if (!isActiveAndAlive()) return;
 
         Act is = new Act(p);
-        if (is.act(1)) {
+        if (is.act(ACT_THROW_POISON)) {
             if (direction != null) {
                 throwPoison = true;
             }
             return;
         }
 
-        if (is.act(2)) {
+        if (is.act(ACT_EXPLODE_ALL_POTIONS)) {
             explodeAllPotions = true;
             return;
         }
@@ -122,6 +125,28 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         } else {
             setPotion(this);
         }
+    }
+
+    public void dropPotion() {
+        act();
+    }
+
+    public void throwPoison() {
+        act(ACT_THROW_POISON);
+    }
+
+    public void throwPoison(Direction direction) {
+        switch (direction) {
+            case LEFT: left(); break;
+            case RIGHT: right(); break;
+            case UP: up(); break;
+            case DOWN: down(); break;
+        }
+        throwPoison();
+    }
+
+    public void explodeAllPotions() {
+        act(ACT_EXPLODE_ALL_POTIONS);
     }
 
     @Override
@@ -142,7 +167,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         }
 
         if (throwPoison) {
-            throwPoison(direction);
+            throwPoisonAt(direction);
 
             throwPoison = false;
             direction = null;
@@ -176,7 +201,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         perk.decrease();
     }
 
-    private void throwPoison(Direction direction) {
+    private void throwPoisonAt(Direction direction) {
         Perk perk = perks.getPerk(POISON_THROWER);
 
         if (perk == null || recharge != 0) {

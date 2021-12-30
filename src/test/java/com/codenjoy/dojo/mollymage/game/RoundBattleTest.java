@@ -254,7 +254,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         // when
         // когда я выношу одного игрока
-        hero(0).act();
+        hero(0).dropPotion();
         tick();
 
         hero(0).right();
@@ -349,7 +349,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         // then
         // ставлю зелье
-        hero(0).act();
+        hero(0).dropPotion();
         tick();
 
         // и тикать
@@ -457,7 +457,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         // when
         // ставлю зелье
-        hero(0).act();
+        hero(0).dropPotion();
         tick();
 
         // и тикать
@@ -485,7 +485,7 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
 
         hero(0).right();
-        hero(0).act();
+        hero(0).dropPotion();
         tick();
 
         hero(0).left();
@@ -625,7 +625,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         // when
         // когда я выношу одного игрока
-        hero(0).act();
+        hero(0).dropPotion();
         tick();
 
         hero(0).up();
@@ -698,7 +698,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "☺♣♥  \n", 0);
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         tick();
 
         hero(0).up();
@@ -767,7 +767,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         // when
         // ставим зелье и убегаем
-        hero(2).act();
+        hero(2).dropPotion();
         tick();
 
         hero(2).right();

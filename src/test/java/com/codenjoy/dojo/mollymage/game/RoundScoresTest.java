@@ -86,7 +86,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // when
         // когда я выношу одного игрока
-        hero(1).act();
+        hero(1).dropPotion();
         tick();
 
         hero(1).right();
@@ -179,7 +179,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // when
         // когда я выношу одного игрока
-        hero(1).act();
+        hero(1).dropPotion();
         tick();
 
         hero(1).right();
@@ -271,7 +271,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // when
         // когда я выношу одного игрока
-        hero(2).act();
+        hero(2).dropPotion();
         tick();
 
         hero(2).right();
@@ -432,7 +432,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // when
         // когда я выношу одного игрока
-        hero(1).act();
+        hero(1).dropPotion();
         tick();
 
         hero(1).right();
@@ -577,8 +577,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // when
         // пошла движуха
-        hero(3).act();
-        hero(1).act();
+        hero(3).dropPotion();
+        hero(1).dropPotion();
         tick();
 
         hero(3).right();
@@ -776,8 +776,8 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // when
         // пошла движуха
-        hero(4).act();
-        hero(1).act();
+        hero(4).dropPotion();
+        hero(1).dropPotion();
         tick();
 
         hero(4).right();
@@ -955,7 +955,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // when
         // бахнем зелье
-        hero(2).act();
+        hero(2).dropPotion();
         tick();
 
         hero(2).left();
@@ -1084,7 +1084,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // when
         // бахнем зелье
-        hero(2).act();
+        hero(2).dropPotion();
         tick();
 
         hero(2).left();
@@ -1138,7 +1138,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // when
         // выношу одного игрока мощным снарядом
-        hero(0).act();
+        hero(0).dropPotion();
         tick();
 
         hero(0).up();
@@ -1199,7 +1199,7 @@ public class RoundScoresTest extends AbstractGameTest {
         // when
         // а теперь пробую то же, но через останки только что
         // поверженного соперника - они не должны мешать взрывной волне
-        hero(0).act();
+        hero(0).dropPotion();
         tick();
 
         hero(0).up();
@@ -1261,7 +1261,7 @@ public class RoundScoresTest extends AbstractGameTest {
         // when
         // а теперь посмотрим как взорвется зелье на двух трупиках
         // они должны быть полностью прозрачна для взрывной волны
-        hero(0).act();
+        hero(0).dropPotion();
         tick();
 
         hero(0).up();

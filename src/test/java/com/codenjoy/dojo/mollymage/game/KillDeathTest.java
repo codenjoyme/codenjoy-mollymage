@@ -42,7 +42,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "☺    \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -119,7 +119,7 @@ public class KillDeathTest extends AbstractGameTest {
         tick();
 
         hero().right();
-        hero().act();
+        hero().dropPotion();
         tick();
 
         tick();
@@ -222,7 +222,7 @@ public class KillDeathTest extends AbstractGameTest {
         killPotioner();
 
         // when
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -246,7 +246,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "☺    \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().right();
@@ -304,7 +304,7 @@ public class KillDeathTest extends AbstractGameTest {
         hero().right();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().left();
@@ -359,7 +359,7 @@ public class KillDeathTest extends AbstractGameTest {
 
         // when
         hero().up();
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().down();
@@ -416,7 +416,7 @@ public class KillDeathTest extends AbstractGameTest {
         hero().down();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().up();
@@ -476,7 +476,7 @@ public class KillDeathTest extends AbstractGameTest {
         hero().right();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().up();
@@ -517,7 +517,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "     \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().down();
@@ -562,7 +562,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "#####\n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -675,7 +675,7 @@ public class KillDeathTest extends AbstractGameTest {
         // when
         tick();
 
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -748,7 +748,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "☺  & \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -791,7 +791,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "☺☺   \n");
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
         tick();
 

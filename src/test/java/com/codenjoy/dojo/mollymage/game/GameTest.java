@@ -186,7 +186,7 @@ public class GameTest extends AbstractGameTest {
 
         // when
         // hero set bomb and goes away
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -281,7 +281,7 @@ public class GameTest extends AbstractGameTest {
             Direction.RIGHT.value()); // направление движения
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -334,7 +334,7 @@ public class GameTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().up();
@@ -382,7 +382,7 @@ public class GameTest extends AbstractGameTest {
                 "☺☺   \n");
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(1).up();
         tick();
 
@@ -452,7 +452,7 @@ public class GameTest extends AbstractGameTest {
                 "☺☺   \n");
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
 
         // then
@@ -485,9 +485,9 @@ public class GameTest extends AbstractGameTest {
                 "#&&  \n", 0);
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
         tick();
 

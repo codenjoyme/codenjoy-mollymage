@@ -45,7 +45,7 @@ public class PotionTest extends AbstractGameTest {
                 "☺    \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -72,7 +72,7 @@ public class PotionTest extends AbstractGameTest {
         hero().right();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -98,13 +98,13 @@ public class PotionTest extends AbstractGameTest {
         hero().up();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().right();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -130,7 +130,7 @@ public class PotionTest extends AbstractGameTest {
 
         // when
         hero().up();
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -142,7 +142,7 @@ public class PotionTest extends AbstractGameTest {
 
         // when
         hero().up();
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -154,7 +154,7 @@ public class PotionTest extends AbstractGameTest {
 
         // when
         hero().up();
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -178,10 +178,10 @@ public class PotionTest extends AbstractGameTest {
                 "☺    \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -246,7 +246,7 @@ public class PotionTest extends AbstractGameTest {
                 "☺    \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().right();
@@ -288,7 +288,7 @@ public class PotionTest extends AbstractGameTest {
                 "҉҉☺  \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -309,7 +309,7 @@ public class PotionTest extends AbstractGameTest {
                 "☺    \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().right();
@@ -339,7 +339,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         tick();
 
         hero().left();
@@ -369,7 +369,7 @@ public class PotionTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         goOut();
 
         // then
@@ -425,7 +425,7 @@ public class PotionTest extends AbstractGameTest {
         settings.integer(POTION_POWER, power);
 
         // when
-        hero().act();
+        hero().dropPotion();
         goOut();
         tick();
 
@@ -541,11 +541,11 @@ public class PotionTest extends AbstractGameTest {
                 "☺    \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -613,7 +613,7 @@ public class PotionTest extends AbstractGameTest {
                 "☺    \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -646,7 +646,7 @@ public class PotionTest extends AbstractGameTest {
                 "☺    \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
         hero().right();
@@ -710,7 +710,7 @@ public class PotionTest extends AbstractGameTest {
         hero().up();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         tick();
         tick();
         tick();
@@ -745,7 +745,7 @@ public class PotionTest extends AbstractGameTest {
         // when
         dice(101); // don't drop perk by accident
 
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -782,7 +782,7 @@ public class PotionTest extends AbstractGameTest {
                 "☺   &  \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -822,10 +822,10 @@ public class PotionTest extends AbstractGameTest {
                 "☺☺   \n");
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
 
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
 
         tick();
@@ -838,10 +838,10 @@ public class PotionTest extends AbstractGameTest {
                 "44   \n", 0);
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
 
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
 
         tick();
@@ -869,10 +869,10 @@ public class PotionTest extends AbstractGameTest {
         player(0).inTeam(0);
         player(1).inTeam(1);
 
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
 
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
 
         tick();
@@ -885,10 +885,10 @@ public class PotionTest extends AbstractGameTest {
                 "44   \n", 0);
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
 
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
 
         tick();
@@ -913,10 +913,10 @@ public class PotionTest extends AbstractGameTest {
                 "☺☺   \n");
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
 
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
 
         tick();
@@ -929,10 +929,10 @@ public class PotionTest extends AbstractGameTest {
                 "44   \n", 0);
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
 
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
 
         tick();
@@ -945,10 +945,10 @@ public class PotionTest extends AbstractGameTest {
                 "33   \n", 0);
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
 
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
 
         tick();
@@ -973,7 +973,7 @@ public class PotionTest extends AbstractGameTest {
                 "☺☺   \n");
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
 
         tick();
@@ -986,7 +986,7 @@ public class PotionTest extends AbstractGameTest {
                 "4♥   \n", 0);
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
 
         tick();
@@ -999,7 +999,7 @@ public class PotionTest extends AbstractGameTest {
                 "3♥   \n", 0);
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
 
         tick();

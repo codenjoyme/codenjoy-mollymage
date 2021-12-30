@@ -66,7 +66,7 @@ public class EventsTest extends AbstractGameTest {
                 "#☺   \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -99,7 +99,7 @@ public class EventsTest extends AbstractGameTest {
                 "&☺   \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -141,19 +141,19 @@ public class EventsTest extends AbstractGameTest {
                 "&☺   \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -228,7 +228,7 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         hero().down();
-        hero().act();
+        hero().dropPotion();
         tick();
 
         // then
@@ -277,7 +277,7 @@ public class EventsTest extends AbstractGameTest {
                 " ☺   \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().right();
         tick();
 
@@ -316,19 +316,19 @@ public class EventsTest extends AbstractGameTest {
                 "&☺   \n");
 
         // when
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -379,7 +379,7 @@ public class EventsTest extends AbstractGameTest {
 
         // when
         // portion explode
-        hero().act();
+        hero().dropPotion();
         hero().up();
         tick();
 
@@ -437,7 +437,7 @@ public class EventsTest extends AbstractGameTest {
                 "#☺   \n");
 
         // when
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).right();
         hero(0).up();
         tick();
@@ -486,7 +486,7 @@ public class EventsTest extends AbstractGameTest {
                 "&☺   \n");
 
         // when
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).right();
         hero(0).up();
         tick();
@@ -533,9 +533,9 @@ public class EventsTest extends AbstractGameTest {
                 "☺#☺  \n");
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
         tick();
 
@@ -584,9 +584,9 @@ public class EventsTest extends AbstractGameTest {
                 "☺#♥  \n", 0);
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
         tick();
 
@@ -642,9 +642,9 @@ public class EventsTest extends AbstractGameTest {
                 "☺##☺ \n");
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
         tick();
 
@@ -689,10 +689,10 @@ public class EventsTest extends AbstractGameTest {
                 "     \n");
 
         // when
-        hero(0).act();
-        hero(1).act();
-        hero(2).act();
-        hero(3).act();
+        hero(0).dropPotion();
+        hero(1).dropPotion();
+        hero(2).dropPotion();
+        hero(3).dropPotion();
         tick();
 
         tick();
@@ -736,10 +736,10 @@ public class EventsTest extends AbstractGameTest {
                 "     \n");
 
         // when
-        hero(0).act();
-        hero(1).act();
-        hero(2).act();
-        hero(3).act();
+        hero(0).dropPotion();
+        hero(1).dropPotion();
+        hero(2).dropPotion();
+        hero(3).dropPotion();
         tick();
 
         tick();
@@ -793,9 +793,9 @@ public class EventsTest extends AbstractGameTest {
                 "☺##♥ \n", 0);
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
         tick();
 
@@ -847,9 +847,9 @@ public class EventsTest extends AbstractGameTest {
                 "☺&☺  \n");
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
         tick();
 
@@ -891,9 +891,9 @@ public class EventsTest extends AbstractGameTest {
                 "☺&☺  \n");
 
         // when
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).up();
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).up();
         tick();
 
@@ -938,10 +938,10 @@ public class EventsTest extends AbstractGameTest {
                 "     \n");
 
         // when
-        hero(0).act();
-        hero(1).act();
-        hero(2).act();
-        hero(3).act();
+        hero(0).dropPotion();
+        hero(1).dropPotion();
+        hero(2).dropPotion();
+        hero(3).dropPotion();
         tick();
 
         tick();
@@ -990,31 +990,31 @@ public class EventsTest extends AbstractGameTest {
         // when
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
-        hero(0).act();
+        hero(0).dropPotion();
         tick();
 
         hero(0).move(1, 3);
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).move(0, 0);
 
         hero(1).move(2, 1);
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).move(1, 1);
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).move(1, 0);
         tick();
 
         hero(2).move(3, 2);
-        hero(2).act();
+        hero(2).dropPotion();
         hero(2).move(3, 1);
-        hero(2).act();
+        hero(2).dropPotion();
         hero(2).move(2, 0);
         tick();
 
         hero(3).move(2, 3);
-        hero(3).act();
+        hero(3).dropPotion();
         hero(3).move(3, 3);
-        hero(3).act();
+        hero(3).dropPotion();
         hero(3).move(3, 0);
 
         tick();
@@ -1094,31 +1094,31 @@ public class EventsTest extends AbstractGameTest {
 
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
-        hero(0).act();
+        hero(0).dropPotion();
         tick();
 
         hero(0).move(1, 3);
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).move(0, 0);
 
         hero(1).move(2, 1);
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).move(1, 1);
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).move(1, 0);
         tick();
 
         hero(2).move(3, 2);
-        hero(2).act();
+        hero(2).dropPotion();
         hero(2).move(3, 1);
-        hero(2).act();
+        hero(2).dropPotion();
         hero(2).move(2, 0);
         tick();
 
         hero(3).move(2, 3);
-        hero(3).act();
+        hero(3).dropPotion();
         hero(3).move(3, 3);
-        hero(3).act();
+        hero(3).dropPotion();
         hero(3).move(3, 0);
 
         tick();
@@ -1191,31 +1191,31 @@ public class EventsTest extends AbstractGameTest {
         // when
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
-        hero(0).act();
+        hero(0).dropPotion();
         tick();
 
         hero(0).move(1, 3);
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).move(0, 0);
 
         hero(1).move(2, 1);
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).move(1, 1);
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).move(1, 0);
         tick();
 
         hero(2).move(3, 2);
-        hero(2).act();
+        hero(2).dropPotion();
         hero(2).move(3, 1);
-        hero(2).act();
+        hero(2).dropPotion();
         hero(2).move(2, 0);
         tick();
 
         hero(3).move(2, 3);
-        hero(3).act();
+        hero(3).dropPotion();
         hero(3).move(3, 3);
-        hero(3).act();
+        hero(3).dropPotion();
         hero(3).move(3, 0);
 
         tick();
@@ -1291,31 +1291,31 @@ public class EventsTest extends AbstractGameTest {
         // when
         // зелье, которым все пордорвем
         hero(0).move(1, 2);
-        hero(0).act();
+        hero(0).dropPotion();
         tick();
 
         hero(0).move(1, 3);
-        hero(0).act();
+        hero(0).dropPotion();
         hero(0).move(0, 0);
 
         hero(1).move(2, 1);
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).move(1, 1);
-        hero(1).act();
+        hero(1).dropPotion();
         hero(1).move(1, 0);
         tick();
 
         hero(2).move(3, 2);
-        hero(2).act();
+        hero(2).dropPotion();
         hero(2).move(3, 1);
-        hero(2).act();
+        hero(2).dropPotion();
         hero(2).move(2, 0);
         tick();
 
         hero(3).move(2, 3);
-        hero(3).act();
+        hero(3).dropPotion();
         hero(3).move(3, 3);
-        hero(3).act();
+        hero(3).dropPotion();
         hero(3).move(3, 0);
 
         tick();

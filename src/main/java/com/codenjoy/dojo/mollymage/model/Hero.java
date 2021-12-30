@@ -41,6 +41,7 @@ import static com.codenjoy.dojo.games.mollymage.Element.*;
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
 import static com.codenjoy.dojo.mollymage.services.Event.*;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.services.Direction.*;
 import static com.codenjoy.dojo.services.StateUtils.filter;
 import static com.codenjoy.dojo.services.StateUtils.filterOne;
 
@@ -80,28 +81,28 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
     public void right() {
         if (!isActiveAndAlive()) return;
 
-        direction = Direction.RIGHT;
+        direction = RIGHT;
     }
 
     @Override
     public void down() {
         if (!isActiveAndAlive()) return;
 
-        direction = Direction.DOWN;
+        direction = DOWN;
     }
 
     @Override
     public void up() {
         if (!isActiveAndAlive()) return;
 
-        direction = Direction.UP;
+        direction = UP;
     }
 
     @Override
     public void left() {
         if (!isActiveAndAlive()) return;
 
-        direction = Direction.LEFT;
+        direction = LEFT;
     }
 
     @Override

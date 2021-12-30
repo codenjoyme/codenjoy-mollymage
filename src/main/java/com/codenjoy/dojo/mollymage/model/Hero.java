@@ -32,6 +32,7 @@ import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
+import com.codenjoy.dojo.services.joystick.Act;
 import com.codenjoy.dojo.services.round.RoundPlayerHero;
 
 import java.util.List;
@@ -108,6 +109,7 @@ public class Hero extends RoundPlayerHero<Field> implements State<Element, Playe
         if (!isActiveAndAlive()) return;
 
         Act is = new Act(p);
+
         if (is.act(ACT_THROW_POISON)) {
             if (direction != null) {
                 throwPoison = true;

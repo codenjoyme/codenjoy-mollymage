@@ -22,6 +22,7 @@ package com.codenjoy.dojo.mollymage.model;
  * #L%
  */
 
+import com.codenjoy.dojo.services.joystick.Act;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -84,15 +84,15 @@ public class Hero extends RoundPlayerHero<Field>
     }
 
     @Override
-    public void act(Act is) {
-        if (is.act(ACT_THROW_POISON)) {
+    public void act(Act act) {
+        if (act.is(ACT_THROW_POISON)) {
             if (direction != null) {
                 throwPoison = true;
             }
             return;
         }
 
-        if (is.act(ACT_EXPLODE_ALL_POTIONS)) {
+        if (act.is(ACT_EXPLODE_ALL_POTIONS)) {
             explodeAllPotions = true;
             return;
         }

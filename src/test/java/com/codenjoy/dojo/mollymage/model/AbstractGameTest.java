@@ -31,16 +31,13 @@ import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.services.Event;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.services.Dice;
-import com.codenjoy.dojo.services.EventListener;
-import com.codenjoy.dojo.services.Game;
-import com.codenjoy.dojo.services.PointImpl;
+import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
-import com.codenjoy.dojo.services.multiplayer.Single;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.utils.TestUtils;
 import com.codenjoy.dojo.utils.events.EventsListenersAssert;
+import com.codenjoy.dojo.whatsnext.WhatsNextUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.mockito.stubbing.OngoingStubbing;
@@ -52,6 +49,8 @@ import java.util.Objects;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
+import static com.codenjoy.dojo.utils.TestUtils.asArray;
+import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -89,6 +88,7 @@ public abstract class AbstractGameTest {
     }
 
     public void dice(int... ints) {
+        if (ints.length == 0) return;
         OngoingStubbing<Integer> when = when(dice.next(anyInt()));
         for (int i : ints) {
             when = when.thenReturn(i);
@@ -100,38 +100,50 @@ public abstract class AbstractGameTest {
         settings.setLevelMaps(levelNumber, maps);
         level = settings.level(levelNumber, dice, Level::new);
 
-        beforeCrateField();
+        beforeCreateField();
 
-        field = new MollyMage(dice, level, settings);
-        level.heroes().forEach(this::givenPlayer);
+        field = new MollyMage(dice, null, settings);
+        field.load(level.map(), this::givenPlayer);
 
-        afterCrateField();
+        setupHeroesDice();
+
+        games = WhatsNextUtils.newGameForAll(players, printer, field);
+
+        afterCreateField();
     }
 
-    private void beforeCrateField() {
+    private void setupHeroesDice() {
+        dice(asArray(level.heroes()));
+    }
+
+    private void beforeCreateField() {
         // settings / level pre-processing
     }
 
-    private void afterCrateField() {
+    private void afterCreateField() {
         settings.integer(TREASURE_BOX_COUNT, field.boxes().size())
                 .integer(GHOSTS_COUNT, field.ghosts().size());
 
         stopGhosts(); // по умолчанию все привидения стоят на месте
     }
 
-    private void givenPlayer(Hero hero) {
+    protected Player givenPlayer() {
         EventListener listener = mock(EventListener.class);
         listeners.add(listener);
 
         Player player = new Player(listener, settings);
         players.add(player);
+        return player;
+    }
 
-        Game game = new Single(player, printer);
+    public Player givenPlayer(Point pt) {
+        Player player = givenPlayer();
+
+        dice(asArray(asList(pt)));
+        Game game = WhatsNextUtils.newGame(player, printer, field);
         games.add(game);
 
-        dice(hero.getX(), hero.getY());
-        game.on(field);
-        game.newGame();
+        return players.get(players.size() - 1);
     }
 
     protected GameSettings settings() {

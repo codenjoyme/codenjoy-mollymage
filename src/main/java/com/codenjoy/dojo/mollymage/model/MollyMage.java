@@ -41,11 +41,13 @@ import com.codenjoy.dojo.services.field.Accessor;
 import com.codenjoy.dojo.services.field.PointField;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.round.RoundField;
+import com.codenjoy.dojo.whatsnext.WhatsNextUtils;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 import static com.codenjoy.dojo.mollymage.services.Event.*;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
@@ -78,6 +80,8 @@ public class MollyMage extends RoundField<Player> implements Field {
 
     @Override
     public void clearScore() {
+        if (level == null) return;
+
         level.saveTo(field);
         field.init(this);
 
@@ -584,6 +588,12 @@ public class MollyMage extends RoundField<Player> implements Field {
                 Potion.class,
                 Blast.class,
                 PerkOnBoard.class);
+    }
+
+    @Override
+    public List<Player> load(String board, Supplier<Player> player) {
+        level = new Level(board);
+        return WhatsNextUtils.load(this, level.heroes(), player);
     }
 
     @Override

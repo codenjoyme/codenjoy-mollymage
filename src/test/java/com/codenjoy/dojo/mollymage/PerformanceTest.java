@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.mollymage.services;
+package com.codenjoy.dojo.mollymage;
 
 /*-
  * #%L
@@ -26,8 +26,13 @@ package com.codenjoy.dojo.mollymage.services;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.services.GameRunner;
+import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.profile.Profiler;
-import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.EventListener;
+import com.codenjoy.dojo.services.Game;
+import com.codenjoy.dojo.services.Joystick;
+import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.dice.RandomDice;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.printer.BoardReader;

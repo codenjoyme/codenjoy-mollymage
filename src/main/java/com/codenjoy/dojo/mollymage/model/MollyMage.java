@@ -41,7 +41,7 @@ import com.codenjoy.dojo.services.field.Accessor;
 import com.codenjoy.dojo.services.field.PointField;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.round.RoundField;
-import com.codenjoy.dojo.whatsnext.WhatsNextUtils;
+import com.codenjoy.dojo.utils.whatsnext.WhatsNextUtils;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;

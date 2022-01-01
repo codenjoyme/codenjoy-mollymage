@@ -29,7 +29,6 @@ import org.junit.Test;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.Direction.DOWN;
 import static com.codenjoy.dojo.services.Direction.UP;
-import static org.junit.Assert.assertEquals;
 
 public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
@@ -43,7 +42,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldPerkDisappearWhenTimeout() {
         // given
-        settings.integer(PERK_PICK_TIMEOUT, 5);
+        settings().integer(PERK_PICK_TIMEOUT, 5);
 
         givenFl("######\n" +
                 "# # ##\n" +
@@ -234,7 +233,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldNotThrowPoison_withoutPTperk() {
         // given
-        settings.integer(POTION_POWER, 4)
+        settings().integer(POTION_POWER, 4)
                 .integer(POISON_THROWER_RECHARGE, 3);
 
         givenFl("##########\n" +
@@ -268,7 +267,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldNotDoAnythingWhenACTWithoutMove_withPTperk() {
         // given
-        settings.integer(POTION_POWER, 4)
+        settings().integer(POTION_POWER, 4)
                 .integer(POISON_THROWER_RECHARGE, 3);
 
         givenFl("##########\n" +
@@ -306,7 +305,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoisonThroughThePotion_withPTperk() {
         // given
-        settings.integer(POTION_POWER, 4)
+        settings().integer(POTION_POWER, 4)
                 .integer(POISON_THROWER_RECHARGE, 3);
 
         givenFl("☼☼☼☼☼☼☼☼☼☼\n" +
@@ -370,7 +369,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldDetonatePotionWhenThrowPoison_withPTperk_withBadaBoom() {
         // given
-        settings.integer(POTION_POWER, 4)
+        settings().integer(POTION_POWER, 4)
                 .integer(POISON_THROWER_RECHARGE, 3)
                 .bool(BIG_BADABOOM, true);
 
@@ -438,7 +437,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldPerkWorksAfterCombine_WithPTPerk() {
         // given
-        settings.integer(POTION_POWER, 4)
+        settings().integer(POTION_POWER, 4)
                 .integer(POISON_THROWER_RECHARGE, 1);
 
         givenFl("☼☼☼☼☼\n" +
@@ -517,7 +516,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoison_whenPTperk() {
         // given
-        settings.integer(POTION_POWER, 4)
+        settings().integer(POTION_POWER, 4)
                 .integer(POISON_THROWER_RECHARGE, 3);
 
         givenFl("##########\n" +
@@ -621,7 +620,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldThrowPoisonWithIncreasedPower_withPT_withPBRI_perks() {
         // given
-        settings.integer(POTION_POWER, 4)
+        settings().integer(POTION_POWER, 4)
                 .integer(POISON_THROWER_RECHARGE, 3);
 
         givenFl("##########\n" +
@@ -1026,7 +1025,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastOnAction_whenBRCperk_caseTwoPotions() {
         // given
-        settings.integer(POTIONS_COUNT, 2);
+        settings().integer(POTIONS_COUNT, 2);
 
         givenFl("     \n" +
                 "     \n" +
@@ -1250,7 +1249,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldPotionBlastOnAction_whenBRCperk_caseOnePotion() {
         // given
-        settings.integer(POTIONS_COUNT, 1);
+        settings().integer(POTIONS_COUNT, 1);
 
         givenFl("     \n" +
                 "     \n" +
@@ -1474,7 +1473,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     @Test
     public void shouldSuicide_whenBRCPerk_shouldRemoveAfterDeath_andCollectScores() {
         // given
-        settings.integer(POTIONS_COUNT, 1)
+        settings().integer(POTIONS_COUNT, 1)
                 .integer(POTION_POWER, 3);
 
         givenFl("     \n" +

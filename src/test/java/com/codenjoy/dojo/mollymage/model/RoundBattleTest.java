@@ -29,13 +29,12 @@ import org.junit.Test;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
 import static com.codenjoy.dojo.services.Direction.DOWN;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
-import static org.junit.Assert.assertEquals;
 
 public class RoundBattleTest extends AbstractGameTest {
 
     @Override
-    protected GameSettings settings() {
-        return super.settings()
+    protected GameSettings setupSettings() {
+        return super.setupSettings()
                 .bool(ROUNDS_ENABLED, true)
                 .integer(ROUNDS_TIME_BEFORE_START, 5)
                 .integer(ROUNDS_PER_MATCH, 3)
@@ -50,7 +49,7 @@ public class RoundBattleTest extends AbstractGameTest {
     @Test
     public void shouldAllPlayersOnBoardIsInactive_whenStart() {
         // given
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3);
+        settings().integer(ROUNDS_PLAYERS_PER_ROOM, 3);
 
         givenFl("     \n" +
                 "     \n" +
@@ -216,7 +215,7 @@ public class RoundBattleTest extends AbstractGameTest {
     @Test
     public void shouldMoveToInactive_whenKillSomeone() {
         // given
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
+        settings().integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1); // TODO а что будет если тут 0 игра хоть начнется?
 
         givenFl("     \n" +
@@ -304,7 +303,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
         // новые координаты для героя
         dice(3, 4);
-        field.newGame(player(2)); // это сделает сервер в ответ на isAlive = false
+        field().newGame(player(2)); // это сделает сервер в ответ на isAlive = false
 
         // then
         // игрок уже живой но неактивный до начала следующего раунда
@@ -327,7 +326,7 @@ public class RoundBattleTest extends AbstractGameTest {
     @Test
     public void shouldDrawGhost_onPlaceOfDeath() {
         // given
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
+        settings().integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
 
@@ -433,7 +432,7 @@ public class RoundBattleTest extends AbstractGameTest {
     @Test
     public void shouldDrawGhost_onPlaceOfDeath_withBomb() {
         // given
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
+        settings().integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
 
@@ -586,7 +585,7 @@ public class RoundBattleTest extends AbstractGameTest {
 
     private void givenCaseWhenPlaceOfDeathOnMyWay() {
         // given
-        settings.integer(ROUNDS_PLAYERS_PER_ROOM, 3)
+        settings().integer(ROUNDS_PLAYERS_PER_ROOM, 3)
                 .integer(ROUNDS_TIME_BEFORE_START, 1)
                 .integer(ROUNDS_TIME, 20);
 
@@ -744,7 +743,7 @@ public class RoundBattleTest extends AbstractGameTest {
         // given
         shouldPlaceOfDeath_isNotABarrierForOtherHero();
 
-        // вижу себя в клетке где еще трупик
+        // вижу себя в клетке, где еще трупик
         assertF("     \n" +
                 "     \n" +
                 "     \n" +

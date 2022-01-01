@@ -31,7 +31,6 @@ import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTIONS_COUNT;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
-import static org.junit.Assert.assertEquals;
 
 public class PotionTest extends AbstractGameTest {
 
@@ -86,7 +85,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldPotionsDropped_whenHeroDropThreePotion() {
         // given
-        settings.integer(POTIONS_COUNT, 3);
+        settings().integer(POTIONS_COUNT, 3);
 
         givenFl("     \n" +
                 "     \n" +
@@ -120,7 +119,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldOnlyTwoPotions_whenLevelApproveIt() {
         // given
-        settings.integer(POTIONS_COUNT, 2);
+        settings().integer(POTIONS_COUNT, 2);
 
         givenFl("     \n" +
                 "     \n" +
@@ -169,7 +168,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldOnlyOnePotionPerPlace() {
         // given
-        settings.integer(POTIONS_COUNT, 2);
+        settings().integer(POTIONS_COUNT, 2);
 
         givenFl("     \n" +
                 "     \n" +
@@ -191,7 +190,7 @@ public class PotionTest extends AbstractGameTest {
                 "     \n" +
                 "☻    \n");
 
-        assertEquals(1, field.potions().size());
+        assertEquals(1, field().potions().size());
 
         // when
         hero().right();
@@ -422,7 +421,7 @@ public class PotionTest extends AbstractGameTest {
 
     private void assertPotionPower(int power, String expected) {
         // given
-        settings.integer(POTION_POWER, power);
+        settings().integer(POTION_POWER, power);
 
         // when
         hero().dropPotion();
@@ -532,7 +531,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldNoChangeOriginalPotionsWhenUseBoardApiButTimersSynchronized() {
         // given
-        settings.integer(POTIONS_COUNT, 2);
+        settings().integer(POTIONS_COUNT, 2);
 
         givenFl("     \n" +
                 "     \n" +
@@ -550,9 +549,9 @@ public class PotionTest extends AbstractGameTest {
         tick();
 
         // then
-        List<Potion> potions1 = field.potions().all();
-        List<Potion> potions2 = field.potions().all();
-        List<Potion> potions3 = field.potions().all();
+        List<Potion> potions1 = field().potions().all();
+        List<Potion> potions2 = field().potions().all();
+        List<Potion> potions3 = field().potions().all();
         assertEquals(potions1.toString(), potions2.toString());
         assertEquals(potions2.toString(), potions3.toString());
         assertEquals(potions3.toString(), potions1.toString());
@@ -618,7 +617,7 @@ public class PotionTest extends AbstractGameTest {
         tick();
 
         // then
-        List<Potion> potions1 = field.potions().all();
+        List<Potion> potions1 = field().potions().all();
         assertEquals(1, potions1.size());
 
         // when
@@ -630,7 +629,7 @@ public class PotionTest extends AbstractGameTest {
         // then
         verifyAllEvents("[HERO_DIED]");
 
-        List<Potion> potions2 = field.potions().all();
+        List<Potion> potions2 = field().potions().all();
         assertEquals(0, potions2.size());
         assertEquals(0, potions1.size());
         assertEquals(potions1.toString(), potions2.toString());
@@ -656,9 +655,9 @@ public class PotionTest extends AbstractGameTest {
         tick();
 
         // then
-        List<Blast> blasts1 = field.blasts().all();
-        List<Blast> blasts2 = field.blasts().all();
-        List<Blast> blasts3 = field.blasts().all();
+        List<Blast> blasts1 = field().blasts().all();
+        List<Blast> blasts2 = field().blasts().all();
+        List<Blast> blasts3 = field().blasts().all();
         assertEquals(blasts1.toString(), blasts2.toString());
         assertEquals(blasts2.toString(), blasts3.toString());
         assertEquals(blasts3.toString(), blasts1.toString());
@@ -682,7 +681,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldBlastWaveDoesNotPassThroughWall() {
         // given
-        settings.integer(POTION_POWER, 3);
+        settings().integer(POTION_POWER, 3);
 
         givenFl("☼☼☼☼☼☼☼\n" +
                 "☼     ☼\n" +
@@ -732,7 +731,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldStopBlastWhenHeroOrDestroyWalls() {
         // given
-        settings.integer(POTION_POWER, 5);
+        settings().integer(POTION_POWER, 5);
 
         givenFl("       \n" +
                 "       \n" +
@@ -771,7 +770,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldStopBlastWhenGhost() {
         // given
-        settings.integer(POTION_POWER, 5);
+        settings().integer(POTION_POWER, 5);
 
         givenFl("       \n" +
                 "       \n" +
@@ -813,7 +812,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldTwoPotionsOnBoard() {
         // given
-        settings.integer(POTIONS_COUNT, 1);
+        settings().integer(POTIONS_COUNT, 1);
 
         givenFl("     \n" +
                 "     \n" +
@@ -857,7 +856,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldTwoPotionsOnBoard_withEnemy() {
         // given
-        settings.integer(POTIONS_COUNT, 1);
+        settings().integer(POTIONS_COUNT, 1);
 
         givenFl("     \n" +
                 "     \n" +
@@ -904,7 +903,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldFourPotionsOnBoard() {
         // given
-        settings.integer(POTIONS_COUNT, 2);
+        settings().integer(POTIONS_COUNT, 2);
 
         givenFl("     \n" +
                 "     \n" +
@@ -964,7 +963,7 @@ public class PotionTest extends AbstractGameTest {
     @Test
     public void shouldFourPotionsOnBoard_checkTwoPotionsPerHero() {
         // given
-        settings.integer(POTIONS_COUNT, 2);
+        settings().integer(POTIONS_COUNT, 2);
 
         givenFl("     \n" +
                 "     \n" +

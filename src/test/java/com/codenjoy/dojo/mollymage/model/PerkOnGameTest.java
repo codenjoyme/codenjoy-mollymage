@@ -30,7 +30,6 @@ import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static org.junit.Assert.assertEquals;
 
 public class PerkOnGameTest extends AbstractGameTest {
 
@@ -125,7 +124,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         tick();
 
         int before = hero().scores();
-        assertEquals(2 * settings.integer(KILL_WALL_SCORE), before);
+        assertEquals(2 * settings().integer(KILL_WALL_SCORE), before);
 
         assertF("######\n" +
                 "# # ##\n" +
@@ -148,7 +147,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "#+####\n");
 
         verifyAllEvents("[CATCH_PERK]");
-        assertEquals(before + settings.integer(CATCH_PERK_SCORE), hero().scores());
+        assertEquals(before + settings().integer(CATCH_PERK_SCORE), hero().scores());
         assertEquals("Hero had to acquire new perk",
                 1, player().getHero().getPerks().size());
     }
@@ -376,7 +375,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         hero().move(3, 4);
         newBox(1, 2); // две коробки подорвали, две добавили
         newBox(1, 3);
-        field.walls().add(new Wall(pt(1, 4)));
+        field().walls().add(new Wall(pt(1, 4)));
 
         // when
         tick();
@@ -538,7 +537,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     @Test
     public void shouldDropPerk_generateNewGhost_thenKillIt() {
         // given
-        settings.integer(POTIONS_COUNT, 2);
+        settings().integer(POTIONS_COUNT, 2);
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
 
@@ -694,13 +693,13 @@ public class PerkOnGameTest extends AbstractGameTest {
     @Test
     public void shouldKillGhostWithSuicide() {
         // given
-        settings.integer(POTIONS_COUNT, 2);
+        settings().integer(POTIONS_COUNT, 2);
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
         hero().getPerks().clear(); // удаляем любые перки
 
         // взрывная волна большая
-        settings.integer(POTION_POWER, 5);
+        settings().integer(POTION_POWER, 5);
 
         // when
         hero().right();
@@ -861,7 +860,7 @@ public class PerkOnGameTest extends AbstractGameTest {
     @Test
     public void shouldKillGhostAfterEatMe() {
         // given
-        settings.integer(POTIONS_COUNT, 2);
+        settings().integer(POTIONS_COUNT, 2);
 
         shouldHeroAcquirePerk_whenMoveToFieldWithPerk();
 
@@ -1045,13 +1044,13 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // given
         // строим оборону
-        field.boxes().removeAt(pt(5, 5));
-        field.boxes().removeAt(pt(5, 4));
-        field.boxes().removeAt(pt(4, 4));
-        field.boxes().removeAt(pt(4, 5));
+        field().boxes().removeAt(pt(5, 5));
+        field().boxes().removeAt(pt(5, 4));
+        field().boxes().removeAt(pt(4, 4));
+        field().boxes().removeAt(pt(4, 5));
 
-        field.walls().add(new Wall(pt(4, 4)));
-        field.walls().add(new Wall(pt(4, 5)));
+        field().walls().add(new Wall(pt(4, 4)));
+        field().walls().add(new Wall(pt(4, 5)));
 
         hero().move(5, 5); // убегаем в укрытие
 
@@ -1158,7 +1157,7 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // when
         // но стоит забарикадироваться
-        field.walls().add(new Wall(pt(5, 4)));
+        field().walls().add(new Wall(pt(5, 4)));
         tick();
 
         // then

@@ -27,7 +27,6 @@ import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static org.junit.Assert.assertEquals;
 
 public class EventsTest extends AbstractGameTest {
 
@@ -125,7 +124,7 @@ public class EventsTest extends AbstractGameTest {
     @Test
     public void shouldCalculateGhostsAndWallKills() {
         // given
-        settings.integer(POTIONS_COUNT, 4)
+        settings().integer(POTIONS_COUNT, 4)
                 .integer(POTION_POWER, 1);
 
         givenFl("     \n" +
@@ -299,7 +298,7 @@ public class EventsTest extends AbstractGameTest {
     @Test
     public void shouldCalculateGhostsAndWallKills_caseBigBadaboom() {
         // given
-        settings.bool(BIG_BADABOOM, true)
+        settings().bool(BIG_BADABOOM, true)
                 .integer(POTIONS_COUNT, 4)
                 .integer(POTION_POWER, 1);
 
@@ -371,7 +370,7 @@ public class EventsTest extends AbstractGameTest {
     @Test
     public void shouldGhostNotAppearOnThePlaceWhereItDie_AfterKill() {
         // given
-        settings.integer(POTION_POWER, 3);
+        settings().integer(POTION_POWER, 3);
 
         givenFl("   \n" +
                 "   \n" +
@@ -400,7 +399,7 @@ public class EventsTest extends AbstractGameTest {
 
         // when
         // fill free places boxes
-        settings.integer(TREASURE_BOX_COUNT, 6);
+        settings().integer(TREASURE_BOX_COUNT, 6);
         dice(preparedCoordinatesForBoxesAndGhosts());
         tick();
 
@@ -412,7 +411,7 @@ public class EventsTest extends AbstractGameTest {
                 "#☺#\n" +
                 "## \n");
 
-        assertEquals(1, field.ghosts().size());
+        assertEquals(1, field().ghosts().size());
     }
 
     private int[] preparedCoordinatesForBoxesAndGhosts() {
@@ -633,7 +632,7 @@ public class EventsTest extends AbstractGameTest {
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseHERO_DIED() {
         // given
-        settings.integer(POTION_POWER, 2);
+        settings().integer(POTION_POWER, 2);
 
         givenFl("     \n" +
                 "     \n" +
@@ -778,7 +777,7 @@ public class EventsTest extends AbstractGameTest {
     @Test
     public void shouldCrossBlasts_checkingScores_whenTwoDestroyWalls_caseAlive() {
         // given
-        settings.integer(POTION_POWER, 2);
+        settings().integer(POTION_POWER, 2);
 
         givenFl("     \n" +
                 "     \n" +
@@ -977,7 +976,7 @@ public class EventsTest extends AbstractGameTest {
     @Test
     public void shouldCrossBlasts_checkingScores_whenBigBadaboom() {
         // given
-        settings.integer(POTIONS_COUNT, 2)
+        settings().integer(POTIONS_COUNT, 2)
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
@@ -1076,7 +1075,7 @@ public class EventsTest extends AbstractGameTest {
     @Test
     public void shouldCrossBlasts_checkingScores_whenBigBadaboom_withEnemies() {
         // given
-        settings.integer(POTIONS_COUNT, 2)
+        settings().integer(POTIONS_COUNT, 2)
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
@@ -1178,7 +1177,7 @@ public class EventsTest extends AbstractGameTest {
     @Test
     public void shouldCrossBlasts_checkingScores_whenBigBadaboom_caseKillAll() {
         // given
-        settings.integer(POTIONS_COUNT, 2)
+        settings().integer(POTIONS_COUNT, 2)
                 .bool(BIG_BADABOOM, true)
                 .perksSettings().dropRatio(0);
 
@@ -1278,7 +1277,7 @@ public class EventsTest extends AbstractGameTest {
     @Test
     public void shouldCrossBlasts_checkingScores_whenNotBigBadaboom_caseKillAll() {
         // given
-        settings.integer(POTIONS_COUNT, 2)
+        settings().integer(POTIONS_COUNT, 2)
                 .bool(BIG_BADABOOM, false)
                 .perksSettings().dropRatio(0);
 

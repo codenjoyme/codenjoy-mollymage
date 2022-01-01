@@ -612,7 +612,7 @@ public class KillDeathTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
         // when
-        settings.integer(GHOSTS_COUNT, 1);
+        settings().integer(GHOSTS_COUNT, 1);
         // координата и направление движения привидения
         dice(9, 9,
             1, Direction.DOWN.value());
@@ -739,7 +739,7 @@ public class KillDeathTest extends AbstractGameTest {
     @Test
     public void shouldGhostAppearAfterKill() {
         // given
-        settings.integer(POTION_POWER, 3);
+        settings().integer(POTION_POWER, 3);
 
         givenFl("     \n" +
                 "     \n" +

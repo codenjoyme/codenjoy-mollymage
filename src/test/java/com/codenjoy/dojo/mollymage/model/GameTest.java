@@ -33,7 +33,8 @@ import java.util.List;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 
 public class GameTest extends AbstractGameTest {
 
@@ -47,7 +48,7 @@ public class GameTest extends AbstractGameTest {
                 "☺    \n");
 
         // then
-        assertEquals(5, field.size());
+        assertEquals(5, field().size());
     }
 
     @Test
@@ -122,7 +123,7 @@ public class GameTest extends AbstractGameTest {
                 "☺    \n");
 
         // then
-        assertEquals(5, field.size());
+        assertEquals(5, field().size());
     }
 
     @Test
@@ -170,7 +171,7 @@ public class GameTest extends AbstractGameTest {
     @Test
     public void shouldNotAppearBoxesOnDestroyedPlaces() {
         // given
-        settings.integer(POTION_POWER, 1);
+        settings().integer(POTION_POWER, 1);
 
         givenFl("     \n" +
                 "     \n" +
@@ -204,7 +205,7 @@ public class GameTest extends AbstractGameTest {
         // we allow to create more boxes
         // boxes should fill square around hero in coordinates from [0,0] to [2,2]
         // we allow to create 9 boxes and only 7 should be created
-        settings.integer(TREASURE_BOX_COUNT, 9);
+        settings().integer(TREASURE_BOX_COUNT, 9);
         dice(inSquare(pt(0, 0), 3));
         tick();
 
@@ -215,7 +216,7 @@ public class GameTest extends AbstractGameTest {
                 "#☺#  \n" +
                 "2##  \n");
 
-        assertEquals(7, field.boxes().size());
+        assertEquals(7, field().boxes().size());
 
         // when
         // field tick 2 times
@@ -247,7 +248,7 @@ public class GameTest extends AbstractGameTest {
                 " ☺#  \n" +
                 "# #  \n");
 
-        assertEquals(6, field.boxes().size());
+        assertEquals(6, field().boxes().size());
 
         // when
         // next tick - empty spaces should been filled by boxes
@@ -262,13 +263,13 @@ public class GameTest extends AbstractGameTest {
                 "#☺#  \n" +
                 "###  \n");
 
-        assertEquals(8, field.boxes().size());
+        assertEquals(8, field().boxes().size());
     }
 
     @Test
     public void shouldGhostNotAppearWhenDestroyWall() {
         // given
-        settings.integer(POTION_POWER, 3);
+        settings().integer(POTION_POWER, 3);
 
         givenFl("     \n" +
                 "     \n" +
@@ -276,7 +277,7 @@ public class GameTest extends AbstractGameTest {
                 "     \n" +
                 "☺  # \n");
 
-        settings.integer(GHOSTS_COUNT, 1);
+        settings().integer(GHOSTS_COUNT, 1);
         dice(4, 4, // координаты привидения
             Direction.RIGHT.value()); // направление движения
 

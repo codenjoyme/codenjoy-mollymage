@@ -30,14 +30,13 @@ import org.junit.Test;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.Direction.RIGHT;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_TEAMS_PER_ROOM;
-import static org.junit.Assert.assertEquals;
 
 public class PerkAffectMultiplayerTest extends AbstractGameTest {
 
     @Test
     public void shouldNotTeammateGetPerk_AfterFirstPlayerPickUp_withEnemy() {
         // given
-        settings.integer(POTIONS_COUNT, 1)
+        settings().integer(POTIONS_COUNT, 1)
                 .integer(CATCH_PERK_SCORE, 11)
                 .bool(PERK_WHOLE_TEAM_GET,false)
                 .integer(ROUNDS_TEAMS_PER_ROOM, 2);
@@ -53,7 +52,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         player(1).inTeam(0);
         player(2).inTeam(1);
 
-        field.perks().add(new PerkOnBoard(new PointImpl(0, 1), new PotionImmune(settings.integer(TIMEOUT_POTION_IMMUNE))));
+        field().perks().add(new PerkOnBoard(new PointImpl(0, 1), new PotionImmune(settings().integer(TIMEOUT_POTION_IMMUNE))));
 
         assertF("     \n" +
                 "     \n" +
@@ -96,7 +95,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldTeammateGetPerk_AfterFirstPlayerPickUp_withEnemy() {
         // given
-        settings.integer(POTIONS_COUNT, 1)
+        settings().integer(POTIONS_COUNT, 1)
                 .integer(CATCH_PERK_SCORE, 11)
                 .bool(PERK_WHOLE_TEAM_GET, true)
                 .integer(ROUNDS_TEAMS_PER_ROOM, 2);
@@ -112,7 +111,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         player(1).inTeam(0);
         player(2).inTeam(1);
 
-        field.perks().add(new PerkOnBoard(new PointImpl(0, 1), new PotionImmune(settings.integer(TIMEOUT_POTION_IMMUNE))));
+        field().perks().add(new PerkOnBoard(new PointImpl(0, 1), new PotionImmune(settings().integer(TIMEOUT_POTION_IMMUNE))));
 
         assertF("     \n" +
                 "     \n" +
@@ -161,7 +160,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     public void shouldKillEnemyByPTAndScorePoints_whenCrossBlast() {
         // given
         int killScore = 10;
-        settings.integer(POTION_POWER, 2)
+        settings().integer(POTION_POWER, 2)
                 .integer(CATCH_PERK_SCORE, 0)
                 .integer(KILL_OTHER_HERO_SCORE, killScore);
 
@@ -258,7 +257,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     public void shouldKillGhostByPTAndScorePoints_whenCrossBlast() {
         // given
         int killScore = 10;
-        settings.integer(POTION_POWER, 2)
+        settings().integer(POTION_POWER, 2)
                 .integer(CATCH_PERK_SCORE, 0)
                 .integer(KILL_GHOST_SCORE, killScore);
 
@@ -352,7 +351,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     public void shouldKillBoxByPTAndScorePoints_whenCrossBlast() {
         // given
         int killScore = 10;
-        settings.integer(POTION_POWER, 2)
+        settings().integer(POTION_POWER, 2)
                 .integer(CATCH_PERK_SCORE, 0)
                 .integer(KILL_WALL_SCORE, killScore);
 
@@ -446,7 +445,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     public void shouldKillOnePerkAndGetTwoHuntedGhost_CrossBlastPortionAndPoisonThrow() {
         // given
         int killScore = 10;
-        settings.integer(POTION_POWER, 2)
+        settings().integer(POTION_POWER, 2)
                 .integer(CATCH_PERK_SCORE, 0)
                 .integer(KILL_GHOST_SCORE, killScore);
 
@@ -547,7 +546,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 "listener(0) => [DROP_PERK]\n" +
                 "listener(1) => [DROP_PERK]\n");
 
-        assertEquals(2, field.hunters().size());
+        assertEquals(2, field().hunters().size());
 
         // when
         // field tick
@@ -619,7 +618,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldExplodeBothPotionsOnBoard_WithPE_Test1() {
         // given
-        settings.integer(POTIONS_COUNT, 1);
+        settings().integer(POTIONS_COUNT, 1);
 
         givenFl("     \n" +
                 "     \n" +
@@ -683,7 +682,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldExplodeBothPotionsOnBoard_WithPE_Test2() {
         // given
-        settings.integer(POTIONS_COUNT, 1);
+        settings().integer(POTIONS_COUNT, 1);
 
         givenFl("     \n" +
                 "     \n" +
@@ -751,7 +750,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldExplodeBothPotionsOnBoard_WithPE_Test3() {
         // given
-        settings.integer(POTIONS_COUNT, 1);
+        settings().integer(POTIONS_COUNT, 1);
 
         givenFl("     \n" +
                 "     \n" +
@@ -823,7 +822,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldExplodeBothPotionsOnBoardAndKillGhost_WithPE() {
         // given
-        settings.integer(POTIONS_COUNT, 1);
+        settings().integer(POTIONS_COUNT, 1);
 
         givenFl("     \n" +
                 "     \n" +
@@ -893,7 +892,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldPotionOwnerGetScoresTo_WithPE() {
         // given
-        settings.integer(POTIONS_COUNT, 1)
+        settings().integer(POTIONS_COUNT, 1)
                 .bool(STEAL_POINTS, false);
 
         givenFl("     \n" +
@@ -973,7 +972,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldNotPotionOwnerGetScores_WithPE() {
         // given
-        settings.integer(POTIONS_COUNT, 1)
+        settings().integer(POTIONS_COUNT, 1)
                 .bool(STEAL_POINTS, true);
 
         givenFl("     \n" +
@@ -1120,7 +1119,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 " ҉   \n" +
                 "  ☺  \n", 1);
 
-        assertEquals(2, field.hunters().size());
+        assertEquals(2, field().hunters().size());
 
         // when
         // next tick two ghostHunters should been visible
@@ -1143,7 +1142,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldBothHeroesGerPersonalHunterAfterKillingPerk_WithPE_Test2() {
         // given
-        settings.bool(STEAL_POINTS, false);
+        settings().bool(STEAL_POINTS, false);
 
         givenFl("     \n" +
                 "     \n" +
@@ -1205,7 +1204,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 " ҉   \n" +
                 "  ☺  \n", 1);
 
-        assertEquals(2, field.hunters().size());
+        assertEquals(2, field().hunters().size());
 
         // when
         // next tick two ghostHunters should been visible
@@ -1228,7 +1227,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
     @Test
     public void shouldNotGetGhostHunterWhenPointsStealing_WithPE() {
         // given
-        settings.bool(STEAL_POINTS, true);
+        settings().bool(STEAL_POINTS, true);
 
         givenFl("     \n" +
                 "     \n" +
@@ -1289,7 +1288,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
                 " ҉   \n" +
                 "  ☺  \n", 1);
 
-        assertEquals(1, field.hunters().size());
+        assertEquals(1, field().hunters().size());
 
         // when
         // next tick only one ghostHunter should been visible

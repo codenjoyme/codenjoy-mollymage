@@ -27,7 +27,6 @@ import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static org.junit.Assert.assertEquals;
 
 public class MovementTest extends AbstractGameTest {
 
@@ -289,7 +288,7 @@ public class MovementTest extends AbstractGameTest {
         hero().up();
         hero().left();
         hero().right();
-        field.tick();
+        field().tick();
 
         // then
         assertF("     \n" +
@@ -303,7 +302,7 @@ public class MovementTest extends AbstractGameTest {
         hero().left();
         hero().down();
         hero().up();
-        field.tick();
+        field().tick();
 
         // then
         assertF("     \n" +
@@ -325,7 +324,7 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().down();
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -346,7 +345,7 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().left();
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -402,10 +401,10 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().up();
-        field.tick();
+        field().tick();
 
         hero().up();
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -416,7 +415,7 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().up();
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -438,7 +437,7 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().dropPotion();
-        field.tick();
+        field().tick();
 
         // then
         assertF("     \n" +
@@ -449,7 +448,7 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().right();
-        field.tick();
+        field().tick();
 
         // then
         assertF("     \n" +
@@ -460,7 +459,7 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().left();
-        field.tick();
+        field().tick();
 
         // then
         assertF("     \n" +
@@ -483,7 +482,7 @@ public class MovementTest extends AbstractGameTest {
         // when
         hero().dropPotion();
         hero().right();
-        field.tick();
+        field().tick();
 
         // then
         assertF("     \n" +
@@ -505,7 +504,7 @@ public class MovementTest extends AbstractGameTest {
         // when
         hero().right();
         hero().dropPotion();
-        field.tick();
+        field().tick();
 
         // then
         assertF("     \n" +
@@ -516,7 +515,7 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().right();
-        field.tick();
+        field().tick();
 
         // then
         assertF("     \n" +
@@ -537,10 +536,10 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().dropPotion();
-        field.tick();
+        field().tick();
 
         hero().right();
-        field.tick();
+        field().tick();
 
         // then
         assertF("     \n" +
@@ -561,10 +560,10 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().right();
-        field.tick();
+        field().tick();
 
         hero().dropPotion();
-        field.tick();
+        field().tick();
 
         // then
         assertF("     \n" +
@@ -575,7 +574,7 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().right();
-        field.tick();
+        field().tick();
 
         // then
         assertF("     \n" +
@@ -604,10 +603,10 @@ public class MovementTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
         // when
-        settings.integer(GHOSTS_COUNT, 1);
+        settings().integer(GHOSTS_COUNT, 1);
         dice(9, 9, // координата
             1, Direction.DOWN.value()); // направление движения
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -624,11 +623,11 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         dice(1);
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
+        field().tick();
+        field().tick();
+        field().tick();
+        field().tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -645,7 +644,7 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         dice(0, Direction.LEFT.value());
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -661,13 +660,13 @@ public class MovementTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
         // when
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
-        field.tick();
+        field().tick();
+        field().tick();
+        field().tick();
+        field().tick();
+        field().tick();
+        field().tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -684,7 +683,7 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         dice(1, Direction.RIGHT.value());
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -701,11 +700,11 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         dice(0, Direction.LEFT.value());
-        field.tick();
-        field.tick();
+        field().tick();
+        field().tick();
 
         dice(Direction.LEFT.value());
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -722,7 +721,7 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         dice(Direction.DOWN.value());
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -738,7 +737,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☼☼☼☼☼☼☼☼☼☼\n");
 
         // when
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼☼☼☼☼☼☼\n" +
@@ -770,14 +769,14 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().up();
-        field.tick();
+        field().tick();
 
         hero().up();
-        field.tick();
+        field().tick();
 
         hero().left();
         hero().dropPotion();
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -808,20 +807,20 @@ public class MovementTest extends AbstractGameTest {
         
         // when
         hero().up();
-        field.tick();
+        field().tick();
 
         hero().up();
-        field.tick();
+        field().tick();
 
         hero().right();
         hero().dropPotion();
-        field.tick();
+        field().tick();
 
         hero().left();
-        field.tick();
+        field().tick();
 
         hero().down();
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -831,7 +830,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☼☼☼☼\n");
 
         dice(Direction.LEFT.value());
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -849,7 +848,7 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         hero().down();
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -868,7 +867,7 @@ public class MovementTest extends AbstractGameTest {
         dice(0, 0, hero().getX(), hero().getY(), 3, 3, Direction.DOWN.value());
 
         // when пришла пора регенериться чоперу
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -900,7 +899,7 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         dice(Direction.RIGHT.value());
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -932,7 +931,7 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         dice(Direction.RIGHT.value());
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -943,7 +942,7 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         dice(Direction.UP.value());
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -954,7 +953,7 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         dice(Direction.LEFT.value());
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -965,7 +964,7 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         dice(Direction.DOWN.value());
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -983,7 +982,7 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         // минус одна коробка
-        field.boxes().removeAt(pt(2, 3));
+        field().boxes().removeAt(pt(2, 3));
         removeBoxes(1);
 
         // then
@@ -995,7 +994,7 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         dice(Direction.LEFT.value());
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +
@@ -1006,7 +1005,7 @@ public class MovementTest extends AbstractGameTest {
 
         // when
         dice(Direction.LEFT.value());
-        field.tick();
+        field().tick();
 
         // then
         assertF("☼☼☼☼☼\n" +

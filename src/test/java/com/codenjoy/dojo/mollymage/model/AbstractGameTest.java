@@ -22,7 +22,6 @@ package com.codenjoy.dojo.mollymage.model;
  * #L%
  */
 
-import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.TestGameSettings;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
@@ -31,226 +30,104 @@ import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.services.Event;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.services.*;
-import com.codenjoy.dojo.services.multiplayer.LevelProgress;
-import com.codenjoy.dojo.services.printer.PrinterFactory;
-import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
-import com.codenjoy.dojo.utils.TestUtils;
-import com.codenjoy.dojo.utils.events.EventsListenersAssert;
-import com.codenjoy.dojo.whatsnext.WhatsNextUtils;
+import com.codenjoy.dojo.services.Dice;
+import com.codenjoy.dojo.services.EventListener;
+import com.codenjoy.dojo.services.PointImpl;
+import com.codenjoy.dojo.services.multiplayer.TriFunction;
+import com.codenjoy.dojo.utils.gametest.AbstractBaseGameTest;
 import org.junit.After;
 import org.junit.Before;
-import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.utils.TestUtils.asArray;
-import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.spy;
 
-public abstract class AbstractGameTest {
+public abstract class AbstractGameTest 
+        extends AbstractBaseGameTest<Player, MollyMage, GameSettings, Level, Hero> {
 
-    private List<EventListener> listeners;
-    private List<Player> players;
-    private List<Game> games;
-
-    private Dice dice;
-    private PrinterFactory<Element, Player> printer;
-    protected MollyMage field;
-    protected GameSettings settings;
     protected PerksSettingsWrapper perks;
-    private EventsListenersAssert events;
-    private Level level;
 
     @Before
     public void setup() {
-        listeners = new LinkedList<>();
-        players = new LinkedList<>();
-        games = new LinkedList<>();
-
-        dice = mock(Dice.class);
-        settings = settings();
-        perks = settings.perksSettings();
-        printer = new PrinterFactoryImpl<>();
-        events = new EventsListenersAssert(() -> listeners, Event.class);
+        super.setup();
+        perks = settings().perksSettings();
     }
 
     @After
-    public void tearDown() {
-        verifyAllEvents("");
+    public void after() {
+        super.after();
     }
 
-    public void dice(int... ints) {
-        if (ints.length == 0) return;
-        OngoingStubbing<Integer> when = when(dice.next(anyInt()));
-        for (int i : ints) {
-            when = when.thenReturn(i);
-        }
+    protected void setupHeroesDice() {
+        dice(asArray(level().heroes()));
     }
 
-    public void givenFl(String... maps) {
-        int levelNumber = LevelProgress.levelsStartsFrom1;
-        settings.setLevelMaps(levelNumber, maps);
-        level = settings.level(levelNumber, dice, Level::new);
-
-        beforeCreateField();
-
-        field = new MollyMage(dice, null, settings);
-        field.load(level.map(), this::givenPlayer);
-
-        setupHeroesDice();
-
-        games = WhatsNextUtils.newGameForAll(players, printer, field);
-
-        afterCreateField();
-    }
-
-    private void setupHeroesDice() {
-        dice(asArray(level.heroes()));
-    }
-
-    private void beforeCreateField() {
-        // settings / level pre-processing
-    }
-
-    private void afterCreateField() {
-        settings.integer(TREASURE_BOX_COUNT, field.boxes().size())
-                .integer(GHOSTS_COUNT, field.ghosts().size());
+    protected void afterCreateField() {
+        settings().integer(TREASURE_BOX_COUNT, field().boxes().size())
+                .integer(GHOSTS_COUNT, field().ghosts().size());
 
         stopGhosts(); // по умолчанию все привидения стоят на месте
     }
 
-    protected Player givenPlayer() {
-        EventListener listener = mock(EventListener.class);
-        listeners.add(listener);
-
-        Player player = new Player(listener, settings);
-        players.add(player);
-        return player;
-    }
-
-    public Player givenPlayer(Point pt) {
-        Player player = givenPlayer();
-
-        dice(asArray(asList(pt)));
-        Game game = WhatsNextUtils.newGame(player, printer, field);
-        games.add(game);
-
-        return players.get(players.size() - 1);
-    }
-
-    protected GameSettings settings() {
+    @Override
+    protected GameSettings setupSettings() {
         return spy(new TestGameSettings())
                 .integer(POTION_POWER, 1)
                 .integer(TREASURE_BOX_COUNT, 0)
                 .integer(GHOSTS_COUNT, 0);
     }
 
-    public void tick() {
-        field.tick();
+    @Override
+    protected Function<String, Level> createLevel() {
+        return Level::new;
     }
 
-    // getters & asserts
-
-    public void verifyAllEvents(String expected) {
-        assertEquals(expected, events.getEvents());
+    @Override
+    protected BiFunction<EventListener, GameSettings, Player> createPlayer() {
+        return Player::new;
     }
 
-    public void assertScores(String expected) {
-        assertEquals(expected,
-                TestUtils.collectHeroesData(players, "scores", true));
+    @Override
+    protected TriFunction<Dice, Level, GameSettings, MollyMage> createField() {
+        return MollyMage::new;
     }
 
-    /**
-     * Проверяет одну борду с заданным индексом
-     * @param expected ожидаемое значение
-     * @param index индекс
-     */
-    public void assertF(String expected, int index) {
-        assertEquals(expected, game(index).getBoardAsString());
+    @Override
+    protected Class<?> eventClass() {
+        return Event.class;
     }
 
-    /**
-     * Проверяет все борды сразу
-     * @param expected ожидаемое значение
-     */
-    public void assertA(String expected) {
-        assertEquals(expected,
-                EventsListenersAssert.collectAll(games, index -> {
-                    Object actual = game(index).getBoardAsString();
-                    return String.format("game(%s)\n%s\n", index, actual);
-                }));
-    }
-
-    public Game game(int index) {
-        return games.get(index);
-    }
-
-    public Player player(int index) {
-        return players.get(index);
-    }
-
-    public Hero hero(int index) {
-        return (Hero) game(index).getPlayer().getHero();
-    }
-
-    // getters, if only one player
-
-    public void assertF(String expected) {
-        assertF(expected, 0);
-    }
-
-    public Game game() {
-        return game(0);
-    }
-
-    public Player player() {
-        return player(0);
-    }
-
-    public Hero hero() {
-        return hero(0);
-    }
-
-    public void assertHeroDie() {
-        assertEquals(true, game().isGameOver());
-    }
-
-    public void assertHeroAlive() {
-        assertEquals(false, game().isGameOver());
-    }
-
-    // other stuff
+    // other methods
 
     public void newBox(int x, int y) {
-        field.boxes().add(new TreasureBox(pt(x, y)));
+        field().boxes().add(new TreasureBox(pt(x, y)));
     }
 
     public void newPerk(int x, int y, Perk perk) {
-        field.perks().add(new PerkOnBoard(new PointImpl(x, y), perk));
+        field().perks().add(new PerkOnBoard(new PointImpl(x, y), perk));
     }
 
     public void removeBoxes(int count) {
-        settings.integer(TREASURE_BOX_COUNT, settings.integer(TREASURE_BOX_COUNT) - count);
+        settings().integer(TREASURE_BOX_COUNT, settings().integer(TREASURE_BOX_COUNT) - count);
     }
 
     public void removeGhosts(int count) {
-        settings.integer(GHOSTS_COUNT, settings.integer(GHOSTS_COUNT) - count);
+        settings().integer(GHOSTS_COUNT, settings().integer(GHOSTS_COUNT) - count);
     }
 
     public Ghost ghost(int x, int y) {
-        return field.ghosts().getAt(pt(x, y)).get(0);
+        return field().ghosts().getAt(pt(x, y)).get(0);
     }
 
     public void stopGhosts() {
-        field.ghosts().forEach(Ghost::stop);
+        field().ghosts().forEach(Ghost::stop);
     }
 
     public void assertHeroPerks(String expected) {
@@ -263,10 +140,9 @@ public abstract class AbstractGameTest {
 
     public void assertFieldPerks(String expected) {
         assertEquals(expected,
-                field.perks().stream()
+                field().perks().stream()
                         .sorted(Comparator.comparing(PerkOnBoard::copy))
                         .map(Objects::toString)
                         .collect(joining("\n")));
     }
-
 }

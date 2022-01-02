@@ -45,7 +45,6 @@ import java.util.function.Function;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static com.codenjoy.dojo.utils.TestUtils.asArray;
 import static java.util.stream.Collectors.joining;
 import static org.mockito.Mockito.spy;
 
@@ -63,10 +62,6 @@ public abstract class AbstractGameTest
     @After
     public void after() {
         super.after();
-    }
-
-    protected void setupHeroesDice() {
-        dice(asArray(level().heroes()));
     }
 
     protected void afterCreateField() {

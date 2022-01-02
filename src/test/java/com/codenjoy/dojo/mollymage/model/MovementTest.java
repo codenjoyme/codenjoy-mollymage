@@ -796,6 +796,7 @@ public class MovementTest extends AbstractGameTest {
                 "☼☺  ☼\n" +
                 "☼☼☼☼☼\n");
 
+        dice(Direction.RIGHT.value());
         ghost(3, 3).start();
 
         // then
@@ -809,16 +810,48 @@ public class MovementTest extends AbstractGameTest {
         hero().up();
         field().tick();
 
+        // then
+        assertF("☼☼☼☼☼\n" +
+                "☼  &☼\n" +
+                "☼☺☼ ☼\n" +
+                "☼   ☼\n" +
+                "☼☼☼☼☼\n");
+
+        // when
         hero().up();
         field().tick();
 
+        // then
+        assertF("☼☼☼☼☼\n" +
+                "☼☺ &☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼   ☼\n" +
+                "☼☼☼☼☼\n");
+
+        // when
         hero().right();
         hero().dropPotion();
         field().tick();
 
+        // then
+        assertF("☼☼☼☼☼\n" +
+                "☼ ☻&☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼   ☼\n" +
+                "☼☼☼☼☼\n");
+
+        // when
         hero().left();
         field().tick();
 
+        // then
+        assertF("☼☼☼☼☼\n" +
+                "☼☺3&☼\n" +
+                "☼ ☼ ☼\n" +
+                "☼   ☼\n" +
+                "☼☼☼☼☼\n");
+
+        // when
         hero().down();
         field().tick();
 

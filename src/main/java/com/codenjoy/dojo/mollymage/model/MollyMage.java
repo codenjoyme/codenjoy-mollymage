@@ -47,14 +47,14 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
 import java.util.*;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 import static com.codenjoy.dojo.mollymage.services.Event.*;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.field.Generator.generate;
 import static java.util.stream.Collectors.toList;
 
-public class MollyMage extends RoundField<Player> implements Field {
+public class MollyMage extends RoundField<Player, Hero> implements Field {
 
     private Level level;
     private PointField field;
@@ -591,7 +591,7 @@ public class MollyMage extends RoundField<Player> implements Field {
     }
 
     @Override
-    public List<Player> load(String board, Supplier<Player> player) {
+    public List<Player> load(String board, Function<Hero, Player> player) {
         level = new Level(board);
         return WhatsNextUtils.load(this, level.heroes(), player);
     }

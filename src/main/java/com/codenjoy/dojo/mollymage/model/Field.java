@@ -30,8 +30,8 @@ import com.codenjoy.dojo.mollymage.model.items.blast.Poison;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
-import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
+import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.field.Accessor;
@@ -40,7 +40,7 @@ import com.codenjoy.dojo.services.round.RoundGameField;
 import java.util.List;
 import java.util.Optional;
 
-public interface Field extends RoundGameField<Player> {  // TODO применить тут ISP (все ли методы должны быть паблик?)
+public interface Field extends RoundGameField<Player, Hero> {  // TODO применить тут ISP (все ли методы должны быть паблик?)
 
     boolean FOR_HERO = true;
 

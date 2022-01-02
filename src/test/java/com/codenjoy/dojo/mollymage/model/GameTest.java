@@ -359,11 +359,11 @@ public class GameTest extends AbstractGameTest {
         verifyAllEvents("[KILL_TREASURE_BOX]");
 
         // when
-        tick();
-
         dice(0, 0,  // на неразрушаемоей стене нельзя
             hero().getX(), hero().getY(),  // на месте героя не должен появиться
             1, 1); // а вот тут свободно
+
+        tick();
 
         // then
         assertF("☼☼☼☼☼\n" +

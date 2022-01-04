@@ -44,13 +44,13 @@ public interface Field extends RoundGameField<Player, Hero> {  // TODO прим�
 
     boolean FOR_HERO = true;
 
+    boolean isBarrier(Point pt, boolean isForHero);
+
     boolean isFree(Point pt);
 
     int size();
 
     List<Potion> potions(Hero hero);
-
-    boolean isBarrier(Point pt, boolean isForHero);
 
     void remove(Player player);
 

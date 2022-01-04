@@ -118,9 +118,9 @@ public class Ghost extends PointImpl implements State<Element, Player>, Fieldabl
     }
 
     private boolean barrier(Point to) {
-        return field.ghosts().contains(to)
-                || field.walls().contains(to)
-                || field.boxes().contains(to)
+        return field.isGhost(to)
+                || field.isWall(to)
+                || field.isBox(to)
                 || to.isOutOf(field.size());
     }
 }

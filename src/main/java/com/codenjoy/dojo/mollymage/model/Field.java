@@ -46,19 +46,33 @@ public interface Field extends RoundGameField<Player, Hero> {  // TODO прим�
 
     boolean isBarrier(Point pt, boolean isForHero);
 
+    boolean isPerk(Point pt);
+
+    boolean isPotion(Point pt);
+
+    boolean isWall(Point pt);
+
+    boolean isBox(Point pt);
+
+    boolean isBlast(Point pt);
+
+    boolean isGhost(Point pt);
+
+    boolean isHunter(Point pt);
+
+    boolean isActiveAliveHero(Point pt);
+
     boolean isFree(Point pt);
 
+    Optional<Point> freeRandom(Player player);
+
     int size();
-
-    List<Potion> potions(Hero hero);
-
-    void remove(Player player);
 
     void drop(Potion potion);
 
     void remove(Potion potion);
 
-    void remove(Point pt);
+    void remove(Point anyObject);
 
     List<PerkOnBoard> pickPerk(Point pt);
 
@@ -68,13 +82,11 @@ public interface Field extends RoundGameField<Player, Hero> {  // TODO прим�
 
     Dice dice();
 
-    Optional<Point> freeRandom(Player player);
-
-    void addPoison(Poison poison);
-
     void explodeAllPotions(Hero hero);
 
-    Accessor<Poison> toxins();
+    List<Potion> heroPotions(Hero hero);
+
+    Accessor<Poison> poisons();
 
     Accessor<Wall> walls();
 

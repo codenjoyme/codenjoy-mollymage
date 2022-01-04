@@ -244,7 +244,7 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
         previousTickDestroyedObjects.clear();
         previousTickDestroyedObjects.addAll(destroyedObjects);
         destroyedObjects.clear();
-        toxins().clear();
+        poisons().clear();
     }
 
     private void ghostEatHeroes() {
@@ -270,7 +270,7 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
             if (settings.bool(BIG_BADABOOM)) {
                 // если зелье зацепила взрывная волна и его тоже подрываем
                 for (Potion potion : potions()) {
-                    if (blasts().contains(potion)) {
+                    if (isBlast(potion)) {
                         potion.boom();
                     }
                 }
@@ -298,15 +298,15 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
     }
 
     private void makeBlastsFromPoisonThrower() {
-        for (Poison poison : toxins()) {
+        for (Poison poison : poisons()) {
             List<Blast> blast = makeBlast(poison);
             blasts().addAll(blast);
         }
-        toxins().clear();
+        poisons().clear();
     }
 
     @Override
-    public List<Potion> potions(Hero hero) {
+    public List<Potion> heroPotions(Hero hero) {
         return potions().stream()
                 .filter(potion -> potion.itsMine(hero))
                 .collect(toList());
@@ -325,8 +325,8 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
     }
 
     @Override
-    public void remove(Point pt) {
-        destroyedObjects.add(pt);
+    public void remove(Point anyObject) {
+        destroyedObjects.add(anyObject);
     }
 
     private List<Blast> makeBlast(Poison poison) {
@@ -536,34 +536,34 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
             }
         }
 
-        if (potions().contains(pt)) {
+        if (isPotion(pt)) {
             return true;
         }
 
         // TODO test me привидение или стена не могут появиться на перке
         if (!isForHero) {
-            if (perks().contains(pt)) {
+            if (isPerk(pt)) {
                 return true;
             }
         }
 
         // TODO: test me
-        if (walls().contains(pt)) {
+        if (isWall(pt)) {
             return true;
         }
 
         // TODO: test me
-        if (boxes().contains(pt)) {
+        if (isBox(pt)) {
             return true;
         }
 
         // TODO test me стенка или другой чопер не могут появиться на чопере
         // TODO но герой может пойти к нему на встречу
         if (!isForHero) {
-            if (ghosts().contains(pt)) {
+            if (isGhost(pt)) {
                 return true;
             }
-            if (hunters().contains(pt)) {
+            if (isHunter(pt)) {
                 return true;
             }
         }
@@ -576,6 +576,48 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
         }
 
         return pt.isOutOf(size());
+    }
+
+    @Override
+    public boolean isPerk(Point pt) {
+        return perks().contains(pt);
+    }
+
+    @Override
+    public boolean isPotion(Point pt) {
+        return potions().contains(pt);
+    }
+
+    @Override
+    public boolean isWall(Point pt) {
+        return walls().contains(pt);
+    }
+
+    @Override
+    public boolean isBlast(Point pt) {
+        return blasts().contains(pt);
+    }
+
+    @Override
+    public boolean isGhost(Point pt) {
+        return ghosts().contains(pt);
+    }
+
+    @Override
+    public boolean isBox(Point pt) {
+        return boxes().contains(pt);
+    }
+
+    @Override
+    public boolean isHunter(Point pt) {
+        return hunters().contains(pt);
+    }
+
+    @Override
+    public boolean isActiveAliveHero(Point pt) {
+        return heroes().stream()
+                .filter(Hero::isActiveAndAlive)
+                .anyMatch(hero -> hero.itsMe(pt));
     }
 
     public BoardReader<Player> reader() {
@@ -602,11 +644,6 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
     }
 
     @Override
-    public void addPoison(Poison poison) {
-        toxins().add(poison);
-    }
-
-    @Override
     public void explodeAllPotions(Hero hero) {
         for (Potion potion : potions()) {
             potion.intercept(hero);
@@ -625,7 +662,7 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
     }
 
     @Override
-    public Accessor<Poison> toxins() {
+    public Accessor<Poison> poisons() {
         return field.of(Poison.class);
     }
 

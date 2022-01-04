@@ -184,13 +184,13 @@ public class Hero extends RoundPlayerHero<Field>
         if (perk == null || recharge != 0) {
             return;
         }
-        field.addPoison(new Poison(this, direction, getBlastPower()));
+        field.poisons().add(new Poison(this, direction, getBlastPower()));
 
         recharge += settings().integer(POISON_THROWER_RECHARGE);
     }
 
     private void setPotion(Point pt) {
-        List<Potion> potions = field.potions(this);
+        List<Potion> potions = field.heroPotions(this);
 
         Perk remotePerk = perks.getPerk(POTION_REMOTE_CONTROL);
         if (remotePerk != null) {

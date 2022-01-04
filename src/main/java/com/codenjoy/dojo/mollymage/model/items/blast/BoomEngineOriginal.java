@@ -65,16 +65,10 @@ public class BoomEngineOriginal implements BoomEngine {
     }
 
     private boolean barriersAt(Point pt) {
-        return field.ghosts().contains(pt)
-                || field.hunters().contains(pt)
-                || field.boxes().contains(pt)
-                || field.heroes().stream()
-                        .filter(Hero::isActiveAndAlive)
-                        .anyMatch(hero -> hero.itsMe(pt));
-    }
-
-    private boolean wallAt(Point pt) {
-        return field.walls().contains(pt);
+        return field.isGhost(pt)
+                || field.isHunter(pt)
+                || field.isBox(pt)
+                || field.isActiveAliveHero(pt);
     }
 
     private void addBlast(List<Blast> blasts, int length, Direction direction, Point point) {
@@ -92,7 +86,7 @@ public class BoomEngineOriginal implements BoomEngine {
             return false;
         }
 
-        if (wallAt(pt)) {
+        if (field.isWall(pt)) {
             return false;
         }
 

@@ -40,7 +40,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
     // перк исчезает спустя некоторое время
     @Test
-    public void shouldPerkDisappearWhenTimeout() {
+    public void shouldPerkDisAppearWhenTimeout() {
         // given
         settings().integer(PERK_PICK_TIMEOUT, 5);
 
@@ -949,7 +949,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
     // BI - Potion Immune perk
     @Test
-    public void shouldHeroKeepAlive_whenBIperk() {
+    public void shouldHeroKeepAlive_whenBIPerk() {
         // given
         givenFl("     \n" +
                 "     \n" +
@@ -1247,7 +1247,7 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
     }
 
     @Test
-    public void shouldPotionBlastOnAction_whenBRCperk_caseOnePotion() {
+    public void shouldPotionBlastOnAction_whenBRCPerk_caseOnePotion() {
         // given
         settings().integer(POTIONS_COUNT, 1);
 
@@ -1535,20 +1535,25 @@ public class PerkAffectSinglePlyaerTest extends AbstractGameTest {
 
         verifyAllEvents("[HERO_DIED, KILL_GHOST, KILL_TREASURE_BOX]");
 
-        // только сейчас перк забрался
-        assertHeroPerks("");
+        // хоть перк не пропал, но герой уже не жилец, а потому не страшно
+        assertEquals(true, hero().isActive());
+        assertEquals(false, hero().isAlive());
+        assertHeroPerks("{POTION_REMOTE_CONTROL('r')\n" +
+                "  value=0, timeout=0, timer=0, pick=0}");
 
         // when
-        // новая коробка
-        dice(4, 4);
+
+        dice(1, 1, // новая коробка
+             4, 4); // новое место для героя
+        game().newGame(); // это сделает сервер
         tick();
 
         // then
         assertF("    #\n" +
                 "     \n" +
                 "     \n" +
-                "     \n" +
-                "   Ѡ \n");
+                " ☺   \n" +
+                "     \n");
 
         verifyAllEvents("");
 

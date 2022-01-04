@@ -307,8 +307,7 @@ public class Hero extends RoundPlayerHero<Field>
     }
 
     @Override
-    public void tick() {
-        // TODO добавить проверку if (!isActiveAndAlive()) return;
+    public void tickHero() {
         perks.tick();
         rechargeTick();
     }

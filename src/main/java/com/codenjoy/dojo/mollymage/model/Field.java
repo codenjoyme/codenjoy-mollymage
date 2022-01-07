@@ -32,6 +32,7 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
+import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.field.Accessor;
@@ -83,6 +84,8 @@ public interface Field extends RoundGameField<Player, Hero> {  // TODO прим�
     Dice dice();
 
     void explodeAllPotions(Hero hero);
+
+    GameSettings settings();
 
     List<Potion> heroPotions(Hero hero);
 

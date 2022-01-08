@@ -31,9 +31,10 @@ import com.codenjoy.dojo.mollymage.model.items.perks.HeroPerks;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.printer.state.State;
 import com.codenjoy.dojo.services.joystick.Act;
 import com.codenjoy.dojo.services.joystick.RoundsDirectionActJoystick;
+import com.codenjoy.dojo.services.printer.state.HeroState;
+import com.codenjoy.dojo.services.printer.state.State;
 import com.codenjoy.dojo.services.round.RoundPlayerHero;
 
 import java.util.List;
@@ -42,11 +43,11 @@ import static com.codenjoy.dojo.games.mollymage.Element.*;
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
 import static com.codenjoy.dojo.mollymage.services.Event.*;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
-import static com.codenjoy.dojo.services.printer.state.StateUtils.filter;
 import static com.codenjoy.dojo.services.printer.state.StateUtils.filterOne;
 
 public class Hero extends RoundPlayerHero<Field>
-        implements RoundsDirectionActJoystick, State<Element, Player> {
+        implements RoundsDirectionActJoystick, State<Element, Player>,
+                   HeroState<Element, Hero, Player> {
 
     public static final int ACT_THROW_POISON = 1;
     public static final int ACT_EXPLODE_ALL_POTIONS = 2;
@@ -251,33 +252,25 @@ public class Hero extends RoundPlayerHero<Field>
 
     @Override
     public Element state(Player player, Object... alsoAtPoint) {
-        boolean myHero = StateUtils.containsMyHero(player, this, alsoAtPoint, player.getHero());
-        Hero hero = myHero ? player.getHero() : this;
+        return HeroState.super.state(player, alsoAtPoint);
+    }
 
-        Element state = hero.beforeState(alsoAtPoint);
-
-        if (!myHero) {
-            List<Hero> heroes = filter(alsoAtPoint, Hero.class);
-
-            state = hero.middleState(state, heroes, alsoAtPoint);
-
-            if (state == null) {
-                return null;
-            }
-
-            state = player.allFromMyTeam(heroes)
-                    ? state.otherHero()
-                    : state.enemyHero();
+    @Override
+    public Element beforeState(Object... alsoAtPoint) {
+        if (!isActiveAndAlive()) {
+            return DEAD_HERO;
         }
 
-        return hero.afterState(state);
+        Potion potion = filterOne(alsoAtPoint, Potion.class);
+        if (potion != null) {
+            return POTION_HERO;
+        }
+
+        return HERO;
     }
 
-    private Element afterState(Element state) {
-        return state;
-    }
-
-    private Element middleState(Element state, List<Hero> heroes, Object[] alsoAtPoint) {
+    @Override
+    public Element middleState(Element state, List<Hero> heroes, Object[] alsoAtPoint) {
         // если в этой клетке есть хоть один живой, его надо отобразить как угрозу
         if (heroes.stream().anyMatch(Hero::isActiveAndAlive)) {
             return state == DEAD_HERO
@@ -297,19 +290,6 @@ public class Hero extends RoundPlayerHero<Field>
 
         // и если опасности нет, тогда уже рисуем останки
         return DEAD_HERO;
-    }
-
-    private Element beforeState(Object... alsoAtPoint) {
-        if (!isActiveAndAlive()) {
-            return DEAD_HERO;
-        }
-
-        Potion potion = filterOne(alsoAtPoint, Potion.class);
-        if (potion != null) {
-            return POTION_HERO;
-        }
-
-        return HERO;
     }
 
     @Override

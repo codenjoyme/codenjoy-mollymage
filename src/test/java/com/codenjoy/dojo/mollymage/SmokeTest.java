@@ -37,7 +37,8 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
 
 public class SmokeTest {
 
@@ -52,7 +53,7 @@ public class SmokeTest {
 
     @Test
     public void test() {
-        // about 2.5 sec
+        // about 1 sec
         // coverage 881 lines from 1071
         int ticks = 1000;
 

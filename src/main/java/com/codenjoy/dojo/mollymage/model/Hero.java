@@ -32,6 +32,7 @@ import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
+import com.codenjoy.dojo.services.StateUtils;
 import com.codenjoy.dojo.services.joystick.Act;
 import com.codenjoy.dojo.services.joystick.RoundsDirectionActJoystick;
 import com.codenjoy.dojo.services.round.RoundPlayerHero;
@@ -251,59 +252,65 @@ public class Hero extends RoundPlayerHero<Field>
 
     @Override
     public Element state(Player player, Object... alsoAtPoint) {
-        Potion potion = filterOne(alsoAtPoint, Potion.class);
-        List<Hero> heroes = filter(alsoAtPoint, Hero.class);
-        Ghost ghost = filterOne(alsoAtPoint, Ghost.class);
+        boolean myHero = StateUtils.containsMyHero(player, this, alsoAtPoint, player.getHero());
+        Hero hero = myHero ? player.getHero() : this;
 
-        // player наблюдатель содержится в той же клетке которую прорисовываем
-        if (heroes.contains(player.getHero())) {
-            // герой наблюдателя неактивен или его вынесли
-            if (!player.getHero().isActiveAndAlive()) {
-                return DEAD_HERO;
+        Element state = hero.beforeState(alsoAtPoint);
+
+        if (!myHero) {
+            List<Hero> heroes = filter(alsoAtPoint, Hero.class);
+
+            state = hero.middleState(state, heroes, alsoAtPoint);
+
+            if (state == null) {
+                return null;
             }
 
-            // герой наблюдателя жив и активен
-
-            // под ним зелье
-            if (potion != null) {
-                return POTION_HERO;
-            }
-
-            return HERO;
+            state = player.allFromMyTeam(heroes)
+                    ? state.otherHero()
+                    : state.enemyHero();
         }
 
-        // player наблюдает за клеткой в которой не находится сам
-
-        // в клетке только трупики?
-        if (heroes.stream().noneMatch(Hero::isActiveAndAlive)) {
-            // если в клеточке с героем привидение, рисуем его
-            if (ghost != null) {
-                return ghost.state(player, alsoAtPoint);
-            }
-
-            // если привидения нет, следующий по опасности - зелье
-            if (potion != null) {
-                return potion.state(player, alsoAtPoint);
-            }
-
-            // и если опасности нет, тогда уже рисуем останки
-            return anyHeroFromAnotherTeam(player, heroes) ? ENEMY_DEAD_HERO : OTHER_DEAD_HERO;
-        }
-
-        // в клетке есть другие активные и живые герои
-
-        // под ними зелье
-        if (potion != null) {
-            return anyHeroFromAnotherTeam(player, heroes) ? ENEMY_POTION_HERO : OTHER_POTION_HERO;
-        }
-
-        return anyHeroFromAnotherTeam(player, heroes) ? ENEMY_HERO : OTHER_HERO;
+        return hero.afterState(state);
     }
 
-    // TODO do we use only settings.isTeamDeathMatch() here?
-    private boolean anyHeroFromAnotherTeam(Player player, List<Hero> heroes) {
-        return heroes.stream()
-                .anyMatch(hero -> player.getTeamId() != hero.getPlayer().getTeamId());
+    private Element afterState(Element state) {
+        return state;
+    }
+
+    private Element middleState(Element state, List<Hero> heroes, Object[] alsoAtPoint) {
+        // если в этой клетке есть хоть один живой, его надо отобразить как угрозу
+        if (heroes.stream().anyMatch(Hero::isActiveAndAlive)) {
+            return state == DEAD_HERO
+                    ? null
+                    : state;
+        }
+
+        // если в клеточке привидение, рисуем его как угрозу
+        if (filterOne(alsoAtPoint, Ghost.class) != null) {
+            return null;
+        }
+
+        // если привидения нет, следующий по опасности - зелье
+        if (filterOne(alsoAtPoint, Potion.class) != null) {
+            return null;
+        }
+
+        // и если опасности нет, тогда уже рисуем останки
+        return DEAD_HERO;
+    }
+
+    private Element beforeState(Object... alsoAtPoint) {
+        if (!isActiveAndAlive()) {
+            return DEAD_HERO;
+        }
+
+        Potion potion = filterOne(alsoAtPoint, Potion.class);
+        if (potion != null) {
+            return POTION_HERO;
+        }
+
+        return HERO;
     }
 
     @Override
@@ -342,7 +349,7 @@ public class Hero extends RoundPlayerHero<Field>
     }
 
     public void fireKillHero(Hero prey) {
-        if (getTeamId() == prey.getTeamId()) {
+        if (isMyTeam(prey)) {
             event(KILL_OTHER_HERO);
         } else {
             event(KILL_ENEMY_HERO);

@@ -561,7 +561,7 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
 
         // then
-        // от имени того кто стоит на месте смерти другого героя он видет себя
+        // от имени того кто стоит на месте смерти другого героя он видит себя
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -737,7 +737,7 @@ public class RoundBattleTest extends AbstractGameTest {
     }
 
     // люой герой может зайти на место трупика и там его можно прибить, так что
-    // будет у нас двап трупика в одной клетке
+    // будет у нас два трупика в одной клетке
     @Test
     public void shouldDestroySecondHero_whenItOnDeathPlace() {
         // given
@@ -777,7 +777,6 @@ public class RoundBattleTest extends AbstractGameTest {
 
         tick();
         tick();
-
 
         // then
         // что в результате

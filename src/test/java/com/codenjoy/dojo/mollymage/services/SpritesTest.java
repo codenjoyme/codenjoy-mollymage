@@ -22,36 +22,18 @@ package com.codenjoy.dojo.mollymage.services;
  * #L%
  */
 
-import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.services.printer.CharElement;
 import org.junit.Test;
 
-import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
-
-import static com.codenjoy.dojo.client.Utils.split;
-import static org.junit.Assert.assertEquals;
+import static com.codenjoy.dojo.utils.TestUtils.assertSprites;
 
 public class SpritesTest {
 
     @Test
     public void shouldAllSpritesExists() {
         // given
-        List<String> errors = new LinkedList<>();
-        String game = "mollymage";
-        CharElement[] elements = Element.values();
+        GameRunner runner = new GameRunner();
 
         // when then
-        for (CharElement element : elements) {
-            String path = "./src/main/webapp/resources/%s/sprite/%s.png";
-            File file = new File(String.format(path, game, element.name().toLowerCase()));
-            if (!file.exists()) {
-                errors.add("Sprite not found: " + file.getAbsolutePath());
-            }
-        }
-
-        // then
-        assertEquals("[]", split(errors, ", \nSprite"));
+        assertSprites(runner.name(), runner.getPlots());
     }
 }

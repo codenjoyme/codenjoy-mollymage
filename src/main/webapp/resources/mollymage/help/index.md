@@ -227,7 +227,7 @@ C помощью этого regexp можно выкусить строку до
   + Would be. Maybe some tips will help you. Please look into the classes
     which presented in your client. Class Board as usual has some methods
     that can help you analyze field state
-* Fore some reason, flying DEAD_GHOSTs are shown as 'opening treasure boxes',
+* Fore some reason, flying GHOST_DEADs are shown as 'opening treasure boxes',
   is it an issue or I don't understand smth?
   + This is expected; blasting potions create flying ghosts which will find
     shortest path opening treasure to kill you.

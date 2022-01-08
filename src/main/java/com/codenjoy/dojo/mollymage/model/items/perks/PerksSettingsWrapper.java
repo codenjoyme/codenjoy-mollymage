@@ -30,6 +30,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.codenjoy.dojo.games.mollymage.Element.TREASURE_BOX_OPENING;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static java.util.stream.Collectors.toList;
 
@@ -168,13 +169,13 @@ public class PerksSettingsWrapper {
         // нет перков - стенка
         int total = enabled().size();
         if (total == 0) {
-            return Element.OPENING_TREASURE_BOX;
+            return TREASURE_BOX_OPENING;
         }
 
         // dropRatio - вероятность выпадения любого перка
         int random = dice.next(MAX_PERCENTS);
         if (random >= dropRatio()) {
-            return Element.OPENING_TREASURE_BOX;
+            return TREASURE_BOX_OPENING;
         }
 
         // считаем какой перк победил

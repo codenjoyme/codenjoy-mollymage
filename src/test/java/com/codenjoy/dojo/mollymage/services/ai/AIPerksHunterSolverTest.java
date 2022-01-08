@@ -128,7 +128,7 @@ public class AIPerksHunterSolverTest {
         assertEquals(expected,
                 TestUtils.printWay(expected,
                         Element.HERO, Element.POTION_BLAST_RADIUS_INCREASE,
-                        Element.NONE, Element.DEAD_GHOST,
+                        Element.NONE, Element.GHOST_DEAD,
                         board,
                         b -> AIPerksHunterSolver.possible((Board) b)));
     }

@@ -258,12 +258,12 @@ public class Hero extends RoundPlayerHero<Field>
     @Override
     public Element beforeState(Object... alsoAtPoint) {
         if (!isActiveAndAlive()) {
-            return DEAD_HERO;
+            return HERO_DEAD;
         }
 
         Potion potion = filterOne(alsoAtPoint, Potion.class);
         if (potion != null) {
-            return POTION_HERO;
+            return HERO_POTION;
         }
 
         return HERO;
@@ -273,7 +273,7 @@ public class Hero extends RoundPlayerHero<Field>
     public Element middleState(Element state, List<Hero> heroes, Object[] alsoAtPoint) {
         // если в этой клетке есть хоть один живой, его надо отобразить как угрозу
         if (heroes.stream().anyMatch(Hero::isActiveAndAlive)) {
-            return state == DEAD_HERO
+            return state == HERO_DEAD
                     ? null
                     : state;
         }
@@ -289,7 +289,7 @@ public class Hero extends RoundPlayerHero<Field>
         }
 
         // и если опасности нет, тогда уже рисуем останки
-        return DEAD_HERO;
+        return HERO_DEAD;
     }
 
     @Override

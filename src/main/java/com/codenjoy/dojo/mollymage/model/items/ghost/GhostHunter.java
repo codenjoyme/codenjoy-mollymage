@@ -109,7 +109,7 @@ public class GhostHunter extends Ghost {
         if (alive) {
             TreasureBox wall = filterOne(alsoAtPoint, TreasureBox.class);
             if (wall != null) {
-                return OPENING_TREASURE_BOX;
+                return TREASURE_BOX_OPENING;
             }
 
             Blast blast = filterOne(alsoAtPoint, Blast.class);
@@ -117,7 +117,7 @@ public class GhostHunter extends Ghost {
                 return GHOST;
             }
 
-            return DEAD_GHOST;
+            return GHOST_DEAD;
         }
 
         // если поднизом зелье, видеть ее важнее, чем трупик привидения TODO test me

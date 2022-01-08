@@ -43,7 +43,7 @@ public class PerksSettingsWrapperTest {
 
     @Mock Dice dice;
 
-    private static final Element NO_PERK = Element.OPENING_TREASURE_BOX;
+    private static final Element NO_PERK = TREASURE_BOX_OPENING;
     private PerksSettingsWrapper settings;
 
     @Before

@@ -40,6 +40,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static com.codenjoy.dojo.games.mollymage.Element.HERO_POTION;
 import static com.codenjoy.dojo.services.Direction.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
@@ -683,7 +684,7 @@ public class BoomEngineOriginalTest {
 
                 @Override
                 public Element state(Player player, Object... alsoAtPoint) {
-                    return Element.POTION_HERO;
+                    return HERO_POTION;
                 }
             }
 

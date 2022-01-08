@@ -30,6 +30,8 @@ import com.codenjoy.dojo.services.Point;
 
 import java.util.*;
 
+import static com.codenjoy.dojo.games.mollymage.Element.HERO_DEAD;
+
 public class AI2Solver implements Solver<Board> {
 
     public static HistoryPoint memory = new HistoryPoint(null);
@@ -151,7 +153,7 @@ public class AI2Solver implements Solver<Board> {
         }
 
         private boolean noKillWay() {
-            return next != null && !next.near.contains(Element.DEAD_HERO);
+            return next != null && !next.near.contains(HERO_DEAD);
         }
 
         @Override
@@ -199,7 +201,7 @@ public class AI2Solver implements Solver<Board> {
         }
 
         public boolean isDie() {
-            return near.contains(Element.DEAD_HERO);
+            return near.contains(HERO_DEAD);
         }
     }
 

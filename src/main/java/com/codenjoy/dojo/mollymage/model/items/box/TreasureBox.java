@@ -31,7 +31,7 @@ import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.printer.state.State;
 
-import static com.codenjoy.dojo.games.mollymage.Element.OPENING_TREASURE_BOX;
+import static com.codenjoy.dojo.games.mollymage.Element.TREASURE_BOX_OPENING;
 import static com.codenjoy.dojo.games.mollymage.Element.TREASURE_BOX;
 import static com.codenjoy.dojo.services.printer.state.StateUtils.filterOne;
 
@@ -45,7 +45,7 @@ public class TreasureBox extends PointImpl implements State<Element, Player> {
     public Element state(Player player, Object... alsoAtPoint) {
         Blast blast = filterOne(alsoAtPoint, Blast.class);
         if (blast != null) {
-            return OPENING_TREASURE_BOX;
+            return TREASURE_BOX_OPENING;
         }
 
         GhostHunter ghost = filterOne(alsoAtPoint, GhostHunter.class);

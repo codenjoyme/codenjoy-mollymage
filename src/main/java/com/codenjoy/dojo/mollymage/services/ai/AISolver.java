@@ -32,6 +32,8 @@ import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import org.apache.commons.lang3.StringUtils;
 
+import static com.codenjoy.dojo.games.mollymage.Element.*;
+
 public class AISolver implements Solver<Board> {
 
     private Direction direction;
@@ -48,11 +50,11 @@ public class AISolver implements Solver<Board> {
         this.board = board;
         Point hero = board.getHero();
 
-        boolean nearTreasureBox = board.isNear(hero.getX(), hero.getY(), Element.TREASURE_BOX);
-        boolean nearOtherHero = board.isNear(hero.getX(), hero.getY(), Element.OTHER_HERO);
-        boolean nearEnemyHero = board.isNear(hero.getX(), hero.getY(), Element.ENEMY_HERO);
-        boolean nearGhost = board.isNear(hero.getX(), hero.getY(), Element.GHOST);
-        boolean potionNotDropped = !board.isAt(hero.getX(), hero.getY(), Element.POTION_HERO);
+        boolean nearTreasureBox = board.isNear(hero.getX(), hero.getY(), TREASURE_BOX);
+        boolean nearOtherHero = board.isNear(hero.getX(), hero.getY(), OTHER_HERO);
+        boolean nearEnemyHero = board.isNear(hero.getX(), hero.getY(), ENEMY_HERO);
+        boolean nearGhost = board.isNear(hero.getX(), hero.getY(), GHOST);
+        boolean potionNotDropped = !board.isAt(hero.getX(), hero.getY(), HERO_POTION);
 
         potion = null;
         if ((nearTreasureBox || nearOtherHero || nearEnemyHero || nearGhost) && potionNotDropped) {
@@ -88,17 +90,17 @@ public class AISolver implements Solver<Board> {
             boolean potionAtWay = potion != null && potion.equals(to);
             boolean barrierAtWay = board.isBarrierAt(to);
             boolean blastAtWay = board.getFutureBlasts().contains(to);
-            boolean ghostNearWay = board.isNear(to, Element.GHOST);
+            boolean ghostNearWay = board.isNear(to, GHOST);
 
-            if (blastAtWay && board.countNear(from, Element.NONE) == 1 &&
-                    !board.isAt(from, Element.POTION_HERO)) {
+            if (blastAtWay && board.countNear(from, NONE) == 1 &&
+                    !board.isAt(from, HERO_POTION)) {
                 return Direction.STOP;
             }
 
             again = potionAtWay || barrierAtWay || ghostNearWay;
 
             // TODO продолжить но с тестами
-            boolean deadEndAtWay = board.countNear(to, Element.NONE) == 0 && potion != null;
+            boolean deadEndAtWay = board.countNear(to, NONE) == 0 && potion != null;
             if (deadEndAtWay) {
                 potion = null;
             }

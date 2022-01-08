@@ -38,7 +38,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.codenjoy.dojo.games.mollymage.Element.*;
-import static com.codenjoy.dojo.services.StateUtils.filterOne;
+import static com.codenjoy.dojo.services.printer.state.StateUtils.filterOne;
 
 public class GhostHunter extends Ghost {
 

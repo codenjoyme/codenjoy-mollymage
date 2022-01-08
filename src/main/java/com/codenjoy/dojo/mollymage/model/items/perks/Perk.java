@@ -25,7 +25,7 @@ package com.codenjoy.dojo.mollymage.model.items.perks;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.services.PointImpl;
-import com.codenjoy.dojo.services.State;
+import com.codenjoy.dojo.services.printer.state.State;
 import com.codenjoy.dojo.services.Tickable;
 
 public abstract class Perk extends PointImpl implements Tickable, State<Element, Player> {

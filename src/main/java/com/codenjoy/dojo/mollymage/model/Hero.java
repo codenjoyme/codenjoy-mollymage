@@ -31,8 +31,7 @@ import com.codenjoy.dojo.mollymage.model.items.perks.HeroPerks;
 import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.State;
-import com.codenjoy.dojo.services.StateUtils;
+import com.codenjoy.dojo.services.printer.state.State;
 import com.codenjoy.dojo.services.joystick.Act;
 import com.codenjoy.dojo.services.joystick.RoundsDirectionActJoystick;
 import com.codenjoy.dojo.services.round.RoundPlayerHero;
@@ -43,8 +42,8 @@ import static com.codenjoy.dojo.games.mollymage.Element.*;
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
 import static com.codenjoy.dojo.mollymage.services.Event.*;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
-import static com.codenjoy.dojo.services.StateUtils.filter;
-import static com.codenjoy.dojo.services.StateUtils.filterOne;
+import static com.codenjoy.dojo.services.printer.state.StateUtils.filter;
+import static com.codenjoy.dojo.services.printer.state.StateUtils.filterOne;
 
 public class Hero extends RoundPlayerHero<Field>
         implements RoundsDirectionActJoystick, State<Element, Player> {
@@ -356,4 +355,3 @@ public class Hero extends RoundPlayerHero<Field>
         }
     }
 }
-

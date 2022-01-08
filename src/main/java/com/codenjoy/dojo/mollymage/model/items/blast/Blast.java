@@ -27,7 +27,7 @@ import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Hero;
 import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.services.PointImpl;
-import com.codenjoy.dojo.services.State;
+import com.codenjoy.dojo.services.printer.state.State;
 
 import static com.codenjoy.dojo.games.mollymage.Element.BLAST;
 

@@ -26,7 +26,7 @@ import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.State;
+import com.codenjoy.dojo.services.printer.state.State;
 import com.codenjoy.dojo.services.Tickable;
 
 public class PerkOnBoard extends Wall implements State<Element, Player>, Tickable {

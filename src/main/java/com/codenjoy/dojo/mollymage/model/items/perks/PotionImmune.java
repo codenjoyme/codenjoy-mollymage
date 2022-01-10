@@ -30,7 +30,6 @@ public class PotionImmune extends Perk {
         super(Element.POTION_IMMUNE, 0, timeout);
     }
 
-
     /**
      * In case player grabs another such a perk while current one is active still,
      * timer will be reset to initial time-out value.

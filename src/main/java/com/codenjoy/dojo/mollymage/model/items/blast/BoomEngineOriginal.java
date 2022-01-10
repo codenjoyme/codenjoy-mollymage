@@ -98,9 +98,4 @@ public class BoomEngineOriginal implements BoomEngine {
         blasts.add(new Blast(pt.getX(), pt.getY(), owner));
         return true;
     }
-
-    private boolean isNotWall(List<? extends Point> barriers, Point pt) {
-        return !barriers.get(barriers.indexOf(pt)).getClass().equals(Wall.class);
-    }
-
 }

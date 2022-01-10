@@ -22,13 +22,15 @@ package com.codenjoy.dojo.mollymage.model.items.ghost;
  * #L%
  */
 
-import com.codenjoy.dojo.mollymage.model.*;
-import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
+import com.codenjoy.dojo.games.mollymage.Element;
+import com.codenjoy.dojo.mollymage.model.Field;
+import com.codenjoy.dojo.mollymage.model.Hero;
+import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.mollymage.model.items.Potion;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
+import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
 import com.codenjoy.dojo.mollymage.model.items.box.TreasureBox;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
-import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.algs.DeikstraFindWay;
@@ -37,7 +39,6 @@ import com.codenjoy.dojo.services.field.Accessor;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.codenjoy.dojo.games.mollymage.Element.*;
 import static com.codenjoy.dojo.services.printer.state.StateUtils.filterOne;
 
 public class GhostHunter extends Ghost {
@@ -109,23 +110,23 @@ public class GhostHunter extends Ghost {
         if (alive) {
             TreasureBox wall = filterOne(alsoAtPoint, TreasureBox.class);
             if (wall != null) {
-                return TREASURE_BOX_OPENING;
+                return Element.TREASURE_BOX_OPENING;
             }
 
             Blast blast = filterOne(alsoAtPoint, Blast.class);
             if (blast != null) {
-                return GHOST;
+                return Element.GHOST;
             }
 
-            return GHOST_DEAD;
+            return Element.GHOST_DEAD;
         }
 
-        // если поднизом зелье, видеть ее важнее, чем трупик привидения TODO test me
+        // если под низом зелье, видеть ее важнее, чем трупик привидения TODO test me
         Potion potion = filterOne(alsoAtPoint, Potion.class);
         if (potion != null) {
             return potion.state(player, alsoAtPoint);
         }
 
-        return GHOST;
+        return Element.GHOST;
     }
 }

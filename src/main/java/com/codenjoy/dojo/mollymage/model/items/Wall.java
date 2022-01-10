@@ -27,10 +27,8 @@ import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
-import com.codenjoy.dojo.services.printer.state.State;
 import com.codenjoy.dojo.services.Tickable;
-
-import static com.codenjoy.dojo.games.mollymage.Element.WALL;
+import com.codenjoy.dojo.services.printer.state.State;
 
 public class Wall extends PointImpl implements State<Element, Player>, Tickable {
 
@@ -40,7 +38,7 @@ public class Wall extends PointImpl implements State<Element, Player>, Tickable 
 
     @Override
     public Element state(Player player, Object... alsoAtPoint) {
-        return WALL;
+        return Element.WALL;
     }
 
     @Override

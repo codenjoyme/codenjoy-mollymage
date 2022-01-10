@@ -25,6 +25,7 @@ package com.codenjoy.dojo.mollymage.model.items.perks;
 import com.codenjoy.dojo.games.mollymage.Element;
 
 public class PoisonThrower extends Perk {
+
     public PoisonThrower(int timeout) {
         super(Element.POISON_THROWER, 0, timeout);
     }

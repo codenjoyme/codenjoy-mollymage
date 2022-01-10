@@ -35,7 +35,7 @@ public class PotionRemoteControl extends Perk {
         return new PotionRemoteControl(getValue(), getTimeout());
     }
 
-    // We don't countdown by time, only by usage
+    // We don't count down by time, only by usage
     @Override
     public void tick() {
         // do nothing

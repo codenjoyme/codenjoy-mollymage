@@ -34,8 +34,6 @@ import com.codenjoy.dojo.services.printer.state.State;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.codenjoy.dojo.games.mollymage.Element.GHOST_DEAD;
-import static com.codenjoy.dojo.games.mollymage.Element.GHOST;
 import static com.codenjoy.dojo.services.printer.state.StateUtils.filterOne;
 
 public class Ghost extends PointImpl implements State<Element, Player>, Fieldable<Field>, Tickable {
@@ -73,15 +71,15 @@ public class Ghost extends PointImpl implements State<Element, Player>, Fieldabl
     public Element state(Player player, Object... alsoAtPoint) {
         Blast blast = filterOne(alsoAtPoint, Blast.class);
         if (blast != null) {
-            return GHOST_DEAD;
+            return Element.GHOST_DEAD;
         }
 
-        return GHOST;
+        return Element.GHOST;
     }
 
     @Override
     public void tick() {
-        // неугомонные чоперы в тестах только так останавливаются
+        // неугомонные привидения в тестах только так останавливаются
         if (stop) {
             return;
         }

@@ -46,7 +46,8 @@ import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.printer.state.StateUtils.filterOne;
 
 public class Hero extends RoundPlayerHero<Field>
-        implements RoundsDirectionActJoystick, State<Element, Player>,
+        implements RoundsDirectionActJoystick,
+                   State<Element, Player>,
                    HeroState<Element, Hero, Player> {
 
     public static final int ACT_THROW_POISON = 1;

@@ -56,9 +56,9 @@ public class PerformanceTest {
         int players = 100;
         int ticks = 100;
 
-        int expectedPrint = 10000;
-        int expectedTick = 6000;
         int expectedCreation = 2000;
+        int expectedTick = 6000;
+        int expectedPrint = 10000;
 
         PrinterFactory<Element, Player> factory = new PrinterFactoryImpl<>();
 
@@ -78,7 +78,7 @@ public class PerformanceTest {
         boolean printBoard = false;
         assertPerformance(runner,
                 players, ticks,
-                expectedPrint, expectedTick, expectedCreation,
+                expectedCreation, expectedTick, expectedPrint,
                 printBoard);
 
     }

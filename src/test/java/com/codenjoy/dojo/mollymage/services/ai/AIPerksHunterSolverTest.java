@@ -118,19 +118,11 @@ public class AIPerksHunterSolverTest {
     }
 
     private void asrtWay(String expected) {
-        Board board = new Board() {
-            @Override
-            public Element valueOf(char ch) {
-                return Element.valueOf(ch);
-            }
-        };
-
         assertEquals(expected,
                 TestUtils.printWay(expected,
                         Element.HERO, Element.POTION_BLAST_RADIUS_INCREASE,
                         Element.NONE, Element.GHOST_DEAD,
-                        board,
-                        b -> AIPerksHunterSolver.possible((Board) b)));
+                        new Board(),
+                        board -> AIPerksHunterSolver.possible((Board) board)));
     }
-
 }

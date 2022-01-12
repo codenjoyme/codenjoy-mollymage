@@ -53,7 +53,7 @@ public class SmokeTest {
 
     @Test
     public void test() {
-        // about 1 sec
+        // about 0.7 sec
         // coverage 881 lines from 1071
         int ticks = 1000;
 

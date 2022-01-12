@@ -22,6 +22,7 @@ package com.codenjoy.dojo.mollymage.model.items.perks;
  * #L%
  */
 
+import com.codenjoy.dojo.client.ElementsMap;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Dice;
@@ -35,6 +36,7 @@ import static java.util.stream.Collectors.toList;
 
 public class PerksSettingsWrapper {
 
+    private static final ElementsMap<Element> elements = new ElementsMap<>(Element.values());
     public static final int MAX_PERCENTS = 100;
 
     private GameSettings settings;
@@ -81,7 +83,7 @@ public class PerksSettingsWrapper {
     }
 
     private void enable(Element perk) {
-        Set<Element> perks = new LinkedHashSet(enabled());
+        Set<Element> perks = new LinkedHashSet<>(enabled());
         perks.add(perk);
         enabled(perks);
     }
@@ -96,7 +98,7 @@ public class PerksSettingsWrapper {
     private List<Element> enabled() {
         return settings.string(DEFAULT_PERKS)
                 .chars()
-                .mapToObj(ch -> Element.valueOf((char)ch))
+                .mapToObj(ch -> elements.get((char)ch))
                 .collect(toList());
     }
 

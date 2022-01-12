@@ -28,17 +28,11 @@ import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.services.GameRunner;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.profile.Profiler;
-import com.codenjoy.dojo.services.EventListener;
-import com.codenjoy.dojo.services.Game;
-import com.codenjoy.dojo.services.Joystick;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.dice.RandomDice;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
-import com.codenjoy.dojo.utils.TestUtils;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -48,28 +42,23 @@ import java.util.function.Consumer;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_ENABLED;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
+import static com.codenjoy.dojo.utils.TestUtils.assertPerformance;
 
 public class PerformanceTest {
-
-    private Profiler profiler;
 
     @Test
     public void test() {
 
-        // about 9 sec
+        // about 12.5 sec
         int boardSize = 100;
         int walls = 1500;
         int ghosts = 200;
         int players = 100;
         int ticks = 100;
-        boolean printBoard = false;
 
-        profiler = new Profiler(){{
-            PRINT_SOUT = true;
-        }};
-        profiler.start();
+        int expectedPrint = 10000;
+        int expectedTick = 6000;
+        int expectedCreation = 2000;
 
         PrinterFactory<Element, Player> factory = new PrinterFactoryImpl<>();
 
@@ -86,52 +75,11 @@ public class PerformanceTest {
             }
         };
 
-        List<Game> games = TestUtils.getGames(players, runner,
-                factory, () -> mock(EventListener.class));
-
-        profiler.done("creation");
-
-        for (int i = 0; i < ticks; i++) {
-            for (Game game : games) {
-                Joystick joystick = game.getJoystick();
-                int next = new RandomDice().next(5);
-                if (next % 2 == 0) {
-                    joystick.act();
-                }
-                switch (next) {
-                    case 0: joystick.left(); break;
-                    case 1: joystick.right(); break;
-                    case 2: joystick.up(); break;
-                    case 3: joystick.down(); break;
-                }
-            }
-            // because of MULTIPLE there is only one tick for all
-            games.get(0).getField().tick();
-            for (Game game : games) {
-                if (game.isGameOver()) {
-                    game.newGame();
-                }
-            }
-            profiler.done("tick");
-
-            Object board = null;
-            for (Game game : games) {
-                board = game.getBoardAsString();
-            }
-            if (printBoard) {
-                System.out.println(board);
-            }
-            profiler.done("print");
-        }
-
-        profiler.print();
-
-        int reserve = 3;
-        // сколько пользователей - столько раз выполнялось
-        assertLess("print", 10000 * reserve);
-        assertLess("tick", 6000 * reserve);
-        // выполнялось единожды
-        assertLess("creation", 2000 * reserve);
+        boolean printBoard = false;
+        assertPerformance(runner,
+                players, ticks,
+                expectedPrint, expectedTick, expectedCreation,
+                printBoard);
 
     }
 
@@ -171,11 +119,5 @@ public class PerformanceTest {
             }
         }
         return result;
-    }
-
-    private void assertLess(String phase, double expected) {
-        double actual = profiler.info(phase).getTime();
-        assertEquals(actual + " > " + expected,
-                true, actual < expected);
     }
 }

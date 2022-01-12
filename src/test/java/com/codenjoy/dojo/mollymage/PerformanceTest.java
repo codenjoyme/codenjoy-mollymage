@@ -23,11 +23,13 @@ package com.codenjoy.dojo.mollymage;
  */
 
 
+import com.codenjoy.dojo.client.local.DiceGenerator;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.Player;
 import com.codenjoy.dojo.mollymage.model.items.Wall;
 import com.codenjoy.dojo.mollymage.services.GameRunner;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
+import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.printer.BoardReader;
@@ -56,18 +58,24 @@ public class PerformanceTest {
         int players = 100;
         int ticks = 100;
 
-        int expectedCreation = 2000;
-        int expectedTick = 6000;
-        int expectedPrint = 10000;
+        int expectedCreation = 1200;
+        int expectedTick = 3000;
+        int expectedPrint = 8000;
 
         PrinterFactory<Element, Player> factory = new PrinterFactoryImpl<>();
 
         String level = toString(boardSize, factory);
+        Dice dice = new DiceGenerator().getDice(20000);
         GameRunner runner = new GameRunner(){
+
+            @Override
+            public Dice getDice() {
+                return dice;
+            }
+
             @Override
             public GameSettings getSettings() {
                 return super.getSettings()
-                        .bool(ROUNDS_ENABLED, false)
                         .setLevelMaps(LevelProgress.levelsStartsFrom1, level)
                         .integer(POTION_POWER, 10)
                         .integer(TREASURE_BOX_COUNT, walls)

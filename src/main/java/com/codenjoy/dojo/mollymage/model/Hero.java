@@ -324,10 +324,6 @@ public class Hero extends RoundPlayerHero<Field>
         score = Math.max(0, score + added);
     }
 
-    public int getTeamId() {
-        return getPlayer().getTeamId();
-    }
-
     public void fireKillHero(Hero prey) {
         if (isMyTeam(prey)) {
             event(KILL_OTHER_HERO);

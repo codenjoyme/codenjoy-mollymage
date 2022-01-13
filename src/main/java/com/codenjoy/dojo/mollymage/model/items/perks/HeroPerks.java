@@ -35,6 +35,7 @@ public class HeroPerks implements Tickable {
     private Map<String, Perk> perks = new HashMap<>();
 
     public void add(Perk perk) {
+        // TODO do not use map.containsKey just check that map.get() != null
         if (perks.containsKey(perk.getName())) {
             Perk newPerk = perk.combine(perks.get(perk.getName()));
             perks.put(perk.getName(), newPerk);

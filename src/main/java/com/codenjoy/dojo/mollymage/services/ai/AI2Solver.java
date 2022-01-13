@@ -23,9 +23,9 @@ package com.codenjoy.dojo.mollymage.services.ai;
  */
 
 
+import com.codenjoy.dojo.client.Solver;
 import com.codenjoy.dojo.games.mollymage.Board;
 import com.codenjoy.dojo.games.mollymage.Element;
-import com.codenjoy.dojo.client.Solver;
 import com.codenjoy.dojo.services.Point;
 
 import java.util.*;
@@ -104,6 +104,7 @@ public class AI2Solver implements Solver<Board> {
             Map<String, List<HistoryPoint>> byDirection = new HashMap<String, List<HistoryPoint>>();
             for (HistoryPoint point : goodPoint) {
                 String command = point.command;
+                // TODO do not use map.containsKey just check that map.get() != null
                 if (!byDirection.containsKey(command)) {
                     byDirection.put(command, new LinkedList<HistoryPoint>());
                 }

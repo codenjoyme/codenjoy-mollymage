@@ -436,8 +436,7 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
         Multimap<Hero, Hero> deathMatch = HashMultimap.create();
         for (Blast blast : blasts()) {
             Hero hunter = blast.owner();
-            aliveActive().stream()
-                    .map(Player::getHero)
+            aliveActiveHeroes().stream()
                     .filter(hero -> hero.itsMe(blast))
                     .filter(prey -> prey.getPerk(Element.POTION_IMMUNE) == null)
                     .forEach(prey -> deathMatch.put(hunter, prey));

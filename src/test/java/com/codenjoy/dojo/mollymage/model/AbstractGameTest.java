@@ -47,7 +47,6 @@ import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUN
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static java.util.stream.Collectors.joining;
-import static org.mockito.Mockito.spy;
 
 public abstract class AbstractGameTest 
         extends AbstractBaseGameTest<Player, MollyMage, GameSettings, Level, Hero> {
@@ -74,7 +73,7 @@ public abstract class AbstractGameTest
 
     @Override
     protected GameSettings setupSettings() {
-        return spy(new TestGameSettings());
+        return new TestGameSettings();
     }
 
     @Override

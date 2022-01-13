@@ -26,12 +26,11 @@ package com.codenjoy.dojo.mollymage.model;
 import com.codenjoy.dojo.mollymage.TestGameSettings;
 import com.codenjoy.dojo.mollymage.services.Event;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.EventListener;
+import com.codenjoy.dojo.services.dice.MockDice;
 import com.codenjoy.dojo.services.field.Accessor;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.Optional;
 
@@ -43,12 +42,12 @@ public class PlayerTest {
     private EventListener listener;
     private Field field;
     private GameSettings settings;
-    private Dice dice;
+    private MockDice dice;
 
     @Before
     public void setup() {
         settings = spy(new TestGameSettings());
-        dice = mock(Dice.class);
+        dice = new MockDice();
 
         field = mock(Field.class);
         when(field.settings()).thenReturn(settings);
@@ -59,11 +58,8 @@ public class PlayerTest {
         listener = mock(EventListener.class);
     }
 
-    protected void dice(int... values) {
-        OngoingStubbing<Integer> when = when(dice.next(anyInt()));
-        for (int value : values) {
-            when = when.thenReturn(value);
-        }
+    private void dice(Integer... next) {
+        dice.then(next);
     }
 
     @Test

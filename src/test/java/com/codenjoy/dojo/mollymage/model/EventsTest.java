@@ -414,8 +414,8 @@ public class EventsTest extends AbstractGameTest {
         assertEquals(1, field().ghosts().size());
     }
 
-    private int[] preparedCoordinatesForBoxesAndGhosts() {
-        int[] result = new int[]
+    private Integer[] preparedCoordinatesForBoxesAndGhosts() {
+        return new Integer[]
                 {
                         0, 0, 0, 1,        // boxes, first line
                         1, 0, 1, 1, 1, 2,  // boxes second line
@@ -423,7 +423,6 @@ public class EventsTest extends AbstractGameTest {
                         0, 2,              // first point for ghost
                         2, 2,              // second point for ghost
                 };
-        return result;
     }
 
     @Test

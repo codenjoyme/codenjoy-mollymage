@@ -108,7 +108,7 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
     }
 
     public void regenerateGhosts() {
-        generate(ghosts(), settings, GHOSTS_COUNT,
+        generate(ghosts(), size(), settings, GHOSTS_COUNT,
                 player -> freeRandom((Player) player),
                 pt -> {
                     Ghost ghost = new Ghost(pt);
@@ -118,7 +118,7 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
     }
 
     public void regenerateBoxes() {
-        generate(boxes(), settings, TREASURE_BOX_COUNT,
+        generate(boxes(), size(), settings, TREASURE_BOX_COUNT,
                 player -> freeRandom((Player) player),
                 TreasureBox::new);
     }

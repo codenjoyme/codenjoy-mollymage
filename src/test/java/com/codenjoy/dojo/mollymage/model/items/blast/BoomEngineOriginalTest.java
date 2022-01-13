@@ -26,7 +26,10 @@ package com.codenjoy.dojo.mollymage.model.items.blast;
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.TestGameSettings;
 import com.codenjoy.dojo.mollymage.model.*;
-import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.Direction;
+import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.PointImpl;
+import com.codenjoy.dojo.services.dice.MockDice;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.Printer;
@@ -44,7 +47,6 @@ import static com.codenjoy.dojo.games.mollymage.Element.HERO_POTION;
 import static com.codenjoy.dojo.services.Direction.*;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 
 public class BoomEngineOriginalTest {
 
@@ -53,12 +55,12 @@ public class BoomEngineOriginalTest {
     private PrinterFactory<Element, Player> printer;
     private Field field;
     private TestGameSettings settings;
-    private Dice dice;
+    private MockDice dice;
 
     @Before
     public void setup() {
         settings = settings();
-        dice = mock(Dice.class);
+        dice = new MockDice();
         printer = new PrinterFactoryImpl<>();
     }
 

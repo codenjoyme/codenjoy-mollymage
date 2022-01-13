@@ -156,7 +156,7 @@ public class GameTest extends AbstractGameTest {
         assertSame(hero(), game().getJoystick());
     }
 
-    private int[] inSquare(Point pt, int size) {
+    private Integer[] inSquare(Point pt, int size) {
         List<Integer> result = new ArrayList<>();
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
@@ -164,8 +164,7 @@ public class GameTest extends AbstractGameTest {
                 result.add(y + pt.getY());
             }
         }
-        return result.stream()
-                .mapToInt(i -> i).toArray();
+        return result.toArray(new Integer[0]);
     }
 
     @Test

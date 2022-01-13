@@ -25,7 +25,7 @@ package com.codenjoy.dojo.mollymage.services.ai;
 
 import com.codenjoy.dojo.games.mollymage.Board;
 import com.codenjoy.dojo.services.Direction;
-import com.codenjoy.dojo.services.Dice;
+import com.codenjoy.dojo.services.dice.MockDice;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,13 +39,13 @@ import static org.mockito.Mockito.*;
 
 public class AISolverTest {
 
-    private AISolver solver;
-    private Dice dice;
+    private AISolver ai;
+    private MockDice dice;
 
     @Before
     public void setup() {
-        dice = mock(Dice.class);
-        solver = new AISolver(dice);
+        dice = spy(new MockDice());
+        ai = new AISolver(dice);
     }
 
     @Test
@@ -245,14 +245,14 @@ public class AISolverTest {
     }
 
     private void assertD(String board, String expected, Direction... directions) {
-        List<Integer> dices = new LinkedList<Integer>();
+        List<Integer> dices = new LinkedList<>();
         for (Direction d : directions) {
             dices.add(d.value());
         }
-        Integer first = dices.remove(0);
-        when(dice.next(anyInt())).thenReturn(first, dices.toArray(new Integer[0]));
+        reset(dice);
+        dice.then(dices.toArray(new Integer[0]));
 
-        String actual = solver.get((Board) new Board().forString(board));
+        String actual = ai.get((Board) new Board().forString(board));
 
         verify(dice, times(directions.length)).next(anyInt());
         assertEquals(expected, actual);

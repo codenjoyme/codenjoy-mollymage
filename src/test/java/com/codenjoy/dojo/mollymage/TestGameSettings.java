@@ -46,11 +46,11 @@ public class TestGameSettings extends GameSettings {
         integer(KILL_WALL_SCORE, 10);
         integer(CATCH_PERK_SCORE, 5);
 
-        integer(GHOSTS_COUNT, 10);
-        integer(POTION_POWER, 3);
+        integer(GHOSTS_COUNT, 0);
+        integer(POTION_POWER, 1);
         integer(POTIONS_COUNT, 1);
 
-        integer(TREASURE_BOX_COUNT, 108);
+        integer(TREASURE_BOX_COUNT, 0);
 
         bool(BIG_BADABOOM, false);
 

@@ -43,7 +43,8 @@ import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static java.util.stream.Collectors.joining;
 import static org.mockito.Mockito.spy;
@@ -73,10 +74,7 @@ public abstract class AbstractGameTest
 
     @Override
     protected GameSettings setupSettings() {
-        return spy(new TestGameSettings())
-                .integer(POTION_POWER, 1)
-                .integer(TREASURE_BOX_COUNT, 0)
-                .integer(GHOSTS_COUNT, 0);
+        return spy(new TestGameSettings());
     }
 
     @Override

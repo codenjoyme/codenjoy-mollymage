@@ -37,8 +37,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.GHOSTS_COUNT;
-import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.TREASURE_BOX_COUNT;
+import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
 
 public class SmokeTest {
 
@@ -69,6 +68,7 @@ public class SmokeTest {
                         GameSettings settings = new TestGameSettings()
                                 .integer(TREASURE_BOX_COUNT, 14)
                                 .integer(GHOSTS_COUNT, 3)
+                                .integer(POTION_POWER, 3)
                                 .setLevelMaps(LevelProgress.levelsStartsFrom1,
                                         "☼☼☼☼☼☼☼☼☼☼☼\n" +
                                         "☼         ☼\n" +

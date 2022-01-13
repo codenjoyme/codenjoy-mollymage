@@ -436,7 +436,7 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
         Multimap<Hero, Hero> deathMatch = HashMultimap.create();
         for (Blast blast : blasts()) {
             Hero hunter = blast.owner();
-            aliveActiveHeroes().stream()
+            aliveActiveHeroes()
                     .filter(hero -> hero.itsMe(blast))
                     .filter(prey -> prey.getPerk(Element.POTION_IMMUNE) == null)
                     .forEach(prey -> deathMatch.put(hunter, prey));
@@ -522,7 +522,7 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
     // но если мы для героя смотрим - он может пойти к чоперу и на перк
     @Override
     public boolean isBarrier(Point pt, boolean isForHero) {
-        List<Player> players = isForHero ? aliveActive() : players();
+        List<Player> players = isForHero ? aliveActive().collect(toList()) : players();
 
         // мы дергаем этот метод когда еще герой ищет себе место, потому тут надо скипнуть все недоинициализированные плеера
         players = players.stream()

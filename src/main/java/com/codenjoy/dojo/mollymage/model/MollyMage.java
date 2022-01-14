@@ -34,10 +34,10 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.items.perks.*;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.services.BoardUtils;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.field.Accessor;
+import com.codenjoy.dojo.services.field.Generator;
 import com.codenjoy.dojo.services.field.PointField;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.round.RoundField;
@@ -161,7 +161,7 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
 
     @Override
     public Optional<Point> freeRandom(Player player) {
-        return BoardUtils.freeRandom(size(), dice, this::isFree);
+        return Generator.freeRandom(size(), dice, this::isFree);
     }
 
     @Override

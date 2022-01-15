@@ -34,6 +34,7 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.items.perks.*;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
+import com.codenjoy.dojo.profile.SimpleProfiler;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.field.Accessor;
@@ -107,7 +108,7 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
         return players;
     }
 
-    public void regenerateGhosts() {
+    public void generateGhosts() {
         generate(ghosts(), size(), settings, GHOSTS_COUNT,
                 player -> freeRandom((Player) player),
                 pt -> {
@@ -117,7 +118,7 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
                 });
     }
 
-    public void regenerateBoxes() {
+    public void generateBoxes() {
         generate(boxes(), size(), settings, TREASURE_BOX_COUNT,
                 player -> freeRandom((Player) player),
                 TreasureBox::new);
@@ -181,10 +182,11 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
 
     @Override
     public void tickField() {
+        SimpleProfiler.inc();
         applyAllHeroes();       // герои ходят
         ghostEatHeroes();       // омномном
-        regenerateBoxes();      // сундуки появляются
-        regenerateGhosts();     // приведения появляются
+        generateBoxes();        // сундуки появляются
+        generateGhosts();       // приведения появляются
         ghosts().tick();        // привидения водят свой хоровод
         hunters().tick();       // охотники охотятся
         ghostEatHeroes();       // омномном

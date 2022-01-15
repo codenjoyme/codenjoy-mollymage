@@ -34,7 +34,6 @@ import com.codenjoy.dojo.mollymage.model.items.ghost.Ghost;
 import com.codenjoy.dojo.mollymage.model.items.ghost.GhostHunter;
 import com.codenjoy.dojo.mollymage.model.items.perks.*;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
-import com.codenjoy.dojo.profile.SimpleProfiler;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.field.Accessor;
@@ -182,7 +181,6 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
 
     @Override
     public void tickField() {
-        SimpleProfiler.inc();
         applyAllHeroes();       // герои ходят
         ghostEatHeroes();       // омномном
         generateBoxes();        // сундуки появляются

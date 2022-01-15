@@ -50,7 +50,7 @@ public class PerformanceTest {
 
     @Test
     public void test() {
-        // about 10.5 sec
+        // about 8.9 sec
         int boardSize = 50;
         int walls = 500;
         int ghosts = 100;
@@ -85,7 +85,7 @@ public class PerformanceTest {
         boolean printBoard = false;
         String board = assertPerformance(runner,
                 players, ticks,
-                expectedCreation, expectedTick, expectedPrint,
+                expectedCreation, expectedPrint, expectedTick,
                 printBoard);
 
         assertEquals(

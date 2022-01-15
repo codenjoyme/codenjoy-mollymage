@@ -53,7 +53,7 @@ public class GameSettingsTest {
 
     public LinkedHashMap<String, PerkSettings> allPerkSettings(PerksSettingsWrapper perksSettings) {
         return new LinkedHashMap<>() {{
-            Arrays.stream(Element.perks())
+            Arrays.stream(Element.perks)
                     .forEach(it -> put(it.name(), perksSettings.get(it)));
         }};
     }

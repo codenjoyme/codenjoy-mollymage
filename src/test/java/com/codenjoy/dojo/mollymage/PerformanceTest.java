@@ -50,7 +50,7 @@ public class PerformanceTest {
 
     @Test
     public void test() {
-        // about 8.9 sec
+        // about 10.9 sec
         int boardSize = 50;
         int walls = 500;
         int ghosts = 100;

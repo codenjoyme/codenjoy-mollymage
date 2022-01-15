@@ -32,6 +32,8 @@ import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
+
 import static com.codenjoy.dojo.games.mollymage.Element.*;
 
 public class AISolver implements Solver<Board> {
@@ -76,6 +78,7 @@ public class AISolver implements Solver<Board> {
     }
 
     private Direction tryToMove(Point from) {
+        List<Point> futureBlasts = board.getFutureBlasts();
         int count = 0;
         Direction result;
         boolean again;
@@ -89,7 +92,7 @@ public class AISolver implements Solver<Board> {
 
             boolean potionAtWay = potion != null && potion.equals(to);
             boolean barrierAtWay = board.isBarrierAt(to);
-            boolean blastAtWay = board.getFutureBlasts().contains(to);
+            boolean blastAtWay = futureBlasts.contains(to);
             boolean ghostNearWay = board.isNear(to, GHOST);
 
             if (blastAtWay && board.countNear(from, NONE) == 1 &&

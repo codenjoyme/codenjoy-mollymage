@@ -648,10 +648,9 @@ public class BoomEngineOriginalTest {
     }
 
     private void givenPoison(Point pt, Direction direction, int range) {
-        Hero hero = new Hero();
+        Hero hero = new Hero(pt);
+        hero.init(field);
         engine = new BoomEngineOriginal(field, hero);
-
-        hero.move(pt);
         poison = new Poison(hero, direction, range);
     }
 

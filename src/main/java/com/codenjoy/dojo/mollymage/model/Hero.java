@@ -62,15 +62,15 @@ public class Hero extends RoundPlayerHero<Field>
 
     private HeroPerks perks = new HeroPerks();
 
-    public Hero() {
+    public Hero(Point pt) {
+        super(pt);
+        clearScores();
+    }
+
+    public void clearScores() {
         score = 0;
         direction = null;
         recharge = 0;
-    }
-
-    public Hero(Point pt) {
-        this();
-        move(pt);
     }
 
     @Override
@@ -314,10 +314,6 @@ public class Hero extends RoundPlayerHero<Field>
     @Override
     public int scores() {
         return score;
-    }
-
-    public void clearScores() {
-        score = 0;
     }
 
     public void addScore(int added) {

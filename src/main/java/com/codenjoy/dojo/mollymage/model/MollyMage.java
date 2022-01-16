@@ -361,9 +361,10 @@ public class MollyMage extends RoundField<Player, Hero> implements Field {
         Multimap<Hero, Point> deathMatch = LinkedHashMultimap.create();
         for (Blast blast : blasts()) {
             Hero hunter = blast.owner();
-            all.stream()
-                    .filter(object -> object.itsMe(blast))
-                    .forEach(object -> deathMatch.put(hunter, object));
+            for (Point object : all) {
+                if (!object.itsMe(blast)) continue;
+                deathMatch.put(hunter, object);
+            }
         }
 
         // у нас есть два списка, прибитые стенки

@@ -23,7 +23,6 @@ package com.codenjoy.dojo.mollymage.services;
  */
 
 import com.codenjoy.dojo.client.Utils;
-import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkSettings;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.utils.JsonUtils;
@@ -33,6 +32,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 
+import static com.codenjoy.dojo.games.mollymage.ElementUtils.perks;
 import static org.junit.Assert.assertEquals;
 
 public class GameSettingsTest {
@@ -53,7 +53,7 @@ public class GameSettingsTest {
 
     public LinkedHashMap<String, PerkSettings> allPerkSettings(PerksSettingsWrapper perksSettings) {
         return new LinkedHashMap<>() {{
-            Arrays.stream(Element.perks)
+            Arrays.stream(perks)
                     .forEach(it -> put(it.name(), perksSettings.get(it)));
         }};
     }

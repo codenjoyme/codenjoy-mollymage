@@ -40,6 +40,7 @@ import com.codenjoy.dojo.services.round.RoundPlayerHero;
 import java.util.List;
 
 import static com.codenjoy.dojo.games.mollymage.Element.*;
+import static com.codenjoy.dojo.games.mollymage.ElementUtils.TEAM_ELEMENT;
 import static com.codenjoy.dojo.mollymage.model.Field.FOR_HERO;
 import static com.codenjoy.dojo.mollymage.services.Event.*;
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
@@ -253,7 +254,7 @@ public class Hero extends RoundPlayerHero<Field>
 
     @Override
     public Element state(Player player, Object... alsoAtPoint) {
-        return HeroState.super.state(player, alsoAtPoint);
+        return HeroState.super.state(player, TEAM_ELEMENT, alsoAtPoint);
     }
 
     @Override

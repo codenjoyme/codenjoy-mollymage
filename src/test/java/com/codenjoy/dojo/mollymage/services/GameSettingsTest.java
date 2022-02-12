@@ -26,6 +26,7 @@ import com.codenjoy.dojo.client.Utils;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkSettings;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.utils.JsonUtils;
+import com.codenjoy.dojo.utils.TestUtils;
 import org.json.JSONObject;
 import org.junit.Test;
 
@@ -238,5 +239,38 @@ public class GameSettingsTest {
                 "  'TREASURE_BOX_COUNT':52,\n" +
                 "  'WIN_ROUND_SCORE':30\n" +
                 "}", JsonUtils.prettyPrint(settings.asJson()));
+    }
+
+    @Test
+    public void shouldGetAllKeys() {
+        assertEquals("KILL_WALL_SCORE                 =[Score] Kill wall score\n" +
+                    "KILL_GHOST_SCORE                =[Score] Kill ghost score\n" +
+                    "KILL_OTHER_HERO_SCORE           =[Score] Kill other hero score\n" +
+                    "KILL_ENEMY_HERO_SCORE           =[Score] Kill enemy hero score\n" +
+                    "CATCH_PERK_SCORE                =[Score] Catch perk score\n" +
+                    "HERO_DIED_PENALTY               =[Score] Your hero's death penalty\n" +
+                    "WIN_ROUND_SCORE                 =[Score][Rounds] Win round score\n" +
+                    "BIG_BADABOOM                    =[Map] Blast activate potion\n" +
+                    "POTIONS_COUNT                   =[Map] Potions count\n" +
+                    "POTION_POWER                    =[Map] Potion power\n" +
+                    "TREASURE_BOX_COUNT              =[Map] Treasure boxes count\n" +
+                    "GHOSTS_COUNT                    =[Map] Ghosts count\n" +
+                    "PERK_WHOLE_TEAM_GET             =[Perks] All teammates get perk\n" +
+                    "PERK_DROP_RATIO                 =[Perks] Perks drop ratio in %\n" +
+                    "PERK_PICK_TIMEOUT               =[Perks] Perks pick timeout\n" +
+                    "PERK_POTION_BLAST_RADIUS_INC    =[Perks] Potion blast radius increase\n" +
+                    "TIMEOUT_POTION_BLAST_RADIUS_INC =[Perks] Potion blast radius increase effect timeout\n" +
+                    "PERK_POTION_COUNT_INC           =[Perks] Potion count increase\n" +
+                    "TIMEOUT_POTION_COUNT_INC        =[Perks] Potion count effect timeout\n" +
+                    "TIMEOUT_POTION_IMMUNE           =[Perks] Potion immune effect timeout\n" +
+                    "TIMEOUT_POISON_THROWER          =[Perks] Poison thrower effect timeout\n" +
+                    "TIMEOUT_POTION_EXPLODER         =[Perks] Potion exploder effect timeout\n" +
+                    "POISON_THROWER_RECHARGE         =[Perks] Poison thrower recharge\n" +
+                    "REMOTE_CONTROL_COUNT            =[Perks] Number of Potion remote controls (how many times player can use it)\n" +
+                    "POTION_EXPLODER_COUNT           =[Perks] Number of Potion Exploder (how many times player can use it)\n" +
+                    "STEAL_POINTS                    =[Perks] Steal points from potion owner (works with Potion Exploder perk)\n" +
+                    "DEFAULT_PERKS                   =[Perks] Perks available in this game\n" +
+                    "SCORE_COUNTING_TYPE             =[Score] Counting score mode",
+                TestUtils.toString(new GameSettings().allKeys()));
     }
 }

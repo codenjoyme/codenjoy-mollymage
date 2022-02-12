@@ -22,12 +22,11 @@ package com.codenjoy.dojo.mollymage.services;
  * #L%
  */
 
-
 import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.services.event.Calculator;
-import com.codenjoy.dojo.services.event.ScoresImpl;
 import com.codenjoy.dojo.services.settings.AllSettings;
+import com.codenjoy.dojo.services.settings.PropertiesKey;
 import com.codenjoy.dojo.services.settings.SettingsImpl;
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,41 +38,41 @@ import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_TEAMS_P
 
 public class GameSettings extends SettingsImpl implements AllSettings<GameSettings> {
 
-    public enum Keys implements Key {
+    public enum Keys implements PropertiesKey {
 
-        KILL_WALL_SCORE("[Score] Kill wall score"),
-        KILL_GHOST_SCORE("[Score] Kill ghost score"),
-        KILL_OTHER_HERO_SCORE("[Score] Kill other hero score"),
-        KILL_ENEMY_HERO_SCORE("[Score] Kill enemy hero score"),
-        CATCH_PERK_SCORE("[Score] Catch perk score"),
-        HERO_DIED_PENALTY("[Score] Your hero's death penalty"),
-        WIN_ROUND_SCORE("[Score][Rounds] Win round score"),
-        BIG_BADABOOM("[Map] Blast activate potion"),
-        POTIONS_COUNT("[Map] Potions count"),
-        POTION_POWER("[Map] Potion power"),
-        TREASURE_BOX_COUNT("[Map] Treasure boxes count"),
-        GHOSTS_COUNT("[Map] Ghosts count"),
-        PERK_WHOLE_TEAM_GET("[Perks] All teammates get perk"),
-        PERK_DROP_RATIO("[Perks] Perks drop ratio in %"),
-        PERK_PICK_TIMEOUT("[Perks] Perks pick timeout"),
-        PERK_POTION_BLAST_RADIUS_INC("[Perks] Potion blast radius increase"),
-        TIMEOUT_POTION_BLAST_RADIUS_INC("[Perks] Potion blast radius increase effect timeout"),
-        PERK_POTION_COUNT_INC("[Perks] Potion count increase"),
-        TIMEOUT_POTION_COUNT_INC("[Perks] Potion count effect timeout"),
-        TIMEOUT_POTION_IMMUNE("[Perks] Potion immune effect timeout"),
-        TIMEOUT_POISON_THROWER("[Perks] Poison thrower effect timeout"),
-        TIMEOUT_POTION_EXPLODER("[Perks] Potion exploder effect timeout"),
-        POISON_THROWER_RECHARGE("[Perks] Poison thrower recharge"),
-        REMOTE_CONTROL_COUNT("[Perks] Number of Potion remote controls (how many times player can use it)"),
-        POTION_EXPLODER_COUNT("[Perks] Number of Potion Exploder (how many times player can use it)"),
-        STEAL_POINTS("[Perks] Steal points from potion owner (works with Potion Exploder perk)"),
-        DEFAULT_PERKS("[Perks] Perks available in this game"),
-        SCORE_COUNTING_TYPE(ScoresImpl.SCORE_COUNTING_TYPE.key());
+        KILL_WALL_SCORE,
+        KILL_GHOST_SCORE,
+        KILL_OTHER_HERO_SCORE,
+        KILL_ENEMY_HERO_SCORE,
+        CATCH_PERK_SCORE,
+        HERO_DIED_PENALTY,
+        WIN_ROUND_SCORE,
+        BIG_BADABOOM,
+        POTIONS_COUNT,
+        POTION_POWER,
+        TREASURE_BOX_COUNT,
+        GHOSTS_COUNT,
+        PERK_WHOLE_TEAM_GET,
+        PERK_DROP_RATIO,
+        PERK_PICK_TIMEOUT,
+        PERK_POTION_BLAST_RADIUS_INC,
+        TIMEOUT_POTION_BLAST_RADIUS_INC,
+        PERK_POTION_COUNT_INC,
+        TIMEOUT_POTION_COUNT_INC,
+        TIMEOUT_POTION_IMMUNE,
+        TIMEOUT_POISON_THROWER,
+        TIMEOUT_POTION_EXPLODER,
+        POISON_THROWER_RECHARGE,
+        REMOTE_CONTROL_COUNT,
+        POTION_EXPLODER_COUNT,
+        STEAL_POINTS,
+        DEFAULT_PERKS,
+        SCORE_COUNTING_TYPE;
 
         private String key;
 
-        Keys(String key) {
-            this.key = key;
+        Keys() {
+            this.key = key(GameRunner.GAME_NAME);
         }
 
         @Override

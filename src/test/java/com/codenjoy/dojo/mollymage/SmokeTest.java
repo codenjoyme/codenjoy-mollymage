@@ -53,8 +53,11 @@ public class SmokeTest {
     @Test
     public void test() {
         // about 0.7 sec
-        // coverage 881 lines from 1071
+        // coverage 763 lines from 992
         int ticks = 1000;
+        int ghosts = 3;
+        int boxes = 25;
+        int power = 3;
 
         smoke.play(ticks, "SmokeTest.data",
                 new GameRunner() {
@@ -66,9 +69,9 @@ public class SmokeTest {
                     @Override
                     public GameSettings getSettings() {
                         GameSettings settings = new TestGameSettings()
-                                .integer(TREASURE_BOX_COUNT, 14)
-                                .integer(GHOSTS_COUNT, 3)
-                                .integer(POTION_POWER, 3)
+                                .integer(TREASURE_BOX_COUNT, boxes)
+                                .integer(GHOSTS_COUNT, ghosts)
+                                .integer(POTION_POWER, power)
                                 .setLevelMaps(LevelProgress.levelsStartsFrom1,
                                         "☼☼☼☼☼☼☼☼☼☼☼\n" +
                                         "☼         ☼\n" +
@@ -88,12 +91,21 @@ public class SmokeTest {
                                 .put(Element.POTION_BLAST_RADIUS_INCREASE, 5, 10)
                                 .put(Element.POTION_COUNT_INCREASE, 5, 3)
                                 .put(Element.POTION_REMOTE_CONTROL, 5, 10)
-                                .put(Element.POTION_IMMUNE, 5, 10);
+                                .put(Element.POTION_IMMUNE, 5, 10)
+                                .put(Element.POTION_EXPLODER, 5, 10)
+                                .put(Element.POISON_THROWER, 5, 10);
 
                         return settings;
                     }
                 },
-                Arrays.asList(new AISolver(dice), new AIPerksHunterSolver(dice)),
-                Arrays.asList(new Board(), new Board()));
+                Arrays.asList(new AISolver(dice),
+                        new AIPerksHunterSolver(dice),
+                        new AIPerksHunterSolver(dice)
+                ),
+                Arrays.asList(
+                        new Board(),
+                        new Board(),
+                        new Board()
+                ));
     }
 }

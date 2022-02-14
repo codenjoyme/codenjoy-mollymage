@@ -30,42 +30,37 @@ import com.codenjoy.dojo.games.mollymage.Element;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.dice.RandomDice;
 import com.codenjoy.dojo.services.algs.DeikstraFindWay;
+import com.codenjoy.dojo.services.dice.RandomDice;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static com.codenjoy.dojo.games.mollymage.Element.GHOST;
+
 public class AIPerksHunterSolver implements Solver<Board> {
 
     private DeikstraFindWay way;
-    private Direction direction;
-    private Point potion;
-    private Dice dice;
-    private Board board;
 
     public AIPerksHunterSolver(Dice dice) {
-        this.dice = dice;
         this.way = new DeikstraFindWay();
     }
 
     public static DeikstraFindWay.Possible possible(Board board) {
         List<Point> futureBlasts = board.getFutureBlasts();
-        List<Point> ghosts = board.get(Element.GHOST);
-        List<Point> barriers = board.getBarriers();
 
         return new DeikstraFindWay.Possible() {
             @Override
             public boolean possible(Point from, Direction where) {
                 Point to = where.change(from);
                 if (futureBlasts.contains(to)) return false;
-                if (ghosts.contains(to)) return false;
+                if (board.isAt(to, GHOST)) return false;
                 return true;
             }
 
             @Override
             public boolean possible(Point point) {
-                return !barriers.contains(point);
+                return !board.isBarrierAt(point);
             }
         };
     }
@@ -77,7 +72,9 @@ public class AIPerksHunterSolver implements Solver<Board> {
                 Element.POTION_BLAST_RADIUS_INCREASE,
                 Element.POTION_COUNT_INCREASE,
                 Element.POTION_IMMUNE,
-                Element.POTION_REMOTE_CONTROL);
+                Element.POTION_REMOTE_CONTROL,
+                Element.POISON_THROWER,
+                Element.POTION_EXPLODER);
         if (to.isEmpty()) {
             return Arrays.asList();
         }

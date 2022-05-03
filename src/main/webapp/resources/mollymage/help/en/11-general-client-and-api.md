@@ -1,4 +1,4 @@
-"## Clients and API
+## Clients and API
 
 The client code does not give a considerable handicap to gamers because
 you should spend time to puzzle out the code. However, it is pleasant
@@ -49,4 +49,4 @@ level API for working with the board are implemented already.
 * `Collection<Point> getFutureBlasts();`
   Positions of all potential hazardous places where the potion 
   can explode (the potion explodes on N {N will be arranged 
-  before the game starts} cell to the directions: up, down, right, left)."
+  before the game starts} cell to the directions: up, down, right, left).

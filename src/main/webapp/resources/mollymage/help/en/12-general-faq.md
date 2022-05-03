@@ -1,4 +1,4 @@
-"## FAQ
+## FAQ
 
 * I wonder what will happen if two players will try to move their heroes
   on one cell simultaneously? Both mages will die?
@@ -50,4 +50,4 @@
   + It will be in the same room. You need to play like you played before.
     The finale will begin with the room resetting points for all players. That's all.
 * How to combine in JS both `ACT` and `LEFT`?
-  + `return [Direction.ACT, Direction.LEFT];`"
+  + `return [Direction.ACT, Direction.LEFT];`

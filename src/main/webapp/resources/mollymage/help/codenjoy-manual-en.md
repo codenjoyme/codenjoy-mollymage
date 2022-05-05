@@ -38,10 +38,10 @@ its way.
 
 Each destroyed object on the field (hero, ghost, destroyed walls) is 
 restored in an instant in the other place. If the hero is damaged, 
-the penalty points[*](index-en.md#ask) are allocated to him.
+the penalty points[*](#ask) are allocated to him.
 
 The hero whose potion destroyed something on the map receives bonus 
-points[*](index-en.md#ask) as follows: for the destroyed walls, 
+points[*](#ask) as follows: for the destroyed walls, 
 for the ghost, for the enemy hero.
 
 All points are summed up. The player with the largest number of points 
@@ -209,35 +209,35 @@ winning the game.
 ### Perks
 
 * `POTION_BLAST_RADIUS_INCREASE` - Increase potion radius blast. 
-  `{value: +2, timeout: 30}`[*](index-en.md#ask)
+  `{value: +2, timeout: 30}`[*](#ask)
 * `POTION_COUNT_INCREASE` - Temporarily increase count of settable potions.
-  `{count: +4, timeout: 30}`[*](index-en.md#ask)
+  `{count: +4, timeout: 30}`[*](#ask)
 * `POTION_REMOTE_CONTROL` - Next several potions would be with 
-  remote control. Activating by command `ACT`. `{value:  3}`[*](index-en.md#ask)
+  remote control. Activating by command `ACT`. `{value:  3}`[*](#ask)
 * `POTION_IMMUNE` - Temporarily gives you immunity from potion blasts.
-  `{timeout: 30}`[*](index-en.md#ask)
+  `{timeout: 30}`[*](#ask)
 * `POISON_THROWER`  Hero can shoot by poison cloud. 
-  Using: `ACT(1),<DIRECTION>`. `{timeout: 30}`[*](index-en.md#ask)
+  Using: `ACT(1),<DIRECTION>`. `{timeout: 30}`[*](#ask)
 * `POTION_EXPLODER`  Hero can explode all potions on the field. 
-  Using: `ACT(2)`. `{number of  use: +1, timeout: 30}`[*](index-en.md#ask)
+  Using: `ACT(2)`. `{number of  use: +1, timeout: 30}`[*](#ask)
  
 ### Points
 
 The parameters will change[*](index-md.md#ask) as the game progresses.
 The default values are shown in the table below:
 
-* open chests by explode: `1`[*](index-en.md#ask)
-* kills ghosts: `10`[*](index-en.md#ask)
-* kill other heroes: `20`[*](index-en.md#ask)
-* kill enemy heroes: `100`[*](index-en.md#ask)
-* catch perk: `5`[*](index-en.md#ask)
-* win round: `30`[*](index-en.md#ask)
-* death penalty: `-30`[*](index-en.md#ask)
+* open chests by explode: `1`[*](#ask)
+* kills ghosts: `10`[*](#ask)
+* kill other heroes: `20`[*](#ask)
+* kill enemy heroes: `100`[*](#ask)
+* catch perk: `5`[*](#ask)
+* win round: `30`[*](#ask)
+* death penalty: `-30`[*](#ask)
   
 ### Cases
 
 * you can combine perks
-* who earn points after using `POTION_EXPLODER` - decides Sensei[*](index-en.md#ask).
+* who earn points after using `POTION_EXPLODER` - decides Sensei[*](#ask).
 * please be careful with perks on the field.
 
 ## <a id=""ask""></a> Ask Sensei
@@ -246,7 +246,6 @@ You can always see the settings of the current game
 [here](/codenjoy-contest/rest/settings/player).
 Please ask Sensei about current game settings. You can find Sensei in
 the chat that the organizers have provided to discuss issues.
-
 
 ## Hints
 
@@ -262,7 +261,6 @@ If you are not sure what to do try to implement the following algorithms:
 * Try to hide from future blasts.
 * Avoid ghost and other heroes.
 * Try to set the bomb so that it explode the box, ghosts or another heroes.
-
 
 ## Clients and API
 
@@ -316,7 +314,6 @@ level API for working with the board are implemented already.
   Positions of all potential hazardous places where the potion 
   can explode (the potion explodes on N {N will be arranged 
   before the game starts} cell to the directions: up, down, right, left).
-
 
 ## FAQ
 
@@ -372,7 +369,6 @@ level API for working with the board are implemented already.
 * How to combine in JS both `ACT` and `LEFT`?
   + `return [Direction.ACT, Direction.LEFT];`
 
-
 ## Want to host an event?
 
 It's an open source game. To implement your version of it,
@@ -384,5 +380,4 @@ If you have any questions reach me in [skype alexander.baglay](skype:alexander.b
 or email [apofig@gmail.com](mailto:apofig@gmail.com).
 
 Good luck and may the best win!
-
 

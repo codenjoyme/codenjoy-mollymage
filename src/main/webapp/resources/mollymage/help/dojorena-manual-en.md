@@ -161,7 +161,7 @@ Your goal is to make the molly move according to your algorithm. The
 algorithm must earn points as much as possible. The ultimate goal is 
 winning the game.
 
-### Commands
+## Commands
 
 * `UP`, `DOWN`, `LEFT`, `RIGHT` - move your hero in the specified direction.
 * `ACT` - set a potion.  Also, if you have perk `POTION_REMOTE_CONTROL` - 
@@ -182,7 +182,7 @@ winning the game.
   with Direction. Example: `RIGHT,ACT(2)` - in this case Molly will try 
   to move right and all potions on the field explode. 
 
-### Perks
+## Perks
 
 * `POTION_BLAST_RADIUS_INCREASE` - Increase potion radius blast. 
   `{value: +2, timeout: 30}`[*](#ask)
@@ -197,7 +197,7 @@ winning the game.
 * `POTION_EXPLODER`  Hero can explode all potions on the field. 
   Using: `ACT(2)`. `{number of  use: +1, timeout: 30}`[*](#ask)
  
-### Points
+## Points
 
 The parameters will change[*](index-md.md#ask) as the game progresses.
 The default values are shown in the table below:
@@ -210,18 +210,11 @@ The default values are shown in the table below:
 * win round: `30`[*](#ask)
 * death penalty: `-30`[*](#ask)
   
-### Cases
+## Cases
 
 * you can combine perks
 * who earn points after using `POTION_EXPLODER` - decides Sensei[*](#ask).
 * please be careful with perks on the field.
-
-## <a id=""ask""></a> Ask Sensei
-
-You can always see the settings of the current game
-[here](/codenjoy-contest/rest/settings/player).
-Please ask Sensei about current game settings. You can find Sensei in
-the chat that the organizers have provided to discuss issues.
 
 ## Hints
 
@@ -237,6 +230,13 @@ If you are not sure what to do try to implement the following algorithms:
 * Try to hide from future blasts.
 * Avoid ghost and other heroes.
 * Try to set the bomb so that it explode the box, ghosts or another heroes.
+
+## <a id=""ask""></a> Ask Sensei
+
+You can always see the settings of the current game
+[here](/codenjoy-contest/rest/settings/player).
+Please ask Sensei about current game settings. You can find Sensei in
+the chat that the organizers have provided to discuss issues.
 
 ## Clients and API
 

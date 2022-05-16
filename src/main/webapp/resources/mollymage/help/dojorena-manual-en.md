@@ -114,7 +114,7 @@ corner has the `[0, 0]` coordinate.
 
 This is what you see on UI:
 
-![](board.png)
+![](https://dojorena.io/codenjoy-contest/resources/mollymage/help/board.png)
 
 <meta charset="UTF-8">
 

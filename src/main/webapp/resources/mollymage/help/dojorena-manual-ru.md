@@ -119,7 +119,7 @@ C помощью этого regexp можно выкусить строку до
 
 Как это поле выглядит в реале:
 
-![](board.png)
+![](https://dojorena.io/codenjoy-contest/resources/mollymage/help/board.png)
 
 <meta charset="UTF-8">
 

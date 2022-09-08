@@ -4,11 +4,17 @@
 
 ## Intro
 
-The game server for familiarization and practice you can always find here: [MollyMage Free-For-All server.](https://dojorena.io/games/1)
+The game server for familiarization and practice you can always 
+find here: [MollyMage Free-For-All server.](https://dojorena.io/games/1)
 
-This is the open source game. To realize your game, correct errors in the current version and make the other corrections, you should [fork the project](https://github.com/codenjoyme/codenjoy) at first. There is the description in the Readme.md file in the repository root. It is specified in the description what to do next.
+This is the open source game. To realize your game, correct errors 
+in the current version and make the other corrections, you should 
+[fork the project](https://github.com/codenjoyme/codenjoy) at first. 
+There is the description in the Readme.md file in the repository root. 
+It is specified in the description what to do next.
 
-Game project (for writing your bot) can be found [here](https://github.com/codenjoyme/codenjoy-clients.git)
+Game project (for writing your bot) can be found 
+[here](https://github.com/codenjoyme/codenjoy-clients.git)
 
 ## What is the game about
 
@@ -42,16 +48,23 @@ is considered to be a winner (prior to the due date).
 
 So, the player registers on the server and joining the game.
 
-Then you should connect from client code to the server via websockets. This [collection of clients](https://github.com/codenjoyme/codenjoy-clients.git) for different programming languages will help you. How to start a client please check at the root of the project in the README.md file.
+Then you should connect from client code to the server via websockets. 
+This [collection of clients](https://github.com/codenjoyme/codenjoy-clients.git) 
+for different programming languages will help you. How to start a client 
+please check at the root of the project in the README.md file.
 
-If you can't find your programming language, you're gonna have to write your client (and then send us to the mail:
+If you can't find your programming language, you're gonna have to 
+write your client (and then send us to the mail:
 [oleksandr_baglai@epam.com](mailto:oleksandr_baglai@epam.com)
 
-Address to connect the game on the server looks like this (you can copy it from your game room):
+Address to connect the game on the server looks like this (you can 
+copy it from your game room):
 
 `https://[server]/codenjoy-contest/board/player/[user]?code=[code]`
 
-Here `[server]` - domain/id of server, `[user]` is your player id and `[code]` is your security token. Make sure you keep the code safe from prying eyes. Any participant, knowing your code, can play on your behalf.
+Here `[server]` - domain/id of server, `[user]` is your player id and 
+`[code]` is your security token. Make sure you keep the code safe from 
+prying eyes. Any participant, knowing your code, can play on your behalf.
 
 ## Message format
 
@@ -350,7 +363,8 @@ level API for working with the board are implemented already.
 It's an open source game. To implement your version of it,
 to fix bugs and to add any other logic simply
 [fork it](https://github.com/codenjoyme/codenjoy.git).
-All instructions are in Readme.md file, you'll know what to do next once you read it.
+All instructions are in Readme.md file, you'll know what to do 
+next once you read it.
 
 If you have any questions reach me in [skype alexander.baglay](skype:alexander.baglay)
 or email [apofig@gmail.com](mailto:apofig@gmail.com).

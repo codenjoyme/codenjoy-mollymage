@@ -309,7 +309,7 @@ If you are not sure what to do try to implement the following algorithms:
 * How to combine in JS both `ACT` and `LEFT`?
   + `return [Direction.ACT, Direction.LEFT];`
 
-## <a id=""ask""></a> Ask Sensei
+## <a id="ask"></a> Ask Sensei
 
 You can always see the settings of the current game
 [here](/codenjoy-contest/rest/settings/player).

@@ -47,7 +47,7 @@ winning the game.
  
 ## Points
 
-The parameters will change[*](index-md.md#ask) as the game progresses.
+The parameters will change[(?)](#ask) as the game progresses.
 The default values are shown in the table below:
 
 * open chests by explode: `1`[(?)](#ask)

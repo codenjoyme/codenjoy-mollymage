@@ -33,35 +33,35 @@ winning the game.
 ## Perks
 
 * `POTION_BLAST_RADIUS_INCREASE` - Increase potion radius blast. 
-  `{value: +2, timeout: 30}`[*](#ask)
+  `{value: +2, timeout: 30}`[(?)](#ask)
 * `POTION_COUNT_INCREASE` - Temporarily increase count of settable potions.
-  `{count: +4, timeout: 30}`[*](#ask)
+  `{count: +4, timeout: 30}`[(?)](#ask)
 * `POTION_REMOTE_CONTROL` - Next several potions would be with 
-  remote control. Activating by command `ACT`. `{value:  3}`[*](#ask)
+  remote control. Activating by command `ACT`. `{value:  3}`[(?)](#ask)
 * `POTION_IMMUNE` - Temporarily gives you immunity from potion blasts.
-  `{timeout: 30}`[*](#ask)
+  `{timeout: 30}`[(?)](#ask)
 * `POISON_THROWER`  Hero can shoot by poison cloud. 
-  Using: `ACT(1),<DIRECTION>`. `{timeout: 30}`[*](#ask)
+  Using: `ACT(1),<DIRECTION>`. `{timeout: 30}`[(?)](#ask)
 * `POTION_EXPLODER`  Hero can explode all potions on the field. 
-  Using: `ACT(2)`. `{number of  use: +1, timeout: 30}`[*](#ask)
+  Using: `ACT(2)`. `{number of  use: +1, timeout: 30}`[(?)](#ask)
  
 ## Points
 
 The parameters will change[*](index-md.md#ask) as the game progresses.
 The default values are shown in the table below:
 
-* open chests by explode: `1`[*](#ask)
-* kills ghosts: `10`[*](#ask)
-* kill other heroes: `20`[*](#ask)
-* kill enemy heroes: `100`[*](#ask)
-* catch perk: `5`[*](#ask)
-* win round: `30`[*](#ask)
-* death penalty: `-30`[*](#ask)
+* open chests by explode: `1`[(?)](#ask)
+* kills ghosts: `10`[(?)](#ask)
+* kill other heroes: `20`[(?)](#ask)
+* kill enemy heroes: `100`[(?)](#ask)
+* catch perk: `5`[(?)](#ask)
+* win round: `30`[(?)](#ask)
+* death penalty: `-30`[(?)](#ask)
   
 ## Cases
 
 * you can combine perks
-* who earn points after using `POTION_EXPLODER` - decides Sensei[*](#ask).
+* who earn points after using `POTION_EXPLODER` - decides Sensei[(?)](#ask).
 * please be careful with perks on the field.
 
 ## Hints

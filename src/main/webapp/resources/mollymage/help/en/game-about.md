@@ -17,10 +17,10 @@ its way.
 
 Each destroyed object on the field (hero, ghost, destroyed walls) is 
 restored in an instant in the other place. If the hero is damaged, 
-the penalty points[*](#ask) are allocated to him.
+the penalty points[(?)](#ask) are allocated to him.
 
 The hero whose potion destroyed something on the map receives bonus 
-points[*](#ask) as follows: for the destroyed walls, 
+points[(?)](#ask) as follows: for the destroyed walls, 
 for the ghost, for the enemy hero.
 
 All points are summed up. The player with the largest number of points 

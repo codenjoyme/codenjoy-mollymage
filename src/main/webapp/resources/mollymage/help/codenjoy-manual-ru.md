@@ -391,7 +391,7 @@ C помощью этого regexp можно выкусить строку до
 [форкни проект](https://github.com/codenjoyme/codenjoy.git).
 Все инструкции ты найдешь в Readme.md файлах - они подскажут, что делать дальше.
 
-Если у тебя есть вопросы - прошу, задавай их мне 
+Если у тебя есть вопросы - прошу, задавай их мне
 в [скайпе alexander.baglay](skype:alexander.baglay)
 или по почте [apofig@gmail.com](mailto:apofig@gmail.com).
 

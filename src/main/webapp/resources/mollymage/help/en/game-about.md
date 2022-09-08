@@ -1,4 +1,4 @@
-## What is the game about
+## What's this game about?
 
 Keep in mind: when writing your bot you should stick to its movement logic.
 The rest of the game is ready for you.

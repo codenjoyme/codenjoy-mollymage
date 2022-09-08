@@ -40,7 +40,7 @@ public class GameSettings extends SettingsImpl implements AllSettings<GameSettin
 
     public enum Keys implements PropertiesKey {
 
-        KILL_WALL_SCORE,
+        OPEN_TREASURE_BOX_SCORE,
         KILL_GHOST_SCORE,
         KILL_OTHER_HERO_SCORE,
         KILL_ENEMY_HERO_SCORE,
@@ -89,7 +89,7 @@ public class GameSettings extends SettingsImpl implements AllSettings<GameSettin
     public GameSettings() {
         initAll();
 
-        integer(KILL_WALL_SCORE, 1);
+        integer(OPEN_TREASURE_BOX_SCORE, 1);
         integer(KILL_GHOST_SCORE, 10);
         integer(KILL_OTHER_HERO_SCORE, 20);
         integer(KILL_ENEMY_HERO_SCORE, 100);

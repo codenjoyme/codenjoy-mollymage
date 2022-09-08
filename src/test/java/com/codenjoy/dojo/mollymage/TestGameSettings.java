@@ -43,7 +43,7 @@ public class TestGameSettings extends GameSettings {
         integer(KILL_OTHER_HERO_SCORE, 200);
         integer(KILL_ENEMY_HERO_SCORE, 500);
         integer(KILL_GHOST_SCORE, 100);
-        integer(KILL_WALL_SCORE, 10);
+        integer(OPEN_TREASURE_BOX_SCORE, 10);
         integer(CATCH_PERK_SCORE, 5);
 
         integer(GHOSTS_COUNT, 0);

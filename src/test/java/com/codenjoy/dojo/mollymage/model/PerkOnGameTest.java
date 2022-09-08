@@ -124,7 +124,7 @@ public class PerkOnGameTest extends AbstractGameTest {
         tick();
 
         int before = hero().scores();
-        assertEquals(2 * settings().integer(KILL_WALL_SCORE), before);
+        assertEquals(2 * settings().integer(OPEN_TREASURE_BOX_SCORE), before);
 
         assertF("######\n" +
                 "# # ##\n" +

@@ -46,7 +46,7 @@ public class Scores extends ScoresMap<Void> {
                 value -> settings.integer(KILL_GHOST_SCORE));
 
         put(Event.KILL_TREASURE_BOX,
-                value -> settings.integer(KILL_WALL_SCORE));
+                value -> settings.integer(OPEN_TREASURE_BOX_SCORE));
 
         put(Event.CATCH_PERK,
                 value -> settings.integer(CATCH_PERK_SCORE));

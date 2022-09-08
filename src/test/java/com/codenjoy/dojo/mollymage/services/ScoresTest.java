@@ -96,7 +96,7 @@ public class ScoresTest {
 
         // then
         assertEquals(140
-                    + 4 * settings.integer(KILL_WALL_SCORE)
+                    + 4 * settings.integer(OPEN_TREASURE_BOX_SCORE)
                     + settings.integer(HERO_DIED_PENALTY)
                     + settings.integer(CATCH_PERK_SCORE)
                     + settings.integer(KILL_OTHER_HERO_SCORE)
@@ -147,7 +147,7 @@ public class ScoresTest {
 
         // then
         assertEquals(140
-                    + 2*settings.integer(KILL_WALL_SCORE),
+                    + 2*settings.integer(OPEN_TREASURE_BOX_SCORE),
                 scores.getScore());
     }
 

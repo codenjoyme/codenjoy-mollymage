@@ -353,7 +353,7 @@ public class PerkAffectMultiplayerTest extends AbstractGameTest {
         int killScore = 10;
         settings().integer(POTION_POWER, 2)
                 .integer(CATCH_PERK_SCORE, 0)
-                .integer(KILL_WALL_SCORE, killScore);
+                .integer(OPEN_TREASURE_BOX_SCORE, killScore);
 
         givenFl("     \n" +
                 "     \n" +

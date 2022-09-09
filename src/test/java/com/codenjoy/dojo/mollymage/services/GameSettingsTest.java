@@ -76,10 +76,10 @@ public class GameSettingsTest {
                 "  'KILL_ENEMY_HERO_SCORE':100,\n" +
                 "  'KILL_GHOST_SCORE':10,\n" +
                 "  'KILL_OTHER_HERO_SCORE':20,\n" +
-                "  'KILL_WALL_SCORE':1,\n" +
                 "  'LEVELS_MAP_1_1':'☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n',\n" +
                 "  'LEVELS_MAP_1_2':'☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n☼                     ☼\\n☼ ☼☼ ☼☼☼☼ ☼  ☼☼ ☼☼  ☼ ☼\\n☼ ☼☼      ☼☼ ☼☼ ☼☼ ☼☼ ☼\\n☼     ☼☼☼  ☼        ☼ ☼\\n☼ ☼☼☼   ☼    ☼☼☼☼ ☼   ☼\\n☼  ☼  ☼   ☼☼      ☼☼☼ ☼\\n☼     ☼☼☼  ☼☼   ☼     ☼\\n☼ ☼☼☼          ☼☼☼  ☼ ☼\\n☼  ☼  ☼☼☼☼ ☼☼☼     ☼☼ ☼\\n☼           ☼   ☼   ☼ ☼\\n☼ ☼☼☼☼ ☼☼ ☼   ☼☼☼ ☼   ☼\\n☼      ☼☼ ☼☼☼     ☼☼☼ ☼\\n☼ ☼☼☼         ☼☼☼     ☼\\n☼  ☼  ☼☼ ☼☼☼   ☼  ☼☼☼ ☼\\n☼    ☼☼    ☼ ☼      ☼ ☼\\n☼ ☼      ☼   ☼☼☼ ☼☼   ☼\\n☼ ☼  ☼☼  ☼☼      ☼☼ ☼ ☼\\n☼ ☼☼ ☼☼   ☼ ☼☼☼☼    ☼ ☼\\n☼       ☼        ☼☼ ☼ ☼\\n☼ ☼☼☼☼ ☼☼☼ ☼☼☼☼ ☼☼  ☼ ☼\\n☼                     ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n',\n" +
                 "  'LEVELS_MAP_1_3':'☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n☼     ☼          ☼    ☼\\n☼     ☼          ☼    ☼\\n☼     ☼   ☼    ☼☼☼    ☼\\n☼     ☼   ☼      ☼    ☼\\n☼     ☼☼☼☼☼☼     ☼☼   ☼\\n☼       ☼             ☼\\n☼☼☼     ☼   ☼         ☼\\n☼           ☼    ☼    ☼\\n☼           ☼    ☼    ☼\\n☼☼☼☼☼☼☼☼    ☼☼☼☼☼☼    ☼\\n☼     ☼     ☼         ☼\\n☼     ☼     ☼         ☼\\n☼     ☼     ☼     ☼   ☼\\n☼                 ☼   ☼\\n☼         ☼    ☼☼☼☼☼☼☼☼\\n☼   ☼     ☼       ☼   ☼\\n☼   ☼     ☼       ☼   ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼        ☼\\n☼     ☼               ☼\\n☼     ☼       ☼       ☼\\n☼             ☼       ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n',\n" +
+                "  'OPEN_TREASURE_BOX_SCORE':1,\n" +
                 "  'PERK_DROP_RATIO':20,\n" +
                 "  'PERK_PICK_TIMEOUT':30,\n" +
                 "  'PERK_POTION_BLAST_RADIUS_INC':2,\n" +
@@ -142,10 +142,10 @@ public class GameSettingsTest {
                 "  'KILL_ENEMY_HERO_SCORE':100,\n" +
                 "  'KILL_GHOST_SCORE':10,\n" +
                 "  'KILL_OTHER_HERO_SCORE':20,\n" +
-                "  'KILL_WALL_SCORE':1,\n" +
                 "  'LEVELS_MAP_1_1':'☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n',\n" +
                 "  'LEVELS_MAP_1_2':'☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n☼                     ☼\\n☼ ☼☼ ☼☼☼☼ ☼  ☼☼ ☼☼  ☼ ☼\\n☼ ☼☼      ☼☼ ☼☼ ☼☼ ☼☼ ☼\\n☼     ☼☼☼  ☼        ☼ ☼\\n☼ ☼☼☼   ☼    ☼☼☼☼ ☼   ☼\\n☼  ☼  ☼   ☼☼      ☼☼☼ ☼\\n☼     ☼☼☼  ☼☼   ☼     ☼\\n☼ ☼☼☼          ☼☼☼  ☼ ☼\\n☼  ☼  ☼☼☼☼ ☼☼☼     ☼☼ ☼\\n☼           ☼   ☼   ☼ ☼\\n☼ ☼☼☼☼ ☼☼ ☼   ☼☼☼ ☼   ☼\\n☼      ☼☼ ☼☼☼     ☼☼☼ ☼\\n☼ ☼☼☼         ☼☼☼     ☼\\n☼  ☼  ☼☼ ☼☼☼   ☼  ☼☼☼ ☼\\n☼    ☼☼    ☼ ☼      ☼ ☼\\n☼ ☼      ☼   ☼☼☼ ☼☼   ☼\\n☼ ☼  ☼☼  ☼☼      ☼☼ ☼ ☼\\n☼ ☼☼ ☼☼   ☼ ☼☼☼☼    ☼ ☼\\n☼       ☼        ☼☼ ☼ ☼\\n☼ ☼☼☼☼ ☼☼☼ ☼☼☼☼ ☼☼  ☼ ☼\\n☼                     ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n',\n" +
                 "  'LEVELS_MAP_1_3':'☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n☼     ☼          ☼    ☼\\n☼     ☼          ☼    ☼\\n☼     ☼   ☼    ☼☼☼    ☼\\n☼     ☼   ☼      ☼    ☼\\n☼     ☼☼☼☼☼☼     ☼☼   ☼\\n☼       ☼             ☼\\n☼☼☼     ☼   ☼         ☼\\n☼           ☼    ☼    ☼\\n☼           ☼    ☼    ☼\\n☼☼☼☼☼☼☼☼    ☼☼☼☼☼☼    ☼\\n☼     ☼     ☼         ☼\\n☼     ☼     ☼         ☼\\n☼     ☼     ☼     ☼   ☼\\n☼                 ☼   ☼\\n☼         ☼    ☼☼☼☼☼☼☼☼\\n☼   ☼     ☼       ☼   ☼\\n☼   ☼     ☼       ☼   ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼        ☼\\n☼     ☼               ☼\\n☼     ☼       ☼       ☼\\n☼             ☼       ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n',\n" +
+                "  'OPEN_TREASURE_BOX_SCORE':1,\n" +
                 "  'PERK_DROP_RATIO':23,\n" +
                 "  'PERK_PICK_TIMEOUT':30,\n" +
                 "  'PERK_POTION_BLAST_RADIUS_INC':4,\n" +
@@ -199,10 +199,10 @@ public class GameSettingsTest {
                 "  'KILL_ENEMY_HERO_SCORE':100,\n" +
                 "  'KILL_GHOST_SCORE':10,\n" +
                 "  'KILL_OTHER_HERO_SCORE':20,\n" +
-                "  'KILL_WALL_SCORE':1,\n" +
                 "  'LEVELS_MAP_1_1':'☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼                     ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n',\n" +
                 "  'LEVELS_MAP_1_2':'☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n☼                     ☼\\n☼ ☼☼ ☼☼☼☼ ☼  ☼☼ ☼☼  ☼ ☼\\n☼ ☼☼      ☼☼ ☼☼ ☼☼ ☼☼ ☼\\n☼     ☼☼☼  ☼        ☼ ☼\\n☼ ☼☼☼   ☼    ☼☼☼☼ ☼   ☼\\n☼  ☼  ☼   ☼☼      ☼☼☼ ☼\\n☼     ☼☼☼  ☼☼   ☼     ☼\\n☼ ☼☼☼          ☼☼☼  ☼ ☼\\n☼  ☼  ☼☼☼☼ ☼☼☼     ☼☼ ☼\\n☼           ☼   ☼   ☼ ☼\\n☼ ☼☼☼☼ ☼☼ ☼   ☼☼☼ ☼   ☼\\n☼      ☼☼ ☼☼☼     ☼☼☼ ☼\\n☼ ☼☼☼         ☼☼☼     ☼\\n☼  ☼  ☼☼ ☼☼☼   ☼  ☼☼☼ ☼\\n☼    ☼☼    ☼ ☼      ☼ ☼\\n☼ ☼      ☼   ☼☼☼ ☼☼   ☼\\n☼ ☼  ☼☼  ☼☼      ☼☼ ☼ ☼\\n☼ ☼☼ ☼☼   ☼ ☼☼☼☼    ☼ ☼\\n☼       ☼        ☼☼ ☼ ☼\\n☼ ☼☼☼☼ ☼☼☼ ☼☼☼☼ ☼☼  ☼ ☼\\n☼                     ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n',\n" +
                 "  'LEVELS_MAP_1_3':'☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n☼     ☼          ☼    ☼\\n☼     ☼          ☼    ☼\\n☼     ☼   ☼    ☼☼☼    ☼\\n☼     ☼   ☼      ☼    ☼\\n☼     ☼☼☼☼☼☼     ☼☼   ☼\\n☼       ☼             ☼\\n☼☼☼     ☼   ☼         ☼\\n☼           ☼    ☼    ☼\\n☼           ☼    ☼    ☼\\n☼☼☼☼☼☼☼☼    ☼☼☼☼☼☼    ☼\\n☼     ☼     ☼         ☼\\n☼     ☼     ☼         ☼\\n☼     ☼     ☼     ☼   ☼\\n☼                 ☼   ☼\\n☼         ☼    ☼☼☼☼☼☼☼☼\\n☼   ☼     ☼       ☼   ☼\\n☼   ☼     ☼       ☼   ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼        ☼\\n☼     ☼               ☼\\n☼     ☼       ☼       ☼\\n☼             ☼       ☼\\n☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼\\n',\n" +
+                "  'OPEN_TREASURE_BOX_SCORE':1,\n" +
                 "  'PERK_DROP_RATIO':23,\n" +
                 "  'PERK_PICK_TIMEOUT':30,\n" +
                 "  'PERK_POTION_BLAST_RADIUS_INC':4,\n" +
@@ -243,7 +243,7 @@ public class GameSettingsTest {
 
     @Test
     public void shouldGetAllKeys() {
-        assertEquals("KILL_WALL_SCORE                 =[Score] Kill wall score\n" +
+        assertEquals("OPEN_TREASURE_BOX_SCORE         =[Score] Open treasure box score\n" +
                     "KILL_GHOST_SCORE                =[Score] Kill ghost score\n" +
                     "KILL_OTHER_HERO_SCORE           =[Score] Kill other hero score\n" +
                     "KILL_ENEMY_HERO_SCORE           =[Score] Kill enemy hero score\n" +

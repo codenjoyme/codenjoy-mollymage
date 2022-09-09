@@ -4,8 +4,8 @@
 
 ## Intro
 
-The game server for familiarization and practice you can always 
-find here: [MollyMage Free-For-All server.](https://dojorena.io/games/1)
+The game server for familiarization and practice you can always find here: 
+[MollyMage Free-For-All server](https://dojorena.io/games/1)
 
 This is the open source game. To realize your game, correct errors 
 in the current version and make the other corrections, you should 

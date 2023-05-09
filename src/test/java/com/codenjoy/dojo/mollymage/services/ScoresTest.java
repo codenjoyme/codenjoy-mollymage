@@ -24,220 +24,135 @@ package com.codenjoy.dojo.mollymage.services;
 
 
 import com.codenjoy.dojo.mollymage.TestGameSettings;
-import com.codenjoy.dojo.services.PlayerScores;
-import com.codenjoy.dojo.services.event.Calculator;
-import com.codenjoy.dojo.services.event.ScoresImpl;
-import org.junit.Before;
+import com.codenjoy.dojo.services.event.ScoresMap;
+import com.codenjoy.dojo.utils.scorestest.AbstractScoresTest;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.*;
-import static org.junit.Assert.assertEquals;
 
-public class ScoresTest {
+public class ScoresTest  extends AbstractScoresTest {
 
-    private PlayerScores scores;
-    private GameSettings settings;
-
-    public void killWall() {
-        scores.event(Event.KILL_TREASURE_BOX);
+    @Override
+    public GameSettings settings() {
+        return new TestGameSettings();
     }
 
-    public void killYourself() {
-        scores.event(Event.HERO_DIED);
+    @Override
+    protected Class<? extends ScoresMap> scores() {
+        return Scores.class;
     }
 
-    public void killGhost() {
-        scores.event(Event.KILL_GHOST);
-    }
-
-    public void killOtherHero() {
-        scores.event(Event.KILL_OTHER_HERO);
-    }
-
-    public void killEnemyHero() {
-        scores.event(Event.KILL_ENEMY_HERO);
-    }
-
-    public void dropPerk() {
-        scores.event(Event.CATCH_PERK);
-    }
-
-    public void winRound() {
-        scores.event(Event.WIN_ROUND);
-    }
-
-    @Before
-    public void setup() {
-        settings = new TestGameSettings();
-        givenScores(0);
+    @Override
+    protected Class<? extends Enum> eventTypes() {
+        return Event.class;
     }
 
     @Test
     public void shouldCollectScores() {
-        // given
-        givenScores(140);
-
-        // when
-        killWall();
-        killWall();
-        killWall();
-        killWall();
-
-        killYourself();
-
-        killGhost();
-
-        killOtherHero();
-        killEnemyHero();
-
-        dropPerk();
-
-        winRound();
-
-        // then
-        assertEquals(140
-                    + 4 * settings.integer(OPEN_TREASURE_BOX_SCORE)
-                    + settings.integer(HERO_DIED_PENALTY)
-                    + settings.integer(CATCH_PERK_SCORE)
-                    + settings.integer(KILL_OTHER_HERO_SCORE)
-                    + settings.integer(KILL_ENEMY_HERO_SCORE)
-                    + settings.integer(KILL_GHOST_SCORE)
-                    + settings.integer(WIN_ROUND_SCORE),
-                scores.getScore());
-    }
-
-    private void givenScores(int score) {
-        scores = new ScoresImpl<>(score, new Calculator<>(new Scores(settings)));
+        assertEvents("100:\n" +
+                "KILL_TREASURE_BOX > +10 = 110\n" +
+                "KILL_TREASURE_BOX > +10 = 120\n" +
+                "KILL_TREASURE_BOX > +10 = 130\n" +
+                "KILL_TREASURE_BOX > +10 = 140\n" +
+                "HERO_DIED > -50 = 90\n" +
+                "KILL_GHOST > +100 = 190\n" +
+                "KILL_OTHER_HERO > +200 = 390\n" +
+                "KILL_ENEMY_HERO > +500 = 890\n" +
+                "DROP_PERK > +0 = 890\n" +
+                "CATCH_PERK > +5 = 895\n" +
+                "WIN_ROUND > +1000 = 1895");
     }
 
     @Test
     public void shouldNotBeLessThanZero() {
-        // given
-        givenScores(0);
-
-        // when
-        killYourself();
-
-        // then
-        assertEquals(0, scores.getScore());
+        assertEvents("100:\n" +
+                "HERO_DIED > -50 = 50\n" +
+                "HERO_DIED > -50 = 0\n" +
+                "HERO_DIED > +0 = 0");
     }
 
     @Test
-    public void shouldClearScore() {
-        // given
-        givenScores(0);
-
-        killWall();
-
-        // when
-        scores.clear();
-
-        // then
-        assertEquals(0, scores.getScore());
+    public void shouldCleanScore() {
+        assertEvents("100:\n" +
+                "KILL_TREASURE_BOX > +10 = 110\n" +
+                "(CLEAN) > -110 = 0\n" +
+                "KILL_TREASURE_BOX > +10 = 10");
     }
 
     @Test
     public void shouldCollectScores_whenKillWall() {
         // given
-        givenScores(140);
+        settings.integer(OPEN_TREASURE_BOX_SCORE, 10);
 
-        // then
-        killWall();
-        killWall();
-
-        // then
-        assertEquals(140
-                    + 2*settings.integer(OPEN_TREASURE_BOX_SCORE),
-                scores.getScore());
+        // when then
+        assertEvents("100:\n" +
+                "KILL_TREASURE_BOX > +10 = 110\n" +
+                "KILL_TREASURE_BOX > +10 = 120");
     }
 
     @Test
     public void shouldCollectScores_whenKillYourself() {
         // given
-        givenScores(140);
+        settings.integer(HERO_DIED_PENALTY, -50);
 
-        // when
-        killYourself();
-        killYourself();
-
-        // then
-        assertEquals(140
-                    + 2 * settings.integer(HERO_DIED_PENALTY),
-                scores.getScore());
+        // when then
+        assertEvents("100:\n" +
+                "HERO_DIED > -50 = 50\n" +
+                "HERO_DIED > -50 = 0");
     }
 
     @Test
     public void shouldCollectScores_whenKillGhost() {
         // given
-        givenScores(140);
+        settings.integer(KILL_GHOST_SCORE, 100);
 
-        // when
-        killGhost();
-        killGhost();
-
-        // then
-        assertEquals(140
-                    + 2 * settings.integer(KILL_GHOST_SCORE),
-                scores.getScore());
+        // when then
+        assertEvents("100:\n" +
+                "KILL_GHOST > +100 = 200\n" +
+                "KILL_GHOST > +100 = 300");
     }
 
     @Test
     public void shouldCollectScores_whenKillOtherHero() {
         // given
-        givenScores(140);
+        settings.integer(KILL_OTHER_HERO_SCORE, 200);
 
-        // when
-        killOtherHero();
-        killOtherHero();
-
-        // then
-        assertEquals(140
-                    + 2 * settings.integer(KILL_OTHER_HERO_SCORE),
-                scores.getScore());
+        // when then
+        assertEvents("100:\n" +
+                "KILL_OTHER_HERO > +200 = 300\n" +
+                "KILL_OTHER_HERO > +200 = 500");
     }
 
     @Test
     public void shouldCollectScores_whenKillEnemyHero() {
         // given
-        givenScores(140);
+        settings.integer(KILL_ENEMY_HERO_SCORE, 200);
 
-        // when
-        killEnemyHero();
-        killEnemyHero();
-
-        // then
-        assertEquals(140
-                        + 2 * settings.integer(KILL_ENEMY_HERO_SCORE),
-                scores.getScore());
+        // when then
+        assertEvents("100:\n" +
+                "KILL_ENEMY_HERO > +200 = 300\n" +
+                "KILL_ENEMY_HERO > +200 = 500");
     }
 
     @Test
     public void shouldCollectScores_whenDropPerk() {
         // given
-        givenScores(140);
+        settings.integer(CATCH_PERK_SCORE, 200);
 
-        // when
-        dropPerk();
-        dropPerk();
-
-        // then
-        assertEquals(140
-                    + 2 * settings.integer(CATCH_PERK_SCORE),
-                scores.getScore());
+        // when then
+        assertEvents("100:\n" +
+                "CATCH_PERK > +200 = 300\n" +
+                "CATCH_PERK > +200 = 500");
     }
 
     @Test
     public void shouldCollectScores_whenWinRound() {
         // given
-        givenScores(140);
+        settings.integer(WIN_ROUND_SCORE, 1000);
 
-        // when
-        winRound();
-        winRound();
-
-        // then
-        assertEquals(140
-                    + 2 * settings.integer(WIN_ROUND_SCORE),
-                scores.getScore());
+        // when then
+        assertEvents("100:\n" +
+                "WIN_ROUND > +1000 = 1100\n" +
+                "WIN_ROUND > +1000 = 2100");
     }
 }

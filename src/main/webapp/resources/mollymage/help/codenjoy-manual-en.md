@@ -138,7 +138,7 @@ corner has the `[0, 0]` coordinate.
 
 This is what you see on UI:
 
-<img src="/codenjoy-contest/resources/mollymage/help/board.png" style="height:auto;" />
+<img src="/codenjoy-contest/resources/mollymage/img/board/large.png" style="height:auto;" />
 
 <meta charset="UTF-8">
 

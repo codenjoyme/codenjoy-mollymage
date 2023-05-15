@@ -33,8 +33,8 @@ import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
 public class RoundBattleTest extends AbstractGameTest {
 
     @Override
-    protected GameSettings setupSettings() {
-        return super.setupSettings()
+    protected GameSettings setupSettings(GameSettings settings) {
+        return super.setupSettings(settings)
                 .bool(ROUNDS_ENABLED, true)
                 .integer(ROUNDS_TIME_BEFORE_START, 5)
                 .integer(ROUNDS_PER_MATCH, 3)
@@ -299,11 +299,9 @@ public class RoundBattleTest extends AbstractGameTest {
                 "listener(2) => [HERO_DIED]\n");
 
         // when
-        tick();
-
         // новые координаты для героя
         dice(3, 4);
-        field().newGame(player(2)); // это сделает сервер в ответ на isAlive = false
+        tick();
 
         // then
         // игрок уже живой но неактивный до начала следующего раунда
@@ -369,6 +367,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "listener(1) => [HERO_DIED]\n");
 
         // when
+        dice(1, 0); // same hero position
         // идем назад
         hero(0).down();
         tick();
@@ -447,7 +446,6 @@ public class RoundBattleTest extends AbstractGameTest {
         // when
         tick();
 
-
         // then
         verifyAllEvents(
                 "listener(0) => [START_ROUND, [Round 1]]\n" +
@@ -471,17 +469,30 @@ public class RoundBattleTest extends AbstractGameTest {
         tick();
 
         // then
+        assertF("     \n" +
+                "     \n" +
+                "☺    \n" +
+                "҉&   \n" +
+                "҉♣♥  \n");
+
         verifyAllEvents(
                 "listener(0) => [KILL_OTHER_HERO]\n" +
                 "listener(1) => [HERO_DIED]\n");
 
         // when
+        dice(1, 0); // same hero position
         // идем назад
         hero(0).down();
         tick();
 
         hero(0).down();
         tick();
+
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                " &   \n" +
+                "☺♣♥  \n");
 
         hero(0).right();
         hero(0).dropPotion();
@@ -523,7 +534,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "☺&♥  \n", 0);
 
         // от имени пострадавшего в клеточке я вижу свои
-        // останки, привиедние хоть и есть там, я его не вижу
+        // останки, привидение хоть и есть там, я его не вижу
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -668,6 +679,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "listener(1) => [HERO_DIED]\n");
 
         // when
+        dice(1, 0); // hero same position
         hero(0).down();
         tick();
 
@@ -806,39 +818,88 @@ public class RoundBattleTest extends AbstractGameTest {
                 "listener(2) => [KILL_OTHER_HERO, WIN_ROUND]\n");
     }
 
-    // просто любопытно как рванут два героя, вместе с привидение и трупом под зельем
+    // просто любопытно как рванут два героя, вместе с привидением и трупом под зельем
     @Test
     public void shouldDestroyGhost_withOtherHeroes_onDeathPlace() {
         // given
         shouldDrawGhost_onPlaceOfDeath_withBomb();
 
+        verifyAllEvents("");
+
         // when
-        tick();
-        tick();
+        dice(2, 2, // hero
+            3, 3);
         tick();
 
         // then
         assertF("     \n" +
                 "     \n" +
+                "     \n" +   // TODO почему герой не сразу появился в новом месте?
                 "     \n" +
+                "☺&♥  \n", 0);
+
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "♥Ѡ♥  \n", 1);
+
+        assertF("     \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
+                "♥&☺  \n", 2);
+        // when
+        tick();
+
+        assertF("     \n" +
+                "     \n" +
+                "  ♣  \n" +  // TODO а только сейчас
+                "     \n" +
+                "☺&♥  \n", 0);
+
+        assertF("     \n" +
+                "     \n" +
+                "  Ѡ  \n" +
+                "     \n" +
+                "♥&♥  \n", 1);
+
+        assertF("     \n" +
+                "     \n" +
+                "  ♣  \n" +
+                "     \n" +
+                "♥&☺  \n", 2);
+
+        // when
+        dice(0, 4,
+            1, 4,
+            2, 4,
+            3, 4);
+        tick();
+
+        // then
+        assertF("     \n" +
+                "     \n" +
+                "  ♣  \n" +
                 " ҉   \n" +
                 "Ѡx♣  \n", 0);
 
         assertF("     \n" +
                 "     \n" +
-                "     \n" +
+                "  Ѡ  \n" +
                 " ҉   \n" +
-                "♣Ѡ♣  \n", 1);
+                "♣x♣  \n", 1);
 
         assertF("     \n" +
                 "     \n" +
-                "     \n" +
+                "  ♣  \n" +
                 " ҉   \n" +
                 "♣xѠ  \n", 2);
 
         // победителей нет
         verifyAllEvents(
                 "listener(0) => [HERO_DIED, KILL_OTHER_HERO, KILL_GHOST]\n" +
+                "listener(1) => [HERO_DIED]\n" + // TODO почему этот герой умирает?
                 "listener(2) => [HERO_DIED]\n");
 
         // when

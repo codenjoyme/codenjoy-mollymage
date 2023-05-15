@@ -31,30 +31,35 @@ import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_ENABLED
 
 public class TestGameSettings extends GameSettings {
 
+    public TestGameSettings() {
+        update(this);
+    }
+
     /**
      * Here you can override the settings for all tests.
      */
-    public TestGameSettings() {
-        bool(ROUNDS_ENABLED, false);
+    public static GameSettings update(GameSettings settings) {
+        return settings
+                .bool(ROUNDS_ENABLED, false)
 
-        integer(WIN_ROUND_SCORE, 1000);
-        integer(HERO_DIED_PENALTY, -50);
+                .integer(WIN_ROUND_SCORE, 1000)
+                .integer(HERO_DIED_PENALTY, -50)
 
-        integer(KILL_OTHER_HERO_SCORE, 200);
-        integer(KILL_ENEMY_HERO_SCORE, 500);
-        integer(KILL_GHOST_SCORE, 100);
-        integer(OPEN_TREASURE_BOX_SCORE, 10);
-        integer(CATCH_PERK_SCORE, 5);
+                .integer(KILL_OTHER_HERO_SCORE, 200)
+                .integer(KILL_ENEMY_HERO_SCORE, 500)
+                .integer(KILL_GHOST_SCORE, 100)
+                .integer(OPEN_TREASURE_BOX_SCORE, 10)
+                .integer(CATCH_PERK_SCORE, 5)
 
-        integer(GHOSTS_COUNT, 0);
-        integer(POTION_POWER, 1);
-        integer(POTIONS_COUNT, 1);
+                .integer(GHOSTS_COUNT, 0)
+                .integer(POTION_POWER, 1)
+                .integer(POTIONS_COUNT, 1)
 
-        integer(TREASURE_BOX_COUNT, 0);
+                .integer(TREASURE_BOX_COUNT, 0)
 
-        bool(BIG_BADABOOM, false);
+                .bool(BIG_BADABOOM, false)
 
-        bool(PERK_WHOLE_TEAM_GET, false);
-        string(DEFAULT_PERKS, StringUtils.EMPTY);
+                .bool(PERK_WHOLE_TEAM_GET, false)
+                .string(DEFAULT_PERKS, StringUtils.EMPTY);
     }
 }

@@ -29,12 +29,14 @@ import com.codenjoy.dojo.mollymage.model.items.perks.Perk;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerkOnBoard;
 import com.codenjoy.dojo.mollymage.model.items.perks.PerksSettingsWrapper;
 import com.codenjoy.dojo.mollymage.services.Event;
+import com.codenjoy.dojo.mollymage.services.GameRunner;
 import com.codenjoy.dojo.mollymage.services.GameSettings;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.EventListener;
+import com.codenjoy.dojo.services.GameType;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.multiplayer.TriFunction;
-import com.codenjoy.dojo.utils.gametest.AbstractBaseGameTest;
+import com.codenjoy.dojo.utils.gametest.NewAbstractBaseGameTest;
 import org.junit.After;
 import org.junit.Before;
 
@@ -49,7 +51,7 @@ import static com.codenjoy.dojo.services.PointImpl.pt;
 import static java.util.stream.Collectors.joining;
 
 public abstract class AbstractGameTest 
-        extends AbstractBaseGameTest<Player, MollyMage, GameSettings, Level, Hero> {
+        extends NewAbstractBaseGameTest<Player, MollyMage, GameSettings, Level, Hero> {
 
     protected PerksSettingsWrapper perks;
 
@@ -64,6 +66,11 @@ public abstract class AbstractGameTest
         super.after();
     }
 
+    @Override
+    protected GameType gameType() {
+        return new GameRunner();
+    }
+
     protected void afterCreateField() {
         settings().integer(TREASURE_BOX_COUNT, field().boxes().size())
                 .integer(GHOSTS_COUNT, field().ghosts().size());
@@ -72,8 +79,8 @@ public abstract class AbstractGameTest
     }
 
     @Override
-    protected GameSettings setupSettings() {
-        return new TestGameSettings();
+    protected GameSettings setupSettings(GameSettings settings) {
+        return TestGameSettings.update(settings);
     }
 
     @Override

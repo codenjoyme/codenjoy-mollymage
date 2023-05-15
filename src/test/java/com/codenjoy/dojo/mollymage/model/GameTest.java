@@ -153,7 +153,7 @@ public class GameTest extends AbstractGameTest {
                 "☺    \n");
 
         // when then
-        assertSame(hero(), game().getJoystick());
+        assertSame(hero(), joystick());
     }
 
     private Integer[] inSquare(Point pt, int size) {
@@ -412,8 +412,8 @@ public class GameTest extends AbstractGameTest {
         verifyAllEvents("");
 
         // then
-        assertNotSame(joystick1, game(0).getJoystick());
-        assertNotSame(joystick2, game(0).getJoystick());
+        assertNotSame(joystick1, joystick(0));
+        assertNotSame(joystick2, joystick(0));
     }
 
     @Test
@@ -426,8 +426,8 @@ public class GameTest extends AbstractGameTest {
                 "☺☺   \n");
 
         // then
-        assertSame(hero(0), game(0).getJoystick());
-        assertSame(hero(1), game(1).getJoystick());
+        assertSame(hero(0), joystick(0));
+        assertSame(hero(1), joystick(1));
 
         assertF("     \n" +
                 "     \n" +

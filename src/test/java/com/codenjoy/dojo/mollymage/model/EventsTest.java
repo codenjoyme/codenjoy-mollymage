@@ -554,15 +554,16 @@ public class EventsTest extends AbstractGameTest {
                 "listener(1) => [HERO_DIED, KILL_TREASURE_BOX]\n");
 
         // when
-        // новые коробки
-        dice(4, 4);
+        dice(0, 4, // heroes
+            1, 4,
+            4, 4); // box
         tick();
 
         // then
-        assertF("    #\n" +
+        assertF("☺♥  #\n" +
                 "     \n" +
                 "     \n" +
-                "Ѡ ♣  \n" +
+                "     \n" +
                 "     \n", 0);
     }
 
@@ -664,16 +665,18 @@ public class EventsTest extends AbstractGameTest {
                 "listener(1) => [HERO_DIED, KILL_TREASURE_BOX]\n");
 
         // when
-        // новые коробки
-        dice(4, 4,
-            4, 3);
+        dice(4, 4, // hero
+            4, 3,  // hero
+            4, 2,  // box
+            4, 1,  // box
+            4, 0);
         tick();
 
         // then
-        assertF("    #\n" +
+        assertF("    ☺\n" +
+                "    ♥\n" +
                 "    #\n" +
-                "     \n" +
-                "Ѡ  ♣ \n" +
+                "    #\n" +
                 "     \n", 0);
     }
 
@@ -712,15 +715,18 @@ public class EventsTest extends AbstractGameTest {
                 "listener(3) => [HERO_DIED, KILL_TREASURE_BOX]\n");
 
         // when
-        // новые коробки
-        dice(4, 4);
+        dice(0, 4, // heroes
+            1, 4,
+            2, 4,
+            3, 4,
+            4, 4); // box
         tick();
 
         // then
-        assertF("    #\n" +
-                "  Ѡ  \n" +
-                " ♣ ♣ \n" +
-                "  ♣  \n" +
+        assertF("☺♥♥♥#\n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
                 "     \n", 0);
     }
 
@@ -759,18 +765,21 @@ public class EventsTest extends AbstractGameTest {
                 "listener(3) => [HERO_DIED, KILL_TREASURE_BOX, KILL_TREASURE_BOX]\n");
 
         // when
-        // новые коробки
-        dice(4, 4,
-            4, 3,
-            4, 2);
+        dice(4, 4, // hero
+            4, 3, // hero
+            4, 2, // hero
+            4, 1, // hero
+            4, 0, // box
+            3, 0, // box
+            2, 0); // box
         tick();
 
         // then
-        assertF("    #\n" +
-                "  Ѡ #\n" +
-                " ♣ ♣#\n" +
-                "  ♣  \n" +
-                "     \n", 0);
+        assertF("    ☺\n" +
+                "    ♥\n" +
+                "    ♥\n" +
+                "    ♥\n" +
+                "  ###\n", 0);
     }
 
     @Test
@@ -869,13 +878,15 @@ public class EventsTest extends AbstractGameTest {
 
         // when
         removeGhosts(1); // больше не надо привидений
+        dice(0, 4, // heroes
+            1, 4);
         tick();
 
         // then
-        assertF("     \n" +
+        assertF("☺♥   \n" +
                 "     \n" +
                 "     \n" +
-                "Ѡ ♣  \n" +
+                "     \n" +
                 "     \n", 0);
     }
 
@@ -962,13 +973,17 @@ public class EventsTest extends AbstractGameTest {
 
         // when
         removeGhosts(1); // больше не надо привидений
+        dice(0, 4,
+            1, 4,
+            2, 4,
+            3, 4);
         tick();
 
         // then
-        assertF("     \n" +
-                "  Ѡ  \n" +
-                " ♣ ♣ \n" +
-                "  ♣  \n" +
+        assertF("☺♥♥♥ \n" +
+                "     \n" +
+                "     \n" +
+                "     \n" +
                 "     \n", 0);
     }
 
@@ -1059,16 +1074,23 @@ public class EventsTest extends AbstractGameTest {
 
         // when
         removeBoxes(1); // больше не надо коробок
+        dice(4, 4, // hero
+            4, 3, // hero
+            4, 2, // hero
+            4, 1, // hero
+            4, 0, // ghost
+            0, 4, // ghost
+            0, 3, // ghost
+            0, 2, // ghost
+            0, 1);
         tick();
 
         // then
-        verifyAllEvents("");
-
-        assertF("     \n" +
-                "   ♣ \n" +
+        assertF(" &  ♥\n" +
                 "     \n" +
-                " ♣ ♣ \n" +
-                "☺    \n", 0);
+                " &  ♥\n" +
+                "  &  \n" +
+                "☺   ♥\n", 0);
     }
 
     @Test
@@ -1161,15 +1183,23 @@ public class EventsTest extends AbstractGameTest {
 
         // when
         removeBoxes(1); // больше не надо коробок
+        dice(0, 4, // heroes
+            1, 4,
+            2, 4,
+            3, 4, // ghosts
+            4, 4,
+            4, 3,
+            4, 2,
+            4, 1);
         tick();
 
         // then
         verifyAllEvents("");
 
-        assertF("     \n" +
-                "   ø \n" +
+        assertF("♥öö&&\n" +
                 "     \n" +
-                " ♣ ø \n" +
+                "    &\n" + // TODO why not in [4, 2] and [4, 1]
+                "  &  \n" +
                 "☺    \n", 0);
     }
 
@@ -1260,16 +1290,20 @@ public class EventsTest extends AbstractGameTest {
 
         // when
         // новые коробки
-        dice(4, 4);
+        dice(0, 4, // heroes
+            1, 4,
+            2, 4,
+            3, 4,
+            4, 4); // box
         tick();
 
         // then
         verifyAllEvents("");
 
-        assertF("    #\n" +
-                " Ѡ ♣ \n" +
+        assertF("☺♥♥♥#\n" +
                 "     \n" +
-                " ♣ ♣ \n" +
+                "     \n" +
+                "     \n" +
                 "     \n", 0);
     }
 
@@ -1280,14 +1314,17 @@ public class EventsTest extends AbstractGameTest {
                 .bool(BIG_BADABOOM, false)
                 .perksSettings().dropRatio(0);
 
-        givenFl("     \n" +
-                "&   &\n" +
-                "  #  \n" +
-                "&   &\n" +
-                "☺☺☺☺ \n");
+        givenFl("      \n" +
+                "      \n" +
+                "&   & \n" +
+                "  #   \n" +
+                "&   & \n" +
+                "☺☺☺☺  \n");
+
+        stopGhosts();
 
         // when
-        // зелье, которым все пордорвем
+        // зелье, которым все подорвем
         hero(0).move(1, 2);
         hero(0).dropPotion();
         tick();
@@ -1319,11 +1356,12 @@ public class EventsTest extends AbstractGameTest {
         tick();
 
         // then
-        assertF("     \n" +
-                "&244&\n" +
-                " 1#3 \n" +
-                "&223&\n" +
-                "☺♥♥♥ \n", 0);
+        assertF("      \n" +
+                "      \n" +
+                "&244& \n" +
+                " 1#3  \n" +
+                "&223& \n" +
+                "☺♥♥♥  \n", 0);
 
         // when
         hero(0).move(1, 3);
@@ -1332,11 +1370,12 @@ public class EventsTest extends AbstractGameTest {
         hero(3).move(3, 3);
 
         // then
-        assertF("     \n" +
-                "&☻4♠&\n" +
-                " 1#3 \n" +
-                "&♠2♠&\n" +
-                "     \n", 0);
+        assertF("      \n" +
+                "      \n" +
+                "&☻4♠& \n" +
+                " 1#3  \n" +
+                "&♠2♠& \n" +
+                "      \n", 0);
 
         verifyAllEvents("");
 
@@ -1348,66 +1387,113 @@ public class EventsTest extends AbstractGameTest {
                 "listener(0) => [HERO_DIED, KILL_OTHER_HERO, KILL_TREASURE_BOX]\n" +
                 "listener(1) => [HERO_DIED]\n");
 
-        assertF("     \n" +
-                "&Ѡ3♠&\n" +
-                "҉҉H2 \n" +
-                "&11♠&\n" +
-                "     \n", 0);
+        assertF("      \n" +
+                "      \n" +
+                "&Ѡ3♠& \n" +
+                "҉҉H2  \n" +
+                "&11♠& \n" +
+                "      \n", 0);
 
         // when
-        // новые коробки
-        dice(4, 4);
+        dice(0, 5, // hero
+            1, 5, // hero
+            2, 5, // box
+            3, 5,
+            4, 5,
+            5, 5,
+            5, 4,
+            5, 3,
+            5, 2,
+            5, 1,
+            5, 0);
         tick();
 
         // then
         verifyAllEvents(
-                "listener(0) => [KILL_GHOST]\n" +
-                "listener(1) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
                 "listener(2) => [HERO_DIED]\n");
 
-        assertF(" ҉  #\n" +
-                "xѠ2♠&\n" +
-                " ҉҉1 \n" +
-                "x♣҉1&\n" +
-                " ҉҉  \n", 0);
+        assertF("☺♥#   \n" +
+                " ҉    \n" +
+                "x҉2♠& \n" +
+                " ҉҉1  \n" +
+                "x҉҉1& \n" +
+                " ҉҉   \n", 0);
 
         // when
+        removeGhosts(2); // убитое приведение не появится
+        dice(0, 5, // busy
+            1, 5, // busy
+            2, 5, // busy
+            3, 5, // hero
+            4, 5,
+            5, 5,
+            5, 4,
+            5, 3,
+            5, 2,
+            5, 1,
+            5, 0);
         tick();
+        stopGhosts();
 
         // then
         verifyAllEvents(
-                "listener(2) => [KILL_OTHER_HERO, KILL_GHOST]\n" +
                 "listener(3) => [HERO_DIED]\n");
 
-        assertF("    #\n" +
-                " Ѡ11&\n" +
-                "  ҉҉҉\n" +
-                " ♣҉♣x\n" +
-                "   ҉ \n", 0);
+        assertF("☺♥#♥  \n" +
+                "      \n" +
+                "  11& \n" +
+                "  ҉҉҉ \n" +
+                "  ҉҉x \n" +
+                "   ҉  \n", 0);
 
         // when
-        tick();
-
-        // then
-        verifyAllEvents(
-                "listener(3) => [KILL_GHOST]\n");
-
-        assertF("  ҉҉#\n" +
-                " Ѡ҉♣x\n" +
-                "  ҉҉ \n" +
-                " ♣ ♣ \n" +
-                "     \n", 0);
-
-        // when
+        removeGhosts(1); // убитое приведение не появится
+        dice(0, 5, // busy
+            1, 5, // busy
+            2, 5, // busy
+            3, 5, // busy
+            4, 5, // hero
+            5, 5,
+            5, 4,
+            5, 3,
+            5, 2,
+            5, 1,
+            5, 0);
         tick();
 
         // then
         verifyAllEvents("");
 
-        assertF("    #\n" +
-                " Ѡ ♣ \n" +
-                "     \n" +
-                " ♣ ♣ \n" +
-                "     \n", 0);
+        assertF("☺♥#♥♥ \n" +
+                "  ҉҉  \n" +
+                " ҉҉҉x \n" +
+                "  ҉҉  \n" +
+                "      \n" +
+                "      \n", 0);
+
+        // when
+        removeGhosts(1); // убитое приведение не появится
+        dice(0, 5, // busy
+            1, 5, // busy
+            2, 5, // busy
+            3, 5, // busy
+            4, 5, // busy
+            5, 5,
+            5, 4,
+            5, 3,
+            5, 2,
+            5, 1,
+            5, 0);
+        tick();
+
+        // then
+        verifyAllEvents("");
+
+        assertF("☺♥#♥♥ \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n" +
+                "      \n", 0);
     }
 }

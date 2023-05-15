@@ -74,17 +74,18 @@ public class KillDeathTest extends AbstractGameTest {
         assertHeroDie();
 
         // when
+        dice(4, 4); // new hero position
         tick();
 
         // then
-        assertF("     \n" +
+        assertF("    ☺\n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " Ѡ   \n");
+                "     \n");
 
         verifyAllEvents("");
-        assertHeroDie();
+        assertHeroAlive();
     }
 
     // после смерти ходить больше нельзя
@@ -101,13 +102,23 @@ public class KillDeathTest extends AbstractGameTest {
 
         // when
         hero().left();
-        tick();
 
         // then
         assertF("     \n" +
                 "     \n" +
+                " ҉   \n" +
+                "҉Ѡ҉  \n" +
+                " ҉   \n");
+
+        // when
+        dice(4, 4); // new hero position
+        tick();
+
+        // then
+        assertF("    ☺\n" +
                 "     \n" +
-                " Ѡ   \n" +
+                "     \n" +
+                "     \n" +
                 "     \n");
 
         verifyAllEvents("[HERO_DIED]");
@@ -148,13 +159,23 @@ public class KillDeathTest extends AbstractGameTest {
 
         // when
         hero().up();
-        tick();
 
         // then
         assertF("     \n" +
                 "     \n" +
+                " ҉   \n" +
+                "҉Ѡ҉  \n" +
+                " ҉   \n");
+
+        // when
+        dice(4, 4); // new hero position
+        tick();
+
+        // then
+        assertF("    ☺\n" +
                 "     \n" +
-                " Ѡ   \n" +
+                "     \n" +
+                "     \n" +
                 "     \n");
 
         verifyAllEvents("[HERO_DIED]");
@@ -173,13 +194,23 @@ public class KillDeathTest extends AbstractGameTest {
 
         // when
         hero().down();
-        tick();
 
         // then
         assertF("     \n" +
                 "     \n" +
+                " ҉   \n" +
+                "҉Ѡ҉  \n" +
+                " ҉   \n");
+
+        // when
+        dice(4, 4); // new hero position
+        tick();
+
+        // then
+        assertF("    ☺\n" +
                 "     \n" +
-                " Ѡ   \n" +
+                "     \n" +
+                "     \n" +
                 "     \n");
 
         verifyAllEvents("[HERO_DIED]");
@@ -198,13 +229,23 @@ public class KillDeathTest extends AbstractGameTest {
 
         // when
         hero().right();
-        tick();
 
         // then
         assertF("     \n" +
                 "     \n" +
+                " ҉   \n" +
+                "҉Ѡ҉  \n" +
+                " ҉   \n");
+
+        // when
+        dice(4, 4); // new hero position
+        tick();
+
+        // then
+        assertF("    ☺\n" +
                 "     \n" +
-                " Ѡ   \n" +
+                "     \n" +
+                "     \n" +
                 "     \n");
 
         verifyAllEvents("[HERO_DIED]");
@@ -223,13 +264,23 @@ public class KillDeathTest extends AbstractGameTest {
 
         // when
         hero().dropPotion();
-        tick();
 
         // then
         assertF("     \n" +
                 "     \n" +
+                " ҉   \n" +
+                "҉Ѡ҉  \n" +
+                " ҉   \n");
+
+        // when
+        dice(4, 4); // new hero position
+        tick();
+
+        // then
+        assertF("    ☺\n" +
                 "     \n" +
-                " Ѡ   \n" +
+                "     \n" +
+                "     \n" +
                 "     \n");
 
         verifyAllEvents("[HERO_DIED]");
@@ -278,17 +329,18 @@ public class KillDeathTest extends AbstractGameTest {
         assertHeroDie();
 
         // when
+        dice(4, 4); // new hero position
         tick();
 
         // then
-        assertF("     \n" +
+        assertF("    ☺\n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                " Ѡ   \n");
+                "     \n");
 
         verifyAllEvents("");
-        assertHeroDie();
+        assertHeroAlive();
     }
 
     @Test
@@ -335,17 +387,18 @@ public class KillDeathTest extends AbstractGameTest {
         assertHeroDie();
 
         // when
+        dice(4, 4); // new hero position
         tick();
 
         // then
-        assertF("     \n" +
+        assertF("    ☺\n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "Ѡ    \n");
+                "     \n");
 
         verifyAllEvents("");
-        assertHeroDie();
+        assertHeroAlive();
     }
 
     @Test
@@ -390,17 +443,18 @@ public class KillDeathTest extends AbstractGameTest {
         assertHeroDie();
 
         // when
+        dice(4, 4); // new hero position
         tick();
 
         // then
-        assertF("     \n" +
+        assertF("    ☺\n" +
                 "     \n" +
                 "     \n" +
                 "     \n" +
-                "Ѡ    \n");
+                "     \n");
 
         verifyAllEvents("");
-        assertHeroDie();
+        assertHeroAlive();
     }
 
     @Test
@@ -447,17 +501,18 @@ public class KillDeathTest extends AbstractGameTest {
         assertHeroDie();
 
         // when
+        dice(4, 4); // new hero position
         tick();
 
         // then
-        assertF("     \n" +
+        assertF("    ☺\n" +
                 "     \n" +
                 "     \n" +
-                "Ѡ    \n" +
+                "     \n" +
                 "     \n");
 
         verifyAllEvents("");
-        assertHeroDie();
+        assertHeroAlive();
     }
 
     @Test
@@ -538,17 +593,18 @@ public class KillDeathTest extends AbstractGameTest {
         assertHeroDie();
 
         // when
+        dice(4, 4); // new hero position
         tick();
 
         // then
-        assertF("     \n" +
+        assertF("    ☺\n" +
                 "     \n" +
                 "     \n" +
-                "  Ѡ  \n" +
+                "     \n" +
                 "     \n");
 
         verifyAllEvents("");
-        assertHeroDie();
+        assertHeroAlive();
     }
 
     // они взрываются от ударной волны

@@ -32,8 +32,8 @@ import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
 public class RoundScoresTest extends AbstractGameTest {
 
     @Override
-    protected GameSettings setupSettings() {
-        return super.setupSettings()
+    protected GameSettings setupSettings(GameSettings settings) {
+        return super.setupSettings(settings)
                 .bool(ROUNDS_ENABLED, true)
                 .integer(ROUNDS_TIME_BEFORE_START, 5)
                 .integer(ROUNDS_PER_MATCH, 3)
@@ -338,25 +338,28 @@ public class RoundScoresTest extends AbstractGameTest {
                 " ҉   \n", 2);
 
         // when
+        dice(0, 1, // TODO почему герой не смог тут появиться?
+            0, 2,
+            0, 3);
         tick();
 
         // then
         assertF("     \n" +
-                "     \n" +
-                "  ♥  \n" +
                 "♣    \n" +
+                "Ѡ ♥  \n" +
+                "     \n" +
                 "     \n", 0);
 
         assertF("     \n" +
-                "     \n" +
-                "  ♥  \n" +
                 "Ѡ    \n" +
+                "♣ ♥  \n" +
+                "     \n" +
                 "     \n", 1);
 
         assertF("     \n" +
-                "     \n" +
-                "  ☺  \n" +
                 "♣    \n" +
+                "♣ ☺  \n" +
+                "     \n" +
                 "     \n", 2);
 
         verifyAllEvents(
@@ -477,6 +480,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // when
         // затем пройдет еще некоторое количество тиков, до общего числа = timePerRound
+        dice(1, 0); // new hero position
         tick();
         tick();
         tick();
@@ -494,7 +498,6 @@ public class RoundScoresTest extends AbstractGameTest {
         // when
         // вот он последний тик раунда, тут все и случится
         dice(0, 0,
-            1, 0,
             1, 1);
         tick();
 
@@ -646,25 +649,29 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // when
         // затем пройдет еще некоторое количество тиков, до общего числа = timePerRound
+        // размещаем проигравших в свободные места
+        dice(0, 2,
+            1, 2,
+            2, 2);
         tick();
         tick();
         tick();
         tick();
 
         // then
-        assertF("   ♣ \n" +
+        assertF("     \n" +
                 " ♥   \n" +
-                "     \n" +
-                "♣  ☺ \n" +
-                " ♣   \n", 3);
+                "♣♣♣  \n" +
+                "   ☺ \n" +
+                "     \n", 3);
 
         verifyAllEvents("");
 
         // when
         // вот он последний тик раунда, тут все и случится
-        // размещаем всех победивших в свободные места
-        dice(0, 2,
-            1, 2);
+        // размещаем всех победителей в свободные места
+        dice(3, 2,
+            4, 2);
         tick();
 
         // then
@@ -672,21 +679,10 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(1) => [[Time is over]]\n" +
                 "listener(3) => [WIN_ROUND]\n");
 
-        // when
-        // а это уже сделает сам фреймворк для всех проигравших
-        dice(2, 2);
-        game(0).newGame();
-
-        dice(3, 2);
-        game(2).newGame();
-
-        dice(4, 2);
-        game(4).newGame();
-
         // then
         assertF("     \n" +
                 "     \n" +
-                "♣♣Ѡ♣♣\n" +
+                "Ѡ♣♣♣♣\n" +
                 "     \n" +
                 "     \n", 0);
 
@@ -855,27 +851,31 @@ public class RoundScoresTest extends AbstractGameTest {
         // затем пройдет еще некоторое количество тиков, до общего числа = timePerRound
         // больше коробок нам не надо
         removeBoxes(1);
+        // размещаем всех проигравших в свободные места
+        dice(0, 1, // занято останками
+            1, 0,  // занято останками
+            0, 2,
+            1, 2,
+            2, 2,
+            4, 2); // TODO почему тут нельзя [3, 2]s
         tick();
         tick();
         tick();
         tick();
 
         // then
-        assertF("   ♣ \n" +
-                " ♥  ♣\n" +
-                "     \n" +
-                "♣  ☺ \n" +
-                " ♣   \n", 4);
+        assertF("     \n" +
+                " ♥   \n" +
+                "♣♣♣ ♣\n" +
+                "   ☺ \n" +
+                "     \n", 4);
 
         verifyAllEvents("");
 
         // when
         // вот он последний тик раунда, тут все и случится
-        // размещаем всех победивших в свободные места
-        dice(0, 1, // место занято другим игроком
-            1, 0,  // место занято другим игроком
-            0, 2,
-            1, 2);
+        dice(3, 2,
+            4, 1);
         tick();
 
         // then
@@ -883,23 +883,10 @@ public class RoundScoresTest extends AbstractGameTest {
                 "listener(1) => [WIN_ROUND]\n" +
                 "listener(4) => [[Time is over]]\n");
 
-        // when
-        dice(2, 2);
-        game(0).newGame();
-
-        dice(3, 2);
-        game(2).newGame();
-
-        dice(4, 2);
-        game(3).newGame();
-
-        dice(4, 1);
-        game(5).newGame();
-
         // then
         assertF("     \n" +
                 "     \n" +
-                "♣♣Ѡ♣♣\n" +
+                "Ѡ♣♣♣♣\n" +
                 "    ♣\n" +
                 "     \n", 0);
 
@@ -1183,6 +1170,7 @@ public class RoundScoresTest extends AbstractGameTest {
 
         // when
         hero(0).left();
+        dice(1, 0);
         tick();
 
         hero(0).down();
@@ -1245,6 +1233,8 @@ public class RoundScoresTest extends AbstractGameTest {
         // when
         // ну и напоследок вернемся на место
         hero(0).left();
+        dice(1, 0, // same heroes position
+            2, 0);
         tick();
 
         hero(0).down();

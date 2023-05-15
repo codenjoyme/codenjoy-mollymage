@@ -461,14 +461,15 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "  value=4, timeout=3, timer=3, pick=44} at [5,1]}");
 
         // when
+        dice(1, 1);
         tick();
 
         // then
         assertF("#+####\n" +
-                "#☼#Ѡ##\n" +
+                "#☼#&##\n" +
                 "##   #\n" +
                 "#   ##\n" +
-                "     +\n" +
+                " ☺   +\n" +
                 "# ####\n");
 
         assertFieldPerks(
@@ -480,10 +481,7 @@ public class PerkOnGameTest extends AbstractGameTest {
                 "  value=4, timeout=3, timer=3, pick=43} at [5,1]}");
 
         // when
-        dice(1, 1);
         tick();
-        // это сделает сервер
-        game().newGame(); // это сделает сервер
 
         // then
         assertFieldPerks(
@@ -1317,13 +1315,14 @@ public class PerkOnGameTest extends AbstractGameTest {
         // мувнули героя и кикнули его
         hero().die();
         removeBoxes(1); // одна коробка потречена злым привидением
+        dice(3, 4); // hero
         tick();
 
         // then
         assertF("#+####\n" +
-                "# # ##\n" +
+                "# #☺##\n" +
                 "#    #\n" +
-                "# #Ѡ##\n" +
+                "# # ##\n" +
                 "  &  +\n" +
                 "#  ###\n");
 
@@ -1343,9 +1342,9 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // then
         assertF("#+####\n" +
-                "# # ##\n" +
+                "# #☺##\n" +
                 "#    #\n" +
-                "# #Ѡ##\n" +
+                "# # ##\n" +
                 "  +  +\n" +
                 "#  ###\n");
 
@@ -1363,9 +1362,9 @@ public class PerkOnGameTest extends AbstractGameTest {
 
         // then
         assertF("#+####\n" +
-                "# # ##\n" +
+                "# #☺##\n" +
                 "#    #\n" +
-                "# #Ѡ##\n" +
+                "# # ##\n" +
                 "  +  +\n" +
                 "#  ###\n");
 

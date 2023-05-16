@@ -485,6 +485,17 @@ public class RoundBattleTest extends AbstractGameTest {
         hero(0).down();
         tick();
 
+        // все герои живы
+        assertHeroStatus(
+                "active:\n" +
+                "hero(0)=true\n" +
+                "hero(1)=false\n" + // один неактивен
+                "hero(2)=true\n" +
+                "alive\n" +
+                "hero(0)=true\n" +
+                "hero(1)=true\n" +
+                "hero(2)=true");
+
         hero(0).down();
         tick();
 
@@ -521,7 +532,7 @@ public class RoundBattleTest extends AbstractGameTest {
                 "♥3☺  \n", 2);
 
         // when
-        // попробуем привидением сходить на место падшего героя
+        // попробуем привидением сходить на место нового спавна падшего героя
         ghost.move(DOWN.change(ghost));
 
         // then
@@ -533,8 +544,8 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "☺&♥  \n", 0);
 
-        // от имени пострадавшего в клеточке я вижу свои
-        // останки, привидение хоть и есть там, я его не вижу
+        // от имени пострадавшего в клеточке я вижу место своего нового спавна,
+        // привидение хоть и есть там, я его не вижу
         assertF("     \n" +
                 "     \n" +
                 "     \n" +
@@ -826,15 +837,23 @@ public class RoundBattleTest extends AbstractGameTest {
 
         verifyAllEvents("");
 
+        assertHeroStatus(
+                "active:\n" +
+                "hero(0)=true\n" +
+                "hero(1)=false\n" + // один неактивен
+                "hero(2)=true\n" +
+                "alive\n" +
+                "hero(0)=true\n" +
+                "hero(1)=true\n" +
+                "hero(2)=true");
+
         // when
-        dice(2, 2, // hero
-            3, 3);
         tick();
 
         // then
         assertF("     \n" +
                 "     \n" +
-                "     \n" +   // TODO почему герой не сразу появился в новом месте?
+                "     \n" +
                 "     \n" +
                 "☺&♥  \n", 0);
 
@@ -849,7 +868,20 @@ public class RoundBattleTest extends AbstractGameTest {
                 "     \n" +
                 "     \n" +
                 "♥&☺  \n", 2);
+
+        assertHeroStatus(
+                "active:\n" +
+                "hero(0)=true\n" +
+                "hero(1)=false\n" +
+                "hero(2)=true\n" +
+                "alive\n" +
+                "hero(0)=true\n" +
+                "hero(1)=false\n" +  // TODO стал неживым почему-то
+                "hero(2)=true");
+
         // when
+        dice(2, 2, // hero
+            3, 3);
         tick();
 
         assertF("     \n" +
@@ -869,6 +901,16 @@ public class RoundBattleTest extends AbstractGameTest {
                 "  ♣  \n" +
                 "     \n" +
                 "♥&☺  \n", 2);
+
+        assertHeroStatus(
+                "active:\n" +
+                "hero(0)=true\n" +
+                "hero(1)=false\n" +
+                "hero(2)=true\n" +
+                "alive\n" +
+                "hero(0)=true\n" +
+                "hero(1)=true\n" +  // TODO ожил
+                "hero(2)=true");
 
         // when
         dice(0, 4,
@@ -896,6 +938,16 @@ public class RoundBattleTest extends AbstractGameTest {
                 " ҉   \n" +
                 "♣xѠ  \n", 2);
 
+        assertHeroStatus(
+                "active:\n" +
+                "hero(0)=true\n" +
+                "hero(1)=false\n" +  // TODO и снова неактивен
+                "hero(2)=true\n" +
+                "alive\n" +
+                "hero(0)=false\n" +
+                "hero(1)=true\n" +
+                "hero(2)=false");
+
         // победителей нет
         verifyAllEvents(
                 "listener(0) => [HERO_DIED, KILL_OTHER_HERO, KILL_GHOST]\n" +
@@ -907,5 +959,15 @@ public class RoundBattleTest extends AbstractGameTest {
 
         // then
         verifyAllEvents("");
+
+        assertHeroStatus(
+                "active:\n" +
+                "hero(0)=false\n" +
+                "hero(1)=false\n" +
+                "hero(2)=false\n" +
+                "alive\n" +
+                "hero(0)=true\n" +
+                "hero(1)=true\n" +
+                "hero(2)=true");
     }
 }

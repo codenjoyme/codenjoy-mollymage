@@ -1183,14 +1183,16 @@ public class EventsTest extends AbstractGameTest {
 
         // when
         removeBoxes(1); // больше не надо коробок
-        dice(0, 4, // heroes
-            1, 4,
-            2, 4,
-            3, 4, // ghosts
-            4, 4,
-            4, 3,
-            4, 2,
-            4, 1);
+        dice(0, 4, // hero
+            1, 4, // hero
+            2, 4, // hero
+            3, 4, // ghost
+            4, 4, // ghost
+            4, 3, // just destroyed
+            4, 2, // ghost
+            4, 1, // just destroyed
+            4, 0, // ghost
+                1); // all ghosts not moved
         tick();
 
         // then
@@ -1198,9 +1200,9 @@ public class EventsTest extends AbstractGameTest {
 
         assertF("♥öö&&\n" +
                 "     \n" +
-                "    &\n" + // TODO why not in [4, 2] and [4, 1]
-                "  &  \n" +
-                "☺    \n", 0);
+                "    &\n" +
+                "     \n" +
+                "☺   &\n", 0);
     }
 
     @Test

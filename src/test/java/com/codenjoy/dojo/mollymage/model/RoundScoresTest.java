@@ -977,7 +977,7 @@ public class RoundScoresTest extends AbstractGameTest {
         dice(0, 0, // первый игрок
             0, 1,  // второй
             1, 0); // третий
-        field().clearScore();
+        game().clearScore();
 
         verifyAllEvents("");
 

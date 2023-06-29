@@ -24,6 +24,7 @@ package com.codenjoy.dojo.mollymage.model;
 
 import com.codenjoy.dojo.mollymage.model.items.Potion;
 import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
+import com.codenjoy.dojo.mollymage.model.items.perks.PotionExploder;
 import com.codenjoy.dojo.services.Point;
 import org.junit.Test;
 
@@ -33,6 +34,68 @@ import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTIONS_COU
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
 
 public class PotionTest extends AbstractGameTest {
+
+    @Test
+    public void shouldKillHeroOnCurrentPosition_whenPotionExploded_usingPerkPotionExploder() {
+        // given
+        givenFl("     \n" +
+            "     \n" +
+            "     \n" +
+            "     \n" +
+            "☺    \n");
+
+        player().getHero().addPerk(new PotionExploder(5, 100));
+        assertHeroPerks(
+            "{POTION_EXPLODER('A')\n" +
+                "  value=5, timeout=100, timer=100, pick=0}");
+
+        // when
+        hero().dropPotion();
+        hero().act(2);
+        tick();
+
+        // then
+        assertF("     \n" +
+            "     \n" +
+            "     \n" +
+            "҉    \n" +
+            "Ѡ҉   \n");
+
+        verifyAllEvents("[HERO_DIED]");
+        assertHeroDie();
+    }
+
+    @Test
+    public void shouldNotKillHeroAfterLeavingPosition_whenPotionExploded_usingPerkPotionExploder() {
+        // given
+        givenFl("     \n" +
+            "     \n" +
+            "     \n" +
+            "     \n" +
+            "☺    \n");
+
+        hero().addPerk(new PotionExploder(5, 100));
+        assertHeroPerks(
+            "{POTION_EXPLODER('A')\n" +
+                "  value=5, timeout=100, timer=100, pick=0}");
+
+        // when
+        hero().dropPotion();
+        hero().right();
+        tick();
+        hero().up();
+        hero().act(2);
+        tick();
+
+        // then
+        assertF("     \n" +
+            "     \n" +
+            "     \n" +
+            "҉☺   \n" +
+            "҉҉   \n");
+
+        assertHeroAlive();
+    }
 
     @Test
     public void shouldPotionDropped_whenHeroDropPotion() {

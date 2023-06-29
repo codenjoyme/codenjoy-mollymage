@@ -10,12 +10,12 @@ package com.codenjoy.dojo.mollymage.model;
  * it under the terms of the GNU General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
@@ -36,65 +36,36 @@ import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWE
 public class PotionTest extends AbstractGameTest {
 
     @Test
-    public void shouldKillHeroOnCurrentPosition_whenPotionExploded_usingPerkPotionExploder() {
+    public void shouldKillHero_whenPotionExploded_usingPerkPotionExploder() {
         // given
         givenFl("     \n" +
             "     \n" +
             "     \n" +
             "     \n" +
-            "☺    \n");
+            "☺☺   \n");
 
-        player().getHero().addPerk(new PotionExploder(5, 100));
+        hero(0).addPerk(new PotionExploder(5, 100));
         assertHeroPerks(
             "{POTION_EXPLODER('A')\n" +
                 "  value=5, timeout=100, timer=100, pick=0}");
 
         // when
-        hero().dropPotion();
-        hero().act(2);
+        hero(0).dropPotion();
+        hero(1).dropPotion();
+        hero(1).setActive(false);
+        hero(0).explodeAllPotions();
         tick();
 
         // then
         assertF("     \n" +
             "     \n" +
             "     \n" +
-            "҉    \n" +
-            "Ѡ҉   \n");
+            "҉҉   \n" +
+            "Ѡ♣҉  \n");
 
-        verifyAllEvents("[HERO_DIED]");
+        verifyAllEvents("listener(0) => [HERO_DIED]\n"
+            + "listener(1) => [KILL_OTHER_HERO]\n");
         assertHeroDie();
-    }
-
-    @Test
-    public void shouldNotKillHeroAfterLeavingPosition_whenPotionExploded_usingPerkPotionExploder() {
-        // given
-        givenFl("     \n" +
-            "     \n" +
-            "     \n" +
-            "     \n" +
-            "☺    \n");
-
-        hero().addPerk(new PotionExploder(5, 100));
-        assertHeroPerks(
-            "{POTION_EXPLODER('A')\n" +
-                "  value=5, timeout=100, timer=100, pick=0}");
-
-        // when
-        hero().dropPotion();
-        hero().right();
-        tick();
-        hero().up();
-        hero().act(2);
-        tick();
-
-        // then
-        assertF("     \n" +
-            "     \n" +
-            "     \n" +
-            "҉☺   \n" +
-            "҉҉   \n");
-
-        assertHeroAlive();
     }
 
     @Test

@@ -10,12 +10,12 @@ package com.codenjoy.dojo.mollymage.model;
  * it under the terms of the GNU General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
@@ -24,6 +24,7 @@ package com.codenjoy.dojo.mollymage.model;
 
 import com.codenjoy.dojo.mollymage.model.items.Potion;
 import com.codenjoy.dojo.mollymage.model.items.blast.Blast;
+import com.codenjoy.dojo.mollymage.model.items.perks.PotionExploder;
 import com.codenjoy.dojo.services.Point;
 import org.junit.Test;
 
@@ -33,6 +34,39 @@ import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTIONS_COU
 import static com.codenjoy.dojo.mollymage.services.GameSettings.Keys.POTION_POWER;
 
 public class PotionTest extends AbstractGameTest {
+
+    @Test
+    public void shouldKillHero_whenPotionExploded_usingPerkPotionExploder() {
+        // given
+        givenFl("     \n" +
+            "     \n" +
+            "     \n" +
+            "     \n" +
+            "☺☺   \n");
+
+        hero(0).addPerk(new PotionExploder(5, 100));
+        assertHeroPerks(
+            "{POTION_EXPLODER('A')\n" +
+                "  value=5, timeout=100, timer=100, pick=0}");
+
+        // when
+        hero(0).dropPotion();
+        hero(1).dropPotion();
+        hero(1).setActive(false);
+        hero(0).explodeAllPotions();
+        tick();
+
+        // then
+        assertF("     \n" +
+            "     \n" +
+            "     \n" +
+            "҉҉   \n" +
+            "Ѡ♣҉  \n");
+
+        verifyAllEvents("listener(0) => [HERO_DIED]\n"
+            + "listener(1) => [KILL_OTHER_HERO]\n");
+        assertHeroDie();
+    }
 
     @Test
     public void shouldPotionDropped_whenHeroDropPotion() {

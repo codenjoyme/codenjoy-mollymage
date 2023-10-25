@@ -267,6 +267,11 @@ If you are not sure what to do try to implement the following algorithms:
 * Avoid ghost and other heroes.
 * Try to set the bomb so that it explode the box, ghosts or another heroes.
 
+## Settings
+
+The parameters will change[(?)](#ask) as the game progresses.
+The default values are shown in the table below:
+
 | Settings name | Action |
 |---------------|--------|
 | KILL_OTHER_HERO_SCORE | [Score] Kill other hero score |

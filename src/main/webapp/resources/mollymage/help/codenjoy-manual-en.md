@@ -221,42 +221,6 @@ winning the game.
 * `POTION_EXPLODER`  Hero can explode all potions on the field. 
   Using: `ACT(2)`. `{number of  use: +1, timeout: 30}`[(?)](#ask)
 
-## Settings
-
-The parameters will change[(?)](#ask) as the game progresses.
-The default values are shown in the table below:
-
-| Action | Settings name | Points |
-|--------|--------|--------|
-| Open treasure box score | OPEN_TREASURE_BOX_SCORE | 1[(?)](#ask) |        
-| Kill ghost score | KILL_GHOST_SCORE | 10[(?)](#ask) |               
-| Kill other hero score | KILL_OTHER_HERO_SCORE | 20[(?)](#ask) |          
-| Kill enemy hero score | KILL_ENEMY_HERO_SCORE | 100[(?)](#ask) |          
-| Catch perk score | CATCH_PERK_SCORE | 5[(?)](#ask) |               
-| Your hero's death penalty | HERO_DIED_PENALTY | -30[(?)](#ask) |              
-| Win round score | WIN_ROUND_SCORE | 30[(?)](#ask) |                
-| Blast activate potion | BIG_BADABOOM | false[(?)](#ask) |                   
-| Potions count | POTIONS_COUNT | 1[(?)](#ask) |                  
-| Potion power | POTION_POWER | 3[(?)](#ask) |                   
-| Treasure boxes count | TREASURE_BOX_COUNT | 52[(?)](#ask) |             
-| Ghosts count | GHOSTS_COUNT | 5[(?)](#ask) |                   
-| All teammates get perk | PERK_WHOLE_TEAM_GET | false[(?)](#ask) |            
-| Perks drop ratio in % | PERK_DROP_RATIO | 20[(?)](#ask) |                
-| Perks pick timeout | PERK_PICK_TIMEOUT | 30[(?)](#ask) |              
-| Potion blast radius increase | PERK_POTION_BLAST_RADIUS_INC | 2[(?)](#ask) |   
-| Potion blast radius increase effect timeout | TIMEOUT_POTION_BLAST_RADIUS_INC | 30[(?)](#ask) |
-| Potion count increase | PERK_POTION_COUNT_INC | 4[(?)](#ask) |          
-| Potion count effect timeout | TIMEOUT_POTION_COUNT_INC | 30[(?)](#ask) |       
-| Potion immune effect timeout | TIMEOUT_POTION_IMMUNE | 30[(?)](#ask) |          
-| Poison thrower effect timeout | TIMEOUT_POISON_THROWER | 30[(?)](#ask) |         
-| Potion exploder effect timeout | TIMEOUT_POTION_EXPLODER | 30[(?)](#ask) |        
-| Poison thrower recharge | POISON_THROWER_RECHARGE | 3[(?)](#ask) |        
-| Number of Potion remote controls (how many times player can use it) | REMOTE_CONTROL_COUNT | 3[(?)](#ask) |           
-| Number of Potion Exploder (how many times player can use it) | POTION_EXPLODER_COUNT | 1[(?)](#ask) |          
-| Steal points from potion owner (works with Potion Exploder perk) | STEAL_POINTS | false[(?)](#ask) |                   
-| Perks available in this game | DEFAULT_PERKS | ''[(?)](#ask) |                  
-| Counting score mode | SCORE_COUNTING_TYPE | 0 (0 - Accumulate points consistently, 1 - Maximum points from the event, 2 - Maximum points from the series)[(?)](#ask) |
-  
 ## Cases
 
 * you can combine perks

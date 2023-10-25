@@ -1,10 +1,3 @@
-## Clients and API
-
-The client code does not give a considerable handicap to gamers because
-you should spend time to puzzle out the code. However, it is pleasant
-to note that the logic of communication with the server plus some high
-level API for working with the board are implemented already.
-
 * `Solver`
   An empty class with one method — you'll have to fill it with smart logic.
 * `Direcion`

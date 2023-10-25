@@ -278,10 +278,15 @@ If you are not sure what to do try to implement the following algorithms:
 * Avoid ghost and other heroes.
 * Try to set the bomb so that it explode the box, ghosts or another heroes.
 
-## Settings
+## <a id="ask"></a> Settings
 
-The parameters will change[(?)](#ask) as the game progresses.
-The default values are shown in the table below:
+The parameters will change as the game progresses.
+You can always see the settings of the current game
+[here](/codenjoy-contest/rest/settings/player).
+Please ask Sensei about current game settings. You can find Sensei in
+the chat that the organizers have provided to discuss issues.
+
+All settings are shown in the table below:
 
 | Action | Settings name |
 |--------|---------------|
@@ -368,13 +373,6 @@ The default values are shown in the table below:
     The finale will begin with the room resetting points for all players. That's all.
 * How to combine in JS both `ACT` and `LEFT`?
   + `return [Direction.ACT, Direction.LEFT];`
-
-## <a id="ask"></a> Ask Sensei
-
-You can always see the settings of the current game
-[here](/codenjoy-contest/rest/settings/player).
-Please ask Sensei about current game settings. You can find Sensei in
-the chat that the organizers have provided to discuss issues.
 
 ## Client and API
 
